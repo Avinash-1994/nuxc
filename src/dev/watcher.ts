@@ -55,7 +55,15 @@ export class DevWatcher extends EventEmitter {
                     }
                 });
                 this.engine = 'rust-notify';
-                const ver = typeof this.nativeWatcher.getVersion === 'function' ? this.nativeWatcher.getVersion() : 'rust-notify v6.x.x';
+                // Resolve real version from package.json; never use a hardcoded placeholder
+                let sparxNativeVer = '0.1.0';
+                try {
+                    const pkg = require('../../package.json');
+                    sparxNativeVer = pkg.version ?? '0.1.0';
+                } catch { /* package.json not readable — use safe default */ }
+                const ver = typeof this.nativeWatcher.getVersion === 'function'
+                    ? this.nativeWatcher.getVersion()
+                    : `rust-notify (sparx-native v${sparxNativeVer})`;
                 console.log(`[sparx] watcher: ${ver}`);
                 return;
             } catch (err: any) {

@@ -1,4 +1,5 @@
-import type { Plugin } from '../../src/types.js';
+// Plugin type compatible with both Sparx and Vite plugin API
+type Plugin = { name: string; [hook: string]: any };
 
 export interface VuePluginOptions {
   /** Enable Vue HMR via SFC hot-reload (default: true in dev) */

@@ -8,7 +8,7 @@
 use napi_derive::napi;
 use napi::bindgen_prelude::*;
 use serde_json::Value;
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::{HashMap, VecDeque};
 use xxhash_rust::xxh3::xxh3_64;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -49,11 +49,14 @@ pub struct TaskPlan {
 // ─── Internal graph ───────────────────────────────────────────────────────────
 
 struct TaskNode {
+    #[allow(dead_code)] // stable task ID, exposed in future plan diffing API
     id: String,
     inputs: Vec<String>,
     outputs: Vec<String>,
+    #[allow(dead_code)] // retained for future fn-level cache invalidation
     fn_hash: u64,
     deps: Vec<String>, // task IDs this task depends on
+    #[allow(dead_code)] // cache-hit flag, wired into pending_count via plan
     cached: bool,
 }
 
@@ -175,7 +178,7 @@ pub fn plan_build(manifest_json: String) -> Result<TaskPlan> {
             outputs,
             fn_hash: fn_hash_val,
             deps,
-            cached: false, // Will evaluate in topo order
+            cached, // true = cache hit, skip transform
         });
     }
 

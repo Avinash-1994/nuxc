@@ -1,10 +1,11 @@
-use serde::{Serialize, Deserialize};
+use serde::Deserialize;
 use std::fs;
 use std::env;
 use sparx_native::GraphAnalyzer;
 
 #[derive(Deserialize, Debug)]
 struct Snapshot {
+    #[allow(dead_code)] // reserved for future selective-replay by entry point
     entry_points: Vec<String>,
     ids: Vec<String>,
     edges: Vec<Vec<String>>,

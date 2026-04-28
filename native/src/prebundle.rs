@@ -19,6 +19,7 @@ use std::fs;
 
 pub struct PrebundleStore {
     conn: Arc<Mutex<Connection>>,
+    #[allow(dead_code)] // retained for future disk-based cache eviction
     deps_dir: PathBuf,
 }
 
@@ -91,6 +92,7 @@ impl PrebundleStore {
         Ok(())
     }
 
+    #[allow(dead_code)] // HMR API — called when a module changes to invalidate its pre-bundle
     pub fn invalidate_module(&self, module_id: &str) -> std::result::Result<usize, String> {
         let conn = self.conn.lock().map_err(|_| "Mutex poisoned".to_string())?;
         let n = conn.execute(

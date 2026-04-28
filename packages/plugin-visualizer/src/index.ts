@@ -1,4 +1,5 @@
-import type { Plugin } from '../../src/types.js';
+// Plugin type compatible with both Sparx and Vite plugin API
+type Plugin = { name: string; [hook: string]: any };
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 

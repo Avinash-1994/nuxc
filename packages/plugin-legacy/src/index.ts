@@ -1,4 +1,5 @@
-import type { Plugin } from '../../src/types.js';
+// Plugin type compatible with both Sparx and Vite plugin API
+type Plugin = { name: string; [hook: string]: any };
 
 export interface LegacyPluginOptions {
   /** Browserslist targets (default: '> 0.5%, last 2 versions, IE 11') */

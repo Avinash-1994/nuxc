@@ -22,7 +22,13 @@
   "include": [
     "src/**/*",
     "extensions/**/*",
-    "tests/**/*",
-    "benchmarks/**/*"
+    "packages/**/*"
+  ],
+  "exclude": [
+    "tests/**",
+    "benchmarks/**",
+    "**/node_modules/**",
+    "dist/**",
+    "e2e/**"
   ]
 }

@@ -33,6 +33,7 @@ pub struct ChunkerResult {
 // ─── Internal Graph ───────────────────────────────────────────────────────────
 
 struct ModuleNode {
+    #[allow(dead_code)] // stored for diagnostics and future source-map labeling
     id: String,
     imports: Vec<String>,
     size_bytes: u32,

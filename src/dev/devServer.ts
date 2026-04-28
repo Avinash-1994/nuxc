@@ -964,6 +964,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         let registryScript = '';
         try {
           const { generateRegistryInitTag } = await import('../../packages/sparx-module-registry/src/browser-runtime.js')
+            // @ts-ignore
             .catch(() => import('../../../packages/sparx-module-registry/src/browser-runtime.js')
             .catch(() => ({ generateRegistryInitTag: null })));
           if (generateRegistryInitTag) {
@@ -1646,8 +1647,8 @@ ${raw}
   // WebSocket Server setup directly from uWS shim
   wss = (server as any).wsServer;
 
-  // Initialize Config Sync Handlers
-  setupWssHandlers(wss as any);
+  // Initialize Config Sync Handlers (guard: wss is undefined in SSR preset mode)
+  if (wss) setupWssHandlers(wss as any);
 
   // Upgrade handling for Proxy WebSockets
   server.on('upgrade', (req: http.IncomingMessage, socket: any, head: Buffer) => {

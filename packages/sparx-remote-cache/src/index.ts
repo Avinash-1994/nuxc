@@ -79,7 +79,7 @@ export class S3Provider implements RemoteCacheProvider {
       const url = this.getS3Url(key);
       const res = await fetch(url, {
         method: 'PUT',
-        body: data,
+        body: data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength) as ArrayBuffer,
         headers: this.getHeaders(),
       });
       return res.ok;
@@ -143,7 +143,7 @@ export class SparxCloudProvider implements RemoteCacheProvider {
       const url = this.getCloudUrl(key);
       const res = await fetch(url, {
         method: 'PUT',
-        body: data,
+        body: data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength) as ArrayBuffer,
         headers: this.getHeaders(),
       });
       return res.ok;
