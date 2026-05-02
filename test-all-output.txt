@@ -1,0 +1,187 @@
+
+> sparx@1.0.10 test:all
+> tsc -p tsconfig.build.json && npx tsx tests/config_test.ts && npx tsx tests/bootstrap_test.ts && npx tsx tests/integration_test.ts && npx tsx tests/asset_test.ts && npx tsx tests/federation_core_test.ts && npx tsx tests/core_engine_test.ts && npx tsx tests/framework_verification_test.ts && npx tsx tests/phase_3_1_hmr_classification_test.ts && npx tsx tests/phase_3_1_hmr_integration_test.ts
+
+Running YAML Config Test...
+YAML Config Test Passed!
+✅ Detect Bootstrap in package.json passed
+✅ Detect Bootstrap Icons in package.json passed
+✅ No Bootstrap detected passed
+✅ Get Bootstrap config (CDN fallback) passed
+✅ Inject Bootstrap CDN into HTML passed
+
+Results: 5 passed, 0 failed
+✅ React Framework Detection passed
+✅ SPA Preset Application passed
+✅ SSR Preset Application passed
+✅ Auto-Detection with Default SPA Preset passed
+
+Results: 4 passed, 0 failed
+Running Asset Pipeline Test...
+🏗️  Starting Build Pipeline...
+📁 Root: /home/avinash/Desktop/framework_practis/build/test_assets_temp
+📦 Entry: [ 'src/main.js' ]
+📂 Output: dist
+✅ Build completed successfully!
+✓ Asset Pipeline Test Passed!
+  - Created hashed asset: test.873648e4.png
+  - Bundle references: /assets/
+🧪 Running Federation Core Integration Test (New Engine)
+
+Starting bundler...
+✅ Build completed
+Manifest: {
+  name: 'app1',
+  exposes: {
+    './Button': {
+      import: './src/Button.tsx',
+      name: './Button',
+      chunk: '',
+      shortId: './src/Button.tsx'
+    }
+  },
+  remotes: {},
+  shared: {
+    react: { version: '18.2.0', singleton: true, requiredVersion: '^18.0.0' }
+  },
+  health: '/health',
+  timestamp: 1777185694889,
+  manifestHash: '517a5aa08cfb1a1130f5584d17febafe3b32a3f60e1949d20f782917096c00d6'
+}
+✅ Manifest verified
+
+✨ All tests passed!
+--- Starting Core Engine Verification Tests ---
+
+[Test 1] Initial Build
+
+[Test 2] Determinism Check
+
+[Test 3] Input Sensitivity Check
+
+[Test 4] Explainability Check
+
+[Test 5] Explain Log File Check
+
+--- All Tests Passed! ---
+🧪 Comprehensive Framework Verification
+
+Testing all frameworks for production readiness...
+
+Testing react     ... ✅ PASS
+Testing vue       ... ✅ PASS
+Testing svelte    ... ✅ PASS
+Testing solid     ... ✅ PASS
+Testing angular   ... ✅ PASS
+
+📊 Summary:
+──────────────────────────────────────────────────
+react      ✅ Stable     Full build verified
+vue        ✅ Stable     Full build verified
+svelte     ✅ Stable     Full build verified
+solid      ✅ Stable     Full build verified
+angular    ✅ Stable     Full build verified
+──────────────────────────────────────────────────
+
+Result: 5/5 frameworks production-ready
+
+✨ All frameworks verified as STABLE!
+============================================================
+Phase 3.1: HMR Classification - Test Suite
+============================================================
+
+[Test 1] HMR - Config File Detection
+✅ Config file triggers full reload
+
+[Test 2] HMR - Entry Point Detection
+✅ Entry point triggers full reload
+
+[Test 3] HMR - CSS Safe Update
+✅ CSS changes are safe updates
+
+[Test 4] HMR - Image Asset Update
+✅ Image assets are safe updates
+
+[Test 5] HMR - Component Partial Update
+✅ Component changes trigger partial HMR
+
+[Test 6] HMR - Graph Analysis (Isolated Change)
+✅ Graph analysis detects isolated changes
+
+[Test 7] HMR - Circular Dependency Detection
+✅ Circular dependencies trigger full reload
+
+[Test 8] HMR - Batch Classification
+✅ Batch classification works correctly
+
+[Test 9] HMR - Batch with Full Reload
+✅ Batch with config change triggers full reload
+
+[Test 10] HMR - Optimization Suggestions
+✅ Optimization suggestions generated for high-impact changes
+
+[Test 11] HMR - Deleted File Handling
+✅ Deleted files handled correctly
+
+[Test 12] HMR - SCSS and Less Files
+✅ SCSS and Less files are safe updates
+
+============================================================
+✅ ALL TESTS PASSED (12/12)
+============================================================
+
+Phase 3.1 HMR Classification is VERIFIED and READY
+============================================================
+Phase 3.1: HMR Integration Tests - REAL SERVER
+============================================================
+
+[Setup] Creating test application...
+✅ Test app created
+
+[Test 1] Dev Server - Starts Successfully
+✅ Dev server running at http://localhost:3001
+👁️  Setting up watcher for: /home/avinash/Desktop/framework_practis/build/test-app/app.js
+👁️  Watching: /home/avinash/Desktop/framework_practis/build/test-app/app.js
+👁️  Setting up watcher for: /home/avinash/Desktop/framework_practis/build/test-app/index.html
+👁️  Watching: /home/avinash/Desktop/framework_practis/build/test-app/index.html
+👁️  Setting up watcher for: /home/avinash/Desktop/framework_practis/build/test-app/style.css
+👁️  Watching: /home/avinash/Desktop/framework_practis/build/test-app/style.css
+✅ Dev server starts successfully
+
+[Test 2] Dev Server - Serves Files
+✅ Dev server serves files correctly
+
+[Test 3] HMR Client - Connects to Server
+✅ HMR client can connect
+
+[Test 4] HMR - CSS File Change Detection
+🔔 File event: change on style.css
+📝 File changed: /home/avinash/Desktop/framework_practis/build/test-app/style.css
+🔥 HMR Decision: HMR_SAFE
+   Reason: Stylesheet change - hot reload without state loss
+✅ CSS change detected and classified as SAFE
+
+[Test 5] HMR - JS File Change Detection
+🔔 File event: change on app.js
+📝 File changed: /home/avinash/Desktop/framework_practis/build/test-app/app.js
+🔥 HMR Decision: HMR_PARTIAL
+   Reason: Code change detected - attempting partial HMR
+✅ JS change detected and classified as PARTIAL
+
+[Test 6] Dev Server - Stops Cleanly
+✅ Dev server stopped
+✅ Dev server stops cleanly
+
+[Cleanup] Removing test application...
+✅ Test app removed
+
+============================================================
+✅ ALL INTEGRATION TESTS PASSED (6/6)
+============================================================
+
+🎉 HMR System is ACTUALLY WORKING!
+   - Dev server runs
+   - Files are watched
+   - Changes are detected
+   - HMR decisions are made
+   - Clients receive updates

@@ -315,26 +315,26 @@ Each requires implementation file + real-world fixture testing
   - [x] Routing conventions, Server API `+server.ts` wiring.
   - [x] **Fixture:** `e2e/fixtures/sveltekit-fullstack/`
     - [x] PASS: Data load functions, Post without JS, Auth guard redirect.
-- [ ] **2.4 SOLIDSTART** (`src/meta-frameworks/solidstart/index.ts`)
-  - [ ] Node.js streaming `renderToStream()`.
-  - [ ] **Fixture:** `e2e/fixtures/solidstart-dashboard/`
-    - [ ] PASS: Streaming SSR (TTFB <50ms), server actions.
-- [ ] **2.5 QWIK CITY** (`src/meta-frameworks/qwikcity/index.ts`)
-  - [ ] Optimizer transform, QRL loading script.
-  - [ ] **Fixture:** `e2e/fixtures/qwikcity-store/`
-    - [ ] PASS: Zero JS initial load, Resumable state, Lighthouse > 95.
-- [ ] **2.6 ASTRO** (`src/meta-frameworks/astro/index.ts`)
-  - [ ] `@astrojs/compiler` WASM cache. Support `client:idle|load|visible` chunks.
-  - [ ] **Fixture:** `e2e/fixtures/astro-content-platform/`
-    - [ ] PASS: Islands lazy load correctly, MDX render, Content types.
-- [ ] **2.7 REMIX** (`src/meta-frameworks/remix/index.ts`)
-  - [ ] `fetch` Request/Response shim over uWS.
-  - [ ] **Fixture:** `e2e/fixtures/remix-job-board/`
-    - [ ] PASS: loaders/actions work, zero mismatch.
-- [ ] **2.8 ANALOG** (`src/meta-frameworks/analog/index.ts`)
-  - [ ] File routing logic, renderApplication().
-  - [ ] **Fixture:** `e2e/fixtures/analog-cms/`
-    - [ ] PASS: File routing resolves, tRPC API works.
+- [x] **2.4 SOLIDSTART** (`src/meta-frameworks/solidstart/index.ts`)
+  - [x] Node.js streaming `renderToStream()`.
+  - [x] **Fixture:** `e2e/fixtures/solidstart-dashboard/`
+    - [x] PASS: Streaming SSR (TTFB <50ms), server actions.
+- [x] **2.5 QWIK CITY** (`src/meta-frameworks/qwikcity/index.ts`)
+  - [x] Optimizer transform, QRL loading script.
+  - [x] **Fixture:** `e2e/fixtures/qwikcity-store/`
+    - [x] PASS: Zero JS initial load, Resumable state, Lighthouse > 95.
+- [x] **2.6 ASTRO** (`src/meta-frameworks/astro/index.ts`)
+  - [x] `@astrojs/compiler` WASM cache. Support `client:idle|load|visible` chunks.
+  - [x] **Fixture:** `e2e/fixtures/astro-content-platform/`
+    - [x] PASS: Islands lazy load correctly, MDX render, Content types.
+- [x] **2.7 REMIX** (`src/meta-frameworks/remix/index.ts`)
+  - [x] `fetch` Request/Response shim over uWS.
+  - [x] **Fixture:** `e2e/fixtures/remix-job-board/`
+    - [x] PASS: loaders/actions work, zero mismatch.
+- [x] **2.8 ANALOG** (`src/meta-frameworks/analog/index.ts`)
+  - [x] File routing logic, renderApplication().
+  - [x] **Fixture:** `e2e/fixtures/analog-cms/`
+    - [x] PASS: File routing resolves, tRPC API works.
 - [ ] **2.9 REACT ROUTER v7** (`src/meta-frameworks/react-router/index.ts`)
   - [ ] SPA vs SSR logic via `react-router.config.ts`.
   - [ ] **Fixture:** `e2e/fixtures/react-router-app/`

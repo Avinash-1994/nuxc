@@ -30,38 +30,42 @@ export class AnalogAdapter implements SparxAdapter {
     return config;
   }
 
-  serverMiddleware(): Middleware[] {
-    return [
-       async (req: any, res: any, next: any) => {
-          try {
-             // Analog operates fundamentally on Vite's SSR APIs + Nitro
-             const virtualEntry = 'virtual:sparx/analog-ssr-entry';
-             let render: any;
-             try {
-                const mod = await import(virtualEntry);
-                render = mod.default || mod.render;
-             } catch(e) {
-                return next();
-             }
+  getDevHandler(): any {
+    return async (req: any, res: any, next: any) => {
+      // BUG-002: Check for null req/res
+      if (!req || !res) return next?.();
 
-             if (render) {
-                const url = `http://${req.headers.host || 'localhost'}${req.url || '/'}`;
-                // Map the request fully
-                const html = await render(url, { req, res });
-                if (html) {
-                   res.writeStatus('200 OK');
-                   res.writeHeader('Content-Type', 'text/html');
-                   res.end(html);
-                   return;
-                }
+      try {
+        const path = await import('path');
+        const { pathToFileURL } = await import('url');
+        const fs = await import('fs');
+        
+        const entryPath = path.join(process.cwd(), 'src/entry-server.cjs');
+        if (fs.existsSync(entryPath)) {
+          const entry = await import(pathToFileURL(entryPath).href);
+          const adapter = entry.default || entry;
+          
+          if (req.url?.startsWith('/api/')) {
+             const apiResult = await adapter.executeApi(req.url, { req });
+             if (apiResult && apiResult.status) {
+                res.setHeader('Content-Type', 'application/json');
+                res.end(apiResult.body || '{}');
+                return;
              }
-             next();
-          } catch(e) {
-             console.error('[Sparx:Analog] SSR Error', e);
-             next();
+          } else {
+             const result = adapter.renderApplication(req.url, { root: process.cwd() });
+             if (result && result.html) {
+                res.setHeader('Content-Type', 'text/html');
+                res.end(result.html);
+                return;
+             }
           }
-       }
-    ];
+        }
+      } catch (e) {
+        console.error('[SPARX Analog] Dev handler error:', e);
+      }
+      next();
+    };
   }
 
   ssrEntry(): string {

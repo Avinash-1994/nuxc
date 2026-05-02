@@ -21,7 +21,20 @@ export class SvelteKitAdapter implements SparxAdapter {
   }
 
   config(config: SparxConfig): SparxConfig {
-    return config;
+    const root = config.root || process.cwd();
+    const clientEntry = path.join(root, 'src', 'entry-client.js');
+    const serverEntry = path.join(root, 'src', 'entry-server.js');
+
+    // Build both entries: use client as primary (browser), server via ssrEntry
+    const entries: string[] = [];
+    if (fs.existsSync(clientEntry)) entries.push(clientEntry);
+    if (fs.existsSync(serverEntry) && !entries.includes(serverEntry)) entries.push(serverEntry);
+
+    // Fall back to whatever the user configured if neither exists
+    if (entries.length === 0) return config;
+
+    console.log(`[sparx:sveltekit] entries: ${entries.map(e => e.replace(root + '/', '')).join(', ')}`);
+    return { ...config, entry: entries };
   }
 
   ssrEntry(config: SparxConfig): string {

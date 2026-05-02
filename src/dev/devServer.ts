@@ -280,6 +280,28 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     else if (primaryFramework === 'vanilla' && cfg.adapter === 'qwik') primaryFramework = 'qwik';
     else if (primaryFramework === 'vanilla' && cfg.adapter === 'lit') primaryFramework = 'lit';
   }
+  
+  // ─── Initialize Adapter Registry for Meta-frameworks ───
+  let activeAdapter: any = null;
+  try {
+    const { registry } = await import('@sparx/adapter-core');
+    // Pre-register all meta-framework adapters so registry.detect works
+    await import('../meta-frameworks/sveltekit/index.js').catch(() => {});
+    await import('../meta-frameworks/solidstart/index.js').catch(() => {});
+    await import('../meta-frameworks/nuxt/index.js').catch(() => {});
+    await import('../meta-frameworks/astro/index.js').catch(() => {});
+    await import('../meta-frameworks/remix/index.js').catch(() => {});
+    await import('../meta-frameworks/analog/index.js').catch(() => {});
+    
+    const pkgPath = path.join(cfg.root || process.cwd(), 'package.json');
+    const fsNode = await import('fs');
+    if (fsNode.existsSync(pkgPath)) {
+      const pkg = JSON.parse(fsNode.readFileSync(pkgPath, 'utf-8'));
+      activeAdapter = registry.detect(cfg.root || process.cwd(), pkg);
+    }
+  } catch (e) {
+    // Ignore if not present
+  }
 
   // Determine a human-readable display name for the active framework.
   // Alpine and Mithril intentionally use vanilla pipeline — we still want to log them correctly.
@@ -744,6 +766,27 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     statusHandler.trackRequest();
     if (await statusHandler.handleRequest(req, res)) return;
     if (federationDev.handleRequest(req, res)) return;
+
+    // ── Meta-framework Adapter Hook ──
+    if (activeAdapter && typeof activeAdapter.getDevHandler === 'function') {
+      console.log(`[SPARX] Adapter Hook executing for: ${activeAdapter.name}`);
+      const handler = activeAdapter.getDevHandler();
+      const handled = await new Promise(resolve => {
+        const originalEnd = res.end;
+        res.end = function (...args: any[]) {
+          console.log(`[SPARX] Adapter res.end called!`);
+          resolve(true);
+          return originalEnd.apply(this, args as any);
+        };
+        console.log(`[SPARX] Invoking adapter getDevHandler for ${req.url}`);
+        handler(req, res, () => {
+          console.log(`[SPARX] Adapter handler called next()`);
+          resolve(false);
+        });
+      });
+      console.log(`[SPARX] Adapter handled request: ${handled}`);
+      if (handled) return; // Handler took over the request
+    }
 
     // Security Scan (Day 41)
     if (!anomalyDetector.scanRequest({ url: req.url || '', headers: req.headers, method: req.method || 'GET' })) {

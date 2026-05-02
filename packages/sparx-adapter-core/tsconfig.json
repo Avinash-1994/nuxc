@@ -5,7 +5,9 @@
     "rootDir": "src",
     "declaration": true,
     "module": "NodeNext",
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "NodeNext",
+    "noEmit": false,
+    "allowImportingTsExtensions": false
   },
   "include": ["src"]
 }

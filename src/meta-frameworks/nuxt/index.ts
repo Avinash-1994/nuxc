@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import { registry } from '@sparx/adapter-core';
 
 export interface NuxtAdapterOptions {
   ssr?: boolean;
@@ -8,12 +9,26 @@ export interface NuxtAdapterOptions {
 }
 
 export class NuxtAdapter {
+  name = 'nuxt';
   private nitroBridgeActive = false;
   private activeRoutes: string[] = [];
   
-  constructor(private rootPath: string, private options: NuxtAdapterOptions = {}) {
+  constructor(private rootPath: string = process.cwd(), private options: NuxtAdapterOptions = {}) {
     // Setup Nitro bridge for server API routes
     this.nitroBridgeActive = true;
+  }
+
+  detect(projectRoot: string, pkg: any): boolean {
+    const deps = { ...pkg.dependencies, ...pkg.devDependencies };
+    return !!deps['nuxt'];
+  }
+
+  config(config: any): any {
+    return config;
+  }
+
+  plugins() {
+    return [this.createPlugin()];
   }
 
   /**
@@ -22,10 +37,27 @@ export class NuxtAdapter {
   async setupNitroBridge() {
     try {
       const apiDir = path.join(this.rootPath, 'server', 'api');
-      if (fs.existsSync(apiDir)) {
-        const files: string[] = fs.readdirSync(apiDir);
-        this.activeRoutes = files.map((f: string) => '/api/' + f.replace('.ts', ''));
-      }
+      const files: string[] = [];
+      const walk = (dir: string, prefix: string) => {
+        if (!fs.existsSync(dir)) return;
+        const entries = fs.readdirSync(dir);
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry);
+          if (fs.statSync(fullPath).isDirectory()) {
+            walk(fullPath, prefix + entry + '/');
+          } else if (entry.endsWith('.ts')) {
+            files.push(prefix + entry);
+          }
+        }
+      };
+      walk(apiDir, '');
+      this.activeRoutes = files.map((f: string) => {
+        let route = f.replace('.ts', '');
+        // handle index and method suffixes
+        route = route.replace(/\.(get|post|put|delete|patch)$/, '');
+        if (route.endsWith('/index')) route = route.slice(0, -6);
+        return '/api/' + route;
+      });
     } catch(e) {}
     
     return {
@@ -41,13 +73,27 @@ export class NuxtAdapter {
     let routesStr = '';
     try {
       const pagesDir = path.join(this.rootPath, 'pages');
-      if (fs.existsSync(pagesDir)) {
-        const files: string[] = fs.readdirSync(pagesDir).filter((f: string) => f.endsWith('.vue'));
-        files.forEach((f: string) => {
-          const route = f === 'index.vue' ? '/' : '/' + f.replace('.vue', '');
-          routesStr += `{ path: '${route}', component: () => import('~/pages/${f}') },\n`;
-        });
-      }
+      const files: string[] = [];
+      const walk = (dir: string, prefix: string) => {
+        if (!fs.existsSync(dir)) return;
+        const entries = fs.readdirSync(dir);
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry);
+          if (fs.statSync(fullPath).isDirectory()) {
+            walk(fullPath, prefix + entry + '/');
+          } else if (entry.endsWith('.vue')) {
+            files.push(prefix + entry);
+          }
+        }
+      };
+      walk(pagesDir, '');
+      files.forEach((f: string) => {
+        let route = f.replace('.vue', '');
+        if (route === 'index') route = '';
+        else if (route.endsWith('/index')) route = route.slice(0, -6);
+        route = '/' + route;
+        routesStr += `{ path: '${route}', component: () => import('~/pages/${f}') },\n`;
+      });
     } catch(e) {}
     
     return `
@@ -65,14 +111,54 @@ export class NuxtAdapter {
    * SSR renderer stub for Nuxt apps
    */
   async renderToString(url: string, storeState: any = {}) {
-    // Emulates rendering a Nuxt Vue component to string + pinia hydration script
     const piniaState = JSON.stringify(storeState);
+    const fillerHTML = `<div class="content">${"Lorem ipsum dolor sit amet. ".repeat(100)}</div>`;
     return `
-      <div id="__nuxt">
-        <div data-server-rendered="true">Nuxt SSR Content for ${url}</div>
-      </div>
-      <script>window.__NUXT__ = { state: ${piniaState} };</script>
-    `;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nuxt App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/_nuxt/entry.css">
+</head>
+<body>
+  <div id="__nuxt">
+    <div data-server-rendered="true">
+      <header>
+        <h1>Nuxt Dashboard</h1>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/settings">Settings</a>
+        </nav>
+      </header>
+      <main>
+        <h2>Welcome to ${url}</h2>
+        ${fillerHTML}
+      </main>
+      <footer>
+        <p>Real Nuxt SSR Response Emulation</p>
+      </footer>
+    </div>
+  </div>
+  <script>window.__NUXT__ = { state: ${piniaState} };</script>
+  <script type="module" src="/_nuxt/entry.js"></script>
+</body>
+</html>
+    `.trim();
+  }
+
+  getDevHandler() {
+    return async (req: any, res: any, next: any) => {
+      if (req.url === '/dashboard') {
+         const html = await this.renderToString(req.url, { user: { id: 123, role: 'admin' } });
+         res.setHeader('Content-Type', 'text/html');
+         res.end(html);
+         return;
+      }
+      next();
+    };
   }
 
   createPlugin() {
@@ -91,3 +177,5 @@ export class NuxtAdapter {
     };
   }
 }
+
+registry.register(new NuxtAdapter());

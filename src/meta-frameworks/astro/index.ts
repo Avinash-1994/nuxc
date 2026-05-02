@@ -39,15 +39,27 @@ export class AstroAdapter implements SparxAdapter {
     return config;
   }
 
-  serverMiddleware(): Middleware[] {
-    return [
-       async (req: any, res: any, next: any) => {
-          // Astro SSR / Dev Middleware mapping 
-          // Similar translation boundary from uWS to native Fetch requests
-          // Native WASM server-rendering is piped downward directly to uWS streams
+  getDevHandler(): any {
+    return async (req: any, res: any, next: any) => {
+          try {
+             const path = await import('path');
+             const { pathToFileURL } = await import('url');
+             const entryPath = path.join(process.cwd(), 'src/entry-server.cjs');
+             const entry = await import(pathToFileURL(entryPath).href);
+             // dynamic import of CJS returns it on default
+             const adapter = entry.default || entry;
+             const result = adapter.renderPage(req.url, { root: process.cwd() });
+             if (result && result.html) {
+                res.setHeader('Content-Type', 'text/html');
+                res.end(result.html);
+                return;
+             }
+          } catch (e) {
+             console.error('[SPARX Astro] Dev handler error:', e);
+             // fallback
+          }
           next();
-       }
-    ];
+       };
   }
 
   ssrEntry(): string {

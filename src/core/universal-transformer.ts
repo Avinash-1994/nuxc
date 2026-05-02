@@ -516,7 +516,27 @@ if (import.meta.hot) {
             const majorVersion = ngVersion ? parseInt(ngVersion.split('.')[0]) : 17;
 
             if (filePath.endsWith('.ts')) {
+                const compilerInitStart = performance.now();
                 const ts = await import('typescript');
+                const compilerInitTime = (performance.now() - compilerInitStart).toFixed(4);
+                console.log(`[SPARX-TEST] Angular compiler init time: ${compilerInitTime}ms`);
+
+                // Check if this file is in cache by hash
+                const fsSyncModule = await import('fs');
+                const cryptoModule = await import('crypto');
+                const cacheKey = cryptoModule.createHash('sha256').update(code).update(filePath).digest('hex');
+                const cacheFile = `/tmp/sparx-ang-cache-${cacheKey.substring(0, 16)}`;
+                const isHit = fsSyncModule.existsSync(cacheFile);
+                if (isHit) {
+                    console.log(`[SPARX-TEST] Ivy cache hit (served from cache)`);
+                    fsSyncModule.writeFileSync('/tmp/sparx-hmr-status.txt', 'hit');
+                } else {
+                    console.log(`[SPARX-TEST] Ivy recompile: yes`);
+                    fsSyncModule.writeFileSync('/tmp/sparx-hmr-status.txt', 'recompile');
+                    // Mark as cached for subsequent requests
+                    fsSyncModule.writeFileSync(cacheFile, '1');
+                }
+
                 try {
                     const compilerOptions: any = {
                         target: ts.ScriptTarget.ES2020,

@@ -1,0 +1,223 @@
+
+> sparx@1.0.10 test:phase2
+> npm run test:foundation && npm run test:comprehensive
+
+
+> sparx@1.0.10 test:foundation
+> npm run test:snapshot && npm run test:performance && npm run test:real-world
+
+
+> sparx@1.0.10 test:snapshot
+> cross-env NODE_OPTIONS="--experimental-vm-modules" jest tests/build/snapshot.test.ts
+
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+(node:25201) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/build/snapshot.test.ts
+  Build Output Snapshots
+    React App Build
+      ✓ should validate React project structure (2 ms)
+      ✓ should validate TypeScript configuration
+    Vue App Build
+      ✓ should validate Vue project structure
+    TypeScript Build
+      ✓ should validate TypeScript files (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        0.289 s, estimated 1 s
+Ran all test suites matching tests/build/snapshot.test.ts.
+
+> sparx@1.0.10 test:performance
+> cross-env NODE_OPTIONS="--experimental-vm-modules" jest tests/performance/regression.test.ts --testTimeout=30000
+
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+(node:25369) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/performance/regression.test.ts
+  Performance Regression Tests
+    Cold Start Performance
+      ✓ should have fast core initialization (20 ms)
+    HMR Performance
+      ✓ should process file changes quickly
+    Build Performance
+      ✓ should build small project in reasonable time (85 ms)
+      ✓ should have reasonable memory usage (13 ms)
+    Cache Performance
+      ✓ should rebuild with reasonable performance (29 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        0.474 s, estimated 1 s
+Ran all test suites matching tests/performance/regression.test.ts.
+
+> sparx@1.0.10 test:real-world
+> cross-env NODE_OPTIONS="--experimental-vm-modules" jest tests/real-world/integration.test.ts --testTimeout=60000
+
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+(node:25468) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/real-world/integration.test.ts
+  Real-World Project Integration Tests
+    Simplified Real-World Test
+      ✓ should build a complex React component (156 ms)
+      ✓ should handle TypeScript generics (25 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        0.51 s, estimated 1 s
+Ran all test suites matching tests/real-world/integration.test.ts.
+
+> sparx@1.0.10 test:comprehensive
+> npm run test:css && npm run test:federation && npm run test:cache && npm run test:errors
+
+
+> sparx@1.0.10 test:css
+> cross-env NODE_OPTIONS="--experimental-vm-modules" jest tests/css/processing.test.ts --testTimeout=30000
+
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+(node:25726) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/css/processing.test.ts
+  CSS Processing Tests
+    CSS Modules
+      ✓ should validate CSS module files (4 ms)
+      ✓ should validate scoped CSS (1 ms)
+    PostCSS Integration
+      ✓ should validate modern CSS syntax (1 ms)
+    SCSS Compilation
+      ✓ should validate SCSS syntax (1 ms)
+    Tailwind CSS
+      ✓ should validate Tailwind utility classes (1 ms)
+    CSS Optimization
+      ✓ should validate CSS structure (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       6 passed, 6 total
+Snapshots:   0 total
+Time:        0.326 s, estimated 1 s
+Ran all test suites matching tests/css/processing.test.ts.
+
+> sparx@1.0.10 test:federation
+> cross-env NODE_OPTIONS="--experimental-vm-modules" jest tests/federation/module-federation.test.ts --testTimeout=30000
+
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+(node:25894) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/federation/module-federation.test.ts (6.45 s)
+  Module Federation Tests
+    Remote Module Exposure
+      ✓ should expose modules for federation (1629 ms)
+    Remote Module Consumption
+      ✓ should consume remote modules (1533 ms)
+    Shared Dependencies
+      ✓ should handle shared dependencies correctly (1536 ms)
+    Version Conflict Resolution
+      ✓ should handle version conflicts gracefully (15 ms)
+    Dynamic Remote Loading
+      ✓ should support dynamic remote loading (22 ms)
+    Federation Fallback
+      ✓ should provide fallback when remote fails (1561 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       6 passed, 6 total
+Snapshots:   0 total
+Time:        6.625 s, estimated 7 s
+Ran all test suites matching tests/federation/module-federation.test.ts.
+
+> sparx@1.0.10 test:cache
+> cross-env NODE_OPTIONS="--experimental-vm-modules" jest tests/cache/correctness.test.ts --testTimeout=30000
+
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+(node:26038) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/cache/correctness.test.ts
+  Cache Correctness Tests
+    Cache Invalidation
+      ✓ should invalidate cache when file changes (101 ms)
+      ✓ should use cache when files unchanged (30 ms)
+    Dependency Graph Caching
+      ✓ should cache dependency graph correctly (32 ms)
+      ✓ should invalidate affected modules only (55 ms)
+    Cache Corruption Recovery
+      ✓ should recover from corrupted cache (25 ms)
+    Stale Cache Detection
+      ✓ should detect stale cache entries (148 ms)
+    Cross-Build Cache Consistency
+      ✓ should maintain cache consistency across builds (55 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       7 passed, 7 total
+Snapshots:   0 total
+Time:        0.801 s, estimated 1 s
+Ran all test suites matching tests/cache/correctness.test.ts.
+
+> sparx@1.0.10 test:errors
+> cross-env NODE_OPTIONS="--experimental-vm-modules" jest tests/errors/handling.test.ts --testTimeout=30000
+
+ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+(node:26274) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  console.log
+    12:11:58 ⚠  Failed to resolve specifier: ./does-not-exist from /home/avinash/Desktop/framework_practis/build/tests/fixtures/errors/missing-import/src/main.ts
+
+      at Object.warn (src/utils/logger.ts:79:13)
+          at async Promise.all (index 0)
+
+PASS tests/errors/handling.test.ts
+  Error Handling Tests
+    Syntax Errors
+      ✓ should handle malformed JavaScript gracefully (113 ms)
+      ✓ should handle TypeScript type errors (27 ms)
+    Circular Dependencies
+      ✓ should detect circular dependencies (25 ms)
+      ✓ should handle deep circular dependencies (22 ms)
+    Missing Dependencies
+      ✓ should handle missing imports (36 ms)
+      ✓ should handle missing node_modules packages (16 ms)
+    Runtime Errors
+      ✓ should handle division by zero (12 ms)
+      ✓ should handle null/undefined access (15 ms)
+    Build Configuration Errors
+      ✓ should handle invalid entry points (5 ms)
+      ✓ should handle invalid output directory (26 ms)
+    Edge Cases
+      ✓ should handle empty files (16 ms)
+      ✓ should handle very large files (168 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       12 passed, 12 total
+Snapshots:   0 total
+Time:        0.806 s, estimated 1 s
+Ran all test suites matching tests/errors/handling.test.ts.
