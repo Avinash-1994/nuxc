@@ -499,6 +499,50 @@ jobs:
         run: npx tsx e2e/fixtures/pb-06-reg-test.js
 
 # ══════════════════════════════════════════════════════════════════════
+#  STAGE 8 — PHASE 2 FRAMEWORK E2E FIXTURES
+#  Angular, Nuxt, SvelteKit, SolidStart, Qwik, Astro, Remix, Analog
+# ══════════════════════════════════════════════════════════════════════
+  phase-2-e2e:
+    name: 🧪 Phase 2 Meta-Frameworks
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci ${{ env.NPM_FLAGS }}
+
+      - name: angular 2.1 — Angular Enterprise
+        run: node e2e/fixtures/angular-enterprise/run-test.js
+
+      - name: nuxt 2.2 — Nuxt SaaS Platform
+        run: node e2e/fixtures/nuxt-saas-platform/run-test.js
+
+      - name: sveltekit 2.3 — SvelteKit Fullstack
+        run: node e2e/fixtures/sveltekit-fullstack/run-test.js
+
+      - name: solidstart 2.4 — SolidStart Dashboard
+        run: node e2e/fixtures/solidstart-dashboard/run-test.js
+
+      - name: qwikcity 2.5 — Qwik City Store
+        run: node e2e/fixtures/qwikcity-store/run-test.js
+
+      - name: astro 2.6 — Astro Content Platform
+        run: node e2e/fixtures/astro-content-platform/run-test.js
+
+      - name: remix 2.7 — Remix Job Board
+        run: node e2e/fixtures/remix-job-board/run-test.js
+
+      - name: analog 2.8 — Analog CMS
+        run: node e2e/fixtures/analog-cms/run-test.js
+
+# ══════════════════════════════════════════════════════════════════════
 #  FINAL SUMMARY — Collects all job results and prints a single report
 # ══════════════════════════════════════════════════════════════════════
   production-gate-summary:
@@ -512,6 +556,7 @@ jobs:
       - performance-gate
       - adapter-smoke
       - phase-e2e
+      - phase-2-e2e
     if: always()
     steps:
       - name: 📊 Gate Report
@@ -527,11 +572,13 @@ jobs:
           echo "║  Performance Gate     : ${{ needs.performance-gate.result }}"
           echo "║  Adapter Smoke        : ${{ needs.adapter-smoke.result }}"
           echo "║  Phase 1.15-1.18 E2E  : ${{ needs.phase-e2e.result }}"
+          echo "║  Phase 2 Framework E2E: ${{ needs.phase-2-e2e.result }}"
           echo "╠══════════════════════════════════════════════════════════╣"
           if [ "${{ needs.build.result }}" = "success" ] && \
              [ "${{ needs.cleanup-checks.result }}" = "success" ] && \
              [ "${{ needs.quality-gates.result }}" = "success" ] && \
-             [ "${{ needs.phase-e2e.result }}" = "success" ]; then
+             [ "${{ needs.phase-e2e.result }}" = "success" ] && \
+             [ "${{ needs.phase-2-e2e.result }}" = "success" ]; then
             echo "║  STATUS: ✅  PRODUCTION READY                          ║"
           else
             echo "║  STATUS: ❌  NOT READY — fix failing gates above        ║"
@@ -552,5 +599,8 @@ jobs:
           fi
           if [ "${{ needs.phase-e2e.result }}" != "success" ]; then
             echo "❌ CRITICAL: Phase 1.15-1.18 E2E tests failed" && exit 1
+          fi
+          if [ "${{ needs.phase-2-e2e.result }}" != "success" ]; then
+            echo "❌ CRITICAL: Phase 2 Framework E2E tests failed" && exit 1
           fi
           echo "✅ All critical gates passed!"
