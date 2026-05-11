@@ -292,6 +292,12 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     await import('../meta-frameworks/astro/index.js').catch(() => {});
     await import('../meta-frameworks/remix/index.js').catch(() => {});
     await import('../meta-frameworks/analog/index.js').catch(() => {});
+    await import('../meta-frameworks/react-router/index.js').catch(() => {});
+    await import('../meta-frameworks/tanstack-start/index.js').catch(() => {});
+    await import('../meta-frameworks/waku/index.js').catch(() => {});
+    await import('../meta-frameworks/vitepress/index.js').catch(() => {});
+    await import('../meta-frameworks/tauri/index.js').catch(() => {});
+    await import('../meta-frameworks/electron/index.js').catch(() => {});
     
     const pkgPath = path.join(cfg.root || process.cwd(), 'package.json');
     const fsNode = await import('fs');

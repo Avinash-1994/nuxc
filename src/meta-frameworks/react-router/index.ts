@@ -1,4 +1,4 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
+import type { SparxAdapter, Plugin, SparxConfig, PackageJson } from '@sparx/adapter-core';
 import { detectDependencies, registry } from '@sparx/adapter-core';
 import { rr7RoutesPlugin } from './routes-plugin.js';
 
@@ -11,7 +11,19 @@ export class ReactRouterAdapter implements SparxAdapter {
   name = 'react-router';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
-    return detectDependencies(pkg, ['@react-router/dev']);
+    return detectDependencies(pkg, ['@react-router/dev']) ||
+      (detectDependencies(pkg, ['react-router']) && this._hasConfig(projectRoot));
+  }
+
+  private _hasConfig(root: string): boolean {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const fs = require('fs');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const path = require('path');
+      return fs.existsSync(path.join(root, 'react-router.config.ts')) ||
+             fs.existsSync(path.join(root, 'react-router.config.js'));
+    } catch { return false; }
   }
 
   plugins(): Plugin[] {
@@ -30,57 +42,55 @@ export class ReactRouterAdapter implements SparxAdapter {
     return config;
   }
 
-  serverMiddleware(): Middleware[] {
-    return [
-       async (req: any, res: any, next: any) => {
-          try {
-             const virtualID = 'virtual:sparx/rr7-server-build';
-             let build: any;
-             try {
-                build = await import(virtualID);
-             } catch(e) {
-                return next();
-             }
+  // BUG-004: use getDevHandler not serverMiddleware
+  // BUG-002: null guard on req/res
+  // Reuses same Fetch Request/Response ↔ uWS shim pattern as Remix (Phase 2.7)
+  getDevHandler(): any {
+    return async (req: any, res: any, next: any) => {
+      if (!req || !res) return next?.();
 
-             // Map req to Fetch API Request (Same as Remix structure natively)
-             const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
-             
-             const fetchReq = new Request(url.href, {
-                method: req.method,
-                headers: new Headers(req.headers as any),
-             });
+      try {
+        const path = await import('path');
+        const { pathToFileURL } = await import('url');
+        const fs = await import('fs');
 
-             // @ts-ignore
-             const serverBuild = await import('@react-router/node');
-             const handleRequest = serverBuild.createRequestHandler(build, process.env.NODE_ENV);
-             
-             const fetchRes = await handleRequest(fetchReq);
+        const entryPath = path.join(process.cwd(), 'src', 'entry-server.cjs');
+        if (!fs.existsSync(entryPath)) return next();
 
-             res.writeStatus(`${fetchRes.status}`);
-             fetchRes.headers.forEach((val: any, key: any) => res.writeHeader(key, val));
-             
-             if (fetchRes.body) {
-                const reader = fetchRes.body.getReader();
-                while (true) {
-                   const { done, value } = await reader.read();
-                   if (done) break;
-                   res.write(value);
-                }
-             } else {
-                res.write(await fetchRes.text());
-             }
-             res.end();
-             
-          } catch(e) {
-             console.error('[Sparx:ReactRouter] Error rendering SSR', e);
-             next();
+        const entry = await import(pathToFileURL(entryPath).href);
+        const adapter = entry.default || entry;
+
+        const url = req.url || '/';
+
+        if (url.startsWith('/api/')) {
+          const result = await adapter.handleApi(url, { req });
+          if (result) {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(typeof result === 'string' ? result : JSON.stringify(result));
+            return;
           }
-       }
-    ];
+        } else {
+          const result = adapter.renderRoute(url, { root: process.cwd() });
+          if (result && result.html) {
+            res.setHeader('Content-Type', 'text/html');
+            res.end(result.html);
+            return;
+          }
+          if (result && result.spa) {
+            res.setHeader('Content-Type', 'text/html');
+            res.end(result.indexHtml);
+            return;
+          }
+        }
+      } catch (e) {
+        console.error('[SPARX ReactRouter] Dev handler error:', e);
+      }
+      next();
+    };
   }
 
   ssrEntry(): string {
-     return 'virtual:sparx/rr7-server-build';
+    return 'src/entry-server.cjs';
   }
 }
 

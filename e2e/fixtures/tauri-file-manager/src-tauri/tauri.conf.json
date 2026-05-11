@@ -1,0 +1,12 @@
+{
+  "build": {
+    "beforeDevCommand": "sparx dev",
+    "beforeBuildCommand": "sparx build",
+    "devPath": "http://localhost:5173",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "tauri-file-manager",
+    "version": "1.0.0"
+  }
+}

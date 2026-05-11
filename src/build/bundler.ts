@@ -17,7 +17,8 @@ export async function build(rawConfig: BuildConfig) {
       // Pre-load common meta-framework adapters so they register themselves
       const adaptersToTry = [
         'solidstart', 'sveltekit', 'astro', 'qwikcity', 'remix', 
-        'nextjs', 'nuxt', 'tanstack-start', 'waku', 'analog'
+        'nextjs', 'nuxt', 'tanstack-start', 'waku', 'analog', 'react-router', 'vitepress', 'tauri', 'electron',
+        'gatsby', 'redwoodjs', 'stencil', 'marko', 'docusaurus'
       ];
       
       for (const name of adaptersToTry) {

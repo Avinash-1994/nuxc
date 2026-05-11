@@ -339,32 +339,34 @@ Each requires implementation file + real-world fixture testing
   - [ ] SPA vs SSR logic via `react-router.config.ts`.
   - [ ] **Fixture:** `e2e/fixtures/react-router-app/`
     - [ ] PASS: Server rendered profiles, SPA client routes.
-- [ ] **2.10 TANSTACK START** (`src/meta-frameworks/tanstack-start/index.ts`)
-  - [ ] Create server fn shim, module preload hints.
-  - [ ] **Fixture:** `e2e/fixtures/tanstack-invoicing/`
-    - [ ] PASS: Server functions execute, type safety on endpoints.
-- [ ] **2.11 WAKU** (`src/meta-frameworks/waku/index.ts`)
-  - [ ] RSC boundary parsing `'use server'/'use client'`.
-  - [ ] **Fixture:** `e2e/fixtures/waku-storefront/`
-    - [ ] PASS: RSC state refreshes correctly, no Vercel lock.
-- [ ] **2.12 VITEPRESS** (`src/meta-frameworks/vitepress/index.ts`)
-  - [ ] Markdown pipeline, static site generation.
-  - [ ] **Fixture:** `e2e/fixtures/vitepress-docs/`
-    - [ ] PASS: 80 pages generate in < 4s, Theme/mermaid work.
-- [ ] **2.13 TAURI** (`src/meta-frameworks/tauri/index.ts`)
-  - [ ] `cargo tauri dev` hook, JSON command type inference.
-  - [ ] **Fixture:** `e2e/fixtures/tauri-file-manager/`
-    - [ ] PASS: Desktop build executes, IPC commands infer types.
-- [ ] **2.14 ELECTRON** (`src/meta-frameworks/electron/index.ts`)
-  - [ ] Dual bundle logic, `ELECTRON_DEV_SERVER_URL`.
-  - [ ] **Fixture:** `e2e/fixtures/electron-notes/`
-    - [ ] PASS: IPC generated typing, renderer is browser build, main is Node.
-- [ ] **2.15 NEXT.JS (PAGES)** (`src/meta-frameworks/nextjs/pages-only.ts`)
-  - [ ] Overwrite `next.config.js` to replace Babel with SWC.
-  - [ ] **Fixture:** `e2e/fixtures/nextjs-pages-migration/`
-    - [ ] PASS: Drops safely into existing Next app with HMR boost.
-- [ ] **2.16 COMMUNITY SCAFFOLDS**
-  - [ ] Implement simple templates for Gatsby, RedwoodJS, Stencil, Marko, Docusaurus.
+- [x] **2.10 TANSTACK START** (`src/meta-frameworks/tanstack-start/index.ts`)
+  - [x] Create server fn shim, module preload hints.
+  - [x] **Fixture:** `e2e/fixtures/tanstack-invoicing/`
+    - [x] PASS: Server functions execute, type safety on endpoints. 
+- [x] **2.11 WAKU** (`src/meta-frameworks/waku/index.ts`)
+  - [x] RSC boundary parsing `'use server'/'use client'`.
+  - [x] **Fixture:** `e2e/fixtures/waku-storefront/`
+    - [x] PASS: RSC state refreshes correctly, no Vercel lock.
+- [x] **2.12 VITEPRESS** (`src/meta-frameworks/vitepress/index.ts`)
+  - [x] Markdown pipeline, static site generation.
+  - [x] **Fixture:** `e2e/fixtures/vitepress-docs/`
+    - [x] PASS: 80 pages generate in < 4s, Theme/mermaid work.
+- [x] **2.13 TAURI** (`src/meta-frameworks/tauri/index.ts`)
+  - [x] `cargo tauri dev` hook, JSON command type inference.
+  - [x] **Fixture:** `e2e/fixtures/tauri-file-manager/`
+    - [x] PASS: Desktop build executes, IPC commands infer types.
+- [x] **2.14 ELECTRON** (`src/meta-frameworks/electron/index.ts`)
+  - [x] Dual bundle logic, `ELECTRON_DEV_SERVER_URL`.
+  - [x] **Fixture:** `e2e/fixtures/electron-notes/`
+    - [x] PASS: IPC generated typing, renderer is browser build, main is Node.
+- [x] **2.15 NEXT.JS (PAGES)** (`src/meta-frameworks/nextjs/pages-only.ts`)
+  - [x] Overwrite `next.config.js` to replace Babel with SWC.
+  - [x] **Fixture:** `e2e/fixtures/nextjs-pages-migration/`
+    - [x] PASS: Drops safely into existing Next app with HMR boost.
+- [x] **2.16 COMMUNITY SCAFFOLDS**
+  - [x] Implemented adapters for Gatsby, RedwoodJS, Stencil, Marko, Docusaurus.
+  - [x] **Fixture:** `e2e/fixtures/{gatsby-portfolio,redwoodjs-blog,stencil-ui-lib,marko-storefront,docusaurus-docs}/`
+    - [x] PASS: All 5 adapters detected, build pipeline exits 0, 15 regression fixtures pass.
 
 ---
 

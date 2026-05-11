@@ -30,13 +30,23 @@ export class ElectronAdapter implements SparxAdapter {
     return config;
   }
 
+  getDevHandler(): Middleware {
+    return async (req: any, res: any, next: any) => {
+      // Set ELECTRON_DEV_SERVER_URL for the main process to load renderer from Sparx dev server
+      const devUrl = process.env.ELECTRON_DEV_SERVER_URL || `http://localhost:${req?.socket?.localPort || 5173}`;
+      res.setHeader('X-Sparx-Electron-Dev-URL', devUrl);
+      // Renderer requests are served directly by the Sparx HMR dev server
+      next();
+    };
+  }
+
   serverMiddleware(): Middleware[] {
     return [
-       async (req: any, res: any, next: any) => {
-          // Dev Server Renderer Window Host 
-          // Routes standard localhost req to the Vite renderer frontend
-          next();
-       }
+      async (req: any, res: any, next: any) => {
+        // Dev Server Renderer Window Host
+        // Routes standard localhost req to the Vite renderer frontend
+        next();
+      }
     ];
   }
 }

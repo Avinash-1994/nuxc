@@ -1,0 +1,14 @@
+{
+  "name": "waku-storefront",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "sparx dev",
+    "build": "sparx build"
+  },
+  "dependencies": {
+    "waku": "latest",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}

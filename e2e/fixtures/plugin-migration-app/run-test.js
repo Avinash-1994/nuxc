@@ -1,8 +1,8 @@
 // e2e/fixtures/plugin-migration-app/run-test.js
 import fs from 'fs';
 import path from 'path';
-import { PluginManager } from '../../../src/core/plugins/manager.js';
-import { rewriteWasmPlugins } from '../../../src/migrate/wasm-rewriter.js';
+import { PluginManager } from '../../../dist/src/core/plugins/manager.js';
+import { rewriteWasmPlugins } from '../../../dist/src/migrate/wasm-rewriter.js';
 
 async function run() {
     console.log('Testing Phase 1.1 Requirements...');

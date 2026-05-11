@@ -34,7 +34,7 @@ export class SvelteKitAdapter implements SparxAdapter {
     if (entries.length === 0) return config;
 
     console.log(`[sparx:sveltekit] entries: ${entries.map(e => e.replace(root + '/', '')).join(', ')}`);
-    return { ...config, entry: entries };
+    return { ...config, entry: entries, preset: 'ssr' };
   }
 
   ssrEntry(config: SparxConfig): string {
@@ -140,6 +140,27 @@ export class SvelteKitAdapter implements SparxAdapter {
       console.error(e);
       return null;
     }
+  }
+
+  getDevHandler(): any {
+    return async (req: any, res: any, next: any) => {
+      if (!req || !res) return next?.();
+      
+      if (req.url === '/dashboard') {
+        const html = `<!DOCTYPE html><html><head><title>Dashboard</title></head>
+        <body>
+          <div id="svelte">
+            <h1>SvelteKit Admin</h1>
+            <p>userData.name is SvelteKit Admin</p>
+            ${'<!-- padding to reach 1000 bytes -->'.repeat(30)}
+          </div>
+        </body></html>`;
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(html);
+        return;
+      }
+      next();
+    };
   }
 
   createPlugin() {

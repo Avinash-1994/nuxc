@@ -92,6 +92,16 @@ secrets/
 .sparx/telemetry/
 **/.sparx_cache/**
 **/.sparx/telemetry/**
+**/.sparx/cache/**
 *.db
 *.db-journal
 *.tgz
+
+# Fixture build and cache artifacts (generated at test-time, not source)
+e2e/fixtures/**/.ng-out/
+e2e/fixtures/**/dist/
+e2e/fixtures/**/dist-test/
+e2e/fixtures/**/.sparx/
+e2e/fixtures/**/.sparx-cache/
+e2e/fixtures/**/package-lock.json
+e2e/fixtures/**/node_modules/

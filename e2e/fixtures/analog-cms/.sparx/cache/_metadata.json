@@ -1,13 +1,27 @@
 {
-  "hash": "babcc01e",
-  "depsHash": "541e0d48",
+  "hash": "9baba8a5",
+  "depsHash": "7599e19c",
   "deps": [
+    "zone.js",
+    "@angular/core",
+    "@angular/common",
+    "@angular/compiler",
+    "@angular/platform-browser",
+    "@angular/platform-browser-dynamic",
+    "@angular/router",
     "rxjs",
     "rxjs/operators"
   ],
   "depMap": {
+    "zone.js": "/@sparx-deps/zone.js.js",
+    "@angular/core": "/@sparx-deps/_angular_core.js",
+    "@angular/common": "/@sparx-deps/_angular_common.js",
+    "@angular/compiler": "/@sparx-deps/_angular_compiler.js",
+    "@angular/platform-browser": "/@sparx-deps/_angular_platform-browser.js",
+    "@angular/platform-browser-dynamic": "/@sparx-deps/_angular_platform-browser-dynamic.js",
+    "@angular/router": "/@sparx-deps/_angular_router.js",
     "rxjs": "/@sparx-deps/rxjs.js",
     "rxjs/operators": "/@sparx-deps/rxjs_operators.js"
   },
-  "timestamp": 1777716901259
+  "timestamp": 1777824869454
 }

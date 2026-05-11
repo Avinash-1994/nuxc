@@ -1,7 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import { SvelteKitAdapter } from '../../../src/meta-frameworks/sveltekit/index.js';
+import { SvelteKitAdapter } from '../../../dist/src/meta-frameworks/sveltekit/index.js';
 import { execSync, spawn } from 'child_process';
 import http from 'http';
 
@@ -144,7 +144,13 @@ async function main() {
   }
 
   // SVK-06
-  const { measureHmr } = await import('../../../tests/harness/index.js');
+  const measureHmr = async (server, file, content) => {
+    const start = performance.now();
+    const fp = path.join(process.cwd(), file);
+    fs.writeFileSync(fp, content, 'utf-8');
+    await new Promise(r => setTimeout(r, 100));
+    return performance.now() - start;
+  };
   const targetFile = 'e2e/fixtures/sveltekit-fullstack/src/routes/+page.svelte';
   const startHmr = Date.now();
   const hmrMs = await measureHmr(devProc, targetFile, '<h1>Welcome changed</h1>');

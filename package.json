@@ -120,6 +120,7 @@
     "@node-rs/xxhash": "^1.7.6",
     "@sparx/adapter-core": "file:packages/sparx-adapter-core",
     "@swc/core": "^1.15.24",
+    "@tauri-apps/api": "^2.11.0",
     "@trpc/client": "^11.8.1",
     "@trpc/server": "^11.8.1",
     "@types/level": "^6.0.3",

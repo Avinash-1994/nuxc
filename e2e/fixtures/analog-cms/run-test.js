@@ -252,7 +252,10 @@ await (async function() {
      bundleSizeKB = parseFloat((fs.statSync(path.join(outDir, clientBundle.name)).size/1024).toFixed(2));
   }
   
-  const isCompiled = clientContent.includes('"use strict"') || clientContent.includes('var x=');
+  const isCompiled = (clientContent.includes('"use strict"') || clientContent.startsWith('(()=>')) 
+    && (clientContent.includes('defineComponent') || clientContent.includes('elementStart'))
+    && !clientContent.includes('__webpack_require__')
+    && !clientContent.includes('ng.core.ɵcmp = function(opts) { return opts; }');
 
   const ok = htmlFiles.length >= 3 && clientBundle && serverBundle && buildMs < 5000 && bundleSizeKB >= 1 && isCompiled;
   (ok ? pass : fail)('AG-07  Production build (Angular Ivy + Sparx chunker)', `>= 3 HTML pages, client/server bundles, < 5000ms`,
@@ -265,6 +268,8 @@ await (async function() {
     `Client bundle: ${clientBundle ? clientBundle.name : 'MISSING ❌'}`,
     `Client bundle size: ${bundleSizeKB}KB (actual)`,
     `Contains compiled Angular (not ESM imports): ${isCompiled ? 'yes' : 'no'}`,
+    `ɵɵdefineComponent in bundle (mangled): ${clientContent.includes('defineComponent') ? 'yes' : 'no'}`,
+    `ɵɵelementStart in bundle (mangled): ${clientContent.includes('elementStart') ? 'yes' : 'no'}`,
     `First 200 chars of compiled bundle:`,
     clientContent.substring(0, 200).replace(/\n/g, ' '),
   ].filter(Boolean));

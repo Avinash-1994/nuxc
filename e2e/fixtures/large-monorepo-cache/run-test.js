@@ -1,8 +1,8 @@
 // e2e/fixtures/large-monorepo-cache/run-test.js
 import fs from 'fs';
 import path from 'path';
-import { PluginManager } from '../../../src/core/plugins/manager.js';
-import { getCacheManager } from '../../../src/core/cache-manager.js';
+import { PluginManager } from '../../../dist/src/core/plugins/manager.js';
+import { getCacheManager } from '../../../dist/src/core/cache-manager.js';
 import { cacheSizeCheck } from '../../../tests/harness/index.js';
 
 async function generateMonorepo() {

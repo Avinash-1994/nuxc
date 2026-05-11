@@ -30,13 +30,15 @@ export class TauriAdapter implements SparxAdapter {
     return config;
   }
 
-  serverMiddleware(): Middleware[] {
-    return [
-       async (req: any, res: any, next: any) => {
-          // Tauri relies on native Rust backend, dev server acts purely as static HTML edge host for the WebView
-          next();
-       }
-    ];
+  // BUG-004: use getDevHandler not serverMiddleware
+  // BUG-002: null guard on req/res
+  getDevHandler(): any {
+    return async (req: any, res: any, next: any) => {
+      if (!req || !res) return next?.();
+
+      // Tauri relies on native Rust backend, dev server acts purely as static HTML edge host for the WebView
+      next();
+    };
   }
 }
 

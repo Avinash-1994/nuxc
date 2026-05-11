@@ -1,0 +1,69 @@
+  ✅ PASS  TU-01  IPC Bridge plugin
+           Expected: plugin registered
+           Actual:   verified
+      tauriIpcPlugin loaded: yes
+      @tauri-apps/api externalization: yes
+
+  ✅ PASS  TU-02  Static HTML render
+           Expected: HTML layout for WebView
+           Actual:   356 bytes
+      Request: GET /
+      Response status: 200
+      Response Content-Type: text/html
+
+  ✅ PASS  TU-03  Cold start
+           Expected: < 300ms
+           Actual:   49ms
+      Spawn timestamp: 2026-05-07T03:56:35.193Z
+      Ready timestamp: 2026-05-07T03:56:35.242Z
+      Cold start: 49ms
+      [sparx] adapter: tauri in output: yes
+      uWS bound: yes
+
+  ✅ PASS  TU-04  HMR latency
+           Expected: < 80ms
+           Actual:   45ms
+      File written: src/App.tsx
+      t0: 2026-05-07T03:56:35.766Z
+      t1: 2026-05-07T03:56:35.811Z
+      HMR latency: 45ms
+
+tauri installed: latest
+  ✅ PASS  TU-05  Production build
+           Expected: WebView SPA bundle
+           Actual:   188.97KB client (Tauri specific)
+      Build time: 46ms
+      Client bundle: assets/client.js 188.97KB
+      Tauri identifiers: 2 found (expected > 0)
+      First 100 chars of client bundle:
+      var Om=Object.create;var Ni=Object.defineProperty;var _m=Object.getOwnPropertyDescriptor;var Mm=Obje
+      SUCCESS: Real minified bundle
+
+  ✅ PASS  TU-06  Regression
+           Expected: all pass
+           Actual:   all pass
+      vue-basic:            pass 249ms
+      react-basic:          pass 237ms
+      sveltekit-fullstack:  pass 318ms
+      solidstart-dashboard: pass 294ms
+      qwikcity-store:       pass 352ms
+      astro:                pass 310ms
+      remix-job-board:      pass 412ms
+      analog-cms:           pass 412ms
+      react-router-app:     pass 261ms
+      tanstack-invoicing:   pass 261ms
+      waku-storefront:      pass 288ms
+      vitepress-docs:       pass 351ms
+      tsc --noEmit:         0 errors
+
+┌─────────────────────────────────────────────┐
+│ SPARX — PHASE 2.13 TAURI COMPLETE           │
+│ TU-01 IPC Bridge:       PASS  verified       │
+│ TU-02 Static HTML:      PASS  356 bytes       │
+│ TU-03 Cold start:       PASS  49ms            │
+│ TU-04 HMR:              PASS  45ms            │
+│ TU-05 Build:            PASS  188.97KB SPA    │
+│ TU-06 Regression:       PASS  12 fixtures     │
+│ Total: 6 pass  0 fail  0 warn                │
+│ Ready for Phase 2.14: YES                    │
+└─────────────────────────────────────────────┘
