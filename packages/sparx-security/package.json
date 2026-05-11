@@ -3,9 +3,13 @@
   "version": "1.4.0",
   "description": "Sparx Security — SBOM, CVE scanning, SRI, CSP, secret scanning, and plugin permissions",
   "type": "module",
-  "main": "./src/supply-chain.ts",
+  "main": "./dist/supply-chain.js",
+  "types": "./dist/supply-chain.d.ts",
   "exports": {
-    ".": "./src/supply-chain.ts"
+    ".": "./dist/supply-chain.js"
+  },
+  "scripts": {
+    "build": "tsc"
   },
   "sideEffects": false,
   "license": "MIT",

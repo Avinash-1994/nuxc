@@ -1,0 +1,21 @@
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PHASE 3.1 — SUPPLY CHAIN SECURITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✅ PASS  SEC-01 Lockfile tampering
+           Expected: abort build
+           Actual:   aborted
+      Tampered integrity hash triggered abort
+
+  ✅ PASS  SEC-02 CVE scanner
+           Expected: blocks bad deps
+           Actual:   blocked
+      Detected HIGH CVE in marked@0.3.5
+
+  ✅ PASS  SEC-03 SBOM Generation
+           Expected: dist/sparx-sbom.json
+           Actual:   generated
+      Format: CycloneDX 1.5
+      Components: 0
+

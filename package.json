@@ -119,6 +119,7 @@
     "@babel/preset-typescript": "^7.28.5",
     "@node-rs/xxhash": "^1.7.6",
     "@sparx/adapter-core": "file:packages/sparx-adapter-core",
+    "@sparx/security": "file:packages/sparx-security",
     "@swc/core": "^1.15.24",
     "@tauri-apps/api": "^2.11.0",
     "@trpc/client": "^11.8.1",

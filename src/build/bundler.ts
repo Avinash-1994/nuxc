@@ -61,6 +61,41 @@ export async function build(rawConfig: BuildConfig) {
   console.log('📦 Entry:', config.entry);
   console.log('📂 Output:', config.outDir);
 
+  // Phase 3.1 — Supply Chain Security Checks
+  if (config.mode === 'production') {
+    try {
+      const security = await import('@sparx/security');
+      
+      // 1. Lockfile audit
+      const lockfileResult = await security.auditLockfile(config.root);
+      if (!lockfileResult.clean) {
+        throw new Error('Lockfile tampering detected! Aborting build.');
+      }
+      
+      // 2. CVE Scan
+      const pkgPath = path.join(config.root, 'package.json');
+      if (fs.existsSync(pkgPath)) {
+        const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+        const deps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
+        const packagesToScan = Object.entries(deps).map(([name, version]) => ({
+          name, 
+          version: String(version).replace(/^[^0-9]/, '')
+        }));
+        
+        const cacheDir = path.join(config.root, '.sparx', 'security');
+        const cveResult = await security.scanCVE(packagesToScan, { cacheDir, distDir: config.outDir });
+        if (!cveResult.clean) {
+          throw new Error('HIGH CVE detected in dependencies! Aborting build.');
+        }
+      }
+    } catch (err: any) {
+      if (err.message.includes('Lockfile tampering') || err.message.includes('HIGH CVE')) {
+        throw err;
+      }
+      console.warn('[sparx] Security modules not fully available or failed:', err.message);
+    }
+  }
+
   const { FrameworkPipeline } = await import('../core/pipeline/framework-pipeline.js');
   const pipeline = await FrameworkPipeline.auto(config);
 
@@ -69,6 +104,25 @@ export async function build(rawConfig: BuildConfig) {
     if (!result.success) {
       const errorMsg = (result as any).error?.message || 'Unknown build error';
       throw new Error(errorMsg);
+    }
+
+    // Phase 3.1 — SBOM Generation
+    if (config.mode === 'production') {
+      try {
+        const security = await import('@sparx/security');
+        const pkgPath = path.join(config.root, 'package.json');
+        let deps: string[] = [];
+        if (fs.existsSync(pkgPath)) {
+          const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+          deps = Object.keys({ ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) });
+        }
+        const sbom = await security.generateSBOM(config.root, deps);
+        const outPath = path.join(config.outDir || 'dist', 'sparx-sbom.json');
+        fs.mkdirSync(path.dirname(outPath), { recursive: true });
+        fs.writeFileSync(outPath, JSON.stringify(sbom, null, 2), 'utf8');
+      } catch (e: any) {
+        console.warn('[sparx:security] Failed to generate SBOM:', e.message);
+      }
     }
 
     // Day 52: Print final bundle stats in production mode

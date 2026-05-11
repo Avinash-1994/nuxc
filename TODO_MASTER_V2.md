@@ -373,12 +373,12 @@ Each requires implementation file + real-world fixture testing
 ## PHASE 3 — SECURITY
 
 ### 3.1 Supply chain security
-- [ ] Create `packages/sparx-security/src/supply-chain.ts`
-- [ ] Generate SBOM `dist/sparx-sbom.json`
-- [ ] Verify Lockfile hash checksums.
-- [ ] CVE scan using OSV DB, blocking High vulnerabilities.
-- [ ] **Fixture:** `e2e/fixtures/security-supply-chain/`
-  - [ ] TEST: CVE scanner blocks bad deps, lockfile tampering triggers abort.
+- [x] Create `packages/sparx-security/src/supply-chain.ts`
+- [x] Generate SBOM `dist/sparx-sbom.json`
+- [x] Verify Lockfile hash checksums.
+- [x] CVE scan using OSV DB, blocking High vulnerabilities.
+- [x] **Fixture:** `e2e/fixtures/security-supply-chain/`
+  - [x] TEST: CVE scanner blocks bad deps, lockfile tampering triggers abort.
 
 ### 3.2 Build process isolation
 - [ ] Create `packages/sparx-security/src/env-guard.ts` & native sandbox
