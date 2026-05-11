@@ -56,6 +56,21 @@ export async function build(rawConfig: BuildConfig) {
     config.plugins = [...adapterPlugins, ...(config.plugins ?? [])];
   }
 
+  // 3.2: Plugin Permission Sandbox
+  if (config.plugins) {
+    try {
+      const { createPluginPermissionProxy } = await import('@sparx/security');
+      config.plugins = config.plugins.map((p: any) => {
+        const perms = { declared: p.permissions || [], name: p.name || 'anonymous' };
+        return createPluginPermissionProxy(p, perms, { 
+          mode: config.mode === 'production' ? 'production' : 'development' 
+        });
+      });
+    } catch (e) {
+      console.warn('[sparx:security] Failed to load plugin permission sandbox:', e);
+    }
+  }
+
   console.log('🏗️  Starting Build Pipeline...');
   console.log('📁 Root:', config.root);
   console.log('📦 Entry:', config.entry);
@@ -106,10 +121,34 @@ export async function build(rawConfig: BuildConfig) {
       throw new Error(errorMsg);
     }
 
-    // Phase 3.1 — SBOM Generation
+    // Phase 3.1 & 3.2 — Output Analysis & Generation
     if (config.mode === 'production') {
+      const security = await import('@sparx/security');
+      const buildOutDir = config.outDir || 'build_output';
+      
+      // 3.2 Secret Scanning
+      const filesToScan: Record<string, string> = {};
+      const scanDir = (dir: string) => {
+        if (!fs.existsSync(dir)) return;
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+          const p = path.join(dir, entry.name);
+          if (entry.isDirectory()) scanDir(p);
+          else {
+            const ext = path.extname(p).toLowerCase();
+            if (['.js', '.mjs', '.cjs', '.css', '.html', '.json', '.ts'].includes(ext)) {
+              filesToScan[p] = fs.readFileSync(p, 'utf8');
+            }
+          }
+        }
+      };
+      scanDir(buildOutDir);
+      
+      const scanResult = security.scanSecrets(filesToScan);
+      if (!scanResult.clean) {
+        throw new Error('Potential secret detected in bundle output! Aborting build.');
+      }
+
       try {
-        const security = await import('@sparx/security');
         const pkgPath = path.join(config.root, 'package.json');
         let deps: string[] = [];
         if (fs.existsSync(pkgPath)) {
@@ -117,7 +156,7 @@ export async function build(rawConfig: BuildConfig) {
           deps = Object.keys({ ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) });
         }
         const sbom = await security.generateSBOM(config.root, deps);
-        const outPath = path.join(config.outDir || 'dist', 'sparx-sbom.json');
+        const outPath = path.join(buildOutDir, 'sparx-sbom.json');
         fs.mkdirSync(path.dirname(outPath), { recursive: true });
         fs.writeFileSync(outPath, JSON.stringify(sbom, null, 2), 'utf8');
       } catch (e: any) {

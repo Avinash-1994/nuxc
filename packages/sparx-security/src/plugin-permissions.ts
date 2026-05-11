@@ -65,7 +65,7 @@ export function createPluginPermissionProxy<T extends object>(
   const { mode, logDir } = options;
 
   return new Proxy(ctx, {
-    get(target, prop) {
+    get(target, prop, receiver) {
       const val = (target as any)[prop];
 
       // Guard env access
@@ -80,7 +80,13 @@ export function createPluginPermissionProxy<T extends object>(
         }
       }
 
-      return typeof val === 'function' ? val.bind(target) : val;
+      if (typeof val === 'function') {
+        // Bind to the proxy (receiver) so internal `this` accesses are still proxied
+        return function(this: any, ...args: any[]) {
+          return val.apply(receiver, args);
+        };
+      }
+      return val;
     },
   });
 }

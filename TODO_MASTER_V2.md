@@ -381,11 +381,11 @@ Each requires implementation file + real-world fixture testing
   - [x] TEST: CVE scanner blocks bad deps, lockfile tampering triggers abort.
 
 ### 3.2 Build process isolation
-- [ ] Create `packages/sparx-security/src/env-guard.ts` & native sandbox
-- [ ] Enforce plugin permissions (fs, net, env, exec) via `sparx.plugin.json`.
-- [ ] Deep path safety & regex based secret scanning string output checks (AWS, stripe, private keys, JWT, github).
-- [ ] **Fixture:** `e2e/fixtures/security-isolation/`
-  - [ ] TEST: Unauthorized plugins blocked, cleartext secrets abort build.
+- [x] Create `packages/sparx-security/src/env-guard.ts` & native sandbox
+- [x] Enforce plugin permissions (fs, net, env, exec) via `sparx.plugin.json`.
+- [x] Deep path safety & regex based secret scanning string output checks (AWS, stripe, private keys, JWT, github).
+- [x] **Fixture:** `e2e/fixtures/security-isolation/`
+  - [x] TEST: Unauthorized plugins blocked, cleartext secrets abort build.
 
 ### 3.3 Output hardening
 - [ ] Create `packages/sparx-build/src/sri.ts`, `csp.ts`, `security-headers.ts`
