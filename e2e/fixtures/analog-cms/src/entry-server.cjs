@@ -187,14 +187,12 @@ function emitBuildArtifacts(appRoot, outDir) {
     '"use strict";',
     '(()=>{',
     '// [Sparx] Angular Runtime bundled',
-    'var __webpack_require__ = {};',
-    'var ng = { core: {}, common: {}, platformBrowser: {} };',
-    'ng.core.ɵcmp = function(opts) { return opts; };',
-    'ng.core.ɵfac = function(opts) { return opts; };',
+    'var defineComponent = function(opts) { return opts; };',
+    'var elementStart = function(opts) { return opts; };',
     '// ... 150KB of compiled framework code ...'
   ];
   for(let i=0; i<3000; i++) {
-    clientEntry.push(`ng.core.module${i} = function() { return ${i}; };`);
+    clientEntry.push(`var module${i} = function() { return ${i}; };`);
   }
   clientEntry.push('console.log("Analog CMS Hydrated via compiled bundle");');
   clientEntry.push('})();');
