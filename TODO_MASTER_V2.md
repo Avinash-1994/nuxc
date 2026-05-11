@@ -388,11 +388,11 @@ Each requires implementation file + real-world fixture testing
   - [x] TEST: Unauthorized plugins blocked, cleartext secrets abort build.
 
 ### 3.3 Output hardening
-- [ ] Create `packages/sparx-build/src/sri.ts`, `csp.ts`, `security-headers.ts`
-- [ ] Inject `integrity` hashes.
-- [ ] Generate strict Content Security Policies in HTML + Headers config.
-- [ ] **Fixture:** `e2e/fixtures/security-hardened-app/`
-  - [ ] TEST: Valid CSP, valid SRI tags.
+- [x] Create `packages/sparx-build/src/sri.ts`, `csp.ts`, `security-headers.ts`
+- [x] Inject `integrity` hashes.
+- [x] Inject strict `Content-Security-Policy` via `<meta>` tag for static sites and auto-generate an `.htaccess` or `_headers` file.
+- [x] **Fixture:** `e2e/fixtures/security-output/`
+  - [x] TEST: SRI hashes on all scripts, CSP blocks inline eval.
 
 ### 3.4 Security CLI commands
 - [ ] Add `security audit`, `security sbom`, `security plugin-audit`, `security fix`

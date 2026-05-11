@@ -10,7 +10,7 @@ export { scanCVE, type CVEReport, type CVEFinding } from './cve-scan.js';
 export { scanSecrets, type SecretScanResult } from './secret-scanner.js';
 export { createPluginPermissionProxy, type PluginPermissions } from './plugin-permissions.js';
 export { freezeEnv, guardEnvAccess } from './env-guard.js';
-export { generateSRI, type SRIManifest } from './sri.js';
+export { generateSRI, injectSRIIntoHTML, type SRIManifest } from './sri.js';
 export { generateCSP, type CSPConfig } from './csp.js';
 export { generateSecurityHeaders, type SecurityHeaders } from './headers.js';
 export { isolateBuildEnv } from './build-isolation.js';

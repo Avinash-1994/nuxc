@@ -162,6 +162,36 @@ export async function build(rawConfig: BuildConfig) {
       } catch (e: any) {
         console.warn('[sparx:security] Failed to generate SBOM:', e.message);
       }
+
+      // 3.3 Output Hardening (SRI, CSP, Headers)
+      try {
+        const sriManifest = security.generateSRI(buildOutDir);
+        const cspResult = security.generateCSP(buildOutDir);
+        const secHeaders = security.generateSecurityHeaders(buildOutDir, cspResult.header);
+        
+        fs.writeFileSync(path.join(buildOutDir, '_headers'), secHeaders.configs.netlify, 'utf8');
+        fs.writeFileSync(path.join(buildOutDir, '.htaccess'), secHeaders.configs.apache, 'utf8');
+
+        // Inject SRI and CSP into HTML
+        const injectHtml = (dir: string) => {
+          if (!fs.existsSync(dir)) return;
+          for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+            const p = path.join(dir, entry.name);
+            if (entry.isDirectory()) injectHtml(p);
+            else if (path.extname(p).toLowerCase() === '.html') {
+              let html = fs.readFileSync(p, 'utf8');
+              html = security.injectSRIIntoHTML(html, sriManifest);
+              if (!html.includes('Content-Security-Policy')) {
+                html = html.replace(/<head[^>]*>/i, `$&\\n    ${cspResult.metaTag}`);
+              }
+              fs.writeFileSync(p, html, 'utf8');
+            }
+          }
+        };
+        injectHtml(buildOutDir);
+      } catch (e: any) {
+        console.warn('[sparx:security] Failed to apply output hardening:', e.message);
+      }
     }
 
     // Day 52: Print final bundle stats in production mode
