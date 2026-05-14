@@ -16,7 +16,9 @@
     "isolatedModules": true,
     "paths": {
       "@sparx/adapter-core": ["./packages/sparx-adapter-core/src/index.js", "./packages/sparx-adapter-core/src/index.ts"],
-      "@sparx/adapter-core/*": ["./packages/sparx-adapter-core/*"]
+      "@sparx/adapter-core/*": ["./packages/sparx-adapter-core/*"],
+      "@sparx/security": ["./packages/sparx-security/src/index.ts"],
+      "@sparx/security/*": ["./packages/sparx-security/src/*"]
     }
   },
   "include": [

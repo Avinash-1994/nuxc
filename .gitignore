@@ -111,3 +111,4 @@ e2e/fixtures/**/node_modules/
 
 # Test scaffolds
 ux_v09_test_app/
+mdi__home.svg

@@ -404,17 +404,17 @@ Each requires implementation file + real-world fixture testing
 ## PHASE 4 — LAUNCH PLUGIN ECOSYSTEM
 
 Implement Rollup-compatible plugins tracking to `packages/sparx-plugin-{name}/`:
-- [ ] **plugin-env**: Load vars, auto gen `src/env.d.ts`, block secret patterns.
-- [ ] **plugin-pwa**: Web App Manifest, ServiceWorker auto-install precache.
-- [ ] **plugin-icons**: On-demand icon loader (`~icons/mdi/...`).
-- [ ] **plugin-svg**: URL import, raw import, rendering component import.
-- [ ] **plugin-legacy**: `<script nomodule>` transpiled fallback using SWC corejs injection.
-- [ ] **plugin-compression**: Fast Rust Brotli/Gzip parallel thread processing.
-- [ ] **plugin-auto-import**: Import hooks, `.eslintrc-auto-import` sync.
-- [ ] **plugin-inspect**: Vue/React GUI to watch dev timings mapped visually.
-- [ ] **plugin-checker**: Worker thread linter testing (tsc, eslint, stylelint).
-- [ ] **plugin-mock**: Fast REST intercept + GraphQL local generation mocks.
-- [ ] **plugin-image**: sharp optimization, AVIF+WebP responsive srcset output.
+- [x] **plugin-env**: Load vars, auto gen `src/env.d.ts`, block secret patterns.
+- [x] **plugin-pwa**: Web App Manifest, ServiceWorker auto-install precache.
+- [x] **plugin-icons**: On-demand icon loader (`~icons/mdi/...`).
+- [x] **plugin-svg**: URL import, raw import, rendering component import.
+- [x] **plugin-legacy**: `<script nomodule>` transpiled fallback using SWC corejs injection.
+- [x] **plugin-compression**: Fast Rust Brotli/Gzip parallel thread processing.
+- [x] **plugin-auto-import**: Import hooks, `.eslintrc-auto-import` sync.
+- [x] **plugin-inspect**: Vue/React GUI to watch dev timings mapped visually.
+- [x] **plugin-checker**: Worker thread linter testing (tsc, eslint, stylelint).
+- [x] **plugin-mock**: Fast REST intercept + GraphQL local generation mocks.
+- [x] **plugin-image**: sharp optimization, AVIF+WebP responsive srcset output.
 
 _(All must pass their matching `plugin-<name>-app` fixture tested in browser!)_
 

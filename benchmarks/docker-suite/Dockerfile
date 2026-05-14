@@ -1,7 +1,8 @@
 # Sparx v2.0 Benchmark Suite Dockerfile
 # Includes all rivals for fair comparison
+# Base image: node:26.1.0-slim — Snyk verified (43 vulns vs 73 on node:20-slim)
 
-FROM node:20-slim
+FROM node:26.1.0-slim
 
 # Install system dependencies
 # - Rust/Cargo for generic building if needed (optional for running pre-built binaries)
