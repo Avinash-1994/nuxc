@@ -1,0 +1,96 @@
+import path from 'path';
+import { createRequire } from 'module';
+import { performance } from 'perf_hooks';
+
+const require = createRequire(import.meta.url);
+
+export default {
+  options: (yargs: any) => {
+    return yargs
+      .option('port', {
+        type: 'number',
+        description: 'Server port'
+      })
+      .option('root', {
+        alias: 'r',
+        type: 'string',
+        description: 'Project root directory'
+      })
+      .option('strictPort', {
+        type: 'boolean',
+        description: 'Fail if the requested port is unavailable instead of trying another port',
+        default: false
+      })
+      .option('quiet', {
+        type: 'boolean',
+        description: 'Suppress non-error output',
+        default: false
+      })
+      .option('verbose', {
+        type: 'boolean',
+        description: 'Show detailed debug output',
+        default: false
+      })
+      .option('open', {
+        alias: 'o',
+        type: 'boolean',
+        description: 'Open browser automatically on dev server start',
+        default: false
+      });
+  },
+  handler: async (args: any) => {
+    const { log } = await import('../../utils/logger.js');
+    try {
+      if (args.quiet) {
+        process.env.SPARX_QUIET = 'true';
+      }
+      if (args.verbose) {
+        process.env.DEBUG = '*';
+      }
+
+      const root = args.root
+        ? path.resolve(process.cwd(), args.root)
+        : process.cwd();
+        
+      const cfg = {
+        root,
+        port: args.port || 5173,
+        mode: 'development',
+        server: { host: '0.0.0.0', strictPort: args.strictPort }
+      } as any;
+
+      const minimalDevServer = await import('../../dev/devServer.minimal.js');
+      const t0 = performance.now();
+      await minimalDevServer.startDevServer(cfg);
+      const elapsed = Math.round(performance.now() - t0);
+
+      const version = require('../../../package.json').version;
+      const adapter = minimalDevServer.detectedAdapter ?? 'none';
+      const port = cfg.port || 5173;
+
+      console.log(
+        `\n  ⚡ sparx v${version}  ` +
+        `adapter: ${adapter}  ` +
+        `port: ${port}\n` +
+        `     http://localhost:${port}\n` +
+        `     ready in ${elapsed}ms\n`
+      );
+
+      if (args.open) {
+        const url = `http://localhost:${port}`;
+        const { exec } = await import('child_process');
+        const cmd = process.platform === 'darwin' ? 'open'
+          : process.platform === 'win32' ? 'start'
+          : 'xdg-open';
+        exec(`${cmd} ${url}`);
+      }
+
+      if (!args.quiet) {
+        console.log('\n💡  Tip: Run `npx sparx audit --url http://localhost:' + port + '` to generate an audit report.');
+      }
+    } catch (e: any) {
+      log.error(e.message);
+      process.exit(1);
+    }
+  }
+};

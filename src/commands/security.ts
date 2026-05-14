@@ -235,8 +235,19 @@ export async function runPluginAuditCommand(): Promise<void> {
     return;
   }
 
-  const pluginDirs = fs.readdirSync(nodeModulesDir)
-    .filter((d) => d.startsWith('@sparx/plugin-') || d.startsWith('sparx-plugin-'));
+  const pluginDirs: string[] = [];
+  for (const dir of fs.readdirSync(nodeModulesDir)) {
+    if (dir.startsWith('@')) {
+      const scopePath = path.join(nodeModulesDir, dir);
+      if (fs.existsSync(scopePath) && fs.statSync(scopePath).isDirectory()) {
+        for (const sub of fs.readdirSync(scopePath)) {
+          if (sub.startsWith('plugin-')) pluginDirs.push(`${dir}/${sub}`);
+        }
+      }
+    } else if (dir.startsWith('sparx-plugin-')) {
+      pluginDirs.push(dir);
+    }
+  }
 
   if (pluginDirs.length === 0) {
     console.log('  No Sparx plugins found in node_modules.');
@@ -254,3 +265,248 @@ export async function runPluginAuditCommand(): Promise<void> {
     console.log(`  ${flag} ${dir}: [${perms.join(', ') || 'none'}]`);
   }
 }
+
+/** sparx security fix — auto-upgrades lockfiles and rewrites process.env to import.meta.env */
+export async function runSecurityFix(): Promise<void> {
+  console.log('🔒 Security Auto-Fix\n' + '─'.repeat(40));
+  
+  // 1. Upgrade lockfiles
+  console.log('\n[1/2] Running npm audit fix...');
+  try {
+    const { execSync } = await import('node:child_process');
+    execSync('npm audit fix', { cwd: PROJECT_ROOT, stdio: 'inherit' });
+    console.log('  ✅ Dependencies upgraded successfully.');
+  } catch (e: any) {
+    console.warn('  ⚠️  npm audit fix completed with warnings or errors.');
+  }
+
+  // 2. Rewrite process.env -> import.meta.env
+  console.log('\n[2/2] Scanning for process.env references...');
+  let rewrittenCount = 0;
+  
+  function scanAndRewrite(dir: string) {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (!['node_modules', 'dist', 'build_output', '.sparx', '.git'].includes(entry.name)) {
+          scanAndRewrite(fullPath);
+        }
+      } else if (entry.isFile()) {
+        const ext = path.extname(entry.name).toLowerCase();
+        if (['.js', '.ts', '.jsx', '.tsx', '.mjs', '.cjs'].includes(ext)) {
+          const content = fs.readFileSync(fullPath, 'utf8');
+          if (content.includes('process.env.')) {
+            const newContent = content.replace(/process\.env\./g, 'import.meta.env.');
+            fs.writeFileSync(fullPath, newContent, 'utf8');
+            rewrittenCount++;
+            console.log(`  🔧 Rewrote process.env in ${path.relative(PROJECT_ROOT, fullPath)}`);
+          }
+        }
+      }
+    }
+  }
+
+  const srcDir = path.join(PROJECT_ROOT, 'src');
+  if (fs.existsSync(srcDir)) {
+    scanAndRewrite(srcDir);
+  } else {
+    // If no src/, scan root but carefully
+    for (const file of fs.readdirSync(PROJECT_ROOT)) {
+      if (file.endsWith('.js') || file.endsWith('.ts')) {
+        scanAndRewrite(path.join(PROJECT_ROOT, file));
+      }
+    }
+  }
+
+  if (rewrittenCount === 0) {
+    console.log('  ✅ No process.env references found to rewrite.');
+  } else {
+    console.log(`  ✅ Successfully rewrote process.env in ${rewrittenCount} file(s).`);
+  }
+
+  console.log('\n' + '─'.repeat(40));
+  console.log('✅ Auto-fix complete.');
+}
+
+// ── BUG-CLI-05: 4 additional security subcommands ─────────────────────────────
+
+/** sparx security scan — scan source files for leaked secrets */
+export async function runSecurityScan(
+  args: { dir?: string; 'include-dist'?: boolean; allowlist?: string; ci?: boolean } = {}
+): Promise<{ exitCode: 0 | 1 }> {
+  const targetDir = path.join(PROJECT_ROOT, args.dir ?? 'src');
+  const allowedPatterns: RegExp[] = args.allowlist ? [new RegExp(args.allowlist)] : [];
+
+  console.log(`\n🔍 Sparx Secret Scan — ${targetDir}\n` + '─'.repeat(40));
+
+  function deepScan(dir: string): SecretViolation[] {
+    const found: SecretViolation[] = [];
+    if (!fs.existsSync(dir)) return found;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (!['node_modules', '.git', '.sparx', 'build_output', 'dist'].includes(entry.name))
+          found.push(...deepScan(full));
+      } else if (entry.isFile()) {
+        const ext = path.extname(entry.name).toLowerCase();
+        if (!['.js', '.ts', '.jsx', '.tsx', '.mjs', '.cjs', '.env', '.json', '.yaml', '.yml'].includes(ext)) continue;
+        const lines = fs.readFileSync(full, 'utf8').split('\n');
+        lines.forEach((line, idx) => {
+          for (const { name, pattern } of SECRET_PATTERNS) {
+            if (allowedPatterns.some(p => p.test(line))) continue;
+            if (pattern.test(line)) {
+              found.push({ file: full, patternName: name, lineNumber: idx + 1 });
+              console.error(`  ❌ ${name} in ${path.relative(PROJECT_ROOT, full)}:${idx + 1}`);
+              break;
+            }
+          }
+        });
+      }
+    }
+    return found;
+  }
+
+  const violations = deepScan(targetDir);
+  if (args['include-dist']) violations.push(...scanSecretsInDir(DIST_DIR));
+
+  console.log('\n' + '─'.repeat(40));
+  if (violations.length === 0) {
+    console.log(`✅ No secrets found.`);
+    return { exitCode: 0 };
+  }
+  console.error(`❌ ${violations.length} potential secret(s) detected.`);
+  return { exitCode: args.ci ? 1 : 0 };
+}
+
+/** sparx security cve — check dependencies against CVE database (OSV.dev) */
+export async function runCVEScan(
+  args: { severity?: string; 'no-cache'?: boolean; json?: boolean } = {}
+): Promise<{ exitCode: 0 | 1 }> {
+  const severity = (args.severity ?? 'high').toUpperCase();
+  console.log(`\n🛡️  Sparx CVE Scan (min severity: ${severity})\n` + '─'.repeat(40));
+
+  const lockPath = path.join(PROJECT_ROOT, 'package-lock.json');
+  if (!fs.existsSync(lockPath)) {
+    console.warn('  ⚠️  No package-lock.json found — run npm install first.');
+    return { exitCode: 0 };
+  }
+
+  const lock = JSON.parse(fs.readFileSync(lockPath, 'utf8')) as Record<string, unknown>;
+  const pkgs = (lock['packages'] as Record<string, Record<string, string>> | undefined) ?? {};
+  const packages = Object.entries(pkgs)
+    .filter(([k]) => k && k !== '')
+    .map(([k, v]) => ({
+      name: v['name'] ?? k.replace('node_modules/', ''),
+      version: v['version'] ?? '0.0.0'
+    }));
+
+  console.log(`  Scanning ${packages.length} packages against OSV.dev...`);
+
+  try {
+    const cacheDir = path.join(PROJECT_ROOT, '.sparx', 'security');
+    const { scanCVE } = await import('@sparx/security');
+    const result = await scanCVE(packages, { cacheDir, distDir: DIST_DIR });
+    if (args.json) {
+      console.log(JSON.stringify(result, null, 2));
+    } else if (result.clean) {
+      console.log(`\n  ✅ No ${severity} CVEs found in ${packages.length} packages.`);
+    } else {
+      result.findings.forEach((f: any) => {
+        console.error(`  ❌ ${f.package}@${f.version}: ${f.cveId} (${f.severity})`);
+        console.error(`     https://osv.dev/vulnerability/${f.cveId}`);
+      });
+      console.error(`\n  ❌ ${result.findings.length} CVE(s) found.`);
+      return { exitCode: 1 };
+    }
+  } catch (err: any) {
+    console.warn(`  ⚠️  CVE scan error: ${err.message}`);
+  }
+  return { exitCode: 0 };
+}
+
+/** sparx security headers — generate server security headers */
+export async function runSecurityHeaders(
+  args: { format?: string; strict?: boolean; output?: string } = {}
+): Promise<void> {
+  const format = args.format ?? 'vercel';
+  console.log(`\n🔒 Security Headers Generator (format: ${format})\n` + '─'.repeat(40));
+
+  const { generateCSP, generateSecurityHeaders } = await import('@sparx/security');
+
+  const cspConfig = {
+    defaultSrc: ["'self'"],
+    scriptSrc: args.strict ? ["'self'"] : ["'self'", "'unsafe-inline'"],
+    styleSrc: ["'self'", "'unsafe-inline'"],
+    imgSrc: ["'self'", 'data:', 'https:'],
+    connectSrc: ["'self'"],
+    fontSrc: ["'self'"],
+    objectSrc: ["'none'"],
+    frameSrc: ["'none'"],
+    upgradeInsecureRequests: true,
+  };
+
+  const csp = generateCSP(cspConfig as any);
+  const headers = generateSecurityHeaders(DIST_DIR, csp as any);
+
+  let output = '';
+  if (format === 'vercel') {
+    output = JSON.stringify({ headers: [{ source: '/(.*)', headers: Object.entries(headers).map(([k, v]) => ({ key: k, value: v })) }] }, null, 2);
+  } else if (format === 'netlify') {
+    output = '[[headers]]\n  for = "/*"\n  [headers.values]\n' + Object.entries(headers).map(([k, v]) => `    ${k} = "${v}"`).join('\n');
+  } else if (format === 'nginx') {
+    output = Object.entries(headers).map(([k, v]) => `add_header ${k} "${v}";`).join('\n');
+  } else if (format === 'apache') {
+    output = '<IfModule mod_headers.c>\n' + Object.entries(headers).map(([k, v]) => `  Header always set ${k} "${v}"`).join('\n') + '\n</IfModule>';
+  } else {
+    output = JSON.stringify(headers, null, 2);
+  }
+
+  if (args.output) {
+    fs.writeFileSync(args.output, output, 'utf8');
+    console.log(`  ✅ Headers written → ${args.output}`);
+  } else {
+    console.log(output);
+  }
+}
+
+/** sparx security report — full security report (HTML or JSON) */
+export async function runSecurityReport(
+  args: { format?: string; output?: string } = {}
+): Promise<void> {
+  const format = args.format ?? 'html';
+  const outFile = args.output ?? `security-report.${format === 'html' ? 'html' : 'json'}`;
+  console.log(`\n📊 Sparx Security Report (format: ${format})\n` + '─'.repeat(40));
+
+  const lockResult = auditLockfileIntegrity();
+  const secretViolations = scanSecretsInDir(DIST_DIR);
+  const overall = lockResult.clean && secretViolations.length === 0 ? 'PASS' : 'FAIL';
+
+  const reportData = {
+    generatedAt: new Date().toISOString(),
+    project: PROJECT_ROOT,
+    lockfile: { clean: lockResult.clean, checked: lockResult.checked, violations: lockResult.violations.length },
+    secrets: { clean: secretViolations.length === 0, violations: secretViolations.length },
+    overall
+  };
+
+  if (format === 'json') {
+    fs.writeFileSync(outFile, JSON.stringify(reportData, null, 2), 'utf8');
+  } else {
+    const scoreColor = overall === 'PASS' ? '#22c55e' : '#ef4444';
+    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Sparx Security Report</title>
+<style>body{font-family:system-ui,sans-serif;background:#0f172a;color:#e2e8f0;padding:2rem}
+h1{color:#38bdf8}.card{background:#1e293b;border-radius:8px;padding:1.5rem;margin:1rem 0}
+.pass{color:#22c55e}.fail{color:#ef4444}.badge{display:inline-block;padding:.25rem .75rem;border-radius:9999px;font-weight:700}</style></head>
+<body><h1>⚡ Sparx Security Report</h1><p>Generated: ${reportData.generatedAt}</p>
+<div class="card"><h2>Overall: <span class="badge" style="background:${scoreColor}">${overall}</span></h2></div>
+<div class="card"><h3>Lockfile Integrity</h3>
+<p class="${lockResult.clean ? 'pass' : 'fail'}">${lockResult.clean ? '✅ Clean' : `❌ ${reportData.lockfile.violations} violation(s)`} (${lockResult.checked} packages checked)</p></div>
+<div class="card"><h3>Secret Scan</h3>
+<p class="${secretViolations.length === 0 ? 'pass' : 'fail'}">${secretViolations.length === 0 ? '✅ No secrets found' : `❌ ${secretViolations.length} potential secret(s)`}</p></div>
+</body></html>`;
+    fs.writeFileSync(outFile, html, 'utf8');
+  }
+  console.log(`  ✅ Report written → ${outFile}`);
+}
+

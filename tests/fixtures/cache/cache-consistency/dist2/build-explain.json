@@ -3,49 +3,49 @@
     "stage": "init",
     "decision": "initialize",
     "reason": "Starting build initialization",
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "plugins",
     "decision": "load",
     "reason": "Loaded plugin: sparx:json@1.0.0 (js)",
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "plugins",
     "decision": "load",
     "reason": "Loaded plugin: sparx:asset@1.0.0 (js)",
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "plugins",
     "decision": "load",
     "reason": "Loaded plugin: sparx:js-transform@1.0.0 (js)",
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "plugins",
     "decision": "load",
     "reason": "Loaded plugin: sparx:postcss@1.0.0 (js)",
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "plugins",
     "decision": "load",
     "reason": "Loaded plugin: sparx:linker@1.0.0 (js)",
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "plugins",
     "decision": "load",
     "reason": "Loaded plugin: sparx:html@1.0.0 (js)",
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "plugins",
     "decision": "load",
     "reason": "Loaded plugin: sparx:static@1.0.0 (js)",
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "init",
@@ -65,22 +65,22 @@
         "cssModules": false
       }
     },
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "init",
     "decision": "performance",
-    "reason": "Initialization took 0.10ms",
+    "reason": "Initialization took 0.05ms",
     "data": {
-      "duration": 0.0961130000000594
+      "duration": 0.052563000000191096
     },
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "fingerprint",
     "decision": "start",
     "reason": "Computing input fingerprint",
-    "timestamp": 1777438409925
+    "timestamp": 1778643958031
   },
   {
     "stage": "fingerprint",
@@ -89,61 +89,61 @@
     "data": {
       "inputHash": "17bcd534aca7d951"
     },
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "fingerprint",
     "decision": "performance",
-    "reason": "Fingerprinting took 0.81ms",
+    "reason": "Fingerprinting took 0.46ms",
     "data": {
-      "duration": 0.8075340000000324
+      "duration": 0.45627399999966656
     },
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "plugins",
     "decision": "hook",
-    "reason": "Executed sparx:asset:load (1777438407416.50ms)",
-    "timestamp": 1777438409926
+    "reason": "Executed sparx:asset:load (1778643955663.20ms)",
+    "timestamp": 1778643958032
   },
   {
     "stage": "plugins",
     "decision": "hook",
-    "reason": "Executed sparx:json:load (1777438407416.47ms)",
-    "timestamp": 1777438409926
+    "reason": "Executed sparx:json:load (1778643955663.18ms)",
+    "timestamp": 1778643958032
   },
   {
     "stage": "plugins",
     "decision": "hook",
-    "reason": "Executed sparx:asset:load (1777438407416.24ms)",
-    "timestamp": 1777438409926
+    "reason": "Executed sparx:asset:load (1778643955662.98ms)",
+    "timestamp": 1778643958032
   },
   {
     "stage": "plugins",
     "decision": "hook",
-    "reason": "Executed sparx:json:load (1777438407416.22ms)",
-    "timestamp": 1777438409926
+    "reason": "Executed sparx:json:load (1778643955662.97ms)",
+    "timestamp": 1778643958032
   },
   {
     "stage": "graph",
     "decision": "attached",
     "reason": "Dependency graph attached",
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "graph",
     "decision": "performance",
-    "reason": "Dependency Graph took 0.54ms",
+    "reason": "Dependency Graph took 0.43ms",
     "data": {
-      "duration": 0.5428959999999279
+      "duration": 0.4270729999998366
     },
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "plan",
     "decision": "start",
     "reason": "Starting build planning",
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "plan",
@@ -153,22 +153,22 @@
       "planId": "23ce1f603b586440",
       "chunkCount": 1
     },
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "plan",
     "decision": "performance",
-    "reason": "Build Planning took 0.20ms",
+    "reason": "Build Planning took 0.11ms",
     "data": {
-      "duration": 0.19955299999992349
+      "duration": 0.11403999999993175
     },
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "parallel_plan",
     "decision": "start",
     "reason": "Planning parallel execution",
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "parallel_plan",
@@ -177,120 +177,120 @@
     "data": {
       "groups": 1
     },
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "parallel_plan",
     "decision": "performance",
     "reason": "Parallel Planning took 0.00ms",
     "data": {
-      "duration": 0.004597999999987223
+      "duration": 0.0026370000000497384
     },
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "determinism",
     "decision": "check",
     "reason": "Checking determinism for mode: production",
-    "timestamp": 1777438409926
+    "timestamp": 1778643958032
   },
   {
     "stage": "determinism",
     "decision": "pass",
     "reason": "Determinism checks passed",
-    "timestamp": 1777438409927
+    "timestamp": 1778643958032
   },
   {
     "stage": "determinism",
     "decision": "performance",
-    "reason": "Determinism Check took 0.11ms",
+    "reason": "Determinism Check took 0.07ms",
     "data": {
-      "duration": 0.11302599999999074
+      "duration": 0.07276900000033493
     },
-    "timestamp": 1777438409927
+    "timestamp": 1778643958032
   },
   {
     "stage": "execute",
     "decision": "start",
     "reason": "Starting optimized execution",
-    "timestamp": 1777438409927
+    "timestamp": 1778643958032
   },
   {
     "stage": "optimize",
     "decision": "start",
     "reason": "Starting Global Native Optimization",
-    "timestamp": 1777438409933
+    "timestamp": 1778643958038
   },
   {
     "stage": "optimize",
     "decision": "complete",
     "reason": "Optimized assets/entry2.f50ac7b9.bundle.js: 1617 -> 904 bytes (44.09% savings)",
-    "timestamp": 1777438409938
+    "timestamp": 1778643958043
   },
   {
     "stage": "execute",
     "decision": "performance",
-    "reason": "Execution took 11.39ms",
+    "reason": "Execution took 11.07ms",
     "data": {
-      "duration": 11.385172999999668
+      "duration": 11.066203000000314
     },
-    "timestamp": 1777438409938
+    "timestamp": 1778643958043
   },
   {
     "stage": "optimize",
     "decision": "start",
     "reason": "Starting parallel optimization passes",
-    "timestamp": 1777438409938
+    "timestamp": 1778643958043
   },
   {
     "stage": "optimize",
     "decision": "minify",
     "reason": "Minifying assets/entry2.f50ac7b9.bundle.js",
-    "timestamp": 1777438409938
+    "timestamp": 1778643958043
   },
   {
     "stage": "optimize",
     "decision": "complete",
     "reason": "Optimization finished. 3 artifacts generated.",
-    "timestamp": 1777438409943
+    "timestamp": 1778643958048
   },
   {
     "stage": "optimize",
     "decision": "performance",
-    "reason": "Optimization took 4.54ms",
+    "reason": "Optimization took 4.53ms",
     "data": {
-      "duration": 4.544846999999663
+      "duration": 4.5302959999999075
     },
-    "timestamp": 1777438409943
+    "timestamp": 1778643958048
   },
   {
     "stage": "emit",
     "decision": "start",
     "reason": "Starting emit phase",
-    "timestamp": 1777438409943
+    "timestamp": 1778643958048
   },
   {
     "stage": "emit",
     "decision": "writing",
     "reason": "Writing artifact: /home/avinash/Desktop/framework_practis/build/tests/fixtures/cache/cache-consistency/dist2/assets/entry2.f50ac7b9.bundle.js",
-    "timestamp": 1777438409943
+    "timestamp": 1778643958048
   },
   {
     "stage": "emit",
     "decision": "writing",
     "reason": "Writing artifact: /home/avinash/Desktop/framework_practis/build/tests/fixtures/cache/cache-consistency/dist2/assets/entry2.f50ac7b9.bundle.js.gz",
-    "timestamp": 1777438409943
+    "timestamp": 1778643958049
   },
   {
     "stage": "emit",
     "decision": "writing",
     "reason": "Writing artifact: /home/avinash/Desktop/framework_practis/build/tests/fixtures/cache/cache-consistency/dist2/assets/entry2.f50ac7b9.bundle.js.br",
-    "timestamp": 1777438409943
+    "timestamp": 1778643958051
   },
   {
     "stage": "emit",
     "decision": "writing",
     "reason": "Writing artifact: /home/avinash/Desktop/framework_practis/build/tests/fixtures/cache/cache-consistency/dist2/index.html",
-    "timestamp": 1777438409944
+    "timestamp": 1778643958051
   }
 ]

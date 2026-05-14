@@ -105,3 +105,9 @@ e2e/fixtures/**/.sparx/
 e2e/fixtures/**/.sparx-cache/
 e2e/fixtures/**/package-lock.json
 e2e/fixtures/**/node_modules/
+
+# Sparx runtime cache
+.sparx/
+
+# Test scaffolds
+ux_v09_test_app/
