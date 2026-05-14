@@ -335,10 +335,10 @@ Each requires implementation file + real-world fixture testing
   - [x] File routing logic, renderApplication().
   - [x] **Fixture:** `e2e/fixtures/analog-cms/`
     - [x] PASS: File routing resolves, tRPC API works.
-- [ ] **2.9 REACT ROUTER v7** (`src/meta-frameworks/react-router/index.ts`)
-  - [ ] SPA vs SSR logic via `react-router.config.ts`.
-  - [ ] **Fixture:** `e2e/fixtures/react-router-app/`
-    - [ ] PASS: Server rendered profiles, SPA client routes.
+- [x] **2.9 REACT ROUTER v7** (`src/meta-frameworks/react-router/index.ts`)
+  - [x] SPA vs SSR logic via `react-router.config.ts`.
+  - [x] **Fixture:** `e2e/fixtures/react-router-app/`
+    - [x] PASS: Server rendered profiles, SPA client routes.
 - [x] **2.10 TANSTACK START** (`src/meta-frameworks/tanstack-start/index.ts`)
   - [x] Create server fn shim, module preload hints.
   - [x] **Fixture:** `e2e/fixtures/tanstack-invoicing/`
