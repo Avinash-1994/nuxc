@@ -25,7 +25,7 @@ interface ModuleRecord {
 const moduleGraph = new Map<string, ModuleRecord>();
 
 export interface InspectOptions {
-  /** URL path for the inspect UI (default: '/__nuclie_inspect') */
+  /** URL path for the inspect UI (default: '/__sparx_inspect__') */
   basePath?: string;
 }
 
@@ -34,7 +34,7 @@ export function inspect(options: InspectOptions = {}) {
     return { name: '@sparx/plugin-inspect' }; // No-op in production
   }
 
-  const { basePath = '/__nuclie_inspect' } = options;
+  const { basePath = '/__sparx_inspect__' } = options;
 
   return {
     name: '@sparx/plugin-inspect',
