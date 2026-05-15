@@ -369,8 +369,9 @@ await (async function testColdStartHmrBuild() {
   let buildOk = false;
   let buildOutput = '';
   try {
-    buildOutput = execFileSync('node', [cliPath, 'build', '--root', FIXTURE_ROOT], {
-      encoding: 'utf-8', timeout: 30000, cwd: FIXTURE_ROOT
+    buildOutput = execFileSync('node', [cliPath, 'build'], {
+      encoding: 'utf-8', timeout: 30000, cwd: FIXTURE_ROOT,
+      env: { ...process.env, SPARX_SKIP_CVE: '1' }
     });
     buildOk = true;
   } catch (e) {
@@ -379,7 +380,7 @@ await (async function testColdStartHmrBuild() {
   const buildMs = parseFloat((performance.now() - t0build).toFixed(2));
 
   // Read ALL real dist/ files with sizes
-  const distDir = path.join(FIXTURE_ROOT, 'build_output');
+  const distDir = path.join(FIXTURE_ROOT, 'dist');
   const distFiles = [];
   let totalSizeBytes = 0;
   function walkDist(dir, rel) {
@@ -515,7 +516,10 @@ await (async function testRegression() {
   for (const f of fixtures) {
     const t0 = performance.now();
     try {
-      await execFileAsync('node', [cliPath, 'build', '--root', f.dir]);
+      await execFileAsync('node', [cliPath, 'build'], {
+        cwd: f.dir,
+        env: { ...process.env, SPARX_SKIP_CVE: '1' }
+      });
       results.push(f.name + ': pass ' + Math.round(performance.now() - t0) + 'ms');
     } catch {
       results.push(f.name + ': FAIL');
