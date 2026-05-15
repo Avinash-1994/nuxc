@@ -502,23 +502,22 @@ await (async function testSSRContent() {
 
 await (async function testRegression() {
   const cliPath = path.join(FIXTURE_ROOT, '../../../dist/cli.js');
-  const { execFile } = await import('child_process');
-  const { promisify } = await import('util');
-  const execFileAsync = promisify(execFile);
 
   const fixtures = [
-    { name: 'vue-basic',            dir: path.join(FIXTURE_ROOT, '../vue-basic') },
-    { name: 'react-basic',          dir: path.join(FIXTURE_ROOT, '../react-basic') },
-    { name: 'sveltekit-fullstack',  dir: path.join(FIXTURE_ROOT, '../sveltekit-fullstack') },
+    { name: 'vue-basic',           dir: path.join(FIXTURE_ROOT, '../vue-basic') },
+    { name: 'react-basic',         dir: path.join(FIXTURE_ROOT, '../react-basic') },
+    { name: 'sveltekit-fullstack', dir: path.join(FIXTURE_ROOT, '../sveltekit-fullstack') },
   ];
 
   const results = [];
   for (const f of fixtures) {
     const t0 = performance.now();
     try {
-      await execFileAsync('node', [cliPath, 'build'], {
+      execFileSync('node', [cliPath, 'build'], {
         cwd: f.dir,
-        env: { ...process.env, SPARX_SKIP_CVE: '1' }
+        stdio: 'ignore',
+        env: { ...process.env, SPARX_SKIP_CVE: '1' },
+        timeout: 30000
       });
       results.push(f.name + ': pass ' + Math.round(performance.now() - t0) + 'ms');
     } catch {
@@ -527,12 +526,15 @@ await (async function testRegression() {
     }
   }
 
-  const tscOk = await (async () => {
-    try {
-      await execFileAsync('npx', ['tsc', '--noEmit'], { cwd: path.join(FIXTURE_ROOT, '../../..') });
-      return true;
-    } catch { return false; }
-  })();
+  let tscOk = false;
+  try {
+    execFileSync('npx', ['tsc', '--noEmit'], {
+      cwd: path.join(FIXTURE_ROOT, '../../..'),
+      stdio: 'pipe',
+      timeout: 30000
+    });
+    tscOk = true;
+  } catch { tscOk = false; }
 
   const allPass = !results.some(r => r.includes('FAIL')) && tscOk;
   (allPass ? printPass : printFail)(
@@ -542,6 +544,7 @@ await (async function testRegression() {
     [...results, 'tsc --noEmit: ' + (tscOk ? '0 errors' : 'errors found')]
   );
 })();
+
 
 // ─── Final summary ────────────────────────────────────────────────────────────
 
