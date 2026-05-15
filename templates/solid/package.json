@@ -1,0 +1,1 @@
+{"name":"sparx-solid-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"solid","description":"Sparx Analytics — website analytics dashboard"},"devDependencies":{"sparx":"file:../..","typescript":"5.4.5"}}

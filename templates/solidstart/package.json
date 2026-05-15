@@ -1,0 +1,1 @@
+{"name":"sparx-solidstart-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"solidstart","description":"Sparx Dashboard — streaming SSR analytics"},"devDependencies":{"sparx":"file:../..","typescript":"5.4.5"}}

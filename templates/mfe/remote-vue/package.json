@@ -1,0 +1,1 @@
+{"name":"sparx-mfe-remote-vue","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build"},"dependencies":{"vue":"3.4.27"},"devDependencies":{"sparx":"file:../../.."}}

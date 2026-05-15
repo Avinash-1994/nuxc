@@ -1,0 +1,1 @@
+{"name":"sparx-vitepress-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"vitepress","description":"Sparx API Docs — full documentation site"},"devDependencies":{"sparx":"file:../..","typescript":"5.4.5"}}
