@@ -227,7 +227,7 @@ async function main() {
     execSync(`node ${cliPath} build`, {
       cwd: __dirname,
       stdio: 'ignore',
-      env: { ...process.env, SPARX_SKIP_CVE: '1' }
+      env: { ...process.env, SPARX_SKIP_SECURITY: '1' }
     });
   } catch(e) {}
   const buildTime = Date.now() - tBuildStart;
@@ -295,7 +295,7 @@ async function main() {
       execSync(`node ${cliPath} build`, {
         cwd: path.resolve(__dirname, '..', fixture),
         stdio: 'ignore',
-        env: { ...process.env, SPARX_SKIP_CVE: '1' }
+        env: { ...process.env, SPARX_SKIP_SECURITY: '1' }
       });
       return { ok: true, ms: Date.now() - t };
     } catch { return { ok: false, ms: Date.now() - t }; }

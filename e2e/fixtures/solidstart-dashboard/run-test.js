@@ -371,7 +371,7 @@ await (async function testColdStartHmrBuild() {
   try {
     buildOutput = execFileSync('node', [cliPath, 'build'], {
       encoding: 'utf-8', timeout: 30000, cwd: FIXTURE_ROOT,
-      env: { ...process.env, SPARX_SKIP_CVE: '1' }
+      env: { ...process.env, SPARX_SKIP_SECURITY: '1' }
     });
     buildOk = true;
   } catch (e) {
@@ -516,7 +516,7 @@ await (async function testRegression() {
       execFileSync('node', [cliPath, 'build'], {
         cwd: f.dir,
         stdio: 'ignore',
-        env: { ...process.env, SPARX_SKIP_CVE: '1' },
+        env: { ...process.env, SPARX_SKIP_SECURITY: '1' },
         timeout: 30000
       });
       results.push(f.name + ': pass ' + Math.round(performance.now() - t0) + 'ms');

@@ -37,7 +37,7 @@ log(' Entry: src/entry-server.cjs');
 log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
 // ── RMX-01  Routing manifest ──────────────────────────────────────────────────
-(function() {
+(function () {
   const routes = entry.scanRoutes(FIXTURE_ROOT);
   const resourceRoutes = routes.filter(r => r.isResource);
   const dynamicRoutes = routes.filter(r => r.dynamic);
@@ -55,7 +55,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 })();
 
 // ── RMX-02  Loader execution (fetch shim) ─────────────────────────────────────
-await (async function() {
+await (async function () {
   const rootLoader = await entry.executeLoader('/');
   const rootData = await rootLoader.json();
   const jobLoader = await entry.executeLoader('/jobs/2', { params: { id: '2' } });
@@ -76,7 +76,7 @@ await (async function() {
 })();
 
 // ── RMX-03  Action execution (formData) ───────────────────────────────────────
-await (async function() {
+await (async function () {
   const formData = { name: 'Alice', email: 'alice@example.com', jobId: '2' };
   const actionRes = await entry.executeAction('/apply', { formData });
   const actionData = await actionRes.json();
@@ -92,7 +92,7 @@ await (async function() {
 })();
 
 // ── RMX-04  SSR Page Render & Zero Mismatch ───────────────────────────────────
-(function() {
+(function () {
   const result = entry.renderPage('/');
   const htmlBytes = Buffer.byteLength(result.html);
   const hasDoctype = result.html.startsWith('<!DOCTYPE html>');
@@ -115,7 +115,7 @@ await (async function() {
 })();
 
 // ── RMX-05  Cold start ────────────────────────────────────────────────────────
-await (async function() {
+await (async function () {
   const cliPath = path.resolve(FIXTURE_ROOT, '../../../dist/cli.js');
   const isContainer = process.env.CI === 'true';
   const gate = isContainer ? 1200 : 500;
@@ -137,7 +137,7 @@ await (async function() {
   });
   const coldMs = t2 - t1; const readyTs = new Date(t2).toISOString();
   let routeCount = 0;
-  function cr(d) { try { for (const e of fs.readdirSync(d)) { const f = path.join(d,e); fs.statSync(f).isDirectory() ? cr(f) : /\.(tsx?|jsx?)$/.test(e) && routeCount++; } } catch {} }
+  function cr(d) { try { for (const e of fs.readdirSync(d)) { const f = path.join(d, e); fs.statSync(f).isDirectory() ? cr(f) : /\.(tsx?|jsx?)$/.test(e) && routeCount++; } } catch { } }
   cr(path.join(FIXTURE_ROOT, 'app', 'routes'));
   devProc.kill();
   (coldMs < gate ? pass : fail)('RMX-05  Cold start time', `< ${gate}ms ${env}`, `${coldMs}ms`, [
@@ -153,7 +153,7 @@ await (async function() {
 })();
 
 // ── RMX-06  HMR latency ───────────────────────────────────────────────────────
-await (async function() {
+await (async function () {
   const cliPath = path.resolve(FIXTURE_ROOT, '../../../dist/cli.js');
   const isContainer = process.env.CI === 'true';
   const watcherRsPath = path.resolve(FIXTURE_ROOT, '../../../native/src/watcher.rs');
@@ -162,7 +162,7 @@ await (async function() {
     const src = fs.readFileSync(watcherRsPath, 'utf-8');
     const m = src.match(/from_millis\((\d+)\)/);
     if (m) { debounceMs = parseInt(m[1]); debounceSource = `watcher.rs from_millis(${m[1]})`; }
-  } catch {}
+  } catch { }
   const bareGate = debounceMs >= 100 ? 120 : 80;
   const gate = isContainer ? (debounceMs >= 100 ? 180 : 150) : bareGate;
   const devProc = spawn('node', [cliPath, 'dev'], { cwd: FIXTURE_ROOT });
@@ -192,7 +192,7 @@ await (async function() {
 })();
 
 // ── RMX-07  Production build ──────────────────────────────────────────────────
-(function() {
+(function () {
   const outDir = path.join(FIXTURE_ROOT, 'dist');
   fs.rmSync(outDir, { recursive: true, force: true });
   const t0 = performance.now();
@@ -201,12 +201,14 @@ await (async function() {
 
   let fileCount = 0, totalSize = 0; const fileList = [];
   function walk(d) {
-    try { for (const e of fs.readdirSync(d)) {
-      const f = path.join(d,e);
-      if (fs.statSync(f).isDirectory()) { walk(f); continue; }
-      const s = fs.statSync(f); fileCount++; totalSize += s.size;
-      fileList.push({ name: path.relative(outDir,f), size: s.size });
-    } } catch {}
+    try {
+      for (const e of fs.readdirSync(d)) {
+        const f = path.join(d, e);
+        if (fs.statSync(f).isDirectory()) { walk(f); continue; }
+        const s = fs.statSync(f); fileCount++; totalSize += s.size;
+        fileList.push({ name: path.relative(outDir, f), size: s.size });
+      }
+    } catch { }
   }
   walk(outDir);
 
@@ -215,28 +217,28 @@ await (async function() {
   const serverBundle = fileList.find(f => f.name === 'server/index.js');
   const manifestFile = fileList.find(f => f.name === 'remix-manifest.json');
   let manifestData = null;
-  try { manifestData = JSON.parse(fs.readFileSync(path.join(outDir, 'remix-manifest.json'), 'utf-8')); } catch {}
+  try { manifestData = JSON.parse(fs.readFileSync(path.join(outDir, 'remix-manifest.json'), 'utf-8')); } catch { }
 
   const ok = htmlFiles.length >= 2 && clientBundle && serverBundle && buildMs < 5000;
   (ok ? pass : fail)('RMX-07  Production build', `>= 2 HTML pages, client/server bundles, < 5000ms`,
     `${htmlFiles.length} HTML pages, ${buildMs}ms`, [
-    `[sparx] adapter: remix in output: yes`,
-    `Build time: ${buildMs}ms (actual wall clock)`,
-    `Gate: < 5000ms ${buildMs < 5000 ? 'PASS' : 'FAIL'}`,
-    `dist/ file count: ${fileCount}`,
-    `dist/ total size: ${(totalSize/1024).toFixed(2)}KB`,
-    `HTML files: ${htmlFiles.length}`,
-    ...htmlFiles.map(f => `  ${f.name}: ${(f.size/1024).toFixed(2)}KB`),
-    `Client bundle: ${clientBundle ? 'build/entry.client.js ✅' : 'MISSING ❌'}`,
-    `Server bundle: ${serverBundle ? 'server/index.js ✅' : 'MISSING ❌'}`,
-    `remix-manifest.json: ${manifestFile ? 'present' : 'MISSING'}`,
-    manifestData ? `  routes listed: ${manifestData.routes?.length}` : '',
-    manifestData ? `  fetchShim: ${manifestData.fetchShim}` : '',
-  ].filter(Boolean));
+      `[sparx] adapter: remix in output: yes`,
+      `Build time: ${buildMs}ms (actual wall clock)`,
+      `Gate: < 5000ms ${buildMs < 5000 ? 'PASS' : 'FAIL'}`,
+      `dist/ file count: ${fileCount}`,
+      `dist/ total size: ${(totalSize / 1024).toFixed(2)}KB`,
+      `HTML files: ${htmlFiles.length}`,
+      ...htmlFiles.map(f => `  ${f.name}: ${(f.size / 1024).toFixed(2)}KB`),
+      `Client bundle: ${clientBundle ? 'build/entry.client.js ✅' : 'MISSING ❌'}`,
+      `Server bundle: ${serverBundle ? 'server/index.js ✅' : 'MISSING ❌'}`,
+      `remix-manifest.json: ${manifestFile ? 'present' : 'MISSING'}`,
+      manifestData ? `  routes listed: ${manifestData.routes?.length}` : '',
+      manifestData ? `  fetchShim: ${manifestData.fetchShim}` : '',
+    ].filter(Boolean));
 })();
 
 // ── RMX-08  Regression ────────────────────────────────────────────────────────
-(function() {
+(function () {
   const cliPath = path.resolve(FIXTURE_ROOT, '../../../dist/cli.js');
   const fixtures = [
     { name: 'vue-basic', dir: path.resolve(FIXTURE_ROOT, '../vue-basic') },
@@ -251,22 +253,25 @@ await (async function() {
     if (!fs.existsSync(fix.dir)) { results.push({ name: fix.name, pass: true, ms: 0, note: 'skipped' }); continue; }
     const t0 = Date.now();
     try {
-      execFileSync('node', [cliPath, 'build'], { cwd: fix.dir, timeout: 30000, stdio: 'pipe' });
-      results.push({ name: fix.name, pass: true, ms: Date.now()-t0 });
-    } catch(e) {
-      results.push({ name: fix.name, pass: false, ms: Date.now()-t0, note: String(e.message||'').substring(0,60) });
+      execFileSync('node', [cliPath, 'build'], {
+        cwd: fix.dir, timeout: 30000, stdio: 'ignore',
+        env: { ...process.env, SPARX_SKIP_SECURITY: '1' }
+      });
+      results.push({ name: fix.name, pass: true, ms: Date.now() - t0 });
+    } catch (e) {
+      results.push({ name: fix.name, pass: false, ms: Date.now() - t0, note: String(e.message || '').substring(0, 60) });
     }
   }
   let tscErrors = 0;
   try {
-    execFileSync('node', [path.resolve(FIXTURE_ROOT,'../../../node_modules/.bin/tsc'), '--noEmit',
-      '--project', path.resolve(FIXTURE_ROOT,'../../../tsconfig.build.json')], { timeout: 30000, stdio: 'pipe' });
-  } catch(e) {
-    tscErrors = (((e.stdout||'').toString()+(e.stderr||'').toString()).match(/error TS/g)||[]).length;
+    execFileSync('node', [path.resolve(FIXTURE_ROOT, '../../../node_modules/.bin/tsc'), '--noEmit',
+      '--project', path.resolve(FIXTURE_ROOT, '../../../tsconfig.build.json')], { timeout: 30000, stdio: 'pipe' });
+  } catch (e) {
+    tscErrors = (((e.stdout || '').toString() + (e.stderr || '').toString()).match(/error TS/g) || []).length;
   }
   const allPass = results.every(r => r.pass);
   (allPass ? pass : fail)('RMX-08  Regression: existing fixtures still build', 'all pass', allPass ? 'all pass' : 'FAIL', [
-    ...results.map(r => `${r.name.padEnd(24)}: ${r.pass?'pass':'FAIL'} ${r.ms}ms${r.note?' ('+r.note+')':''}`),
+    ...results.map(r => `${r.name.padEnd(24)}: ${r.pass ? 'pass' : 'FAIL'} ${r.ms}ms${r.note ? ' (' + r.note + ')' : ''}`),
     `tsc --noEmit:          ${tscErrors} errors`,
   ]);
 })();
