@@ -1,0 +1,24 @@
+{
+  "name": "sparx-svelte-template",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sparx dev",
+    "build": "sparx build",
+    "preview": "sparx preview"
+  },
+  "sparx": {
+    "template": true,
+    "framework": "svelte",
+    "description": "Sparx Notes — markdown note-taking app"
+  },
+  "dependencies": {
+    "svelte": "4.2.18",
+    "marked": "12.0.0"
+  },
+  "devDependencies": {
+    "sparx": "file:../../",
+    "typescript": "5.4.5"
+  }
+}

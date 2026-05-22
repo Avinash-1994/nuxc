@@ -1,1 +1,0 @@
-{"name":"sparx-astro-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"astro","description":"Sparx Docs — documentation site"},"dependencies":{"astro":"4.10.2"},"devDependencies":{"sparx":"file:../..","typescript":"5.4.5"}}

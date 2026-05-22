@@ -43,6 +43,15 @@ export function createFederationDevRemoteEntry(federation: NonNullable<BuildConf
     return `      ${JSON.stringify(key)}: ${JSON.stringify(importPath)}`;
   }).join(',\n');
 
+  // Build the list of singleton packages so the dev entry can intercept them
+  const singletonPkgs = federation.shared
+    ? Object.entries(federation.shared)
+        .filter(([, cfg]) => typeof cfg === 'object' && (cfg as any).singleton)
+        .map(([pkg]) => pkg)
+    : [];
+
+  const singletonPkgsJson = JSON.stringify(singletonPkgs);
+
   const sharedInitCode = federation.shared ? `
       if (sharedScope && typeof globalThis.__sparx_shared__ !== 'undefined') {
         Object.keys(sharedScope).forEach(function(name) {
@@ -62,6 +71,9 @@ export function createFederationDevRemoteEntry(federation: NonNullable<BuildConf
 ${exposeEntries}
   };
 
+  // Singleton packages that must use the host's shared instance (Bug Class B fix)
+  var SINGLETONS = ${singletonPkgsJson};
+
   function resolvePath(moduleName) {
     var modulePath = exposedModules[moduleName];
     if (!modulePath) {
@@ -69,6 +81,29 @@ ${exposeEntries}
     }
     var base = typeof import.meta !== 'undefined' ? import.meta.url : window.location.href;
     return new URL(modulePath, base).toString();
+  }
+
+  /**
+   * Before importing the remote module, we patch globalThis module resolution
+   * so that singleton imports (react, react-dom, etc.) return the host's shared
+   * instance instead of the remote server's own pre-bundled copy.
+   */
+  function importWithSharedScope(url) {
+    // If the shared scope is available, pre-seed the window module cache
+    // by registering a global interception map that the remote's bundled
+    // importmap-style imports will consult.
+    if (typeof globalThis.__sparx_shared__ !== 'undefined' && SINGLETONS.length > 0) {
+      if (!globalThis.__sparx_singleton_map__) {
+        globalThis.__sparx_singleton_map__ = {};
+      }
+      SINGLETONS.forEach(function(pkg) {
+        var instance = globalThis.__sparx_shared__.get(pkg, '*');
+        if (instance) {
+          globalThis.__sparx_singleton_map__[pkg] = instance;
+        }
+      });
+    }
+    return import(/* @vite-ignore */ url);
   }
 
   var container = {
@@ -79,7 +114,7 @@ ${exposeEntries}
     },
     get: function(moduleName) {
       return Promise.resolve().then(function() {
-        return import(resolvePath(moduleName));
+        return importWithSharedScope(resolvePath(moduleName));
       });
     }
   };
@@ -92,6 +127,7 @@ ${exposeEntries}
   }
 })();`;
 }
+
 
 export class FederationDev {
     private remotes: Record<string, string> = {};

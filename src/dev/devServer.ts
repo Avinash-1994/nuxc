@@ -66,7 +66,7 @@ import { LiveConfigManager } from '../config/live-config.js';
  * Rewrite bare module imports to node_modules paths
  * Production-grade AST-based rewriting (Phase C1 Honest)
  */
-async function rewriteImports(code: string, rootDir: string, preBundledDeps?: Map<string, string>, federationRemotes?: Set<string>): Promise<string> {
+async function rewriteImports(code: string, rootDir: string, preBundledDeps?: Map<string, string>, federationRemotes?: Set<string>, singletonRedirects?: Map<string, string>): Promise<string> {
   try {
     const acorn = await import('acorn');
     const ast = acorn.parse(code, {
@@ -94,6 +94,21 @@ async function rewriteImports(code: string, rootDir: string, preBundledDeps?: Ma
         if (federationRemotes) {
           const [remoteName] = specifier.split('/');
           if (remoteName && federationRemotes.has(remoteName) && specifier.includes('/')) {
+            return;
+          }
+        }
+
+        // Singleton redirect: if this is a singleton package managed by the shell host,
+        // point directly to the shell's pre-bundled copy to enforce one instance.
+        if (singletonRedirects && singletonRedirects.size > 0) {
+          const pkgRoot = specifier.startsWith('@')
+            ? specifier.split('/').slice(0, 2).join('/')
+            : specifier.split('/')[0];
+          if (singletonRedirects.has(pkgRoot)) {
+            const safeName = specifier.replace(/[/@]/g, '_');
+            const hostBase = singletonRedirects.get(pkgRoot)!;
+            const singletonUrl = `${hostBase}/@sparx-deps/${safeName}.js?v=${Date.now()}`;
+            replacements.push({ start: node.start, end: node.end, replacement: `'${singletonUrl}'` });
             return;
           }
         }
@@ -457,6 +472,14 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
     const defaultDeps = frameworkDeps[primaryFramework] || [];
 
+    // Auto-discover from package.json
+    let pkgDepsList: string[] = [];
+    try {
+      const pkgJsonRaw = await fs.readFile(path.join(cfg.root, 'package.json'), 'utf-8');
+      const pkgJson = JSON.parse(pkgJsonRaw);
+      pkgDepsList = Object.keys({ ...pkgJson.dependencies, ...pkgJson.peerDependencies });
+    } catch { }
+
     // 3. User Config (prebundle)
     const prebundleConfig = cfg.prebundle || { enabled: true, include: [], exclude: [] };
 
@@ -465,37 +488,57 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       // Merge sources
       let depsToBundle = new Set([
         ...defaultDeps,
+        ...pkgDepsList,
         ...(prebundleConfig.include || [])
+      ]);
+
+      // ── Server-only packages that must NEVER be pre-bundled as browser ESM ──
+      // These packages use Node.js built-ins (node:fs, node:url, etc.) and are
+      // only used in the server/build pipeline, not in browser code.
+      // Sparx understands the SSR boundary better than any other build tool.
+      const SERVER_ONLY_PACKAGES = new Set([
+        // Meta-framework cores (all Node.js SSR engines)
+        'astro', '@astrojs/compiler', '@astrojs/prism',
+        '@sveltejs/kit', '@sveltejs/vite-plugin-svelte',
+        'nuxt', '@nuxt/kit', '@nuxt/schema', 'nitro', 'nitropack',
+        'next', '@next/env', '@next/swc',
+        'remix', '@remix-run/node', '@remix-run/server-runtime', '@remix-run/dev',
+        '@angular/core', '@angular/cli', '@angular/compiler-cli', '@angular/build',
+        '@analogjs/platform', '@analogjs/vite-plugin-angular',
+        '@builder.io/qwik', '@builder.io/qwik-city',
+        'waku', '@waku/dev-server',
+        'vitepress', 'vite',
+        '@solidjs/start',
+        '@tanstack/start', '@tanstack/router-vite-plugin',
+        'electron', 'electron-builder',
+        '@tauri-apps/cli', '@tauri-apps/api',
+        // Build tools (never browser code)
+        'esbuild', 'rollup', 'webpack', 'parcel',
+        'typescript', 'ts-node', 'tsx',
+        // Node-only utilities
+        'chokidar', 'better-sqlite3', 'ws',
+        'express', 'koa', 'fastify', 'hono',
       ]);
 
       // Filter 1: Must verify existence in node_modules (Avoid resolve errors)
       const validDeps = new Set<string>();
-      // Use require.resolve to check existence, but be careful with exports
       for (const dep of depsToBundle) {
-        // Exclude specific overrides
+        // Exclude user-specified overrides
         if (prebundleConfig.exclude?.includes(dep)) continue;
 
-        // Verify existence
+        // Exclude server-only / Node.js-only packages from browser bundling
+        const rootPkg = dep.startsWith('@') ? dep.split('/').slice(0, 2).join('/') : dep.split('/')[0];
+        if (SERVER_ONLY_PACKAGES.has(rootPkg) || SERVER_ONLY_PACKAGES.has(dep)) continue;
+
         try {
-          // Check if package.json or dependency exists in node_modules
-          // We can't always use require.resolve for sub-paths (like react/jsx-runtime) comfortably without conditions
-          // So we check if the ROOT package is installed
-          const rootPkg = dep.startsWith('@') ? dep.split('/').slice(0, 2).join('/') : dep.split('/')[0];
-
-          // Only strict check if it's NOT in package.json? 
-          // Ideally we pre-bundle only what IS available.
-          // Check if root package is in pkgDeps (direct dependency) OR we can resolve it
           const isDirectDep = pkgDeps.includes(rootPkg);
-
           if (isDirectDep) {
             validDeps.add(dep);
           } else {
-            // Try to resolve it to ensure it exists (transitive deps like @remix-run/router)
             try {
               require.resolve(dep, { paths: [cfg.root] });
               validDeps.add(dep);
             } catch (e) {
-              // Try resolving package.json of the dep
               try {
                 const pkgJsonPath = path.join(cfg.root, 'node_modules', rootPkg, 'package.json');
                 await fs.access(pkgJsonPath);
@@ -773,26 +816,64 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     if (await statusHandler.handleRequest(req, res)) return;
     if (federationDev.handleRequest(req, res)) return;
 
+    // ── Bug Class B fix: Singleton dep proxy for remote apps ────────────────────
+    // When this app is a REMOTE (has `exposes`) with singleton shared deps,
+    // proxy pre-bundled dep requests (/@sparx-deps/react, etc.) to the shell
+    // so there is exactly one React instance across all federation boundaries.
+    if (cfg.federation?.exposes && cfg.federation.shared && req.url?.startsWith('/@sparx-deps/')) {
+      const singletonPkgs = Object.entries(cfg.federation.shared)
+        .filter(([, v]) => typeof v === 'object' && (v as any).singleton)
+        .map(([k]) => k);
+      // Strip query string then .js extension: "react.js?v=123" → "react", "react-dom_client.js" → "react-dom"
+      const rawDepPath = req.url.slice('/@sparx-deps/'.length).split('?')[0];
+      // Convert sparx safe-name back to pkg name: "react-dom_client.js" → check both "react-dom" and "react"
+      const withoutExt = rawDepPath.replace(/\.js$/, '');
+      // rootPkg: take portion before first underscore (for subpath like react_jsx-dev-runtime → react)
+      const rootPkgRaw = withoutExt.startsWith('@')
+        ? withoutExt.split('_').slice(0, 2).join('/')  // scoped pkg
+        : withoutExt.split('_')[0];                     // react-dom_client → react-dom
+      // Only proxy if this dep belongs to a singleton package
+      const matchedSingleton = singletonPkgs.find(pkg =>
+        pkg === rootPkgRaw || withoutExt === pkg.replace(/[/@]/g, '_') || withoutExt.startsWith(pkg.replace(/[/@]/g, '_'))
+      );
+      if (matchedSingleton) {
+        const singletonHost = (cfg.federation as any).singletonHost || 'http://localhost:5173';
+        const proxyUrl = `${singletonHost}/@sparx-deps/${rawDepPath}${req.url.includes('?') ? '?' + req.url.split('?')[1] : ''}`;
+        try {
+          const { getFetch } = await import('../utils/fetch.js');
+          const fetch = await getFetch();
+          const upstream = await fetch(proxyUrl);
+          const body = await upstream.text();
+          res.writeHead(upstream.status, {
+            'Content-Type': upstream.headers.get('content-type') || 'application/javascript',
+            'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'no-store',
+          });
+          res.end(body);
+          return;
+        } catch {
+          // proxy failed — fall through to serve own copy (graceful degradation)
+        }
+      }
+    }
+
+
     // ── Meta-framework Adapter Hook ──
     if (activeAdapter && typeof activeAdapter.getDevHandler === 'function') {
-      console.log(`[SPARX] Adapter Hook executing for: ${activeAdapter.name}`);
       const handler = activeAdapter.getDevHandler();
+      // Attach root so adapters (e.g. Astro) know the project directory
+      (req as any).__sparxRoot = cfg.root;
       const handled = await new Promise(resolve => {
         const originalEnd = res.end;
         res.end = function (...args: any[]) {
-          console.log(`[SPARX] Adapter res.end called!`);
           resolve(true);
           return originalEnd.apply(this, args as any);
         };
-        console.log(`[SPARX] Invoking adapter getDevHandler for ${req.url}`);
-        handler(req, res, () => {
-          console.log(`[SPARX] Adapter handler called next()`);
-          resolve(false);
-        });
+        handler(req, res, () => resolve(false));
       });
-      console.log(`[SPARX] Adapter handled request: ${handled}`);
-      if (handled) return; // Handler took over the request
+      if (handled) return;
     }
+
 
     // Security Scan (Day 41)
     if (!anomalyDetector.scanRequest({ url: req.url || '', headers: req.headers, method: req.method || 'GET' })) {
@@ -958,13 +1039,19 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         let needsInjection = true;
         if (cfg.entry && cfg.entry.length > 0) {
           const entryPath = cfg.entry[0].replace(/^\.\//, '');
-          needsInjection = !data.includes(`src="${entryPath}"`) && !data.includes(`src="/${entryPath}"`);
+          if (!entryPath.endsWith('.html')) {
+            needsInjection = !data.includes(`src="${entryPath}"`) && !data.includes(`src="/${entryPath}"`);
+          } else {
+            needsInjection = false;
+          }
         }
 
         if (needsInjection && cfg.entry && cfg.entry.length > 0) {
           const entryPath = cfg.entry[0].replace(/^\.\//, '');
-          const entryScript = `<script type="module" src="/${entryPath}"></script>`;
-          data = data.replace('</body>', `${entryScript}</body>`);
+          if (!entryPath.endsWith('.html')) {
+            const entryScript = `<script type="module" src="/${entryPath}"></script>`;
+            data = data.replace('</body>', `${entryScript}</body>`);
+          }
         }
 
         // Inject only client runtime
@@ -977,6 +1064,26 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         if (cfg.federation?.remotes && Object.keys(cfg.federation.remotes).length > 0) {
           const { generateFederationRuntime } = await import('../federation/index.js');
           federationRuntime = `<script>${generateFederationRuntime(cfg.federation.remotes)}</script>`;
+
+          // Bug Class B fix: inject an importmap that redirects shared singleton packages
+          // (react, react-dom, etc.) from any remote origin to the host's pre-bundled copy.
+          // This ensures only ONE React instance exists across all federation boundaries.
+          if (cfg.federation.shared) {
+            const singletonEntries: string[] = [];
+            for (const [pkg, sharedCfg] of Object.entries(cfg.federation.shared)) {
+              const isSingleton = typeof sharedCfg === 'object' && (sharedCfg as any).singleton;
+              if (isSingleton) {
+                // Map the bare specifier to the host's pre-bundled chunk
+                const hostOrigin = `http://localhost:${cfg.server?.port || cfg.port || 5173}`;
+                singletonEntries.push(`    "${pkg}": "${hostOrigin}/@sparx-deps/${pkg}"`);
+                // Also cover scoped variants (e.g. react-dom/client)
+                singletonEntries.push(`    "${pkg}/": "${hostOrigin}/@sparx-deps/${pkg}/"`);
+              }
+            }
+            if (singletonEntries.length > 0) {
+              federationRuntime = `<script type="importmap">{\n  "imports": {\n${singletonEntries.join(',\n')}\n  }\n}</script>\n` + federationRuntime;
+            }
+          }
         }
 
         // Always inject basic shims in dev mode to prevent ReferenceErrors from any React-ish modules
@@ -1060,7 +1167,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       // Strip query parameters
       const cleanUrl = url.split('?')[0];
       const depFile = cleanUrl.replace('/@sparx-deps/', '');
-      const depPath = path.join(cfg.root, 'node_modules', '.sparx', depFile);
+      const depPath = path.join(resolvedCacheDir, depFile);
       try {
         const content = await fs.readFile(depPath, 'utf-8');
         res.writeHead(200, {
@@ -1515,22 +1622,6 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         // Plugin transform (JS plugins like Tailwind)
         raw = await pluginManager.transform(raw, filePath);
 
-        // Inject Env Vars and React Refresh Shims (only for JS/TS files)
-        // Aggressive In-Module Shim: Guarantee $RefreshSig$ existence
-        if (ext === '.ts' || ext === '.tsx' || ext === '.jsx' || ext === '.js' || ext === '.mjs') {
-          raw = `
-/** Sparx Dev Preamble **/
-if (typeof window !== 'undefined') {
-  window.$RefreshReg$ = window.$RefreshReg$ || (() => {});
-  window.$RefreshSig$ = window.$RefreshSig$ || (() => (type) => type);
-}
-if (!window.process) window.process = { env: {} };
-Object.assign(window.process.env, ${JSON.stringify(publicEnv)});
-
-${raw}
-          `;
-        }
-
         // Use Universal Transformer (supports all frameworks)
         try {
           const transformResult = await universalTransformer.transform({
@@ -1543,7 +1634,22 @@ ${raw}
 
           // Rewrite imports after transformation
           const federationRemotes = cfg.federation?.remotes ? new Set(Object.keys(cfg.federation.remotes)) : undefined;
-          let code = await rewriteImports(transformResult.code, cfg.root, preBundledDeps, federationRemotes);
+
+          // Build singleton redirect map for remote apps (Bug Class B fix).
+          // Maps each singleton pkg name → shell host base URL.
+          // rewriteImports will redirect bare 'react' imports to the shell's pre-bundled copy.
+          let singletonRedirects: Map<string, string> | undefined;
+          if (cfg.federation?.exposes && cfg.federation.shared) {
+            const hostBase = (cfg.federation as any).singletonHost || 'http://localhost:5173';
+            singletonRedirects = new Map<string, string>();
+            for (const [pkg, sharedCfg] of Object.entries(cfg.federation.shared)) {
+              if (typeof sharedCfg === 'object' && (sharedCfg as any).singleton) {
+                singletonRedirects.set(pkg, hostBase);
+              }
+            }
+          }
+
+          let code = await rewriteImports(transformResult.code, cfg.root, preBundledDeps, federationRemotes, singletonRedirects);
 
           res.writeHead(200, {
             'Content-Type': 'application/javascript',
@@ -1626,17 +1732,60 @@ ${raw}
         res.end(raw);
         return;
       }
-
       // Serve other files raw
-      const data = await fs.readFile(filePath);
+      if (url.includes('?url') || url.includes('?import')) {
+        const publicPath = url.split('?')[0];
+        res.writeHead(200, { 'Content-Type': 'application/javascript' });
+        res.end(`export default ${JSON.stringify(publicPath)};`);
+        return;
+      }
+
+      let data: Buffer | string = await fs.readFile(filePath);
       let mime = 'application/octet-stream';
       if (ext === '.map') mime = 'application/json';
-      if (ext === '.html') mime = 'text/html';
+      if (ext === '.html') {
+        mime = 'text/html';
+        let html = data.toString('utf-8');
+        let clientScript = `\n<script type="module" src="/@sparx/hmr-client"></script>\n`;
+        let preamble = `
+    <script>
+      window.$RefreshReg$ = () => {};
+      window.$RefreshSig$ = () => (type) => type;
+      if (!window.process) window.process = { env: {} };
+    </script>
+    <script type="module">
+      import RefreshRuntime from "/@react-refresh";
+      RefreshRuntime.injectIntoGlobalHook(window);
+      window.$RefreshReg$ = (type, id) => { RefreshRuntime.register(type, id); };
+      window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+      window.__vite_plugin_react_preamble_installed__ = true;
+    </script>
+        `;
+        const inject = preamble + clientScript;
+        if (html.includes('</head>')) {
+          html = html.replace('</head>', `${inject}</head>`);
+        } else if (html.includes('<body>')) {
+          html = html.replace('<body>', `<body>${inject}`);
+        } else {
+          html += inject;
+        }
+        data = html;
+      }
       if (ext === '.svg') mime = 'image/svg+xml';
+      if (ext === '.png') mime = 'image/png';
+      if (ext === '.jpg' || ext === '.jpeg') mime = 'image/jpeg';
+      if (ext === '.gif') mime = 'image/gif';
+      if (ext === '.webp') mime = 'image/webp';
+      if (ext === '.woff2') mime = 'font/woff2';
 
       res.writeHead(200, { 'Content-Type': mime });
       res.end(data);
     } catch (e: any) {
+      if (e.code === 'ENOENT') {
+        res.writeHead(404);
+        res.end(`Not found: ${url}`);
+        return;
+      }
       log.error(`Request error: ${e.message}`, { category: 'server' });
       if (process.env.DEBUG || process.env.NODE_ENV === 'test') {
         console.error(e.stack);

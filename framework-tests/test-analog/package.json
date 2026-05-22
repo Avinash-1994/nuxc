@@ -1,0 +1,20 @@
+{
+  "name": "sparx-analog-template",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sparx dev",
+    "build": "sparx build",
+    "preview": "sparx preview"
+  },
+  "sparx": {
+    "template": true,
+    "framework": "analog",
+    "description": "Sparx CMS — headless CMS with Angular"
+  },
+  "devDependencies": {
+    "sparx": "file:../../",
+    "typescript": "5.4.5"
+  }
+}

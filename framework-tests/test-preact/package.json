@@ -1,0 +1,24 @@
+{
+  "name": "sparx-preact-template",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sparx dev",
+    "build": "sparx build",
+    "preview": "sparx preview"
+  },
+  "sparx": {
+    "template": true,
+    "framework": "preact",
+    "description": "Sparx Weather — real weather dashboard"
+  },
+  "dependencies": {
+    "@preact/signals": "^2.9.0",
+    "preact": "^10.22.0"
+  },
+  "devDependencies": {
+    "sparx": "file:../../",
+    "typescript": "5.4.5"
+  }
+}

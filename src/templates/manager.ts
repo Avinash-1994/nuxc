@@ -30,6 +30,22 @@ import { edgeTemplate } from './starters/edge.js';
 import { fintechTemplate } from './starters/fintech.js';
 import { monorepoTemplate } from './starters/monorepo.js';
 
+// New Frameworks
+import { astroSpaTemplate } from './starters/astro-spa.js';
+import { sveltekitAppTemplate } from './starters/sveltekit-app.js';
+import { qwikSpaTemplate } from './starters/qwik-spa.js';
+import { litSpaTemplate } from './starters/lit-spa.js';
+import { alpineSpaTemplate } from './starters/alpine-spa.js';
+import { solidstartAppTemplate } from './starters/solidstart-app.js';
+import { tauriAppTemplate } from './starters/tauri-app.js';
+import { electronAppTemplate } from './starters/electron-app.js';
+import { vitepressAppTemplate } from './starters/vitepress-app.js';
+import { wakuAppTemplate } from './starters/waku-app.js';
+import { analogAppTemplate } from './starters/analog-app.js';
+import { nuxtAppTemplate } from './starters/nuxt-app.js';
+import { reactRouterV7AppTemplate } from './starters/react-router-v7-app.js';
+import { tanstackStartAppTemplate } from './starters/tanstack-start-app.js';
+
 export class TemplateManager {
     private templates: Map<string, TemplateConfig> = new Map();
 
@@ -44,6 +60,22 @@ export class TemplateManager {
         this.register(edgeTemplate);
         this.register(fintechTemplate);
         this.register(monorepoTemplate);
+        
+        // Register new frameworks
+        this.register(astroSpaTemplate);
+        this.register(sveltekitAppTemplate);
+        this.register(qwikSpaTemplate);
+        this.register(litSpaTemplate);
+        this.register(alpineSpaTemplate);
+        this.register(solidstartAppTemplate);
+        this.register(tauriAppTemplate);
+        this.register(electronAppTemplate);
+        this.register(vitepressAppTemplate);
+        this.register(wakuAppTemplate);
+        this.register(analogAppTemplate);
+        this.register(nuxtAppTemplate);
+        this.register(reactRouterV7AppTemplate);
+        this.register(tanstackStartAppTemplate);
     }
 
     register(template: TemplateConfig): void {

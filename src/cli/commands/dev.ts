@@ -51,12 +51,23 @@ export default {
       const root = args.root
         ? path.resolve(process.cwd(), args.root)
         : process.cwd();
-        
+
+      // Load sparx.config.ts BEFORE starting the server so that
+      // server.port from the user's config is respected when binding the port.
+      let userPort = args.port || 5173;
+      try {
+        const { loadConfig } = await import('../../config/index.js');
+        const userCfg = await loadConfig(root);
+        userPort = args.port || userCfg.server?.port || (userCfg as any).port || 5173;
+      } catch {
+        // Config may not exist yet — fall back to default
+      }
+
       const cfg = {
         root,
-        port: args.port || 5173,
+        port: userPort,
         mode: 'development',
-        server: { host: '0.0.0.0', strictPort: args.strictPort }
+        server: { host: '0.0.0.0', strictPort: args.strictPort, port: userPort }
       } as any;
 
       const minimalDevServer = await import('../../dev/devServer.minimal.js');

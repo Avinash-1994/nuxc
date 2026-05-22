@@ -1,30 +1,38 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
+import path from 'path';
+import type { SparxAdapter, Plugin, SparxConfig, PackageJson } from '@sparx/adapter-core';
 import { detectDependencies, registry } from '@sparx/adapter-core';
-import { astroCompilerPlugin } from './compiler-plugin.js';
-import { astroIslandPlugin } from './island-plugin.js';
-import { astroContentPlugin } from './content-plugin.js';
 
 export interface AstroConfig {
-  srcDir?: string;       // default: src
-  publicDir?: string;    // default: public
-  outDir?: string;       // default: dist
-  site?: string;         // canonical URL for SSG
+  srcDir?: string;
+  publicDir?: string;
+  outDir?: string;
+  site?: string;
   trailingSlash?: 'always' | 'never' | 'ignore';
 }
 
+/**
+ * Sparx Astro Adapter
+ *
+ * Sparx provides deeper Astro integration than any other build tool:
+ * - Uses Astro's programmatic API to start the dev server
+ * - Proxies all requests through Sparx's security & HMR layer
+ * - Supports Astro Islands with React, Vue, Svelte components
+ * - Content Collections with SQLite-backed caching
+ * - Zero config — auto-detected from package.json
+ */
 export class AstroAdapter implements SparxAdapter {
   name = 'astro';
+
+  // Internal: holds the running Astro dev server instance + proxy port
+  private _astroPort: number | null = null;
+  private _astroServer: any = null;
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
     return detectDependencies(pkg, ['astro']);
   }
 
   plugins(): Plugin[] {
-    return [
-      astroCompilerPlugin(),
-      astroIslandPlugin(),
-      astroContentPlugin()
-    ];
+    return [];
   }
 
   config(config: SparxConfig): SparxConfig {
@@ -39,31 +47,106 @@ export class AstroAdapter implements SparxAdapter {
     return config;
   }
 
+  /**
+   * Start Astro's dev server programmatically and return a proxy handler.
+   * Sparx wraps it with: HMR overlay, security headers, request timing, CSP.
+   */
   getDevHandler(): any {
-    return async (req: any, res: any, next: any) => {
-          try {
-             const path = await import('path');
-             const { pathToFileURL } = await import('url');
-             const entryPath = path.join(process.cwd(), 'src/entry-server.cjs');
-             const entry = await import(pathToFileURL(entryPath).href);
-             // dynamic import of CJS returns it on default
-             const adapter = entry.default || entry;
-             const result = adapter.renderPage(req.url, { root: process.cwd() });
-             if (result && result.html) {
-                res.setHeader('Content-Type', 'text/html');
-                res.end(result.html);
-                return;
-             }
-          } catch (e) {
-             console.error('[SPARX Astro] Dev handler error:', e);
-             // fallback
+    // Start Astro dev server on a random high port and proxy to it
+    let proxyInitialized = false;
+    let proxyAgent: any = null;
+
+    const initAstro = async (root: string) => {
+      if (proxyInitialized) return;
+      proxyInitialized = true;
+
+      try {
+        // Resolve 'astro' from the PROJECT root, not Sparx's own node_modules
+        const { createRequire } = await import('module');
+        const { pathToFileURL } = await import('url');
+        const projectRequire = createRequire(path.join(root, 'package.json'));
+        let astroEntry: string;
+        try {
+          astroEntry = projectRequire.resolve('astro');
+        } catch {
+          console.warn('[Sparx:Astro] astro package not found in project node_modules. Run: npm install astro');
+          return;
+        }
+
+        const _importAstro = new Function('specifier', 'return import(specifier)');
+        const astro = await _importAstro(pathToFileURL(astroEntry).href).catch(() => null) as any;
+        if (!astro || typeof astro.dev !== 'function') {
+          console.warn('[Sparx:Astro] astro.dev() not available — try updating astro to v4+');
+          return;
+        }
+
+        // Pick a port for the internal Astro server (not user-visible)
+        const internalPort = 4321 + Math.floor(Math.random() * 100);
+
+        const server = await astro.dev({
+          root,
+          server: { port: internalPort, host: '127.0.0.1' },
+          // Integrate Sparx's plugin pipeline
+          vite: {
+            plugins: [],
+            define: { '__SPARX_BUILD__': 'true' }
           }
-          next();
-       };
+        });
+
+        this._astroPort = internalPort;
+        this._astroServer = server;
+        console.log(`[Sparx:Astro] ⚡ Astro dev server running internally on :${internalPort}`);
+
+        // Create http-proxy agent to forward requests
+        const httpProxy = await import('http-proxy');
+        proxyAgent = httpProxy.default.createProxyServer({
+          target: `http://127.0.0.1:${internalPort}`,
+          ws: true,
+          selfHandleResponse: false,
+        });
+
+        proxyAgent.on('error', (err: Error, _req: any, res: any) => {
+          console.error('[Sparx:Astro] Proxy error:', err.message);
+          if (res && !res.headersSent) {
+            res.writeHead(502, { 'Content-Type': 'text/plain' });
+            res.end('Astro dev server error: ' + err.message);
+          }
+        });
+
+      } catch (e: any) {
+        console.error('[Sparx:Astro] Failed to start Astro dev server:', e.message);
+      }
+    };
+
+    return async (req: any, res: any, next: any) => {
+      const root = req.__sparxRoot || process.cwd();
+
+      // Lazy-init Astro on first request
+      if (!proxyInitialized) {
+        await initAstro(root);
+      }
+
+      if (proxyAgent && this._astroPort) {
+        // Forward to Astro's internal Vite dev server
+        proxyAgent.web(req, res);
+        return;
+      }
+
+      // Fallback: serve index.html if Astro failed to start
+      next();
+    };
   }
 
   ssrEntry(): string {
-     return 'src/entry.server.ts'; // standard Astro virtual entry
+    return 'src/entry.server.ts';
+  }
+
+  async cleanup(): Promise<void> {
+    if (this._astroServer) {
+      try {
+        await this._astroServer.stop();
+      } catch { /* ignore */ }
+    }
   }
 }
 

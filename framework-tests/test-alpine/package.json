@@ -1,0 +1,1 @@
+{ "name": "test-alpine", "private": true, "type": "module", "scripts": { "dev": "sparx dev", "build": "sparx build" }, "dependencies": { "alpinejs": "^3.13.5" }, "devDependencies": { "sparx": "file:../../", "typescript": "^5.0.0" } }

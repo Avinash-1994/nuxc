@@ -1,6 +1,0 @@
-{
-  "type":"module",
-  "scripts": {
-    "dev": "cd .. && npm run dev:mfe"
-  }
-}

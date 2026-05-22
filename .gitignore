@@ -1,76 +1,61 @@
-node_modules
-dist
-# Exception: workspace packages that must have built dist/ for CI runtime resolution
-!packages/sparx-security/dist
-build_output
-dist_ts
-dist_plugin_test
-temp_config_test
-temp_init_test
-temp_ts_config_test
+# ──────────────────────────────────────────────────────
+#  Sparx — .gitignore
+#  Updated: 2026-05-22
+# ──────────────────────────────────────────────────────
+
+# ── Core build output ──────────────────────────────────
+node_modules/
+dist/
+# Exception: workspace packages that need built dist/ for CI
+!packages/sparx-security/dist/
+build_output/
+dist_ts/
+dist_plugin_test/
+
+# ── Logs ───────────────────────────────────────────────
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/tmp/mfe-*.log
+
+# ── OS / IDE ───────────────────────────────────────────
 .DS_Store
-
-# Generated e2e fixture files (auto-generated, not source)
-e2e/fixtures/e-commerce-app/routes/Route*.jsx
-e2e/fixtures/e-commerce-app/src/LazyImg*.jsx
-e2e/fixtures/e-commerce-app/src/store/
-e2e/fixtures/e-commerce-app/fix-results*.json
-e2e/fixtures/e-commerce-app/run-mocked-*.js
-e2e/fixtures/ssr-blog/fix-results.json
-e2e/fixtures/ssr-blog/run-targeted.js
-e2e/fixtures/vite-plugin-compat/node_modules/
-e2e/fixtures/vite-plugin-compat/package-lock.json
-
-# Validation output files (run artifacts, not source)
-validation-output-*.txt
-validation-rerun-*.txt
-nextgen.build.temp.mjs
-
-# Rust/Native build artifacts
-native/target/
-native/Cargo.lock
-native/*.node
-native/native.d.ts
-native/sparx_native*.node
-native/nextgen_native*.node
-native/sparx_native*.node
-*.node
-
-# Test artifacts
-.test_create_sparx/
-test-project-*/
-my-react-app/
-test_output*/
-test_*/
-temp_*/
-
-# Marketplace/Plugin artifacts
-marketplace.db
-marketplace.db-journal
-
-# Build artifacts
-sparx_native.node
-*.wasm
-
-# IDE
+Thumbs.db
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
-.DS_Store
-Thumbs.db
+# ── Sparx runtime caches (all projects) ───────────────
+.sparx/
+.sparx_cache/
+**/.sparx/
+**/.sparx_cache/
+**/.sparx/cache/
+**/.sparx/telemetry/
+**/.sparx/certs/
 
-# Temporary files
-tmp/
-temp/
-.cache/
-benchmark_temp/
+# ── Database & lock artifacts ──────────────────────────
+*.db
+*.db-journal
+marketplace.db
+marketplace.db-journal
 
-# Security - NEVER commit these
+# ── Rust / Native build ────────────────────────────────
+native/target/
+native/Cargo.lock
+native/*.node
+native/native.d.ts
+native/sparx_native*.node
+native/nextgen_native*.node
+sparx_native.node
+*.node
+*.wasm
+
+# ── Security — NEVER commit ────────────────────────────
 *.key
 *.pem
 *.p12
@@ -81,7 +66,6 @@ benchmark_temp/
 *.csr
 *.priv
 **/certs/**
-**/.sparx/certs/**
 .env
 .env.local
 .env.*.local
@@ -89,29 +73,95 @@ secrets/
 *.secret
 *.private
 
-# Cache and local data
-.sparx_cache/
-.sparx/telemetry/
-**/.sparx_cache/**
-**/.sparx/telemetry/**
-**/.sparx/cache/**
-*.db
-*.db-journal
+# ── Temporary / scratch ────────────────────────────────
+tmp/
+temp/
+.cache/
+benchmark_temp/
+temp_config_test/
+temp_init_test/
+temp_ts_config_test/
+nextgen.build.temp.mjs
+validation-output-*.txt
+validation-rerun-*.txt
 *.tgz
 
-# Fixture build and cache artifacts (generated at test-time, not source)
-e2e/fixtures/**/.ng-out/
-e2e/fixtures/**/dist/
-e2e/fixtures/**/dist-test/
-e2e/fixtures/**/.sparx/
-e2e/fixtures/**/.sparx-cache/
-e2e/fixtures/**/package-lock.json
-e2e/fixtures/**/node_modules/
-
-# Sparx runtime cache
-.sparx/
-
-# Test scaffolds
+# ── Test scaffolds ─────────────────────────────────────
+.test_create_sparx/
+test-project-*/
+my-react-app/
+test_output*/
+test_*/
+temp_*/
 ux_v09_test_app/
 mdi__home.svg
+
+# ── e2e fixtures — build & runtime artifacts ──────────
+# (source lives here; generated artifacts do not)
+e2e/fixtures/**/dist/
+e2e/fixtures/**/dist-test/
+e2e/fixtures/**/.ng-out/
+e2e/fixtures/**/.sparx/
+e2e/fixtures/**/.sparx-cache/
+e2e/fixtures/**/node_modules/
+e2e/fixtures/**/package-lock.json
+e2e/fixtures/**/*.db
+e2e/fixtures/**/*.db-journal
+
+# Sparx build report artifacts (generated per-build)
+e2e/fixtures/**/build-manifest.json
+e2e/fixtures/**/build-explain.json
+e2e/fixtures/**/sparx-sbom.json
+e2e/fixtures/**/sparx-headers.json
+e2e/fixtures/**/sparx-sri-manifest.json
+e2e/fixtures/**/sparx-csp.txt
+e2e/fixtures/**/sparx-csp-meta.html
+e2e/fixtures/**/_headers
+
+# Specific generated files in e2e fixtures
+e2e/fixtures/e-commerce-app/routes/Route*.jsx
+e2e/fixtures/e-commerce-app/src/LazyImg*.jsx
+e2e/fixtures/e-commerce-app/src/store/
+e2e/fixtures/e-commerce-app/fix-results*.json
+e2e/fixtures/e-commerce-app/run-mocked-*.js
+e2e/fixtures/ssr-blog/fix-results.json
+e2e/fixtures/ssr-blog/run-targeted.js
+e2e/fixtures/vite-plugin-compat/node_modules/
+e2e/fixtures/vite-plugin-compat/package-lock.json
 e2e/fixtures/plugin-ecosystem-app/tmp-fix/
+
+# ── framework-tests — generated artifacts ─────────────
+framework-tests/**/node_modules/
+framework-tests/**/dist/
+framework-tests/**/.sparx/
+framework-tests/**/.sparx-cache/
+framework-tests/**/package-lock.json
+framework-tests/**/*.db
+framework-tests/**/*.db-journal
+framework-tests/**/build-manifest.json
+framework-tests/**/build-explain.json
+framework-tests/**/sparx-sbom.json
+framework-tests/**/sparx-headers.json
+framework-tests/**/sparx-sri-manifest.json
+framework-tests/**/sparx-csp.txt
+framework-tests/**/sparx-csp-meta.html
+framework-tests/**/_headers
+
+# ── real-world-mfe / portal (dev:mfe target) ──────────
+real-world-mfe/**/node_modules/
+real-world-mfe/**/dist/
+real-world-mfe/**/.sparx/
+portal/**/node_modules/
+portal/**/dist/
+portal/**/.sparx/
+tests/fixtures/**/dist/
+tests/fixtures/**/*.db
+tests/fixtures/**/.sparx/
+
+# ── tests/fixtures — build output artifacts ────────────
+# (cache-consistency test uses real builds; outputs are generated)
+tests/fixtures/**/dist/
+tests/fixtures/**/.sparx/
+tests/fixtures/**/*.db
+tests/fixtures/**/build-manifest.json
+tests/fixtures/**/build-explain.json
