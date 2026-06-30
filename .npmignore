@@ -7,6 +7,11 @@ dist/**/*.spec.js
 dist/**/*.spec.d.ts
 dist/benchmarks/
 dist/test-production-app/
+dist/src/
+dist/visual/
+dist/test-server.js
+dist/test-server.d.ts
+dist/templates/starters/*.d.ts
 
 # General ignores
 node_modules/

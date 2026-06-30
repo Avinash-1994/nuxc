@@ -65,5 +65,14 @@ async function copyAll(patternDir, filterExt, outDir) {
     await fs.chmod(target, 0o755).catch(() => { });
   }
 
-  console.log('Post-build copy complete');
+  await fs.rm(join(distDir, 'src'), { recursive: true, force: true }).catch(() => {});
+  await fs.rm(join(distDir, 'test'), { recursive: true, force: true }).catch(() => {});
+  await fs.rm(join(distDir, 'visual'), { recursive: true, force: true }).catch(() => {});
+  await fs.rm(join(distDir, 'repro'), { recursive: true, force: true }).catch(() => {});
+  await fs.rm(join(distDir, 'test-server.js'), { force: true }).catch(() => {});
+  await fs.rm(join(distDir, 'test-server.d.ts'), { force: true }).catch(() => {});
+  await fs.rm(join(distDir, 'plugins', 'testSandbox.js'), { force: true }).catch(() => {});
+  await fs.rm(join(distDir, 'plugins', 'testSandbox.d.ts'), { force: true }).catch(() => {});
+
+  console.log('Post-build copy and cleanup complete');
 })();

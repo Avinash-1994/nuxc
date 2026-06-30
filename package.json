@@ -1,6 +1,6 @@
 {
   "name": "nuce",
-  "version": "1.0.10",
+  "version": "1.0.0",
   "description": "⚡ Nuce — a modern JavaScript build tool powered by SWC and LightningCSS. Fast HMR, module federation, tree shaking, and multi-framework support (React, Vue, Svelte, Solid). A fast, Rust-native build pipeline.",
   "type": "module",
   "main": "./dist/index.js",
