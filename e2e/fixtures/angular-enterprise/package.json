@@ -1,6 +1,7 @@
 {
   "name": "angular-enterprise",
   "version": "1.0.0",
+  "type": "module",
   "main": "run-test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
