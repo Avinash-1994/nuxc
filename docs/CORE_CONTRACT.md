@@ -1,7 +1,7 @@
-# Sparx Core Contract (v1.x)
+# Nuce Core Contract (v1.x)
 
 ## 1. Unified Pipeline Specification
-Sparx operates on a strictly ordered **10-stage pipeline**. Any modification to the core engine must preserve this sequence.
+Nuce operates on a strictly ordered **10-stage pipeline**. Any modification to the core engine must preserve this sequence.
 
 1.  **Initialization**: Normalize config and initialize services.
 2.  **Input Fingerprinting**: Hash all base inputs (config, source files).
@@ -30,17 +30,17 @@ Sparx operates on a strictly ordered **10-stage pipeline**. Any modification to 
 ---
 
 ## 3. Plugin Compatibility Contract
-Sparx provides a compatibility layer for the ecosystem. However, this is strictly limited to:
-- **Stateless Transforms**: Mapping Rollup `transform` or Webpack `loader` to Sparx's `transformModule` hook.
+Nuce provides a compatibility layer for the ecosystem. However, this is strictly limited to:
+- **Stateless Transforms**: Mapping Rollup `transform` or Webpack `loader` to Nuce's `transformModule` hook.
 - **Stateless Resolvers**: Mapping standard `resolveId` hooks.
 - **Output Rendering**: Basic `renderChunk` support.
 
-*Plugins requiring deep access to Sparx's Internal Graph API are NOT supported.*
+*Plugins requiring deep access to Nuce's Internal Graph API are NOT supported.*
 
 ---
 
 ## 4. Determinism Guarantee
-In `ci` mode, Sparx asserts that identical inputs MUST produce identical `BuildFingerprint` outputs.
+In `ci` mode, Nuce asserts that identical inputs MUST produce identical `BuildFingerprint` outputs.
 - Hashing Algorithm: **XXH3** (Native).
 - Serialization: Sorted-key JSON stringification.
 - Delta: Any drift results in a `DETERMINISM_VIOLATION`.

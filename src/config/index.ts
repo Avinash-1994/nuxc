@@ -84,7 +84,7 @@ export const BuildConfigSchema = z.object({
   // Phase 4.2 — Remote cache (new optional key)
   cache: z.object({
     remote: z.object({
-      provider: z.union([z.enum(['s3', 'sparx-cloud']), z.literal(false)]).default(false),
+      provider: z.union([z.enum(['s3', 'nuce-cloud']), z.literal(false)]).default(false),
       bucket: z.string().optional(),
       token: z.string().optional(),
       region: z.string().optional(),
@@ -141,7 +141,7 @@ export type BuildConfig = {
     https?: boolean | { key: string; cert: string };
     headers?: Record<string, string>;
   };
-  /** Phase 1.10 — cache root dir (relative to project root). Default: .sparx/cache */
+  /** Phase 1.10 — cache root dir (relative to project root). Default: .nuce/cache */
   cacheDir?: string;
   prebundle?: {
     enabled?: boolean;
@@ -152,7 +152,7 @@ export type BuildConfig = {
   // Supports: false (disable), true (legacy boolean), or object with remote config
   cache?: boolean | {
     remote?: {
-      provider: 's3' | 'sparx-cloud' | false;
+      provider: 's3' | 'nuce-cloud' | false;
       bucket?: string;
       token?: string;
       region?: string;
@@ -195,20 +195,20 @@ function validateConfigKeys(raw: Record<string, unknown>) {
         .sort((a, b) => a.d - b.d)[0];
       if (closest.d <= 3) {
         errors.push(
-          `[sparx] Config error: unknown key "${key}"\n` +
+          `[nuce] Config error: unknown key "${key}"\n` +
           `        Did you mean: ${closest.k} ?`
         );
       } else {
         errors.push(
-          `[sparx] Config error: unknown key "${key}"\n` +
-          `        See https://sparx.dev/config for valid keys.`
+          `[nuce] Config error: unknown key "${key}"\n` +
+          `        See https://nuce.dev/config for valid keys.`
         );
       }
     }
   }
   if (errors.length > 0) {
     errors.forEach(e => console.error(e));
-    console.error('\nFix sparx.config.ts then re-run.\n');
+    console.error('\nFix nuce.config.ts then re-run.\n');
     process.exit(1);
   }
 }
@@ -257,58 +257,58 @@ const FRAMEWORK_IMPLICATIONS: Record<string, { preset?: string; platform?: strin
 };
 
 export async function loadConfig(cwd: string): Promise<BuildConfig> {
-  const sparxTsPath = path.join(cwd, 'sparx.config.ts');
-  const sparxJsPath = path.join(cwd, 'sparx.config.js');
-  const sparxCjsPath = path.join(cwd, 'sparx.config.cjs');
-  const sparxJsonPath = path.join(cwd, 'sparx.config.json');
-  const sparxYamlPath = path.join(cwd, 'sparx.config.yaml');
-  const sparxYmlPath = path.join(cwd, 'sparx.config.yml');
-  const legacyJsonPath = path.join(cwd, 'sparx.build.json');
-  const legacyTsPath = path.join(cwd, 'sparx.build.ts');
-  const legacyYamlPath = path.join(cwd, 'sparx.build.yaml');
-  const legacyYmlPath = path.join(cwd, 'sparx.build.yml');
+  const nuceTsPath = path.join(cwd, 'nuce.config.ts');
+  const nuceJsPath = path.join(cwd, 'nuce.config.js');
+  const nuceCjsPath = path.join(cwd, 'nuce.config.cjs');
+  const nuceJsonPath = path.join(cwd, 'nuce.config.json');
+  const nuceYamlPath = path.join(cwd, 'nuce.config.yaml');
+  const nuceYmlPath = path.join(cwd, 'nuce.config.yml');
+  const legacyJsonPath = path.join(cwd, 'nuce.build.json');
+  const legacyTsPath = path.join(cwd, 'nuce.build.ts');
+  const legacyYamlPath = path.join(cwd, 'nuce.build.yaml');
+  const legacyYmlPath = path.join(cwd, 'nuce.build.yml');
 
   let rawConfig: any;
   let loadedConfigPath = 'default';
 
   try {
-    if (await fs.access(sparxTsPath).then(() => true).catch(() => false)) {
-      rawConfig = await loadModuleConfig(sparxTsPath, cwd);
-      loadedConfigPath = 'sparx.config.ts';
-    } else if (await fs.access(sparxCjsPath).then(() => true).catch(() => false)) {
-      rawConfig = require(sparxCjsPath);
-      loadedConfigPath = 'sparx.config.cjs';
-    } else if (await fs.access(sparxJsPath).then(() => true).catch(() => false)) {
-      const mod = await import('file://' + sparxJsPath);
+    if (await fs.access(nuceTsPath).then(() => true).catch(() => false)) {
+      rawConfig = await loadModuleConfig(nuceTsPath, cwd);
+      loadedConfigPath = 'nuce.config.ts';
+    } else if (await fs.access(nuceCjsPath).then(() => true).catch(() => false)) {
+      rawConfig = require(nuceCjsPath);
+      loadedConfigPath = 'nuce.config.cjs';
+    } else if (await fs.access(nuceJsPath).then(() => true).catch(() => false)) {
+      const mod = await import('file://' + nuceJsPath);
       rawConfig = mod.default || mod;
-      loadedConfigPath = 'sparx.config.js';
-    } else if (await fs.access(sparxJsonPath).then(() => true).catch(() => false)) {
-      const raw = await fs.readFile(sparxJsonPath, 'utf-8');
+      loadedConfigPath = 'nuce.config.js';
+    } else if (await fs.access(nuceJsonPath).then(() => true).catch(() => false)) {
+      const raw = await fs.readFile(nuceJsonPath, 'utf-8');
       rawConfig = JSON.parse(raw);
-      loadedConfigPath = 'sparx.config.json';
-    } else if (await fs.access(sparxYamlPath).then(() => true).catch(() => false)) {
-      const raw = await fs.readFile(sparxYamlPath, 'utf-8');
+      loadedConfigPath = 'nuce.config.json';
+    } else if (await fs.access(nuceYamlPath).then(() => true).catch(() => false)) {
+      const raw = await fs.readFile(nuceYamlPath, 'utf-8');
       rawConfig = yaml.load(raw);
-      loadedConfigPath = 'sparx.config.yaml';
-    } else if (await fs.access(sparxYmlPath).then(() => true).catch(() => false)) {
-      const raw = await fs.readFile(sparxYmlPath, 'utf-8');
+      loadedConfigPath = 'nuce.config.yaml';
+    } else if (await fs.access(nuceYmlPath).then(() => true).catch(() => false)) {
+      const raw = await fs.readFile(nuceYmlPath, 'utf-8');
       rawConfig = yaml.load(raw);
-      loadedConfigPath = 'sparx.config.yml';
+      loadedConfigPath = 'nuce.config.yml';
     } else if (await fs.access(legacyTsPath).then(() => true).catch(() => false)) {
       rawConfig = await loadModuleConfig(legacyTsPath, cwd);
-      loadedConfigPath = 'sparx.build.ts';
+      loadedConfigPath = 'nuce.build.ts';
     } else if (await fs.access(legacyJsonPath).then(() => true).catch(() => false)) {
       const raw = await fs.readFile(legacyJsonPath, 'utf-8');
       rawConfig = JSON.parse(raw);
-      loadedConfigPath = 'sparx.build.json';
+      loadedConfigPath = 'nuce.build.json';
     } else if (await fs.access(legacyYamlPath).then(() => true).catch(() => false)) {
       const raw = await fs.readFile(legacyYamlPath, 'utf-8');
       rawConfig = yaml.load(raw);
-      loadedConfigPath = 'sparx.build.yaml';
+      loadedConfigPath = 'nuce.build.yaml';
     } else if (await fs.access(legacyYmlPath).then(() => true).catch(() => false)) {
       const raw = await fs.readFile(legacyYmlPath, 'utf-8');
       rawConfig = yaml.load(raw);
-      loadedConfigPath = 'sparx.build.yml';
+      loadedConfigPath = 'nuce.build.yml';
     } else {
       // Return default config if file not found, with auto-detection
       log.info('No config file found, using defaults...');
@@ -381,7 +381,7 @@ export async function loadConfig(cwd: string): Promise<BuildConfig> {
     if (finalConfig.plugins) {
       for (const p of finalConfig.plugins) {
         if (p && (p.main?.endsWith('.wasm') || p.entry?.endsWith('.wasm') || typeof p === 'string' && p.endsWith('.wasm'))) {
-          throw new Error("Sparx no longer supports WASM plugins. Please use a JS/TS plugin entry point. See https://sparx.dev/migrate#wasm-plugins");
+          throw new Error("Nuce no longer supports WASM plugins. Please use a JS/TS plugin entry point. See https://nuce.dev/migrate#wasm-plugins");
         }
       }
     }
@@ -393,18 +393,18 @@ export async function loadConfig(cwd: string): Promise<BuildConfig> {
       const val = (finalConfig as any)[key];
       if (typeof val === 'string' && /leveldb|rocksdb/i.test(val)) {
         console.warn(
-          `[sparx] Deprecated config key "${key}": "${val}" is no longer supported. ` +
-          `Sparx uses SQLite for all caching. See https://sparx.dev/migrate#cache-backend`
+          `[nuce] Deprecated config key "${key}": "${val}" is no longer supported. ` +
+          `Nuce uses SQLite for all caching. See https://nuce.dev/migrate#cache-backend`
         );
       }
     }
     // Also check environment variables
-    for (const envKey of ['SPARX_CACHE_BACKEND', 'SPARX_CACHE_DRIVER', 'NUCLIE_CACHE_BACKEND']) {
+    for (const envKey of ['NUCE_CACHE_BACKEND', 'NUCE_CACHE_DRIVER', 'NUCLIE_CACHE_BACKEND']) {
       const envVal = process.env[envKey];
       if (envVal && /leveldb|rocksdb/i.test(envVal)) {
         console.warn(
-          `[sparx] Deprecated environment variable "${envKey}": "${envVal}" is ignored. ` +
-          `Sparx uses SQLite for all caching. See https://sparx.dev/migrate#cache-backend`
+          `[nuce] Deprecated environment variable "${envKey}": "${envVal}" is ignored. ` +
+          `Nuce uses SQLite for all caching. See https://nuce.dev/migrate#cache-backend`
         );
       }
     }
@@ -420,7 +420,7 @@ export async function loadConfig(cwd: string): Promise<BuildConfig> {
 async function loadModuleConfig(tsPath: string, cwd: string): Promise<any> {
   log.info(`Loading config from ${path.basename(tsPath)}...`);
   const { build } = await import('esbuild');
-  const outfile = path.join(cwd, `sparx.config.temp.${Date.now()}.mjs`);
+  const outfile = path.join(cwd, `nuce.config.temp.${Date.now()}.mjs`);
 
   try {
     await build({
@@ -446,7 +446,7 @@ async function loadModuleConfig(tsPath: string, cwd: string): Promise<any> {
 }
 
 export async function saveConfig(cwd: string, config: any): Promise<void> {
-  const jsonPath = path.join(cwd, 'sparx.build.json');
+  const jsonPath = path.join(cwd, 'nuce.build.json');
   await fs.writeFile(jsonPath, JSON.stringify(config, null, 2), 'utf-8');
   log.info(`Configuration saved to ${jsonPath}`);
 }

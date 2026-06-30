@@ -19,11 +19,11 @@ export const svelteSpaTemplate: TemplateConfig = {
         "svelte-check": "^3.5.0",
         "tslib": "^2.6.2",
         "typescript": "^5.2.2",
-        "@sparx/plugin-svelte": "^1.0.0"
+        "@nuce/plugin-svelte": "^1.0.0"
     },
     files: {
-        'sparx.config.ts': `
-import { defineConfig } from 'sparx';
+        'nuce.config.ts': `
+import { defineConfig } from 'nuce';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
@@ -47,11 +47,11 @@ export default app
 <script lang="ts">
   import Counter from './lib/Counter.svelte'
 
-  let sparxLogo = '/sparx.svg'
+  let nuceLogo = '/nuce.svg'
 </script>
 
 <main>
-  <h1>Sparx + Svelte</h1>
+  <h1>Nuce + Svelte</h1>
 
   <div class="card">
     <Counter />
@@ -62,7 +62,7 @@ export default app
   </p>
 
   <p class="read-the-docs">
-    Click on the Sparx and Svelte logos to learn more
+    Click on the Nuce and Svelte logos to learn more
   </p>
 </main>
 

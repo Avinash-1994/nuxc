@@ -15,10 +15,10 @@
     "jsx": "react-jsx",
     "isolatedModules": true,
     "paths": {
-      "@sparx/adapter-core": ["./packages/sparx-adapter-core/src/index.js", "./packages/sparx-adapter-core/src/index.ts"],
-      "@sparx/adapter-core/*": ["./packages/sparx-adapter-core/*"],
-      "@sparx/security": ["./packages/sparx-security/src/index.ts"],
-      "@sparx/security/*": ["./packages/sparx-security/src/*"]
+      "@nuce/adapter-core": ["./packages/nuce-adapter-core/src/index.js", "./packages/nuce-adapter-core/src/index.ts"],
+      "@nuce/adapter-core/*": ["./packages/nuce-adapter-core/*"],
+      "@nuce/security": ["./packages/nuce-security/src/index.ts"],
+      "@nuce/security/*": ["./packages/nuce-security/src/*"]
     }
   },
   "include": [

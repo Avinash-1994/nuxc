@@ -4,16 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "sparx dev",
-    "build": "sparx build",
-    "preview": "sparx preview"
+    "dev": "nuce dev",
+    "build": "nuce build",
+    "preview": "nuce preview"
   },
   "dependencies": {
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "sparx": "file:../../",
+    "nuce": "file:../../",
     "typescript": "latest"
   }
 }

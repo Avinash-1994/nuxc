@@ -1,7 +1,7 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 
-export class RedwoodAdapter implements SparxAdapter {
+export class RedwoodAdapter implements NuceAdapter {
   name = 'redwoodjs';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -11,17 +11,17 @@ export class RedwoodAdapter implements SparxAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'sparx:redwood-scaffold',
+        name: 'nuce:redwood-scaffold',
         async buildStart() {
-          console.log('[Sparx:RedwoodJS] Detected RedwoodJS project.');
-          console.log('[Sparx:RedwoodJS] Use `yarn rw dev` for the full RedwoodJS dev experience.');
-          console.log('[Sparx:RedwoodJS] Sparx handles the web/ side bundling natively.');
+          console.log('[Nuce:RedwoodJS] Detected RedwoodJS project.');
+          console.log('[Nuce:RedwoodJS] Use `yarn rw dev` for the full RedwoodJS dev experience.');
+          console.log('[Nuce:RedwoodJS] Nuce handles the web/ side bundling natively.');
         }
       }
     ];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     if (!config.redwood) config.redwood = {};
     config.redwood = {
       // RedwoodJS splits into web/ (frontend) and api/ (backend graphql)
@@ -39,7 +39,7 @@ export class RedwoodAdapter implements SparxAdapter {
         const url = req.url || '/';
         if (url.startsWith('/.redwood/') || url.startsWith('/api/')) {
           // Log and pass; a full implementation would proxy to localhost:8911
-          console.log(`[Sparx:RedwoodJS] API request detected: ${url} — ensure \`yarn rw dev api\` is running.`);
+          console.log(`[Nuce:RedwoodJS] API request detected: ${url} — ensure \`yarn rw dev api\` is running.`);
         }
         next();
       }

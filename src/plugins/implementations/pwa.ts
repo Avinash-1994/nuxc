@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-pwa
+ * @nuce/plugin-pwa
  * Progressive Web App support
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPwaPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-pwa',
+        name: '@nuce/plugin-pwa',
         originalPlugin: 'vite-plugin-pwa',
         
         async transform(code: string, id: string) {

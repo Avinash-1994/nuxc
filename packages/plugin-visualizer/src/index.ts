@@ -1,4 +1,4 @@
-// Plugin type compatible with both Sparx and Vite plugin API
+// Plugin type compatible with both Nuce and Vite plugin API
 type Plugin = { name: string; [hook: string]: any };
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 export interface VisualizerPluginOptions {
   /** Output file path for the HTML report (default: 'dist/stats.html') */
   filename?: string;
-  /** Title for the HTML report (default: 'Sparx Bundle Visualizer') */
+  /** Title for the HTML report (default: 'Nuce Bundle Visualizer') */
   title?: string;
   /** Open the report in browser after build (default: false) */
   open?: boolean;
@@ -23,16 +23,16 @@ interface ModuleInfo {
 }
 
 /**
- * @sparx/plugin-visualizer
+ * @nuce/plugin-visualizer
  *
- * Official Sparx plugin for bundle visualization:
+ * Official Nuce plugin for bundle visualization:
  * - Outputs an interactive HTML treemap showing bundle composition
  * - Shows module sizes, chunk assignments, and import relationships
  * - Similar to rollup-plugin-visualizer / webpack-bundle-analyzer
  *
  * @example
  * ```js
- * const visualizer = require('@sparx/plugin-visualizer');
+ * const visualizer = require('@nuce/plugin-visualizer');
  * module.exports = {
  *   plugins: [
  *     visualizer({ filename: 'dist/stats.html', open: true })
@@ -43,7 +43,7 @@ interface ModuleInfo {
 export function visualizerPlugin(options: VisualizerPluginOptions = {}): Plugin {
   const {
     filename = 'dist/stats.html',
-    title = 'Sparx Bundle Visualizer',
+    title = 'Nuce Bundle Visualizer',
     open = false,
     template = 'treemap',
     gzipSize = true,
@@ -52,7 +52,7 @@ export function visualizerPlugin(options: VisualizerPluginOptions = {}): Plugin 
   const modules: ModuleInfo[] = [];
 
   return {
-    name: '@sparx/plugin-visualizer',
+    name: '@nuce/plugin-visualizer',
 
     /**
      * Transform hook: record module size for visualization.
@@ -188,8 +188,8 @@ function generateHtmlReport(
 
   <script>
     const data = ${JSON.stringify(treemapData)};
-    console.log('[Sparx Visualizer] Loaded', data.length, 'modules');
-    console.log('[Sparx Visualizer] Total size:', ${totalSize}, 'bytes');
+    console.log('[Nuce Visualizer] Loaded', data.length, 'modules');
+    console.log('[Nuce Visualizer] Total size:', ${totalSize}, 'bytes');
   </script>
 </body>
 </html>`;

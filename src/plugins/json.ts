@@ -1,19 +1,19 @@
 
-import { SparxPlugin } from '../core/plugins/types.js';
+import { NucePlugin } from '../core/plugins/types.js';
 import path from 'path';
 import fs from 'fs/promises';
 
-export function createJsonPlugin(): SparxPlugin {
+export function createJsonPlugin(): NucePlugin {
     return {
         manifest: {
-            name: 'sparx:json',
+            name: 'nuce:json',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['load'],
             permissions: { fs: 'read' }
         },
-        id: 'sparx:json',
+        id: 'nuce:json',
         async runHook(hook, input, context) {
             if (hook === 'load') {
                 if (input.path.endsWith('.json')) {

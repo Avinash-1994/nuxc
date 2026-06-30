@@ -29,10 +29,10 @@ function fail(label, reason)     { throw new Error(`FAIL [${label}]: ${reason}`)
 // ─── Load native mergeSourceMaps ─────────────────────────────────────────────
 async function getNative() {
     const candidates = [
-        path.resolve(__dirname, '../../../sparx_native.node'),
-        path.resolve(__dirname, '../../sparx_native.node'),
-        path.resolve(process.cwd(), 'sparx_native.node'),
-        path.resolve(process.cwd(), 'dist/sparx_native.node'),
+        path.resolve(__dirname, '../../../nuce_native.node'),
+        path.resolve(__dirname, '../../nuce_native.node'),
+        path.resolve(process.cwd(), 'nuce_native.node'),
+        path.resolve(process.cwd(), 'dist/nuce_native.node'),
     ];
     for (const p of candidates) {
         try { return _require(p); } catch {}

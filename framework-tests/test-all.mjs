@@ -18,7 +18,7 @@ console.log(`Found ${dirs.length} framework test projects.`);
     console.log(` Testing: ${dir}`);
     console.log(`======================================`);
     
-    // Kill any existing servers on this port range or just let sparx auto-assign port
+    // Kill any existing servers on this port range or just let nuce auto-assign port
     const proc = spawn('npm', ['run', 'dev'], { cwd: path.join(testsDir, dir), shell: true });
     
     let url = '';

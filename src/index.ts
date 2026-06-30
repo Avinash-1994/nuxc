@@ -1,7 +1,7 @@
 /**
- * Sparx Build Tool - Public API
+ * Nuce Build Tool - Public API
  * 
- * This is the ONLY stable public surface for Sparx.
+ * This is the ONLY stable public surface for Nuce.
  * Everything not exported here is considered internal and may change without notice.
  * 
  * @public
@@ -34,7 +34,7 @@ export type {
 } from './federation/index.js';
 
 // ============================================================================
-// ENV SYSTEM (.env → import.meta.env.SPARX_*)
+// ENV SYSTEM (.env → import.meta.env.NUCE_*)
 // ============================================================================
 
 export { loadEnv, getEsbuildDefines, warnSensitiveEnv } from './env.js';
@@ -45,7 +45,7 @@ export type { EnvConfig, LoadedEnv } from './env.js';
 // ============================================================================
 
 export { loadConfigExtended, mergeConfig, findConfigFile, validateConfig } from './config-loader.js';
-export type { SparxConfig, LoadConfigResult, ConfigValidationResult } from './config-loader.js';
+export type { NuceConfig, LoadConfigResult, ConfigValidationResult } from './config-loader.js';
 
 // ============================================================================
 // COMMANDS (Preview server + Library build)
@@ -55,7 +55,7 @@ export { preview } from './commands/preview.js';
 export type { PreviewOptions } from './commands/preview.js';
 
 export { buildLib } from './commands/lib-build.js';
-export type { SparxLibConfig, LibBuildResult } from './commands/lib-build.js';
+export type { NuceLibConfig, LibBuildResult } from './commands/lib-build.js';
 
 // ============================================================================
 // DEV MIDDLEWARE (proxy + CORS + request logger)
@@ -76,7 +76,7 @@ export type { BuildConfig } from './config/index.js';
 // ============================================================================
 
 export type {
-    SparxPlugin,
+    NucePlugin,
     PluginHookName,
     PluginManifest,
     PluginType

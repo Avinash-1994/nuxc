@@ -19,11 +19,11 @@ let NativeWorker: any;
 
 try {
   const candidates = [
-    path.resolve(__dirname, '../../sparx_native.node'), // From src/dev/devServer.ts
-    path.resolve(__dirname, '../sparx_native.node'),    // From dist/dev/devServer.js
-    path.resolve(__dirname, './sparx_native.node'),     // From dist/
-    path.resolve(process.cwd(), 'sparx_native.node'),   // Root fallback
-    path.resolve(process.cwd(), 'dist/sparx_native.node')
+    path.resolve(__dirname, '../../nuce_native.node'), // From src/dev/devServer.ts
+    path.resolve(__dirname, '../nuce_native.node'),    // From dist/dev/devServer.js
+    path.resolve(__dirname, './nuce_native.node'),     // From dist/
+    path.resolve(process.cwd(), 'nuce_native.node'),   // Root fallback
+    path.resolve(process.cwd(), 'dist/nuce_native.node')
   ];
 
   let pathFound = '';
@@ -107,7 +107,7 @@ async function rewriteImports(code: string, rootDir: string, preBundledDeps?: Ma
           if (singletonRedirects.has(pkgRoot)) {
             const safeName = specifier.replace(/[/@]/g, '_');
             const hostBase = singletonRedirects.get(pkgRoot)!;
-            const singletonUrl = `${hostBase}/@sparx-deps/${safeName}.js?v=${Date.now()}`;
+            const singletonUrl = `${hostBase}/@nuce-deps/${safeName}.js?v=${Date.now()}`;
             replacements.push({ start: node.start, end: node.end, replacement: `'${singletonUrl}'` });
             return;
           }
@@ -131,7 +131,7 @@ async function rewriteImports(code: string, rootDir: string, preBundledDeps?: Ma
             if (specifier.endsWith('.js') && !preBundledDeps.has(specifier)) {
               replacement = `/node_modules/${specifier}`;
             } else {
-              replacement = `/@sparx-deps/${safeName}.js?v=${Date.now()}`;
+              replacement = `/@nuce-deps/${safeName}.js?v=${Date.now()}`;
             }
           }
         }
@@ -205,7 +205,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   function _mark(name: string) { _phases.push({ name, ms: Date.now() - _t0 }); }
   function _printStartupDiagnostics(port: number) {
     const total = Date.now() - _t0;
-    process.stderr.write('\n┌─ Sparx startup diagnostics ─────────────────\n');
+    process.stderr.write('\n┌─ Nuce startup diagnostics ─────────────────\n');
     let prev = 0;
     for (const p of _phases) {
       const dur = p.ms - prev;
@@ -262,7 +262,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
   // Filter public env vars — also loads .env / .env.development / .env.local files
   let publicEnv: Record<string, string | undefined> = Object.keys(process.env)
-    .filter(key => key.startsWith('SPARX_') || key.startsWith('PUBLIC_') || key === 'NODE_ENV')
+    .filter(key => key.startsWith('NUCE_') || key.startsWith('PUBLIC_') || key === 'NODE_ENV')
     .reduce((acc, key) => ({ ...acc, [key]: process.env[key] }), {
       NODE_ENV: process.env.NODE_ENV || 'development'
     });
@@ -299,7 +299,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   // ─── Initialize Adapter Registry for Meta-frameworks ───
   let activeAdapter: any = null;
   try {
-    const { registry } = await import('@sparx/adapter-core');
+    const { registry } = await import('@nuce/adapter-core');
     // Pre-register all meta-framework adapters so registry.detect works
     await import('../meta-frameworks/sveltekit/index.js').catch(() => {});
     await import('../meta-frameworks/solidstart/index.js').catch(() => {});
@@ -379,12 +379,12 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   if (cfg.federation?.remotes && Object.keys(cfg.federation.remotes).length > 0) {
     const remoteNames = Object.keys(cfg.federation.remotes).map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
     pluginManager.register({
-      name: 'sparx-federation-dev',
+      name: 'nuce-federation-dev',
       transform(code, id) {
         const regex = new RegExp('\\bimport\\s*\\(\\s*["\'](' + remoteNames + ')\\/([^"\']+)["\']\\s*\\)', 'g');
         if (!regex.test(code)) return code;
         return code.replace(regex, (_, remote, modulePath) => {
-          return `globalThis.__sparx_import__("${remote}/${modulePath}")`;
+          return `globalThis.__nuce_import__("${remote}/${modulePath}")`;
         });
       }
     });
@@ -394,10 +394,10 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   // Vue Support removed - Handled by UniversalTransformer
 
   const { DependencyPreBundler } = await import('./preBundler.js');
-  // Phase 1.10: resolve cache dir from config. Default: '<root>/.sparx/cache'.
+  // Phase 1.10: resolve cache dir from config. Default: '<root>/.nuce/cache'.
   const resolvedCacheDir = cfg.cacheDir
     ? path.join(cfg.root, cfg.cacheDir)
-    : path.join(cfg.root, '.sparx', 'cache');
+    : path.join(cfg.root, '.nuce', 'cache');
   const preBundler = new DependencyPreBundler(cfg.root, resolvedCacheDir);
 
   // Initialize Live Config Manager
@@ -495,7 +495,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       // ── Server-only packages that must NEVER be pre-bundled as browser ESM ──
       // These packages use Node.js built-ins (node:fs, node:url, etc.) and are
       // only used in the server/build pipeline, not in browser code.
-      // Sparx understands the SSR boundary better than any other build tool.
+      // Nuce understands the SSR boundary better than any other build tool.
       const SERVER_ONLY_PACKAGES = new Set([
         // Meta-framework cores (all Node.js SSR engines)
         'astro', '@astrojs/compiler', '@astrojs/prism',
@@ -571,7 +571,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         line: error?.loc?.line,
         column: error?.loc?.column,
         type: 'Build Error',
-        plugin: 'sparx:pipeline'
+        plugin: 'nuce:pipeline'
       });
       log.error('→ Dev Server: Warmup build failed - Fix the errors above');
     } else {
@@ -616,7 +616,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       httpsOptions = cfg.server.https;
     } else {
       // Generate self-signed cert
-      const certDir = path.join(cfg.root, '.sparx', 'certs');
+      const certDir = path.join(cfg.root, '.nuce', 'certs');
       await fs.mkdir(certDir, { recursive: true });
       const keyPath = path.join(certDir, 'dev.key');
       const certPath = path.join(certDir, 'dev.crt');
@@ -818,15 +818,15 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
     // ── Bug Class B fix: Singleton dep proxy for remote apps ────────────────────
     // When this app is a REMOTE (has `exposes`) with singleton shared deps,
-    // proxy pre-bundled dep requests (/@sparx-deps/react, etc.) to the shell
+    // proxy pre-bundled dep requests (/@nuce-deps/react, etc.) to the shell
     // so there is exactly one React instance across all federation boundaries.
-    if (cfg.federation?.exposes && cfg.federation.shared && req.url?.startsWith('/@sparx-deps/')) {
+    if (cfg.federation?.exposes && cfg.federation.shared && req.url?.startsWith('/@nuce-deps/')) {
       const singletonPkgs = Object.entries(cfg.federation.shared)
         .filter(([, v]) => typeof v === 'object' && (v as any).singleton)
         .map(([k]) => k);
       // Strip query string then .js extension: "react.js?v=123" → "react", "react-dom_client.js" → "react-dom"
-      const rawDepPath = req.url.slice('/@sparx-deps/'.length).split('?')[0];
-      // Convert sparx safe-name back to pkg name: "react-dom_client.js" → check both "react-dom" and "react"
+      const rawDepPath = req.url.slice('/@nuce-deps/'.length).split('?')[0];
+      // Convert nuce safe-name back to pkg name: "react-dom_client.js" → check both "react-dom" and "react"
       const withoutExt = rawDepPath.replace(/\.js$/, '');
       // rootPkg: take portion before first underscore (for subpath like react_jsx-dev-runtime → react)
       const rootPkgRaw = withoutExt.startsWith('@')
@@ -838,7 +838,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       );
       if (matchedSingleton) {
         const singletonHost = (cfg.federation as any).singletonHost || 'http://localhost:5173';
-        const proxyUrl = `${singletonHost}/@sparx-deps/${rawDepPath}${req.url.includes('?') ? '?' + req.url.split('?')[1] : ''}`;
+        const proxyUrl = `${singletonHost}/@nuce-deps/${rawDepPath}${req.url.includes('?') ? '?' + req.url.split('?')[1] : ''}`;
         try {
           const { getFetch } = await import('../utils/fetch.js');
           const fetch = await getFetch();
@@ -862,7 +862,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     if (activeAdapter && typeof activeAdapter.getDevHandler === 'function') {
       const handler = activeAdapter.getDevHandler();
       // Attach root so adapters (e.g. Astro) know the project directory
-      (req as any).__sparxRoot = cfg.root;
+      (req as any).__nuceRoot = cfg.root;
       const handled = await new Promise(resolve => {
         const originalEnd = res.end;
         res.end = function (...args: any[]) {
@@ -878,19 +878,19 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     // Security Scan (Day 41)
     if (!anomalyDetector.scanRequest({ url: req.url || '', headers: req.headers, method: req.method || 'GET' })) {
       res.writeHead(403, { 'Content-Type': 'text/plain' });
-      res.end('Request Blocked by Sparx Security Shield');
+      res.end('Request Blocked by Nuce Security Shield');
       return;
     }
 
-    if (req.url === '/__sparx/security') {
+    if (req.url === '/__nuce/security') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(anomalyDetector.getDashboard(), null, 2));
       return;
     }
 
     // Phase 1.11 — Module Registry status endpoint
-    if (req.url === '/__sparx/registry') {
-      const snapshot = (globalThis as any).__sparx_registry__?.getRegistry?.() ?? { scopes: {} };
+    if (req.url === '/__nuce/registry') {
+      const snapshot = (globalThis as any).__nuce_registry__?.getRegistry?.() ?? { scopes: {} };
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(snapshot, null, 2));
       return;
@@ -960,7 +960,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     if (cfg.preset === 'ssr' && (url === '/' || (!hasExtension && !isInternal && acceptsHtml))) {
       try {
         // @ts-ignore - plugin package removed to clean up orphans
-        const ssrRunner = await import('../../packages/sparx-ssr/src/runner.js')
+        const ssrRunner = await import('../../packages/nuce-ssr/src/runner.js')
           .catch(() => null as any);
 
         if (ssrRunner?.renderToString) {
@@ -984,7 +984,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
             try { shell = await fs.readFile(path.join(cfg.root, 'index.html'), 'utf-8'); } catch { }
             if (!shell) shell = '<!DOCTYPE html><html><head><!--head--></head><body><div id="app"><!--app--></div></body></html>';
             const finalHtml = shell
-              .replace('<!--head-->', head + `<script>window.__SPARX_STATE__=${state}</script>`)
+              .replace('<!--head-->', head + `<script>window.__NUCE_STATE__=${state}</script>`)
               .replace('<!--app-->', html)
               .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
               .replace('<div id="app"></div>', `<div id="app">${html}</div>`);
@@ -994,7 +994,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
           }
         }
       } catch (e: any) {
-        log.warn(`[sparx:ssr] renderToString failed for ${url}: ${e.message} — falling through`);
+        log.warn(`[nuce:ssr] renderToString failed for ${url}: ${e.message} — falling through`);
       }
     }
 
@@ -1056,7 +1056,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
         // Inject only client runtime
         let clientScript = `
-    <script type="module" src="/@sparx/hmr-client"></script>
+    <script type="module" src="/@nuce/hmr-client"></script>
         `;
 
         // Federation runtime injection for host apps
@@ -1075,9 +1075,9 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
               if (isSingleton) {
                 // Map the bare specifier to the host's pre-bundled chunk
                 const hostOrigin = `http://localhost:${cfg.server?.port || cfg.port || 5173}`;
-                singletonEntries.push(`    "${pkg}": "${hostOrigin}/@sparx-deps/${pkg}"`);
+                singletonEntries.push(`    "${pkg}": "${hostOrigin}/@nuce-deps/${pkg}"`);
                 // Also cover scoped variants (e.g. react-dom/client)
-                singletonEntries.push(`    "${pkg}/": "${hostOrigin}/@sparx-deps/${pkg}/"`);
+                singletonEntries.push(`    "${pkg}/": "${hostOrigin}/@nuce-deps/${pkg}/"`);
               }
             }
             if (singletonEntries.length > 0) {
@@ -1100,7 +1100,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
         if (isReact) {
           if (process.env.DEBUG) {
-            log.info('[Sparx] Injecting React Refresh Preamble', { category: 'server' });
+            log.info('[Nuce] Injecting React Refresh Preamble', { category: 'server' });
           }
           preamble += `
     <script type="module">
@@ -1119,9 +1119,9 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         // Phase 1.11 — inject registry bootstrap before federation runtime
         let registryScript = '';
         try {
-          const { generateRegistryInitTag } = await import('../../packages/sparx-module-registry/src/browser-runtime.js')
+          const { generateRegistryInitTag } = await import('../../packages/nuce-module-registry/src/browser-runtime.js')
             // @ts-ignore
-            .catch(() => import('../../../packages/sparx-module-registry/src/browser-runtime.js')
+            .catch(() => import('../../../packages/nuce-module-registry/src/browser-runtime.js')
             .catch(() => ({ generateRegistryInitTag: null })));
           if (generateRegistryInitTag) {
             registryScript = (generateRegistryInitTag as () => string)();
@@ -1163,10 +1163,10 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     }
 
     // Serve pre-bundled dependencies
-    if (url.startsWith('/@sparx-deps/')) {
+    if (url.startsWith('/@nuce-deps/')) {
       // Strip query parameters
       const cleanUrl = url.split('?')[0];
-      const depFile = cleanUrl.replace('/@sparx-deps/', '');
+      const depFile = cleanUrl.replace('/@nuce-deps/', '');
       const depPath = path.join(resolvedCacheDir, depFile);
       try {
         const content = await fs.readFile(depPath, 'utf-8');
@@ -1178,12 +1178,12 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       } catch (error) {
         // Dep file doesn't exist (e.g. Svelte 5 internal requested on Svelte 4 project).
         // Serve empty ESM module so the page loads gracefully instead of crashing with 404.
-        log.debug(`[SparxDepS] Not found, serving empty module: ${depFile}`);
+        log.debug(`[NuceDepS] Not found, serving empty module: ${depFile}`);
         res.writeHead(200, {
           'Content-Type': 'application/javascript',
           'Cache-Control': 'no-cache, no-store, must-revalidate'
         });
-        res.end(`// sparx: empty stub for missing dep: ${depFile}\nexport default {};\n`);
+        res.end(`// nuce: empty stub for missing dep: ${depFile}\nexport default {};\n`);
       }
       return;
     }
@@ -1237,7 +1237,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
 
 
-    if (url === '/@sparx/client') {
+    if (url === '/@nuce/client') {
       const clientPath = path.resolve(__dirname, '../runtime/client.ts');
       try {
         const raw = await fs.readFile(clientPath, 'utf-8');
@@ -1254,13 +1254,13 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
           res.end(client);
         } catch (e2) {
           res.writeHead(404);
-          res.end('Sparx client runtime not found');
+          res.end('Nuce client runtime not found');
         }
       }
       return;
     }
 
-    if (url === '/@sparx/error-overlay.js') {
+    if (url === '/@nuce/error-overlay.js') {
       // Also transform error-overlay if ts
       const overlayPath = path.resolve(__dirname, '../runtime/error-overlay.ts');
       try {
@@ -1278,15 +1278,15 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
           res.end(overlay);
         } catch (e2) {
           res.writeHead(404);
-          res.end('Sparx error overlay not found');
+          res.end('Nuce error overlay not found');
         }
       }
       return;
     }
 
     // Phase 3.4 — HMR client runtime route
-    if (url === '/@sparx/hmr-client' || url === '/@sparx/hmr-client.js') {
-      const srcPath = path.resolve(__dirname, '../../packages/sparx-hmr-client/src/index.ts');
+    if (url === '/@nuce/hmr-client' || url === '/@nuce/hmr-client.js') {
+      const srcPath = path.resolve(__dirname, '../../packages/nuce-hmr-client/src/index.ts');
       try {
         const raw = await fs.readFile(srcPath, 'utf-8');
         const { transform } = await import('esbuild');
@@ -1294,28 +1294,28 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         res.writeHead(200, { 'Content-Type': 'application/javascript' });
         res.end(result.code);
       } catch (e: any) {
-        log.warn(`[sparx] /@sparx/hmr-client: ${e.message}`);
-        res.writeHead(404); res.end('/* @sparx/hmr-client not built */');
+        log.warn(`[nuce] /@nuce/hmr-client: ${e.message}`);
+        res.writeHead(404); res.end('/* @nuce/hmr-client not built */');
       }
       return;
     }
 
     // Phase 3.5 — Module registry route
-    if (url === '/@sparx/module-registry' || url === '/@sparx/module-registry.js') {
-      const srcPath = path.resolve(__dirname, '../../packages/sparx-module-registry/src/index.ts');
+    if (url === '/@nuce/module-registry' || url === '/@nuce/module-registry.js') {
+      const srcPath = path.resolve(__dirname, '../../packages/nuce-module-registry/src/index.ts');
       try {
         const raw = await fs.readFile(srcPath, 'utf-8');
         const { transform } = await import('esbuild');
         const result = await transform(raw, { loader: 'ts', format: 'esm', target: 'es2020' });
         const remotes = (cfg as any).federation?.remotes ?? {};
         const initCall = Object.keys(remotes).length
-          ? `\nimport{__sparx_registry_init__ as _ri}from '/@sparx/module-registry';_ri(${JSON.stringify(remotes)});\n`
+          ? `\nimport{__nuce_registry_init__ as _ri}from '/@nuce/module-registry';_ri(${JSON.stringify(remotes)});\n`
           : '';
         res.writeHead(200, { 'Content-Type': 'application/javascript' });
         res.end(result.code + initCall);
       } catch (e: any) {
-        log.warn(`[sparx] /@sparx/module-registry: ${e.message}`);
-        res.writeHead(404); res.end('/* @sparx/module-registry not built */');
+        log.warn(`[nuce] /@nuce/module-registry: ${e.message}`);
+        res.writeHead(404); res.end('/* @nuce/module-registry not built */');
       }
       return;
     }
@@ -1746,7 +1746,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       if (ext === '.html') {
         mime = 'text/html';
         let html = data.toString('utf-8');
-        let clientScript = `\n<script type="module" src="/@sparx/hmr-client"></script>\n`;
+        let clientScript = `\n<script type="module" src="/@nuce/hmr-client"></script>\n`;
         let preamble = `
     <script>
       window.$RefreshReg$ = () => {};
@@ -1814,12 +1814,12 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
           // Serve a JS fallback that throws in console and triggers overlay
           res.writeHead(200, { 'Content-Type': 'application/javascript' });
           res.end(`
-            console.error("[Sparx Build Error]", ${JSON.stringify(e.message)});
+            console.error("[Nuce Build Error]", ${JSON.stringify(e.message)});
             const error = ${JSON.stringify(errorData)};
-            if (window.__SPARX_ERROR_OVERLAY__) {
-              window.__SPARX_ERROR_OVERLAY__.show(error);
+            if (window.__NUCE_ERROR_OVERLAY__) {
+              window.__NUCE_ERROR_OVERLAY__.show(error);
             }
-            throw new Error("[Sparx Build Error] See overlay for details");
+            throw new Error("[Nuce Build Error] See overlay for details");
           `);
           return;
         }
@@ -1835,7 +1835,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   let server;
   if (existingServer) {
     server = existingServer;
-    (server as any).__sparx_handler = requestHandler;
+    (server as any).__nuce_handler = requestHandler;
   } else {
     const { createUWSServer } = await import('./uWS-shim.js');
     server = createUWSServer(httpsOptions);

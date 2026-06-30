@@ -1,9 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson } from '@sparx/adapter-core';
-import { registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson } from '@nuce/adapter-core';
+import { registry } from '@nuce/adapter-core';
 
-export class SvelteKitAdapter implements SparxAdapter {
+export class SvelteKitAdapter implements NuceAdapter {
   name = 'svelte-kit';
   private routesPath: string;
 
@@ -20,7 +20,7 @@ export class SvelteKitAdapter implements SparxAdapter {
     return [];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     const root = config.root || process.cwd();
     const clientEntry = path.join(root, 'src', 'entry-client.js');
     const serverEntry = path.join(root, 'src', 'entry-server.js');
@@ -33,11 +33,11 @@ export class SvelteKitAdapter implements SparxAdapter {
     // Fall back to whatever the user configured if neither exists
     if (entries.length === 0) return config;
 
-    console.log(`[sparx:sveltekit] entries: ${entries.map(e => e.replace(root + '/', '')).join(', ')}`);
+    console.log(`[nuce:sveltekit] entries: ${entries.map(e => e.replace(root + '/', '')).join(', ')}`);
     return { ...config, entry: entries, preset: 'ssr' };
   }
 
-  ssrEntry(config: SparxConfig): string {
+  ssrEntry(config: NuceConfig): string {
     return path.join(config.root || process.cwd(), 'src', 'entry-server.js');
   }
 
@@ -99,7 +99,7 @@ export class SvelteKitAdapter implements SparxAdapter {
 
   /**
    * Evaluates a +page.server.ts file natively to test load/action outputs
-   * In Sparx, this is bundled via esbuild, but for the adapter tests we dynamically parse it
+   * In Nuce, this is bundled via esbuild, but for the adapter tests we dynamically parse it
    */
   async evaluateServerNode(filePath: string, mockRequest: any, mockCookies: any) {
     if (!fs.existsSync(filePath)) throw new Error('File not found');
@@ -165,7 +165,7 @@ export class SvelteKitAdapter implements SparxAdapter {
 
   createPlugin() {
     return {
-      name: 'sparx-sveltekit-adapter',
+      name: 'nuce-sveltekit-adapter',
       setup: () => {},
       transform: (code: string, id: string) => { return null; }
     };

@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-babel
+ * @nuce/plugin-babel
  * Babel transpilation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createBabelPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-babel',
+        name: '@nuce/plugin-babel',
         originalPlugin: 'babel-loader',
         
         async transform(code: string, id: string) {

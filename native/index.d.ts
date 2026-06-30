@@ -232,6 +232,8 @@ export declare function minifySync(code: string): string
 /** Fast string operations for module resolution */
 export declare function normalizePath(path: string): string
 
+export declare function nuceChunk(graphJson: string, config: ChunkerConfig): ChunkerResult
+
 /** Orchestrator statistics */
 export interface OrchestratorStats {
   totalTasks: number
@@ -248,7 +250,7 @@ export interface OrchestratorStats {
  * {
  *   "swcVersion": "0.90.x",
  *   "cssVersion": "1.0.0-alpha.58",
- *   "configHash": "<xxh3 of sparx.config>",
+ *   "configHash": "<xxh3 of nuce.config>",
  *   "modules": [
  *     {
  *       "id": "abc123",
@@ -277,7 +279,7 @@ export declare function planBuild(manifestJson: string): TaskPlan
 export declare function prebundle(modulesJson: string, config: PrebundleConfig): Array<PrebundleEntry>
 
 export interface PrebundleConfig {
-  /** Path to .sparx_cache directory */
+  /** Path to .nuce_cache directory */
   cacheRoot: string
 }
 
@@ -303,8 +305,6 @@ export declare function prebundlePut(key: string, moduleId: string, bundle: stri
  * This is significantly faster than JS-based regex or full AST parsing
  */
 export declare function scanImports(code: string): Array<string>
-
-export declare function sparxChunk(graphJson: string, config: ChunkerConfig): ChunkerResult
 
 /**
  * Convenience standalone function: start watching paths and call callback on events.

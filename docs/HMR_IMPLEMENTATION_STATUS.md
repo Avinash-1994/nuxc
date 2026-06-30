@@ -1,4 +1,4 @@
-# Sparx Framework HMR Implementation Status
+# Nuce Framework HMR Implementation Status
 
 **Date**: 2026-01-06  
 **Status**: ✅ All frameworks have HMR support
@@ -19,7 +19,7 @@ All framework plugins include Hot Module Replacement (HMR) support that is:
 
 ### 🟢 Tier 1: Production-Ready
 
-#### React (`sparxReact`)
+#### React (`nuceReact`)
 **HMR Status**: ✅ **Fast Refresh Enabled**
 
 **Features**:
@@ -39,7 +39,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-sparxReact({
+nuceReact({
   fastRefresh: true,  // Enable Fast Refresh
   development: true,  // Enable HMR
   sourceMaps: true
@@ -48,7 +48,7 @@ sparxReact({
 
 ---
 
-#### Vue (`sparxVue`)
+#### Vue (`nuceVue`)
 **HMR Status**: ✅ **Vue HMR Runtime Enabled**
 
 **Features**:
@@ -67,7 +67,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-sparxVue({
+nuceVue({
   hmr: true,         // Enable HMR
   development: true,
   sourceMaps: true
@@ -78,7 +78,7 @@ sparxVue({
 
 ### 🟡 Tier 2: Stable
 
-#### Svelte (`sparxSvelte`)
+#### Svelte (`nuceSvelte`)
 **HMR Status**: ✅ **Svelte HMR Enabled**
 
 **Features**:
@@ -101,7 +101,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-sparxSvelte({
+nuceSvelte({
   hmr: true,         // Enable HMR
   development: true,
   compilerOptions: { dev: true }
@@ -110,7 +110,7 @@ sparxSvelte({
 
 ---
 
-#### Solid (`sparxSolid`)
+#### Solid (`nuceSolid`)
 **HMR Status**: ✅ **Solid HMR Enabled**
 
 **Features**:
@@ -133,7 +133,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-sparxSolid({
+nuceSolid({
   hmr: true,         // Enable HMR
   development: true,
   sourceMaps: true
@@ -142,7 +142,7 @@ sparxSolid({
 
 ---
 
-#### Lit (`sparxLit`)
+#### Lit (`nuceLit`)
 **HMR Status**: ✅ **Lit HMR Enabled**
 
 **Features**:
@@ -168,7 +168,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-sparxLit({
+nuceLit({
   hmr: true,         // Enable HMR
   development: true,
   typescript: { experimentalDecorators: true }
@@ -186,7 +186,7 @@ All plugins **automatically disable HMR** in production:
 const development = process.env.NODE_ENV !== 'production';
 
 // Or explicit configuration
-sparxReact({ development: false, fastRefresh: false })
+nuceReact({ development: false, fastRefresh: false })
 ```
 
 **Production builds**:
@@ -204,11 +204,11 @@ sparxReact({ development: false, fastRefresh: false })
 All plugins follow this pattern:
 
 ```typescript
-export function sparxFramework(options = {}) {
+export function nuceFramework(options = {}) {
   const { hmr = true, development = true } = options;
   
   return {
-    name: 'sparx-framework',
+    name: 'nuce-framework',
     
     async transform(code, id) {
       // 1. Transform framework code
@@ -331,4 +331,4 @@ No plugin wrapper needed ✅
 ✅ **Zero global state**  
 ✅ **Automatic production optimization**  
 
-Sparx's HMR implementation is **complete and verified**.
+Nuce's HMR implementation is **complete and verified**.

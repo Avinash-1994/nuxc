@@ -1,4 +1,4 @@
-// react-router.config.ts — Sparx Phase 2.9
+// react-router.config.ts — Nuce Phase 2.9
 import type { Config } from '@react-router/dev/config';
 
 export default {

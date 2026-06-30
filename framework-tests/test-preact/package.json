@@ -1,24 +1,24 @@
 {
-  "name": "sparx-preact-template",
+  "name": "nuce-preact-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "sparx dev",
-    "build": "sparx build",
-    "preview": "sparx preview"
+    "dev": "nuce dev",
+    "build": "nuce build",
+    "preview": "nuce preview"
   },
-  "sparx": {
+  "nuce": {
     "template": true,
     "framework": "preact",
-    "description": "Sparx Weather — real weather dashboard"
+    "description": "Nuce Weather — real weather dashboard"
   },
   "dependencies": {
     "@preact/signals": "^2.9.0",
     "preact": "^10.22.0"
   },
   "devDependencies": {
-    "sparx": "file:../../",
+    "nuce": "file:../../",
     "typescript": "5.4.5"
   }
 }

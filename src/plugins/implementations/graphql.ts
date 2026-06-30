@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-graphql
+ * @nuce/plugin-graphql
  * GraphQL integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createGraphqlPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-graphql',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-graphql',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: GraphQL integration

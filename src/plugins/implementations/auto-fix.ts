@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-auto-fix
+ * @nuce/plugin-auto-fix
  * Automatic error fixing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createAutoFixPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-auto-fix',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-auto-fix',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Automatic error fixing

@@ -1,4 +1,4 @@
-# Sparx electron Template — Sparx Notes Desktop — native note app
+# Nuce electron Template — Nuce Notes Desktop — native note app
 ```bash
 npm install && npm run dev
 ```

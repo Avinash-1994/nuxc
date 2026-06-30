@@ -223,7 +223,7 @@ await (async function() {
     `Ready timestamp: ${readyTs}`,
     `Cold start: ${coldMs}ms (wall clock from spawn to ready)`,
     `Environment: ${env}`,
-    `[sparx] adapter: astro in output: yes`,
+    `[nuce] adapter: astro in output: yes`,
     `Port: ${devPort}`,
     `Routes scanned: ${routeCount}`,
     `Gate: < ${gate}ms ${coldMs < gate ? 'PASS' : 'FAIL'}`,
@@ -251,7 +251,7 @@ await (async function() {
     devProc.stdout.on('data', o); devProc.stderr.on('data', o); setTimeout(resolve, 6000);
   });
   const t0 = performance.now(); const t0Ts = new Date().toISOString();
-  fs.writeFileSync(targetFile, orig + `\n<!-- sparx-hmr-${Date.now()} -->`);
+  fs.writeFileSync(targetFile, orig + `\n<!-- nuce-hmr-${Date.now()} -->`);
   await new Promise(r => setTimeout(r, debounceMs + 10));
   const hmrMs = parseFloat((performance.now() - t0).toFixed(2));
   const t1Ts = new Date().toISOString();
@@ -303,7 +303,7 @@ await (async function() {
   const ok = htmlFiles.length >= 4 && islandFiles.length > 0 && buildMs < 5000;
   (ok ? pass : fail)('AST-08  Production build (SSG)', `>= 4 HTML pages, island chunks, < 5000ms`,
     `${htmlFiles.length} HTML pages, ${islandFiles.length} island chunks, ${buildMs}ms`, [
-    `[sparx] adapter: astro in output: yes`,
+    `[nuce] adapter: astro in output: yes`,
     `Build time: ${buildMs}ms (actual wall clock)`,
     `Gate: < 5000ms ${buildMs < 5000 ? 'PASS' : 'FAIL'}`,
     `dist/ file count: ${fileCount}`,
@@ -337,7 +337,7 @@ await (async function() {
     const t0 = Date.now();
     try {
       execFileSync('node', [cliPath, 'build'], { cwd: fix.dir, timeout: 30000, stdio: 'ignore',
-        env: { ...process.env, SPARX_SKIP_SECURITY: '1' } });
+        env: { ...process.env, NUCE_SKIP_SECURITY: '1' } });
       results.push({ name: fix.name, pass: true, ms: Date.now()-t0 });
     } catch(e) {
       results.push({ name: fix.name, pass: false, ms: Date.now()-t0, note: String(e.message||'').substring(0,60) });
@@ -368,7 +368,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 log(!process.exitCode ? '✅ ALL ASTRO TESTS PASSED WITH REAL DATA' : '❌ SOME TESTS FAILED');
 log('');
 log('┌─────────────────────────────────────────────┐');
-log('│ SPARX — PHASE 2.6 ASTRO COMPLETE           │');
+log('│ NUCE — PHASE 2.6 ASTRO COMPLETE           │');
 log(`│ AST-01 Routing:      PASS  ${String(pages.length + ' pages').padEnd(15)}│`);
 log(`│ AST-02 SSG render:   PASS  ${String(homeBytes + ' bytes').padEnd(15)}│`);
 log('│ AST-03 Islands:      PASS  deferred         │');
@@ -380,7 +380,7 @@ log('│ AST-08 Build output: PASS  9 HTML pages     │');
 log('│ AST-09 Regression:   PASS                   │');
 log('│                                             │');
 log('│ Total: 9 pass  0 fail  0 warn               │');
-log('│ [sparx] adapter: astro confirmed            │');
+log('│ [nuce] adapter: astro confirmed            │');
 log('│ Islands: client:idle|load|visible           │');
 log('│ Ready for Phase 2.7: YES                    │');
 log('└─────────────────────────────────────────────┘');

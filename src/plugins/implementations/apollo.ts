@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-apollo
+ * @nuce/plugin-apollo
  * Apollo Client integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createApolloPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-apollo',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-apollo',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Apollo Client integration

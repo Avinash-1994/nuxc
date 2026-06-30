@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-bundle-analyzer
+ * @nuce/plugin-bundle-analyzer
  * Bundle analysis
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createBundleAnalyzerPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-bundle-analyzer',
+        name: '@nuce/plugin-bundle-analyzer',
         originalPlugin: 'webpack-bundle-analyzer',
         
         async buildStart() {
-            console.log('[@sparx/plugin-bundle-analyzer] Starting performance optimization...');
+            console.log('[@nuce/plugin-bundle-analyzer] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createBundleAnalyzerPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@sparx/plugin-bundle-analyzer] Performance optimization complete');
+            console.log('[@nuce/plugin-bundle-analyzer] Performance optimization complete');
         }
     };
 }

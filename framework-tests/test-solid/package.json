@@ -1,20 +1,20 @@
 {
-  "name": "sparx-solid-template",
+  "name": "nuce-solid-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "sparx dev",
-    "build": "sparx build",
-    "preview": "sparx preview"
+    "dev": "nuce dev",
+    "build": "nuce build",
+    "preview": "nuce preview"
   },
-  "sparx": {
+  "nuce": {
     "template": true,
     "framework": "solid",
-    "description": "Sparx Analytics — website analytics dashboard"
+    "description": "Nuce Analytics — website analytics dashboard"
   },
   "devDependencies": {
-    "sparx": "file:../../",
+    "nuce": "file:../../",
     "typescript": "5.4.5"
   },
   "dependencies": {

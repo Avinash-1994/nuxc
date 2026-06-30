@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const PROJECTS = [
-  { id: 1, name: 'Sparx Core', tasks: 12, done: 8 },
+  { id: 1, name: 'Nuce Core', tasks: 12, done: 8 },
   { id: 2, name: 'Plugin Ecosystem', tasks: 34, done: 29 },
   { id: 3, name: 'Meta-Frameworks', tasks: 21, done: 19 },
   { id: 4, name: 'Security Gate', tasks: 15, done: 15 },
@@ -27,7 +27,7 @@ function Nav() {
   const links = [['/', 'Dashboard'], ['/projects', 'Projects'], ['/tasks/new', '+ New Task'], ['/settings', 'Settings']];
   return (
     <nav style={{background:'#0f172a',color:'#fff',padding:'0 24px',display:'flex',gap:24,alignItems:'center',height:56}}>
-      <span style={{fontWeight:700,fontSize:18,marginRight:16}}>⚡ Sparx Tasks</span>
+      <span style={{fontWeight:700,fontSize:18,marginRight:16}}>⚡ Nuce Tasks</span>
       {links.map(([to, label]) => (
         <NavLink key={to} to={to} style={({isActive})=>({color: isActive ? '#818cf8' : '#94a3b8', textDecoration:'none', fontWeight: isActive ? 600 : 400})}>{label}</NavLink>
       ))}
@@ -107,7 +107,7 @@ function Login() {
     <div style={{padding:32,maxWidth:400}}>
       <h1>Sign In</h1>
       <form onSubmit={e=>{e.preventDefault();setOk(true)}} style={{display:'flex',flexDirection:'column',gap:16}}>
-        <input type="email" placeholder="Email" defaultValue="dev@sparx.dev" required style={{padding:12,borderRadius:8,border:'1px solid #334155',background:'#1e293b',color:'#fff'}}/>
+        <input type="email" placeholder="Email" defaultValue="dev@nuce.dev" required style={{padding:12,borderRadius:8,border:'1px solid #334155',background:'#1e293b',color:'#fff'}}/>
         <input type="password" placeholder="Password" defaultValue="password" required style={{padding:12,borderRadius:8,border:'1px solid #334155',background:'#1e293b',color:'#fff'}}/>
         <button type="submit" style={{padding:12,background:'#6366f1',color:'#fff',border:'none',borderRadius:8,cursor:'pointer',fontWeight:600}}>Sign In</button>
       </form>

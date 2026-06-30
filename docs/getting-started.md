@@ -1,4 +1,4 @@
-# Getting Started with Sparx
+# Getting Started with Nuce
 
 > Get from zero to a running app in **under 5 minutes**.
 
@@ -11,17 +11,17 @@
 
 ---
 
-## Step 1 — Install Sparx
+## Step 1 — Install Nuce
 
 ```bash
-npm install -g sparx
+npm install -g nuce
 ```
 
 Verify the installation:
 
 ```bash
-sparx --version
-# ⚡ sparx v1.0.9
+nuce --version
+# ⚡ nuce v1.0.9
 ```
 
 ---
@@ -32,16 +32,16 @@ Pick your framework:
 
 ```bash
 # React + TypeScript (recommended)
-sparx bootstrap --name my-app --template react-ts
+nuce bootstrap --name my-app --template react-ts
 
 # Vue 3 + TypeScript
-sparx bootstrap --name my-app --template vue-ts
+nuce bootstrap --name my-app --template vue-ts
 
 # Svelte + TypeScript
-sparx bootstrap --name my-app --template svelte-ts
+nuce bootstrap --name my-app --template svelte-ts
 
 # Vanilla TypeScript
-sparx bootstrap --name my-app --template vanilla-ts
+nuce bootstrap --name my-app --template vanilla-ts
 ```
 
 This creates a `my-app/` directory with a working starter project.
@@ -52,13 +52,13 @@ This creates a `my-app/` directory with a working starter project.
 
 ```bash
 cd my-app
-sparx dev
+nuce dev
 ```
 
 You should see:
 
 ```
-⚡ Sparx v1.0.9
+⚡ Nuce v1.0.9
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://192.168.x.x:3000/
 
@@ -72,7 +72,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. **HMR is ac
 ## Step 4 — Production Build
 
 ```bash
-sparx build
+nuce build
 ```
 
 Output goes to `./dist/`. The build is minified, tree-shaken, and ready to deploy.
@@ -82,7 +82,7 @@ Output goes to `./dist/`. The build is minified, tree-shaken, and ready to deplo
 ## Step 5 — Preview the Production Build
 
 ```bash
-sparx preview
+nuce preview
 ```
 
 Serves the `dist/` folder locally so you can verify before deploying.
@@ -100,7 +100,7 @@ my-app/
 │   ├── App.tsx         ← Root component
 │   └── index.css
 ├── index.html
-├── sparx.config.js    ← Sparx configuration
+├── nuce.config.js    ← Nuce configuration
 └── package.json
 ```
 
@@ -108,10 +108,10 @@ my-app/
 
 ## Minimal Configuration
 
-The scaffolded `sparx.config.js` works out of the box:
+The scaffolded `nuce.config.js` works out of the box:
 
 ```js
-// sparx.config.js
+// nuce.config.js
 module.exports = {
   entry: ['./src/main.tsx'],
   outDir: './dist',
@@ -134,14 +134,14 @@ module.exports = {
 
 ## Adding to an Existing Project
 
-If you already have a project, you can add Sparx without scaffolding:
+If you already have a project, you can add Nuce without scaffolding:
 
 ```bash
 # Install locally
-npm install --save-dev sparx
+npm install --save-dev nuce
 
 # Generate a config file
-npx sparx init
+npx nuce init
 ```
 
 Then update your `package.json` scripts:
@@ -149,9 +149,9 @@ Then update your `package.json` scripts:
 ```json
 {
   "scripts": {
-    "dev": "sparx dev",
-    "build": "sparx build",
-    "preview": "sparx preview"
+    "dev": "nuce dev",
+    "build": "nuce build",
+    "preview": "nuce preview"
   }
 }
 ```
@@ -161,14 +161,14 @@ Then update your `package.json` scripts:
 ## CLI Reference
 
 ```bash
-sparx dev                            # Start dev server with HMR
-sparx build                          # Production build
-sparx preview                        # Preview production build
-sparx bootstrap --name n --template t  # Scaffold new project
-sparx init                           # Generate sparx.config.js
-sparx inspect                        # Inspect module graph
-sparx analyze                        # Analyze bundle size
-sparx doctor                         # Diagnose common issues
+nuce dev                            # Start dev server with HMR
+nuce build                          # Production build
+nuce preview                        # Preview production build
+nuce bootstrap --name n --template t  # Scaffold new project
+nuce init                           # Generate nuce.config.js
+nuce inspect                        # Inspect module graph
+nuce analyze                        # Analyze bundle size
+nuce doctor                         # Diagnose common issues
 ```
 
 ---
@@ -176,7 +176,7 @@ sparx doctor                         # Diagnose common issues
 ## Next Steps
 
 - 📖 [Configuration Reference](./guides/configuration.md) — all config options with types and defaults
-- 🔌 [Plugin Guide](./plugins.md) — extend Sparx with plugins
+- 🔌 [Plugin Guide](./plugins.md) — extend Nuce with plugins
 - 📦 [Module Federation](./guides/federation.md) — micro-frontend architecture
 - 🔥 [HMR Guide](./HMR_IMPLEMENTATION_STATUS.md) — how HMR works and how to debug it
 - 🚚 [Migration Guide](./migration.md) — moving from Vite or Webpack

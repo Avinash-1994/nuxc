@@ -1,9 +1,9 @@
 
 import vm from 'vm';
-import { SparxPlugin, PluginHookName, PluginManifest } from './types.js';
+import { NucePlugin, PluginHookName, PluginManifest } from './types.js';
 import { canonicalHash } from '../engine/hash.js';
 
-export class JSPluginSandbox implements SparxPlugin {
+export class JSPluginSandbox implements NucePlugin {
     manifest: PluginManifest;
     id: string;
     private context: vm.Context;

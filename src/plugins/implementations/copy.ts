@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-copy
+ * @nuce/plugin-copy
  * Static file copying
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCopyPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-copy',
+        name: '@nuce/plugin-copy',
         originalPlugin: 'copy-webpack-plugin',
         
         async transform(code: string, id: string) {

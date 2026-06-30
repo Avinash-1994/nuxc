@@ -1,17 +1,17 @@
 {
-  "name": "sparx-sveltekit-template",
+  "name": "nuce-sveltekit-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "sparx dev",
-    "build": "sparx build",
-    "preview": "sparx preview"
+    "dev": "nuce dev",
+    "build": "nuce build",
+    "preview": "nuce preview"
   },
-  "sparx": {
+  "nuce": {
     "template": true,
     "framework": "sveltekit",
-    "description": "Sparx Blog — full-stack blog with CMS"
+    "description": "Nuce Blog — full-stack blog with CMS"
   },
   "dependencies": {
     "@sveltejs/kit": "2.5.18",
@@ -19,7 +19,7 @@
     "marked": "12.0.0"
   },
   "devDependencies": {
-    "sparx": "file:../../",
+    "nuce": "file:../../",
     "typescript": "5.4.5"
   }
 }

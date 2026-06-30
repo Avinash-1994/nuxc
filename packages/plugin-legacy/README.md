@@ -1,18 +1,18 @@
-# @sparx/plugin-legacy
+# @nuce/plugin-legacy
 
-> Official Sparx plugin for legacy browser support — ES5 transpilation and core-js polyfills.
+> Official Nuce plugin for legacy browser support — ES5 transpilation and core-js polyfills.
 
 ## Install
 
 ```bash
-npm install --save-dev @sparx/plugin-legacy
+npm install --save-dev @nuce/plugin-legacy
 npm install core-js regenerator-runtime
 ```
 
 ## Usage
 
 ```js
-const legacy = require('@sparx/plugin-legacy');
+const legacy = require('@nuce/plugin-legacy');
 module.exports = {
   entry: ['./src/main.ts'],
   plugins: [

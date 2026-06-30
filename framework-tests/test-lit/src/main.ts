@@ -3,6 +3,6 @@ import { customElement, property } from 'lit/decorators.js';
 @customElement('my-element')
 export class MyElement extends LitElement {
   static styles = css`p { color: blue }`;
-  @property() name = 'Sparx Lit';
+  @property() name = 'Nuce Lit';
   render() { return html`<p>Hello, ${this.name}!</p>`; }
 }

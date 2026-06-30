@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-webp
+ * @nuce/plugin-webp
  * WebP image conversion
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createWebpPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-webp',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-webp',
+        originalPlugin: 'nuce-native',
         
         async load(id: string) {
             // Asset loading for webp

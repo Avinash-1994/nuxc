@@ -1,5 +1,5 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 import { tsRouterPlugin } from './router-plugin.js';
 
 export interface TanStackConfig {
@@ -7,7 +7,7 @@ export interface TanStackConfig {
   serverOnly?: boolean;    // default: false
 }
 
-export class TanStackAdapter implements SparxAdapter {
+export class TanStackAdapter implements NuceAdapter {
   name = 'tanstack-start';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class TanStackAdapter implements SparxAdapter {
     ];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     if (!config.tanstack) config.tanstack = {};
     config.tanstack = {
       ssr: true,
@@ -36,7 +36,7 @@ export class TanStackAdapter implements SparxAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:sparx/tanstack-routes';
+         const virtualEntry = 'virtual:nuce/tanstack-routes';
          let manifest: any;
          try {
             manifest = await import(virtualEntry);
@@ -79,7 +79,7 @@ export class TanStackAdapter implements SparxAdapter {
 
          next();
       } catch(e) {
-         console.error('[Sparx:TanStack] Dev Middleware SSR Error', e);
+         console.error('[Nuce:TanStack] Dev Middleware SSR Error', e);
          next();
       }
     };

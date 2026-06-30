@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-meta-tags
+ * @nuce/plugin-meta-tags
  * SEO meta tags
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMetaTagsPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-meta-tags',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-meta-tags',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: SEO meta tags

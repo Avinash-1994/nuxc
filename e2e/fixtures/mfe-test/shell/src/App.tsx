@@ -14,7 +14,7 @@ export default function App() {
       </Suspense>
 
       <div style={{ maxWidth: 900, margin: '40px auto', padding: '0 20px' }}>
-        <h1 style={{ color: '#0f172a', marginBottom: 24 }}>Sparx MFE Demo</h1>
+        <h1 style={{ color: '#0f172a', marginBottom: 24 }}>Nuce MFE Demo</h1>
         <p style={{ color: '#64748b', marginBottom: 32 }}>
           Both components below are loaded from separate remote servers via Module Federation.
         </p>

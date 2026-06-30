@@ -1,17 +1,17 @@
-# @sparx/plugin-svelte
+# @nuce/plugin-svelte
 
-> Official Sparx plugin for Svelte — .svelte file transform, Runes, HMR.
+> Official Nuce plugin for Svelte — .svelte file transform, Runes, HMR.
 
 ## Install
 
 ```bash
-npm install --save-dev @sparx/plugin-svelte svelte
+npm install --save-dev @nuce/plugin-svelte svelte
 ```
 
 ## Usage
 
 ```js
-const svelte = require('@sparx/plugin-svelte');
+const svelte = require('@nuce/plugin-svelte');
 module.exports = {
   entry: ['./src/main.ts'],
   plugins: [svelte()],

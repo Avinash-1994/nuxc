@@ -16,8 +16,8 @@ async function setupProject() {
     await fs.mkdir(path.join(testRoot, 'src'), { recursive: true });
     await fs.mkdir(path.join(testRoot, 'public'), { recursive: true });
 
-    // Create sparx.config.js
-    await fs.writeFile(path.join(testRoot, 'sparx.config.js'), `
+    // Create nuce.config.js
+    await fs.writeFile(path.join(testRoot, 'nuce.config.js'), `
     export default {
       root: process.cwd(),
       entry: ["src/main.js"],

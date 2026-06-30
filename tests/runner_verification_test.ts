@@ -1,7 +1,7 @@
 // tests/runner_verification_test.ts
-// This file tests the custom @sparx/test runner itself
+// This file tests the custom @nuce/test runner itself
 
-describe('Sparx Test Runner', () => {
+describe('Nuce Test Runner', () => {
     it('should support describe/it blocks', () => {
         expect(true).toBe(true);
     });

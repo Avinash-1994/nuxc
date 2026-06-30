@@ -58,7 +58,7 @@ export default {
       )
       .command(
         'plugin-audit',
-        'Audit installed Sparx plugin permissions',
+        'Audit installed Nuce plugin permissions',
         () => {},
         async () => {
           const { runPluginAuditCommand } = await import('../../commands/security.js');

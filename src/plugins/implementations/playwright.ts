@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-playwright
+ * @nuce/plugin-playwright
  * Playwright E2E
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPlaywrightPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-playwright',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-playwright',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Playwright E2E

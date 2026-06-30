@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-rss
+ * @nuce/plugin-rss
  * RSS feed generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRssPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-rss',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-rss',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: RSS feed generation

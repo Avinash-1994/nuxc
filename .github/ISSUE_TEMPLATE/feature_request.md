@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest a new feature or enhancement for Sparx
+about: Suggest a new feature or enhancement for Nuce
 title: '[FEATURE] '
 labels: enhancement
 assignees: ''
@@ -31,7 +31,7 @@ Explain how this feature would be used and who would benefit from it.
 Example:
 ```typescript
 // How you'd like to use this feature
-import { newFeature } from 'sparx';
+import { newFeature } from 'nuce';
 
 newFeature({
   // configuration
@@ -48,7 +48,7 @@ A clear description of any alternative solutions or features you've considered.
 
 **Who will benefit from this feature?**
 
-- [ ] All Sparx users
+- [ ] All Nuce users
 - [ ] Users of specific frameworks (which ones?)
 - [ ] Plugin developers
 - [ ] Enterprise users
@@ -77,7 +77,7 @@ Link to any related issues or pull requests:
 ## ✅ Checklist
 
 - [ ] I have searched existing issues to ensure this isn't a duplicate
-- [ ] I have considered how this feature fits with Sparx's philosophy
+- [ ] I have considered how this feature fits with Nuce's philosophy
 - [ ] I am willing to help implement this feature (optional)
 
 ## 📚 Additional Context

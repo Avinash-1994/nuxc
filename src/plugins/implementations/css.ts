@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-css
+ * @nuce/plugin-css
  * CSS module resolution
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCssPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-css',
+        name: '@nuce/plugin-css',
         originalPlugin: 'css-loader',
         
         async transform(code: string, id: string) {

@@ -1,4 +1,4 @@
-// @sparx/plugin-vue — Self-contained Unit Tests
+// @nuce/plugin-vue — Self-contained Unit Tests
 // Run: node --test packages/plugin-vue/src/__tests__/index.test.js
 
 import { describe, it, beforeEach, afterEach } from 'node:test';
@@ -9,7 +9,7 @@ function vuePlugin(options = {}) {
   const { hmr = true, devtools = true, compilerOptions = {} } = options;
 
   return {
-    name: '@sparx/plugin-vue',
+    name: '@nuce/plugin-vue',
 
     load(id) {
       if (!id.endsWith('.vue')) return null;
@@ -43,9 +43,9 @@ function vuePlugin(options = {}) {
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
-describe('@sparx/plugin-vue — plugin structure', () => {
+describe('@nuce/plugin-vue — plugin structure', () => {
   it('has correct name', () => {
-    assert.equal(vuePlugin().name, '@sparx/plugin-vue');
+    assert.equal(vuePlugin().name, '@nuce/plugin-vue');
   });
 
   it('exposes load and transform hooks', () => {
@@ -61,7 +61,7 @@ describe('@sparx/plugin-vue — plugin structure', () => {
   });
 });
 
-describe('@sparx/plugin-vue — load hook', () => {
+describe('@nuce/plugin-vue — load hook', () => {
   it('returns null for .vue files (core handles compilation)', () => {
     assert.equal(vuePlugin().load('/src/App.vue'), null);
   });
@@ -73,7 +73,7 @@ describe('@sparx/plugin-vue — load hook', () => {
   });
 });
 
-describe('@sparx/plugin-vue — transform hook', () => {
+describe('@nuce/plugin-vue — transform hook', () => {
   let savedEnv;
   beforeEach(() => { savedEnv = process.env.NODE_ENV; process.env.NODE_ENV = 'development'; });
   afterEach(() => { process.env.NODE_ENV = savedEnv; });

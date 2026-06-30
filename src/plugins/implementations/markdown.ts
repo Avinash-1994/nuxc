@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-markdown
+ * @nuce/plugin-markdown
  * Markdown processing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMarkdownPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-markdown',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-markdown',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Markdown processing

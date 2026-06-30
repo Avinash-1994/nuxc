@@ -1,17 +1,17 @@
 /**
- * Tier-A Plugin Wrappers for Sparx
+ * Tier-A Plugin Wrappers for Nuce
  * 
  * These are pre-configured wrappers for popular Rollup plugins.
  * Users can import these directly or use the rollupAdapter for custom plugins.
  * 
  * Usage:
  * ```typescript
- * import { sparxBabel, sparxTerser } from 'sparx/plugins/compat/tier-a';
+ * import { nuceBabel, nuceTerser } from 'nuce/plugins/compat/tier-a';
  * 
  * export default {
  *   plugins: [
- *     sparxBabel({ presets: ['@babel/preset-react'] }),
- *     sparxTerser()
+ *     nuceBabel({ presets: ['@babel/preset-react'] }),
+ *     nuceTerser()
  *   ]
  * }
  * ```
@@ -33,14 +33,14 @@ function createStub(name: string): Plugin {
  * Babel plugin wrapper
  * Requires: npm install @rollup/plugin-babel @babel/core
  */
-export function sparxBabel(options: any = {}): Plugin {
+export function nuceBabel(options: any = {}): Plugin {
     try {
         // Dynamic import to avoid hard dependency
         const babel = require('@rollup/plugin-babel');
         return rollupAdapter(babel.default ? babel.default(options) : babel(options));
     } catch (e) {
-        console.warn('[@sparx/babel] @rollup/plugin-babel not found. Install with: npm install @rollup/plugin-babel @babel/core');
-        return createStub('sparx-babel-stub');
+        console.warn('[@nuce/babel] @rollup/plugin-babel not found. Install with: npm install @rollup/plugin-babel @babel/core');
+        return createStub('nuce-babel-stub');
     }
 }
 
@@ -48,13 +48,13 @@ export function sparxBabel(options: any = {}): Plugin {
  * Terser (minification) plugin wrapper
  * Requires: npm install @rollup/plugin-terser
  */
-export function sparxTerser(options: any = {}): Plugin {
+export function nuceTerser(options: any = {}): Plugin {
     try {
         const terser = require('@rollup/plugin-terser');
         return rollupAdapter(terser.default ? terser.default(options) : terser(options));
     } catch (e) {
-        console.warn('[@sparx/terser] @rollup/plugin-terser not found. Install with: npm install @rollup/plugin-terser');
-        return createStub('sparx-terser-stub');
+        console.warn('[@nuce/terser] @rollup/plugin-terser not found. Install with: npm install @rollup/plugin-terser');
+        return createStub('nuce-terser-stub');
     }
 }
 
@@ -62,15 +62,15 @@ export function sparxTerser(options: any = {}): Plugin {
  * JSON plugin wrapper
  * Requires: npm install @rollup/plugin-json
  */
-export function sparxJson(options: any = {}): Plugin {
+export function nuceJson(options: any = {}): Plugin {
     try {
         const json = require('@rollup/plugin-json');
         return rollupAdapter(json.default ? json.default(options) : json(options));
     } catch (e) {
-        console.warn('[@sparx/json] @rollup/plugin-json not found. Install with: npm install @rollup/plugin-json');
+        console.warn('[@nuce/json] @rollup/plugin-json not found. Install with: npm install @rollup/plugin-json');
         // Provide basic fallback
         return {
-            name: 'sparx-json-fallback',
+            name: 'nuce-json-fallback',
             async transform(code: string, id: string) {
                 if (id.endsWith('.json')) {
                     return `export default ${code}`;
@@ -85,13 +85,13 @@ export function sparxJson(options: any = {}): Plugin {
  * YAML plugin wrapper
  * Requires: npm install @rollup/plugin-yaml
  */
-export function sparxYaml(options: any = {}): Plugin {
+export function nuceYaml(options: any = {}): Plugin {
     try {
         const yaml = require('@rollup/plugin-yaml');
         return rollupAdapter(yaml.default ? yaml.default(options) : yaml(options));
     } catch (e) {
-        console.warn('[@sparx/yaml] @rollup/plugin-yaml not found. Install with: npm install @rollup/plugin-yaml');
-        return createStub('sparx-yaml-stub');
+        console.warn('[@nuce/yaml] @rollup/plugin-yaml not found. Install with: npm install @rollup/plugin-yaml');
+        return createStub('nuce-yaml-stub');
     }
 }
 
@@ -99,13 +99,13 @@ export function sparxYaml(options: any = {}): Plugin {
  * MDX plugin wrapper
  * Requires: npm install @mdx-js/rollup
  */
-export function sparxMdx(options: any = {}): Plugin {
+export function nuceMdx(options: any = {}): Plugin {
     try {
         const mdx = require('@mdx-js/rollup');
         return rollupAdapter(mdx.default ? mdx.default(options) : mdx(options));
     } catch (e) {
-        console.warn('[@sparx/mdx] @mdx-js/rollup not found. Install with: npm install @mdx-js/rollup');
-        return createStub('sparx-mdx-stub');
+        console.warn('[@nuce/mdx] @mdx-js/rollup not found. Install with: npm install @mdx-js/rollup');
+        return createStub('nuce-mdx-stub');
     }
 }
 
@@ -113,13 +113,13 @@ export function sparxMdx(options: any = {}): Plugin {
  * SVGR plugin wrapper (SVG to React components)
  * Requires: npm install rollup-plugin-svgr
  */
-export function sparxSvgr(options: any = {}): Plugin {
+export function nuceSvgr(options: any = {}): Plugin {
     try {
         const svgr = require('rollup-plugin-svgr');
         return rollupAdapter(svgr.default ? svgr.default(options) : svgr(options));
     } catch (e) {
-        console.warn('[@sparx/svgr] rollup-plugin-svgr not found. Install with: npm install rollup-plugin-svgr');
-        return createStub('sparx-svgr-stub');
+        console.warn('[@nuce/svgr] rollup-plugin-svgr not found. Install with: npm install rollup-plugin-svgr');
+        return createStub('nuce-svgr-stub');
     }
 }
 
@@ -127,10 +127,10 @@ export function sparxSvgr(options: any = {}): Plugin {
  * Export all Tier-A plugins
  */
 export const TierA = {
-    babel: sparxBabel,
-    terser: sparxTerser,
-    json: sparxJson,
-    yaml: sparxYaml,
-    mdx: sparxMdx,
-    svgr: sparxSvgr
+    babel: nuceBabel,
+    terser: nuceTerser,
+    json: nuceJson,
+    yaml: nuceYaml,
+    mdx: nuceMdx,
+    svgr: nuceSvgr
 };

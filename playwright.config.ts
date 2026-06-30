@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Playwright configuration for Sparx visual regression tests
+ * Playwright configuration for Nuce visual regression tests
  * 
  * See https://playwright.dev/docs/test-configuration
  */

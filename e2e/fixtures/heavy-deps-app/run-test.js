@@ -11,9 +11,9 @@ function log(msg) { process.stdout.write(msg + '\n'); }
 
 async function getNative() {
     const candidates = [
-        path.resolve(__dirname, '../../../sparx_native.node'),
-        path.resolve(process.cwd(), 'sparx_native.node'),
-        path.resolve(process.cwd(), 'dist/sparx_native.node'),
+        path.resolve(__dirname, '../../../nuce_native.node'),
+        path.resolve(process.cwd(), 'nuce_native.node'),
+        path.resolve(process.cwd(), 'dist/nuce_native.node'),
     ];
     for (const p of candidates) {
         try { return _require(p); } catch {}
@@ -33,7 +33,7 @@ async function run() {
         process.exit(1);
     }
 
-    const cacheRoot = path.join(__dirname, '.sparx/cache');
+    const cacheRoot = path.join(__dirname, '.nuce/cache');
     const config = { cacheRoot };
 
     // PB-01 Cold Start

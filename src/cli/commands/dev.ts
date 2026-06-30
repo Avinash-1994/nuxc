@@ -42,7 +42,7 @@ export default {
     const { log } = await import('../../utils/logger.js');
     try {
       if (args.quiet) {
-        process.env.SPARX_QUIET = 'true';
+        process.env.NUCE_QUIET = 'true';
       }
       if (args.verbose) {
         process.env.DEBUG = '*';
@@ -52,7 +52,7 @@ export default {
         ? path.resolve(process.cwd(), args.root)
         : process.cwd();
 
-      // Load sparx.config.ts BEFORE starting the server so that
+      // Load nuce.config.ts BEFORE starting the server so that
       // server.port from the user's config is respected when binding the port.
       let userPort = args.port || 5173;
       try {
@@ -80,7 +80,7 @@ export default {
       const port = cfg.port || 5173;
 
       console.log(
-        `\n  ⚡ sparx v${version}  ` +
+        `\n  ⚡ nuce v${version}  ` +
         `adapter: ${adapter}  ` +
         `port: ${port}\n` +
         `     http://localhost:${port}\n` +
@@ -97,7 +97,7 @@ export default {
       }
 
       if (!args.quiet) {
-        console.log('\n💡  Tip: Run `npx sparx audit --url http://localhost:' + port + '` to generate an audit report.');
+        console.log('\n💡  Tip: Run `npx nuce audit --url http://localhost:' + port + '` to generate an audit report.');
       }
     } catch (e: any) {
       log.error(e.message);

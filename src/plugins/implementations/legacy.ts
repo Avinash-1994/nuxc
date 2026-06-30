@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-legacy
+ * @nuce/plugin-legacy
  * Legacy browser support
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createLegacyPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-legacy',
+        name: '@nuce/plugin-legacy',
         originalPlugin: '@vitejs/plugin-legacy',
         
         async transform(code: string, id: string) {

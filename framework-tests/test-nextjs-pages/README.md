@@ -1,4 +1,4 @@
-# Sparx nextjs-pages Template — Sparx Store — Next.js e-commerce
+# Nuce nextjs-pages Template — Nuce Store — Next.js e-commerce
 ```bash
 npm install && npm run dev
 ```

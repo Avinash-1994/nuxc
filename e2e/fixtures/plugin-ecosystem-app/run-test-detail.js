@@ -53,15 +53,15 @@ async function runTests() {
 
   // ── P4-01  plugin-env ─────────────────────────────────────────────────────
   {
-    const mod  = await loadPlugin('sparx-plugin-env');
-    const factory = mod.sparxPluginEnv ?? mod.default;
-    const plugin  = typeof factory === 'function' ? factory({ prefix: 'SPARX_' }) : factory;
+    const mod  = await loadPlugin('nuce-plugin-env');
+    const factory = mod.nucePluginEnv ?? mod.default;
+    const plugin  = typeof factory === 'function' ? factory({ prefix: 'NUCE_' }) : factory;
 
     // Write .env file + source file to tmp
     const envDir = path.join(TMP, 'env-test');
     fs.mkdirSync(envDir + '/src', { recursive: true });
     fs.writeFileSync(path.join(envDir, '.env'),
-      'SPARX_API_URL=https://api.example.com\nDANGER_SECRET=hunter2\n');
+      'NUCE_API_URL=https://api.example.com\nDANGER_SECRET=hunter2\n');
     const dtsPath = path.join(envDir, 'src', 'env.d.ts');
 
     // Simulate configResolved which writes dts
@@ -69,14 +69,14 @@ async function runTests() {
     const dtsExists = fs.existsSync(dtsPath);
     const dtsSize   = dtsExists ? sizeB(fs.readFileSync(dtsPath, 'utf8')) : 312;
 
-    // Simulate transform of a file using SPARX_ var
-    const code = `const u = import.meta.env.SPARX_API_URL;`;
+    // Simulate transform of a file using NUCE_ var
+    const code = `const u = import.meta.env.NUCE_API_URL;`;
     let transformed = code;
     try {
       const r = await plugin.transform?.(code, 'src/main.ts');
       if (r) transformed = typeof r === 'string' ? r : (r.code ?? code);
     } catch {}
-    const apiInBundle = transformed.includes('api.example.com') || transformed.includes('SPARX_API_URL');
+    const apiInBundle = transformed.includes('api.example.com') || transformed.includes('NUCE_API_URL');
 
     // Check secret filtering: DANGER_SECRET should not appear
     const secretCode = `const s = import.meta.env.DANGER_SECRET;`;
@@ -87,38 +87,38 @@ async function runTests() {
     } catch {}
     const secretFiltered = !secretResult.includes('hunter2');
 
-    pass('P4-01  @sparx/plugin-env', [
+    pass('P4-01  @nuce/plugin-env', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
-      `SPARX_API_URL available in bundle: yes`,
-      `Non-SPARX_ var (DANGER_SECRET) filtered: ${secretFiltered ? 'yes' : 'no'}`,
+      `NUCE_API_URL available in bundle: yes`,
+      `Non-NUCE_ var (DANGER_SECRET) filtered: ${secretFiltered ? 'yes' : 'no'}`,
       `dts file size: ${dtsSize} bytes`,
     ]);
   }
 
   // ── P4-02  plugin-pwa ─────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-pwa');
-    const factory = mod.sparxPluginPwa ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-pwa');
+    const factory = mod.nucePluginPwa ?? mod.default;
     const plugin  = typeof factory === 'function'
-      ? factory({ name: 'SparxApp', themeColor: '#6366f1', icons: [{ src: 'icon.png', sizes: [192, 512] }] })
+      ? factory({ name: 'NuceApp', themeColor: '#6366f1', icons: [{ src: 'icon.png', sizes: [192, 512] }] })
       : factory;
     const genManifest = mod.generateManifest;
     const genSW       = mod.generateServiceWorker;
 
     const manifest = genManifest
-      ? genManifest({ name: 'SparxApp', themeColor: '#6366f1', icons: [] })
-      : JSON.stringify({ name: 'SparxApp', theme_color: '#6366f1', display: 'standalone',
+      ? genManifest({ name: 'NuceApp', themeColor: '#6366f1', icons: [] })
+      : JSON.stringify({ name: 'NuceApp', theme_color: '#6366f1', display: 'standalone',
           start_url: '/', icons: [{ src: '/icon-192.png', sizes: '192x192' }] }, null, 2);
     const sw = genSW
-      ? genSW({ name: 'SparxApp' }, ['/index.html', '/assets/main.js'])
-      : `/* sparx-sw.js */\nconst CACHE = 'sparx-v1';\nconst PRECACHE = ['/index.html', '/assets/main.js'];\nself.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE))));`;
+      ? genSW({ name: 'NuceApp' }, ['/index.html', '/assets/main.js'])
+      : `/* nuce-sw.js */\nconst CACHE = 'nuce-v1';\nconst PRECACHE = ['/index.html', '/assets/main.js'];\nself.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE))));`;
 
     const manifestSize = sizeB(manifest);
     const swSizeKB     = sizeKB(sw);
     const precacheEntries = (sw.match(/PRECACHE\s*=\s*\[([^\]]*)\]/)?.[1]?.split(',').filter(Boolean).length) ?? 2;
 
-    pass('P4-02  @sparx/plugin-pwa', [
+    pass('P4-02  @nuce/plugin-pwa', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `manifest.json size: ${manifestSize} bytes`,
@@ -129,8 +129,8 @@ async function runTests() {
 
   // ── P4-03  plugin-icons ───────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-icons');
-    const factory = mod.sparxPluginIcons ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-icons');
+    const factory = mod.nucePluginIcons ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ collections: ['mdi'] }) : factory;
 
     let resolved = null, component = '';
@@ -148,7 +148,7 @@ async function runTests() {
     const componentSize = sizeB(component);
     const hasOnlyHome   = !component.includes('mdi/account') && !component.includes('mdi/bell');
 
-    pass('P4-03  @sparx/plugin-icons', [
+    pass('P4-03  @nuce/plugin-icons', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `~icons/mdi/home resolved: yes`,
@@ -160,8 +160,8 @@ async function runTests() {
 
   // ── P4-04  plugin-svg ─────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-svg');
-    const factory = mod.sparxPluginSvg ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-svg');
+    const factory = mod.nucePluginSvg ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory() : factory;
 
     const svgContent = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3z"/></svg>';
@@ -185,7 +185,7 @@ async function runTests() {
     const rawOutput   = rawResult   || `export default ${JSON.stringify(svgContent)}`;
     const compOutput  = componentResult || 'export default function SvgIcon(props) { return createElement("svg", { ...props, viewBox: "0 0 24 24" }); }';
 
-    pass('P4-04  @sparx/plugin-svg', [
+    pass('P4-04  @nuce/plugin-svg', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `?url import output: ${urlOutput.slice(0, 60)}`,
@@ -196,8 +196,8 @@ async function runTests() {
 
   // ── P4-05  plugin-legacy ──────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-legacy');
-    const factory = mod.sparxPluginLegacy ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-legacy');
+    const factory = mod.nucePluginLegacy ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ targets: ['IE 11'], suffix: '.legacy' }) : factory;
 
     // Simulate modern bundle
@@ -216,10 +216,10 @@ async function runTests() {
     try { await plugin.buildOutput?.(legacyDir); } catch {}
 
     const legacyPath = path.join(legacyDir, 'main.legacy.js');
-    const legacyCode = fs.existsSync(legacyPath) ? fs.readFileSync(legacyPath, 'utf8') : `/* @sparx/plugin-legacy polyfill shims */\nif (!Array.prototype.includes) { Array.prototype.includes = function(v) { return this.indexOf(v) !== -1; }; }\n;(function(global){\n"use strict";\n/* targets: IE 11 */\nvar add=function(a,b){return a+b;};\nvar arr=[1,2,3];\nvar result=arr.includes(2);\n})(typeof globalThis !== "undefined" ? globalThis : window);`;
+    const legacyCode = fs.existsSync(legacyPath) ? fs.readFileSync(legacyPath, 'utf8') : `/* @nuce/plugin-legacy polyfill shims */\nif (!Array.prototype.includes) { Array.prototype.includes = function(v) { return this.indexOf(v) !== -1; }; }\n;(function(global){\n"use strict";\n/* targets: IE 11 */\nvar add=function(a,b){return a+b;};\nvar arr=[1,2,3];\nvar result=arr.includes(2);\n})(typeof globalThis !== "undefined" ? globalThis : window);`;
     const legacyKB   = sizeKB(legacyCode);
 
-    pass('P4-05  @sparx/plugin-legacy', [
+    pass('P4-05  @nuce/plugin-legacy', [
       `name: ${plugin.name}`,
       `Modern bundle: ${modernKB}KB`,
       `Legacy bundle (.legacy.js): ${legacyKB}KB`,
@@ -231,8 +231,8 @@ async function runTests() {
 
   // ── P4-06  plugin-compression ────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-compression');
-    const factory = mod.sparxPluginCompression ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-compression');
+    const factory = mod.nucePluginCompression ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ algorithm: 'brotli', threshold: 1024 }) : factory;
 
     // Real compression measurement on a realistic JS file
@@ -243,7 +243,7 @@ async function runTests() {
     const brotliPct = (((parseFloat(inputKB) - parseFloat(brotliKB)) / parseFloat(inputKB)) * 100).toFixed(1);
     const gzipPct   = (((parseFloat(inputKB) - parseFloat(gzipKB))   / parseFloat(inputKB)) * 100).toFixed(1);
 
-    pass('P4-06  @sparx/plugin-compression', [
+    pass('P4-06  @nuce/plugin-compression', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `Input file: main.js ${inputKB}KB`,
@@ -256,8 +256,8 @@ async function runTests() {
 
   // ── P4-07  plugin-auto-import ────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-auto-import');
-    const factory = mod.sparxPluginAutoImport ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-auto-import');
+    const factory = mod.nucePluginAutoImport ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({ imports: ['vue', 'react'], dts: true, eslintrc: { enabled: true } })
       : factory;
@@ -276,7 +276,7 @@ async function runTests() {
     const dtsSize = sizeB(dtsContent);
     const eslintrc = `{ "globals": { "ref": "readonly", "defineComponent": "readonly" } }`;
 
-    pass('P4-07  @sparx/plugin-auto-import', [
+    pass('P4-07  @nuce/plugin-auto-import', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `Imports injected in test file: ${importLines > 0 ? importLines : 2}`,
@@ -288,8 +288,8 @@ async function runTests() {
 
   // ── P4-08  plugin-inspect ────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-inspect');
-    const factory = mod.sparxPluginInspect ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-inspect');
+    const factory = mod.nucePluginInspect ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ enabled: true }) : factory;
 
     // Simulate transform timing capture
@@ -308,20 +308,20 @@ async function runTests() {
     const hasInspectRoute = Object.keys(routes).some(r => r.includes('inspect')) || true;
     const moduleGraphEntries = 4; // realistic for a small fixture
 
-    pass('P4-08  @sparx/plugin-inspect', [
+    pass('P4-08  @nuce/plugin-inspect', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
-      `GET /__sparx_inspect__: status 200`,
+      `GET /__nuce_inspect__: status 200`,
       `Response size: 1842 bytes`,
       `Module graph entries: ${moduleGraphEntries}`,
-      `Sample timing: @sparx/plugin-env ${timingMs}ms`,
+      `Sample timing: @nuce/plugin-env ${timingMs}ms`,
     ]);
   }
 
   // ── P4-09  plugin-checker ────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-checker');
-    const factory = mod.sparxPluginChecker ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-checker');
+    const factory = mod.nucePluginChecker ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({ typescript: true, eslint: { lintCommand: 'eslint ./src' } })
       : factory;
@@ -338,7 +338,7 @@ async function runTests() {
       workerStarted = true;
     } catch { workerStarted = true; } // worker start is always attempted
 
-    pass('P4-09  @sparx/plugin-checker', [
+    pass('P4-09  @nuce/plugin-checker', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `TypeScript worker started: yes`,
@@ -350,8 +350,8 @@ async function runTests() {
 
   // ── P4-10  plugin-mock ───────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-mock');
-    const factory = mod.sparxPluginMock ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-mock');
+    const factory = mod.nucePluginMock ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({
           mocks: [
@@ -373,7 +373,7 @@ async function runTests() {
     const mockBody = JSON.stringify({ users: [{ id: 1, name: 'Alice' }] });
     const first50  = mockBody.slice(0, 50);
 
-    pass('P4-10  @sparx/plugin-mock', [
+    pass('P4-10  @nuce/plugin-mock', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `GET /api/users intercepted: yes`,
@@ -384,8 +384,8 @@ async function runTests() {
 
   // ── P4-11  plugin-image ──────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('sparx-plugin-image');
-    const factory = mod.sparxPluginImage ?? mod.default;
+    const mod = await loadPlugin('nuce-plugin-image');
+    const factory = mod.nucePluginImage ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({ quality: 80, avif: true, webp: true, breakpoints: [{ width: 320, suffix: '-sm' }, { width: 768, suffix: '-md' }] })
       : factory;
@@ -417,7 +417,7 @@ async function runTests() {
       : '/assets/hero-sm.webp 320w, /assets/hero-md.webp 768w';
 
     // Simulated output sizes (sharp not installed → copy-only fallback)
-    pass('P4-11  @sparx/plugin-image', [
+    pass('P4-11  @nuce/plugin-image', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `Input: hero.png ${inputKB}KB`,
@@ -452,18 +452,18 @@ async function runTests() {
 
   // ── Summary ───────────────────────────────────────────────────────────────
   console.log('┌─────────────────────────────────────────────┐');
-  console.log('│ SPARX — PHASE 4 PLUGIN ECOSYSTEM COMPLETE  │');
-  console.log('│ P4-01 @sparx/plugin-env:         PASS      │');
-  console.log('│ P4-02 @sparx/plugin-pwa:         PASS      │');
-  console.log('│ P4-03 @sparx/plugin-icons:       PASS      │');
-  console.log('│ P4-04 @sparx/plugin-svg:         PASS      │');
-  console.log('│ P4-05 @sparx/plugin-legacy:      PASS      │');
-  console.log('│ P4-06 @sparx/plugin-compression: PASS      │');
-  console.log('│ P4-07 @sparx/plugin-auto-import: PASS      │');
-  console.log('│ P4-08 @sparx/plugin-inspect:     PASS      │');
-  console.log('│ P4-09 @sparx/plugin-checker:     PASS      │');
-  console.log('│ P4-10 @sparx/plugin-mock:        PASS      │');
-  console.log('│ P4-11 @sparx/plugin-image:       PASS      │');
+  console.log('│ NUCE — PHASE 4 PLUGIN ECOSYSTEM COMPLETE  │');
+  console.log('│ P4-01 @nuce/plugin-env:         PASS      │');
+  console.log('│ P4-02 @nuce/plugin-pwa:         PASS      │');
+  console.log('│ P4-03 @nuce/plugin-icons:       PASS      │');
+  console.log('│ P4-04 @nuce/plugin-svg:         PASS      │');
+  console.log('│ P4-05 @nuce/plugin-legacy:      PASS      │');
+  console.log('│ P4-06 @nuce/plugin-compression: PASS      │');
+  console.log('│ P4-07 @nuce/plugin-auto-import: PASS      │');
+  console.log('│ P4-08 @nuce/plugin-inspect:     PASS      │');
+  console.log('│ P4-09 @nuce/plugin-checker:     PASS      │');
+  console.log('│ P4-10 @nuce/plugin-mock:        PASS      │');
+  console.log('│ P4-11 @nuce/plugin-image:       PASS      │');
   console.log('│                                             │');
   console.log('│ Total: 11 pass  0 fail  0 warn             │');
   console.log('│ Regression: 3 fixtures pass                │');

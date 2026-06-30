@@ -1,11 +1,11 @@
-# Migrating from Vite to Sparx
+# Migrating from Vite to Nuce
 
-Sparx is designed to be a fast replacement for Vite.
+Nuce is designed to be a fast replacement for Vite.
 
 ## 1. Quick Switch
 Run the auto-migration command:
 ```bash
-npx sparx migrate
+npx nuce migrate
 ```
 
 ## 2. Manual Migration
@@ -14,18 +14,18 @@ npx sparx migrate
 Change your content in `package.json`:
 ```json
 "scripts": {
-  "dev": "sparx dev",
-  "build": "sparx build"
+  "dev": "nuce dev",
+  "build": "nuce build"
 }
 ```
 
 ### Reuse Vite Plugins
-Sparx can reuse many Vite-compatible plugins through compatibility adapters.
+Nuce can reuse many Vite-compatible plugins through compatibility adapters.
 
 ```ts
-// sparx.config.ts
-import { defineConfig } from 'sparx';
-import { rollupAdapter } from '@sparx/plugin-compat';
+// nuce.config.ts
+import { defineConfig } from 'nuce';
+import { rollupAdapter } from '@nuce/plugin-compat';
 import someVitePlugin from 'vite-plugin-cool';
 
 export default defineConfig({
@@ -36,10 +36,10 @@ export default defineConfig({
 ```
 
 ## 3. Environment Variables
-Sparx respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
+Nuce respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
 
 ## 4. Key Differences
-| Feature | Vite | Sparx |
+| Feature | Vite | Nuce |
 |---------|------|-------|
 | Startup | ~400ms | < 50ms |
 | Build | esbuild/Rollup | Native Rust |

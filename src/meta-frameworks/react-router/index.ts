@@ -1,5 +1,5 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 import { rr7RoutesPlugin } from './routes-plugin.js';
 
 export interface ReactRouterConfig {
@@ -7,7 +7,7 @@ export interface ReactRouterConfig {
   ssr?: boolean;         // default true
 }
 
-export class ReactRouterAdapter implements SparxAdapter {
+export class ReactRouterAdapter implements NuceAdapter {
   name = 'react-router';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -32,7 +32,7 @@ export class ReactRouterAdapter implements SparxAdapter {
     ];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     if (!config.reactRouter) config.reactRouter = {};
     config.reactRouter = {
       appDirectory: 'app',
@@ -83,7 +83,7 @@ export class ReactRouterAdapter implements SparxAdapter {
           }
         }
       } catch (e) {
-        console.error('[SPARX ReactRouter] Dev handler error:', e);
+        console.error('[NUCE ReactRouter] Dev handler error:', e);
       }
       next();
     };

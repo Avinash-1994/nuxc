@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-critical-css
+ * @nuce/plugin-critical-css
  * Critical CSS extraction
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCriticalCssPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-critical-css',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-critical-css',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for critical-css

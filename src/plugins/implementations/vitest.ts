@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-vitest
+ * @nuce/plugin-vitest
  * Vitest integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVitestPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-vitest',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-vitest',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Vitest integration

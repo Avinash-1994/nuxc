@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Sparx Stability Audit — Plugin Contract Check
+ * Nuce Stability Audit — Plugin Contract Check
  * 
  * Verifies that plugin hook signatures have not changed.
  * Ensures backward compatibility for all plugins.
@@ -136,7 +136,7 @@ function compareHooks(baseline: PluginHook[], current: PluginHook[]): {
 }
 
 async function main() {
-    console.log('🔍 Sparx Plugin Contract Audit\n');
+    console.log('🔍 Nuce Plugin Contract Audit\n');
 
     const currentHooks = EXPECTED_HOOKS;
     console.log(`✅ Verified ${currentHooks.length} plugin hooks\n`);

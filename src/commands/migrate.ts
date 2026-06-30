@@ -1,5 +1,5 @@
 /**
- * sparx migrate — config and plugin migration from older Sparx versions
+ * nuce migrate — config and plugin migration from older Nuce versions
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,7 +11,7 @@ interface MigrateOptions {
 const MIGRATIONS = [
   {
     id: 'M01',
-    title: 'Rename nuclie.config.* → sparx.config.*',
+    title: 'Rename nuclie.config.* → nuce.config.*',
     detect: (root: string) =>
       ['nuclie.config.js', 'nuclie.config.ts', 'nuclie.config.json'].find(f =>
         fs.existsSync(path.join(root, f))
@@ -22,14 +22,14 @@ const MIGRATIONS = [
       );
       if (!old) return;
       const ext = path.extname(old);
-      const newName = `sparx.config${ext}`;
+      const newName = `nuce.config${ext}`;
       fs.renameSync(path.join(root, old), path.join(root, newName));
       console.log(`  ✅ Renamed ${old} → ${newName}`);
     }
   },
   {
     id: 'M02',
-    title: 'Rewrite @nuclie/* imports → @sparx/* in package.json',
+    title: 'Rewrite @nuclie/* imports → @nuce/* in package.json',
     detect: (root: string) => {
       const pkgPath = path.join(root, 'package.json');
       if (!fs.existsSync(pkgPath)) return undefined;
@@ -40,9 +40,9 @@ const MIGRATIONS = [
       const pkgPath = path.join(root, 'package.json');
       if (!fs.existsSync(pkgPath)) return;
       const content = fs.readFileSync(pkgPath, 'utf8');
-      const updated = content.replace(/@nuclie\//g, '@sparx/');
+      const updated = content.replace(/@nuclie\//g, '@nuce/');
       fs.writeFileSync(pkgPath, updated, 'utf8');
-      console.log('  ✅ Rewrote @nuclie/* → @sparx/* in package.json');
+      console.log('  ✅ Rewrote @nuclie/* → @nuce/* in package.json');
     }
   },
   {
@@ -62,11 +62,11 @@ const MIGRATIONS = [
       for (const file of files) {
         const content = fs.readFileSync(file, 'utf8');
         if (content.includes('@nuclie/')) {
-          fs.writeFileSync(file, content.replace(/@nuclie\//g, '@sparx/'), 'utf8');
+          fs.writeFileSync(file, content.replace(/@nuclie\//g, '@nuce/'), 'utf8');
           count++;
         }
       }
-      console.log(`  ✅ Rewrote @nuclie/* → @sparx/* in ${count} source file(s)`);
+      console.log(`  ✅ Rewrote @nuclie/* → @nuce/* in ${count} source file(s)`);
     }
   }
 ];
@@ -76,7 +76,7 @@ function findSourceFiles(dir: string): string[] {
   if (!fs.existsSync(dir)) return results;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory() && !['node_modules', '.sparx', 'dist', 'build_output'].includes(entry.name)) {
+    if (entry.isDirectory() && !['node_modules', '.nuce', 'dist', 'build_output'].includes(entry.name)) {
       results.push(...findSourceFiles(full));
     } else if (entry.isFile() && /\.(ts|tsx|js|mjs|cjs)$/.test(entry.name)) {
       results.push(full);
@@ -86,7 +86,7 @@ function findSourceFiles(dir: string): string[] {
 }
 
 export async function runMigrate(root: string, options: MigrateOptions = {}): Promise<void> {
-  console.log('\n🔄 Sparx Migration Tool\n' + '─'.repeat(40));
+  console.log('\n🔄 Nuce Migration Tool\n' + '─'.repeat(40));
 
   const applicable = MIGRATIONS.filter(m => m.detect(root));
 

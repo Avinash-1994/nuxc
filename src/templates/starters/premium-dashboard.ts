@@ -78,7 +78,7 @@ function App() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="logo">⚡ Sparx Build Tool</h1>
+          <h1 className="logo">⚡ Nuce Build Tool</h1>
           <div className="stats-bar">
             <div className="stat-pill">
               <Zap size={16} />
@@ -214,7 +214,7 @@ function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <p>Edit <code>src/App.tsx</code> to see HMR in action • Built with ⚡ Sparx</p>
+          <p>Edit <code>src/App.tsx</code> to see HMR in action • Built with ⚡ Nuce</p>
         </motion.div>
       </div>
     </div>
@@ -701,7 +701,7 @@ body {
   min-height: 100vh;
 }`,
 
-    'sparx.config.js': `module.exports = {
+    'nuce.config.js': `module.exports = {
   entry: ['./src/main.tsx'],
   outDir: './dist',
   framework: 'react',
@@ -719,13 +719,13 @@ body {
 };`,
 
     'package.json': `{
-  "name": "sparx-premium-dashboard",
+  "name": "nuce-premium-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "sparx dev",
-    "build": "sparx build",
-    "preview": "sparx preview"
+    "dev": "nuce dev",
+    "build": "nuce build",
+    "preview": "nuce preview"
   },
   "dependencies": {
     "react": "^19.2.3",
@@ -761,7 +761,7 @@ body {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Premium Dashboard - Sparx</title>
+    <title>Premium Dashboard - Nuce</title>
   </head>
   <body>
     <div id="root"></div>

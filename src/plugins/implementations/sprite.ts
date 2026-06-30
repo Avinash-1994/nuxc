@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-sprite
+ * @nuce/plugin-sprite
  * SVG sprite generation
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createSpritePlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-sprite',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-sprite',
+        originalPlugin: 'nuce-native',
         
         async load(id: string) {
             // Asset loading for sprite

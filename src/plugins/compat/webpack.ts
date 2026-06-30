@@ -28,8 +28,8 @@ export interface WebpackAdapterOptions {
 }
 
 /**
- * Adapter to use Webpack Loaders within Sparx
- * Maps Webpack's loader API to Sparx's transform hook.
+ * Adapter to use Webpack Loaders within Nuce
+ * Maps Webpack's loader API to Nuce's transform hook.
  */
 export function webpackLoaderAdapter(opts: WebpackAdapterOptions): Plugin {
     const name = opts.name || 'webpack-loader-compat';
@@ -52,17 +52,17 @@ export function webpackLoaderAdapter(opts: WebpackAdapterOptions): Plugin {
                     query: opts.options || {},
                     fs: fs,
 
-                    // Cacheable is a no-op in Sparx (we handle caching at graph level)
+                    // Cacheable is a no-op in Nuce (we handle caching at graph level)
                     cacheable: () => { },
 
                     // Dependency tracking
                     addDependency: (file: string) => {
-                        // TODO: Hook into Sparx's graph dependency tracking
+                        // TODO: Hook into Nuce's graph dependency tracking
                         // context.meta.watchFiles.add(file);
                     },
 
                     emitFile: (name: string, content: string | Buffer) => {
-                        // TODO: Hook into Sparx's asset emission
+                        // TODO: Hook into Nuce's asset emission
                     },
 
                     async: () => {

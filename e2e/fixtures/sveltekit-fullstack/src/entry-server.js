@@ -5,7 +5,7 @@ export async function render({ url, cookies }) {
     const isAuthed = cookies && cookies['session'];
     state = { userData: { name: 'SvelteKit Admin', email: 'admin@acme.com' }, authed: !!isAuthed };
     html = [
-      '<main id="sparx-ssr-root">',
+      '<main id="nuce-ssr-root">',
       '  <h1>Dashboard — SvelteKit SSR</h1>',
       '  <p>Welcome, SvelteKit Admin (admin@acme.com)</p>',
       '  <ul>',
@@ -22,5 +22,5 @@ export async function render({ url, cookies }) {
       '</main>',
     ].join('\n');
   }
-  return { html, head: '<title>Dashboard | Sparx SSR</title><meta name="description" content="SvelteKit SSR Dashboard">', state: JSON.stringify(state) };
+  return { html, head: '<title>Dashboard | Nuce SSR</title><meta name="description" content="SvelteKit SSR Dashboard">', state: JSON.stringify(state) };
 }

@@ -15,7 +15,7 @@ async function runTest() {
     try {
         // Setup: Create dummy telemetry
         console.log('Test 1: Dashboard Data Retrieval');
-        const telemetryDir = path.join(testDir, '.sparx', 'telemetry');
+        const telemetryDir = path.join(testDir, '.nuce', 'telemetry');
         await fs.mkdir(telemetryDir, { recursive: true });
 
         for (let i = 0; i < 5; i++) {

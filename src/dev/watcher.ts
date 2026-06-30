@@ -35,7 +35,7 @@ export class DevWatcher extends EventEmitter {
 
     private start() {
         const ignoredPatterns = [
-            '**/node_modules/**', '**/.git/**', '**/dist/**', '**/.sparx/**', '**/.sparx_cache/**'
+            '**/node_modules/**', '**/.git/**', '**/dist/**', '**/.nuce/**', '**/.nuce_cache/**'
         ];
 
         if (NativeWatcher) {
@@ -56,21 +56,21 @@ export class DevWatcher extends EventEmitter {
                 });
                 this.engine = 'rust-notify';
                 // Resolve real version from package.json; never use a hardcoded placeholder
-                let sparxNativeVer = '0.1.0';
+                let nuceNativeVer = '0.1.0';
                 try {
                     const pkg = require('../../package.json');
-                    sparxNativeVer = pkg.version ?? '0.1.0';
+                    nuceNativeVer = pkg.version ?? '0.1.0';
                 } catch { /* package.json not readable — use safe default */ }
                 const ver = typeof this.nativeWatcher.getVersion === 'function'
                     ? this.nativeWatcher.getVersion()
-                    : `rust-notify (sparx-native v${sparxNativeVer})`;
-                console.log(`[sparx] watcher: ${ver}`);
+                    : `rust-notify (nuce-native v${nuceNativeVer})`;
+                console.log(`[nuce] watcher: ${ver}`);
                 return;
             } catch (err: any) {
-                console.warn(`[sparx] WARN: native watcher failed to load, falling back to chokidar (`, err?.message ?? err, `)`);
+                console.warn(`[nuce] WARN: native watcher failed to load, falling back to chokidar (`, err?.message ?? err, `)`);
             }
         } else {
-            console.warn(`[sparx] WARN: native watcher failed to load, falling back to chokidar`);
+            console.warn(`[nuce] WARN: native watcher failed to load, falling back to chokidar`);
         }
 
         // Chokidar fallback
@@ -91,7 +91,7 @@ export class DevWatcher extends EventEmitter {
             });
             this.engine = 'chokidar';
         } catch (err: any) {
-            console.error(`[sparx] Both native watcher and chokidar failed: ${err.message}`);
+            console.error(`[nuce] Both native watcher and chokidar failed: ${err.message}`);
         }
     }
 

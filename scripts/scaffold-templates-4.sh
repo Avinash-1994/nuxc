@@ -8,41 +8,41 @@ stub() {
   local name=$1 fw=$2 desc=$3
   mkdir -p "$T/$name/src"
   cat > "$T/$name/package.json" <<PEOF
-{"name":"sparx-${name}-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"${fw}","description":"${desc}"},"devDependencies":{"sparx":"file:../..","typescript":"5.4.5"}}
+{"name":"nuce-${name}-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuce dev","build":"nuce build","preview":"nuce preview"},"nuce":{"template":true,"framework":"${fw}","description":"${desc}"},"devDependencies":{"nuce":"file:../..","typescript":"5.4.5"}}
 PEOF
-  cat > "$T/$name/sparx.config.ts" <<CEOF
-import { defineConfig } from 'sparx';
+  cat > "$T/$name/nuce.config.ts" <<CEOF
+import { defineConfig } from 'nuce';
 export default defineConfig({ framework: '${fw}' });
 CEOF
   cat > "$T/$name/README.md" <<REOF
-# Sparx ${name} Template — ${desc}
+# Nuce ${name} Template — ${desc}
 \`\`\`bash
 npm install && npm run dev
 \`\`\`
 REOF
 }
 
-stub nuxt           nuxt             "Sparx SaaS — landing + dashboard"
-stub nextjs-pages   next             "Sparx Store — Next.js e-commerce"
-stub solidstart     solidstart       "Sparx Dashboard — streaming SSR analytics"
-stub qwik           qwik             "Sparx Store — zero-JS e-commerce"
-stub tanstack-start tanstack-start   "Sparx Invoices — freelancer billing app"
-stub analog         analog           "Sparx CMS — headless CMS with Angular"
-stub waku           waku             "Sparx Shop — RSC-powered catalogue"
-stub react-router-v7 react-router   "Sparx Profiles — hybrid SSR+SPA directory"
-stub vitepress      vitepress        "Sparx API Docs — full documentation site"
-stub electron       electron         "Sparx Notes Desktop — native note app"
-stub tauri          tauri            "Sparx Files Desktop — Rust file manager"
-stub angular        angular          "Sparx HR — employee management dashboard"
+stub nuxt           nuxt             "Nuce SaaS — landing + dashboard"
+stub nextjs-pages   next             "Nuce Store — Next.js e-commerce"
+stub solidstart     solidstart       "Nuce Dashboard — streaming SSR analytics"
+stub qwik           qwik             "Nuce Store — zero-JS e-commerce"
+stub tanstack-start tanstack-start   "Nuce Invoices — freelancer billing app"
+stub analog         analog           "Nuce CMS — headless CMS with Angular"
+stub waku           waku             "Nuce Shop — RSC-powered catalogue"
+stub react-router-v7 react-router   "Nuce Profiles — hybrid SSR+SPA directory"
+stub vitepress      vitepress        "Nuce API Docs — full documentation site"
+stub electron       electron         "Nuce Notes Desktop — native note app"
+stub tauri          tauri            "Nuce Files Desktop — Rust file manager"
+stub angular        angular          "Nuce HR — employee management dashboard"
 
 # Add real index.html entries for stub templates
 for name in nuxt nextjs-pages solidstart qwik tanstack-start analog waku react-router-v7 vitepress electron tauri angular; do
   cat > "$T/$name/index.html" <<HEOF
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Sparx ${name} Template</title></head><body><div id="app"><h1>⚡ Sparx — ${name} template</h1><p>Run: npm install && npm run dev</p></div><script type="module" src="/src/main.ts"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Nuce ${name} Template</title></head><body><div id="app"><h1>⚡ Nuce — ${name} template</h1><p>Run: npm install && npm run dev</p></div><script type="module" src="/src/main.ts"></script></body></html>
 HEOF
   cat > "$T/$name/src/main.ts" <<MEOF
-console.log('[sparx:${name}] Template ready. Built with Sparx.');
-document.getElementById('app')!.innerHTML = '<div style="font-family:system-ui;padding:40px;background:#0f172a;color:#f1f5f9;min-height:100vh"><h1>⚡ Sparx ${name}</h1><p style="color:#94a3b8;margin-top:16px">Template scaffold — extend this with your app code.</p></div>';
+console.log('[nuce:${name}] Template ready. Built with Nuce.');
+document.getElementById('app')!.innerHTML = '<div style="font-family:system-ui;padding:40px;background:#0f172a;color:#f1f5f9;min-height:100vh"><h1>⚡ Nuce ${name}</h1><p style="color:#94a3b8;margin-top:16px">Template scaffold — extend this with your app code.</p></div>';
 MEOF
 done
 
@@ -62,7 +62,7 @@ const TEMPLATE = path.resolve(__dirname, '../../templates/react');
 
 test.beforeAll(async () => {
   server = spawn('node', [path.resolve(__dirname, '../../dist/cli.js'), 'dev', '--port', String(PORT)], {
-    cwd: TEMPLATE, stdio: 'pipe', env: { ...process.env, SPARX_SKIP_SECURITY: '1' }
+    cwd: TEMPLATE, stdio: 'pipe', env: { ...process.env, NUCE_SKIP_SECURITY: '1' }
   });
   await new Promise<void>((res, rej) => {
     const timer = setTimeout(() => rej(new Error('Server start timeout')), 30000);
@@ -88,7 +88,7 @@ test('navigation works between pages', async ({ page }) => {
   await page.goto(BASE);
   await page.click('text=Projects');
   await expect(page).toHaveURL(/projects/);
-  await expect(page.locator('text=Sparx Core')).toBeVisible();
+  await expect(page.locator('text=Nuce Core')).toBeVisible();
 });
 
 test('form submission works — create task', async ({ page }) => {
@@ -119,7 +119,7 @@ const TEMPLATE = path.resolve(__dirname, '../../templates/vue');
 
 test.beforeAll(async () => {
   server = spawn('node', [path.resolve(__dirname, '../../dist/cli.js'), 'dev', '--port', String(PORT)], {
-    cwd: TEMPLATE, stdio: 'pipe', env: { ...process.env, SPARX_SKIP_SECURITY: '1' }
+    cwd: TEMPLATE, stdio: 'pipe', env: { ...process.env, NUCE_SKIP_SECURITY: '1' }
   });
   await new Promise<void>((res, rej) => {
     const timer = setTimeout(() => rej(new Error('Server start timeout')), 30000);
@@ -133,7 +133,7 @@ test.afterAll(() => server?.kill());
 test('homepage — featured products visible', async ({ page }) => {
   await page.goto(BASE);
   await expect(page.locator('text=Wireless Headphones')).toBeVisible();
-  await expect(page.locator('text=Sparx Shop')).toBeVisible();
+  await expect(page.locator('text=Nuce Shop')).toBeVisible();
 });
 
 test('add to cart updates count', async ({ page }) => {
@@ -150,7 +150,7 @@ test('products page with search filter', async ({ page }) => {
 
 test('login form submits successfully', async ({ page }) => {
   await page.goto(`${BASE}/login`);
-  await page.fill('input[type=email]', 'dev@sparx.dev');
+  await page.fill('input[type=email]', 'dev@nuce.dev');
   await page.fill('input[type=password]', 'password123');
   await page.click('button[type=submit]');
   await expect(page.locator('text=Welcome back')).toBeVisible();

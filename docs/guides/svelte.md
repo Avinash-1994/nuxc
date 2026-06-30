@@ -1,15 +1,15 @@
 # Svelte 5 Guide
 
-> Build Svelte 5 apps with Sparx — component HMR, Runes, TypeScript, scoped styles.
+> Build Svelte 5 apps with Nuce — component HMR, Runes, TypeScript, scoped styles.
 
 ---
 
 ## Quick Start
 
 ```bash
-sparx bootstrap --name my-svelte-app --template svelte-ts
+nuce bootstrap --name my-svelte-app --template svelte-ts
 cd my-svelte-app
-sparx dev
+nuce dev
 ```
 
 ---
@@ -19,10 +19,10 @@ sparx dev
 ### 1. Install
 
 ```bash
-npm install --save-dev sparx svelte typescript
+npm install --save-dev nuce svelte typescript
 ```
 
-### 2. Create `sparx.config.js`
+### 2. Create `nuce.config.js`
 
 **JavaScript:**
 ```js
@@ -37,7 +37,7 @@ module.exports = {
 
 **TypeScript:**
 ```ts
-import { defineConfig } from 'sparx';
+import { defineConfig } from 'nuce';
 
 export default defineConfig({
   entry: ['./src/main.ts'],
@@ -66,7 +66,7 @@ export default app;
 </script>
 
 <main>
-  <h1>Hello from Sparx + Svelte 5</h1>
+  <h1>Hello from Nuce + Svelte 5</h1>
   <button onclick={() => count++}>Count: {count}</button>
 </main>
 
@@ -111,7 +111,7 @@ Svelte 5 introduces **Runes** — a new reactivity primitive:
 
 ## HMR — Component Hot-Reload
 
-Sparx integrates **svelte-hmr** for `.svelte` files:
+Nuce integrates **svelte-hmr** for `.svelte` files:
 
 - Component state is **reset** on save (Svelte's HMR model)
 - Styles hot-injected without reload
@@ -226,7 +226,7 @@ npm install -D less
 ## Production Build
 
 ```bash
-sparx build
+nuce build
 ```
 
 Output:

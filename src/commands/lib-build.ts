@@ -1,7 +1,7 @@
 /**
  * src/commands/lib-build.ts
  *
- * Library mode — builds sparx projects as npm packages.
+ * Library mode — builds nuce projects as npm packages.
  * Produces ES + CJS + UMD/IIFE outputs with proper externals.
  *
  * Wire into cli.ts build command:
@@ -14,7 +14,7 @@ import fs from 'fs'
 import { build } from 'esbuild'
 import type { BuildConfig } from '../config/index.js'
 
-export interface SparxLibConfig {
+export interface NuceLibConfig {
   entry: string
   name?: string
   formats?: string[]
@@ -35,7 +35,7 @@ const FORMAT_EXTENSIONS: Record<string, string> = {
 }
 
 function resolveFileName(
-  lib: SparxLibConfig,
+  lib: NuceLibConfig,
   format: string
 ): string {
   if (typeof lib.fileName === 'function') {
@@ -49,7 +49,7 @@ function resolveFileName(
   return `${base}${FORMAT_EXTENSIONS[format] ?? '.js'}`
 }
 
-export async function buildLib(config: BuildConfig, lib: SparxLibConfig): Promise<LibBuildResult> {
+export async function buildLib(config: BuildConfig, lib: NuceLibConfig): Promise<LibBuildResult> {
   const outDir = path.resolve(process.cwd(), config.outDir ?? 'build_output')
   const formats = lib.formats ?? ['es', 'cjs']
   const externals = lib.externals ?? []
@@ -124,7 +124,7 @@ export async function buildLib(config: BuildConfig, lib: SparxLibConfig): Promis
   }
 }
 
-async function generateDts(lib: SparxLibConfig, outDir: string): Promise<void> {
+async function generateDts(lib: NuceLibConfig, outDir: string): Promise<void> {
   try {
     // Use tsc if available
     const { execSync } = await import('child_process')
@@ -140,7 +140,7 @@ async function generateDts(lib: SparxLibConfig, outDir: string): Promise<void> {
 }
 
 function printExportsAdvice(
-  lib: SparxLibConfig,
+  lib: NuceLibConfig,
   formats: string[],
   outDir: string,
   outDirName: string

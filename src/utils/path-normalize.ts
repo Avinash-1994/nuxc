@@ -1,6 +1,6 @@
 
 /**
- * Sparx Path Normalization Utility
+ * Nuce Path Normalization Utility
  * Ensures consistent behavior across Windows (win32) and Unix (posix)
  * Day 25: Legacy Polyfills & Windows Lock
  */

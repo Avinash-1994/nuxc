@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-federation
+ * @nuce/plugin-federation
  * Module federation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createFederationPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-federation',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-federation',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Module federation

@@ -49,7 +49,7 @@
       Client entry script: yes ✅
       Zero mismatch achieved by serializing loader() output directly into HTML string
       First 300 chars of response body:
-      <!DOCTYPE html> <html lang="en"> <head>   <meta charset="UTF-8" />   <meta name="viewport" content="width=device-width, initial-scale=1.0" />   <title>Sparx Job Board</title>   <meta name="description" content="Sparx Job Board — Remix Phase 2.7 SSR" />   <link rel="stylesheet" href="/styles/app.css"
+      <!DOCTYPE html> <html lang="en"> <head>   <meta charset="UTF-8" />   <meta name="viewport" content="width=device-width, initial-scale=1.0" />   <title>Nuce Job Board</title>   <meta name="description" content="Nuce Job Board — Remix Phase 2.7 SSR" />   <link rel="stylesheet" href="/styles/app.css"
 
   ✅ PASS  RMX-05  Cold start time
            Expected: < 500ms bare-metal
@@ -58,7 +58,7 @@
       Ready timestamp: 2026-05-01T06:17:03.022Z
       Cold start: 34ms (wall clock from spawn to ready)
       Environment: bare-metal
-      [sparx] adapter: remix in output: yes
+      [nuce] adapter: remix in output: yes
       Port: 5173
       Routes scanned: 4
       Gate: < 500ms PASS
@@ -77,7 +77,7 @@
   ✅ PASS  RMX-07  Production build
            Expected: >= 2 HTML pages, client/server bundles, < 5000ms
            Actual:   5 HTML pages, 5.23ms
-      [sparx] adapter: remix in output: yes
+      [nuce] adapter: remix in output: yes
       Build time: 5.23ms (actual wall clock)
       Gate: < 5000ms PASS
       dist/ file count: 9
@@ -109,7 +109,7 @@
 ✅ ALL REMIX TESTS PASSED WITH REAL DATA
 
 ┌─────────────────────────────────────────────┐
-│ SPARX — PHASE 2.7 REMIX COMPLETE           │
+│ NUCE — PHASE 2.7 REMIX COMPLETE           │
 │ RMX-01 Routing:      PASS  4 routes       │
 │ RMX-02 Loader exec:  PASS  fetch shim       │
 │ RMX-03 Action exec:  PASS  formData         │
@@ -120,7 +120,7 @@
 │ RMX-08 Regression:   PASS                   │
 │                                             │
 │ Total: 8 pass  0 fail  0 warn               │
-│ [sparx] adapter: remix confirmed            │
+│ [nuce] adapter: remix confirmed            │
 │ fetch shim over uWS: active                 │
 │ Ready for Phase 2.8: YES                    │
 └─────────────────────────────────────────────┘

@@ -1,7 +1,7 @@
 {
-    "name": "sparx-real-project-matrix",
+    "name": "nuce-real-project-matrix",
     "version": "1.0.0",
-    "description": "Test Sparx against 8 real production open-source projects",
+    "description": "Test Nuce against 8 real production open-source projects",
     "main": "dist/runner.js",
     "scripts": {
         "build": "tsc",
@@ -13,11 +13,11 @@
         "test:report": "node dist/runner.js --report"
     },
     "keywords": [
-        "sparx",
+        "nuce",
         "benchmark",
         "testing",
         "matrix"
     ],
-    "author": "Sparx Team",
+    "author": "Nuce Team",
     "license": "MIT"
 }

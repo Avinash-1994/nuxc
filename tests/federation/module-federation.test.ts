@@ -56,9 +56,9 @@ createRoot(document.getElementById('root')!).render(
 );`
                 );
 
-                // Sparx config with federation
+                // Nuce config with federation
                 fs.writeFileSync(
-                    path.join(hostPath, 'sparx.config.json'),
+                    path.join(hostPath, 'nuce.config.json'),
                     JSON.stringify({
                         entry: ['src/main.tsx'],
                         preset: 'spa',
@@ -145,7 +145,7 @@ createRoot(document.getElementById('root')!).render(<App />);`
                 );
 
                 fs.writeFileSync(
-                    path.join(consumerPath, 'sparx.config.json'),
+                    path.join(consumerPath, 'nuce.config.json'),
                     JSON.stringify({
                         entry: ['src/main.tsx'],
                         preset: 'spa',
@@ -199,7 +199,7 @@ createRoot(document.getElementById('root')!).render(
                 );
 
                 fs.writeFileSync(
-                    path.join(sharedPath, 'sparx.config.json'),
+                    path.join(sharedPath, 'nuce.config.json'),
                     JSON.stringify({
                         entry: ['src/main.tsx'],
                         preset: 'spa',
@@ -256,7 +256,7 @@ createRoot(document.getElementById('root')!).render(
 
                 // Config with conflicting version requirements
                 fs.writeFileSync(
-                    path.join(conflictPath, 'sparx.config.json'),
+                    path.join(conflictPath, 'nuce.config.json'),
                     JSON.stringify({
                         entry: ['src/main.ts'],
                         preset: 'spa',

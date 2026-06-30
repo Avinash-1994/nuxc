@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-nanostores
+ * @nuce/plugin-nanostores
  * Nano Stores integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createNanostoresPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-nanostores',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-nanostores',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // State management: Nano Stores integration
@@ -16,7 +16,7 @@ export function createNanostoresPlugin(): PluginAdapter {
         },
 
         async buildStart() {
-            console.log('[@sparx/plugin-nanostores] State management initialized');
+            console.log('[@nuce/plugin-nanostores] State management initialized');
         }
     };
 }

@@ -1,10 +1,10 @@
 
-// TypeScript bindings for Sparx v2.0 native WASM runtime
+// TypeScript bindings for Nuce v2.0 native WASM runtime
 // Day 8: Zero-Trust Ecosystem
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-const nativeModule = require('../../sparx_native.node');
+const nativeModule = require('../../nuce_native.node');
 
 const { PluginRuntime: NativePluginRuntime } = nativeModule;
 

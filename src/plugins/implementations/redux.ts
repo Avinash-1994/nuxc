@@ -1,15 +1,15 @@
 /**
- * @sparx/plugin-redux
+ * @nuce/plugin-redux
  * Redux integration
- * Sparx-native
+ * Nuce-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReduxPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-redux',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-redux',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // redux transformation

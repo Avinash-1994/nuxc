@@ -1,4 +1,4 @@
-# Sparx v2.0 Benchmark Suite Dockerfile
+# Nuce v2.0 Benchmark Suite Dockerfile
 # Includes all rivals for fair comparison
 # Base image: node:26.1.0-slim — Snyk verified (43 vulns vs 73 on node:20-slim)
 
@@ -6,7 +6,7 @@ FROM node:26.1.0-slim
 
 # Install system dependencies
 # - Rust/Cargo for generic building if needed (optional for running pre-built binaries)
-# - Bun for Sparx v2.0 benchmark
+# - Bun for Nuce v2.0 benchmark
 # - Git for repo cloning
 # - wrk/autocannon for load testing
 RUN apt-get update && apt-get install -y \
@@ -26,11 +26,11 @@ RUN npm install -g pnpm
 # Create app directory
 WORKDIR /usr/src/benchmarks
 
-# Copy local Sparx build (assuming we mount or copy the build context)
+# Copy local Nuce build (assuming we mount or copy the build context)
 # For the benchmark suite, we might want to copy everything
 COPY . .
 
-# Install dependencies for the root project (Sparx)
+# Install dependencies for the root project (Nuce)
 RUN npm install
 
 # Pre-install rival CLIs globaly or locally to save time?

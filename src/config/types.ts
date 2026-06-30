@@ -1,11 +1,11 @@
 /**
- * Sparx — Discriminated Union Config Types (PART 4)
+ * Nuce — Discriminated Union Config Types (PART 4)
  * Provides framework-specific IntelliSense via defineConfig overloads.
  */
 
 // ─── Base (shared by all) ──────────────────────────────────────────────────
 
-export interface SparxBaseConfig {
+export interface NuceBaseConfig {
   entry?:     string | string[];
   outDir?:    string;
   mode?:      'development' | 'production' | 'test';
@@ -57,7 +57,7 @@ export interface SparxBaseConfig {
 
 // ─── SSR Meta-Frameworks ───────────────────────────────────────────────────
 
-export interface SparxSSRConfig extends SparxBaseConfig {
+export interface NuceSSRConfig extends NuceBaseConfig {
   framework: 'nuxt' | 'sveltekit' | 'svelte-kit' | 'remix' | 'solidstart'
            | 'solid-start' | 'astro' | 'analog' | 'tanstack-start' | 'waku'
            | 'next' | 'nextjs';
@@ -68,7 +68,7 @@ export interface SparxSSRConfig extends SparxBaseConfig {
 
 // ─── Electron — dual bundle ────────────────────────────────────────────────
 
-export interface SparxElectronConfig extends SparxBaseConfig {
+export interface NuceElectronConfig extends NuceBaseConfig {
   framework:      'electron';
   preset?:        'spa';
   platform?:      'browser';
@@ -80,7 +80,7 @@ export interface SparxElectronConfig extends SparxBaseConfig {
 
 // ─── Tauri — WebView frontend ──────────────────────────────────────────────
 
-export interface SparxTauriConfig extends SparxBaseConfig {
+export interface NuceTauriConfig extends NuceBaseConfig {
   framework: 'tauri';
   preset?:   'spa';
   platform?: 'browser';
@@ -90,7 +90,7 @@ export interface SparxTauriConfig extends SparxBaseConfig {
 
 // ─── SPA frameworks ───────────────────────────────────────────────────────
 
-export interface SparxSPAConfig extends SparxBaseConfig {
+export interface NuceSPAConfig extends NuceBaseConfig {
   framework?: 'react' | 'vue' | 'svelte' | 'angular' | 'solid'
             | 'preact' | 'lit' | 'qwik' | 'vanilla';
   preset?:    'spa';
@@ -99,10 +99,10 @@ export interface SparxSPAConfig extends SparxBaseConfig {
 
 // ─── defineConfig overloads ────────────────────────────────────────────────
 /* eslint-disable no-redeclare */
-export function defineConfig(c: SparxElectronConfig): SparxElectronConfig;
-export function defineConfig(c: SparxTauriConfig):    SparxTauriConfig;
-export function defineConfig(c: SparxSSRConfig):      SparxSSRConfig;
-export function defineConfig(c: SparxSPAConfig):      SparxSPAConfig;
-export function defineConfig(c: SparxBaseConfig):     SparxBaseConfig;
+export function defineConfig(c: NuceElectronConfig): NuceElectronConfig;
+export function defineConfig(c: NuceTauriConfig):    NuceTauriConfig;
+export function defineConfig(c: NuceSSRConfig):      NuceSSRConfig;
+export function defineConfig(c: NuceSPAConfig):      NuceSPAConfig;
+export function defineConfig(c: NuceBaseConfig):     NuceBaseConfig;
 export function defineConfig(c: any): any { return c; }
 /* eslint-enable no-redeclare */

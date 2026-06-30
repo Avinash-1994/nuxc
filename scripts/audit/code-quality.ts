@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Sparx Stability Audit — Code Quality Check
+ * Nuce Stability Audit — Code Quality Check
  * 
  * Scans core files for prohibited "temporary" hacks:
  * - TODO / FIXME comments in src/core
@@ -74,7 +74,7 @@ async function scanDirectory(dir: string, violations: QualityViolation[]) {
 }
 
 async function main() {
-    console.log('🔍 Sparx Code Quality Audit (src/core)\n');
+    console.log('🔍 Nuce Code Quality Audit (src/core)\n');
 
     const violations: QualityViolation[] = [];
 

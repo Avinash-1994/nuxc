@@ -1,6 +1,6 @@
 
 /**
- * Sparx Edge Adapters
+ * Nuce Edge Adapters
  * Wrappers for Cloudflare Workers, Vercel Edge, & Netlify Edge
  * Day 24: Edge Runtime Support Lock
  */
@@ -9,7 +9,7 @@ import { UniversalSSREngine, SSRAdapter } from '../universal-engine.js';
 
 /**
  * Cloudflare Worker Entry Generator
- * Usage: import { createCloudflareHandler } from 'sparx/edge';
+ * Usage: import { createCloudflareHandler } from 'nuce/edge';
  * export default createCloudflareHandler(myAdapter);
  */
 export function createCloudflareHandler(adapter: SSRAdapter) {

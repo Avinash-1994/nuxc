@@ -143,7 +143,7 @@ async function runTests() {
       `Spawn timestamp: ${t0Ts}`,
       `Ready timestamp: ${t1Ts}`,
       `Cold start: ${Math.round(startupTime)}ms`,
-      `[sparx] adapter: waku in output: yes`,
+      `[nuce] adapter: waku in output: yes`,
       `uWS bound: yes`
     ]);
 
@@ -223,7 +223,7 @@ async function runTests() {
     }
   }
   
-  const hasMockComments = clientContent.includes('mock waku bundle') || clientContent.includes('mock vitepress bundle') || clientContent.includes('// [Sparx]');
+  const hasMockComments = clientContent.includes('mock waku bundle') || clientContent.includes('mock vitepress bundle') || clientContent.includes('// [Nuce]');
   const ok7 = htmlFiles.length >= 1 && clientBundle && serverBundle && buildMs < 5000 && bundleSizeKB > 10 && hasWaku && !hasMockComments;
   
   // Real version from installed package.json
@@ -273,7 +273,7 @@ async function runTests() {
     const t0r = Date.now();
     try {
       execFileSync('node', [cliPathReg, 'build'], { cwd: fix.dir, timeout: 30000, stdio: 'ignore',
-        env: { ...process.env, SPARX_SKIP_SECURITY: '1' } });
+        env: { ...process.env, NUCE_SKIP_SECURITY: '1' } });
       regLines.push(`${fix.name.padEnd(22)}: pass ${Date.now()-t0r}ms`);
     } catch(e) {
       regLines.push(`${fix.name.padEnd(22)}: FAIL`);
@@ -291,7 +291,7 @@ async function runTests() {
   pass('WK-09  Regression', 'all pass', regAllPass ? 'all pass' : 'FAIL', regLines);
 
   log(`┌─────────────────────────────────────────────┐`);
-  log(`│ SPARX — PHASE 2.11 WAKU COMPLETE           │`);
+  log(`│ NUCE — PHASE 2.11 WAKU COMPLETE           │`);
   log(`│ WK-01 RSC Directives: PASS  2 boundaries   │`);
   log(`│ WK-02 SSR Shell:      PASS  ${Buffer.byteLength(htmlResData)} bytes        │`);
   log(`│ WK-03 RSC Flight:     PASS  ${Buffer.byteLength(flightData)} bytes         │`);

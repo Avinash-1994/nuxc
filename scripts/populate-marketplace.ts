@@ -1,7 +1,7 @@
 
 /**
  * populate-marketplace.ts
- * Mass publishes 20 Core Plugins to local Sparx Registry
+ * Mass publishes 20 Core Plugins to local Nuce Registry
  * Day 12: Curated Plugin Suite Lock
  */
 
@@ -10,26 +10,26 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const PLUGINS = [
-    { name: '@sparx/plugin-react', desc: 'Secure React Fast Refresh & JSX' },
-    { name: '@sparx/plugin-vue', desc: 'Vue 3 SFC Compiler (Sandboxed)' },
-    { name: '@sparx/plugin-svelte', desc: 'Svelte 5 Compiler & HMR' },
-    { name: '@sparx/plugin-solid', desc: 'SolidJS Fine-grained Reactivity' },
-    { name: '@sparx/plugin-lit', desc: 'Web Components & Lit Support' },
-    { name: '@sparx/plugin-angular', desc: 'Angular Ivy Compat' },
-    { name: '@sparx/plugin-postcss', desc: 'PostCSS 8 Adapter' },
-    { name: '@sparx/plugin-tailwindcss', desc: 'Tailwind JIT Engine' },
-    { name: '@sparx/plugin-sass', desc: 'Dart Sass (WASM)' },
-    { name: '@sparx/plugin-less', desc: 'Less CSS Support' },
-    { name: '@sparx/plugin-mdx', desc: 'Markdown to JSX' },
-    { name: '@sparx/plugin-optimize-css', desc: 'CSS Minification' },
-    { name: '@sparx/plugin-terser', desc: 'JS Minification (Terser)' },
-    { name: '@sparx/plugin-visualizer', desc: 'Bundle Analysis UI' },
-    { name: '@sparx/plugin-audit', desc: 'Lighthouse & Performance Audit' },
-    { name: '@sparx/plugin-pwa', desc: 'PWA Manifest & Service Workers' },
-    { name: '@sparx/plugin-legacy', desc: 'Polyfills for older browsers' },
-    { name: '@sparx/plugin-compression', desc: 'Gzip/Brotli Compression' },
-    { name: '@sparx/plugin-inspector', desc: 'DevTools & Debugging Overlay' },
-    { name: '@sparx/plugin-wasm', desc: 'Native WASM Modules Support' }
+    { name: '@nuce/plugin-react', desc: 'Secure React Fast Refresh & JSX' },
+    { name: '@nuce/plugin-vue', desc: 'Vue 3 SFC Compiler (Sandboxed)' },
+    { name: '@nuce/plugin-svelte', desc: 'Svelte 5 Compiler & HMR' },
+    { name: '@nuce/plugin-solid', desc: 'SolidJS Fine-grained Reactivity' },
+    { name: '@nuce/plugin-lit', desc: 'Web Components & Lit Support' },
+    { name: '@nuce/plugin-angular', desc: 'Angular Ivy Compat' },
+    { name: '@nuce/plugin-postcss', desc: 'PostCSS 8 Adapter' },
+    { name: '@nuce/plugin-tailwindcss', desc: 'Tailwind JIT Engine' },
+    { name: '@nuce/plugin-sass', desc: 'Dart Sass (WASM)' },
+    { name: '@nuce/plugin-less', desc: 'Less CSS Support' },
+    { name: '@nuce/plugin-mdx', desc: 'Markdown to JSX' },
+    { name: '@nuce/plugin-optimize-css', desc: 'CSS Minification' },
+    { name: '@nuce/plugin-terser', desc: 'JS Minification (Terser)' },
+    { name: '@nuce/plugin-visualizer', desc: 'Bundle Analysis UI' },
+    { name: '@nuce/plugin-audit', desc: 'Lighthouse & Performance Audit' },
+    { name: '@nuce/plugin-pwa', desc: 'PWA Manifest & Service Workers' },
+    { name: '@nuce/plugin-legacy', desc: 'Polyfills for older browsers' },
+    { name: '@nuce/plugin-compression', desc: 'Gzip/Brotli Compression' },
+    { name: '@nuce/plugin-inspector', desc: 'DevTools & Debugging Overlay' },
+    { name: '@nuce/plugin-wasm', desc: 'Native WASM Modules Support' }
 ];
 
 const TEMP_DIR = path.resolve('.temp_plugins');
@@ -54,7 +54,7 @@ async function run() {
         const meta = {
             name: p.name,
             version: '1.0.0',
-            author: 'Sparx Core Team',
+            author: 'Nuce Core Team',
             description: p.desc,
             permissions: { network: false, fs: false } // Zero-trust default
         };

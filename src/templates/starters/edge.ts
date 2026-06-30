@@ -14,12 +14,12 @@ export const edgeTemplate: TemplateConfig = {
     dependencies: {},
     devDependencies: {
         "typescript": "^5.0.0",
-        "@sparx/plugin-edge": "^1.0.0"
+        "@nuce/plugin-edge": "^1.0.0"
     },
     files: {
-        'sparx.config.ts': `
-import { defineConfig } from 'sparx';
-import edge from '@sparx/plugin-edge';
+        'nuce.config.ts': `
+import { defineConfig } from 'nuce';
+import edge from '@nuce/plugin-edge';
 
 export default defineConfig({
     plugins: [edge()],
@@ -36,7 +36,7 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === '/hello') {
-        return new Response('Hello from Sparx Edge!', {
+        return new Response('Hello from Nuce Edge!', {
             headers: { 'content-type': 'text/plain' }
         });
     }
@@ -44,9 +44,9 @@ export default {
     return new Response(\`
       <!DOCTYPE html>
       <html>
-        <head><title>Sparx Edge</title></head>
+        <head><title>Nuce Edge</title></head>
         <body>
-          <h1>⚡ Sparx Edge Runtime</h1>
+          <h1>⚡ Nuce Edge Runtime</h1>
           <p>Request URL: \${request.url}</p>
           <p>Region: \${request.cf?.colo || 'Local'}</p>
         </body>
@@ -72,7 +72,7 @@ export default {
 }
 `,
         'README.md': `
-# Sparx Edge Function
+# Nuce Edge Function
 
 This is a universal Edge Function starter compatible with:
 - Cloudflare Workers

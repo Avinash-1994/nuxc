@@ -14,7 +14,7 @@ module.exports = {
     hmr: true,
   },
   federation: {
-    name: 'sparx_remote',
+    name: 'nuce_remote',
     filename: 'remoteEntry.js',
     exposes: {
       './App': './src/main.ts'

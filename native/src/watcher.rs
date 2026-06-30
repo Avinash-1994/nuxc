@@ -42,7 +42,7 @@ impl NativeWatcher {
 
     #[napi]
     pub fn get_version(&self) -> String {
-        format!("rust-notify (sparx-native v{})", env!("CARGO_PKG_VERSION"))
+        format!("rust-notify (nuce-native v{})", env!("CARGO_PKG_VERSION"))
     }
 
     /// Start watching the given paths.

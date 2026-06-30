@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-determinism
+ * @nuce/plugin-determinism
  * Build determinism checker
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createDeterminismPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-determinism',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-determinism',
+        originalPlugin: 'nuce-native',
         
         async buildStart() {
-            console.log('[@sparx/plugin-determinism] Starting performance optimization...');
+            console.log('[@nuce/plugin-determinism] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createDeterminismPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@sparx/plugin-determinism] Performance optimization complete');
+            console.log('[@nuce/plugin-determinism] Performance optimization complete');
         }
     };
 }

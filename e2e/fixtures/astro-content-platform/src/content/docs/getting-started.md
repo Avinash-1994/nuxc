@@ -1,19 +1,19 @@
 ---
-title: "Getting Started with Sparx"
-description: "Set up Sparx in under 60 seconds."
+title: "Getting Started with Nuce"
+description: "Set up Nuce in under 60 seconds."
 order: 1
 section: "guides"
 ---
 
-# Getting Started with Sparx
+# Getting Started with Nuce
 
 ## Installation
 
 ```bash
-npm install -g sparx
-sparx dev
+npm install -g nuce
+nuce dev
 ```
 
 ## Configuration
 
-Create a `sparx.config.ts` in your project root.
+Create a `nuce.config.ts` in your project root.

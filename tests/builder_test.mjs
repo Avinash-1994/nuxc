@@ -41,7 +41,7 @@ async function test() {
             throw new Error('Builder UI failed to load');
         }
         const html = await uiResponse.text();
-        if (!html.includes('Sparx Builder')) {
+        if (!html.includes('Nuce Builder')) {
             throw new Error('Builder UI content incorrect');
         }
         console.log('   ✅ Builder UI loads correctly\n');

@@ -44,9 +44,9 @@ function createRollupContext(): RollupPluginContext {
 }
 
 /**
- * Adapter to use Rollup plugins within Sparx
+ * Adapter to use Rollup plugins within Nuce
  * @param plugin The Rollup plugin instance
- * @returns A Sparx-compatible plugin
+ * @returns A Nuce-compatible plugin
  */
 export function rollupAdapter(plugin: RollupPlugin): Plugin {
     return {
@@ -116,4 +116,4 @@ export function rollupAdapter(plugin: RollupPlugin): Plugin {
 
 export const createRollupAdapter = rollupAdapter;
 export const vitePluginAdapter = rollupAdapter;
-export const viteToSparx = rollupAdapter;
+export const viteToNuce = rollupAdapter;

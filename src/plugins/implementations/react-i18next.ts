@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-react-i18next
+ * @nuce/plugin-react-i18next
  * React i18next integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReactI18nextPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-react-i18next',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-react-i18next',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // i18n: React i18next integration
@@ -16,7 +16,7 @@ export function createReactI18nextPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@sparx/plugin-react-i18next] i18n setup complete');
+            console.log('[@nuce/plugin-react-i18next] i18n setup complete');
         }
     };
 }

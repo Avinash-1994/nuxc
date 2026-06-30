@@ -3,7 +3,7 @@ import { component$, Slot } from '@builder.io/qwik';
 export default component$(() => {
   return (
     <div>
-      <header><a href="/">⚡ Sparx Qwik Store</a></header>
+      <header><a href="/">⚡ Nuce Qwik Store</a></header>
       <main><Slot /></main>
       <footer><p>Phase 2.5 — Qwik City</p></footer>
     </div>

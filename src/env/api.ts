@@ -1,6 +1,6 @@
 
 /**
- * Sparx Environment API
+ * Nuce Environment API
  * Unified Runtime for Browser, Node, and Edge
  * Day 26: Environment API Lock
  */
@@ -11,8 +11,8 @@ export interface EnvConfig {
     base: string;
 }
 
-export class SparxEnv {
-    private static instance: SparxEnv;
+export class NuceEnv {
+    private static instance: NuceEnv;
     public config: EnvConfig;
     private listeners: Function[] = [];
 
@@ -20,18 +20,18 @@ export class SparxEnv {
         this.config = config;
     }
 
-    static init(config: EnvConfig): SparxEnv {
-        if (!SparxEnv.instance) {
-            SparxEnv.instance = new SparxEnv(config);
+    static init(config: EnvConfig): NuceEnv {
+        if (!NuceEnv.instance) {
+            NuceEnv.instance = new NuceEnv(config);
         }
-        return SparxEnv.instance;
+        return NuceEnv.instance;
     }
 
-    static get(): SparxEnv {
-        if (!SparxEnv.instance) {
-            throw new Error('SparxEnv not initialized');
+    static get(): NuceEnv {
+        if (!NuceEnv.instance) {
+            throw new Error('NuceEnv not initialized');
         }
-        return SparxEnv.instance;
+        return NuceEnv.instance;
     }
 
     /**

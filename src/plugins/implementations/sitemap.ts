@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-sitemap
+ * @nuce/plugin-sitemap
  * Sitemap generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSitemapPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-sitemap',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-sitemap',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Sitemap generation

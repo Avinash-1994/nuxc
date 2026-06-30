@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-trpc
+ * @nuce/plugin-trpc
  * tRPC integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTrpcPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-trpc',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-trpc',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: tRPC integration

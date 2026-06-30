@@ -1,12 +1,12 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 import { wakuRscPlugin } from './rsc-plugin.js';
 
 export interface WakuConfig {
   rscPath?: string; // default '/RSC'
 }
 
-export class WakuAdapter implements SparxAdapter {
+export class WakuAdapter implements NuceAdapter {
   name = 'waku';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -19,7 +19,7 @@ export class WakuAdapter implements SparxAdapter {
     ];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     if (!config.waku) config.waku = {};
     config.waku = {
       rscPath: '/RSC',
@@ -35,7 +35,7 @@ export class WakuAdapter implements SparxAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:sparx/waku-rsc-router';
+         const virtualEntry = 'virtual:nuce/waku-rsc-router';
          let router: any;
          try {
             router = await import(virtualEntry);
@@ -88,7 +88,7 @@ export class WakuAdapter implements SparxAdapter {
 
          next();
       } catch(e) {
-         console.error('[Sparx:Waku] Error rendering RSC', e);
+         console.error('[Nuce:Waku] Error rendering RSC', e);
          next();
       }
     };

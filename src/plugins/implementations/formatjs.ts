@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-formatjs
+ * @nuce/plugin-formatjs
  * FormatJS (react-intl) integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createFormatjsPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-formatjs',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-formatjs',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // i18n: FormatJS (react-intl) integration
@@ -16,7 +16,7 @@ export function createFormatjsPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@sparx/plugin-formatjs] i18n setup complete');
+            console.log('[@nuce/plugin-formatjs] i18n setup complete');
         }
     };
 }

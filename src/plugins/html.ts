@@ -1,19 +1,19 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { SparxPlugin } from '../core/plugins/types.js';
+import { NucePlugin } from '../core/plugins/types.js';
 
-export function createHtmlPlugin(rootDir: string, outDir: string): SparxPlugin {
+export function createHtmlPlugin(rootDir: string, outDir: string): NucePlugin {
     return {
         manifest: {
-            name: 'sparx:html',
+            name: 'nuce:html',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['buildEnd'],
             permissions: { fs: 'read' }
         },
-        id: 'sparx:html',
+        id: 'nuce:html',
         async runHook(hook, data) {
             if (hook !== 'buildEnd') return data;
 
@@ -29,7 +29,7 @@ export function createHtmlPlugin(rootDir: string, outDir: string): SparxPlugin {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sparx Build</title>
+    <title>Nuce Build</title>
     ${links}
 </head>
 <body>

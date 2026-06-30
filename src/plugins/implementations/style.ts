@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-style
+ * @nuce/plugin-style
  * CSS injection
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createStylePlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-style',
+        name: '@nuce/plugin-style',
         originalPlugin: 'style-loader',
         
         async transform(code: string, id: string) {

@@ -1,7 +1,7 @@
 {
   "build": {
-    "beforeDevCommand": "sparx dev",
-    "beforeBuildCommand": "sparx build",
+    "beforeDevCommand": "nuce dev",
+    "beforeBuildCommand": "nuce build",
     "devPath": "http://localhost:5173",
     "distDir": "../dist"
   },

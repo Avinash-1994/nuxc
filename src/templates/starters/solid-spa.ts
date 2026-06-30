@@ -17,11 +17,11 @@ export const solidSpaTemplate: TemplateConfig = {
     devDependencies: {
         "vite-plugin-solid": "^2.7.2",
         "typescript": "^5.2.2",
-        "@sparx/plugin-solid": "^1.0.0"
+        "@nuce/plugin-solid": "^1.0.0"
     },
     files: {
-        'sparx.config.ts': `
-import { defineConfig } from 'sparx';
+        'nuce.config.ts': `
+import { defineConfig } from 'nuce';
 import solid from 'vite-plugin-solid';
 
 export default defineConfig({
@@ -63,7 +63,7 @@ const App: Component = () => {
       <header class={styles.header}>
         <img src={logo} class={styles.logo} alt="logo" />
         <p>
-          Sparx + SolidJS
+          Nuce + SolidJS
         </p>
         <button class={styles.button} onClick={() => setCount((c) => c + 1)}>
             Count: {count()}

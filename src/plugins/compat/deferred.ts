@@ -9,29 +9,29 @@ export interface CompressOptions {
 }
 
 /**
- * Sparx Compress Plugin (sparx-compress)
+ * Nuce Compress Plugin (nuce-compress)
  * Mocks compression-webpack-plugin using a simple status message.
  * In a real V1, this would actually gzip/brotli the assets in `dist`.
  */
-export function sparxCompress(options: CompressOptions = {}): Plugin {
+export function nuceCompress(options: CompressOptions = {}): Plugin {
     return {
-        name: 'sparx-compress',
+        name: 'nuce-compress',
         async buildEnd() {
-            // Sparx v1 - Placeholder for Asset Compression
+            // Nuce v1 - Placeholder for Asset Compression
             // Real implementation would iterate dist/ and gzip
-            // console.log('[sparx-compress] Compression enabled (Placeholder)');
+            // console.log('[nuce-compress] Compression enabled (Placeholder)');
         }
     };
 }
 
 /**
- * Sparx CSS Extract Plugin (sparx-css-extract)
+ * Nuce CSS Extract Plugin (nuce-css-extract)
  * Mocks mini-css-extract-plugin.
- * Sparx extracts CSS by default, so this is mostly a no-op compatibility shim.
+ * Nuce extracts CSS by default, so this is mostly a no-op compatibility shim.
  */
-export function sparxCssExtract(options: any = {}): Plugin {
+export function nuceCssExtract(options: any = {}): Plugin {
     return {
-        name: 'sparx-css-extract',
+        name: 'nuce-css-extract',
         // No-op
     };
 }

@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-plausible
+ * @nuce/plugin-plausible
  * Plausible Analytics integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPlausiblePlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-plausible',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-plausible',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Analytics: Plausible Analytics integration
@@ -16,7 +16,7 @@ export function createPlausiblePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@sparx/plugin-plausible] Analytics integration ready');
+            console.log('[@nuce/plugin-plausible] Analytics integration ready');
         }
     };
 }

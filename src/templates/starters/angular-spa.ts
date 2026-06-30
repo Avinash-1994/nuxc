@@ -27,12 +27,12 @@ export const angularSpaTemplate: TemplateConfig = {
         "@angular/cli": "^17.0.0",
         "@angular/compiler-cli": "^17.0.0",
         "typescript": "~5.2.0",
-        "@sparx/plugin-angular": "^1.0.0"
+        "@nuce/plugin-angular": "^1.0.0"
     },
     files: {
-        'sparx.config.ts': `
-import { defineConfig } from 'sparx';
-import angular from '@sparx/plugin-angular';
+        'nuce.config.ts': `
+import { defineConfig } from 'nuce';
+import angular from '@nuce/plugin-angular';
 
 export default defineConfig({
     plugins: [angular()],
@@ -77,13 +77,13 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'sparx-angular';
+  title = 'nuce-angular';
 }
 `,
         'src/app/app.component.html': `
 <main class="main">
   <div class="content">
-    <h1>Sparx + Angular 17</h1>
+    <h1>Nuce + Angular 17</h1>
     <p>Build with speed.</p>
   </div>
 </main>

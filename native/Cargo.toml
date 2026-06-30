@@ -1,5 +1,5 @@
 [package]
-name = "sparx_native"
+name = "nuce_native"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,8 +7,8 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [[bin]]
-name = "sparx-native"
-path = "src/bin/sparx_native.rs"
+name = "nuce-native"
+path = "src/bin/nuce_native.rs"
 
 [dependencies]
 lazy_static = "1.5.0"

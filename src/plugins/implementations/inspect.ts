@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-inspect
+ * @nuce/plugin-inspect
  * Plugin inspection tool
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createInspectPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-inspect',
+        name: '@nuce/plugin-inspect',
         originalPlugin: 'vite-plugin-inspect',
         
         async transform(code: string, id: string) {

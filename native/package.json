@@ -1,7 +1,7 @@
 {
-    "name": "sparx-native",
+    "name": "nuce-native",
     "version": "0.1.0",
     "napi": {
-        "binaryName": "sparx_native"
+        "binaryName": "nuce_native"
     }
 }

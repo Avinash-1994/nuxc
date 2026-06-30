@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-css-framework
+ * @nuce/plugin-css-framework
  * CSS framework detection
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCssFrameworkPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-css-framework',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-css-framework',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for css-framework

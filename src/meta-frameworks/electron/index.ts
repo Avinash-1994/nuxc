@@ -1,5 +1,5 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 import { electronPlugin } from './electron-plugin.js';
 
 export interface ElectronConfig {
@@ -7,7 +7,7 @@ export interface ElectronConfig {
   preloadSrc?: string;    // default 'electron/preload.ts'
 }
 
-export class ElectronAdapter implements SparxAdapter {
+export class ElectronAdapter implements NuceAdapter {
   name = 'electron';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class ElectronAdapter implements SparxAdapter {
     ];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     if (!config.electron) config.electron = {};
     config.electron = {
       mainSrc: 'electron/main.ts',
@@ -32,10 +32,10 @@ export class ElectronAdapter implements SparxAdapter {
 
   getDevHandler(): Middleware {
     return async (req: any, res: any, next: any) => {
-      // Set ELECTRON_DEV_SERVER_URL for the main process to load renderer from Sparx dev server
+      // Set ELECTRON_DEV_SERVER_URL for the main process to load renderer from Nuce dev server
       const devUrl = process.env.ELECTRON_DEV_SERVER_URL || `http://localhost:${req?.socket?.localPort || 5173}`;
-      res.setHeader('X-Sparx-Electron-Dev-URL', devUrl);
-      // Renderer requests are served directly by the Sparx HMR dev server
+      res.setHeader('X-Nuce-Electron-Dev-URL', devUrl);
+      // Renderer requests are served directly by the Nuce HMR dev server
       next();
     };
   }

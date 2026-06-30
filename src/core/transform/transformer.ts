@@ -213,7 +213,7 @@ export class Transformer {
     }
 
     static removeEsbuildWrappers(code: string): string {
-        // High-performance boilerplate removal for Sparx minified
+        // High-performance boilerplate removal for Nuce minified
         let clean = code;
 
         // Pattern 1: ESM exports wrapper (Minified)
@@ -288,7 +288,7 @@ export class Transformer {
                     const out = await processor.process(r.code, { from: undefined });
                     r.code = out.css;
                 } catch (e: any) {
-                    log.warn(`[sparx:postcss] Error processing ${r.id}: ${e.message}`);
+                    log.warn(`[nuce:postcss] Error processing ${r.id}: ${e.message}`);
                 }
             }
         } catch {

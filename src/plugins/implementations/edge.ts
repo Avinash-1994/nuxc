@@ -1,15 +1,15 @@
 /**
- * @sparx/plugin-edge
+ * @nuce/plugin-edge
  * Edge runtime adapter
- * Sparx-native
+ * Nuce-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createEdgePlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-edge',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-edge',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // edge transformation

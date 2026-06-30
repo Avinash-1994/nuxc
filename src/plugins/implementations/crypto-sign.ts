@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-crypto-sign
+ * @nuce/plugin-crypto-sign
  * Plugin signature verification
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCryptoSignPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-crypto-sign',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-crypto-sign',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Security check: Plugin signature verification
@@ -29,7 +29,7 @@ export function createCryptoSignPlugin(): PluginAdapter {
             }
             
             if (issues.length > 0) {
-                console.warn(`[@sparx/plugin-crypto-sign] Security issues found:`, issues);
+                console.warn(`[@nuce/plugin-crypto-sign] Security issues found:`, issues);
             }
         }
     };

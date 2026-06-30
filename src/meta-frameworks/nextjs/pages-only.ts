@@ -1,21 +1,21 @@
 /**
- * SPARX — Next.js Pages Router Adapter (pages-only)
+ * NUCE — Next.js Pages Router Adapter (pages-only)
  *
  * Scope:
  *   - Pages Router ONLY (pages/ dir, no src/app/)
  *   - If src/app/ exists → print INFO, do NOTHING (App Router untouched)
  *   - Overrides webpack() in next.config.js to replace babel-loader/swc-loader
- *     with Sparx SWC transform (same output, faster, SQLite-cached)
+ *     with Nuce SWC transform (same output, faster, SQLite-cached)
  *   - Does NOT replace `next dev` or `next build` commands
  */
 
 import fs from 'fs';
 import path from 'path';
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 
-export const SPARX_NEXTJS_INFO_MESSAGE =
-  '[sparx] INFO: App Router project detected. Sparx does not modify App Router projects. next.config.js unchanged.';
+export const NUCE_NEXTJS_INFO_MESSAGE =
+  '[nuce] INFO: App Router project detected. Nuce does not modify App Router projects. next.config.js unchanged.';
 
 /**
  * Detect whether a project is Pages Router only.
@@ -32,19 +32,19 @@ export function detectRouterType(projectRoot: string): 'pages' | 'app' | 'none' 
 }
 
 /**
- * Build the webpack override config snippet that injects the Sparx SWC loader
+ * Build the webpack override config snippet that injects the Nuce SWC loader
  * in place of babel-loader or next/dist/compiled/babel/bundle.js.
  */
-export function buildWebpackOverride(sparxSwcLoaderPath: string): string {
+export function buildWebpackOverride(nuceSwcLoaderPath: string): string {
   return `
-// [sparx] Pages Router webpack override — replaces babel-loader with Sparx SWC transform
-// Do NOT edit this block manually — managed by Sparx adapter
-const sparxSwcLoader = {
-  loader: ${JSON.stringify(sparxSwcLoaderPath)},
-  options: { cacheDir: '.sparx-cache' }
+// [nuce] Pages Router webpack override — replaces babel-loader with Nuce SWC transform
+// Do NOT edit this block manually — managed by Nuce adapter
+const nuceSwcLoader = {
+  loader: ${JSON.stringify(nuceSwcLoaderPath)},
+  options: { cacheDir: '.nuce-cache' }
 };
 
-function sparxWebpackOverride(config, { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) {
+function nuceWebpackOverride(config, { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) {
   config.module.rules = config.module.rules.map(rule => {
     if (!rule || typeof rule !== 'object') return rule;
     // Replace babel-loader / next swc-loader in oneOf chains
@@ -53,7 +53,7 @@ function sparxWebpackOverride(config, { buildId, dev, isServer, defaultLoaders, 
         if (!r || typeof r !== 'object') return r;
         const loaderStr = JSON.stringify(r.loader || r.use || '');
         if (loaderStr.includes('babel') || loaderStr.includes('swc-loader')) {
-          return { ...r, loader: sparxSwcLoader.loader, options: sparxSwcLoader.options };
+          return { ...r, loader: nuceSwcLoader.loader, options: nuceSwcLoader.options };
         }
         return r;
       });
@@ -68,29 +68,29 @@ function sparxWebpackOverride(config, { buildId, dev, isServer, defaultLoaders, 
 /**
  * Inject or update the webpack override in next.config.js.
  * If the config already has a webpack() function, wraps it.
- * If no webpack() exists, adds sparxWebpackOverride.
+ * If no webpack() exists, adds nuceWebpackOverride.
  * Returns the modified config content.
  */
-export function injectWebpackOverride(configContent: string, sparxSwcLoaderPath: string): string {
-  const override = buildWebpackOverride(sparxSwcLoaderPath);
+export function injectWebpackOverride(configContent: string, nuceSwcLoaderPath: string): string {
+  const override = buildWebpackOverride(nuceSwcLoaderPath);
 
   // Already injected
-  if (configContent.includes('[sparx] Pages Router webpack override')) {
+  if (configContent.includes('[nuce] Pages Router webpack override')) {
     return configContent;
   }
 
   // Prepend override definition, then append webpack key to module.exports
   const preamble = override;
 
-  // Add webpack: sparxWebpackOverride to the exported config object
+  // Add webpack: nuceWebpackOverride to the exported config object
   const patched = configContent.replace(
     /module\.exports\s*=\s*(\{)/,
-    `${preamble}\nmodule.exports = {\n  webpack: sparxWebpackOverride,`
+    `${preamble}\nmodule.exports = {\n  webpack: nuceWebpackOverride,`
   );
 
   if (patched === configContent) {
     // Fallback: wrap entire export
-    return `${preamble}\nconst _nextConfig = ${configContent};\n_nextConfig.webpack = sparxWebpackOverride;\nmodule.exports = _nextConfig;\n`;
+    return `${preamble}\nconst _nextConfig = ${configContent};\n_nextConfig.webpack = nuceWebpackOverride;\nmodule.exports = _nextConfig;\n`;
   }
   return patched;
 }
@@ -107,7 +107,7 @@ function getDb(cacheDir: string): any {
   try {
     const Database = _require('better-sqlite3');
     fs.mkdirSync(cacheDir, { recursive: true });
-    _db = new Database(path.join(cacheDir, 'sparx-transform.db'));
+    _db = new Database(path.join(cacheDir, 'nuce-transform.db'));
     _db.exec(`CREATE TABLE IF NOT EXISTS transforms (
       fingerprint TEXT PRIMARY KEY,
       output      TEXT NOT NULL,
@@ -133,11 +133,11 @@ export function setCachedTransform(fingerprint: string, output: string, cacheDir
     .run(fingerprint, output, Date.now());
 }
 
-// ─── SparxSwcTransformer (used by the webpack loader) ─────────────────────
+// ─── NuceSwcTransformer (used by the webpack loader) ─────────────────────
 
 import { createHash } from 'crypto';
 
-export function transformWithSparxSwc(source: string, filePath: string, cacheDir = '.sparx-cache'): {
+export function transformWithNuceSwc(source: string, filePath: string, cacheDir = '.nuce-cache'): {
   code: string;
   cached: boolean;
 } {
@@ -147,7 +147,7 @@ export function transformWithSparxSwc(source: string, filePath: string, cacheDir
     return { code: cached, cached: true };
   }
 
-  // Sparx SWC transform: strip TypeScript types + JSX (same output as Next's internal SWC)
+  // Nuce SWC transform: strip TypeScript types + JSX (same output as Next's internal SWC)
   // In production this calls the native Rust SWC binding.
   // For the adapter layer we use esbuild as a compatible JS-side transform with identical semantics.
   let code = source;
@@ -165,7 +165,7 @@ export function transformWithSparxSwc(source: string, filePath: string, cacheDir
 
 // ─── Adapter ──────────────────────────────────────────────────────────────
 
-export class NextJsPagesAdapter implements SparxAdapter {
+export class NextJsPagesAdapter implements NuceAdapter {
   name = 'nextjs-pages';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -174,7 +174,7 @@ export class NextJsPagesAdapter implements SparxAdapter {
     const routerType = detectRouterType(projectRoot);
     if (routerType === 'app') {
       // Print info message but return false — we do not activate
-      console.log(SPARX_NEXTJS_INFO_MESSAGE);
+      console.log(NUCE_NEXTJS_INFO_MESSAGE);
       return false;
     }
     return routerType === 'pages';
@@ -184,7 +184,7 @@ export class NextJsPagesAdapter implements SparxAdapter {
     return [];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     return config;
   }
 
@@ -194,7 +194,7 @@ export class NextJsPagesAdapter implements SparxAdapter {
   async onBuild(projectRoot: string): Promise<void> {
     const routerType = detectRouterType(projectRoot);
     if (routerType === 'app') {
-      console.log(SPARX_NEXTJS_INFO_MESSAGE);
+      console.log(NUCE_NEXTJS_INFO_MESSAGE);
       return;
     }
 
@@ -202,8 +202,8 @@ export class NextJsPagesAdapter implements SparxAdapter {
     if (!fs.existsSync(configPath)) return;
 
     const original = fs.readFileSync(configPath, 'utf-8');
-    const sparxLoaderPath = path.resolve(projectRoot, 'node_modules/@sparx/swc-loader/index.js');
-    const patched = injectWebpackOverride(original, sparxLoaderPath);
+    const nuceLoaderPath = path.resolve(projectRoot, 'node_modules/@nuce/swc-loader/index.js');
+    const patched = injectWebpackOverride(original, nuceLoaderPath);
 
     if (patched !== original) {
       fs.writeFileSync(configPath, patched, 'utf-8');

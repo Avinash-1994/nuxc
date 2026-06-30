@@ -1,7 +1,7 @@
 {
-  "name": "@sparx/plugin-react",
+  "name": "@nuce/plugin-react",
   "version": "1.0.0",
-  "description": "Official Sparx plugin for React — JSX transform, React Fast Refresh HMR, and error overlay",
+  "description": "Official Nuce plugin for React — JSX transform, React Fast Refresh HMR, and error overlay",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,11 +16,11 @@
     "build": "tsc",
     "test": "node --test src/__tests__/index.test.js"
   },
-  "keywords": ["sparx", "plugin", "react", "jsx", "hmr", "fast-refresh"],
+  "keywords": ["nuce", "plugin", "react", "jsx", "hmr", "fast-refresh"],
   "author": "Avinash-1994",
   "license": "MIT",
   "peerDependencies": {
-    "sparx": ">=1.0.0",
+    "nuce": ">=1.0.0",
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"
   },

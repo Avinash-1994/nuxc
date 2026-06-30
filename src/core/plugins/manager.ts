@@ -1,27 +1,27 @@
 
 import fs from 'fs/promises';
-import { SparxPlugin, PluginHookName, PluginExecutionRecord, PluginValidation } from './types.js';
+import { NucePlugin, PluginHookName, PluginExecutionRecord, PluginValidation } from './types.js';
 import { canonicalHash } from '../engine/hash.js';
 import { explainReporter } from '../engine/events.js';
 
 /**
  * Plugin Manager
  * 
- * PUBLIC: Responsible for registering and executing plugins in the Sparx pipeline.
+ * PUBLIC: Responsible for registering and executing plugins in the Nuce pipeline.
  * Use this to extend engine functionality via the official plugin contract.
  * 
  * @public
  */
 export class PluginManager {
     /** @internal */
-    private plugins: Map<string, SparxPlugin> = new Map();
+    private plugins: Map<string, NucePlugin> = new Map();
 
     /** @public */
-    async register(plugin: SparxPlugin | any) {
+    async register(plugin: NucePlugin | any) {
         // [SAFE REMOVAL] Phase 1.1: Wasmtime Sandbox removal
         if (plugin?.manifest?.type === 'wasm' || plugin?.path?.endsWith('.wasm')) {
-            console.warn('[SPARX:WARN] WASM plugins are deprecated. See https://sparx.dev/migrate for the new JS/TS Hook API hook migration path.');
-            throw new Error(`[Sparx] Error: .wasm plugin architecture has been removed for security and performance reasons. Plugin "${plugin?.manifest?.name || plugin?.name || 'unknown'}" must be migrated to a standard JS/TS hook format.`);
+            console.warn('[NUCE:WARN] WASM plugins are deprecated. See https://nuce.dev/migrate for the new JS/TS Hook API hook migration path.');
+            throw new Error(`[Nuce] Error: .wasm plugin architecture has been removed for security and performance reasons. Plugin "${plugin?.manifest?.name || plugin?.name || 'unknown'}" must be migrated to a standard JS/TS hook format.`);
         }
 
         let activePlugin = plugin;
@@ -44,7 +44,7 @@ export class PluginManager {
                     }
                     return null;
                 }
-            } as SparxPlugin;
+            } as NucePlugin;
         }
 
         const { name, version } = activePlugin.manifest;
@@ -67,22 +67,22 @@ export class PluginManager {
      * Please migrate your plugin to standard JS/TS Hooks.
      */
     async registerWasmPlugin(wasmBytes: Buffer | Uint8Array | ArrayBuffer): Promise<void> {
-        console.warn('[SPARX:WARN] registerWasmPlugin() is deprecated. See https://sparx.dev/migrate');
-        throw new Error('[Sparx] Error: .wasm plugin architecture has been removed.');
+        console.warn('[NUCE:WARN] registerWasmPlugin() is deprecated. See https://nuce.dev/migrate');
+        throw new Error('[Nuce] Error: .wasm plugin architecture has been removed.');
     }
 
     /**
      * @deprecated WASM plugin support has been removed (Phase 1.1).
      */
     async registerWasmPluginFromFile(filePath: string): Promise<void> {
-        console.warn('[SPARX:WARN] registerWasmPluginFromFile() is deprecated. See https://sparx.dev/migrate');
-        throw new Error('[Sparx] Error: .wasm plugin architecture has been removed.');
+        console.warn('[NUCE:WARN] registerWasmPluginFromFile() is deprecated. See https://nuce.dev/migrate');
+        throw new Error('[Nuce] Error: .wasm plugin architecture has been removed.');
     }
 
     /** @internal */
     private metrics: Map<string, { time: number, calls: number }> = new Map();
     /** @internal */
-    private hookCache: Map<string, SparxPlugin[]> = new Map();
+    private hookCache: Map<string, NucePlugin[]> = new Map();
 
     /** @internal - Used by the engine to execute hooks. */
     async runHook(hookName: PluginHookName, input: any, context?: any): Promise<any> {

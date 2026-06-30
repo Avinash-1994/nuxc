@@ -1,15 +1,15 @@
 # Vue 3 Guide
 
-> Build Vue 3 apps with Sparx — SFC hot-reload, Composition API, TypeScript, CSS Modules.
+> Build Vue 3 apps with Nuce — SFC hot-reload, Composition API, TypeScript, CSS Modules.
 
 ---
 
 ## Quick Start
 
 ```bash
-sparx bootstrap --name my-vue-app --template vue-ts
+nuce bootstrap --name my-vue-app --template vue-ts
 cd my-vue-app
-sparx dev
+nuce dev
 ```
 
 ---
@@ -19,12 +19,12 @@ sparx dev
 ### 1. Install
 
 ```bash
-npm install --save-dev sparx
+npm install --save-dev nuce
 npm install vue
 npm install --save-dev typescript @vue/tsconfig
 ```
 
-### 2. Create `sparx.config.js`
+### 2. Create `nuce.config.js`
 
 **JavaScript:**
 ```js
@@ -38,7 +38,7 @@ module.exports = {
 
 **TypeScript:**
 ```ts
-import { defineConfig } from 'sparx';
+import { defineConfig } from 'nuce';
 
 export default defineConfig({
   entry: ['./src/main.ts'],
@@ -69,7 +69,7 @@ const count = ref(0);
 
 <template>
   <div>
-    <h1>Hello from Sparx + Vue 3</h1>
+    <h1>Hello from Nuce + Vue 3</h1>
     <button @click="count++">Count: {{ count }}</button>
   </div>
 </template>
@@ -89,7 +89,7 @@ button {
 
 ## HMR — SFC Hot-Reload
 
-Sparx integrates **Vue SFC hot-reload** automatically for `.vue` files.
+Nuce integrates **Vue SFC hot-reload** automatically for `.vue` files.
 
 - `<script setup>` changes: component re-mounts
 - `<template>` changes: hot-patched (state preserved)
@@ -240,7 +240,7 @@ export const useCounterStore = defineStore('counter', {
 ## Production Build
 
 ```bash
-sparx build
+nuce build
 ```
 
 Output:

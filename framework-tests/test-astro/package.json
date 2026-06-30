@@ -1,23 +1,23 @@
 {
-  "name": "sparx-astro-template",
+  "name": "nuce-astro-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "sparx dev",
-    "build": "sparx build",
-    "preview": "sparx preview"
+    "dev": "nuce dev",
+    "build": "nuce build",
+    "preview": "nuce preview"
   },
-  "sparx": {
+  "nuce": {
     "template": true,
     "framework": "astro",
-    "description": "Sparx Docs — documentation site"
+    "description": "Nuce Docs — documentation site"
   },
   "dependencies": {
     "astro": "4.10.2"
   },
   "devDependencies": {
-    "sparx": "file:../../",
+    "nuce": "file:../../",
     "typescript": "5.4.5"
   }
 }

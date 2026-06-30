@@ -1,15 +1,15 @@
 /**
- * @sparx/plugin-jotai
+ * @nuce/plugin-jotai
  * Jotai state management
- * Sparx-native
+ * Nuce-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createJotaiPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-jotai',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-jotai',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // jotai transformation

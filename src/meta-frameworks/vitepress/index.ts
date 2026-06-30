@@ -1,5 +1,5 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 import { vitepressMarkdownPlugin } from './press-plugin.js';
 
 export interface VitePressConfig {
@@ -8,7 +8,7 @@ export interface VitePressConfig {
   cleanUrls?: boolean;   // default false
 }
 
-export class VitePressAdapter implements SparxAdapter {
+export class VitePressAdapter implements NuceAdapter {
   name = 'vitepress';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -21,7 +21,7 @@ export class VitePressAdapter implements SparxAdapter {
     ];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     if (!config.vitepress) config.vitepress = {};
     config.vitepress = {
       srcDir: '.',
@@ -39,7 +39,7 @@ export class VitePressAdapter implements SparxAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:sparx/vitepress-router';
+         const virtualEntry = 'virtual:nuce/vitepress-router';
          let router: any;
          try {
             router = await import(virtualEntry);
@@ -70,7 +70,7 @@ export class VitePressAdapter implements SparxAdapter {
 
          next();
       } catch(e) {
-         console.error('[Sparx:VitePress] Error rendering SSR', e);
+         console.error('[Nuce:VitePress] Error rendering SSR', e);
          next();
       }
     };

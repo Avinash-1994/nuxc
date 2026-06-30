@@ -1,13 +1,13 @@
-# Sparx Adapter Registry
+# Nuce Adapter Registry
 
 **Phase**: H.1 (Module 9)  
 **Status**: ✅ Active
 
-This registry indexes all supported framework adapters for the Sparx build system.
+This registry indexes all supported framework adapters for the Nuce build system.
 
 ## 📖 What is an Adapter?
 
-An **Adapter** is an isolated translation layer that allows Sparx to build, bundle, and serve a specific frontend framework without modifying Sparx's core logic. Adapters are **data producers**, not policy engines.
+An **Adapter** is an isolated translation layer that allows Nuce to build, bundle, and serve a specific frontend framework without modifying Nuce's core logic. Adapters are **data producers**, not policy engines.
 
 See: [Adapter Architecture](../MODULE_8_SCOPE.md)
 

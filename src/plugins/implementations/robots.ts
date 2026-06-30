@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-robots
+ * @nuce/plugin-robots
  * Robots.txt generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRobotsPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-robots',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-robots',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Robots.txt generation

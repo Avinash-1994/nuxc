@@ -1,19 +1,19 @@
 import path from 'path';
 import fs from 'fs/promises';
-import { SparxPlugin } from '../core/plugins/types.js';
+import { NucePlugin } from '../core/plugins/types.js';
 import { fastHash } from '../native/index.js';
 
-export function createAssetPlugin(outDir: string = 'build_output'): SparxPlugin {
+export function createAssetPlugin(outDir: string = 'build_output'): NucePlugin {
     return {
         manifest: {
-            name: 'sparx:asset',
+            name: 'nuce:asset',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['resolveId', 'load'],
             permissions: { fs: 'read' }
         },
-        id: 'sparx:asset',
+        id: 'nuce:asset',
         async runHook(hook, input, context) {
             const ASSET_REGEX = /\.(png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|otf)$/;
 

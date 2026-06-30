@@ -1,5 +1,5 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 import { analogCompilerPlugin } from './analog-plugin.js';
 
 export interface AnalogConfig {
@@ -7,7 +7,7 @@ export interface AnalogConfig {
   prerender?: string[];    // default: ['/']
 }
 
-export class AnalogAdapter implements SparxAdapter {
+export class AnalogAdapter implements NuceAdapter {
   name = 'analog';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class AnalogAdapter implements SparxAdapter {
     ];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     if (!config.analog) config.analog = {};
     config.analog = {
       ssr: true,
@@ -62,7 +62,7 @@ export class AnalogAdapter implements SparxAdapter {
           }
         }
       } catch (e) {
-        console.error('[SPARX Analog] Dev handler error:', e);
+        console.error('[NUCE Analog] Dev handler error:', e);
       }
       next();
     };

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 export function rewriteWasmPlugins(projectPath: string): string[] {
-    const filesToExamine = ['sparx.config.ts', 'sparx.config.js', 'sparx.config.cjs', 'sparx.config.json', 'sparx.build.json', 'sparx.build.ts'];
+    const filesToExamine = ['nuce.config.ts', 'nuce.config.js', 'nuce.config.cjs', 'nuce.config.json', 'nuce.build.json', 'nuce.build.ts'];
     const rewrittenFiles: string[] = [];
 
     for (const file of filesToExamine) {

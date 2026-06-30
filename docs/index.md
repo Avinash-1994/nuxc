@@ -1,4 +1,4 @@
-# Sparx Documentation
+# Nuce Documentation
 
 > Blazing-fast JavaScript build tool powered by SWC + LightningCSS
 
@@ -15,7 +15,7 @@
 | 📦 **[Module Federation](./guides/federation.md)** | Micro-frontend setup |
 | 🚚 **[Migration Guide](./migration.md)** | From Vite, Webpack, Rollup |
 | ❓ **[Troubleshooting](./TROUBLESHOOTING.md)** | Top 10 errors and fixes |
-| ⚖️ **[Why Sparx?](./WHY_SPARX.md)** | Honest comparison vs Vite, Rspack, Turbopack |
+| ⚖️ **[Why Nuce?](./WHY_NUCE.md)** | Honest comparison vs Vite, Rspack, Turbopack |
 | 📊 **[Benchmarks](./benchmarks.md)** | Reproducible performance data |
 
 ---
@@ -33,8 +33,8 @@
 
 ## Online Resources
 
-- 🌐 [Documentation Website](https://avinash-1994.github.io/Sparx/)
-- 📦 [npm Package](https://www.npmjs.com/package/sparx)
-- 💻 [GitHub Repository](https://github.com/Avinash-1994/Sparx)
-- 🐛 [Report a Bug](https://github.com/Avinash-1994/Sparx/issues)
-- 💬 [Discussions](https://github.com/Avinash-1994/Sparx/discussions)
+- 🌐 [Documentation Website](https://avinash-1994.github.io/Nuce/)
+- 📦 [npm Package](https://www.npmjs.com/package/nuce)
+- 💻 [GitHub Repository](https://github.com/Avinash-1994/Nuce)
+- 🐛 [Report a Bug](https://github.com/Avinash-1994/Nuce/issues)
+- 💬 [Discussions](https://github.com/Avinash-1994/Nuce/discussions)

@@ -1,6 +1,6 @@
 /**
  * ConfigWatcher — Phase 3.3
- * Watches sparx.config.ts, tsconfig.json, .env etc. for changes.
+ * Watches nuce.config.ts, tsconfig.json, .env etc. for changes.
  * Uses native Rust watcher first; falls back to chokidar.
  */
 import path from 'path';
@@ -14,7 +14,7 @@ try {
     const native = await import('../native/index.js');
     NativeWatcher = native.NativeWatcher;
 } catch (e: any) {
-    console.warn(`[sparx] Native watcher unavailable, falling back to chokidar: ${e?.message ?? e}`);
+    console.warn(`[nuce] Native watcher unavailable, falling back to chokidar: ${e?.message ?? e}`);
 }
 
 export class ConfigWatcher {
@@ -28,7 +28,7 @@ export class ConfigWatcher {
 
     async start() {
         const configFiles = [
-            'sparx.config.ts', 'sparx.config.js', 'sparx.config.json',
+            'nuce.config.ts', 'nuce.config.js', 'nuce.config.json',
             'tailwind.config.js', 'tsconfig.json', '.env', '.env.local'
         ].map(f => path.join(this.root, f));
 
@@ -48,7 +48,7 @@ export class ConfigWatcher {
                 });
                 return;
             } catch (e: any) {
-                log.warn(`[sparx] ConfigWatcher native failed (${e.message}), using chokidar.`);
+                log.warn(`[nuce] ConfigWatcher native failed (${e.message}), using chokidar.`);
             }
         }
 
@@ -63,7 +63,7 @@ export class ConfigWatcher {
                 this.onReload(type, file);
             });
         } catch (e: any) {
-            log.error(`[sparx] ConfigWatcher: both native and chokidar failed: ${e.message}`);
+            log.error(`[nuce] ConfigWatcher: both native and chokidar failed: ${e.message}`);
         }
     }
 

@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-analytics
+ * @nuce/plugin-analytics
  * Build analytics
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createAnalyticsPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-analytics',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-analytics',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Build analytics

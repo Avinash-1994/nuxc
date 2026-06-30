@@ -1,5 +1,5 @@
 /**
- * Sparx v2.0 Native Module Definitions
+ * Nuce v2.0 Native Module Definitions
  */
 
 export interface CacheStats {
@@ -148,7 +148,7 @@ export interface ChunkerResult {
 }
 
 /** Phase 3.1 — Chunker + DCE. Walk dep graph, eliminate dead code, split into chunks. */
-export function sparxChunk(graphJson: string, config: ChunkerConfig): ChunkerResult;
+export function nuceChunk(graphJson: string, config: ChunkerConfig): ChunkerResult;
 
 /** Phase 3.2 — Merge N source maps (SWC + LightningCSS) into one. */
 export function mergeSourceMaps(maps: string[]): string;

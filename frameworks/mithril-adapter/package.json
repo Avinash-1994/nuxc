@@ -1,12 +1,12 @@
 {
-    "name": "@sparx/mithril-adapter",
+    "name": "@nuce/mithril-adapter",
     "version": "0.1.0",
-    "description": "Sparx Framework Adapter for Mithril.js (Tier-1 Supported)",
+    "description": "Nuce Framework Adapter for Mithril.js (Tier-1 Supported)",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
         "build": "tsc",
-        "test": "echo 'Run integration tests via Sparx runner'"
+        "test": "echo 'Run integration tests via Nuce runner'"
     },
     "dependencies": {
         "vite": "^5.0.0"
@@ -17,10 +17,10 @@
         "@types/mithril": "^2.0.0",
         "@types/node": "^20.0.0"
     },
-    "sparx": {
+    "nuce": {
         "name": "Mithril Adapter",
         "state": "candidate",
-        "maintainer": "Sparx Core Team",
+        "maintainer": "Nuce Core Team",
         "supported_capabilities": [
             "build",
             "hmr",

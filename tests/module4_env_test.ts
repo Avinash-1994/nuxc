@@ -4,19 +4,19 @@
  * Validates Day 26 Unified HMR & Config
  */
 
-import { SparxEnv } from '../src/env/api.js';
+import { NuceEnv } from '../src/env/api.js';
 
 async function runEnvTest() {
     console.log('🧪 Testing Environment API...');
 
     // 1. Initialize
-    const env = SparxEnv.init({
+    const env = NuceEnv.init({
         mode: 'development',
         ssr: true,
         base: '/'
     });
 
-    if (SparxEnv.get().config.mode !== 'development') {
+    if (NuceEnv.get().config.mode !== 'development') {
         throw new Error('Config mismatch');
     }
     console.log('  ✅ Env Initialization Verified');

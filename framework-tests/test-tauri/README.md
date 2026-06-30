@@ -1,4 +1,4 @@
-# Sparx tauri Template — Sparx Files Desktop — Rust file manager
+# Nuce tauri Template — Nuce Files Desktop — Rust file manager
 ```bash
 npm install && npm run dev
 ```

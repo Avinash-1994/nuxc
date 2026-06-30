@@ -1,6 +1,6 @@
-# Getting Started with Sparx
+# Getting Started with Nuce
 
-Welcome to Sparx! This guide will help you get up and running in minutes.
+Welcome to Nuce! This guide will help you get up and running in minutes.
 
 ## Quick Start
 
@@ -8,23 +8,23 @@ Welcome to Sparx! This guide will help you get up and running in minutes.
 
 ```bash
 # Using npm
-npm install -g sparx
+npm install -g nuce
 
 # Using yarn
-yarn global add sparx
+yarn global add nuce
 
 # Using pnpm
-pnpm add -g sparx
+pnpm add -g nuce
 ```
 
 ### Create a New Project
 
 ```bash
 # Create a new project from template
-npx create-sparx my-app
+npx create-nuce my-app
 
 # Choose from available templates
-npx create-sparx my-app --template react-spa
+npx create-nuce my-app --template react-spa
 ```
 
 ### Available Templates
@@ -57,7 +57,7 @@ npm install
 ### 3. Start development server
 
 ```bash
-sparx dev
+nuce dev
 ```
 
 Your app will be running at `http://localhost:3000` with Hot Module Replacement enabled!
@@ -65,7 +65,7 @@ Your app will be running at `http://localhost:3000` with Hot Module Replacement 
 ### 4. Build for production
 
 ```bash
-sparx build
+nuce build
 ```
 
 Your optimized build will be in the `dist/` folder.
@@ -79,14 +79,14 @@ my-app/
 │   ├── App.tsx          # Main component
 │   └── ...
 ├── public/              # Static assets
-├── sparx.config.js      # Sparx configuration
+├── nuce.config.js      # Nuce configuration
 ├── package.json
 └── tsconfig.json
 ```
 
 ## Configuration
 
-Create a `sparx.config.js` in your project root:
+Create a `nuce.config.js` in your project root:
 
 ```javascript
 module.exports = {
@@ -122,7 +122,7 @@ module.exports = {
 
 ## Need Help?
 
-- 📖 [Documentation](https://sparx.dev/docs)
-- 💬 [GitHub Discussions](https://github.com/Avinash-1994/sparx/discussions)
-- 🐛 [Report Issues](https://github.com/Avinash-1994/sparx/issues)
-- 🌟 [Star on GitHub](https://github.com/Avinash-1994/sparx)
+- 📖 [Documentation](https://nuce.dev/docs)
+- 💬 [GitHub Discussions](https://github.com/Avinash-1994/nuce/discussions)
+- 🐛 [Report Issues](https://github.com/Avinash-1994/nuce/issues)
+- 🌟 [Star on GitHub](https://github.com/Avinash-1994/nuce)

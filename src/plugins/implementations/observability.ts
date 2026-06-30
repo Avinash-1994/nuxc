@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-observability
+ * @nuce/plugin-observability
  * Build observability
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createObservabilityPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-observability',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-observability',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Build observability

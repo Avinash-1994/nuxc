@@ -4,7 +4,7 @@ import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
 
-// CFG-05: Preview reads outDir from sparx.config
+// CFG-05: Preview reads outDir from nuce.config
 export default {
   options: (yargs: any) => {
     return yargs

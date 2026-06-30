@@ -1,22 +1,22 @@
 {
-  "name": "sparx-mfe-template",
+  "name": "nuce-mfe-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev:all": "concurrently \"npm run dev:remote-vue\" \"npm run dev:remote-react\" \"npm run dev:host\"",
-    "dev:host": "cd host && sparx dev",
-    "dev:remote-vue": "cd remote-vue && sparx dev",
-    "dev:remote-react": "cd remote-react && sparx dev",
+    "dev:host": "cd host && nuce dev",
+    "dev:remote-vue": "cd remote-vue && nuce dev",
+    "dev:remote-react": "cd remote-react && nuce dev",
     "build:all": "npm run build --prefix remote-vue && npm run build --prefix remote-react && npm run build --prefix host"
   },
-  "sparx": {
+  "nuce": {
     "template": true,
     "framework": "mfe",
-    "description": "Sparx MFE — Module Federation host + 2 remotes"
+    "description": "Nuce MFE — Module Federation host + 2 remotes"
   },
   "devDependencies": {
     "concurrently": "8.2.2",
-    "sparx": "file:../../"
+    "nuce": "file:../../"
   }
 }

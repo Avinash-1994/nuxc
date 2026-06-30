@@ -12,7 +12,7 @@ interface DoctorCheck {
     fix?: string;
 }
 
-export class SparxDoctor {
+export class NuceDoctor {
     private cwd: string;
     private checks: DoctorCheck[] = [];
 
@@ -21,11 +21,11 @@ export class SparxDoctor {
     }
 
     async diagnose(): Promise<void> {
-        console.log('\n🩺 Sparx Doctor - Running Diagnostics...\n');
+        console.log('\n🩺 Nuce Doctor - Running Diagnostics...\n');
 
         await this.checkNodeVersion();
         await this.checkPackageJson();
-        await this.checkSparxConfig();
+        await this.checkNuceConfig();
         await this.checkDependencies();
         await this.checkGitIgnore();
         await this.checkEnvironment();
@@ -61,30 +61,30 @@ export class SparxDoctor {
         try {
             const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
 
-            // Check for sparx in dependencies
-            const hasSparx = pkg.dependencies?.sparx || pkg.devDependencies?.sparx;
-            if (hasSparx) {
-                this.addCheck('package.json', 'pass', `Sparx ${hasSparx} configured`);
+            // Check for nuce in dependencies
+            const hasNuce = pkg.dependencies?.nuce || pkg.devDependencies?.nuce;
+            if (hasNuce) {
+                this.addCheck('package.json', 'pass', `Nuce ${hasNuce} configured`);
             } else {
-                this.addCheck('package.json', 'warn', 'Sparx not in dependencies', 'Run `npm install sparx`');
+                this.addCheck('package.json', 'warn', 'Nuce not in dependencies', 'Run `npm install nuce`');
             }
 
             // Check for scripts
             if (pkg.scripts?.dev || pkg.scripts?.build) {
                 this.addCheck('npm scripts', 'pass', 'Build scripts configured');
             } else {
-                this.addCheck('npm scripts', 'warn', 'No dev/build scripts', 'Add "dev": "sparx dev" and "build": "sparx build"');
+                this.addCheck('npm scripts', 'warn', 'No dev/build scripts', 'Add "dev": "nuce dev" and "build": "nuce build"');
             }
         } catch (e) {
             this.addCheck('package.json', 'fail', 'Invalid JSON', 'Fix JSON syntax errors');
         }
     }
 
-    private async checkSparxConfig(): Promise<void> {
+    private async checkNuceConfig(): Promise<void> {
         const configPaths = [
-            'sparx.config.ts',
-            'sparx.config.js',
-            'sparx.config.mjs'
+            'nuce.config.ts',
+            'nuce.config.js',
+            'nuce.config.mjs'
         ];
 
         const configFile = configPaths.find(p => fs.existsSync(path.join(this.cwd, p)));
@@ -92,7 +92,7 @@ export class SparxDoctor {
         if (configFile) {
             try {
                 const config = await loadConfig(this.cwd);
-                this.addCheck('Sparx Config', 'pass', `Found ${configFile}`);
+                this.addCheck('Nuce Config', 'pass', `Found ${configFile}`);
 
                 // Validate config
                 if (!config.entry || config.entry.length === 0) {
@@ -101,10 +101,10 @@ export class SparxDoctor {
                     this.addCheck('Config Validation', 'pass', `${config.entry.length} entry point(s)`);
                 }
             } catch (e: any) {
-                this.addCheck('Sparx Config', 'fail', `Error loading config: ${e.message}`, 'Check config syntax');
+                this.addCheck('Nuce Config', 'fail', `Error loading config: ${e.message}`, 'Check config syntax');
             }
         } else {
-            this.addCheck('Sparx Config', 'warn', 'No config file found', 'Run `sparx init` to create one');
+            this.addCheck('Nuce Config', 'warn', 'No config file found', 'Run `nuce init` to create one');
         }
     }
 
@@ -227,7 +227,7 @@ export class SparxDoctor {
     }
 
     private async checkCacheHealth(): Promise<void> {
-        const cacheDir = path.join(this.cwd, 'node_modules', '.sparx');
+        const cacheDir = path.join(this.cwd, 'node_modules', '.nuce');
 
         if (!fs.existsSync(cacheDir)) {
             this.addCheck('Build Cache', 'pass', 'No cache yet (will be created on first build)');
@@ -240,7 +240,7 @@ export class SparxDoctor {
             const sizeMB = sizeBytes / (1024 ** 2);
 
             if (sizeMB > 1000) {
-                this.addCheck('Build Cache', 'warn', `${sizeMB.toFixed(0)} MB (large)`, 'Consider clearing cache with `rm -rf node_modules/.sparx`');
+                this.addCheck('Build Cache', 'warn', `${sizeMB.toFixed(0)} MB (large)`, 'Consider clearing cache with `rm -rf node_modules/.nuce`');
             } else {
                 this.addCheck('Build Cache', 'pass', `${sizeMB.toFixed(0)} MB`);
             }
@@ -275,7 +275,7 @@ export class SparxDoctor {
         const outputDir = fs.existsSync(buildDir) ? buildDir : fs.existsSync(distDir) ? distDir : null;
 
         if (!outputDir) {
-            this.addCheck('Performance', 'pass', 'No build output yet (run `sparx build` first)');
+            this.addCheck('Performance', 'pass', 'No build output yet (run `nuce build` first)');
             return;
         }
 
@@ -367,12 +367,12 @@ export class SparxDoctor {
         console.log(`   CPU: ${os.cpus()[0].model} (${os.cpus().length} cores)`);
         console.log(`   Memory: ${(os.totalmem() / (1024 ** 3)).toFixed(1)} GB total, ${(os.freemem() / (1024 ** 3)).toFixed(1)} GB free`);
 
-        // Try to get Sparx version
+        // Try to get Nuce version
         try {
-            const pkgPath = path.join(this.cwd, 'node_modules', 'sparx', 'package.json');
+            const pkgPath = path.join(this.cwd, 'node_modules', 'nuce', 'package.json');
             if (fs.existsSync(pkgPath)) {
                 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
-                console.log(`   Sparx: v${pkg.version}`);
+                console.log(`   Nuce: v${pkg.version}`);
             }
         } catch (e) {
             // Ignore
@@ -386,12 +386,12 @@ export class SparxDoctor {
         } else if (warnings > 0) {
             console.log('⚠️  Some warnings detected. Consider addressing them for optimal performance.\n');
         } else {
-            console.log('✅ All checks passed! Your Sparx project is healthy.\n');
+            console.log('✅ All checks passed! Your Nuce project is healthy.\n');
         }
     }
 }
 
 export async function runDoctor(cwd: string = process.cwd()): Promise<void> {
-    const doctor = new SparxDoctor(cwd);
+    const doctor = new NuceDoctor(cwd);
     await doctor.diagnose();
 }

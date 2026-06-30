@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-imagemin
+ * @nuce/plugin-imagemin
  * Image optimization
  */
 
@@ -9,7 +9,7 @@ import path from 'path';
 
 export function createImageminPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-imagemin',
+        name: '@nuce/plugin-imagemin',
         originalPlugin: 'vite-plugin-imagemin',
         
         async load(id: string) {

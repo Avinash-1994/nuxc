@@ -1,4 +1,4 @@
-// Plugin type compatible with both Sparx and Vite plugin API
+// Plugin type compatible with both Nuce and Vite plugin API
 type Plugin = { name: string; [hook: string]: any };
 
 export interface SveltePluginOptions {
@@ -11,9 +11,9 @@ export interface SveltePluginOptions {
 }
 
 /**
- * @sparx/plugin-svelte
+ * @nuce/plugin-svelte
  *
- * Official Sparx plugin for Svelte:
+ * Official Nuce plugin for Svelte:
  * - .svelte file transform via Svelte compiler
  * - Svelte 5 Runes support ($state, $derived, $effect)
  * - HMR via svelte-hmr pattern (state resets on save)
@@ -21,7 +21,7 @@ export interface SveltePluginOptions {
  *
  * @example
  * ```js
- * const svelte = require('@sparx/plugin-svelte');
+ * const svelte = require('@nuce/plugin-svelte');
  * module.exports = { plugins: [svelte()] };
  * ```
  */
@@ -33,14 +33,14 @@ export function sveltePlugin(options: SveltePluginOptions = {}): Plugin {
   } = options;
 
   return {
-    name: '@sparx/plugin-svelte',
+    name: '@nuce/plugin-svelte',
 
     /**
      * Load hook: detect Svelte files and signal to core for compilation.
      */
     load(id: string): null {
       if (!id.endsWith('.svelte')) return null;
-      // Svelte compilation is handled natively by Sparx's esbuild-svelte integration.
+      // Svelte compilation is handled natively by Nuce's esbuild-svelte integration.
       // This plugin extends configuration and wraps for HMR.
       return null;
     },

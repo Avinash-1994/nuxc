@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-vue-i18n-next
+ * @nuce/plugin-vue-i18n-next
  * Vue I18n integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVueI18nNextPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-vue-i18n-next',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-vue-i18n-next',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // i18n: Vue I18n integration
@@ -16,7 +16,7 @@ export function createVueI18nNextPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@sparx/plugin-vue-i18n-next] i18n setup complete');
+            console.log('[@nuce/plugin-vue-i18n-next] i18n setup complete');
         }
     };
 }

@@ -1,20 +1,20 @@
 {
-  "name": "sparx-tauri-template",
+  "name": "nuce-tauri-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "sparx dev",
-    "build": "sparx build",
-    "preview": "sparx preview"
+    "dev": "nuce dev",
+    "build": "nuce build",
+    "preview": "nuce preview"
   },
-  "sparx": {
+  "nuce": {
     "template": true,
     "framework": "tauri",
-    "description": "Sparx Files Desktop — Rust file manager"
+    "description": "Nuce Files Desktop — Rust file manager"
   },
   "devDependencies": {
-    "sparx": "file:../../",
+    "nuce": "file:../../",
     "typescript": "5.4.5"
   }
 }

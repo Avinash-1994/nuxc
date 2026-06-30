@@ -19,8 +19,8 @@ function App() {
   return (
     <div className="container">
       <div className="header">
-        <img src={logoSvg} alt="Sparx Logo" className="logo" />
-        <h1>Sparx <span className="highlight">Features Showcase</span></h1>
+        <img src={logoSvg} alt="Nuce Logo" className="logo" />
+        <h1>Nuce <span className="highlight">Features Showcase</span></h1>
       </div>
       
       <div className="feature-grid">

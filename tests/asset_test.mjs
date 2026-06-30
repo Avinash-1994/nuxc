@@ -179,7 +179,7 @@ import crypto from "crypto";
 var globalFetch = globalThis.fetch;
 var DiskCache = class {
   constructor(base) {
-    this.dir = path.resolve(base, ".sparx_cache");
+    this.dir = path.resolve(base, ".nuce_cache");
   }
   async ensure() {
     await fs.mkdir(this.dir, { recursive: true });
@@ -195,7 +195,7 @@ var DiskCache = class {
       }
     }
     try {
-      const cfg = await fs.readFile("sparx.build.json");
+      const cfg = await fs.readFile("nuce.build.json");
       hash.update(cfg);
     } catch (e) {
     }
@@ -344,7 +344,7 @@ import path2 from "path";
 import fs2 from "fs/promises";
 function createEsbuildPlugin(pm) {
   return {
-    name: "sparx-adapter",
+    name: "nuce-adapter",
     setup(build2) {
       build2.onLoad({ filter: /.*/ }, async (args) => {
         if (args.path.includes("node_modules"))
@@ -374,7 +374,7 @@ var nativeModule = null;
 function loadNative() {
   if (!nativeModule) {
     try {
-      nativeModule = nodeRequire("../../sparx_native.node");
+      nativeModule = nodeRequire("../../nuce_native.node");
     } catch (e) {
       throw new Error(`Failed to load Rust native worker: ${e}`);
     }

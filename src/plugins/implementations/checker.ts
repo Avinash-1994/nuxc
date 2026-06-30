@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-checker
+ * @nuce/plugin-checker
  * TypeScript/ESLint checker
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCheckerPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-checker',
+        name: '@nuce/plugin-checker',
         originalPlugin: 'vite-plugin-checker',
         
         async transform(code: string, id: string) {

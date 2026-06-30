@@ -1,4 +1,4 @@
-# Sparx Tasks — React Template
+# Nuce Tasks — React Template
 ```bash
 npm install && npm run dev
 ```

@@ -1,7 +1,7 @@
-# 🎯 Sparx Web App Update Requirements
+# 🎯 Nuce Web App Update Requirements
 
 ## Current Status
-The sparx-web-app exists at `/home/avinash/Desktop/framework_practis/build/sparx-web-app` but needs updating with **accurate production data** from our v1.0 release.
+The nuce-web-app exists at `/home/avinash/Desktop/framework_practis/build/nuce-web-app` but needs updating with **accurate production data** from our v1.0 release.
 
 ---
 
@@ -61,20 +61,20 @@ The sparx-web-app exists at `/home/avinash/Desktop/framework_practis/build/sparx
 
 ### CLI Commands (ACTUAL)
 ```bash
-sparx dev        # Start development server
-sparx build      # Build for production
-sparx analyze    # Analyze bundle
-sparx ssr        # Start SSR server
-sparx init       # Initialize config
-sparx bootstrap  # Create from template
-sparx css        # CSS utilities
-sparx optimize   # Optimize config
-sparx inspect    # Inspect dependency graph
-sparx report     # Generate build report
-sparx audit      # Run audits (A11y, Perf, SEO)
-sparx verify     # Verify project health
-sparx test       # Run tests
-sparx doctor     # Health diagnostics
+nuce dev        # Start development server
+nuce build      # Build for production
+nuce analyze    # Analyze bundle
+nuce ssr        # Start SSR server
+nuce init       # Initialize config
+nuce bootstrap  # Create from template
+nuce css        # CSS utilities
+nuce optimize   # Optimize config
+nuce inspect    # Inspect dependency graph
+nuce report     # Generate build report
+nuce audit      # Run audits (A11y, Perf, SEO)
+nuce verify     # Verify project health
+nuce test       # Run tests
+nuce doctor     # Health diagnostics
 ```
 
 ---
@@ -116,17 +116,17 @@ sparx doctor     # Health diagnostics
 **Update CLI Example (line 125):**
 ```tsx
 // OLD
-<CodeBlock code="$ npx sparx build --preset react" />
+<CodeBlock code="$ npx nuce build --preset react" />
 
 // NEW
 <CodeBlock code={`# Create new project
-npx create-sparx my-app --template premium-dashboard
+npx create-nuce my-app --template premium-dashboard
 
 # Start development
-cd my-app && sparx dev
+cd my-app && nuce dev
 
 # Build for production
-sparx build`} />
+nuce build`} />
 ```
 
 **Update Framework Status (line 147-169):**
@@ -164,17 +164,17 @@ sparx build`} />
 ```tsx
 {
   coldStart: {
-    sparx: 69,
+    nuce: 69,
     vite: 100,
     webpack: 2000
   },
   hmr: {
-    sparx: '10-60',
+    nuce: '10-60',
     vite: '<100',
     webpack: '~500'
   },
   bundleSize: {
-    sparx: 6.9,
+    nuce: 6.9,
     vite: 7.2,
     webpack: 8.5
   }
@@ -186,10 +186,10 @@ sparx build`} />
 **Update Getting Started:**
 ```bash
 # Install
-npm install -g sparx
+npm install -g nuce
 
 # Create project
-npx create-sparx my-app
+npx create-nuce my-app
 
 # Choose template
 - premium-dashboard (Feature showcase)
@@ -199,10 +199,10 @@ npx create-sparx my-app
 - And 9 more...
 
 # Start dev server
-sparx dev
+nuce dev
 
 # Build
-sparx build
+nuce build
 ```
 
 ### 5. Templates Page (`src/pages/TemplateStarters.tsx`)

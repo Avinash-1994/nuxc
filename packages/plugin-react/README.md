@@ -1,18 +1,18 @@
-# @sparx/plugin-react
+# @nuce/plugin-react
 
-> Official Sparx plugin for React — JSX transform, React Fast Refresh HMR, and error overlay.
+> Official Nuce plugin for React — JSX transform, React Fast Refresh HMR, and error overlay.
 
 ## Install
 
 ```bash
-npm install --save-dev @sparx/plugin-react
+npm install --save-dev @nuce/plugin-react
 ```
 
 ## Usage
 
 ```js
-// sparx.config.js
-const react = require('@sparx/plugin-react');
+// nuce.config.js
+const react = require('@nuce/plugin-react');
 
 module.exports = {
   entry: ['./src/main.tsx'],
@@ -23,9 +23,9 @@ module.exports = {
 ```
 
 ```ts
-// sparx.config.ts
-import { defineConfig } from 'sparx';
-import react from '@sparx/plugin-react';
+// nuce.config.ts
+import { defineConfig } from 'nuce';
+import react from '@nuce/plugin-react';
 
 export default defineConfig({
   entry: ['./src/main.tsx'],

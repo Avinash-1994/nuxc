@@ -1,4 +1,4 @@
-# Contributing to Sparx
+# Contributing to Nuce
 
 We welcome contributions! Please follow these guidelines to ensure a smooth process.
 

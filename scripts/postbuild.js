@@ -59,7 +59,7 @@ async function copyAll(patternDir, filterExt, outDir) {
   await mirrorDir(join(distDir, 'src'), distDir);
 
   // Ensure CLI entry points are executable when installed as a local package
-  const executables = ['cli.js', 'create-sparx.js'];
+  const executables = ['cli.js', 'create-nuce.js'];
   for (const file of executables) {
     const target = join(distDir, file);
     await fs.chmod(target, 0o755).catch(() => { });

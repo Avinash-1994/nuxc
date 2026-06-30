@@ -4,10 +4,10 @@ import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
 
-// NEW-01: sparx create — interactive project scaffolding
+// NEW-01: nuce create — interactive project scaffolding
 
 function generateConfig(framework: string, preset: string, ts: boolean): string {
-  return `import { defineConfig } from 'sparx';\n\nexport default defineConfig({\n  framework: '${framework}',\n  preset: '${preset}',\n  entry: ['src/main.${ts ? 'tsx' : 'jsx'}'],\n  outDir: 'dist',\n});\n`;
+  return `import { defineConfig } from 'nuce';\n\nexport default defineConfig({\n  framework: '${framework}',\n  preset: '${preset}',\n  entry: ['src/main.${ts ? 'tsx' : 'jsx'}'],\n  outDir: 'dist',\n});\n`;
 }
 
 function generateIndexHtml(name: string, ts: boolean): string {
@@ -18,7 +18,7 @@ function generateIndexHtml(name: string, ts: boolean): string {
 function generateMainEntry(framework: string, ts: boolean): string {
   const ext = ts ? 'tsx' : 'jsx';
   if (framework === 'react' || framework === 'vanilla') {
-    return `import React from 'react';\nimport ReactDOM from 'react-dom/client';\n\nconst App = () => <h1>Welcome to Sparx + ${framework}!</h1>;\n\nReactDOM.createRoot(document.getElementById('root')!).render(<App />);\n`;
+    return `import React from 'react';\nimport ReactDOM from 'react-dom/client';\n\nconst App = () => <h1>Welcome to Nuce + ${framework}!</h1>;\n\nReactDOM.createRoot(document.getElementById('root')!).render(<App />);\n`;
   }
   if (framework === 'vue') {
     return `import { createApp } from 'vue';\nimport App from './App.vue';\ncreateApp(App).mount('#root');\n`;
@@ -26,7 +26,7 @@ function generateMainEntry(framework: string, ts: boolean): string {
   if (framework === 'svelte' || framework === 'sveltekit') {
     return `import App from './App.svelte';\nconst app = new App({ target: document.getElementById('root')! });\nexport default app;\n`;
   }
-  return `// ${framework} entry point\nconsole.log('Sparx + ${framework} ready!');\n`;
+  return `// ${framework} entry point\nconsole.log('Nuce + ${framework} ready!');\n`;
 }
 
 function generateTsConfig(): string {
@@ -55,7 +55,7 @@ function buildDeps(framework: string): Record<string, string> {
 }
 
 function buildDevDeps(ts: boolean, tailwind: boolean): Record<string, string> {
-  const base: Record<string, string> = { sparx: 'latest' };
+  const base: Record<string, string> = { nuce: 'latest' };
   if (ts) { base['typescript'] = 'latest'; }
   if (tailwind) { base['tailwindcss'] = 'latest'; base['autoprefixer'] = 'latest'; }
   return base;
@@ -121,14 +121,14 @@ export async function runCreate(
   // package.json
   const pkg = {
     name, version: '0.0.0', private: true, type: 'module',
-    scripts: { dev: 'sparx dev', build: 'sparx build', preview: 'sparx preview' },
+    scripts: { dev: 'nuce dev', build: 'nuce build', preview: 'nuce preview' },
     dependencies: buildDeps(fw!.value),
     devDependencies: buildDevDeps(useTs, useTailwind),
   };
   fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkg, null, 2));
 
-  // sparx.config.ts
-  fs.writeFileSync(path.join(targetDir, 'sparx.config.ts'), generateConfig(fw!.value, fw!.preset, useTs));
+  // nuce.config.ts
+  fs.writeFileSync(path.join(targetDir, 'nuce.config.ts'), generateConfig(fw!.value, fw!.preset, useTs));
 
   // index.html
   fs.writeFileSync(path.join(targetDir, 'index.html'), generateIndexHtml(name, useTs));
@@ -154,5 +154,5 @@ export async function runCreate(
   console.log(`\n  Next steps:`);
   console.log(`    cd ${name}`);
   console.log(`    npm install`);
-  console.log(`    sparx dev\n`);
+  console.log(`    nuce dev\n`);
 }

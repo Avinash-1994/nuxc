@@ -1,7 +1,7 @@
 /**
  * src/config-loader.ts
  *
- * Loads and merges sparx.config.js / sparx.config.ts,
+ * Loads and merges nuce.config.js / nuce.config.ts,
  * with support for `extends` (base config inheritance).
  *
  * Replace / augment your existing config loader with this.
@@ -12,8 +12,8 @@ import fs from 'fs'
 import { pathToFileURL } from 'url'
 import type { BuildConfig } from './config/index.js'
 
-// Use the existing BuildConfig type from config/index.ts as SparxConfig alias
-export type SparxConfig = BuildConfig
+// Use the existing BuildConfig type from config/index.ts as NuceConfig alias
+export type NuceConfig = BuildConfig
 
 // ─── Deep merge ───────────────────────────────────────────────────────────────
 
@@ -49,10 +49,10 @@ export function mergeConfig(
 // ─── Config file resolution ───────────────────────────────────────────────────
 
 const CONFIG_FILE_NAMES = [
-  'sparx.config.ts',
-  'sparx.config.js',
-  'sparx.config.mjs',
-  'sparx.config.cjs',
+  'nuce.config.ts',
+  'nuce.config.js',
+  'nuce.config.mjs',
+  'nuce.config.cjs',
 ]
 
 export async function findConfigFile(root: string): Promise<string | null> {
@@ -63,7 +63,7 @@ export async function findConfigFile(root: string): Promise<string | null> {
   return null
 }
 
-async function loadRawConfig(filePath: string): Promise<SparxConfig & { extends?: string }> {
+async function loadRawConfig(filePath: string): Promise<NuceConfig & { extends?: string }> {
   const ext = path.extname(filePath)
   const fileUrl = pathToFileURL(filePath).href
 
@@ -91,7 +91,7 @@ async function loadRawConfig(filePath: string): Promise<SparxConfig & { extends?
     return config
   } catch (err) {
     throw new Error(
-      `[sparx] Failed to load config from "${filePath}":\n  ${(err as Error).message}\n` +
+      `[nuce] Failed to load config from "${filePath}":\n  ${(err as Error).message}\n` +
       `  Make sure the file is valid JS/TS and exports a default config object.`
     )
   }
@@ -100,21 +100,21 @@ async function loadRawConfig(filePath: string): Promise<SparxConfig & { extends?
 // ─── Main loader ──────────────────────────────────────────────────────────────
 
 export interface LoadConfigResult {
-  config: SparxConfig
+  config: NuceConfig
   configFile: string | null
 }
 
 /**
- * Load sparx config from the given root directory.
+ * Load nuce config from the given root directory.
  * Supports:
- * - sparx.config.ts / .js / .mjs / .cjs
+ * - nuce.config.ts / .js / .mjs / .cjs
  * - `extends` field for base config inheritance
  * - Deep merge of extended + local config
  *
  * @example
- * // sparx.config.js in a monorepo package
+ * // nuce.config.js in a monorepo package
  * module.exports = {
- *   extends: '../../sparx.base.config.js',
+ *   extends: '../../nuce.base.config.js',
  *   dev: { port: 3001 }  // override only what changes
  * }
  */
@@ -135,7 +135,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
 
     if (!fs.existsSync(baseConfigPath)) {
       throw new Error(
-        `[sparx] Config "extends" path not found: "${baseConfigPath}"\n` +
+        `[nuce] Config "extends" path not found: "${baseConfigPath}"\n` +
         `  Resolved from: "${configFile}"`
       )
     }
@@ -143,7 +143,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
     const baseRaw = await loadRawConfig(baseConfigPath)
 
     // Recursively handle extends chain (base can also extend something)
-    let baseConfig: SparxConfig = baseRaw
+    let baseConfig: NuceConfig = baseRaw
     if (baseRaw.extends) {
       const { config: resolvedBase } = await loadConfigExtended(path.dirname(baseConfigPath))
       baseConfig = resolvedBase
@@ -157,7 +157,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
     )
 
     return {
-      config: applyDefaults(merged as SparxConfig),
+      config: applyDefaults(merged as NuceConfig),
       configFile,
     }
   }
@@ -170,7 +170,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
 
 // ─── Defaults ─────────────────────────────────────────────────────────────────
 
-function getDefaults(): SparxConfig {
+function getDefaults(): NuceConfig {
   return {
     root: process.cwd(),
     entry: ['./src/main.ts'],
@@ -182,12 +182,12 @@ function getDefaults(): SparxConfig {
   }
 }
 
-function applyDefaults(config: SparxConfig): SparxConfig {
+function applyDefaults(config: NuceConfig): NuceConfig {
   const defaults = getDefaults()
   return mergeConfig(
     defaults as unknown as Record<string, unknown>,
     config as unknown as Record<string, unknown>
-  ) as unknown as SparxConfig
+  ) as unknown as NuceConfig
 }
 
 // ─── Config validator ─────────────────────────────────────────────────────────
@@ -198,7 +198,7 @@ export interface ConfigValidationResult {
   warnings: string[]
 }
 
-export function validateConfig(config: SparxConfig): ConfigValidationResult {
+export function validateConfig(config: NuceConfig): ConfigValidationResult {
   const errors: string[] = []
   const warnings: string[] = []
 

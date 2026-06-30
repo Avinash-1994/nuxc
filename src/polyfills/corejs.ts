@@ -1,6 +1,6 @@
 
 /**
- * Sparx Legacy Polyfill Injector
+ * Nuce Legacy Polyfill Injector
  * Day 25: Legacy Polyfills & Windows Lock
  */
 

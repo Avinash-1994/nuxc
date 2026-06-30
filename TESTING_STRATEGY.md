@@ -1,4 +1,4 @@
-# 🧪 Sparx Testing Strategy - Current & Recommended
+# 🧪 Nuce Testing Strategy - Current & Recommended
 
 ## 📊 Current Testing Coverage (41 Tests)
 

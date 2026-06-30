@@ -1,15 +1,15 @@
 /**
- * @sparx/plugin-zustand
+ * @nuce/plugin-zustand
  * Zustand state management
- * Sparx-native
+ * Nuce-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createZustandPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-zustand',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-zustand',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // zustand transformation

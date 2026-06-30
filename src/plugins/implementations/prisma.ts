@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-prisma
+ * @nuce/plugin-prisma
  * Prisma integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPrismaPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-prisma',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-prisma',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Prisma integration

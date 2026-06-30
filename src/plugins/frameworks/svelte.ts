@@ -1,5 +1,5 @@
 /**
- * @sparx/svelte - Production-Grade Svelte Plugin
+ * @nuce/svelte - Production-Grade Svelte Plugin
  * 
  * Features:
  * - Svelte component compilation
@@ -47,7 +47,7 @@ export interface SveltePluginOptions {
     preprocess?: any;
 }
 
-export function sparxSvelte(options: SveltePluginOptions = {}): Plugin {
+export function nuceSvelte(options: SveltePluginOptions = {}): Plugin {
     const {
         hmr = true,
         development = process.env.NODE_ENV !== 'production',
@@ -60,7 +60,7 @@ export function sparxSvelte(options: SveltePluginOptions = {}): Plugin {
     const componentCache = new Map<string, { code: string; css: string; hash: string }>();
 
     return {
-        name: 'sparx-svelte',
+        name: 'nuce-svelte',
 
         async buildStart() {
             // Clear cache on rebuild
@@ -179,7 +179,7 @@ async function compileSvelte(
             css: result.css || { code: '' }
         };
     } catch (error) {
-        console.warn('[sparx-svelte] Compilation failed:', error);
+        console.warn('[nuce-svelte] Compilation failed:', error);
         return null;
     }
 }
@@ -207,6 +207,6 @@ function generateSourceMap(originalCode: string, transformedCode: string, id: st
 // Export helper for use in config
 export function sveltePreset(options: SveltePluginOptions = {}): Plugin[] {
     return [
-        sparxSvelte(options)
+        nuceSvelte(options)
     ];
 }

@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-xstate
+ * @nuce/plugin-xstate
  * XState state machines
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createXstatePlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-xstate',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-xstate',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // State management: XState state machines
@@ -16,7 +16,7 @@ export function createXstatePlugin(): PluginAdapter {
         },
 
         async buildStart() {
-            console.log('[@sparx/plugin-xstate] State management initialized');
+            console.log('[@nuce/plugin-xstate] State management initialized');
         }
     };
 }

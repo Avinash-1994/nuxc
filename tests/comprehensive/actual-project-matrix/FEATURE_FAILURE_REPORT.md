@@ -1,6 +1,6 @@
-# 🔍 Sparx Feature Failure Report
+# 🔍 Nuce Feature Failure Report
 
-This report provides a deep dive into specifically which Sparx features are failing and why, based on real-project edge cases.
+This report provides a deep dive into specifically which Nuce features are failing and why, based on real-project edge cases.
 
 | Project | Feature | Error Type | Root Cause | Status |
 |---------|---------|------------|------------|--------|
@@ -13,13 +13,13 @@ This report provides a deep dive into specifically which Sparx features are fail
 ## 🛠️ Technical Deep Dive
 
 ### 1. Configuration Validation Rigidity
-*   **Symptom**: Sparx fails immediately if `sparx.config.js` slightly deviates from the latest internal Zod schema.
-*   **Issue**: Most build tools (like Vite) auto-convert strings to arrays for convenience. Sparx is currently too strict.
+*   **Symptom**: Nuce fails immediately if `nuce.config.js` slightly deviates from the latest internal Zod schema.
+*   **Issue**: Most build tools (like Vite) auto-convert strings to arrays for convenience. Nuce is currently too strict.
 *   **Impact**: Blocks initial project setup unless configurations are "perfect".
 
 ### 2. Alpine.js ESM Resolution
 *   **Symptom**: Tree shaking test failed.
-*   **Hypothesis**: Sparx might not be correctly identifying the "sideEffects" flag in Alpine's vanilla structure, leading to over-aggressive or under-aggressive shaking.
+*   **Hypothesis**: Nuce might not be correctly identifying the "sideEffects" flag in Alpine's vanilla structure, leading to over-aggressive or under-aggressive shaking.
 
 ---
 

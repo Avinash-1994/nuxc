@@ -40,11 +40,11 @@ async function runFixes() {
   console.log('\n  Phase 4 — Targeted Fixes: P4-05 · P4-06 · P4-08\n');
 
   // ══════════════════════════════════════════════════════════════════════
-  //  FIX P4-08 — /__nuclie_inspect → /__sparx_inspect__
+  //  FIX P4-08 — /__nuclie_inspect → /__nuce_inspect__
   // ══════════════════════════════════════════════════════════════════════
   {
-    const mod    = await loadPlugin('sparx-plugin-inspect');
-    const factory = mod.inspect ?? mod.sparxPluginInspect ?? mod.default;
+    const mod    = await loadPlugin('nuce-plugin-inspect');
+    const factory = mod.inspect ?? mod.nucePluginInspect ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory() : factory;
 
     // Capture log output
@@ -61,11 +61,11 @@ async function runFixes() {
 
     const logLine   = logs.find(l => l.includes('Inspect UI:')) ?? '';
     const hasNuclie = logLine.includes('nuclie');
-    const hasSparx  = logLine.includes('__sparx_inspect__');
-    const urlOk     = !hasNuclie && hasSparx;
+    const hasNuce  = logLine.includes('__nuce_inspect__');
+    const urlOk     = !hasNuclie && hasNuce;
 
-    // Verify the handler responds to /__sparx_inspect__ not /__nuclie_inspect__
-    let sparxResponds = false;
+    // Verify the handler responds to /__nuce_inspect__ not /__nuclie_inspect__
+    let nuceResponds = false;
     let nuclieResponds = false;
     if (routes['handler']) {
       const makeReq = (url) => ({ url });
@@ -73,27 +73,27 @@ async function runFixes() {
         let body = '';
         return { setHeader: () => {}, end: (b) => { body = b; }, _body: () => body };
       };
-      const resSparx = makeRes();
+      const resNuce = makeRes();
       const resNuclie = makeRes();
-      await routes['handler'](makeReq('/__sparx_inspect__'), resSparx, () => {});
+      await routes['handler'](makeReq('/__nuce_inspect__'), resNuce, () => {});
       await routes['handler'](makeReq('/__nuclie_inspect'), resNuclie, () => {});
-      sparxResponds = resSparx._body().length > 0;
+      nuceResponds = resNuce._body().length > 0;
       nuclieResponds = resNuclie._body().length > 0;
     }
 
     if (urlOk) {
-      pass('P4-08  @sparx/plugin-inspect', [
+      pass('P4-08  @nuce/plugin-inspect', [
         `name: ${plugin.name}`,
         `Log line: ${logLine}`,
         `URL contains 'nuclie': no ✓`,
-        `URL contains '__sparx_inspect__': yes ✓`,
-        `/__sparx_inspect__ responds: ${sparxResponds ? 'yes' : 'yes (handler registered)'}`,
+        `URL contains '__nuce_inspect__': yes ✓`,
+        `/__nuce_inspect__ responds: ${nuceResponds ? 'yes' : 'yes (handler registered)'}`,
         `/__nuclie_inspect responds: no ✓`,
       ]);
     } else {
-      fail('P4-08  @sparx/plugin-inspect',
-        `URL still contains 'nuclie' or missing '__sparx_inspect__'`,
-        [`Log line: ${logLine}`, `hasNuclie=${hasNuclie}`, `hasSparx=${hasSparx}`]);
+      fail('P4-08  @nuce/plugin-inspect',
+        `URL still contains 'nuclie' or missing '__nuce_inspect__'`,
+        [`Log line: ${logLine}`, `hasNuclie=${hasNuclie}`, `hasNuce=${hasNuce}`]);
     }
   }
 
@@ -101,8 +101,8 @@ async function runFixes() {
   //  FIX P4-05 — Legacy bundle must contain real transpiled app code
   // ══════════════════════════════════════════════════════════════════════
   {
-    const mod     = await loadPlugin('sparx-plugin-legacy');
-    const factory = mod.sparxPluginLegacy ?? mod.default;
+    const mod     = await loadPlugin('nuce-plugin-legacy');
+    const factory = mod.nucePluginLegacy ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ targets: ['IE 11'], suffix: '.legacy' }) : factory;
 
     // Use a REAL modern JS app snippet (arrow fns, const, let, template literals,
@@ -176,7 +176,7 @@ async function runFixes() {
     console.log('');
 
     if (transpiled && hasNomodule) {
-      pass('P4-05  @sparx/plugin-legacy', [
+      pass('P4-05  @nuce/plugin-legacy', [
         `name: ${plugin.name}`,
         `Modern bundle: ${modernKB}KB  (arrow fns, const/let, template literals, optional chaining)`,
         `Legacy bundle (.legacy.js): ${legacyKB}KB`,
@@ -187,7 +187,7 @@ async function runFixes() {
         `SWC downlevel ran: yes`,
       ]);
     } else {
-      fail('P4-05  @sparx/plugin-legacy',
+      fail('P4-05  @nuce/plugin-legacy',
         `Legacy bundle missing transpiled code (hasVar=${hasVar} hasRegularFn=${hasRegularFn})`,
         [`Modern: ${modernKB}KB`, `Legacy: ${legacyKB}KB`, `Chars 200-400: ${slice200_400}`]);
     }
@@ -197,8 +197,8 @@ async function runFixes() {
   //  FIX P4-06 — Real compression measurements (exact bytes, real file)
   // ══════════════════════════════════════════════════════════════════════
   {
-    const mod     = await loadPlugin('sparx-plugin-compression');
-    const factory = mod.sparxPluginCompression ?? mod.default;
+    const mod     = await loadPlugin('nuce-plugin-compression');
+    const factory = mod.nucePluginCompression ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ algorithm: 'brotli', threshold: 1024 }) : factory;
 
     // Use the REAL client.js from the react-router fixture (142KB real-world bundle)
@@ -235,7 +235,7 @@ async function runFixes() {
     } catch {}
 
     if (bytesNotEqual && reductionOk) {
-      pass('P4-06  @sparx/plugin-compression', [
+      pass('P4-06  @nuce/plugin-compression', [
         `name: ${plugin.name}`,
         `Input:  ${inputBytes} bytes (${inputKB}KB) — client.js from react-router fixture`,
         `Brotli: ${brotliBytes} bytes (${brotliKB}KB) (${brotliPct}% reduction)`,
@@ -247,7 +247,7 @@ async function runFixes() {
         `Thread count: 4 (Rust parallel) / Node zlib fallback`,
       ]);
     } else {
-      fail('P4-06  @sparx/plugin-compression',
+      fail('P4-06  @nuce/plugin-compression',
         `Assertion failed: bytesNotEqual=${bytesNotEqual} reductionOk=${reductionOk}`,
         [
           `Input: ${inputBytes} bytes`,
@@ -263,6 +263,6 @@ async function runFixes() {
 }
 
 // Helper to strip polyfill section for const/let detection
-const POLYFILL_SECTION = /\/\* @sparx\/plugin-legacy polyfill shims \*\/[\s\S]*?\n\n/;
+const POLYFILL_SECTION = /\/\* @nuce\/plugin-legacy polyfill shims \*\/[\s\S]*?\n\n/;
 
 runFixes().catch(e => { console.error('Fatal:', e.message, '\n', e.stack); process.exit(1); });

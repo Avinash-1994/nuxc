@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-chromatic
+ * @nuce/plugin-chromatic
  * Chromatic visual testing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createChromaticPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-chromatic',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-chromatic',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Chromatic visual testing

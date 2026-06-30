@@ -1,15 +1,15 @@
 /**
- * @sparx/plugin-vuex
+ * @nuce/plugin-vuex
  * Vuex integration
- * Sparx-native
+ * Nuce-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVuexPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-vuex',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-vuex',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // vuex transformation

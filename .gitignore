@@ -1,5 +1,5 @@
 # ──────────────────────────────────────────────────────
-#  Sparx — .gitignore
+#  Nuce — .gitignore
 #  Updated: 2026-05-22
 # ──────────────────────────────────────────────────────
 
@@ -7,7 +7,7 @@
 node_modules/
 dist/
 # Exception: workspace packages that need built dist/ for CI
-!packages/sparx-security/dist/
+!packages/nuce-security/dist/
 build_output/
 dist_ts/
 dist_plugin_test/
@@ -29,14 +29,14 @@ Thumbs.db
 *.swo
 *~
 
-# ── Sparx runtime caches (all projects) ───────────────
-.sparx/
-.sparx_cache/
-**/.sparx/
-**/.sparx_cache/
-**/.sparx/cache/
-**/.sparx/telemetry/
-**/.sparx/certs/
+# ── Nuce runtime caches (all projects) ───────────────
+.nuce/
+.nuce_cache/
+**/.nuce/
+**/.nuce_cache/
+**/.nuce/cache/
+**/.nuce/telemetry/
+**/.nuce/certs/
 
 # ── Database & lock artifacts ──────────────────────────
 *.db
@@ -49,9 +49,9 @@ native/target/
 native/Cargo.lock
 native/*.node
 native/native.d.ts
-native/sparx_native*.node
+native/nuce_native*.node
 native/nextgen_native*.node
-sparx_native.node
+nuce_native.node
 *.node
 *.wasm
 
@@ -87,7 +87,7 @@ validation-rerun-*.txt
 *.tgz
 
 # ── Test scaffolds ─────────────────────────────────────
-.test_create_sparx/
+.test_create_nuce/
 test-project-*/
 my-react-app/
 test_output*/
@@ -101,21 +101,21 @@ mdi__home.svg
 e2e/fixtures/**/dist/
 e2e/fixtures/**/dist-test/
 e2e/fixtures/**/.ng-out/
-e2e/fixtures/**/.sparx/
-e2e/fixtures/**/.sparx-cache/
+e2e/fixtures/**/.nuce/
+e2e/fixtures/**/.nuce-cache/
 e2e/fixtures/**/node_modules/
 e2e/fixtures/**/package-lock.json
 e2e/fixtures/**/*.db
 e2e/fixtures/**/*.db-journal
 
-# Sparx build report artifacts (generated per-build)
+# Nuce build report artifacts (generated per-build)
 e2e/fixtures/**/build-manifest.json
 e2e/fixtures/**/build-explain.json
-e2e/fixtures/**/sparx-sbom.json
-e2e/fixtures/**/sparx-headers.json
-e2e/fixtures/**/sparx-sri-manifest.json
-e2e/fixtures/**/sparx-csp.txt
-e2e/fixtures/**/sparx-csp-meta.html
+e2e/fixtures/**/nuce-sbom.json
+e2e/fixtures/**/nuce-headers.json
+e2e/fixtures/**/nuce-sri-manifest.json
+e2e/fixtures/**/nuce-csp.txt
+e2e/fixtures/**/nuce-csp-meta.html
 e2e/fixtures/**/_headers
 
 # Specific generated files in e2e fixtures
@@ -133,35 +133,35 @@ e2e/fixtures/plugin-ecosystem-app/tmp-fix/
 # ── framework-tests — generated artifacts ─────────────
 framework-tests/**/node_modules/
 framework-tests/**/dist/
-framework-tests/**/.sparx/
-framework-tests/**/.sparx-cache/
+framework-tests/**/.nuce/
+framework-tests/**/.nuce-cache/
 framework-tests/**/package-lock.json
 framework-tests/**/*.db
 framework-tests/**/*.db-journal
 framework-tests/**/build-manifest.json
 framework-tests/**/build-explain.json
-framework-tests/**/sparx-sbom.json
-framework-tests/**/sparx-headers.json
-framework-tests/**/sparx-sri-manifest.json
-framework-tests/**/sparx-csp.txt
-framework-tests/**/sparx-csp-meta.html
+framework-tests/**/nuce-sbom.json
+framework-tests/**/nuce-headers.json
+framework-tests/**/nuce-sri-manifest.json
+framework-tests/**/nuce-csp.txt
+framework-tests/**/nuce-csp-meta.html
 framework-tests/**/_headers
 
 # ── real-world-mfe / portal (dev:mfe target) ──────────
 real-world-mfe/**/node_modules/
 real-world-mfe/**/dist/
-real-world-mfe/**/.sparx/
+real-world-mfe/**/.nuce/
 portal/**/node_modules/
 portal/**/dist/
-portal/**/.sparx/
+portal/**/.nuce/
 tests/fixtures/**/dist/
 tests/fixtures/**/*.db
-tests/fixtures/**/.sparx/
+tests/fixtures/**/.nuce/
 
 # ── tests/fixtures — build output artifacts ────────────
 # (cache-consistency test uses real builds; outputs are generated)
 tests/fixtures/**/dist/
-tests/fixtures/**/.sparx/
+tests/fixtures/**/.nuce/
 tests/fixtures/**/*.db
 tests/fixtures/**/build-manifest.json
 tests/fixtures/**/build-explain.json

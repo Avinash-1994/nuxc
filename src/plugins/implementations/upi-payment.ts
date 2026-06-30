@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-upi-payment
+ * @nuce/plugin-upi-payment
  * UPI payment integration (India)
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createUpiPaymentPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-upi-payment',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-upi-payment',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Fintech integration: UPI payment integration (India)
@@ -16,7 +16,7 @@ export function createUpiPaymentPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@sparx/plugin-upi-payment] Fintech integration ready');
+            console.log('[@nuce/plugin-upi-payment] Fintech integration ready');
             // Initialize payment gateway, generate QR codes, etc.
         }
     };

@@ -1,12 +1,12 @@
 {
-    "name": "@sparx/alpine-adapter",
+    "name": "@nuce/alpine-adapter",
     "version": "0.1.0",
-    "description": "Sparx Framework Adapter for Alpine.js (Tier-1 Supported)",
+    "description": "Nuce Framework Adapter for Alpine.js (Tier-1 Supported)",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
         "build": "tsc",
-        "test": "echo 'Run integration tests via Sparx runner'"
+        "test": "echo 'Run integration tests via Nuce runner'"
     },
     "dependencies": {
         "vite": "^5.0.0"
@@ -16,10 +16,10 @@
         "alpinejs": "^3.13.0",
         "@types/node": "^20.0.0"
     },
-    "sparx": {
+    "nuce": {
         "name": "Alpine Adapter",
         "state": "candidate",
-        "maintainer": "Sparx Core Team",
+        "maintainer": "Nuce Core Team",
         "supported_capabilities": [
             "build",
             "hmr",

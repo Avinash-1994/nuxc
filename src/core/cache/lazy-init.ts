@@ -41,7 +41,7 @@ export class LazyCacheInitializer {
      */
     private setupPersistentStorage() {
         // Task Day 51: Persistent cache for Docker/Edge
-        const tmpCache = '/tmp/sparx-cache';
+        const tmpCache = '/tmp/nuce-cache';
         if (process.env.DOCKER_CONTAINER && !fs.existsSync(this.cacheDir)) {
             try {
                 if (!fs.existsSync(tmpCache)) fs.mkdirSync(tmpCache, { recursive: true });
@@ -90,19 +90,19 @@ export class LazyCacheInitializer {
         const startTime = Date.now();
 
         try {
-            // Phase 1.2 [SAFE REMOVAL] - Migrate legacy `.sparx/cache` or `.sparx_cache` naming conventions
+            // Phase 1.2 [SAFE REMOVAL] - Migrate legacy `.nuce/cache` or `.nuce_cache` naming conventions
             const projectRoot = path.dirname(path.dirname(this.cacheDir));
-            const legacyNuclie = path.join(projectRoot, '.sparx', 'cache');
-            const legacySparx = path.join(projectRoot, '.sparx_cache');
+            const legacyNuclie = path.join(projectRoot, '.nuce', 'cache');
+            const legacyNuce = path.join(projectRoot, '.nuce_cache');
             
             if (fs.existsSync(legacyNuclie) && !fs.existsSync(this.cacheDir)) {
-                log.info(`Migrating legacy LevelDB cache from .sparx/cache -> .sparx/cache`);
+                log.info(`Migrating legacy LevelDB cache from .nuce/cache -> .nuce/cache`);
                 fs.mkdirSync(path.dirname(this.cacheDir), { recursive: true });
                 fs.renameSync(legacyNuclie, this.cacheDir);
-            } else if (fs.existsSync(legacySparx) && !fs.existsSync(this.cacheDir)) {
-                log.info(`Migrating legacy .sparx_cache -> .sparx/cache`);
+            } else if (fs.existsSync(legacyNuce) && !fs.existsSync(this.cacheDir)) {
+                log.info(`Migrating legacy .nuce_cache -> .nuce/cache`);
                 fs.mkdirSync(path.dirname(this.cacheDir), { recursive: true });
-                fs.renameSync(legacySparx, this.cacheDir);
+                fs.renameSync(legacyNuce, this.cacheDir);
             }
 
             if (!fs.existsSync(this.cacheDir)) {
@@ -174,7 +174,7 @@ let globalLazyCache: LazyCacheInitializer | null = null;
 
 export function getLazyCache(cacheDir?: string): LazyCacheInitializer {
     if (!globalLazyCache) {
-        const dir = cacheDir || path.join(process.cwd(), '.sparx', 'cache');
+        const dir = cacheDir || path.join(process.cwd(), '.nuce', 'cache');
         globalLazyCache = new LazyCacheInitializer({
             cacheDir: dir,
             preload: true,

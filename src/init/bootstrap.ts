@@ -10,12 +10,12 @@ const __dirname = path.dirname(__filename);
 export async function bootstrapProject(cwd: string, template: string = 'react-ts') {
   log.info(`Bootstrapping new ${template} project in ${cwd}...`);
 
-  // 1. Get current sparx version for package.json
-  let sparxVersion = 'latest';
+  // 1. Get current nuce version for package.json
+  let nuceVersion = 'latest';
   try {
     const pkgPath = path.resolve(__dirname, '../../package.json');
     const pkg = JSON.parse(await fs.readFile(pkgPath, 'utf8'));
-    sparxVersion = `^${pkg.version}`;
+    nuceVersion = `^${pkg.version}`;
   } catch (e) { /* fallback to latest */ }
 
   // 2. Look up template definition from shared TEMPLATES registry
@@ -36,13 +36,13 @@ export async function bootstrapProject(cwd: string, template: string = 'react-ts
   await fs.mkdir(path.join(cwd, 'public'), { recursive: true });
 
   // Write every file defined in the template, injecting dynamic placeholders
-  const versionLabel = sparxVersion.replace('^', '');
+  const versionLabel = nuceVersion.replace('^', '');
   const frameworkName = def.name.split(' ')[0];
   for (const file of def.files) {
     const filePath = path.join(cwd, file.path);
     await fs.mkdir(path.dirname(filePath), { recursive: true });
     const content = file.content
-      .replace(/\{\{SPARX_VERSION\}\}/g, versionLabel)
+      .replace(/\{\{NUCE_VERSION\}\}/g, versionLabel)
       .replace(/\{\{FRAMEWORK_NAME\}\}/g, frameworkName)
       .replace(/\{\{FRAMEWORK_VERSION\}\}/g, 'Latest');
     await fs.writeFile(filePath, content, 'utf8');
@@ -54,7 +54,7 @@ export async function bootstrapProject(cwd: string, template: string = 'react-ts
     dynamicDependencies[pkg] = 'latest';
   }
 
-  const dynamicDevDependencies: Record<string, string> = { sparx: sparxVersion };
+  const dynamicDevDependencies: Record<string, string> = { nuce: nuceVersion };
   for (const pkg of Object.keys(def.devDependencies)) {
     dynamicDevDependencies[pkg] = 'latest';
   }
@@ -65,9 +65,9 @@ export async function bootstrapProject(cwd: string, template: string = 'react-ts
     private: true,
     type: 'module',
     scripts: {
-      dev: 'sparx dev',
-      build: 'sparx build',
-      preview: 'sparx dev --port 4173'
+      dev: 'nuce dev',
+      build: 'nuce build',
+      preview: 'nuce dev --port 4173'
     },
     dependencies: dynamicDependencies,
     devDependencies: dynamicDevDependencies
@@ -88,7 +88,7 @@ export async function bootstrapProject(cwd: string, template: string = 'react-ts
     mode: 'development',
     preset: 'spa'
   };
-  await fs.writeFile(path.join(cwd, 'sparx.config.json'), JSON.stringify(config, null, 2), 'utf8');
+  await fs.writeFile(path.join(cwd, 'nuce.config.json'), JSON.stringify(config, null, 2), 'utf8');
 
   log.success(`Successfully bootstrapped ${def.name} project!`);
   log.info(`To get started:\n  cd ${path.basename(cwd)}\n  npm install\n  npm run dev`);

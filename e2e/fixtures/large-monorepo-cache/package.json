@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "sparx dev",
-    "build": "sparx build"
+    "dev": "nuce dev",
+    "build": "nuce build"
   },
   "dependencies": {}
 }

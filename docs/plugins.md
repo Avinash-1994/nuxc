@@ -1,4 +1,4 @@
-# Sparx Plugins Guide
+# Nuce Plugins Guide
 
 > **Plugin ecosystem with sandboxing support and WebCrypto signing support.**
 
@@ -8,29 +8,29 @@
 
 ```bash
 # Search for plugins
-sparx plugin search react
+nuce plugin search react
 
 # Install a plugin
-sparx plugin install @sparx/plugin-react
+nuce plugin install @nuce/plugin-react
 
 # List installed plugins
-sparx plugin list
+nuce plugin list
 
 # Verify plugin signatures
-sparx plugin verify @sparx/plugin-react
+nuce plugin verify @nuce/plugin-react
 ```
 
 ---
 
 ## Using Plugins
 
-### In `sparx.config.ts`
+### In `nuce.config.ts`
 
 ```typescript
-import { defineConfig } from 'sparx';
-import react from '@sparx/plugin-react';
-import tailwind from '@sparx/plugin-tailwind';
-import pwa from '@sparx/plugin-pwa';
+import { defineConfig } from 'nuce';
+import react from '@nuce/plugin-react';
+import tailwind from '@nuce/plugin-tailwind';
+import pwa from '@nuce/plugin-pwa';
 
 export default defineConfig({
   preset: 'spa',
@@ -66,90 +66,90 @@ export default defineConfig({
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-react` | React Fast Refresh + JSX | `sparx plugin install @sparx/plugin-react` |
-| `@sparx/plugin-vue` | Vue 3 SFC support | `sparx plugin install @sparx/plugin-vue` |
-| `@sparx/plugin-svelte` | Svelte compiler | `sparx plugin install @sparx/plugin-svelte` |
-| `@sparx/plugin-solid` | Solid.js JSX | `sparx plugin install @sparx/plugin-solid` |
-| `@sparx/plugin-angular` | Angular AOT compiler | `sparx plugin install @sparx/plugin-angular` |
-| `@sparx/plugin-preact` | Preact with Fast Refresh | `sparx plugin install @sparx/plugin-preact` |
+| `@nuce/plugin-react` | React Fast Refresh + JSX | `nuce plugin install @nuce/plugin-react` |
+| `@nuce/plugin-vue` | Vue 3 SFC support | `nuce plugin install @nuce/plugin-vue` |
+| `@nuce/plugin-svelte` | Svelte compiler | `nuce plugin install @nuce/plugin-svelte` |
+| `@nuce/plugin-solid` | Solid.js JSX | `nuce plugin install @nuce/plugin-solid` |
+| `@nuce/plugin-angular` | Angular AOT compiler | `nuce plugin install @nuce/plugin-angular` |
+| `@nuce/plugin-preact` | Preact with Fast Refresh | `nuce plugin install @nuce/plugin-preact` |
 
 ### CSS & Styling
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-tailwind` | Tailwind CSS v3+ | `sparx plugin install @sparx/plugin-tailwind` |
-| `@sparx/plugin-sass` | Sass/SCSS compiler | `sparx plugin install @sparx/plugin-sass` |
-| `@sparx/plugin-less` | Less compiler | `sparx plugin install @sparx/plugin-less` |
-| `@sparx/plugin-postcss` | PostCSS processor | `sparx plugin install @sparx/plugin-postcss` |
-| `@sparx/plugin-styled-components` | CSS-in-JS support | `sparx plugin install @sparx/plugin-styled-components` |
-| `@sparx/plugin-emotion` | Emotion CSS-in-JS | `sparx plugin install @sparx/plugin-emotion` |
+| `@nuce/plugin-tailwind` | Tailwind CSS v3+ | `nuce plugin install @nuce/plugin-tailwind` |
+| `@nuce/plugin-sass` | Sass/SCSS compiler | `nuce plugin install @nuce/plugin-sass` |
+| `@nuce/plugin-less` | Less compiler | `nuce plugin install @nuce/plugin-less` |
+| `@nuce/plugin-postcss` | PostCSS processor | `nuce plugin install @nuce/plugin-postcss` |
+| `@nuce/plugin-styled-components` | CSS-in-JS support | `nuce plugin install @nuce/plugin-styled-components` |
+| `@nuce/plugin-emotion` | Emotion CSS-in-JS | `nuce plugin install @nuce/plugin-emotion` |
 
 ### Assets & Media
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-svgr` | SVG to React components | `sparx plugin install @sparx/plugin-svgr` |
-| `@sparx/plugin-image-optimizer` | Image compression | `sparx plugin install @sparx/plugin-image-optimizer` |
-| `@sparx/plugin-webp` | WebP conversion | `sparx plugin install @sparx/plugin-webp` |
-| `@sparx/plugin-fonts` | Font optimization | `sparx plugin install @sparx/plugin-fonts` |
+| `@nuce/plugin-svgr` | SVG to React components | `nuce plugin install @nuce/plugin-svgr` |
+| `@nuce/plugin-image-optimizer` | Image compression | `nuce plugin install @nuce/plugin-image-optimizer` |
+| `@nuce/plugin-webp` | WebP conversion | `nuce plugin install @nuce/plugin-webp` |
+| `@nuce/plugin-fonts` | Font optimization | `nuce plugin install @nuce/plugin-fonts` |
 
 ### Performance
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-compression` | Gzip/Brotli compression | `sparx plugin install @sparx/plugin-compression` |
-| `@sparx/plugin-preload` | Resource preloading | `sparx plugin install @sparx/plugin-preload` |
-| `@sparx/plugin-lazy-load` | Code splitting helpers | `sparx plugin install @sparx/plugin-lazy-load` |
-| `@sparx/plugin-bundle-analyzer` | Bundle size analysis | `sparx plugin install @sparx/plugin-bundle-analyzer` |
+| `@nuce/plugin-compression` | Gzip/Brotli compression | `nuce plugin install @nuce/plugin-compression` |
+| `@nuce/plugin-preload` | Resource preloading | `nuce plugin install @nuce/plugin-preload` |
+| `@nuce/plugin-lazy-load` | Code splitting helpers | `nuce plugin install @nuce/plugin-lazy-load` |
+| `@nuce/plugin-bundle-analyzer` | Bundle size analysis | `nuce plugin install @nuce/plugin-bundle-analyzer` |
 
 ### Security
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-csp` | Content Security Policy | `sparx plugin install @sparx/plugin-csp` |
-| `@sparx/plugin-sri` | Subresource Integrity | `sparx plugin install @sparx/plugin-sri` |
-| `@sparx/plugin-security-headers` | HTTP security headers | `sparx plugin install @sparx/plugin-security-headers` |
+| `@nuce/plugin-csp` | Content Security Policy | `nuce plugin install @nuce/plugin-csp` |
+| `@nuce/plugin-sri` | Subresource Integrity | `nuce plugin install @nuce/plugin-sri` |
+| `@nuce/plugin-security-headers` | HTTP security headers | `nuce plugin install @nuce/plugin-security-headers` |
 
 ### Testing
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-vitest` | Vitest integration | `sparx plugin install @sparx/plugin-vitest` |
-| `@sparx/plugin-jest` | Jest integration | `sparx plugin install @sparx/plugin-jest` |
-| `@sparx/plugin-playwright` | E2E testing | `sparx plugin install @sparx/plugin-playwright` |
+| `@nuce/plugin-vitest` | Vitest integration | `nuce plugin install @nuce/plugin-vitest` |
+| `@nuce/plugin-jest` | Jest integration | `nuce plugin install @nuce/plugin-jest` |
+| `@nuce/plugin-playwright` | E2E testing | `nuce plugin install @nuce/plugin-playwright` |
 
 ### i18n
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-i18next` | i18next integration | `sparx plugin install @sparx/plugin-i18next` |
-| `@sparx/plugin-react-intl` | React Intl | `sparx plugin install @sparx/plugin-react-intl` |
-| `@sparx/plugin-vue-i18n` | Vue I18n | `sparx plugin install @sparx/plugin-vue-i18n` |
+| `@nuce/plugin-i18next` | i18next integration | `nuce plugin install @nuce/plugin-i18next` |
+| `@nuce/plugin-react-intl` | React Intl | `nuce plugin install @nuce/plugin-react-intl` |
+| `@nuce/plugin-vue-i18n` | Vue I18n | `nuce plugin install @nuce/plugin-vue-i18n` |
 
 ### State Management
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-redux` | Redux DevTools | `sparx plugin install @sparx/plugin-redux` |
-| `@sparx/plugin-zustand` | Zustand integration | `sparx plugin install @sparx/plugin-zustand` |
-| `@sparx/plugin-jotai` | Jotai atoms | `sparx plugin install @sparx/plugin-jotai` |
+| `@nuce/plugin-redux` | Redux DevTools | `nuce plugin install @nuce/plugin-redux` |
+| `@nuce/plugin-zustand` | Zustand integration | `nuce plugin install @nuce/plugin-zustand` |
+| `@nuce/plugin-jotai` | Jotai atoms | `nuce plugin install @nuce/plugin-jotai` |
 
 ### Deployment
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-vercel` | Vercel deployment | `sparx plugin install @sparx/plugin-vercel` |
-| `@sparx/plugin-netlify` | Netlify deployment | `sparx plugin install @sparx/plugin-netlify` |
-| `@sparx/plugin-cloudflare` | Cloudflare Workers | `sparx plugin install @sparx/plugin-cloudflare` |
-| `@sparx/plugin-docker` | Docker containerization | `sparx plugin install @sparx/plugin-docker` |
+| `@nuce/plugin-vercel` | Vercel deployment | `nuce plugin install @nuce/plugin-vercel` |
+| `@nuce/plugin-netlify` | Netlify deployment | `nuce plugin install @nuce/plugin-netlify` |
+| `@nuce/plugin-cloudflare` | Cloudflare Workers | `nuce plugin install @nuce/plugin-cloudflare` |
+| `@nuce/plugin-docker` | Docker containerization | `nuce plugin install @nuce/plugin-docker` |
 
 ### Analytics
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@sparx/plugin-google-analytics` | GA4 integration | `sparx plugin install @sparx/plugin-google-analytics` |
-| `@sparx/plugin-plausible` | Plausible Analytics | `sparx plugin install @sparx/plugin-plausible` |
-| `@sparx/plugin-sentry` | Error tracking | `sparx plugin install @sparx/plugin-sentry` |
+| `@nuce/plugin-google-analytics` | GA4 integration | `nuce plugin install @nuce/plugin-google-analytics` |
+| `@nuce/plugin-plausible` | Plausible Analytics | `nuce plugin install @nuce/plugin-plausible` |
+| `@nuce/plugin-sentry` | Error tracking | `nuce plugin install @nuce/plugin-sentry` |
 
 ---
 
@@ -157,7 +157,7 @@ export default defineConfig({
 
 ### Plugin Security Model
 
-Sparx currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
+Nuce currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
 
 Plugins are subject to explicit permissions:
 - Filesystem access is denied by default and only granted for approved paths.
@@ -184,11 +184,11 @@ Every plugin is **cryptographically signed**:
 
 ```bash
 # Verify plugin signature
-sparx plugin verify @sparx/plugin-react
+nuce plugin verify @nuce/plugin-react
 
 # Output:
 ✅ Signature valid
-✅ Publisher: Sparx Team
+✅ Publisher: Nuce Team
 ✅ Published: 2026-01-15
 ✅ SHA-256: a3f2...
 ```
@@ -197,9 +197,9 @@ sparx plugin verify @sparx/plugin-react
 
 ```json
 {
-  "name": "@sparx/plugin-react",
+  "name": "@nuce/plugin-react",
   "version": "2.0.0",
-  "author": "Sparx Team",
+  "author": "Nuce Team",
   "signature": "...",
   "permissions": [
     "transform:jsx",
@@ -218,9 +218,9 @@ sparx plugin verify @sparx/plugin-react
 
 ```typescript
 // my-plugin.ts
-import { SparxPlugin } from 'sparx';
+import { NucePlugin } from 'nuce';
 
-export default function myPlugin(options = {}): SparxPlugin {
+export default function myPlugin(options = {}): NucePlugin {
   return {
     name: 'my-plugin',
     version: '1.0.0',
@@ -251,7 +251,7 @@ export default function myPlugin(options = {}): SparxPlugin {
 ### Plugin Hooks
 
 ```typescript
-export interface SparxPlugin {
+export interface NucePlugin {
   name: string;
   version: string;
   
@@ -277,12 +277,12 @@ export interface SparxPlugin {
 ### Example: Custom Markdown Plugin
 
 ```typescript
-import { SparxPlugin } from 'sparx';
+import { NucePlugin } from 'nuce';
 import { marked } from 'marked';
 
-export default function markdownPlugin(): SparxPlugin {
+export default function markdownPlugin(): NucePlugin {
   return {
-    name: 'sparx-plugin-markdown',
+    name: 'nuce-plugin-markdown',
     version: '1.0.0',
     
     transform(code, id) {
@@ -301,7 +301,7 @@ export default function markdownPlugin(): SparxPlugin {
 
 **Usage**:
 ```typescript
-// sparx.config.ts
+// nuce.config.ts
 import markdown from './my-plugin';
 
 export default defineConfig({
@@ -325,8 +325,8 @@ function App() {
 ### Vite Plugin Adapter
 
 ```typescript
-import { defineConfig } from 'sparx';
-import { rollupAdapter } from '@sparx/plugin-compat';
+import { defineConfig } from 'nuce';
+import { rollupAdapter } from '@nuce/plugin-compat';
 import viteReactSvgr from 'vite-plugin-svgr';
 
 export default defineConfig({
@@ -342,7 +342,7 @@ export default defineConfig({
 ### Webpack Loader Adapter
 
 ```typescript
-import { webpackLoaderAdapter } from '@sparx/plugin-compat';
+import { webpackLoaderAdapter } from '@nuce/plugin-compat';
 
 export default defineConfig({
   plugins: [
@@ -365,26 +365,26 @@ export default defineConfig({
 
 ```bash
 # List all plugins
-sparx plugin list --all
+nuce plugin list --all
 
 # Search by category
-sparx plugin search --category framework
+nuce plugin search --category framework
 
 # Filter by verified
-sparx plugin search --verified
+nuce plugin search --verified
 ```
 
 ### Plugin Ratings
 
 ```bash
 # View plugin details
-sparx plugin info @sparx/plugin-react
+nuce plugin info @nuce/plugin-react
 
 # Output:
-📦 @sparx/plugin-react v2.0.0
+📦 @nuce/plugin-react v2.0.0
 ⭐ 4.8/5.0 (1,234 reviews)
 📥 50,000 downloads/week
-✅ Verified by Sparx Team
+✅ Verified by Nuce Team
 🔒 Secure isolated plugin runtime
 📝 React Fast Refresh + JSX transform
 ```
@@ -414,11 +414,11 @@ export default defineConfig({
 **Solution**:
 ```bash
 # Re-install plugin
-npm uninstall @sparx/plugin-name
-sparx plugin install @sparx/plugin-name
+npm uninstall @nuce/plugin-name
+nuce plugin install @nuce/plugin-name
 
 # Or skip verification (not recommended)
-sparx plugin install @sparx/plugin-name --skip-verify
+nuce plugin install @nuce/plugin-name --skip-verify
 ```
 
 ### Plugin Conflicts
@@ -443,7 +443,7 @@ export default defineConfig({
 
 ✅ **Good**:
 ```typescript
-import react from '@sparx/plugin-react';
+import react from '@nuce/plugin-react';
 ```
 
 ⚠️ **Avoid** (unless necessary):
@@ -455,7 +455,7 @@ import react from 'some-unofficial-plugin';
 
 ```bash
 # Always verify before using
-sparx plugin verify @sparx/plugin-name
+nuce plugin verify @nuce/plugin-name
 ```
 
 ### 3. Minimal Plugin Configuration
@@ -480,7 +480,7 @@ plugins: [
 
 ```bash
 # Profile plugin impact
-sparx build --profile
+nuce build --profile
 
 # Output shows plugin timings
 ```
@@ -496,20 +496,20 @@ sparx build --profile
 npm run build
 
 # 2. Sign plugin
-sparx plugin sign ./dist
+nuce plugin sign ./dist
 
 # 3. Publish to marketplace
-sparx plugin publish
+nuce plugin publish
 
 # 4. Verify published
-sparx plugin verify @your-org/your-plugin
+nuce plugin verify @your-org/your-plugin
 ```
 
 ### Plugin Testing
 
 ```typescript
 // plugin.test.ts
-import { describe, it, expect } from '@sparx/test';
+import { describe, it, expect } from '@nuce/test';
 import myPlugin from './plugin';
 
 describe('My Plugin', () => {

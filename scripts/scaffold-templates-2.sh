@@ -8,14 +8,14 @@ mk() { mkdir -p "$T/$1/src"; }
 # ── SVELTE ────────────────────────────────────────────────────────
 mk svelte
 cat > "$T/svelte/package.json" <<'EOF'
-{"name":"sparx-svelte-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"svelte","description":"Sparx Notes — markdown note-taking app"},"dependencies":{"svelte":"4.2.18","marked":"12.0.0"},"devDependencies":{"sparx":"file:../..","typescript":"5.4.5"}}
+{"name":"nuce-svelte-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuce dev","build":"nuce build","preview":"nuce preview"},"nuce":{"template":true,"framework":"svelte","description":"Nuce Notes — markdown note-taking app"},"dependencies":{"svelte":"4.2.18","marked":"12.0.0"},"devDependencies":{"nuce":"file:../..","typescript":"5.4.5"}}
 EOF
-cat > "$T/svelte/sparx.config.ts" <<'EOF'
-import { defineConfig } from 'sparx';
+cat > "$T/svelte/nuce.config.ts" <<'EOF'
+import { defineConfig } from 'nuce';
 export default defineConfig({ framework: 'svelte' });
 EOF
 cat > "$T/svelte/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Sparx Notes</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Nuce Notes</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
 EOF
 cat > "$T/svelte/src/main.ts" <<'EOF'
 import App from './App.svelte';
@@ -26,7 +26,7 @@ cat > "$T/svelte/src/App.svelte" <<'EOF'
 <script lang="ts">
   import { writable } from 'svelte/store';
   const notes = writable([
-    { id:1, title:'Getting Started with Sparx', content:'# Getting Started\n\nSparx is a **fast** build tool powered by SWC and LightningCSS.\n\n- Zero config for all major frameworks\n- Sub-100ms HMR\n- Built-in security pipeline', folder:'work', updated: '2026-05-14' },
+    { id:1, title:'Getting Started with Nuce', content:'# Getting Started\n\nNuce is a **fast** build tool powered by SWC and LightningCSS.\n\n- Zero config for all major frameworks\n- Sub-100ms HMR\n- Built-in security pipeline', folder:'work', updated: '2026-05-14' },
     { id:2, title:'Meeting Notes — Q2 Review', content:'## Q2 Review\n\n- Shipped 19 meta-framework adapters\n- 303 tests passing\n- Security gate with CVE scanning live', folder:'work', updated: '2026-05-13' },
     { id:3, title:'Book List 2026', content:'# Books to Read\n\n1. The Pragmatic Programmer\n2. Clean Architecture\n3. Designing Data-Intensive Applications', folder:'personal', updated: '2026-05-10' },
     { id:4, title:'Recipe: Pasta Arrabbiata', content:'## Ingredients\n\n- 400g penne\n- 4 cloves garlic\n- 1 can crushed tomatoes\n- Red chilli flakes', folder:'personal', updated: '2026-05-09' },
@@ -40,7 +40,7 @@ cat > "$T/svelte/src/App.svelte" <<'EOF'
 
 <div style="display:flex;height:100vh;background:#0f172a;color:#f1f5f9;font-family:system-ui">
   <aside style="width:260px;background:#1e293b;border-right:1px solid #334155;display:flex;flex-direction:column">
-    <div style="padding:16px;font-weight:700;font-size:18px;border-bottom:1px solid #334155">📝 Sparx Notes</div>
+    <div style="padding:16px;font-weight:700;font-size:18px;border-bottom:1px solid #334155">📝 Nuce Notes</div>
     <div style="padding:8px">
       {#each $notes as n}
         <button on:click={() => selected = n.id} style="width:100%;text-align:left;padding:12px;border-radius:8px;border:none;background:{selected===n.id?'#334155':'transparent'};color:#f1f5f9;cursor:pointer;margin-bottom:4px">
@@ -71,14 +71,14 @@ EOF
 # ── SOLID ────────────────────────────────────────────────────────
 mk solid
 cat > "$T/solid/package.json" <<'EOF'
-{"name":"sparx-solid-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"solid","description":"Sparx Analytics — website analytics dashboard"},"dependencies":{"solid-js":"1.8.17"},"devDependencies":{"sparx":"file:../..","typescript":"5.4.5"}}
+{"name":"nuce-solid-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuce dev","build":"nuce build","preview":"nuce preview"},"nuce":{"template":true,"framework":"solid","description":"Nuce Analytics — website analytics dashboard"},"dependencies":{"solid-js":"1.8.17"},"devDependencies":{"nuce":"file:../..","typescript":"5.4.5"}}
 EOF
-cat > "$T/solid/sparx.config.ts" <<'EOF'
-import { defineConfig } from 'sparx';
+cat > "$T/solid/nuce.config.ts" <<'EOF'
+import { defineConfig } from 'nuce';
 export default defineConfig({ framework: 'solid' });
 EOF
 cat > "$T/solid/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Sparx Analytics</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Nuce Analytics</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
 EOF
 cat > "$T/solid/src/main.tsx" <<'EOF'
 import { render } from 'solid-js/web';
@@ -101,7 +101,7 @@ function App() {
   return (
     <div style="min-height:100vh;background:#0f172a;color:#f1f5f9;font-family:system-ui">
       <nav style="background:#1e293b;padding:0 24px;display:flex;gap:24px;align-items:center;height:56px">
-        <span style="font-weight:700;font-size:18px;margin-right:16px">📊 Sparx Analytics</span>
+        <span style="font-weight:700;font-size:18px;margin-right:16px">📊 Nuce Analytics</span>
         {(['overview','pages','sources','events'] as const).map(t => (
           <button onClick={() => setTab(t)} style={`background:none;border:none;color:${tab()===t?'#818cf8':'#94a3b8'};cursor:pointer;font-size:15px;font-weight:${tab()===t?'600':'400'}`}>{t.charAt(0).toUpperCase()+t.slice(1)}</button>
         ))}
@@ -170,14 +170,14 @@ EOF
 # ── PREACT ───────────────────────────────────────────────────────
 mk preact
 cat > "$T/preact/package.json" <<'EOF'
-{"name":"sparx-preact-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"preact","description":"Sparx Weather — real weather dashboard"},"dependencies":{"preact":"10.22.0"},"devDependencies":{"sparx":"file:../..","typescript":"5.4.5"}}
+{"name":"nuce-preact-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuce dev","build":"nuce build","preview":"nuce preview"},"nuce":{"template":true,"framework":"preact","description":"Nuce Weather — real weather dashboard"},"dependencies":{"preact":"10.22.0"},"devDependencies":{"nuce":"file:../..","typescript":"5.4.5"}}
 EOF
-cat > "$T/preact/sparx.config.ts" <<'EOF'
-import { defineConfig } from 'sparx';
+cat > "$T/preact/nuce.config.ts" <<'EOF'
+import { defineConfig } from 'nuce';
 export default defineConfig({ framework: 'preact' });
 EOF
 cat > "$T/preact/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Sparx Weather</title></head><body><div id="app"></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Nuce Weather</title></head><body><div id="app"></div><script type="module" src="/src/main.tsx"></script></body></html>
 EOF
 cat > "$T/preact/src/main.tsx" <<'EOF'
 import { render } from 'preact';
@@ -215,7 +215,7 @@ function App() {
     <div style="min-height:100vh;background:linear-gradient(135deg,#0f172a,#1e293b);color:#f1f5f9;font-family:system-ui;padding:24px">
       <div style="max-width:600px;margin:0 auto">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-          <h1 style="margin:0">⛅ Sparx Weather</h1>
+          <h1 style="margin:0">⛅ Nuce Weather</h1>
           <button onClick={() => unit.value = unit.value === 'C' ? 'F' : 'C'} style="padding:8px 16px;background:#334155;color:#fff;border:none;border-radius:8px;cursor:pointer">°{unit.value === 'C' ? 'F' : 'C'}</button>
         </div>
         <div style="display:flex;gap:8px;margin-bottom:24px">
@@ -261,14 +261,14 @@ EOF
 # ── VANILLA ──────────────────────────────────────────────────────
 mk vanilla
 cat > "$T/vanilla/package.json" <<'EOF'
-{"name":"sparx-vanilla-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"vanilla","description":"Sparx Kanban — drag-and-drop board"},"devDependencies":{"sparx":"file:../..","typescript":"5.4.5"}}
+{"name":"nuce-vanilla-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuce dev","build":"nuce build","preview":"nuce preview"},"nuce":{"template":true,"framework":"vanilla","description":"Nuce Kanban — drag-and-drop board"},"devDependencies":{"nuce":"file:../..","typescript":"5.4.5"}}
 EOF
-cat > "$T/vanilla/sparx.config.ts" <<'EOF'
-import { defineConfig } from 'sparx';
+cat > "$T/vanilla/nuce.config.ts" <<'EOF'
+import { defineConfig } from 'nuce';
 export default defineConfig({ framework: 'vanilla', entry: 'src/main.ts' });
 EOF
 cat > "$T/vanilla/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Sparx Kanban</title><style>*{box-sizing:border-box;margin:0}body{background:#0f172a;color:#f1f5f9;font-family:system-ui;min-height:100vh}</style></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Nuce Kanban</title><style>*{box-sizing:border-box;margin:0}body{background:#0f172a;color:#f1f5f9;font-family:system-ui;min-height:100vh}</style></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
 EOF
 cat > "$T/vanilla/src/main.ts" <<'EOF'
 interface Card { id: string; title: string; priority: 'low'|'medium'|'high'; }
@@ -297,10 +297,10 @@ const SEED: Col[] = [
   ]},
 ];
 
-let state: Col[] = JSON.parse(localStorage.getItem('sparx-kanban') || 'null') ?? SEED;
+let state: Col[] = JSON.parse(localStorage.getItem('nuce-kanban') || 'null') ?? SEED;
 let dragCard: {cardId:string; fromCol:string} | null = null;
 
-function save() { localStorage.setItem('sparx-kanban', JSON.stringify(state)); }
+function save() { localStorage.setItem('nuce-kanban', JSON.stringify(state)); }
 function priorityColor(p: string) { return p==='high'?'#ef4444':p==='medium'?'#f59e0b':'#22c55e'; }
 
 function render() {
@@ -308,7 +308,7 @@ function render() {
   app.innerHTML = `
     <div style="padding:24px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-        <h1>🗂️ Sparx Kanban</h1>
+        <h1>🗂️ Nuce Kanban</h1>
         <span style="color:#94a3b8;font-size:14px">${state.reduce((s,c)=>s+c.cards.length,0)} cards total</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">

@@ -1,15 +1,15 @@
 /**
- * @sparx/plugin-mobx
+ * @nuce/plugin-mobx
  * MobX integration
- * Sparx-native
+ * Nuce-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMobxPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-mobx',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-mobx',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // mobx transformation

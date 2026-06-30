@@ -3,11 +3,11 @@ import fs from 'fs/promises';
 import path from 'path';
 
 /**
- * SPARX TIER B PLUGINS (IO / ASSETS)
+ * NUCE TIER B PLUGINS (IO / ASSETS)
  * 
  * Includes:
- * - sparxCopy (copy-webpack-plugin)
- * - sparxHtml (html-webpack-plugin)
+ * - nuceCopy (copy-webpack-plugin)
+ * - nuceHtml (html-webpack-plugin)
  */
 
 export interface CopyTarget {
@@ -21,12 +21,12 @@ export interface CopyOptions {
 }
 
 /**
- * Copy Plugin (sparx-copy)
+ * Copy Plugin (nuce-copy)
  * Copies files or directories from src to dest at build end.
  */
-export function sparxCopy(options: CopyOptions): Plugin {
+export function nuceCopy(options: CopyOptions): Plugin {
     return {
-        name: 'sparx-copy',
+        name: 'nuce-copy',
         async buildEnd() {
             if (!options.targets || options.targets.length === 0) return;
 
@@ -39,10 +39,10 @@ export function sparxCopy(options: CopyOptions): Plugin {
                     await fs.cp(srcPath, destPath, { recursive: true, force: true });
 
                     if (options.verbose) {
-                        console.log(`[sparx-copy] Copied ${target.src} -> ${target.dest}`);
+                        console.log(`[nuce-copy] Copied ${target.src} -> ${target.dest}`);
                     }
                 } catch (e: any) {
-                    console.warn(`[sparx-copy] Failed to copy ${target.src}: ${e.message}`);
+                    console.warn(`[nuce-copy] Failed to copy ${target.src}: ${e.message}`);
                 }
             }
         }
@@ -58,17 +58,17 @@ export interface HtmlOptions {
 }
 
 /**
- * HTML Plugin (sparx-html)
+ * HTML Plugin (nuce-html)
  * Generates an index.html file in the output directory.
  * Advanced: Supports variable interpolation (e.g., %PUBLIC_URL%, %TITLE%)
  */
-export function sparxHtml(options: HtmlOptions = {}): Plugin {
+export function nuceHtml(options: HtmlOptions = {}): Plugin {
     return {
-        name: 'sparx-html',
+        name: 'nuce-html',
         stability: 'stable',
         async buildEnd() {
             const filename = options.filename || 'index.html';
-            const title = options.title || 'Sparx App';
+            const title = options.title || 'Nuce App';
             const destPath = path.resolve(process.cwd(), 'dist', filename);
 
             let content = '';
@@ -78,7 +78,7 @@ export function sparxHtml(options: HtmlOptions = {}): Plugin {
                     const templatePath = path.resolve(process.cwd(), options.template);
                     content = await fs.readFile(templatePath, 'utf-8');
                 } catch (e) {
-                    console.warn(`[sparx-html] Template not found: ${options.template}`);
+                    console.warn(`[nuce-html] Template not found: ${options.template}`);
                     content = getDefaultHtml(title);
                 }
             } else {
@@ -101,7 +101,7 @@ export function sparxHtml(options: HtmlOptions = {}): Plugin {
                 await fs.mkdir(path.dirname(destPath), { recursive: true });
                 await fs.writeFile(destPath, content);
             } catch (e: any) {
-                console.error(`[sparx-html] Failed to generate HTML: ${e.message}`);
+                console.error(`[nuce-html] Failed to generate HTML: ${e.message}`);
             }
         }
     };

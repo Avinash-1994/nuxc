@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-msw
+ * @nuce/plugin-msw
  * Mock Service Worker integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMswPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-msw',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-msw',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Testing: Mock Service Worker integration

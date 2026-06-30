@@ -31,7 +31,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 // ──────────────────────────────────────────────────────────
 {
   fs.writeFileSync(path.join(__dirname, 'package.json'), JSON.stringify({ type: 'module' }));
-  fs.writeFileSync(path.join(__dirname, 'sparx.config.ts'), `export default { entry: ['src/index.js'] };`);
+  fs.writeFileSync(path.join(__dirname, 'nuce.config.ts'), `export default { entry: ['src/index.js'] };`);
   fs.mkdirSync(path.join(__dirname, 'src'), { recursive: true });
   fs.writeFileSync(path.join(__dirname, 'src', 'index.js'), `
     // Simple module output for output hardening test
@@ -61,8 +61,8 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
     const htmlPath = path.join(outDir, 'index.html');
     const headersPath = path.join(outDir, '_headers');
     const htaccessPath = path.join(outDir, '.htaccess');
-    const sriManifestPath = path.join(outDir, 'sparx-sri-manifest.json');
-    const cspPath = path.join(outDir, 'sparx-csp.txt');
+    const sriManifestPath = path.join(outDir, 'nuce-sri-manifest.json');
+    const cspPath = path.join(outDir, 'nuce-csp.txt');
 
     const htmlExists = fs.existsSync(htmlPath);
     const headersExists = fs.existsSync(headersPath);

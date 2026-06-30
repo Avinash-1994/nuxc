@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-eslint
+ * @nuce/plugin-eslint
  * ESLint integration
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createEslintPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-eslint',
+        name: '@nuce/plugin-eslint',
         originalPlugin: 'vite-plugin-eslint',
         
         async transform(code: string, id: string) {

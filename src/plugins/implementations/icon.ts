@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-icon
+ * @nuce/plugin-icon
  * Icon component generation
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createIconPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-icon',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-icon',
+        originalPlugin: 'nuce-native',
         
         async load(id: string) {
             // Asset loading for icon

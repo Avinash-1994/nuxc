@@ -17,12 +17,12 @@ export const vueSpaTemplate: TemplateConfig = {
     devDependencies: {
         "@vitejs/plugin-vue": "^4.2.3",
         "vue-tsc": "^1.8.8",
-        "@sparx/plugin-vue": "^1.0.0"
+        "@nuce/plugin-vue": "^1.0.0"
     },
     files: {
-        'sparx.config.ts': `
-import { defineConfig } from 'sparx';
-import vue from '@sparx/plugin-vue';
+        'nuce.config.ts': `
+import { defineConfig } from 'nuce';
+import vue from '@nuce/plugin-vue';
 
 export default defineConfig({
     plugins: [vue()],
@@ -46,9 +46,9 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <div>
-    <h1>Sparx + Vue</h1>
+    <h1>Nuce + Vue</h1>
   </div>
-  <HelloWorld msg="Sparx + Vue" />
+  <HelloWorld msg="Nuce + Vue" />
 </template>
 
 <style scoped>

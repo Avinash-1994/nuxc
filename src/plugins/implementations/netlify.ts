@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-netlify
+ * @nuce/plugin-netlify
  * Netlify deployment adapter
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createNetlifyPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-netlify',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-netlify',
+        originalPlugin: 'nuce-native',
         
         async buildEnd() {
-            console.log('[@sparx/plugin-netlify] Deployment adapter ready');
+            console.log('[@nuce/plugin-netlify] Deployment adapter ready');
             // Generate deployment config
         }
     };

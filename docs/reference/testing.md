@@ -1,4 +1,4 @@
-# 🧪 Sparx Testing - Quick Reference Guide
+# 🧪 Nuce Testing - Quick Reference Guide
 
 ## 🚀 Quick Start
 
@@ -148,7 +148,7 @@ npm run test:snapshot -- --updateSnapshot
 
 ### Enable Debug Logging
 ```bash
-DEBUG=sparx:* npm test
+DEBUG=nuce:* npm test
 ```
 
 ### Run Single Test

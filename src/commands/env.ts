@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-// NEW-03: sparx env — validate environment variables
+// NEW-03: nuce env — validate environment variables
 
 function scanForEnvUsage(srcDir: string): Set<string> {
   const used = new Set<string>();
@@ -14,7 +14,7 @@ function scanForEnvUsage(srcDir: string): Set<string> {
         walk(full);
       } else if (entry.isFile() && /\.(ts|tsx|js|jsx|svelte|vue)$/.test(entry.name)) {
         const content = fs.readFileSync(full, 'utf8');
-        const matches = content.matchAll(/import\.meta\.env\.(SPARX_[A-Z0-9_]+)/g);
+        const matches = content.matchAll(/import\.meta\.env\.(NUCE_[A-Z0-9_]+)/g);
         for (const m of matches) used.add(m[1]);
       }
     }
@@ -54,8 +54,8 @@ export async function runEnv() {
   if (envFiles.length > 0) console.log(`  Source: ${envFiles[0]}`);
   console.log();
 
-  const sparxVars = Object.entries(envVars).filter(([k]) => k.startsWith('SPARX_'));
-  for (const [key] of sparxVars) {
+  const nuceVars = Object.entries(envVars).filter(([k]) => k.startsWith('NUCE_'));
+  for (const [key] of nuceVars) {
     const used = usedVars.has(key);
     console.log(`  ✓ ${key.padEnd(30)} = [set]${used ? '' : ' (unused in code)'}`);
   }
@@ -66,14 +66,14 @@ export async function runEnv() {
     }
   }
 
-  const nonSparx = Object.keys(envVars).filter(k => !k.startsWith('SPARX_') && !k.startsWith('#'));
-  for (const key of nonSparx) {
-    console.log(`  ⚠  ${key.padEnd(30)} — missing SPARX_ prefix, not exposed to browser`);
+  const nonNuce = Object.keys(envVars).filter(k => !k.startsWith('NUCE_') && !k.startsWith('#'));
+  for (const key of nonNuce) {
+    console.log(`  ⚠  ${key.padEnd(30)} — missing NUCE_ prefix, not exposed to browser`);
   }
 
-  if (sparxVars.length === 0 && usedVars.size === 0) {
-    console.log('  No SPARX_ environment variables found.');
-    console.log('  Docs: https://sparx.dev/guide/env-vars');
+  if (nuceVars.length === 0 && usedVars.size === 0) {
+    console.log('  No NUCE_ environment variables found.');
+    console.log('  Docs: https://nuce.dev/guide/env-vars');
   }
   console.log();
 }

@@ -9,10 +9,10 @@ mk() { mkdir -p "$T/$1/src"; }
 # ── REACT ─────────────────────────────────────────────────────────
 mk react
 cat > "$T/react/package.json" <<'EOF'
-{"name":"sparx-react-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview","test":"playwright test"},"sparx":{"template":true,"framework":"react","description":"Sparx Tasks — task management app"},"dependencies":{"react":"18.3.1","react-dom":"18.3.1","react-router-dom":"6.23.1","@tanstack/react-query":"5.40.0","zustand":"4.5.2"},"devDependencies":{"sparx":"file:../..","@types/react":"18.3.3","@types/react-dom":"18.3.0","typescript":"5.4.5"}}
+{"name":"nuce-react-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuce dev","build":"nuce build","preview":"nuce preview","test":"playwright test"},"nuce":{"template":true,"framework":"react","description":"Nuce Tasks — task management app"},"dependencies":{"react":"18.3.1","react-dom":"18.3.1","react-router-dom":"6.23.1","@tanstack/react-query":"5.40.0","zustand":"4.5.2"},"devDependencies":{"nuce":"file:../..","@types/react":"18.3.3","@types/react-dom":"18.3.0","typescript":"5.4.5"}}
 EOF
-cat > "$T/react/sparx.config.ts" <<'EOF'
-import { defineConfig } from 'sparx';
+cat > "$T/react/nuce.config.ts" <<'EOF'
+import { defineConfig } from 'nuce';
 export default defineConfig({ framework: 'react' });
 EOF
 cat > "$T/react/src/main.tsx" <<'EOF'
@@ -22,7 +22,7 @@ import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const PROJECTS = [
-  { id: 1, name: 'Sparx Core', tasks: 12, done: 8 },
+  { id: 1, name: 'Nuce Core', tasks: 12, done: 8 },
   { id: 2, name: 'Plugin Ecosystem', tasks: 34, done: 29 },
   { id: 3, name: 'Meta-Frameworks', tasks: 21, done: 19 },
   { id: 4, name: 'Security Gate', tasks: 15, done: 15 },
@@ -45,7 +45,7 @@ function Nav() {
   const links = [['/', 'Dashboard'], ['/projects', 'Projects'], ['/tasks/new', '+ New Task'], ['/settings', 'Settings']];
   return (
     <nav style={{background:'#0f172a',color:'#fff',padding:'0 24px',display:'flex',gap:24,alignItems:'center',height:56}}>
-      <span style={{fontWeight:700,fontSize:18,marginRight:16}}>⚡ Sparx Tasks</span>
+      <span style={{fontWeight:700,fontSize:18,marginRight:16}}>⚡ Nuce Tasks</span>
       {links.map(([to, label]) => (
         <NavLink key={to} to={to} style={({isActive})=>({color: isActive ? '#818cf8' : '#94a3b8', textDecoration:'none', fontWeight: isActive ? 600 : 400})}>{label}</NavLink>
       ))}
@@ -125,7 +125,7 @@ function Login() {
     <div style={{padding:32,maxWidth:400}}>
       <h1>Sign In</h1>
       <form onSubmit={e=>{e.preventDefault();setOk(true)}} style={{display:'flex',flexDirection:'column',gap:16}}>
-        <input type="email" placeholder="Email" defaultValue="dev@sparx.dev" required style={{padding:12,borderRadius:8,border:'1px solid #334155',background:'#1e293b',color:'#fff'}}/>
+        <input type="email" placeholder="Email" defaultValue="dev@nuce.dev" required style={{padding:12,borderRadius:8,border:'1px solid #334155',background:'#1e293b',color:'#fff'}}/>
         <input type="password" placeholder="Password" defaultValue="password" required style={{padding:12,borderRadius:8,border:'1px solid #334155',background:'#1e293b',color:'#fff'}}/>
         <button type="submit" style={{padding:12,background:'#6366f1',color:'#fff',border:'none',borderRadius:8,cursor:'pointer',fontWeight:600}}>Sign In</button>
       </form>
@@ -155,10 +155,10 @@ function App() {
 createRoot(document.getElementById('root')!).render(<App/>);
 EOF
 cat > "$T/react/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Sparx Tasks</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Nuce Tasks</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
 EOF
 cat > "$T/react/README.md" <<'EOF'
-# Sparx Tasks — React Template
+# Nuce Tasks — React Template
 ```bash
 npm install && npm run dev
 ```
@@ -168,14 +168,14 @@ EOF
 # ── VUE ─────────────────────────────────────────────────────────
 mk vue
 cat > "$T/vue/package.json" <<'EOF'
-{"name":"sparx-vue-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"sparx dev","build":"sparx build","preview":"sparx preview"},"sparx":{"template":true,"framework":"vue","description":"Sparx Shop — e-commerce storefront"},"dependencies":{"vue":"3.4.27","vue-router":"4.3.3","pinia":"2.1.7"},"devDependencies":{"sparx":"file:../..","@vitejs/plugin-vue":"5.0.4","typescript":"5.4.5"}}
+{"name":"nuce-vue-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuce dev","build":"nuce build","preview":"nuce preview"},"nuce":{"template":true,"framework":"vue","description":"Nuce Shop — e-commerce storefront"},"dependencies":{"vue":"3.4.27","vue-router":"4.3.3","pinia":"2.1.7"},"devDependencies":{"nuce":"file:../..","@vitejs/plugin-vue":"5.0.4","typescript":"5.4.5"}}
 EOF
-cat > "$T/vue/sparx.config.ts" <<'EOF'
-import { defineConfig } from 'sparx';
+cat > "$T/vue/nuce.config.ts" <<'EOF'
+import { defineConfig } from 'nuce';
 export default defineConfig({ framework: 'vue' });
 EOF
 cat > "$T/vue/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Sparx Shop</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Nuce Shop</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
 EOF
 cat > "$T/vue/src/main.ts" <<'EOF'
 import { createApp } from 'vue';
@@ -198,7 +198,7 @@ cat > "$T/vue/src/App.vue" <<'EOF'
 <template>
   <div class="app">
     <nav>
-      <span class="brand">🛒 Sparx Shop</span>
+      <span class="brand">🛒 Nuce Shop</span>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/products">Products</RouterLink>
       <RouterLink to="/cart">Cart ({{ cartCount }})</RouterLink>

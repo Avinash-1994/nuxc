@@ -120,7 +120,7 @@ fn topo_sort(nodes: &HashMap<String, TaskNode>) -> Vec<String> {
 /// {
 ///   "swcVersion": "0.90.x",
 ///   "cssVersion": "1.0.0-alpha.58",
-///   "configHash": "<xxh3 of sparx.config>",
+///   "configHash": "<xxh3 of nuce.config>",
 ///   "modules": [
 ///     {
 ///       "id": "abc123",

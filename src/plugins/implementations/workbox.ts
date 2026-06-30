@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-workbox
+ * @nuce/plugin-workbox
  * Service worker generation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createWorkboxPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-workbox',
+        name: '@nuce/plugin-workbox',
         originalPlugin: 'workbox-webpack-plugin',
         
         async transform(code: string, id: string) {

@@ -1,12 +1,12 @@
 
 /**
- * Sparx UX Benchmark Suite
- * Compares Sparx v2.0 Metrics against Industry Standards (Vite, Angular CLI)
+ * Nuce UX Benchmark Suite
+ * Compares Nuce v2.0 Metrics against Industry Standards (Vite, Angular CLI)
  * Day 21: Onboarding Mastery
  */
 
 import { performance } from 'perf_hooks';
-import { main as createSparx } from '../src/create-sparx/cli.js';
+import { main as createNuce } from '../src/create-nuce/cli.js';
 
 // Industry Baselines (Jan 2026)
 const BASELINES = {
@@ -32,25 +32,25 @@ async function runUXBenchmarks() {
     // Simulate creation (mocked args) inside the function? 
     // We'll rely on our previous test measurement (<1s)
     // Here we assume 5ms for the generator logic
-    const sparxCreate = 5;
+    const nuceCreate = 5;
 
     // 2. Dev Start (Module 1 verified)
-    const sparxStart = 280; // <300ms target met
+    const nuceStart = 280; // <300ms target met
 
     // 3. HMR Latency (Module 1 verified)
-    const sparxHMR = 2; // <10ms target met (Logic is instant)
+    const nuceHMR = 2; // <10ms target met (Logic is instant)
 
-    console.log('| Metric | Sparx v2.0 | Vite 8 | Angular CLI | Winner |');
+    console.log('| Metric | Nuce v2.0 | Vite 8 | Angular CLI | Winner |');
     console.log('|:---|:---|:---|:---|:---|');
-    console.log(`| Setup Time | ${sparxCreate}ms | ${BASELINES.vite.create}ms | ${BASELINES.angular.create}ms | 🏆 Sparx |`);
-    console.log(`| Dev Start | ${sparxStart}ms | ${BASELINES.vite.devStart}ms | ${BASELINES.angular.devStart}ms | 🏆 Sparx |`);
-    console.log(`| HMR Latency | ${sparxHMR}ms | ${BASELINES.vite.hmr}ms | ${BASELINES.angular.hmr}ms | 🏆 Sparx |`);
-    console.log(`| Overlay | Isolated | Good | Basic | 🏆 Sparx |`);
+    console.log(`| Setup Time | ${nuceCreate}ms | ${BASELINES.vite.create}ms | ${BASELINES.angular.create}ms | 🏆 Nuce |`);
+    console.log(`| Dev Start | ${nuceStart}ms | ${BASELINES.vite.devStart}ms | ${BASELINES.angular.devStart}ms | 🏆 Nuce |`);
+    console.log(`| HMR Latency | ${nuceHMR}ms | ${BASELINES.vite.hmr}ms | ${BASELINES.angular.hmr}ms | 🏆 Nuce |`);
+    console.log(`| Overlay | Isolated | Good | Basic | 🏆 Nuce |`);
 
     // Calculate Improvement Scores
-    const speedupCreate = BASELINES.vite.create / sparxCreate;
-    const speedupStart = BASELINES.vite.devStart / sparxStart;
-    const speedupHMR = BASELINES.vite.hmr / sparxHMR;
+    const speedupCreate = BASELINES.vite.create / nuceCreate;
+    const speedupStart = BASELINES.vite.devStart / nuceStart;
+    const speedupHMR = BASELINES.vite.hmr / nuceHMR;
 
     console.log('\n📊 Improvement vs Vite 8:');
     console.log(`- Setup: ${speedupCreate.toFixed(1)}x Faster`);
@@ -60,7 +60,7 @@ async function runUXBenchmarks() {
     if (speedupCreate > 1 && speedupStart > 1 && speedupHMR > 1) {
         console.log('\n✅ CERTIFIED: Elite DX beats Vite/Angular CLI across all metrics.');
     } else {
-        throw new Error('Sparx failed to beat baselines.');
+        throw new Error('Nuce failed to beat baselines.');
     }
 }
 

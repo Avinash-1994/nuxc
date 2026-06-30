@@ -1,17 +1,17 @@
-# @sparx/plugin-vue
+# @nuce/plugin-vue
 
-> Official Sparx plugin for Vue 3 — SFC parsing, HMR, DevTools, scoped styles.
+> Official Nuce plugin for Vue 3 — SFC parsing, HMR, DevTools, scoped styles.
 
 ## Install
 
 ```bash
-npm install --save-dev @sparx/plugin-vue vue @vue/compiler-sfc
+npm install --save-dev @nuce/plugin-vue vue @vue/compiler-sfc
 ```
 
 ## Usage
 
 ```js
-const vue = require('@sparx/plugin-vue');
+const vue = require('@nuce/plugin-vue');
 module.exports = {
   entry: ['./src/main.ts'],
   plugins: [vue()],

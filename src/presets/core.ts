@@ -1,5 +1,5 @@
 /**
- * @sparx/preset-core
+ * @nuce/preset-core
  * 
  * Opinionated defaults for 80% of applications.
  * Zero-config experience with smart auto-detection.

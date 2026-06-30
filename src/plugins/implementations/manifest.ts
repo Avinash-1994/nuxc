@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-manifest
+ * @nuce/plugin-manifest
  * Web manifest generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createManifestPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-manifest',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-manifest',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Web manifest generation

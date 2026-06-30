@@ -33,7 +33,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
   const srcFile = 'src/index.js';
   const fakeAwsKey = 'AKIA1234567890123456'; // fake, not a real key
   fs.writeFileSync(path.join(__dirname, 'package.json'), JSON.stringify({ type: 'module' }));
-  fs.writeFileSync(path.join(__dirname, 'sparx.config.ts'), `export default { entry: ['src/index.js'] };`);
+  fs.writeFileSync(path.join(__dirname, 'nuce.config.ts'), `export default { entry: ['src/index.js'] };`);
   fs.mkdirSync(path.join(__dirname, 'src'), { recursive: true });
 
   const srcContent = `// index.js — intentional leak for test
@@ -71,7 +71,7 @@ console.log(API_KEY);
   const envVarName = 'SECRET_ENV_VAR';
 
   fs.writeFileSync(path.join(__dirname, 'package.json'), JSON.stringify({ type: 'module' }));
-  fs.writeFileSync(path.join(__dirname, 'sparx.config.ts'), `
+  fs.writeFileSync(path.join(__dirname, 'nuce.config.ts'), `
     export default {
       plugins: [{
         name: '${pluginName}',

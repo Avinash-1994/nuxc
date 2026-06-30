@@ -1,5 +1,5 @@
 /**
- * Sparx Plugin Governance & Stability System
+ * Nuce Plugin Governance & Stability System
  * 
  * Enforces strict typing, stability levels, and rules for the ecosystem.
  * This ensures "Production Ready" quality for all loaded plugins.
@@ -24,7 +24,7 @@ export interface GovernanceResult {
 }
 
 /**
- * Validates a plugin against Sparx's strict governance rules.
+ * Validates a plugin against Nuce's strict governance rules.
  * 
  * Rules:
  * 1. Must have a valid name (kebab-case, @scope/name)
@@ -43,7 +43,7 @@ export function validatePlugin(plugin: any): GovernanceResult {
 
     // Name format check
     if (!/^(@[a-z0-9-]+\/)?[a-z0-9-]+$/.test(plugin.name)) {
-        result.warnings.push(`Plugin name "${plugin.name}" should be kebab-case (e.g. sparx-plugin-foo).`);
+        result.warnings.push(`Plugin name "${plugin.name}" should be kebab-case (e.g. nuce-plugin-foo).`);
     }
 
     // Advanced: Check for legacy/unsafe patterns
@@ -63,14 +63,14 @@ export function validatePlugin(plugin: any): GovernanceResult {
  * In a real scenario, this would fetch from a CDN or verified list.
  */
 export const VERIFIED_PLUGINS = new Set([
-    'sparx-react',
-    'sparx-vue',
-    'sparx-svelte',
-    'sparx-copy',
-    'sparx-html',
-    'sparx-compress'
+    'nuce-react',
+    'nuce-vue',
+    'nuce-svelte',
+    'nuce-copy',
+    'nuce-html',
+    'nuce-compress'
 ]);
 
 export function isVerified(name: string): boolean {
-    return VERIFIED_PLUGINS.has(name) || name.startsWith('@sparx/');
+    return VERIFIED_PLUGINS.has(name) || name.startsWith('@nuce/');
 }

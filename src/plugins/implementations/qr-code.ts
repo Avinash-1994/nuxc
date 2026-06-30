@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-qr-code
+ * @nuce/plugin-qr-code
  * QR code generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createQrCodePlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-qr-code',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-qr-code',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Fintech integration: QR code generation
@@ -16,7 +16,7 @@ export function createQrCodePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@sparx/plugin-qr-code] Fintech integration ready');
+            console.log('[@nuce/plugin-qr-code] Fintech integration ready');
             // Initialize payment gateway, generate QR codes, etc.
         }
     };

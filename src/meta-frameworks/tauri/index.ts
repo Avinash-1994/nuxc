@@ -1,5 +1,5 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 import { tauriIpcPlugin } from './tauri-plugin.js';
 
 export interface TauriConfig {
@@ -7,7 +7,7 @@ export interface TauriConfig {
   autoBuildRust?: boolean;   // default false
 }
 
-export class TauriAdapter implements SparxAdapter {
+export class TauriAdapter implements NuceAdapter {
   name = 'tauri';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class TauriAdapter implements SparxAdapter {
     ];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     if (!config.tauri) config.tauri = {};
     config.tauri = {
       backendSrc: 'src-tauri',

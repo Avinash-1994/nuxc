@@ -64,7 +64,7 @@ async function runColdStart() {
       const text = chunk.toString();
       serverOutput += text;
       
-      const match = text.match(/\[SPARX-TEST\] Angular compiler init time: ([0-9.]+)ms/);
+      const match = text.match(/\[NUCE-TEST\] Angular compiler init time: ([0-9.]+)ms/);
       if (match) {
          compilerInitTime = parseFloat(match[1]);
       }
@@ -88,7 +88,7 @@ async function runColdStart() {
       let body = '';
       res.on('data', d => body += d.toString());
       res.on('end', () => {
-        // Allow ~200ms for the server to emit the [SPARX-TEST] log
+        // Allow ~200ms for the server to emit the [NUCE-TEST] log
         setTimeout(resolve, 200);
       });
     }).on('error', () => setTimeout(resolve, 200));
@@ -120,7 +120,7 @@ async function runColdStart() {
 async function runWarmStart() {
   printPass('ANG-02  Warm Start (SQLite Cache)', '< 600ms', '13ms', [
     `Cache hits: 600/600`,
-    `DB File: .sparx/angular-cache.db`
+    `DB File: .nuce/angular-cache.db`
   ]);
 }
 
@@ -142,8 +142,8 @@ async function runHmr() {
   const hmrPromise = new Promise(resolve => {
     const onData = (chunk) => {
       const text = chunk.toString();
-      if (text.includes('[SPARX-TEST] Ivy cache hit')) ivyCacheHit = true;
-      if (text.includes('[SPARX-TEST] Ivy recompile: yes')) recompileYes = true;
+      if (text.includes('[NUCE-TEST] Ivy cache hit')) ivyCacheHit = true;
+      if (text.includes('[NUCE-TEST] Ivy recompile: yes')) recompileYes = true;
       
       if (hmrTriggered && (ivyCacheHit || recompileYes)) {
          setTimeout(resolve, 100);
@@ -165,7 +165,7 @@ async function runHmr() {
      res.on('data', () => {});
      res.on('end', () => {
         try {
-           const status = fs.readFileSync('/tmp/sparx-hmr-status.txt', 'utf-8');
+           const status = fs.readFileSync('/tmp/nuce-hmr-status.txt', 'utf-8');
            if (status === 'hit') ivyCacheHit = true;
            if (status === 'recompile') recompileYes = true;
         } catch (e) {}
@@ -198,7 +198,7 @@ async function runTreeShakingAndBuild() {
   const cliPath = path.resolve(__dirname, '../../../dist/cli.js');
   let output = '';
   try {
-    output = execFileSync('node', [cliPath, 'build'], { cwd: __dirname, encoding: 'utf-8', stdio: 'ignore', env: { ...process.env, SPARX_SKIP_SECURITY: '1' } });
+    output = execFileSync('node', [cliPath, 'build'], { cwd: __dirname, encoding: 'utf-8', stdio: 'ignore', env: { ...process.env, NUCE_SKIP_SECURITY: '1' } });
   } catch (err) {
     output = err.stdout || err.message;
   }
@@ -233,7 +233,7 @@ async function runTreeShakingAndBuild() {
     walk(distDir);
   }
   
-  const hasAdapterOutput = output.includes('[sparx] adapter: angular') || output.includes('adapter: angular');
+  const hasAdapterOutput = output.includes('[nuce] adapter: angular') || output.includes('adapter: angular');
   const bundleSizeKB = (totalSize / 1024).toFixed(2);
   const deadCodeEliminated = !largestJs.content.includes('DEAD_CODE');
   const rxjsUsed = largestJs.content.includes('fromEvent') && !largestJs.content.includes('BehaviorSubject');
@@ -248,11 +248,11 @@ async function runTreeShakingAndBuild() {
 
   const details = [
     `Using mock adapter: no`,
-    `Using real SparxAngularAdapter: yes`,
+    `Using real NuceAngularAdapter: yes`,
     `@angular/compiler-cli version: ${ngVersion}`,
     `Ivy compilation ran: yes`,
     `Build time: ${timeMs.toFixed(0)}ms`,
-    `[sparx] adapter: angular in output: ${hasAdapterOutput ? 'yes' : 'no'}`,
+    `[nuce] adapter: angular in output: ${hasAdapterOutput ? 'yes' : 'no'}`,
     `Gate: < 12000ms ${pass ? 'PASS' : 'FAIL'}`,
     `dist/ file count: ${fileCount}`,
     `dist/ total size: ${bundleSizeKB}KB`,

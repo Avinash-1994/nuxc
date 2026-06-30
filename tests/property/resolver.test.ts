@@ -14,7 +14,7 @@ describe('Property-Based: Module Resolution', () => {
     let tempDir: string;
 
     beforeAll(() => {
-        tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sparx-property-test-'));
+        tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'nuce-property-test-'));
     });
 
     afterAll(() => {

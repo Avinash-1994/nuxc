@@ -1,20 +1,20 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { SparxPlugin } from '../core/plugins/types.js';
+import { NucePlugin } from '../core/plugins/types.js';
 import { log } from '../utils/logger.js';
 
-export function createStaticPlugin(rootDir: string, outDir: string): SparxPlugin {
+export function createStaticPlugin(rootDir: string, outDir: string): NucePlugin {
     return {
         manifest: {
-            name: 'sparx:static',
+            name: 'nuce:static',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['buildEnd'],
             permissions: { fs: 'read' }
         },
-        id: 'sparx:static',
+        id: 'nuce:static',
         async runHook(hook, data) {
             if (hook !== 'buildEnd') return data;
 

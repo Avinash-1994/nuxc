@@ -2,7 +2,7 @@
  * Plugin Compatibility Layer (Day 45)
  * 
  * Provides compatibility adapters for ported Vite/Webpack plugins
- * to work seamlessly in Sparx's isolated plugin runtime.
+ * to work seamlessly in Nuce's isolated plugin runtime.
  */
 
 export interface PluginAdapter {
@@ -18,7 +18,7 @@ export interface PluginAdapter {
 
 /**
  * Vite Plugin Adapter
- * Converts Vite plugin API to Sparx plugin API
+ * Converts Vite plugin API to Nuce plugin API
  */
 export class VitePluginAdapter implements PluginAdapter {
     name: string;
@@ -59,7 +59,7 @@ export class VitePluginAdapter implements PluginAdapter {
 
 /**
  * Webpack Loader Adapter
- * Converts Webpack loader API to Sparx plugin API
+ * Converts Webpack loader API to Nuce plugin API
  */
 export class WebpackLoaderAdapter implements PluginAdapter {
     name: string;
@@ -119,11 +119,11 @@ export class PluginRegistry {
 export const pluginRegistry = new PluginRegistry();
 
 /**
- * React Plugin Adapter (Vite → Sparx)
+ * React Plugin Adapter (Vite → Nuce)
  */
 export function createReactAdapter(): PluginAdapter {
     return {
-        name: '@sparx/plugin-react',
+        name: '@nuce/plugin-react',
         originalPlugin: '@vitejs/plugin-react',
         async transform(code: string, id: string) {
             // React Fast Refresh transformation
@@ -143,11 +143,11 @@ ${code}
 }
 
 /**
- * Vue Plugin Adapter (Vite → Sparx)
+ * Vue Plugin Adapter (Vite → Nuce)
  */
 export function createVueAdapter(): PluginAdapter {
     return {
-        name: '@sparx/plugin-vue',
+        name: '@nuce/plugin-vue',
         originalPlugin: '@vitejs/plugin-vue',
         async transform(code: string, id: string) {
             // Vue SFC transformation
@@ -170,16 +170,16 @@ export default {
 }
 
 /**
- * Sass Loader Adapter (Webpack → Sparx)
+ * Sass Loader Adapter (Webpack → Nuce)
  */
 export function createSassAdapter(): PluginAdapter {
     return {
-        name: '@sparx/plugin-sass',
+        name: '@nuce/plugin-sass',
         originalPlugin: 'sass-loader',
         async transform(code: string, id: string) {
             if (id.endsWith('.scss') || id.endsWith('.sass')) {
                 // In production, would use 'sass' package
-                // For now, pass through (Sparx has built-in Sass support)
+                // For now, pass through (Nuce has built-in Sass support)
                 return { code };
             }
             return { code };
@@ -188,15 +188,15 @@ export function createSassAdapter(): PluginAdapter {
 }
 
 /**
- * TypeScript Loader Adapter (Webpack → Sparx)
+ * TypeScript Loader Adapter (Webpack → Nuce)
  */
 export function createTypeScriptAdapter(): PluginAdapter {
     return {
-        name: '@sparx/plugin-typescript',
+        name: '@nuce/plugin-typescript',
         originalPlugin: 'ts-loader',
         async transform(code: string, id: string) {
             if (id.endsWith('.ts') || id.endsWith('.tsx')) {
-                // Sparx has built-in TypeScript support via universal-transformer
+                // Nuce has built-in TypeScript support via universal-transformer
                 return { code };
             }
             return { code };
@@ -209,7 +209,7 @@ export function createTypeScriptAdapter(): PluginAdapter {
  */
 export function createImageOptimizer(): PluginAdapter {
     return {
-        name: '@sparx/plugin-imagemin',
+        name: '@nuce/plugin-imagemin',
         originalPlugin: 'vite-plugin-imagemin',
         async transform(code: string, id: string) {
             if (/\.(png|jpg|jpeg|gif|webp|avif)$/.test(id)) {
@@ -227,7 +227,7 @@ export function createImageOptimizer(): PluginAdapter {
  */
 export function createPWAAdapter(): PluginAdapter {
     return {
-        name: '@sparx/plugin-pwa',
+        name: '@nuce/plugin-pwa',
         originalPlugin: 'vite-plugin-pwa',
         async buildEnd() {
             // Generate service worker and manifest
@@ -241,7 +241,7 @@ export function createPWAAdapter(): PluginAdapter {
  */
 export function createCompressionAdapter(): PluginAdapter {
     return {
-        name: '@sparx/plugin-compression',
+        name: '@nuce/plugin-compression',
         originalPlugin: 'vite-plugin-compression',
         async buildEnd() {
             // Generate gzip/brotli compressed assets

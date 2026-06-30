@@ -1,5 +1,5 @@
 
-> sparx@1.0.0-freeze test
+> nuce@1.0.0-freeze test
 > cross-env NODE_OPTIONS=--experimental-vm-modules jest
 
 ts-jest[config] (WARN) 

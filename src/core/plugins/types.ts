@@ -50,7 +50,7 @@ export interface PluginExecutionRecord {
 }
 
 /** @public */
-export interface SparxPlugin {
+export interface NucePlugin {
     manifest: PluginManifest;
     id: string; // sha256(name + version)
 

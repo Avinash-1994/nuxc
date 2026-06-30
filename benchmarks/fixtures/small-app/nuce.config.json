@@ -1,0 +1,9 @@
+{
+  "module": "nuce",
+  "entry": ["./src/main.jsx"],
+  "outDir": "./dist-nuce",
+  "build": {
+    "minify": true,
+    "sourcemap": false
+  }
+}

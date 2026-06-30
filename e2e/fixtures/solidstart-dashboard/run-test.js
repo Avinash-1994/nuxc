@@ -147,7 +147,7 @@ await (async function testStreaming() {
   await new Promise((resolve, reject) => {
     const stream = entryServer.renderToStream({
       url: '/dashboard',
-      cookies: { session: 'sparx-session-abc123' }
+      cookies: { session: 'nuce-session-abc123' }
     });
     stream.on('data', chunk => {
       if (ttfbMs === null) {
@@ -201,7 +201,7 @@ await (async function testServerActions() {
 
   // Also test createOrder action
   const orderResult = await entryServer.executeServerAction('createOrder', {
-    productId: 'SPARX-PRO',
+    productId: 'NUCE-PRO',
     quantity: 2
   });
   log(`      createOrder: status ${orderResult.status}, total $${orderResult.body.total}, orderId ${orderResult.body.orderId}`);
@@ -231,7 +231,7 @@ await (async function testColdStartHmrBuild() {
     const onData = (chunk) => {
       const text = chunk.toString();
       serverOutput += text;
-      // Match the Sparx startup banner
+      // Match the Nuce startup banner
       if (
         text.includes('Starting the development server') ||
         text.includes('localhost') ||
@@ -329,7 +329,7 @@ await (async function testColdStartHmrBuild() {
   // Step 3: Measure — dev server running from SS-04, file write + debounce wait
   const hmrFile = path.join(FIXTURE_ROOT, 'app', 'routes', 'dashboard', 'page.tsx');
   const hmrOriginal = fs.readFileSync(hmrFile, 'utf-8');
-  const hmrChange = hmrOriginal + `\n// sparx-hmr-ts-${Date.now()}: exported const updated`;
+  const hmrChange = hmrOriginal + `\n// nuce-hmr-ts-${Date.now()}: exported const updated`;
 
   const t0hmr = performance.now();
   const hmrWriteTs = new Date().toISOString();
@@ -371,7 +371,7 @@ await (async function testColdStartHmrBuild() {
   try {
     buildOutput = execFileSync('node', [cliPath, 'build'], {
       encoding: 'utf-8', timeout: 30000, cwd: FIXTURE_ROOT,
-      env: { ...process.env, SPARX_SKIP_SECURITY: '1' }
+      env: { ...process.env, NUCE_SKIP_SECURITY: '1' }
     });
     buildOk = true;
   } catch (e) {
@@ -436,7 +436,7 @@ await (async function testColdStartHmrBuild() {
       'Contains compiled Solid code: ' + (jsHasSolidCode ? 'yes' : 'no'),
       'Assertion: main output is JS not HTML: ' + (hasRealJs ? 'yes' : 'NO — FAIL'),
       !hasRealJs
-        ? 'Reason: build did not emit compiled JS — sparx build for SolidStart must produce compiled JavaScript bundles'
+        ? 'Reason: build did not emit compiled JS — nuce build for SolidStart must produce compiled JavaScript bundles'
         : 'OK',
     ]
   );
@@ -447,7 +447,7 @@ await (async function testColdStartHmrBuild() {
 await (async function testSSRContent() {
   const html = await entryServer.renderToString({
     url: '/dashboard',
-    cookies: { session: 'sparx-session-abc123' }
+    cookies: { session: 'nuce-session-abc123' }
   });
 
   const bytes = Buffer.byteLength(html);
@@ -516,7 +516,7 @@ await (async function testRegression() {
       execFileSync('node', [cliPath, 'build'], {
         cwd: f.dir,
         stdio: 'ignore',
-        env: { ...process.env, SPARX_SKIP_SECURITY: '1' },
+        env: { ...process.env, NUCE_SKIP_SECURITY: '1' },
         timeout: 30000
       });
       results.push(f.name + ': pass ' + Math.round(performance.now() - t0) + 'ms');

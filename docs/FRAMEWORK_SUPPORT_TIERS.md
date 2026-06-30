@@ -7,7 +7,7 @@
 
 ## Philosophy: Honest Constraints
 
-Sparx supports **ALL frameworks via adapters**, but we believe in **honest maturity levels** rather than false promises.
+Nuce supports **ALL frameworks via adapters**, but we believe in **honest maturity levels** rather than false promises.
 
 > **Core Guarantee**: Every framework gets deterministic builds, CSS correctness, and graph-based rebuilds.  
 > **Honest Non-Guarantee**: Not every framework gets advanced HMR or framework-specific optimizations at v1.0.
@@ -28,7 +28,7 @@ Sparx supports **ALL frameworks via adapters**, but we believe in **honest matur
 ✅ **Deterministic Builds** - Same input → same output, always  
 ✅ **CSS Correctness** - CSS as first-class graph node  
 ✅ **Graph-Based Rebuilds** - Only rebuild affected modules  
-✅ **sparx verify Support** - Full validation and health checks  
+✅ **nuce verify Support** - Full validation and health checks  
 
 ### Use Cases
 - Production applications
@@ -52,7 +52,7 @@ Sparx supports **ALL frameworks via adapters**, but we believe in **honest matur
 ✅ **Deterministic Builds** - Same input → same output  
 ✅ **CSS Correctness** - CSS as first-class graph node  
 ✅ **Graph-Based Rebuilds** - Only rebuild affected modules  
-✅ **sparx verify Support** - Full validation and health checks  
+✅ **nuce verify Support** - Full validation and health checks  
 ✅ **Production Builds Work** - Optimized, minified, ready to deploy  
 
 ### Non-Guarantees
@@ -80,7 +80,7 @@ Sparx supports **ALL frameworks via adapters**, but we believe in **honest matur
 ✅ **Deterministic Builds** - Same input → same output  
 ✅ **CSS Correctness** - CSS as first-class graph node  
 ✅ **Graph-Based Rebuilds** - Only rebuild affected modules  
-✅ **sparx verify Support** - Basic validation  
+✅ **nuce verify Support** - Basic validation  
 
 ### Non-Guarantees
 ⚠️ **HMR** - May be limited, disabled, or unreliable  
@@ -123,8 +123,8 @@ Want to add a new framework? Follow these steps:
 
 ### 1. Create Adapter Package
 ```typescript
-// packages/@sparx/framework-yourframework/src/index.ts
-import { FrameworkAdapter } from 'sparx';
+// packages/@nuce/framework-yourframework/src/index.ts
+import { FrameworkAdapter } from 'nuce';
 
 export default function yourFramework(): FrameworkAdapter {
   return {
@@ -145,7 +145,7 @@ export default function yourFramework(): FrameworkAdapter {
 - Deterministic build test
 - CSS correctness test
 - Graph rebuild test
-- `sparx verify` test
+- `nuce verify` test
 
 ### 3. Document Limitations
 Be honest about what works and what doesn't.
@@ -203,4 +203,4 @@ All new adapters start at Tier 3 (Experimental).
 
 ---
 
-**Remember**: Sparx is about **correctness first, speed second**. Every tier gets deterministic builds and CSS correctness. The difference is in the DX polish.
+**Remember**: Nuce is about **correctness first, speed second**. Every tier gets deterministic builds and CSS correctness. The difference is in the DX polish.

@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-postcss
+ * @nuce/plugin-postcss
  * PostCSS processing
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPostcssPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-postcss',
+        name: '@nuce/plugin-postcss',
         originalPlugin: 'postcss-loader',
         
         async transform(code: string, id: string) {

@@ -1,15 +1,15 @@
 # Configuration Guide
 
-Complete reference for configuring Sparx.
+Complete reference for configuring Nuce.
 
 ## Configuration File
 
-Sparx supports multiple configuration formats:
+Nuce supports multiple configuration formats:
 
-- `sparx.config.js` (recommended)
-- `sparx.config.ts`
-- `sparx.config.mjs`
-- `sparx.config.cjs`
+- `nuce.config.js` (recommended)
+- `nuce.config.ts`
+- `nuce.config.mjs`
+- `nuce.config.cjs`
 
 ## Basic Configuration
 
@@ -165,7 +165,7 @@ module.exports = {
     },
     
     // Or import external plugins
-    require('@sparx/plugin-react-refresh'),
+    require('@nuce/plugin-react-refresh'),
   ],
 };
 ```
@@ -208,7 +208,7 @@ module.exports = {
   },
   
   // Environment variable prefix
-  envPrefix: ['VITE_', 'SPARX_'],
+  envPrefix: ['VITE_', 'NUCE_'],
 };
 ```
 
@@ -354,7 +354,7 @@ module.exports = {
 ## Environment-Specific Configuration
 
 ```javascript
-// sparx.config.js
+// nuce.config.js
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {

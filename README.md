@@ -1,12 +1,12 @@
-# ⚡ Sparx — Modern Build Tool
+# ⚡ Nuce — Modern Build Tool
 
-[![npm version](https://img.shields.io/npm/v/sparx.svg)](https://www.npmjs.com/package/sparx)
-[![CI](https://github.com/Avinash-1994/Sparx/actions/workflows/ci.yml/badge.svg)](https://github.com/Avinash-1994/Sparx/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/nuce.svg)](https://www.npmjs.com/package/nuce)
+[![CI](https://github.com/Avinash-1994/Nuce/actions/workflows/ci.yml/badge.svg)](https://github.com/Avinash-1994/Nuce/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://img.shields.io/badge/tests-303%2F303-brightgreen)](#test-status)
 [![Node >=20](https://img.shields.io/badge/node-%3E%3D20-blue)](https://nodejs.org)
 
-**Sparx** is a production-grade JavaScript/TypeScript build tool powered by **SWC (Rust)** and **LightningCSS**. It delivers sub-100ms HMR, native Module Federation for micro-frontends, full ES2022+ support, automatic tree shaking, a security gate pipeline, and zero-config support for **19 meta-frameworks** — a modern alternative to Webpack/Vite with a Rust-native core.
+**Nuce** is a production-grade JavaScript/TypeScript build tool powered by **SWC (Rust)** and **LightningCSS**. It delivers sub-100ms HMR, native Module Federation for micro-frontends, full ES2022+ support, automatic tree shaking, a security gate pipeline, and zero-config support for **19 meta-frameworks** — a modern alternative to Webpack/Vite with a Rust-native core.
 
 ---
 
@@ -23,7 +23,7 @@
 | 🗺️ **Workspace orchestrator** | Monorepo topological build ordering and parallel execution |
 | 💾 **Smart caching** | SQLite WAL incremental cache (warm start <100ms) |
 | 🎨 **CSS processing** | LightningCSS cascade layers, nesting, CSS Modules, Tailwind |
-| 🔍 **Inspect UI** | Live plugin timing visualization at `/__sparx_inspect__` |
+| 🔍 **Inspect UI** | Live plugin timing visualization at `/__nuce_inspect__` |
 
 ---
 
@@ -31,20 +31,20 @@
 
 ```bash
 # Install globally
-npm install -g sparx
+npm install -g nuce
 
 # Create a new project (interactive)
-sparx create my-app --framework react --ts
+nuce create my-app --framework react --ts
 
 # Or scaffold with a template
-sparx bootstrap --name my-app --template react-ts
+nuce bootstrap --name my-app --template react-ts
 
 # Start dev server
 cd my-app
-sparx dev
+nuce dev
 
 # Production build
-sparx build
+nuce build
 ```
 
 ---
@@ -52,26 +52,26 @@ sparx build
 ## 📦 Installation
 
 ```bash
-npm install -g sparx
+npm install -g nuce
 # or per-project
-npm install -D sparx
+npm install -D nuce
 ```
 
 **Requirements:** Node.js ≥ 20
 
 ---
 
-## ⚙️ Configuration — `sparx.config.ts`
+## ⚙️ Configuration — `nuce.config.ts`
 
 ```ts
-// sparx.config.ts
-import { defineConfig } from 'sparx';
+// nuce.config.ts
+import { defineConfig } from 'nuce';
 
 export default defineConfig({
   // ── Entry ────────────────────────────────────────
   entry: ['./src/main.tsx'],        // string | string[]
   outDir: './dist',                  // output directory
-  cacheDir: '.sparx/cache',         // SQLite WAL cache location
+  cacheDir: '.nuce/cache',         // SQLite WAL cache location
 
   // ── Build ────────────────────────────────────────
   build: {
@@ -106,7 +106,7 @@ export default defineConfig({
     secretPatterns: true,            // scan for AWS/Stripe/JWT/GitHub keys
     csp: true,                       // inject Content-Security-Policy
     sri: true,                       // inject Subresource Integrity hashes
-    sbom: true,                      // emit dist/sparx-sbom.json
+    sbom: true,                      // emit dist/nuce-sbom.json
     lockfileAudit: true,             // verify lockfile integrity
     pluginSandbox: true,             // restrict plugin fs/net permissions
   },
@@ -132,66 +132,66 @@ export default defineConfig({
 ## 🖥️ CLI Reference
 
 ```
-sparx <command> [options]
+nuce <command> [options]
 ```
 
 | Command | Description |
 |---|---|
-| `sparx dev` | Start development server with HMR |
-| `sparx build` | Production build with tree shaking + minification |
-| `sparx preview` | Serve production build locally |
-| `sparx create [name]` | Create a new project interactively |
-| `sparx bootstrap` | Scaffold from a template |
-| `sparx init` | Initialize config in an existing project |
-| `sparx check` | Pre-build validation (type-check + circular imports) |
-| `sparx analyze` | Bundle composition report (HTML or JSON) |
-| `sparx why <module>` | Trace full import chain to a module |
-| `sparx inspect` | Inspect the dependency graph |
-| `sparx ssr` | Start SSR server for meta-frameworks |
-| `sparx security` | Security sub-commands (see below) |
-| `sparx migrate` | Migrate config from older Sparx/Webpack/Vite |
-| `sparx audit` | Accessibility, performance, and SEO audit |
-| `sparx verify` | Project health and configuration check |
-| `sparx report` | AI-narrated build report from latest session |
-| `sparx doctor` | Diagnostics for project health |
-| `sparx test` | Run tests using Sparx custom runner |
-| `sparx css purge` | Remove unused CSS |
-| `sparx env` | List and validate environment variables |
-| `sparx info` | Print environment info for bug reports |
-| `sparx workspaces` | Monorepo workspace commands |
+| `nuce dev` | Start development server with HMR |
+| `nuce build` | Production build with tree shaking + minification |
+| `nuce preview` | Serve production build locally |
+| `nuce create [name]` | Create a new project interactively |
+| `nuce bootstrap` | Scaffold from a template |
+| `nuce init` | Initialize config in an existing project |
+| `nuce check` | Pre-build validation (type-check + circular imports) |
+| `nuce analyze` | Bundle composition report (HTML or JSON) |
+| `nuce why <module>` | Trace full import chain to a module |
+| `nuce inspect` | Inspect the dependency graph |
+| `nuce ssr` | Start SSR server for meta-frameworks |
+| `nuce security` | Security sub-commands (see below) |
+| `nuce migrate` | Migrate config from older Nuce/Webpack/Vite |
+| `nuce audit` | Accessibility, performance, and SEO audit |
+| `nuce verify` | Project health and configuration check |
+| `nuce report` | AI-narrated build report from latest session |
+| `nuce doctor` | Diagnostics for project health |
+| `nuce test` | Run tests using Nuce custom runner |
+| `nuce css purge` | Remove unused CSS |
+| `nuce env` | List and validate environment variables |
+| `nuce info` | Print environment info for bug reports |
+| `nuce workspaces` | Monorepo workspace commands |
 
 ### Security sub-commands
 
 ```bash
-sparx security audit          # full CVE + secret scan
-sparx security cve            # CVE-only scan against OSV API
-sparx security sbom           # generate SBOM (dist/sparx-sbom.json)
-sparx security scan           # scan source for secret patterns
-sparx security plugin-audit   # audit plugin sandbox permissions
-sparx security headers        # generate security headers manifest
-sparx security report         # print full security report
-sparx security fix            # auto-upgrade vulnerable lockfile deps
+nuce security audit          # full CVE + secret scan
+nuce security cve            # CVE-only scan against OSV API
+nuce security sbom           # generate SBOM (dist/nuce-sbom.json)
+nuce security scan           # scan source for secret patterns
+nuce security plugin-audit   # audit plugin sandbox permissions
+nuce security headers        # generate security headers manifest
+nuce security report         # print full security report
+nuce security fix            # auto-upgrade vulnerable lockfile deps
 ```
 
 ### Key options
 
 ```bash
-sparx dev --port 3000 --host 0.0.0.0
-sparx build --outDir ./out --sourcemap inline
-sparx check --no-types           # skip tsc, only circular check
-sparx analyze --json             # JSON output instead of HTML
-sparx why react-dom              # trace import chain
-sparx inspect --filter src/      # filter dependency graph
-sparx ssr --framework remix --port 4000 --prod
-sparx verify --ci --strict       # CI mode: exit 1 on any issue
-sparx create my-app --framework vue --ts --tailwind
+nuce dev --port 3000 --host 0.0.0.0
+nuce build --outDir ./out --sourcemap inline
+nuce check --no-types           # skip tsc, only circular check
+nuce analyze --json             # JSON output instead of HTML
+nuce why react-dom              # trace import chain
+nuce inspect --filter src/      # filter dependency graph
+nuce ssr --framework remix --port 4000 --prod
+nuce verify --ci --strict       # CI mode: exit 1 on any issue
+nuce create my-app --framework vue --ts --tailwind
 ```
 
 ---
 
 ## 🏗️ Meta-Framework Support
 
-Sparx detects your framework automatically from config files and applies the correct adapter. Use `sparx dev` and `sparx build` — no extra setup required.
+Nuce detects your framework automatically from config files and applies the correct adapter. Use `nuce dev` and `nuce build` — no extra setup required.
 
 | Framework | Adapter | SSR | HMR | Streaming |
 |---|---|---|---|---|
@@ -220,7 +220,7 @@ Sparx detects your framework automatically from config files and applies the cor
 ### Example: SvelteKit
 
 ```ts
-// sparx.config.ts
+// nuce.config.ts
 export default defineConfig({
   preset: 'ssr',
   adapter: 'sveltekit',
@@ -257,26 +257,26 @@ export default defineConfig({
 Install any plugin via npm, then add to your config:
 
 ```bash
-npm install -D @sparx/plugin-env @sparx/plugin-pwa
+npm install -D @nuce/plugin-env @nuce/plugin-pwa
 ```
 
 ```ts
-import { envPlugin } from '@sparx/plugin-env';
-import { pwaPlugin } from '@sparx/plugin-pwa';
-import { iconsPlugin } from '@sparx/plugin-icons';
-import { svgPlugin } from '@sparx/plugin-svg';
-import { legacyPlugin } from '@sparx/plugin-legacy';
-import { compressionPlugin } from '@sparx/plugin-compression';
-import { autoImportPlugin } from '@sparx/plugin-auto-import';
-import { inspectPlugin } from '@sparx/plugin-inspect';
-import { checkerPlugin } from '@sparx/plugin-checker';
-import { mockPlugin } from '@sparx/plugin-mock';
-import { imagePlugin } from '@sparx/plugin-image';
+import { envPlugin } from '@nuce/plugin-env';
+import { pwaPlugin } from '@nuce/plugin-pwa';
+import { iconsPlugin } from '@nuce/plugin-icons';
+import { svgPlugin } from '@nuce/plugin-svg';
+import { legacyPlugin } from '@nuce/plugin-legacy';
+import { compressionPlugin } from '@nuce/plugin-compression';
+import { autoImportPlugin } from '@nuce/plugin-auto-import';
+import { inspectPlugin } from '@nuce/plugin-inspect';
+import { checkerPlugin } from '@nuce/plugin-checker';
+import { mockPlugin } from '@nuce/plugin-mock';
+import { imagePlugin } from '@nuce/plugin-image';
 
 export default defineConfig({
   plugins: [
     envPlugin({
-      prefix: 'SPARX_',             // only expose SPARX_* vars to bundle
+      prefix: 'NUCE_',             // only expose NUCE_* vars to bundle
       dts: 'src/env.d.ts',          // auto-generate type declarations
     }),
     pwaPlugin({
@@ -297,7 +297,7 @@ export default defineConfig({
       imports: ['vue', 'react'],     // auto-inject imports
       dts: 'src/auto-imports.d.ts',
     }),
-    inspectPlugin(),                 // UI at /__sparx_inspect__
+    inspectPlugin(),                 // UI at /__nuce_inspect__
     checkerPlugin({
       typescript: true,
       eslint: true,
@@ -320,23 +320,23 @@ export default defineConfig({
 
 | Plugin | What it does |
 |---|---|
-| `@sparx/plugin-env` | Loads `.env`, filters to prefix, generates `env.d.ts`, blocks secret patterns |
-| `@sparx/plugin-pwa` | Generates `manifest.json` + Service Worker with precache |
-| `@sparx/plugin-icons` | On-demand icon loading via `~icons/mdi/home` (no unused icons in bundle) |
-| `@sparx/plugin-svg` | SVG as URL, raw string, or React/Vue component |
-| `@sparx/plugin-legacy` | `<script nomodule>` fallback bundle via SWC + core-js |
-| `@sparx/plugin-compression` | Parallel Brotli + Gzip via Rust threads |
-| `@sparx/plugin-auto-import` | Auto-inject framework imports, sync `.eslintrc-auto-import` |
-| `@sparx/plugin-inspect` | Dev GUI at `/__sparx_inspect__` showing per-plugin timings |
-| `@sparx/plugin-checker` | Worker-thread tsc, eslint, stylelint with overlay error display |
-| `@sparx/plugin-mock` | REST + GraphQL local mock server with fast intercept |
-| `@sparx/plugin-image` | sharp AVIF/WebP optimization, responsive `srcset` |
+| `@nuce/plugin-env` | Loads `.env`, filters to prefix, generates `env.d.ts`, blocks secret patterns |
+| `@nuce/plugin-pwa` | Generates `manifest.json` + Service Worker with precache |
+| `@nuce/plugin-icons` | On-demand icon loading via `~icons/mdi/home` (no unused icons in bundle) |
+| `@nuce/plugin-svg` | SVG as URL, raw string, or React/Vue component |
+| `@nuce/plugin-legacy` | `<script nomodule>` fallback bundle via SWC + core-js |
+| `@nuce/plugin-compression` | Parallel Brotli + Gzip via Rust threads |
+| `@nuce/plugin-auto-import` | Auto-inject framework imports, sync `.eslintrc-auto-import` |
+| `@nuce/plugin-inspect` | Dev GUI at `/__nuce_inspect__` showing per-plugin timings |
+| `@nuce/plugin-checker` | Worker-thread tsc, eslint, stylelint with overlay error display |
+| `@nuce/plugin-mock` | REST + GraphQL local mock server with fast intercept |
+| `@nuce/plugin-image` | sharp AVIF/WebP optimization, responsive `srcset` |
 
 ---
 
 ## 🔒 Security Pipeline
 
-Sparx has a built-in security gate that runs on every production build.
+Nuce has a built-in security gate that runs on every production build.
 
 ### What it checks
 
@@ -346,7 +346,7 @@ Sparx has a built-in security gate that runs on every production build.
 | **CVE gating** | OSV API scan — blocks at configured severity (`high` by default) |
 | **CSP injection** | Injects `<meta http-equiv="Content-Security-Policy">` into all HTML pages |
 | **SRI hashes** | Injects `integrity="sha384-..."` on all `<script>` and `<link>` tags |
-| **SBOM** | Generates `dist/sparx-sbom.json` with full dependency inventory |
+| **SBOM** | Generates `dist/nuce-sbom.json` with full dependency inventory |
 | **Lockfile audit** | Detects tampered `package-lock.json` checksums → abort |
 | **Plugin sandbox** | Blocks plugins from writing to the filesystem without explicit permission |
 
@@ -365,7 +365,7 @@ security: {
 ### Skip in CI (dev fixtures only)
 
 ```bash
-SPARX_SKIP_SECURITY=1 sparx build   # bypasses all security gates
+NUCE_SKIP_SECURITY=1 nuce build   # bypasses all security gates
 ```
 
 > **Never** set this in production. It is only for dev fixture builds where `node_modules` contain dev-only packages with known CVEs.
@@ -409,7 +409,7 @@ const Widget = React.lazy(() => import('dashboard/Widget'));
 ## 🗺️ Monorepo / Workspace
 
 ```ts
-// sparx.workspace.ts
+// nuce.workspace.ts
 export default {
   packages: ['packages/*', 'apps/*'],
   build: {
@@ -420,8 +420,8 @@ export default {
 ```
 
 ```bash
-sparx workspaces build        # build all packages in dependency order
-sparx workspaces dev          # run dev servers for all packages
+nuce workspaces build        # build all packages in dependency order
+nuce workspaces dev          # run dev servers for all packages
 ```
 
 ---
@@ -541,11 +541,11 @@ export default defineConfig({
 
 | Issue | Fix |
 |---|---|
-| `ERR_MODULE_NOT_FOUND @sparx/security` | Run `cd packages/sparx-security && npx tsc` to build the package |
-| CVE scanner aborts dev build | Use `SPARX_SKIP_SECURITY=1` for dev fixtures only |
+| `ERR_MODULE_NOT_FOUND @nuce/security` | Run `cd packages/nuce-security && npx tsc` to build the package |
+| CVE scanner aborts dev build | Use `NUCE_SKIP_SECURITY=1` for dev fixtures only |
 | HMR not working | Check `dev.hmr: true` in config; ensure port is not in use |
-| `build_output/` is empty | Sparx writes to `dist/` by default; check your `outDir` config |
-| TypeScript errors on `@sparx/*` | Verify `tsconfig.json` has the `paths` mapping to `packages/sparx-*/src` |
+| `build_output/` is empty | Nuce writes to `dist/` by default; check your `outDir` config |
+| TypeScript errors on `@nuce/*` | Verify `tsconfig.json` has the `paths` mapping to `packages/nuce-*/src` |
 | `--root` flag unknown | Use `cwd` option instead: `execFileSync('node', ['build'], { cwd: dir })` |
 
 ---
@@ -553,22 +553,22 @@ export default defineConfig({
 ## 📁 Package Structure
 
 ```
-sparx/
+nuce/
 ├── src/
 │   ├── cli.ts                    # CLI entry — 20+ commands
 │   ├── commands/                 # analyze, security, ssr, migrate, …
 │   ├── build/bundler.ts          # core bundler + security gate
-│   ├── config/types.ts           # SparxConfig type definitions
+│   ├── config/types.ts           # NuceConfig type definitions
 │   ├── dev/devServer.ts          # uWS dev server + HMR
 │   ├── meta-frameworks/          # 19 framework adapters
-│   └── plugins/inspect/          # inspect UI (/__sparx_inspect__)
+│   └── plugins/inspect/          # inspect UI (/__nuce_inspect__)
 ├── packages/
-│   ├── sparx-security/           # CVE, CSP, SRI, SBOM, secret scan
-│   ├── sparx-plugin-{name}/      # 11 official plugins
-│   ├── sparx-ssr/                # SSR adapter core
-│   ├── sparx-workspace/          # monorepo orchestration
-│   ├── sparx-hmr-client/         # browser HMR client
-│   └── sparx-module-registry/    # MFE module registry
+│   ├── nuce-security/           # CVE, CSP, SRI, SBOM, secret scan
+│   ├── nuce-plugin-{name}/      # 11 official plugins
+│   ├── nuce-ssr/                # SSR adapter core
+│   ├── nuce-workspace/          # monorepo orchestration
+│   ├── nuce-hmr-client/         # browser HMR client
+│   └── nuce-module-registry/    # MFE module registry
 └── e2e/fixtures/                 # 50+ real framework test fixtures
 ```
 
@@ -577,8 +577,8 @@ sparx/
 ## 🤝 Contributing
 
 ```bash
-git clone https://github.com/Avinash-1994/sparx
-cd sparx
+git clone https://github.com/Avinash-1994/nuce
+cd nuce
 npm install
 npm run build
 npm run typecheck      # tsc --noEmit (0 errors expected)

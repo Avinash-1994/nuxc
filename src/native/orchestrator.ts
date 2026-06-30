@@ -3,7 +3,7 @@
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-const nativeModule = require('../../sparx_native.node');
+const nativeModule = require('../../nuce_native.node');
 
 const {
     BuildOrchestrator: NativeBuildOrchestrator,
@@ -15,7 +15,7 @@ import type {
     BuildOrchestrator as NativeBuildOrchestratorType,
     BuildEvent,
     OrchestratorStats
-} from '../../sparx_native.node';
+} from '../../nuce_native.node';
 
 export { BuildEvent, OrchestratorStats };
 

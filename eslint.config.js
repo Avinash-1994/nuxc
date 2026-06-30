@@ -1,6 +1,6 @@
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
-import sparxGovernance from 'eslint-plugin-sparx-governance';
+import nuceGovernance from 'eslint-plugin-nuce-governance';
 import js from '@eslint/js';
 
 export default [
@@ -12,7 +12,7 @@ export default [
             'dist/**',
             '*.min.js',
             'coverage/**',
-            '.sparx-cache/**'
+            '.nuce-cache/**'
         ]
     },
     js.configs.recommended,
@@ -91,7 +91,7 @@ export default [
         },
         plugins: {
             '@typescript-eslint': tsPlugin,
-            'sparx-governance': sparxGovernance,
+            'nuce-governance': nuceGovernance,
         },
         rules: {
             ...tsPlugin.configs.recommended.rules,
@@ -103,10 +103,10 @@ export default [
             'no-empty': 'off',
             'no-useless-escape': 'off',
             'no-case-declarations': 'off',
-            'sparx-governance/no-internal-imports': 'error',
-            'sparx-governance/require-experimental-flag': 'warn',
-            'sparx-governance/no-graph-mutation': 'error',
-            'sparx-governance/no-cache-access': 'error',
+            'nuce-governance/no-internal-imports': 'error',
+            'nuce-governance/require-experimental-flag': 'warn',
+            'nuce-governance/no-graph-mutation': 'error',
+            'nuce-governance/no-cache-access': 'error',
         },
     },
     {
@@ -130,16 +130,16 @@ export default [
             'src/marketplace/**/*.ts'
         ],
         rules: {
-            'sparx-governance/no-internal-imports': 'off',
-            'sparx-governance/no-graph-mutation': 'off',
-            'sparx-governance/no-cache-access': 'off',
+            'nuce-governance/no-internal-imports': 'off',
+            'nuce-governance/no-graph-mutation': 'off',
+            'nuce-governance/no-cache-access': 'off',
         }
     },
     {
         // Allow tests to be more permissive during stabilization
         files: ['tests/**/*.ts', 'examples/**/*.ts', 'benchmarks/**/*.ts', 'src/test/**/*.ts'],
         rules: {
-            'sparx-governance/no-internal-imports': 'off',
+            'nuce-governance/no-internal-imports': 'off',
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-unused-vars': 'off'
         }

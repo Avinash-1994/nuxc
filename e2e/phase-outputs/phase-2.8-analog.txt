@@ -41,7 +41,7 @@
       Spawn timestamp: 2026-05-02T04:59:45.833Z
       Ready timestamp: 2026-05-02T04:59:45.871Z
       Cold start: 38ms (wall clock)
-      [sparx] adapter: analog in output: yes
+      [nuce] adapter: analog in output: yes
       Gate: < 500ms PASS
 
   ✅ PASS  ALG-05  HMR latency on page file change
@@ -56,7 +56,7 @@
   ✅ PASS  ALG-06  Production build
            Expected: >= 3 HTML pages, client/server bundles, < 5000ms
            Actual:   3 HTML pages, 1041.76ms
-      [sparx] adapter: analog in output: yes
+      [nuce] adapter: analog in output: yes
       Build time: 1041.76ms (actual wall clock)
       dist/ file count: 6
       dist/ total size: 3.65KB
@@ -83,7 +83,7 @@
 ✅ ALL ANALOG TESTS PASSED WITH REAL DATA
 
 ┌─────────────────────────────────────────────┐
-│ SPARX — PHASE 2.8 ANALOG COMPLETE          │
+│ NUCE — PHASE 2.8 ANALOG COMPLETE          │
 │ ALG-01 Routing:      PASS  3 routes       │
 │ ALG-02 API exec:     PASS  Nitro/tRPC       │
 │ ALG-03 SSR render:   PASS  717 bytes      │
@@ -93,6 +93,6 @@
 │ ALG-07 Regression:   PASS                   │
 │                                             │
 │ Total: 7 pass  0 fail  0 warn               │
-│ [sparx] adapter: analog confirmed           │
+│ [nuce] adapter: analog confirmed           │
 │ Ready for Phase 2.9: YES                    │
 └─────────────────────────────────────────────┘

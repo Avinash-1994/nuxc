@@ -3,7 +3,7 @@
 /**
  * SolidStart entry-server.cjs
  *
- * Used by Sparx dev-server's CJS fast-path (createRequire) and
+ * Used by Nuce dev-server's CJS fast-path (createRequire) and
  * directly by run-test.js for SS-02 (streaming) and SS-07 (SSR content).
  *
  * renderToStream() — returns a Node Readable that:
@@ -15,10 +15,10 @@
 var Readable = require('stream').Readable;
 
 function buildShell(url, isAuthed) {
-  var title = url.includes('/dashboard') ? 'Dashboard | Sparx SolidStart'
-    : url.includes('/products') ? 'Products | Sparx SolidStart'
-    : url.includes('/profile') ? 'Profile | Sparx SolidStart'
-    : 'Sparx SolidStart';
+  var title = url.includes('/dashboard') ? 'Dashboard | Nuce SolidStart'
+    : url.includes('/products') ? 'Products | Nuce SolidStart'
+    : url.includes('/profile') ? 'Profile | Nuce SolidStart'
+    : 'Nuce SolidStart';
 
   return [
     '<!DOCTYPE html>',
@@ -27,12 +27,12 @@ function buildShell(url, isAuthed) {
     '  <meta charset="UTF-8" />',
     '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
     '  <title>' + title + '</title>',
-    '  <meta name="description" content="SolidStart streaming SSR — Sparx Phase 2.4" />',
+    '  <meta name="description" content="SolidStart streaming SSR — Nuce Phase 2.4" />',
     '</head>',
     '<body>',
     '<div id="root">',
     '  <header class="app-header">',
-    '    <a href="/" class="logo">Sparx SolidStart</a>',
+    '    <a href="/" class="logo">Nuce SolidStart</a>',
     '    <nav>',
     '      <a href="/dashboard">Dashboard</a>',
     '      <a href="/products">Products</a>',
@@ -41,7 +41,7 @@ function buildShell(url, isAuthed) {
     '    </nav>',
     '    <span class="auth-badge">' + (isAuthed ? 'admin@acme.com' : 'Sign in') + '</span>',
     '  </header>',
-    '  <main id="sparx-solid-root">',
+    '  <main id="nuce-solid-root">',
   ].join('\n');
 }
 
@@ -62,7 +62,7 @@ function buildDashboardChunk(isAuthed, elapsedMs) {
     '      <ul>',
     '        <li><time>09:41</time> Order #9921 — $349.00 — completed</li>',
     '        <li><time>09:38</time> User bob@company.com registered</li>',
-    '        <li><time>09:30</time> Deploy sparx@1.0.10 to production</li>',
+    '        <li><time>09:30</time> Deploy nuce@1.0.10 to production</li>',
     '        <li><time>09:15</time> Cache warmed — 1,248 assets pre-bundled</li>',
     '        <li><time>08:59</time> Security scan completed — 0 vulnerabilities</li>',
     '      </ul>',
@@ -78,12 +78,12 @@ function buildHydrationTail() {
   return [
     '  </main>',
     '  <footer class="app-footer">',
-    '    <p>Powered by Sparx SolidStart Adapter v1.0.0 — Phase 2.4</p>',
+    '    <p>Powered by Nuce SolidStart Adapter v1.0.0 — Phase 2.4</p>',
     '  </footer>',
     '</div>',
     '<!-- window._$HY: solid-js resumability marker -->',
     '<script>window._$HY={events:[],completed:new WeakSet(),r:{}};</script>',
-    '<script type="module" src="/_sparx/assets/entry-client.js"></script>',
+    '<script type="module" src="/_nuce/assets/entry-client.js"></script>',
     '</body>',
     '</html>',
   ].join('\n');
@@ -131,7 +131,7 @@ exports.renderToStream = function renderToStream(opts) {
 
 /**
  * renderToString({ url, cookies }) — convenience wrapper for tools that
- * need a single string (e.g. Sparx SSR runner).
+ * need a single string (e.g. Nuce SSR runner).
  * Collects all stream chunks.
  */
 exports.renderToString = function renderToString(opts) {

@@ -1,4 +1,4 @@
-# SPARX Security Policy
+# NUCE Security Policy
 
 ## Reporting Vulnerabilities
 

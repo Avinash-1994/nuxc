@@ -1,10 +1,10 @@
-import type { SparxAdapter, Plugin, SparxConfig, PackageJson, Middleware } from '@sparx/adapter-core';
-import { detectDependencies, registry } from '@sparx/adapter-core';
+import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
+import { detectDependencies, registry } from '@nuce/adapter-core';
 import { createHash } from 'crypto';
 
 let mdxCompiler: any;
 
-export class DocusaurusAdapter implements SparxAdapter {
+export class DocusaurusAdapter implements NuceAdapter {
   name = 'docusaurus';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -14,7 +14,7 @@ export class DocusaurusAdapter implements SparxAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'sparx:docusaurus-mdx',
+        name: 'nuce:docusaurus-mdx',
 
         async buildStart() {
           try {
@@ -57,7 +57,7 @@ export class DocusaurusAdapter implements SparxAdapter {
     ];
   }
 
-  config(config: SparxConfig): SparxConfig {
+  config(config: NuceConfig): NuceConfig {
     if (!config.docusaurus) config.docusaurus = {};
     config.docusaurus = {
       // Docusaurus outputs to build/ by default
@@ -70,7 +70,7 @@ export class DocusaurusAdapter implements SparxAdapter {
   serverMiddleware(): Middleware[] {
     return [
       async (req: any, res: any, next: any) => {
-        // Docusaurus runs its own dev server; Sparx scaffolds detection + MDX transform support
+        // Docusaurus runs its own dev server; Nuce scaffolds detection + MDX transform support
         next();
       }
     ];

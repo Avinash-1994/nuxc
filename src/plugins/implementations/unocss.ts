@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-unocss
+ * @nuce/plugin-unocss
  * UnoCSS integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createUnocssPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-unocss',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-unocss',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for unocss

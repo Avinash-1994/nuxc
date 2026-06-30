@@ -1,13 +1,13 @@
 import { Plugin } from '../index.js';
 
 /**
- * SPARX TIER C PLUGINS (Graph-Aware / HMR)
+ * NUCE TIER C PLUGINS (Graph-Aware / HMR)
  * 
- * Since Sparx v1.0 handles HMR natively via UniversalTransformer for React, Vue, and Svelte,
+ * Since Nuce v1.0 handles HMR natively via UniversalTransformer for React, Vue, and Svelte,
  * these plugins act as compatibility wrappers or configuration providers.
  * 
  * They ensure that if a user migrates from Vite, they can map existing plugins to these
- * without breaking the build, while Sparx's core engine handles the heavy lifting.
+ * without breaking the build, while Nuce's core engine handles the heavy lifting.
  */
 
 interface ReactOptions {
@@ -18,12 +18,12 @@ interface ReactOptions {
 }
 
 /**
- * Sparx React Plugin
+ * Nuce React Plugin
  * Compatible with @vitejs/plugin-react
  */
-export function sparxReact(options: ReactOptions = {}): Plugin {
+export function nuceReact(options: ReactOptions = {}): Plugin {
     return {
-        name: 'sparx-react',
+        name: 'nuce-react',
         setup(api) {
             // In the future, we can push options to the UniversalTransformer via API
             // For now, we log that React support is active.
@@ -44,12 +44,12 @@ interface VueOptions {
 }
 
 /**
- * Sparx Vue Plugin
+ * Nuce Vue Plugin
  * Compatible with @vitejs/plugin-vue
  */
-export function sparxVue(options: VueOptions = {}): Plugin {
+export function nuceVue(options: VueOptions = {}): Plugin {
     return {
-        name: 'sparx-vue',
+        name: 'nuce-vue',
         setup() {
             // Vue support is built-in
         }
@@ -63,12 +63,12 @@ interface SvelteOptions {
 }
 
 /**
- * Sparx Svelte Plugin
+ * Nuce Svelte Plugin
  * Compatible with @sveltejs/vite-plugin-svelte
  */
-export function sparxSvelte(options: SvelteOptions = {}): Plugin {
+export function nuceSvelte(options: SvelteOptions = {}): Plugin {
     return {
-        name: 'sparx-svelte',
+        name: 'nuce-svelte',
         setup() {
             // Svelte support is built-in
         }
@@ -78,6 +78,6 @@ export function sparxSvelte(options: SvelteOptions = {}): Plugin {
 /**
  * Compatibility aliases
  */
-export const sparxReactRefresh = sparxReact;
-export const sparxVueHmr = sparxVue;
-export const sparxSvelteHmr = sparxSvelte;
+export const nuceReactRefresh = nuceReact;
+export const nuceVueHmr = nuceVue;
+export const nuceSvelteHmr = nuceSvelte;

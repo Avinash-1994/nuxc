@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-relay
+ * @nuce/plugin-relay
  * Relay integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRelayPlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-relay',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-relay',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Relay integration

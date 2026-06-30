@@ -1,5 +1,5 @@
 /**
- * @sparx/plugin-root-cause
+ * @nuce/plugin-root-cause
  * Error root cause analysis
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRootCausePlugin(): PluginAdapter {
     return {
-        name: '@sparx/plugin-root-cause',
-        originalPlugin: 'sparx-native',
+        name: '@nuce/plugin-root-cause',
+        originalPlugin: 'nuce-native',
         
         async transform(code: string, id: string) {
             // Utility: Error root cause analysis
