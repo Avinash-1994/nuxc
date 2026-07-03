@@ -4,16 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   },
   "dependencies": {
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "nuxco": "file:../../",
+    "zeptr": "file:../../",
     "typescript": "latest"
   }
 }

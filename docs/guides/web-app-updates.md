@@ -1,7 +1,7 @@
-# 🎯 Nuxco Web App Update Requirements
+# 🎯 Zeptr Web App Update Requirements
 
 ## Current Status
-The nuxco-web-app exists at `/home/avinash/Desktop/framework_practis/build/nuxco-web-app` but needs updating with **accurate production data** from our v1.0 release.
+The zeptr-web-app exists at `/home/avinash/Desktop/framework_practis/build/zeptr-web-app` but needs updating with **accurate production data** from our v1.0 release.
 
 ---
 
@@ -61,20 +61,20 @@ The nuxco-web-app exists at `/home/avinash/Desktop/framework_practis/build/nuxco
 
 ### CLI Commands (ACTUAL)
 ```bash
-nuxco dev        # Start development server
-nuxco build      # Build for production
-nuxco analyze    # Analyze bundle
-nuxco ssr        # Start SSR server
-nuxco init       # Initialize config
-nuxco bootstrap  # Create from template
-nuxco css        # CSS utilities
-nuxco optimize   # Optimize config
-nuxco inspect    # Inspect dependency graph
-nuxco report     # Generate build report
-nuxco audit      # Run audits (A11y, Perf, SEO)
-nuxco verify     # Verify project health
-nuxco test       # Run tests
-nuxco doctor     # Health diagnostics
+zeptr dev        # Start development server
+zeptr build      # Build for production
+zeptr analyze    # Analyze bundle
+zeptr ssr        # Start SSR server
+zeptr init       # Initialize config
+zeptr bootstrap  # Create from template
+zeptr css        # CSS utilities
+zeptr optimize   # Optimize config
+zeptr inspect    # Inspect dependency graph
+zeptr report     # Generate build report
+zeptr audit      # Run audits (A11y, Perf, SEO)
+zeptr verify     # Verify project health
+zeptr test       # Run tests
+zeptr doctor     # Health diagnostics
 ```
 
 ---
@@ -116,17 +116,17 @@ nuxco doctor     # Health diagnostics
 **Update CLI Example (line 125):**
 ```tsx
 // OLD
-<CodeBlock code="$ npx nuxco build --preset react" />
+<CodeBlock code="$ npx zeptr build --preset react" />
 
 // NEW
 <CodeBlock code={`# Create new project
-npx create-nuxco my-app --template premium-dashboard
+npx create-zeptr my-app --template premium-dashboard
 
 # Start development
-cd my-app && nuxco dev
+cd my-app && zeptr dev
 
 # Build for production
-nuxco build`} />
+zeptr build`} />
 ```
 
 **Update Framework Status (line 147-169):**
@@ -164,17 +164,17 @@ nuxco build`} />
 ```tsx
 {
   coldStart: {
-    nuxco: 69,
+    zeptr: 69,
     vite: 100,
     webpack: 2000
   },
   hmr: {
-    nuxco: '10-60',
+    zeptr: '10-60',
     vite: '<100',
     webpack: '~500'
   },
   bundleSize: {
-    nuxco: 6.9,
+    zeptr: 6.9,
     vite: 7.2,
     webpack: 8.5
   }
@@ -186,10 +186,10 @@ nuxco build`} />
 **Update Getting Started:**
 ```bash
 # Install
-npm install -g nuxco
+npm install -g zeptr
 
 # Create project
-npx create-nuxco my-app
+npx create-zeptr my-app
 
 # Choose template
 - premium-dashboard (Feature showcase)
@@ -199,10 +199,10 @@ npx create-nuxco my-app
 - And 9 more...
 
 # Start dev server
-nuxco dev
+zeptr dev
 
 # Build
-nuxco build
+zeptr build
 ```
 
 ### 5. Templates Page (`src/pages/TemplateStarters.tsx`)

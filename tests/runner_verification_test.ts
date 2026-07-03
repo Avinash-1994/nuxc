@@ -1,7 +1,7 @@
 // tests/runner_verification_test.ts
-// This file tests the custom @nuxco/test runner itself
+// This file tests the custom @zeptr/test runner itself
 
-describe('Nuxco Test Runner', () => {
+describe('Zeptr Test Runner', () => {
     it('should support describe/it blocks', () => {
         expect(true).toBe(true);
     });

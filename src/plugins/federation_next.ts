@@ -1,5 +1,5 @@
 
-import { NuxcoPlugin } from '../core/plugins/types.js';
+import { ZeptrPlugin } from '../core/plugins/types.js';
 import { canonicalHash } from '../core/engine/hash.js';
 import crypto from 'crypto';
 import path from 'path';
@@ -17,10 +17,10 @@ export interface FederationConfig {
     healthCheck?: string;
 }
 
-export function createFederationPlugin(config: FederationConfig): NuxcoPlugin {
+export function createFederationPlugin(config: FederationConfig): ZeptrPlugin {
     return {
         manifest: {
-            name: 'nuxco:federation',
+            name: 'zeptr:federation',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
@@ -132,11 +132,11 @@ var ${config.name} = (() => {
           await __promises[exposed.chunk];
         }
         
-        // Use Nuxco's globalThis.r runtime short ID registration
+        // Use Zeptr's globalThis.r runtime short ID registration
         if (typeof globalThis.r === 'function') {
            return globalThis.r(exposed.shortId);
         }
-        throw new Error("Nuxco runtime missing in host!");
+        throw new Error("Zeptr runtime missing in host!");
       };
     },
     init: async (shareScope) => {

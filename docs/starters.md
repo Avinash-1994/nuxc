@@ -1,4 +1,4 @@
-# Nuxco Starter Templates
+# Zeptr Starter Templates
 
 > **Get from zero to running app in under 5 minutes** with production-ready templates.
 
@@ -8,10 +8,10 @@
 
 ```bash
 # Create new project with interactive CLI
-npm create nuxco@latest
+npm create zeptr@latest
 
 # Or specify template directly
-npm create nuxco@latest my-app --template react-spa
+npm create zeptr@latest my-app --template react-spa
 
 # Start development
 cd my-app
@@ -27,7 +27,7 @@ npm run dev
 
 #### React SPA (TypeScript)
 ```bash
-npm create nuxco@latest my-app --template react-spa
+npm create zeptr@latest my-app --template react-spa
 ```
 
 **Includes**:
@@ -44,7 +44,7 @@ npm create nuxco@latest my-app --template react-spa
 
 #### Vue SPA (TypeScript)
 ```bash
-npm create nuxco@latest my-app --template vue-spa
+npm create zeptr@latest my-app --template vue-spa
 ```
 
 **Includes**:
@@ -60,7 +60,7 @@ npm create nuxco@latest my-app --template vue-spa
 
 #### Svelte SPA (TypeScript)
 ```bash
-npm create nuxco@latest my-app --template svelte-spa
+npm create zeptr@latest my-app --template svelte-spa
 ```
 
 **Includes**:
@@ -75,7 +75,7 @@ npm create nuxco@latest my-app --template svelte-spa
 
 #### Solid SPA (TypeScript)
 ```bash
-npm create nuxco@latest my-app --template solid-spa
+npm create zeptr@latest my-app --template solid-spa
 ```
 
 **Includes**:
@@ -90,7 +90,7 @@ npm create nuxco@latest my-app --template solid-spa
 
 #### Angular SPA (TypeScript)
 ```bash
-npm create nuxco@latest my-app --template angular-spa
+npm create zeptr@latest my-app --template angular-spa
 ```
 
 **Includes**:
@@ -106,7 +106,7 @@ npm create nuxco@latest my-app --template angular-spa
 
 #### Preact SPA (TypeScript)
 ```bash
-npm create nuxco@latest my-app --template preact-spa
+npm create zeptr@latest my-app --template preact-spa
 ```
 
 **Includes**:
@@ -123,7 +123,7 @@ npm create nuxco@latest my-app --template preact-spa
 
 #### React SSR (Node.js)
 ```bash
-npm create nuxco@latest my-app --template react-ssr
+npm create zeptr@latest my-app --template react-ssr
 ```
 
 **Includes**:
@@ -141,7 +141,7 @@ my-app/
 │   ├── entry-server.tsx    # Server entry
 │   ├── App.tsx
 │   └── server.ts           # Express server
-├── nuxco.config.ts
+├── zeptr.config.ts
 └── package.json
 ```
 
@@ -164,7 +164,7 @@ export function render(url: string) {
 
 #### Edge Function (Universal)
 ```bash
-npm create nuxco@latest my-app --template edge-function
+npm create zeptr@latest my-app --template edge-function
 ```
 
 **Includes**:
@@ -179,7 +179,7 @@ npm create nuxco@latest my-app --template edge-function
 my-app/
 ├── src/
 │   └── index.ts           # Edge function
-├── nuxco.config.ts
+├── zeptr.config.ts
 └── wrangler.toml          # Cloudflare config
 ```
 
@@ -202,7 +202,7 @@ export default {
 
 #### Fintech App (India-focused)
 ```bash
-npm create nuxco@latest my-app --template fintech-app
+npm create zeptr@latest my-app --template fintech-app
 ```
 
 **Includes**:
@@ -247,7 +247,7 @@ function PaymentPage() {
 
 #### Monorepo (PNPM)
 ```bash
-npm create nuxco@latest my-monorepo --template monorepo
+npm create zeptr@latest my-monorepo --template monorepo
 ```
 
 **Includes**:
@@ -267,16 +267,16 @@ my-monorepo/
 │   ├── ui/               # Shared UI components
 │   ├── utils/            # Shared utilities
 │   └── config/           # Shared configs
-├── nuxco.config.ts       # Root config
+├── zeptr.config.ts       # Root config
 ├── pnpm-workspace.yaml
 └── package.json
 ```
 
 **Use Case**: Large projects, microservices, design systems
 
-**Example** (`nuxco.config.ts`):
+**Example** (`zeptr.config.ts`):
 ```typescript
-import { defineConfig } from 'nuxco';
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   preset: 'monorepo',
@@ -304,7 +304,7 @@ export default defineConfig({
 ✅ **Git hooks** - Pre-commit linting
 ✅ **Production build** - Optimized output
 ✅ **Development server** - Fast HMR
-✅ **Testing setup** - Nuxco test runner
+✅ **Testing setup** - Zeptr test runner
 ✅ **CI/CD ready** - GitHub Actions config
 
 ### Production-Ready Configuration
@@ -312,8 +312,8 @@ export default defineConfig({
 Every template includes:
 
 ```typescript
-// nuxco.config.ts
-import { defineConfig } from 'nuxco';
+// zeptr.config.ts
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   // Optimized for production
@@ -362,8 +362,8 @@ npm install react-router-dom
 ### Modifying Config
 
 ```typescript
-// nuxco.config.ts
-import { defineConfig } from 'nuxco';
+// zeptr.config.ts
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   // Change output directory
@@ -406,7 +406,7 @@ export default defineConfig({
 
 ```bash
 # 1. Create project
-npm create nuxco@latest my-blog --template react-ssr
+npm create zeptr@latest my-blog --template react-ssr
 
 # 2. Install dependencies
 cd my-blog
@@ -488,7 +488,7 @@ npm run preview
 
 ```bash
 # 1. Create project
-npm create nuxco@latest my-store --template react-spa
+npm create zeptr@latest my-store --template react-spa
 
 # 2. Install dependencies
 cd my-store
@@ -544,10 +544,10 @@ export const useCart = create<CartStore>((set, get) => ({
 **Solution**:
 ```bash
 # List available templates
-npm create nuxco@latest --list-templates
+npm create zeptr@latest --list-templates
 
 # Use exact template name
-npm create nuxco@latest my-app --template react-spa
+npm create zeptr@latest my-app --template react-spa
 ```
 
 ### Build Errors
@@ -577,7 +577,7 @@ npm create nuxco@latest my-app --template react-spa
 
 ## Template Requests
 
-Missing a template? [Request it on GitHub](https://github.com/your-org/nuxco/issues/new?template=template_request.md)
+Missing a template? [Request it on GitHub](https://github.com/your-org/zeptr/issues/new?template=template_request.md)
 
 Popular requests:
 - [ ] Next.js-style template

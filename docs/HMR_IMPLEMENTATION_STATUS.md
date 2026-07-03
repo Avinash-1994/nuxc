@@ -1,4 +1,4 @@
-# Nuxco Framework HMR Implementation Status
+# Zeptr Framework HMR Implementation Status
 
 **Date**: 2026-01-06  
 **Status**: ✅ All frameworks have HMR support
@@ -19,7 +19,7 @@ All framework plugins include Hot Module Replacement (HMR) support that is:
 
 ### 🟢 Tier 1: Production-Ready
 
-#### React (`nuxcoReact`)
+#### React (`zeptrReact`)
 **HMR Status**: ✅ **Fast Refresh Enabled**
 
 **Features**:
@@ -39,7 +39,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-nuxcoReact({
+zeptrReact({
   fastRefresh: true,  // Enable Fast Refresh
   development: true,  // Enable HMR
   sourceMaps: true
@@ -48,7 +48,7 @@ nuxcoReact({
 
 ---
 
-#### Vue (`nuxcoVue`)
+#### Vue (`zeptrVue`)
 **HMR Status**: ✅ **Vue HMR Runtime Enabled**
 
 **Features**:
@@ -67,7 +67,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-nuxcoVue({
+zeptrVue({
   hmr: true,         // Enable HMR
   development: true,
   sourceMaps: true
@@ -78,7 +78,7 @@ nuxcoVue({
 
 ### 🟡 Tier 2: Stable
 
-#### Svelte (`nuxcoSvelte`)
+#### Svelte (`zeptrSvelte`)
 **HMR Status**: ✅ **Svelte HMR Enabled**
 
 **Features**:
@@ -101,7 +101,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-nuxcoSvelte({
+zeptrSvelte({
   hmr: true,         // Enable HMR
   development: true,
   compilerOptions: { dev: true }
@@ -110,7 +110,7 @@ nuxcoSvelte({
 
 ---
 
-#### Solid (`nuxcoSolid`)
+#### Solid (`zeptrSolid`)
 **HMR Status**: ✅ **Solid HMR Enabled**
 
 **Features**:
@@ -133,7 +133,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-nuxcoSolid({
+zeptrSolid({
   hmr: true,         // Enable HMR
   development: true,
   sourceMaps: true
@@ -142,7 +142,7 @@ nuxcoSolid({
 
 ---
 
-#### Lit (`nuxcoLit`)
+#### Lit (`zeptrLit`)
 **HMR Status**: ✅ **Lit HMR Enabled**
 
 **Features**:
@@ -168,7 +168,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-nuxcoLit({
+zeptrLit({
   hmr: true,         // Enable HMR
   development: true,
   typescript: { experimentalDecorators: true }
@@ -186,7 +186,7 @@ All plugins **automatically disable HMR** in production:
 const development = process.env.NODE_ENV !== 'production';
 
 // Or explicit configuration
-nuxcoReact({ development: false, fastRefresh: false })
+zeptrReact({ development: false, fastRefresh: false })
 ```
 
 **Production builds**:
@@ -204,11 +204,11 @@ nuxcoReact({ development: false, fastRefresh: false })
 All plugins follow this pattern:
 
 ```typescript
-export function nuxcoFramework(options = {}) {
+export function zeptrFramework(options = {}) {
   const { hmr = true, development = true } = options;
   
   return {
-    name: 'nuxco-framework',
+    name: 'zeptr-framework',
     
     async transform(code, id) {
       // 1. Transform framework code
@@ -331,4 +331,4 @@ No plugin wrapper needed ✅
 ✅ **Zero global state**  
 ✅ **Automatic production optimization**  
 
-Nuxco's HMR implementation is **complete and verified**.
+Zeptr's HMR implementation is **complete and verified**.

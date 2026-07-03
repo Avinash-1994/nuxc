@@ -1,5 +1,5 @@
 /**
- * Nuxco v2.0 Native Module Definitions
+ * Zeptr v2.0 Native Module Definitions
  */
 
 export interface CacheStats {
@@ -148,7 +148,7 @@ export interface ChunkerResult {
 }
 
 /** Phase 3.1 — Chunker + DCE. Walk dep graph, eliminate dead code, split into chunks. */
-export function nuxcoChunk(graphJson: string, config: ChunkerConfig): ChunkerResult;
+export function zeptrChunk(graphJson: string, config: ChunkerConfig): ChunkerResult;
 
 /** Phase 3.2 — Merge N source maps (SWC + LightningCSS) into one. */
 export function mergeSourceMaps(maps: string[]): string;

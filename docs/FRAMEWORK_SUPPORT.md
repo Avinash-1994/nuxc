@@ -1,8 +1,8 @@
-# Nuxco Framework Support - Universal Production-Grade
+# Zeptr Framework Support - Universal Production-Grade
 
 ## 🌟 **All Frameworks Are Production-Ready**
 
-Nuxco provides **identical, production-grade support** for all major frameworks. There are no tiers - every framework receives:
+Zeptr provides **identical, production-grade support** for all major frameworks. There are no tiers - every framework receives:
 
 ### ✅ **Universal Guarantees (ALL Frameworks)**
 
@@ -12,7 +12,7 @@ Nuxco provides **identical, production-grade support** for all major frameworks.
 - **CSS correctness** (scoped styles, extraction, injection)
 - **Graph-based rebuilds** (dependency tracking)
 - **Production builds work** (optimized, tree-shaken)
-- **Full `nuxco verify` support**
+- **Full `zeptr verify` support**
 
 ---
 
@@ -76,7 +76,7 @@ Nuxco provides **identical, production-grade support** for all major frameworks.
 
 ## 🔧 **How It Works**
 
-All frameworks use Nuxco's **UniversalTransformer** which:
+All frameworks use Zeptr's **UniversalTransformer** which:
 
 1. **Detects** the framework from file extensions and imports
 2. **Transforms** using the framework's native compiler
@@ -103,4 +103,4 @@ We believe in **equality across frameworks**. Every framework deserves:
 - The same production-ready guarantees
 - The same developer experience
 
-**Nuxco treats all frameworks as first-class citizens.**
+**Zeptr treats all frameworks as first-class citizens.**

@@ -1,6 +1,6 @@
 
 /**
- * Nuxco Legacy Polyfill Injector
+ * Zeptr Legacy Polyfill Injector
  * Day 25: Legacy Polyfills & Windows Lock
  */
 

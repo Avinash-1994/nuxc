@@ -9,7 +9,7 @@ import { AsyncPipe, NgFor } from '@angular/common';
     <h2>Latest Posts</h2>
     <ul>
       <li><a href="/blog/hello-analog">Hello Analog</a></li>
-      <li><a href="/blog/nuxco-build">Nuxco Build Integration</a></li>
+      <li><a href="/blog/zeptr-build">Zeptr Build Integration</a></li>
     </ul>
   `
 })

@@ -1,8 +1,8 @@
 /**
  * Migration Generator (Day 44)
  * 
- * Generates Nuxco project configuration from a MigrationPlan.
- * Creates nuxco.config.ts, updates package.json, and generates migration report.
+ * Generates Zeptr project configuration from a MigrationPlan.
+ * Creates zeptr.config.ts, updates package.json, and generates migration report.
  */
 
 import fs from 'fs';
@@ -36,11 +36,11 @@ export class MigrationGenerator {
             this.backupExistingFiles();
         }
 
-        // Generate nuxco.config.ts
-        const configContent = this.generateNuxcoConfig();
-        files.push('nuxco.config.ts');
+        // Generate zeptr.config.ts
+        const configContent = this.generateZeptrConfig();
+        files.push('zeptr.config.ts');
         if (!this.options.dryRun) {
-            fs.writeFileSync(path.join(this.targetDir, 'nuxco.config.ts'), configContent);
+            fs.writeFileSync(path.join(this.targetDir, 'zeptr.config.ts'), configContent);
         }
 
         // Update package.json
@@ -65,7 +65,7 @@ export class MigrationGenerator {
     }
 
     private backupExistingFiles(): void {
-        const backupDir = path.join(this.targetDir, '.nuxco-migration-backup');
+        const backupDir = path.join(this.targetDir, '.zeptr-migration-backup');
         if (!fs.existsSync(backupDir)) {
             fs.mkdirSync(backupDir, { recursive: true });
         }
@@ -89,7 +89,7 @@ export class MigrationGenerator {
         }
     }
 
-    private generateNuxcoConfig(): string {
+    private generateZeptrConfig(): string {
         const { frameworks, cssSetup, projectStructure } = this.plan;
         const primaryFramework = frameworks[0] || 'react';
 
@@ -135,7 +135,7 @@ export class MigrationGenerator {
         };
 
         // Generate TypeScript config file
-        return `import { defineConfig } from 'nuxco';
+        return `import { defineConfig } from 'zeptr';
 
 export default defineConfig(${JSON.stringify(config, null, 2)});
 `;
@@ -143,11 +143,11 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
 
     private generatePackageJsonUpdates(): any {
         const scripts: Record<string, string> = {
-            'dev': 'nuxco dev',
-            'build': 'nuxco build',
-            'preview': 'nuxco preview',
-            'test': 'nuxco test',
-            'audit': 'nuxco audit'
+            'dev': 'zeptr dev',
+            'build': 'zeptr build',
+            'preview': 'zeptr preview',
+            'test': 'zeptr test',
+            'audit': 'zeptr audit'
         };
 
         // Mark old scripts as deprecated
@@ -163,14 +163,14 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
                 deprecatedScripts['build:webpack'] = 'webpack # DEPRECATED: Use npm run build';
                 break;
             case 'angular-cli':
-                deprecatedScripts['ng'] = 'ng # DEPRECATED: Use nuxco commands';
+                deprecatedScripts['ng'] = 'ng # DEPRECATED: Use zeptr commands';
                 break;
         }
 
         return {
             scripts: { ...scripts, ...deprecatedScripts },
             devDependencies: {
-                'nuxco': '^2.0.0'
+                'zeptr': '^2.0.0'
             }
         };
     }
@@ -185,7 +185,7 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
             ...updates.scripts
         };
 
-        // Add Nuxco to devDependencies
+        // Add Zeptr to devDependencies
         pkg.devDependencies = {
             ...pkg.devDependencies,
             ...updates.devDependencies
@@ -197,7 +197,7 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
     private generateMigrationReport(): string {
         const { toolchainType, frameworks, riskLevel, autoMigrate, manualSteps, cssSetup } = this.plan;
 
-        let report = `# Nuxco Migration Report\n\n`;
+        let report = `# Zeptr Migration Report\n\n`;
         report += `**Generated**: ${new Date().toISOString()}\n\n`;
         report += `## Source Project\n\n`;
         report += `- **Toolchain**: ${toolchainType}\n`;
@@ -225,11 +225,11 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
         report += `\n`;
 
         report += `## Next Steps\n\n`;
-        report += `1. Review the generated \`nuxco.config.ts\`\n`;
+        report += `1. Review the generated \`zeptr.config.ts\`\n`;
         report += `2. Install dependencies: \`npm install\`\n`;
         report += `3. Start dev server: \`npm run dev\`\n`;
         report += `4. Test your application thoroughly\n`;
-        report += `5. Update CI/CD pipelines to use Nuxco commands\n\n`;
+        report += `5. Update CI/CD pipelines to use Zeptr commands\n\n`;
 
         report += `## Known Limitations\n\n`;
         if (riskLevel === 'HIGH') {
@@ -244,12 +244,12 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
         }
 
         report += `## Support\n\n`;
-        report += `- Documentation: https://nuxco.dev/docs/migration\n`;
-        report += `- Issues: https://github.com/nuxco/nuxco/issues\n`;
-        report += `- Discord: https://discord.gg/nuxco\n\n`;
+        report += `- Documentation: https://zeptr.dev/docs/migration\n`;
+        report += `- Issues: https://github.com/zeptr/zeptr/issues\n`;
+        report += `- Discord: https://discord.gg/zeptr\n\n`;
 
         report += `---\n\n`;
-        report += `*This report was generated by Nuxco Migration Tool v2.0*\n`;
+        report += `*This report was generated by Zeptr Migration Tool v2.0*\n`;
 
         return report;
     }

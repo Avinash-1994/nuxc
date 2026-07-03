@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-checker
+ * @zeptr/plugin-checker
  * TypeScript/ESLint checker
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCheckerPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-checker',
+        name: '@zeptr/plugin-checker',
         originalPlugin: 'vite-plugin-checker',
         
         async transform(code: string, id: string) {

@@ -1,4 +1,4 @@
-// Plugin type compatible with both Nuxco and Vite plugin API
+// Plugin type compatible with both Zeptr and Vite plugin API
 type Plugin = { name: string; [hook: string]: any };
 
 export interface VuePluginOptions {
@@ -11,9 +11,9 @@ export interface VuePluginOptions {
 }
 
 /**
- * @nuxco/plugin-vue
+ * @zeptr/plugin-vue
  *
- * Official Nuxco plugin for Vue 3:
+ * Official Zeptr plugin for Vue 3:
  * - Full Vue SFC (.vue) parsing and compilation
  * - Vue 3 HMR — template hot-patching, script remount
  * - TypeScript via `lang="ts"` in script blocks
@@ -21,7 +21,7 @@ export interface VuePluginOptions {
  *
  * @example
  * ```js
- * const vue = require('@nuxco/plugin-vue');
+ * const vue = require('@zeptr/plugin-vue');
  * module.exports = { plugins: [vue()] };
  * ```
  */
@@ -33,20 +33,20 @@ export function vuePlugin(options: VuePluginOptions = {}): Plugin {
   } = options;
 
   return {
-    name: '@nuxco/plugin-vue',
+    name: '@zeptr/plugin-vue',
 
     /**
      * Load hook: handle .vue SFC files.
-     * The actual compilation is done by @vue/compiler-sfc (already in Nuxco core).
+     * The actual compilation is done by @vue/compiler-sfc (already in Zeptr core).
      * This plugin configures and extends that behavior.
      */
     load(id: string): { code: string } | null {
       if (!id.endsWith('.vue')) return null;
 
-      // Vue SFC loading is handled natively by Nuxco's framework-detector.
+      // Vue SFC loading is handled natively by Zeptr's framework-detector.
       // This plugin hook adds HMR metadata injection on top.
       if (hmr) {
-        // Signal to the Nuxco HMR system that this is a Vue SFC
+        // Signal to the Zeptr HMR system that this is a Vue SFC
         // The actual hot.accept() logic is injected by the core bundler
         return null; // Let the core handle the actual load
       }

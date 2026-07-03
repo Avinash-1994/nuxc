@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build"
+    "dev": "zeptr dev",
+    "build": "zeptr build"
   },
   "dependencies": {
     "waku": "latest",

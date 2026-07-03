@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-msw
+ * @zeptr/plugin-msw
  * Mock Service Worker integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMswPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-msw',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-msw',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Testing: Mock Service Worker integration

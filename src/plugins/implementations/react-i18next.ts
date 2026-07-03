@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-react-i18next
+ * @zeptr/plugin-react-i18next
  * React i18next integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReactI18nextPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-react-i18next',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-react-i18next',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // i18n: React i18next integration
@@ -16,7 +16,7 @@ export function createReactI18nextPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-react-i18next] i18n setup complete');
+            console.log('[@zeptr/plugin-react-i18next] i18n setup complete');
         }
     };
 }

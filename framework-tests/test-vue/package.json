@@ -1,17 +1,17 @@
 {
-  "name": "nuxco-vue-template",
+  "name": "zeptr-vue-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   },
-  "nuxco": {
+  "zeptr": {
     "template": true,
     "framework": "vue",
-    "description": "Nuxco Shop — e-commerce storefront"
+    "description": "Zeptr Shop — e-commerce storefront"
   },
   "dependencies": {
     "vue": "3.4.27",
@@ -19,7 +19,7 @@
     "pinia": "2.1.7"
   },
   "devDependencies": {
-    "nuxco": "file:../../",
+    "zeptr": "file:../../",
     "@vitejs/plugin-vue": "5.0.4",
     "typescript": "5.4.5"
   }

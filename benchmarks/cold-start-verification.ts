@@ -14,23 +14,23 @@ async function measureColdStart(cwd: string) {
     console.log(`\n🚀 Measuring True Cold Start in ${cwd}...`);
 
     // Clean cache for TRUE cold start
-    const cacheDir = path.join(cwd, '.nuxco_cache');
+    const cacheDir = path.join(cwd, '.zeptr_cache');
     if (fs.existsSync(cacheDir)) {
         console.log('🧹 Cleaning existing cache...');
         fs.rmSync(cacheDir, { recursive: true, force: true });
     }
 
-    const nuxcoBin = path.join(process.cwd(), 'dist/cli.mjs');
-    if (!fs.existsSync(nuxcoBin)) {
-        console.error('❌ Nuxco CLI not found at dist/cli.mjs. Run npm run build first.');
+    const zeptrBin = path.join(process.cwd(), 'dist/cli.mjs');
+    if (!fs.existsSync(zeptrBin)) {
+        console.error('❌ Zeptr CLI not found at dist/cli.mjs. Run npm run build first.');
         process.exit(1);
     }
 
     const start = performance.now();
-    const server = spawn('node', [nuxcoBin, 'dev', '--port', '4099'], {
+    const server = spawn('node', [zeptrBin, 'dev', '--port', '4099'], {
         cwd,
         detached: true,
-        env: { ...process.env, NUXCO_QUIET: 'true' }
+        env: { ...process.env, ZEPTR_QUIET: 'true' }
     });
 
     return new Promise<{ coldStart: number; ttfb: number }>((resolve) => {

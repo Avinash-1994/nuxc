@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-preload
+ * @zeptr/plugin-preload
  * Resource preloading
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPreloadPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-preload',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-preload',
+        originalPlugin: 'zeptr-native',
         
         async buildStart() {
-            console.log('[@nuxco/plugin-preload] Starting performance optimization...');
+            console.log('[@zeptr/plugin-preload] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createPreloadPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-preload] Performance optimization complete');
+            console.log('[@zeptr/plugin-preload] Performance optimization complete');
         }
     };
 }

@@ -1,14 +1,14 @@
 
 /**
- * Module 3: Elite DX - Create-Nuxco Test
+ * Module 3: Elite DX - Create-Zeptr Test
  * Validates Day 17 Template Generation
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { main } from '../src/create-nuxco/cli.js'; // We might need to mock process.argv
+import { main } from '../src/create-zeptr/cli.js'; // We might need to mock process.argv
 
-const TEST_DIR = path.resolve('.test_create_nuxco');
+const TEST_DIR = path.resolve('.test_create_zeptr');
 const PROJ_NAME = 'my-react-app';
 
 async function setup() {
@@ -20,7 +20,7 @@ async function cleanup() {
 }
 
 async function runTest() {
-    console.log('🧪 Testing create-nuxco CLI...');
+    console.log('🧪 Testing create-zeptr CLI...');
     await setup();
 
     // Mock Process Args
@@ -45,7 +45,7 @@ async function runTest() {
         if (!pkgJson.dependencies.react) throw new Error('React dependency missing');
 
         if (!fs.existsSync(path.join(projDir, 'src/main.tsx'))) throw new Error('main.tsx missing');
-        if (!fs.existsSync(path.join(projDir, 'nuxco.config.ts'))) throw new Error('Config missing');
+        if (!fs.existsSync(path.join(projDir, 'zeptr.config.ts'))) throw new Error('Config missing');
 
         console.log('  ✅ React Template Verified');
 

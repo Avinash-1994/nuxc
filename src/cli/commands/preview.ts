@@ -4,7 +4,7 @@ import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
 
-// CFG-05: Preview reads outDir from nuxco.config
+// CFG-05: Preview reads outDir from zeptr.config
 export default {
   options: (yargs: any) => {
     return yargs

@@ -9,29 +9,29 @@ export interface CompressOptions {
 }
 
 /**
- * Nuxco Compress Plugin (nuxco-compress)
+ * Zeptr Compress Plugin (zeptr-compress)
  * Mocks compression-webpack-plugin using a simple status message.
  * In a real V1, this would actually gzip/brotli the assets in `dist`.
  */
-export function nuxcoCompress(options: CompressOptions = {}): Plugin {
+export function zeptrCompress(options: CompressOptions = {}): Plugin {
     return {
-        name: 'nuxco-compress',
+        name: 'zeptr-compress',
         async buildEnd() {
-            // Nuxco v1 - Placeholder for Asset Compression
+            // Zeptr v1 - Placeholder for Asset Compression
             // Real implementation would iterate dist/ and gzip
-            // console.log('[nuxco-compress] Compression enabled (Placeholder)');
+            // console.log('[zeptr-compress] Compression enabled (Placeholder)');
         }
     };
 }
 
 /**
- * Nuxco CSS Extract Plugin (nuxco-css-extract)
+ * Zeptr CSS Extract Plugin (zeptr-css-extract)
  * Mocks mini-css-extract-plugin.
- * Nuxco extracts CSS by default, so this is mostly a no-op compatibility shim.
+ * Zeptr extracts CSS by default, so this is mostly a no-op compatibility shim.
  */
-export function nuxcoCssExtract(options: any = {}): Plugin {
+export function zeptrCssExtract(options: any = {}): Plugin {
     return {
-        name: 'nuxco-css-extract',
+        name: 'zeptr-css-extract',
         // No-op
     };
 }

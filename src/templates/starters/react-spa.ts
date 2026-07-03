@@ -18,12 +18,12 @@ export const reactSpaTemplate: TemplateConfig = {
     devDependencies: {
         "@types/react": "^18.2.0",
         "@types/react-dom": "^18.2.0",
-        "@nuxco/plugin-react": "^1.0.0"
+        "@zeptr/plugin-react": "^1.0.0"
     },
     files: {
-        'nuxco.config.ts': `
-import { defineConfig } from 'nuxco';
-import react from '@nuxco/plugin-react';
+        'zeptr.config.ts': `
+import { defineConfig } from 'zeptr';
+import react from '@zeptr/plugin-react';
 
 export default defineConfig({
     plugins: [react()],
@@ -55,7 +55,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Nuxco + React</h1>
+        <h1>Zeptr + React</h1>
         <div className="card">
           <button onClick={() => setCount((count) => count + 1)}>
             count is {count}
@@ -65,7 +65,7 @@ function App() {
           </p>
         </div>
         <p className="read-the-docs">
-          Click on the Nuxco logo to learn more
+          Click on the Zeptr logo to learn more
         </p>
       </header>
     </div>

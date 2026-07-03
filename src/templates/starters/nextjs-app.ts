@@ -6,7 +6,7 @@ export const nextjsTemplate = {
         'src/app/page.tsx': `export default function Home() {
   return (
     <main className="min-h-screen p-24">
-      <h1 className="text-4xl font-bold">Welcome to Nuxco + Next.js</h1>
+      <h1 className="text-4xl font-bold">Welcome to Zeptr + Next.js</h1>
       <p className="mt-4">Start building your app with App Router</p>
     </main>
   );
@@ -14,8 +14,8 @@ export const nextjsTemplate = {
         'src/app/layout.tsx': `import './globals.css';
 
 export const metadata = {
-  title: 'Nuxco Next.js App',
-  description: 'Built with Nuxco',
+  title: 'Zeptr Next.js App',
+  description: 'Built with Zeptr',
 };
 
 export default function RootLayout({
@@ -42,7 +42,7 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
 }`,
-        'nuxco.config.js': `module.exports = {
+        'zeptr.config.js': `module.exports = {
   entry: ['./src/app/page.tsx'],
   outDir: './dist',
   framework: 'react',
@@ -64,13 +64,13 @@ body {
   },
 };`,
         'package.json': `{
-  "name": "nuxco-nextjs-app",
+  "name": "zeptr-nextjs-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "start": "nuxco ssr"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "start": "zeptr ssr"
   },
   "dependencies": {
     "react": "^19.2.3",

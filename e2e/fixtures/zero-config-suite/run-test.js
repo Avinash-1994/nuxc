@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const detectPath = path.resolve(__dirname, '../../../packages/nuxco-autoconfig/dist/detect.js');
+const detectPath = path.resolve(__dirname, '../../../packages/zeptr-autoconfig/dist/detect.js');
 const { detectFramework } = await import(detectPath);
 
 function log(msg) { process.stdout.write(msg + '\n'); }

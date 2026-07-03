@@ -176,13 +176,13 @@ export const CommonPatterns: ErrorPattern[] = [
         }
     },
     {
-        id: 'nuxco-config-error',
-        name: 'Nuxco Config Validation Error',
+        id: 'zeptr-config-error',
+        name: 'Zeptr Config Validation Error',
         regex: /Invalid config file/i,
         generator: () => {
             return {
                 type: 'MANUAL_INSTRUCTION',
-                description: 'Fix nuxco.config configuration - check for type mismatches or missing fields.',
+                description: 'Fix zeptr.config configuration - check for type mismatches or missing fields.',
                 confidence: 0.95
             };
         }

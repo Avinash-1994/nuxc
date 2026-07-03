@@ -11,7 +11,7 @@ export class ChatCLI {
         const analyzer = new Analyzer(root);
         const profile = await analyzer.analyze();
 
-        console.log('\n🤖 Nuxco AI Chat');
+        console.log('\n🤖 Zeptr AI Chat');
         console.log('Type "exit" to quit.\n');
 
         const rl = createInterface({

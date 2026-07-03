@@ -2,23 +2,23 @@
 
 **Date:** 2026-01-21  
 **Environment:** Linux, Node v20.19.5  
-**Test Apps:** Small (React Hello World), Medium (Nuxco Docs Site)
+**Test Apps:** Small (React Hello World), Medium (Zeptr Docs Site)
 
 ## 📊 Complete Results
 
 ### Small App Benchmarks
 
-| Metric | Nuxco | Vite | Webpack | Rspack | esbuild | Winner |
+| Metric | Zeptr | Vite | Webpack | Rspack | esbuild | Winner |
 |--------|-------|------|---------|--------|---------|--------|
-| **Cold Start** | **118ms 🥇** | 257ms 🥈 | N/A* | N/A* | N/A* | **Nuxco** (54% faster than Vite) |
+| **Cold Start** | **118ms 🥇** | 257ms 🥈 | N/A* | N/A* | N/A* | **Zeptr** (54% faster than Vite) |
 | **Build Time** | 655ms 🥉 | 719ms | 1793ms | **385ms 🥈** | **141ms 🥇** | esbuild |
-| **Bundle Size** | **9 KB 🥇** | 139 KB 🥉 | 137 KB 🥈 | 506 KB | 140 KB | **Nuxco** (93% smaller!) |
+| **Bundle Size** | **9 KB 🥇** | 139 KB 🥉 | 137 KB 🥈 | 506 KB | 140 KB | **Zeptr** (93% smaller!) |
 
 *N/A = Tool doesn't provide dev server in minimal setup
 
-### Medium App Benchmarks (Nuxco Only)
+### Medium App Benchmarks (Zeptr Only)
 
-| Metric | Nuxco | Notes |
+| Metric | Zeptr | Notes |
 |--------|-------|-------|
 | **Cold Start** | **120ms 🥇** | Consistently fast |
 | **Build Time** | **1920ms 🥇** | ~50 components |
@@ -26,7 +26,7 @@
 
 ## 🎯 Key Findings
 
-### Nuxco Strengths
+### Zeptr Strengths
 1. **🚀 Fastest Cold Start** - 118ms beats all competitors
    - 54% faster than Vite (257ms)
    - Consistent performance (118-120ms range)
@@ -47,42 +47,42 @@
 - ✅ **54% faster cold start** (118ms vs 257ms)
 - ✅ **93% smaller bundles** (9 KB vs 139 KB)
 - ✅ **9% faster builds** (655ms vs 719ms)
-- **Verdict:** Nuxco wins across all metrics
+- **Verdict:** Zeptr wins across all metrics
 
 **vs Rspack:**
 - ✅ **Faster cold start** (N/A for Rspack dev server)
 - ⚠️ **Slower builds** (655ms vs 385ms)
 - ✅ **98% smaller bundles** (9 KB vs 506 KB)
-- **Verdict:** Nuxco better for dev experience, Rspack faster builds
+- **Verdict:** Zeptr better for dev experience, Rspack faster builds
 
 **vs esbuild:**
 - ✅ **Faster cold start** (N/A for esbuild dev server)
 - ⚠️ **Slower builds** (655ms vs 141ms)
 - ✅ **94% smaller bundles** (9 KB vs 140 KB)
-- **Verdict:** Nuxco provides full bundler features, esbuild is transpiler-only
+- **Verdict:** Zeptr provides full bundler features, esbuild is transpiler-only
 
 **vs Webpack:**
 - ✅ **Faster cold start** (N/A for Webpack dev server)
 - ✅ **63% faster builds** (655ms vs 1793ms)
 - ✅ **93% smaller bundles** (9 KB vs 137 KB)
-- **Verdict:** Nuxco dominates legacy tooling
+- **Verdict:** Zeptr dominates legacy tooling
 
 ## 🏆 Overall Rankings
 
 ### Cold Start (Dev Server)
-1. **Nuxco** - 118ms 🥇
+1. **Zeptr** - 118ms 🥇
 2. Vite - 257ms 🥈
 3. Others - N/A
 
 ### Build Speed (Small App)
 1. esbuild - 141ms 🥇
 2. Rspack - 385ms 🥈
-3. **Nuxco** - 655ms 🥉
+3. **Zeptr** - 655ms 🥉
 4. Vite - 719ms
 5. Webpack - 1793ms
 
 ### Bundle Size (Small App)
-1. **Nuxco** - 9 KB 🥇
+1. **Zeptr** - 9 KB 🥇
 2. Webpack - 137 KB 🥈
 3. Vite - 139 KB 🥉
 4. esbuild - 140 KB
@@ -90,7 +90,7 @@
 
 ## 💡 Conclusions
 
-### Nuxco's Competitive Position
+### Zeptr's Competitive Position
 
 **Best For:**
 - ✅ Development speed (fastest cold start)
@@ -111,7 +111,7 @@
 
 ### Honest Assessment
 
-Nuxco delivers on its promise of being a **fast, modern build tool** with:
+Zeptr delivers on its promise of being a **fast, modern build tool** with:
 - Industry-leading cold start times
 - Exceptional bundle size optimization
 - Competitive build performance

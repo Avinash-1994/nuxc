@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-cloudflare
+ * @zeptr/plugin-cloudflare
  * Cloudflare Pages adapter
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCloudflarePlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-cloudflare',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-cloudflare',
+        originalPlugin: 'zeptr-native',
         
         async buildEnd() {
-            console.log('[@nuxco/plugin-cloudflare] Deployment adapter ready');
+            console.log('[@zeptr/plugin-cloudflare] Deployment adapter ready');
             // Generate deployment config
         }
     };

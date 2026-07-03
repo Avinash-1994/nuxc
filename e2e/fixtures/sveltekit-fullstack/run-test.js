@@ -166,7 +166,7 @@ async function main() {
   const waitForCompile = new Promise((resolve) => {
     let done = false;
     devProc.stdout.on('data', (chunk) => {
-      if (chunk.toString().includes('Nuxco startup diagnostics')) {
+      if (chunk.toString().includes('Zeptr startup diagnostics')) {
         done = true;
         resolve();
       }
@@ -218,7 +218,7 @@ async function main() {
 
   devProc.kill();
 
-  // SVK-07 — build outputs to dist/ (nuxco default outDir)
+  // SVK-07 — build outputs to dist/ (zeptr default outDir)
   const distDir = path.join(__dirname, 'dist');
   if (fs.existsSync(distDir)) fs.rmSync(distDir, { recursive: true, force: true });
 
@@ -227,7 +227,7 @@ async function main() {
     execSync(`node ${cliPath} build`, {
       cwd: __dirname,
       stdio: 'ignore',
-      env: { ...process.env, NUXCO_SKIP_SECURITY: '1' }
+      env: { ...process.env, ZEPTR_SKIP_SECURITY: '1' }
     });
   } catch(e) {}
   const buildTime = Date.now() - tBuildStart;
@@ -295,7 +295,7 @@ async function main() {
       execSync(`node ${cliPath} build`, {
         cwd: path.resolve(__dirname, '..', fixture),
         stdio: 'ignore',
-        env: { ...process.env, NUXCO_SKIP_SECURITY: '1' }
+        env: { ...process.env, ZEPTR_SKIP_SECURITY: '1' }
       });
       return { ok: true, ms: Date.now() - t };
     } catch { return { ok: false, ms: Date.now() - t }; }

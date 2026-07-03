@@ -1,15 +1,15 @@
 /**
- * @nuxco/plugin-redux
+ * @zeptr/plugin-redux
  * Redux integration
- * Nuxco-native
+ * Zeptr-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReduxPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-redux',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-redux',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // redux transformation

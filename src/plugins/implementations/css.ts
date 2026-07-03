@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-css
+ * @zeptr/plugin-css
  * CSS module resolution
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCssPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-css',
+        name: '@zeptr/plugin-css',
         originalPlugin: 'css-loader',
         
         async transform(code: string, id: string) {

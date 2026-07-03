@@ -1,21 +1,21 @@
 /**
- * @nuxco/rollup-compat - Plugin Compatibility Layer
+ * @zeptr/rollup-compat - Plugin Compatibility Layer
  * 
- * This module provides adapters to use Rollup/Vite plugins within Nuxco.
+ * This module provides adapters to use Rollup/Vite plugins within Zeptr.
  */
 
-export { rollupAdapter, rollupAdapter as vitePluginAdapter, rollupAdapter as viteToNuxco, rollupAdapter as createRollupAdapter } from './rollup.js';
+export { rollupAdapter, rollupAdapter as vitePluginAdapter, rollupAdapter as viteToZeptr, rollupAdapter as createRollupAdapter } from './rollup.js';
 export {
-    nuxcoBabel,
-    nuxcoTerser,
-    nuxcoJson,
-    nuxcoYaml,
-    nuxcoMdx,
-    nuxcoSvgr,
+    zeptrBabel,
+    zeptrTerser,
+    zeptrJson,
+    zeptrYaml,
+    zeptrMdx,
+    zeptrSvgr,
     TierA
 } from './tier-a.js';
 
 export { webpackLoaderAdapter } from './webpack.js';
-export * from './tier-b.js'; // nuxcoCopy, nuxcoHtml
-export * from './tier-c.js'; // nuxcoReact, nuxcoVue, nuxcoSvelte
-export * from './deferred.js'; // nuxcoCompress, nuxcoCssExtract
+export * from './tier-b.js'; // zeptrCopy, zeptrHtml
+export * from './tier-c.js'; // zeptrReact, zeptrVue, zeptrSvelte
+export * from './deferred.js'; // zeptrCompress, zeptrCssExtract

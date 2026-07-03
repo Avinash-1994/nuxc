@@ -1,17 +1,17 @@
 {
-  "name": "nuxco-sveltekit-template",
+  "name": "zeptr-sveltekit-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   },
-  "nuxco": {
+  "zeptr": {
     "template": true,
     "framework": "sveltekit",
-    "description": "Nuxco Blog — full-stack blog with CMS"
+    "description": "Zeptr Blog — full-stack blog with CMS"
   },
   "dependencies": {
     "@sveltejs/kit": "2.5.18",
@@ -19,7 +19,7 @@
     "marked": "12.0.0"
   },
   "devDependencies": {
-    "nuxco": "file:../../",
+    "zeptr": "file:../../",
     "typescript": "5.4.5"
   }
 }

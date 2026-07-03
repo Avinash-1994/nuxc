@@ -77,7 +77,7 @@ The hook cache is built on-demand:
 To measure actual performance:
 
 ```typescript
-import { PluginManager } from 'nuxco/plugins';
+import { PluginManager } from 'zeptr/plugins';
 
 const manager = new PluginManager();
 

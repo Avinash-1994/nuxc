@@ -1,1 +1,1 @@
-{ "name": "test-lit", "private": true, "type": "module", "scripts": { "dev": "nuxco dev", "build": "nuxco build" }, "dependencies": { "lit": "^3.1.2" }, "devDependencies": { "nuxco": "file:../../", "typescript": "^5.0.0" } }
+{ "name": "test-lit", "private": true, "type": "module", "scripts": { "dev": "zeptr dev", "build": "zeptr build" }, "dependencies": { "lit": "^3.1.2" }, "devDependencies": { "zeptr": "file:../../", "typescript": "^5.0.0" } }

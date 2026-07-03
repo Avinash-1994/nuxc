@@ -1,5 +1,5 @@
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 import { remixRoutesPlugin } from './routes-plugin.js';
 
 export interface RemixConfig {
@@ -7,7 +7,7 @@ export interface RemixConfig {
   serverModuleFormat?: 'esm' | 'cjs';
 }
 
-export class RemixAdapter implements NuxcoAdapter {
+export class RemixAdapter implements ZeptrAdapter {
   name = 'remix';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class RemixAdapter implements NuxcoAdapter {
     ];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.remix) config.remix = {};
     config.remix = {
       ignoredRouteFiles: ['**/.*'],
@@ -36,7 +36,7 @@ export class RemixAdapter implements NuxcoAdapter {
           // Shim Request / Response for underlying uWS API mappings
           try {
              // In Remix the entry point is heavily abstracted typically via createRequestHandler
-             const virtualID = 'virtual:nuxco/remix-server-build';
+             const virtualID = 'virtual:zeptr/remix-server-build';
              let build: any;
              try {
                 build = await import(virtualID);
@@ -75,7 +75,7 @@ export class RemixAdapter implements NuxcoAdapter {
              res.end();
              
           } catch(e) {
-             console.error('[Nuxco:Remix] Error rendering SSR', e);
+             console.error('[Zeptr:Remix] Error rendering SSR', e);
              next();
           }
        }
@@ -83,7 +83,7 @@ export class RemixAdapter implements NuxcoAdapter {
   }
 
   ssrEntry(): string {
-     return 'virtual:nuxco/remix-server-build';
+     return 'virtual:zeptr/remix-server-build';
   }
 }
 

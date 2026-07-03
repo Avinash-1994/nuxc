@@ -1,4 +1,4 @@
-# Nuxco v1.0 Baseline Audit Report
+# Zeptr v1.0 Baseline Audit Report
 
 **Date**: 2026-01-09
 **Time**: 11:40:17
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-This report establishes the performance baseline for Nuxco v1.0 before upgrading to v2.0 with the new stack (Bun.js, Rolldown, Tokio, RocksDB).
+This report establishes the performance baseline for Zeptr v1.0 before upgrading to v2.0 with the new stack (Bun.js, Rolldown, Tokio, RocksDB).
 
 ---
 

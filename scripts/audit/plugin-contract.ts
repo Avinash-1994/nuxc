@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Nuxco Stability Audit — Plugin Contract Check
+ * Zeptr Stability Audit — Plugin Contract Check
  * 
  * Verifies that plugin hook signatures have not changed.
  * Ensures backward compatibility for all plugins.
@@ -136,7 +136,7 @@ function compareHooks(baseline: PluginHook[], current: PluginHook[]): {
 }
 
 async function main() {
-    console.log('🔍 Nuxco Plugin Contract Audit\n');
+    console.log('🔍 Zeptr Plugin Contract Audit\n');
 
     const currentHooks = EXPECTED_HOOKS;
     console.log(`✅ Verified ${currentHooks.length} plugin hooks\n`);

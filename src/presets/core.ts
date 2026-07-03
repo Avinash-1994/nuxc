@@ -1,5 +1,5 @@
 /**
- * @nuxco/preset-core
+ * @zeptr/preset-core
  * 
  * Opinionated defaults for 80% of applications.
  * Zero-config experience with smart auto-detection.

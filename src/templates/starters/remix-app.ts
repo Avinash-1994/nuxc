@@ -26,17 +26,17 @@ export default function App() {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Nuxco Remix App' },
-    { name: 'description', content: 'Welcome to Remix with Nuxco!' },
+    { title: 'Zeptr Remix App' },
+    { name: 'description', content: 'Welcome to Remix with Zeptr!' },
   ];
 };
 
 export default function Index() {
   return (
     <div className="container mx-auto p-8">
-      <h1 className="text-4xl font-bold">Welcome to Remix + Nuxco</h1>
+      <h1 className="text-4xl font-bold">Welcome to Remix + Zeptr</h1>
       <p className="mt-4">
-        This is a Remix-style application built with Nuxco.
+        This is a Remix-style application built with Zeptr.
       </p>
     </div>
   );
@@ -49,7 +49,7 @@ export default function Index() {
     </div>
   );
 }`,
-        'nuxco.config.js': `module.exports = {
+        'zeptr.config.js': `module.exports = {
   entry: ['./src/root.tsx'],
   outDir: './dist',
   framework: 'react',
@@ -71,13 +71,13 @@ export default function Index() {
   },
 };`,
         'package.json': `{
-  "name": "nuxco-remix-app",
+  "name": "zeptr-remix-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "start": "nuxco ssr"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "start": "zeptr ssr"
   },
   "dependencies": {
     "@remix-run/react": "^2.0.0",

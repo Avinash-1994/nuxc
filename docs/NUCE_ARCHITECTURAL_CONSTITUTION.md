@@ -1,7 +1,7 @@
-# NUXCO — MASTER PROMPT (FINAL, LOCKED)
+# ZEPTR — MASTER PROMPT (FINAL, LOCKED)
 
 ## Context
-Nuxco processes large dependency graphs (modules, CSS, micro-frontends).
+Zeptr processes large dependency graphs (modules, CSS, micro-frontends).
 Empirical benchmarks show that recursive JavaScript graph traversal fails at ~10k nodes due to call-stack limits. Iterative Rust traversal completes deterministically at much larger scales.
 
 ## 🔒 Locked Decisions
@@ -35,10 +35,10 @@ Empirical benchmarks show that recursive JavaScript graph traversal fails at ~10
 -   Marketing claims of “infinite scalability”
 
 ## 📐 Correct Wording
-Nuxco does not claim infinite scalability.
+Zeptr does not claim infinite scalability.
 
 **Correct phrasing**:
-> “Nuxco removes stack-based failure modes and scales until system memory limits.”
+> “Zeptr removes stack-based failure modes and scales until system memory limits.”
 
 ## 🧾 Benchmark Policy
 Benchmarks demonstrating JS failure vs Rust stability:

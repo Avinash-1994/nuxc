@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-critical-css
+ * @zeptr/plugin-critical-css
  * Critical CSS extraction
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCriticalCssPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-critical-css',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-critical-css',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for critical-css

@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-markdown
+ * @zeptr/plugin-markdown
  * Markdown processing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMarkdownPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-markdown',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-markdown',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Markdown processing

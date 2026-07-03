@@ -1,4 +1,4 @@
-# Getting Started with Nuxco
+# Getting Started with Zeptr
 
 > Get from zero to a running app in **under 5 minutes**.
 
@@ -11,17 +11,17 @@
 
 ---
 
-## Step 1 — Install Nuxco
+## Step 1 — Install Zeptr
 
 ```bash
-npm install -g nuxco
+npm install -g zeptr
 ```
 
 Verify the installation:
 
 ```bash
-nuxco --version
-# ⚡ nuxco v1.0.9
+zeptr --version
+# ⚡ zeptr v1.0.9
 ```
 
 ---
@@ -32,16 +32,16 @@ Pick your framework:
 
 ```bash
 # React + TypeScript (recommended)
-nuxco bootstrap --name my-app --template react-ts
+zeptr bootstrap --name my-app --template react-ts
 
 # Vue 3 + TypeScript
-nuxco bootstrap --name my-app --template vue-ts
+zeptr bootstrap --name my-app --template vue-ts
 
 # Svelte + TypeScript
-nuxco bootstrap --name my-app --template svelte-ts
+zeptr bootstrap --name my-app --template svelte-ts
 
 # Vanilla TypeScript
-nuxco bootstrap --name my-app --template vanilla-ts
+zeptr bootstrap --name my-app --template vanilla-ts
 ```
 
 This creates a `my-app/` directory with a working starter project.
@@ -52,13 +52,13 @@ This creates a `my-app/` directory with a working starter project.
 
 ```bash
 cd my-app
-nuxco dev
+zeptr dev
 ```
 
 You should see:
 
 ```
-⚡ Nuxco v1.0.9
+⚡ Zeptr v1.0.9
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://192.168.x.x:3000/
 
@@ -72,7 +72,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. **HMR is ac
 ## Step 4 — Production Build
 
 ```bash
-nuxco build
+zeptr build
 ```
 
 Output goes to `./dist/`. The build is minified, tree-shaken, and ready to deploy.
@@ -82,7 +82,7 @@ Output goes to `./dist/`. The build is minified, tree-shaken, and ready to deplo
 ## Step 5 — Preview the Production Build
 
 ```bash
-nuxco preview
+zeptr preview
 ```
 
 Serves the `dist/` folder locally so you can verify before deploying.
@@ -100,7 +100,7 @@ my-app/
 │   ├── App.tsx         ← Root component
 │   └── index.css
 ├── index.html
-├── nuxco.config.js    ← Nuxco configuration
+├── zeptr.config.js    ← Zeptr configuration
 └── package.json
 ```
 
@@ -108,10 +108,10 @@ my-app/
 
 ## Minimal Configuration
 
-The scaffolded `nuxco.config.js` works out of the box:
+The scaffolded `zeptr.config.js` works out of the box:
 
 ```js
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   entry: ['./src/main.tsx'],
   outDir: './dist',
@@ -134,14 +134,14 @@ module.exports = {
 
 ## Adding to an Existing Project
 
-If you already have a project, you can add Nuxco without scaffolding:
+If you already have a project, you can add Zeptr without scaffolding:
 
 ```bash
 # Install locally
-npm install --save-dev nuxco
+npm install --save-dev zeptr
 
 # Generate a config file
-npx nuxco init
+npx zeptr init
 ```
 
 Then update your `package.json` scripts:
@@ -149,9 +149,9 @@ Then update your `package.json` scripts:
 ```json
 {
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   }
 }
 ```
@@ -161,14 +161,14 @@ Then update your `package.json` scripts:
 ## CLI Reference
 
 ```bash
-nuxco dev                            # Start dev server with HMR
-nuxco build                          # Production build
-nuxco preview                        # Preview production build
-nuxco bootstrap --name n --template t  # Scaffold new project
-nuxco init                           # Generate nuxco.config.js
-nuxco inspect                        # Inspect module graph
-nuxco analyze                        # Analyze bundle size
-nuxco doctor                         # Diagnose common issues
+zeptr dev                            # Start dev server with HMR
+zeptr build                          # Production build
+zeptr preview                        # Preview production build
+zeptr bootstrap --name n --template t  # Scaffold new project
+zeptr init                           # Generate zeptr.config.js
+zeptr inspect                        # Inspect module graph
+zeptr analyze                        # Analyze bundle size
+zeptr doctor                         # Diagnose common issues
 ```
 
 ---
@@ -176,7 +176,7 @@ nuxco doctor                         # Diagnose common issues
 ## Next Steps
 
 - 📖 [Configuration Reference](./guides/configuration.md) — all config options with types and defaults
-- 🔌 [Plugin Guide](./plugins.md) — extend Nuxco with plugins
+- 🔌 [Plugin Guide](./plugins.md) — extend Zeptr with plugins
 - 📦 [Module Federation](./guides/federation.md) — micro-frontend architecture
 - 🔥 [HMR Guide](./HMR_IMPLEMENTATION_STATUS.md) — how HMR works and how to debug it
 - 🚚 [Migration Guide](./migration.md) — moving from Vite or Webpack

@@ -1,4 +1,4 @@
-import { NuxcoPlugin, PluginHookName } from '../core/plugins/types.js';
+import { ZeptrPlugin, PluginHookName } from '../core/plugins/types.js';
 
 // Generic interface for Rollup/Vite-style plugins to make them compatible
 export interface CommunityPlugin {
@@ -11,16 +11,16 @@ export interface CommunityPlugin {
 }
 
 /**
- * Adapter to run Community (Vite/Rollup) plugins within Nuxco
- * Converts middleware-based plugins to Nuxco's Command Pattern
+ * Adapter to run Community (Vite/Rollup) plugins within Zeptr
+ * Converts middleware-based plugins to Zeptr's Command Pattern
  */
-export function adaptPlugin(plugin: CommunityPlugin): NuxcoPlugin {
+export function adaptPlugin(plugin: CommunityPlugin): ZeptrPlugin {
     const hooks: PluginHookName[] = [];
     if (plugin.resolveId) hooks.push('resolveId');
     if (plugin.load) hooks.push('load');
     if (plugin.transform) hooks.push('transformModule');
 
-    // Nuxco mandates strict versioning, so we mock it for community plugins
+    // Zeptr mandates strict versioning, so we mock it for community plugins
     return {
         manifest: {
             name: `adapter:${plugin.name}`,
@@ -43,7 +43,7 @@ export function adaptPlugin(plugin: CommunityPlugin): NuxcoPlugin {
                     error: (msg: string) => console.error(`[${plugin.name}] ${msg}`)
                 };
                 try {
-                    // Adapt input: Nuxco passes object { source, importer }, Rollup expects (source, importer)
+                    // Adapt input: Zeptr passes object { source, importer }, Rollup expects (source, importer)
                     const source = input.source || input.id;
                     const importer = input.importer;
 

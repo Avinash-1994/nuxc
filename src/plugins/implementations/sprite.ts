@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-sprite
+ * @zeptr/plugin-sprite
  * SVG sprite generation
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createSpritePlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-sprite',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-sprite',
+        originalPlugin: 'zeptr-native',
         
         async load(id: string) {
             // Asset loading for sprite

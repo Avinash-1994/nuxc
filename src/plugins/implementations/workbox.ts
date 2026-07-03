@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-workbox
+ * @zeptr/plugin-workbox
  * Service worker generation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createWorkboxPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-workbox',
+        name: '@zeptr/plugin-workbox',
         originalPlugin: 'workbox-webpack-plugin',
         
         async transform(code: string, id: string) {

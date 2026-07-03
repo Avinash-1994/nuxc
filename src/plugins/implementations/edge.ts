@@ -1,15 +1,15 @@
 /**
- * @nuxco/plugin-edge
+ * @zeptr/plugin-edge
  * Edge runtime adapter
- * Nuxco-native
+ * Zeptr-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createEdgePlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-edge',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-edge',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // edge transformation

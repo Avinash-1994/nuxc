@@ -14,12 +14,12 @@ export const edgeTemplate: TemplateConfig = {
     dependencies: {},
     devDependencies: {
         "typescript": "^5.0.0",
-        "@nuxco/plugin-edge": "^1.0.0"
+        "@zeptr/plugin-edge": "^1.0.0"
     },
     files: {
-        'nuxco.config.ts': `
-import { defineConfig } from 'nuxco';
-import edge from '@nuxco/plugin-edge';
+        'zeptr.config.ts': `
+import { defineConfig } from 'zeptr';
+import edge from '@zeptr/plugin-edge';
 
 export default defineConfig({
     plugins: [edge()],
@@ -36,7 +36,7 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === '/hello') {
-        return new Response('Hello from Nuxco Edge!', {
+        return new Response('Hello from Zeptr Edge!', {
             headers: { 'content-type': 'text/plain' }
         });
     }
@@ -44,9 +44,9 @@ export default {
     return new Response(\`
       <!DOCTYPE html>
       <html>
-        <head><title>Nuxco Edge</title></head>
+        <head><title>Zeptr Edge</title></head>
         <body>
-          <h1>⚡ Nuxco Edge Runtime</h1>
+          <h1>⚡ Zeptr Edge Runtime</h1>
           <p>Request URL: \${request.url}</p>
           <p>Region: \${request.cf?.colo || 'Local'}</p>
         </body>
@@ -72,7 +72,7 @@ export default {
 }
 `,
         'README.md': `
-# Nuxco Edge Function
+# Zeptr Edge Function
 
 This is a universal Edge Function starter compatible with:
 - Cloudflare Workers

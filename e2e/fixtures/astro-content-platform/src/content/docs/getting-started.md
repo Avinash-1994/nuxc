@@ -1,19 +1,19 @@
 ---
-title: "Getting Started with Nuxco"
-description: "Set up Nuxco in under 60 seconds."
+title: "Getting Started with Zeptr"
+description: "Set up Zeptr in under 60 seconds."
 order: 1
 section: "guides"
 ---
 
-# Getting Started with Nuxco
+# Getting Started with Zeptr
 
 ## Installation
 
 ```bash
-npm install -g nuxco
-nuxco dev
+npm install -g zeptr
+zeptr dev
 ```
 
 ## Configuration
 
-Create a `nuxco.config.ts` in your project root.
+Create a `zeptr.config.ts` in your project root.

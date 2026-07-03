@@ -53,15 +53,15 @@ async function runTests() {
 
   // ── P4-01  plugin-env ─────────────────────────────────────────────────────
   {
-    const mod  = await loadPlugin('nuxco-plugin-env');
-    const factory = mod.nuxcoPluginEnv ?? mod.default;
-    const plugin  = typeof factory === 'function' ? factory({ prefix: 'NUXCO_' }) : factory;
+    const mod  = await loadPlugin('zeptr-plugin-env');
+    const factory = mod.zeptrPluginEnv ?? mod.default;
+    const plugin  = typeof factory === 'function' ? factory({ prefix: 'ZEPTR_' }) : factory;
 
     // Write .env file + source file to tmp
     const envDir = path.join(TMP, 'env-test');
     fs.mkdirSync(envDir + '/src', { recursive: true });
     fs.writeFileSync(path.join(envDir, '.env'),
-      'NUXCO_API_URL=https://api.example.com\nDANGER_SECRET=hunter2\n');
+      'ZEPTR_API_URL=https://api.example.com\nDANGER_SECRET=hunter2\n');
     const dtsPath = path.join(envDir, 'src', 'env.d.ts');
 
     // Simulate configResolved which writes dts
@@ -69,14 +69,14 @@ async function runTests() {
     const dtsExists = fs.existsSync(dtsPath);
     const dtsSize   = dtsExists ? sizeB(fs.readFileSync(dtsPath, 'utf8')) : 312;
 
-    // Simulate transform of a file using NUXCO_ var
-    const code = `const u = import.meta.env.NUXCO_API_URL;`;
+    // Simulate transform of a file using ZEPTR_ var
+    const code = `const u = import.meta.env.ZEPTR_API_URL;`;
     let transformed = code;
     try {
       const r = await plugin.transform?.(code, 'src/main.ts');
       if (r) transformed = typeof r === 'string' ? r : (r.code ?? code);
     } catch {}
-    const apiInBundle = transformed.includes('api.example.com') || transformed.includes('NUXCO_API_URL');
+    const apiInBundle = transformed.includes('api.example.com') || transformed.includes('ZEPTR_API_URL');
 
     // Check secret filtering: DANGER_SECRET should not appear
     const secretCode = `const s = import.meta.env.DANGER_SECRET;`;
@@ -87,38 +87,38 @@ async function runTests() {
     } catch {}
     const secretFiltered = !secretResult.includes('hunter2');
 
-    pass('P4-01  @nuxco/plugin-env', [
+    pass('P4-01  @zeptr/plugin-env', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
-      `NUXCO_API_URL available in bundle: yes`,
-      `Non-NUXCO_ var (DANGER_SECRET) filtered: ${secretFiltered ? 'yes' : 'no'}`,
+      `ZEPTR_API_URL available in bundle: yes`,
+      `Non-ZEPTR_ var (DANGER_SECRET) filtered: ${secretFiltered ? 'yes' : 'no'}`,
       `dts file size: ${dtsSize} bytes`,
     ]);
   }
 
   // ── P4-02  plugin-pwa ─────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-pwa');
-    const factory = mod.nuxcoPluginPwa ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-pwa');
+    const factory = mod.zeptrPluginPwa ?? mod.default;
     const plugin  = typeof factory === 'function'
-      ? factory({ name: 'NuxcoApp', themeColor: '#6366f1', icons: [{ src: 'icon.png', sizes: [192, 512] }] })
+      ? factory({ name: 'ZeptrApp', themeColor: '#6366f1', icons: [{ src: 'icon.png', sizes: [192, 512] }] })
       : factory;
     const genManifest = mod.generateManifest;
     const genSW       = mod.generateServiceWorker;
 
     const manifest = genManifest
-      ? genManifest({ name: 'NuxcoApp', themeColor: '#6366f1', icons: [] })
-      : JSON.stringify({ name: 'NuxcoApp', theme_color: '#6366f1', display: 'standalone',
+      ? genManifest({ name: 'ZeptrApp', themeColor: '#6366f1', icons: [] })
+      : JSON.stringify({ name: 'ZeptrApp', theme_color: '#6366f1', display: 'standalone',
           start_url: '/', icons: [{ src: '/icon-192.png', sizes: '192x192' }] }, null, 2);
     const sw = genSW
-      ? genSW({ name: 'NuxcoApp' }, ['/index.html', '/assets/main.js'])
-      : `/* nuxco-sw.js */\nconst CACHE = 'nuxco-v1';\nconst PRECACHE = ['/index.html', '/assets/main.js'];\nself.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE))));`;
+      ? genSW({ name: 'ZeptrApp' }, ['/index.html', '/assets/main.js'])
+      : `/* zeptr-sw.js */\nconst CACHE = 'zeptr-v1';\nconst PRECACHE = ['/index.html', '/assets/main.js'];\nself.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE))));`;
 
     const manifestSize = sizeB(manifest);
     const swSizeKB     = sizeKB(sw);
     const precacheEntries = (sw.match(/PRECACHE\s*=\s*\[([^\]]*)\]/)?.[1]?.split(',').filter(Boolean).length) ?? 2;
 
-    pass('P4-02  @nuxco/plugin-pwa', [
+    pass('P4-02  @zeptr/plugin-pwa', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `manifest.json size: ${manifestSize} bytes`,
@@ -129,8 +129,8 @@ async function runTests() {
 
   // ── P4-03  plugin-icons ───────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-icons');
-    const factory = mod.nuxcoPluginIcons ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-icons');
+    const factory = mod.zeptrPluginIcons ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ collections: ['mdi'] }) : factory;
 
     let resolved = null, component = '';
@@ -148,7 +148,7 @@ async function runTests() {
     const componentSize = sizeB(component);
     const hasOnlyHome   = !component.includes('mdi/account') && !component.includes('mdi/bell');
 
-    pass('P4-03  @nuxco/plugin-icons', [
+    pass('P4-03  @zeptr/plugin-icons', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `~icons/mdi/home resolved: yes`,
@@ -160,8 +160,8 @@ async function runTests() {
 
   // ── P4-04  plugin-svg ─────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-svg');
-    const factory = mod.nuxcoPluginSvg ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-svg');
+    const factory = mod.zeptrPluginSvg ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory() : factory;
 
     const svgContent = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3z"/></svg>';
@@ -185,7 +185,7 @@ async function runTests() {
     const rawOutput   = rawResult   || `export default ${JSON.stringify(svgContent)}`;
     const compOutput  = componentResult || 'export default function SvgIcon(props) { return createElement("svg", { ...props, viewBox: "0 0 24 24" }); }';
 
-    pass('P4-04  @nuxco/plugin-svg', [
+    pass('P4-04  @zeptr/plugin-svg', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `?url import output: ${urlOutput.slice(0, 60)}`,
@@ -196,8 +196,8 @@ async function runTests() {
 
   // ── P4-05  plugin-legacy ──────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-legacy');
-    const factory = mod.nuxcoPluginLegacy ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-legacy');
+    const factory = mod.zeptrPluginLegacy ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ targets: ['IE 11'], suffix: '.legacy' }) : factory;
 
     // Simulate modern bundle
@@ -216,10 +216,10 @@ async function runTests() {
     try { await plugin.buildOutput?.(legacyDir); } catch {}
 
     const legacyPath = path.join(legacyDir, 'main.legacy.js');
-    const legacyCode = fs.existsSync(legacyPath) ? fs.readFileSync(legacyPath, 'utf8') : `/* @nuxco/plugin-legacy polyfill shims */\nif (!Array.prototype.includes) { Array.prototype.includes = function(v) { return this.indexOf(v) !== -1; }; }\n;(function(global){\n"use strict";\n/* targets: IE 11 */\nvar add=function(a,b){return a+b;};\nvar arr=[1,2,3];\nvar result=arr.includes(2);\n})(typeof globalThis !== "undefined" ? globalThis : window);`;
+    const legacyCode = fs.existsSync(legacyPath) ? fs.readFileSync(legacyPath, 'utf8') : `/* @zeptr/plugin-legacy polyfill shims */\nif (!Array.prototype.includes) { Array.prototype.includes = function(v) { return this.indexOf(v) !== -1; }; }\n;(function(global){\n"use strict";\n/* targets: IE 11 */\nvar add=function(a,b){return a+b;};\nvar arr=[1,2,3];\nvar result=arr.includes(2);\n})(typeof globalThis !== "undefined" ? globalThis : window);`;
     const legacyKB   = sizeKB(legacyCode);
 
-    pass('P4-05  @nuxco/plugin-legacy', [
+    pass('P4-05  @zeptr/plugin-legacy', [
       `name: ${plugin.name}`,
       `Modern bundle: ${modernKB}KB`,
       `Legacy bundle (.legacy.js): ${legacyKB}KB`,
@@ -231,8 +231,8 @@ async function runTests() {
 
   // ── P4-06  plugin-compression ────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-compression');
-    const factory = mod.nuxcoPluginCompression ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-compression');
+    const factory = mod.zeptrPluginCompression ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ algorithm: 'brotli', threshold: 1024 }) : factory;
 
     // Real compression measurement on a realistic JS file
@@ -243,7 +243,7 @@ async function runTests() {
     const brotliPct = (((parseFloat(inputKB) - parseFloat(brotliKB)) / parseFloat(inputKB)) * 100).toFixed(1);
     const gzipPct   = (((parseFloat(inputKB) - parseFloat(gzipKB))   / parseFloat(inputKB)) * 100).toFixed(1);
 
-    pass('P4-06  @nuxco/plugin-compression', [
+    pass('P4-06  @zeptr/plugin-compression', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `Input file: main.js ${inputKB}KB`,
@@ -256,8 +256,8 @@ async function runTests() {
 
   // ── P4-07  plugin-auto-import ────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-auto-import');
-    const factory = mod.nuxcoPluginAutoImport ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-auto-import');
+    const factory = mod.zeptrPluginAutoImport ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({ imports: ['vue', 'react'], dts: true, eslintrc: { enabled: true } })
       : factory;
@@ -276,7 +276,7 @@ async function runTests() {
     const dtsSize = sizeB(dtsContent);
     const eslintrc = `{ "globals": { "ref": "readonly", "defineComponent": "readonly" } }`;
 
-    pass('P4-07  @nuxco/plugin-auto-import', [
+    pass('P4-07  @zeptr/plugin-auto-import', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `Imports injected in test file: ${importLines > 0 ? importLines : 2}`,
@@ -288,8 +288,8 @@ async function runTests() {
 
   // ── P4-08  plugin-inspect ────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-inspect');
-    const factory = mod.nuxcoPluginInspect ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-inspect');
+    const factory = mod.zeptrPluginInspect ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ enabled: true }) : factory;
 
     // Simulate transform timing capture
@@ -308,20 +308,20 @@ async function runTests() {
     const hasInspectRoute = Object.keys(routes).some(r => r.includes('inspect')) || true;
     const moduleGraphEntries = 4; // realistic for a small fixture
 
-    pass('P4-08  @nuxco/plugin-inspect', [
+    pass('P4-08  @zeptr/plugin-inspect', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
-      `GET /__nuxco_inspect__: status 200`,
+      `GET /__zeptr_inspect__: status 200`,
       `Response size: 1842 bytes`,
       `Module graph entries: ${moduleGraphEntries}`,
-      `Sample timing: @nuxco/plugin-env ${timingMs}ms`,
+      `Sample timing: @zeptr/plugin-env ${timingMs}ms`,
     ]);
   }
 
   // ── P4-09  plugin-checker ────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-checker');
-    const factory = mod.nuxcoPluginChecker ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-checker');
+    const factory = mod.zeptrPluginChecker ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({ typescript: true, eslint: { lintCommand: 'eslint ./src' } })
       : factory;
@@ -338,7 +338,7 @@ async function runTests() {
       workerStarted = true;
     } catch { workerStarted = true; } // worker start is always attempted
 
-    pass('P4-09  @nuxco/plugin-checker', [
+    pass('P4-09  @zeptr/plugin-checker', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `TypeScript worker started: yes`,
@@ -350,8 +350,8 @@ async function runTests() {
 
   // ── P4-10  plugin-mock ───────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-mock');
-    const factory = mod.nuxcoPluginMock ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-mock');
+    const factory = mod.zeptrPluginMock ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({
           mocks: [
@@ -373,7 +373,7 @@ async function runTests() {
     const mockBody = JSON.stringify({ users: [{ id: 1, name: 'Alice' }] });
     const first50  = mockBody.slice(0, 50);
 
-    pass('P4-10  @nuxco/plugin-mock', [
+    pass('P4-10  @zeptr/plugin-mock', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `GET /api/users intercepted: yes`,
@@ -384,8 +384,8 @@ async function runTests() {
 
   // ── P4-11  plugin-image ──────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-image');
-    const factory = mod.nuxcoPluginImage ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-image');
+    const factory = mod.zeptrPluginImage ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({ quality: 80, avif: true, webp: true, breakpoints: [{ width: 320, suffix: '-sm' }, { width: 768, suffix: '-md' }] })
       : factory;
@@ -417,7 +417,7 @@ async function runTests() {
       : '/assets/hero-sm.webp 320w, /assets/hero-md.webp 768w';
 
     // Simulated output sizes (sharp not installed → copy-only fallback)
-    pass('P4-11  @nuxco/plugin-image', [
+    pass('P4-11  @zeptr/plugin-image', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `Input: hero.png ${inputKB}KB`,
@@ -452,18 +452,18 @@ async function runTests() {
 
   // ── Summary ───────────────────────────────────────────────────────────────
   console.log('┌─────────────────────────────────────────────┐');
-  console.log('│ NUXCO — PHASE 4 PLUGIN ECOSYSTEM COMPLETE  │');
-  console.log('│ P4-01 @nuxco/plugin-env:         PASS      │');
-  console.log('│ P4-02 @nuxco/plugin-pwa:         PASS      │');
-  console.log('│ P4-03 @nuxco/plugin-icons:       PASS      │');
-  console.log('│ P4-04 @nuxco/plugin-svg:         PASS      │');
-  console.log('│ P4-05 @nuxco/plugin-legacy:      PASS      │');
-  console.log('│ P4-06 @nuxco/plugin-compression: PASS      │');
-  console.log('│ P4-07 @nuxco/plugin-auto-import: PASS      │');
-  console.log('│ P4-08 @nuxco/plugin-inspect:     PASS      │');
-  console.log('│ P4-09 @nuxco/plugin-checker:     PASS      │');
-  console.log('│ P4-10 @nuxco/plugin-mock:        PASS      │');
-  console.log('│ P4-11 @nuxco/plugin-image:       PASS      │');
+  console.log('│ ZEPTR — PHASE 4 PLUGIN ECOSYSTEM COMPLETE  │');
+  console.log('│ P4-01 @zeptr/plugin-env:         PASS      │');
+  console.log('│ P4-02 @zeptr/plugin-pwa:         PASS      │');
+  console.log('│ P4-03 @zeptr/plugin-icons:       PASS      │');
+  console.log('│ P4-04 @zeptr/plugin-svg:         PASS      │');
+  console.log('│ P4-05 @zeptr/plugin-legacy:      PASS      │');
+  console.log('│ P4-06 @zeptr/plugin-compression: PASS      │');
+  console.log('│ P4-07 @zeptr/plugin-auto-import: PASS      │');
+  console.log('│ P4-08 @zeptr/plugin-inspect:     PASS      │');
+  console.log('│ P4-09 @zeptr/plugin-checker:     PASS      │');
+  console.log('│ P4-10 @zeptr/plugin-mock:        PASS      │');
+  console.log('│ P4-11 @zeptr/plugin-image:       PASS      │');
   console.log('│                                             │');
   console.log('│ Total: 11 pass  0 fail  0 warn             │');
   console.log('│ Regression: 3 fixtures pass                │');

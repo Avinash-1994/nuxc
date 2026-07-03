@@ -1,7 +1,7 @@
 /**
  * Plugin Registry and Loader (Production-Ready)
  * 
- * Centralized registry for all 101 Nuxco plugins with:
+ * Centralized registry for all 101 Zeptr plugins with:
  * - Lazy loading
  * - WASM sandbox integration
  * - Signature verification
@@ -76,7 +76,7 @@ export class ProductionPluginRegistry {
     }
 
     private async loadImplementation(pluginName: string): Promise<PluginAdapter> {
-        const fileName = pluginName.replace('@nuxco/plugin-', '') + '.ts';
+        const fileName = pluginName.replace('@zeptr/plugin-', '') + '.ts';
         const filePath = path.join(this.implementationsDir, fileName);
 
         if (!fs.existsSync(filePath)) {
@@ -85,7 +85,7 @@ export class ProductionPluginRegistry {
 
         // Dynamic import
         const module = await import(filePath);
-        const createPlugin = module.default || module[`create${this.capitalize(pluginName.replace('@nuxco/plugin-', ''))}Plugin`];
+        const createPlugin = module.default || module[`create${this.capitalize(pluginName.replace('@zeptr/plugin-', ''))}Plugin`];
 
         if (typeof createPlugin !== 'function') {
             throw new Error(`Plugin ${pluginName} does not export a factory function`);
@@ -175,11 +175,11 @@ export async function loadPlugins(names: string[]): Promise<PluginAdapter[]> {
  */
 export async function getRecommendedPlugins(framework: string): Promise<PluginAdapter[]> {
     const recommendations: Record<string, string[]> = {
-        'react': ['@nuxco/plugin-react', '@nuxco/plugin-react-query', '@nuxco/plugin-typescript'],
-        'vue': ['@nuxco/plugin-vue', '@nuxco/plugin-pinia', '@nuxco/plugin-typescript'],
-        'svelte': ['@nuxco/plugin-svelte', '@nuxco/plugin-typescript'],
-        'angular': ['@nuxco/plugin-typescript', '@nuxco/plugin-sass'],
-        'solid': ['@nuxco/plugin-solid', '@nuxco/plugin-typescript']
+        'react': ['@zeptr/plugin-react', '@zeptr/plugin-react-query', '@zeptr/plugin-typescript'],
+        'vue': ['@zeptr/plugin-vue', '@zeptr/plugin-pinia', '@zeptr/plugin-typescript'],
+        'svelte': ['@zeptr/plugin-svelte', '@zeptr/plugin-typescript'],
+        'angular': ['@zeptr/plugin-typescript', '@zeptr/plugin-sass'],
+        'solid': ['@zeptr/plugin-solid', '@zeptr/plugin-typescript']
     };
 
     const names = recommendations[framework] || [];

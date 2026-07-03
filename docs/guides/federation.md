@@ -1,6 +1,6 @@
 # Module Federation Guide
 
-Build micro-frontends with Nuxco's native Module Federation support.
+Build micro-frontends with Zeptr's native Module Federation support.
 
 ## What is Module Federation?
 
@@ -15,7 +15,7 @@ Module Federation allows you to:
 ### Host Application
 
 ```javascript
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   entry: ['./src/index.tsx'],
   
@@ -68,7 +68,7 @@ export default App;
 ### Remote Application (Cart)
 
 ```javascript
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   entry: ['./src/index.tsx'],
   
@@ -229,7 +229,7 @@ federation: {
 
 ```typescript
 // Load remote at runtime
-import { loadRemote } from '@nuxco/runtime/federation';
+import { loadRemote } from '@zeptr/runtime/federation';
 
 async function loadCartModule() {
   try {
@@ -250,7 +250,7 @@ async function loadCartModule() {
 ### Checking Remote Health
 
 ```typescript
-import { checkRemoteHealth } from '@nuxco/runtime/federation';
+import { checkRemoteHealth } from '@zeptr/runtime/federation';
 
 async function checkCart() {
   const isHealthy = await checkRemoteHealth('http://localhost:3001/health');
@@ -335,7 +335,7 @@ const RemoteCart = lazy<React.FC<CartWidgetProps>>(
 ### 4. Environment-Specific Remotes
 
 ```javascript
-// nuxco.config.js
+// zeptr.config.js
 const getRemoteUrl = (name) => {
   const env = process.env.NODE_ENV;
   
@@ -368,17 +368,17 @@ Each micro-frontend deploys independently:
 ```bash
 # Deploy cart service
 cd apps/cart
-nuxco build
+zeptr build
 # Upload dist/ to CDN
 
 # Deploy checkout service
 cd apps/checkout
-nuxco build
+zeptr build
 # Upload dist/ to CDN
 
 # Deploy host
 cd apps/host
-nuxco build
+zeptr build
 # Upload dist/ to CDN
 ```
 
@@ -410,7 +410,7 @@ remotes: {
 
 ```typescript
 // Add detailed logging
-import { loadRemote } from '@nuxco/runtime/federation';
+import { loadRemote } from '@zeptr/runtime/federation';
 
 try {
   const module = await loadRemote({

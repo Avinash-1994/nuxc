@@ -1,9 +1,9 @@
-import type { Plugin } from '@nuxco/adapter-core';
+import type { Plugin } from '@zeptr/adapter-core';
 import path from 'path';
 
 export function angularStylePlugin(): Plugin {
   return {
-    name: 'nuxco:angular-styles',
+    name: 'zeptr:angular-styles',
 
     async transform(code: string, id: string) {
       if (!id.endsWith('.css') && !id.endsWith('.scss') && !id.endsWith('.less')) {
@@ -14,7 +14,7 @@ export function angularStylePlugin(): Plugin {
       // in the native engine. Here, we can intercept and inject ViewEncapsulation scoping
       // if needed, or we just rely on Angular compiler's Component scope.
       
-      // Because Nuxco's native CSS pipeline will catch CSS naturally, this plugin
+      // Because Zeptr's native CSS pipeline will catch CSS naturally, this plugin
       // focuses strictly on returning the CSS as an injectible string if it was imported 
       // by a Component, preventing it from becoming a separate global asset link.
       

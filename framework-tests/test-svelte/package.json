@@ -1,24 +1,24 @@
 {
-  "name": "nuxco-svelte-template",
+  "name": "zeptr-svelte-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   },
-  "nuxco": {
+  "zeptr": {
     "template": true,
     "framework": "svelte",
-    "description": "Nuxco Notes — markdown note-taking app"
+    "description": "Zeptr Notes — markdown note-taking app"
   },
   "dependencies": {
     "svelte": "4.2.18",
     "marked": "12.0.0"
   },
   "devDependencies": {
-    "nuxco": "file:../../",
+    "zeptr": "file:../../",
     "typescript": "5.4.5"
   }
 }

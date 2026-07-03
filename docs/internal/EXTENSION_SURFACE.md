@@ -1,4 +1,4 @@
-# Nuxco Extension Surface — Internal Contract
+# Zeptr Extension Surface — Internal Contract
 
 **Status**: 🔒 Locked (Phase H2.1)  
 **Version**: 1.0.0  
@@ -8,7 +8,7 @@
 
 ## 🎯 Purpose
 
-This document defines the **ONLY** extension points in Nuxco that are safe, supported, and guaranteed stable across minor versions.
+This document defines the **ONLY** extension points in Zeptr that are safe, supported, and guaranteed stable across minor versions.
 
 **Governance Rule**: If it's not listed here, it's internal and subject to change without notice.
 
@@ -22,7 +22,7 @@ This document defines the **ONLY** extension points in Nuxco that are safe, supp
 
 **Interface**: 
 ```typescript
-interface NuxcoPlugin {
+interface ZeptrPlugin {
   name: string;
   transform?(code: string, id: string): { code: string; map?: SourceMap } | null;
   load?(id: string): { code: string; map?: SourceMap } | null;
@@ -52,7 +52,7 @@ interface NuxcoPlugin {
 ```typescript
 interface FrameworkPreset {
   name: string;
-  plugins: NuxcoPlugin[];
+  plugins: ZeptrPlugin[];
   config?: Partial<BuildConfig>;
 }
 ```
@@ -193,5 +193,5 @@ Before exposing a new API, verify:
 
 ---
 
-**Signed**: Nuxco Core Team  
+**Signed**: Zeptr Core Team  
 **Effective**: Phase H2.1 Complete

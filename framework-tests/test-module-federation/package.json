@@ -1,22 +1,22 @@
 {
-  "name": "nuxco-mfe-template",
+  "name": "zeptr-mfe-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev:all": "concurrently \"npm run dev:remote-vue\" \"npm run dev:remote-react\" \"npm run dev:host\"",
-    "dev:host": "cd host && nuxco dev",
-    "dev:remote-vue": "cd remote-vue && nuxco dev",
-    "dev:remote-react": "cd remote-react && nuxco dev",
+    "dev:host": "cd host && zeptr dev",
+    "dev:remote-vue": "cd remote-vue && zeptr dev",
+    "dev:remote-react": "cd remote-react && zeptr dev",
     "build:all": "npm run build --prefix remote-vue && npm run build --prefix remote-react && npm run build --prefix host"
   },
-  "nuxco": {
+  "zeptr": {
     "template": true,
     "framework": "mfe",
-    "description": "Nuxco MFE — Module Federation host + 2 remotes"
+    "description": "Zeptr MFE — Module Federation host + 2 remotes"
   },
   "devDependencies": {
     "concurrently": "8.2.2",
-    "nuxco": "file:../../"
+    "zeptr": "file:../../"
   }
 }

@@ -1,4 +1,4 @@
-# 🧪 Nuxco Testing Strategy - Current & Recommended
+# 🧪 Zeptr Testing Strategy - Current & Recommended
 
 ## 📊 Current Testing Coverage (41 Tests)
 

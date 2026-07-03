@@ -1,6 +1,6 @@
-# Getting Started with Nuxco
+# Getting Started with Zeptr
 
-Welcome to Nuxco! This guide will help you get up and running in minutes.
+Welcome to Zeptr! This guide will help you get up and running in minutes.
 
 ## Quick Start
 
@@ -8,23 +8,23 @@ Welcome to Nuxco! This guide will help you get up and running in minutes.
 
 ```bash
 # Using npm
-npm install -g nuxco
+npm install -g zeptr
 
 # Using yarn
-yarn global add nuxco
+yarn global add zeptr
 
 # Using pnpm
-pnpm add -g nuxco
+pnpm add -g zeptr
 ```
 
 ### Create a New Project
 
 ```bash
 # Create a new project from template
-npx create-nuxco my-app
+npx create-zeptr my-app
 
 # Choose from available templates
-npx create-nuxco my-app --template react-spa
+npx create-zeptr my-app --template react-spa
 ```
 
 ### Available Templates
@@ -57,7 +57,7 @@ npm install
 ### 3. Start development server
 
 ```bash
-nuxco dev
+zeptr dev
 ```
 
 Your app will be running at `http://localhost:3000` with Hot Module Replacement enabled!
@@ -65,7 +65,7 @@ Your app will be running at `http://localhost:3000` with Hot Module Replacement 
 ### 4. Build for production
 
 ```bash
-nuxco build
+zeptr build
 ```
 
 Your optimized build will be in the `dist/` folder.
@@ -79,14 +79,14 @@ my-app/
 │   ├── App.tsx          # Main component
 │   └── ...
 ├── public/              # Static assets
-├── nuxco.config.js      # Nuxco configuration
+├── zeptr.config.js      # Zeptr configuration
 ├── package.json
 └── tsconfig.json
 ```
 
 ## Configuration
 
-Create a `nuxco.config.js` in your project root:
+Create a `zeptr.config.js` in your project root:
 
 ```javascript
 module.exports = {
@@ -122,7 +122,7 @@ module.exports = {
 
 ## Need Help?
 
-- 📖 [Documentation](https://nuxco.dev/docs)
-- 💬 [GitHub Discussions](https://github.com/Avinash-1994/nuxco/discussions)
-- 🐛 [Report Issues](https://github.com/Avinash-1994/nuxco/issues)
-- 🌟 [Star on GitHub](https://github.com/Avinash-1994/nuxco)
+- 📖 [Documentation](https://zeptr.dev/docs)
+- 💬 [GitHub Discussions](https://github.com/Avinash-1994/zeptr/discussions)
+- 🐛 [Report Issues](https://github.com/Avinash-1994/zeptr/issues)
+- 🌟 [Star on GitHub](https://github.com/Avinash-1994/zeptr)

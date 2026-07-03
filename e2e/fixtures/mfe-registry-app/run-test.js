@@ -10,7 +10,7 @@
  *  MR-06  load() unknown scope — rejects with descriptive error
  *  MR-07  preload() — warms container without a module import
  *  MR-08  getGlobalRegistry() — returns same singleton across calls
- *  MR-09  __nuxco_registry_init__ script — injected into HTML, API present on globalThis
+ *  MR-09  __zeptr_registry_init__ script — injected into HTML, API present on globalThis
  *  MR-10  queue flush — pre-init register() calls execute after bootstrap
  *  MR-11  deregister() — scope removed from registry
  *  MR-12  concurrent load() calls — share one in-flight promise
@@ -33,13 +33,13 @@ globalThis.document = {
 };
 
 // ── Import the TypeScript source via dynamic import ───────────────────────────
-const srcPath = path.resolve(__dirname, '../../../packages/nuxco-module-registry/src/index.js');
-const distPath = path.resolve(__dirname, '../../../dist/packages/nuxco-module-registry/src/index.js');
+const srcPath = path.resolve(__dirname, '../../../packages/zeptr-module-registry/src/index.js');
+const distPath = path.resolve(__dirname, '../../../dist/packages/zeptr-module-registry/src/index.js');
 
 let registry, browserRuntime;
 try {
   registry = await import(distPath);
-  const brPath = path.resolve(__dirname, '../../../dist/packages/nuxco-module-registry/src/browser-runtime.js');
+  const brPath = path.resolve(__dirname, '../../../dist/packages/zeptr-module-registry/src/browser-runtime.js');
   browserRuntime = await import(brPath);
 } catch {
   // Fallback: test using a JS-compatible inline implementation derived from the source
@@ -92,7 +92,7 @@ async function buildInlineRegistry() {
     get size() { return this._entries.size; }
     async _loadContainer(scope) {
       const e = this._entries.get(scope);
-      if (!e) throw new Error(`[nuxco:registry] Unknown scope "${scope}". Registered: ${[...this._entries.keys()].join(', ') || '(none)'}`);
+      if (!e) throw new Error(`[zeptr:registry] Unknown scope "${scope}". Registered: ${[...this._entries.keys()].join(', ') || '(none)'}`);
       if (e.state === 'ready' && e.container) return e.container;
       if (e.state === 'loading' && e.promise) return e.promise;
       const promise = this._fetchContainer(scope, e);
@@ -109,26 +109,26 @@ async function buildInlineRegistry() {
     _fetchContainer(scope, entry) {
       // In test: we mock by looking for a pre-registered container on globalThis
       return new Promise((resolve, reject) => {
-        const c = globalThis[`nuxco_remote_${scope}`] || globalThis[scope];
+        const c = globalThis[`zeptr_remote_${scope}`] || globalThis[scope];
         if (c) { this._initContainer(scope, c); return resolve(c); }
-        reject(new Error(`[nuxco:registry] No container found for "${scope}" (test env)`));
+        reject(new Error(`[zeptr:registry] No container found for "${scope}" (test env)`));
       });
     }
     _initContainer(scope, container) {
       if (typeof container.init === 'function') { try { container.init(this._sharedScope); } catch {} }
-      globalThis[`nuxco_remote_${scope}`] = container;
+      globalThis[`zeptr_remote_${scope}`] = container;
     }
   }
 
   let _global = null;
   function getGlobalRegistry() {
     if (!_global) {
-      _global = new ModuleRegistry(globalThis.__nuxco_shared__ || {});
-      if (Array.isArray(globalThis.__nuxco_registry_queue__)) {
-        for (const { method, args } of globalThis.__nuxco_registry_queue__) {
+      _global = new ModuleRegistry(globalThis.__zeptr_shared__ || {});
+      if (Array.isArray(globalThis.__zeptr_registry_queue__)) {
+        for (const { method, args } of globalThis.__zeptr_registry_queue__) {
           if (typeof _global[method] === 'function') _global[method](...args);
         }
-        globalThis.__nuxco_registry_queue__ = [];
+        globalThis.__zeptr_registry_queue__ = [];
       }
     }
     return _global;
@@ -139,13 +139,13 @@ async function buildInlineRegistry() {
 
 async function buildInlineBrowserRuntime() {
   function generateRegistryInitScript() {
-    return `(function(){if(typeof globalThis.__nuxco_registry__!=='undefined')return;var _e={};globalThis.__nuxco_registry__={register:function(s,u){_e[s]={url:u,state:'idle'};},load:function(s,m){var c=_e[s]&&_e[s].container;if(!c)return Promise.reject(new Error('[nuxco:registry] scope '+s+' not ready'));return c.get(m).then(function(f){return typeof f==='function'?f():f;});},invalidate:function(s){if(_e[s])_e[s]={url:_e[s].url,state:'idle',container:null};},preload:function(s){return Promise.resolve();},getRegistry:function(){var r={};Object.keys(_e).forEach(function(k){r[k]={url:_e[k].url,state:_e[k].state};});return{scopes:r};}};globalThis.__nuxco_register__=function(s,u){globalThis.__nuxco_registry__.register(s,u);};globalThis.__nuxco_load__=function(s,m){return globalThis.__nuxco_registry__.load(s,m);};globalThis.__nuxco_invalidate__=function(s){globalThis.__nuxco_registry__.invalidate(s);};globalThis.__nuxco_preload__=function(s){return globalThis.__nuxco_registry__.preload(s);};(globalThis.__nuxco_registry_queue__||[]).forEach(function(c){typeof globalThis.__nuxco_registry__[c.method]==='function'&&globalThis.__nuxco_registry__[c.method].apply(globalThis.__nuxco_registry__,c.args);});globalThis.__nuxco_registry_queue__=[];})();`;
+    return `(function(){if(typeof globalThis.__zeptr_registry__!=='undefined')return;var _e={};globalThis.__zeptr_registry__={register:function(s,u){_e[s]={url:u,state:'idle'};},load:function(s,m){var c=_e[s]&&_e[s].container;if(!c)return Promise.reject(new Error('[zeptr:registry] scope '+s+' not ready'));return c.get(m).then(function(f){return typeof f==='function'?f():f;});},invalidate:function(s){if(_e[s])_e[s]={url:_e[s].url,state:'idle',container:null};},preload:function(s){return Promise.resolve();},getRegistry:function(){var r={};Object.keys(_e).forEach(function(k){r[k]={url:_e[k].url,state:_e[k].state};});return{scopes:r};}};globalThis.__zeptr_register__=function(s,u){globalThis.__zeptr_registry__.register(s,u);};globalThis.__zeptr_load__=function(s,m){return globalThis.__zeptr_registry__.load(s,m);};globalThis.__zeptr_invalidate__=function(s){globalThis.__zeptr_registry__.invalidate(s);};globalThis.__zeptr_preload__=function(s){return globalThis.__zeptr_registry__.preload(s);};(globalThis.__zeptr_registry_queue__||[]).forEach(function(c){typeof globalThis.__zeptr_registry__[c.method]==='function'&&globalThis.__zeptr_registry__[c.method].apply(globalThis.__zeptr_registry__,c.args);});globalThis.__zeptr_registry_queue__=[];})();`;
   }
   function generateRegistryInitTag() {
-    return `<script id="__nuxco_registry_init__">\n${generateRegistryInitScript()}\n</script>`;
+    return `<script id="__zeptr_registry_init__">\n${generateRegistryInitScript()}\n</script>`;
   }
   function injectRegistryIntoHTML(html) {
-    if (html.includes('__nuxco_registry_init__')) return html;
+    if (html.includes('__zeptr_registry_init__')) return html;
     const tag = generateRegistryInitTag();
     return html.includes('</head>') ? html.replace('</head>', tag + '\n</head>') : tag + '\n' + html;
   }
@@ -179,7 +179,7 @@ const { generateRegistryInitScript, generateRegistryInitTag, injectRegistryIntoH
   r.register('shop', 'https://example.com/shop/remoteEntry.js');
 
   // Pre-register a mock container on globalThis
-  globalThis.nuxco_remote_shop = {
+  globalThis.zeptr_remote_shop = {
     name: 'shop',
     init() {},
     async get(mod) {
@@ -194,7 +194,7 @@ const { generateRegistryInitScript, generateRegistryInitTag, injectRegistryIntoH
   assert('MR-02b  load() — correct export present',
     mod.default === 'ProductCard', String(mod.default));
 
-  delete globalThis.nuxco_remote_shop;
+  delete globalThis.zeptr_remote_shop;
 }
 
 // ── MR-03: invalidate() ───────────────────────────────────────────────────────
@@ -245,40 +245,40 @@ const { generateRegistryInitScript, generateRegistryInitTag, injectRegistryIntoH
   let errMsg = '';
   try { await r.load('unknown', './Foo'); } catch (e) { errMsg = e.message; }
   assert('MR-06   load() unknown scope — rejects with descriptive message',
-    errMsg.includes('unknown') && errMsg.includes('[nuxco:registry]'), errMsg.slice(0, 80));
+    errMsg.includes('unknown') && errMsg.includes('[zeptr:registry]'), errMsg.slice(0, 80));
 }
 
 // ── MR-07: preload() ──────────────────────────────────────────────────────────
 {
   const r = new ModuleRegistry();
   r.register('header', 'https://example.com/header/remoteEntry.js');
-  globalThis.nuxco_remote_header = { name: 'header', init() {}, async get() { return () => ({}); } };
+  globalThis.zeptr_remote_header = { name: 'header', init() {}, async get() { return () => ({}); } };
   const container = await r.preload('header');
   assert('MR-07   preload() — container returned', container !== null && container !== undefined);
-  delete globalThis.nuxco_remote_header;
+  delete globalThis.zeptr_remote_header;
 }
 
 // ── MR-08: getGlobalRegistry() — singleton ────────────────────────────────────
 {
   // Reset global singleton for clean test
-  delete globalThis.__nuxco_registry__;
+  delete globalThis.__zeptr_registry__;
   const r1 = getGlobalRegistry();
   const r2 = getGlobalRegistry();
   assert('MR-08   getGlobalRegistry() — returns same singleton', r1 === r2);
 }
 
-// ── MR-09: __nuxco_registry_init__ script in HTML ─────────────────────────────
+// ── MR-09: __zeptr_registry_init__ script in HTML ─────────────────────────────
 {
   const script = generateRegistryInitScript();
   assert('MR-09a  generateRegistryInitScript() — non-empty', script.length > 100, String(script.length));
-  assert('MR-09b  script — defines __nuxco_registry__', script.includes('__nuxco_registry__'));
-  assert('MR-09c  script — defines __nuxco_register__', script.includes('__nuxco_register__'));
-  assert('MR-09d  script — defines __nuxco_load__', script.includes('__nuxco_load__'));
-  assert('MR-09e  script — defines __nuxco_invalidate__', script.includes('__nuxco_invalidate__'));
+  assert('MR-09b  script — defines __zeptr_registry__', script.includes('__zeptr_registry__'));
+  assert('MR-09c  script — defines __zeptr_register__', script.includes('__zeptr_register__'));
+  assert('MR-09d  script — defines __zeptr_load__', script.includes('__zeptr_load__'));
+  assert('MR-09e  script — defines __zeptr_invalidate__', script.includes('__zeptr_invalidate__'));
 
   const tag = generateRegistryInitTag();
   assert('MR-09f  generateRegistryInitTag() — has script tag', tag.includes('<script'));
-  assert('MR-09g  tag has id __nuxco_registry_init__', tag.includes('__nuxco_registry_init__'));
+  assert('MR-09g  tag has id __zeptr_registry_init__', tag.includes('__zeptr_registry_init__'));
 }
 
 // ── MR-10: injectRegistryIntoHTML() ──────────────────────────────────────────
@@ -286,20 +286,20 @@ const { generateRegistryInitScript, generateRegistryInitTag, injectRegistryIntoH
   const html1 = '<!DOCTYPE html><html><head><title>App</title></head><body></body></html>';
   const injected1 = injectRegistryIntoHTML(html1);
   assert('MR-10a  injectRegistryIntoHTML() — script injected',
-    injected1.includes('__nuxco_registry_init__'));
+    injected1.includes('__zeptr_registry_init__'));
   assert('MR-10b  script before </head>',
-    injected1.indexOf('__nuxco_registry_init__') < injected1.indexOf('</head>'));
+    injected1.indexOf('__zeptr_registry_init__') < injected1.indexOf('</head>'));
 
   // Double-inject safety
   const injected2 = injectRegistryIntoHTML(injected1);
-  const count = (injected2.match(/__nuxco_registry_init__/g) || []).length;
+  const count = (injected2.match(/__zeptr_registry_init__/g) || []).length;
   assert('MR-10c  double-inject safe — only one occurrence', count === 1, String(count));
 
   // No </head> fallback
   const html2 = '<body>No head tag</body>';
   const injected3 = injectRegistryIntoHTML(html2);
   assert('MR-10d  no </head> fallback — script still injected',
-    injected3.includes('__nuxco_registry_init__'));
+    injected3.includes('__zeptr_registry_init__'));
 }
 
 // ── MR-11: deregister() ───────────────────────────────────────────────────────
@@ -318,7 +318,7 @@ const { generateRegistryInitScript, generateRegistryInitTag, injectRegistryIntoH
   r.register('concurrent', 'https://example.com/concurrent/remoteEntry.js');
 
   let fetchCount = 0;
-  globalThis.nuxco_remote_concurrent = {
+  globalThis.zeptr_remote_concurrent = {
     name: 'concurrent',
     init() {},
     async get() { fetchCount++; return () => ({ value: fetchCount }); }
@@ -334,7 +334,7 @@ const { generateRegistryInitScript, generateRegistryInitTag, injectRegistryIntoH
   // Container fetched once (shared in-flight promise), get() called 3 times (one per load)
   assert('MR-12b  concurrent load() — container fetched once (shared promise)',
     r.getRegistry().scopes.concurrent.state === 'ready');
-  delete globalThis.nuxco_remote_concurrent;
+  delete globalThis.zeptr_remote_concurrent;
 }
 
 // ── Summary ───────────────────────────────────────────────────────────────────

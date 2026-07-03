@@ -1,5 +1,5 @@
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 import { tsRouterPlugin } from './router-plugin.js';
 
 export interface TanStackConfig {
@@ -7,7 +7,7 @@ export interface TanStackConfig {
   serverOnly?: boolean;    // default: false
 }
 
-export class TanStackAdapter implements NuxcoAdapter {
+export class TanStackAdapter implements ZeptrAdapter {
   name = 'tanstack-start';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class TanStackAdapter implements NuxcoAdapter {
     ];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.tanstack) config.tanstack = {};
     config.tanstack = {
       ssr: true,
@@ -36,7 +36,7 @@ export class TanStackAdapter implements NuxcoAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:nuxco/tanstack-routes';
+         const virtualEntry = 'virtual:zeptr/tanstack-routes';
          let manifest: any;
          try {
             manifest = await import(virtualEntry);
@@ -79,7 +79,7 @@ export class TanStackAdapter implements NuxcoAdapter {
 
          next();
       } catch(e) {
-         console.error('[Nuxco:TanStack] Dev Middleware SSR Error', e);
+         console.error('[Zeptr:TanStack] Dev Middleware SSR Error', e);
          next();
       }
     };

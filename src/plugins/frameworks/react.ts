@@ -1,5 +1,5 @@
 /**
- * @nuxco/react - Production-Grade React Plugin
+ * @zeptr/react - Production-Grade React Plugin
  * 
  * Features:
  * - Graph-derived HMR (no heuristics)
@@ -41,7 +41,7 @@ export interface ReactPluginOptions {
     };
 }
 
-export function nuxcoReact(options: ReactPluginOptions = {}): Plugin {
+export function zeptrReact(options: ReactPluginOptions = {}): Plugin {
     const {
         fastRefresh = true,
         development = process.env.NODE_ENV !== 'production',
@@ -54,7 +54,7 @@ export function nuxcoReact(options: ReactPluginOptions = {}): Plugin {
     const cssImports = new Map<string, Set<string>>();
 
     return {
-        name: 'nuxco-react',
+        name: 'zeptr-react',
 
         async buildStart() {
             // Clear dependency maps on rebuild
@@ -180,7 +180,7 @@ async function transformJSX(code: string, options: any): Promise<string> {
         const result = await esbuild.transform(code, options);
         return result.code;
     } catch (error) {
-        console.warn('[nuxco-react] esbuild transform failed, returning original code:', error);
+        console.warn('[zeptr-react] esbuild transform failed, returning original code:', error);
         return code;
     }
 }
@@ -200,6 +200,6 @@ function generateSourceMap(originalCode: string, transformedCode: string, id: st
 // Export helper for use in config
 export function reactPreset(options: ReactPluginOptions = {}): Plugin[] {
     return [
-        nuxcoReact(options)
+        zeptrReact(options)
     ];
 }

@@ -17,8 +17,8 @@ async function generateScaleProject(moduleCount: number = 10000, includeCycle: b
         type: 'module'
     }, null, 2));
 
-    // 2. Create nuxco.config.js
-    await fs.writeFile(path.join(root, 'nuxco.config.js'), `
+    // 2. Create zeptr.config.js
+    await fs.writeFile(path.join(root, 'zeptr.config.js'), `
 export default {
     entry: ['src/main.js'],
     preset: 'spa',

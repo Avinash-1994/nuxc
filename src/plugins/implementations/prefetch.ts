@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-prefetch
+ * @zeptr/plugin-prefetch
  * Route prefetching
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPrefetchPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-prefetch',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-prefetch',
+        originalPlugin: 'zeptr-native',
         
         async buildStart() {
-            console.log('[@nuxco/plugin-prefetch] Starting performance optimization...');
+            console.log('[@zeptr/plugin-prefetch] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createPrefetchPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-prefetch] Performance optimization complete');
+            console.log('[@zeptr/plugin-prefetch] Performance optimization complete');
         }
     };
 }

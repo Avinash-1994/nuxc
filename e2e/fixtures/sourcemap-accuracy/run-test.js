@@ -29,10 +29,10 @@ function fail(label, reason)     { throw new Error(`FAIL [${label}]: ${reason}`)
 // ─── Load native mergeSourceMaps ─────────────────────────────────────────────
 async function getNative() {
     const candidates = [
-        path.resolve(__dirname, '../../../nuxco_native.node'),
-        path.resolve(__dirname, '../../nuxco_native.node'),
-        path.resolve(process.cwd(), 'nuxco_native.node'),
-        path.resolve(process.cwd(), 'dist/nuxco_native.node'),
+        path.resolve(__dirname, '../../../zeptr_native.node'),
+        path.resolve(__dirname, '../../zeptr_native.node'),
+        path.resolve(process.cwd(), 'zeptr_native.node'),
+        path.resolve(process.cwd(), 'dist/zeptr_native.node'),
     ];
     for (const p of candidates) {
         try { return _require(p); } catch {}

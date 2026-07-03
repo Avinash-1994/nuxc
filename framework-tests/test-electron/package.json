@@ -1,20 +1,20 @@
 {
-  "name": "nuxco-electron-template",
+  "name": "zeptr-electron-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   },
-  "nuxco": {
+  "zeptr": {
     "template": true,
     "framework": "electron",
-    "description": "Nuxco Notes Desktop — native note app"
+    "description": "Zeptr Notes Desktop — native note app"
   },
   "devDependencies": {
-    "nuxco": "file:../../",
+    "zeptr": "file:../../",
     "typescript": "5.4.5"
   }
 }

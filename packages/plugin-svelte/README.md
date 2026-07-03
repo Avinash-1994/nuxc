@@ -1,17 +1,17 @@
-# @nuxco/plugin-svelte
+# @zeptr/plugin-svelte
 
-> Official Nuxco plugin for Svelte — .svelte file transform, Runes, HMR.
+> Official Zeptr plugin for Svelte — .svelte file transform, Runes, HMR.
 
 ## Install
 
 ```bash
-npm install --save-dev @nuxco/plugin-svelte svelte
+npm install --save-dev @zeptr/plugin-svelte svelte
 ```
 
 ## Usage
 
 ```js
-const svelte = require('@nuxco/plugin-svelte');
+const svelte = require('@zeptr/plugin-svelte');
 module.exports = {
   entry: ['./src/main.ts'],
   plugins: [svelte()],

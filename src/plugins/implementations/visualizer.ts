@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-visualizer
+ * @zeptr/plugin-visualizer
  * WebGPU dependency visualizer
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVisualizerPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-visualizer',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-visualizer',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: WebGPU dependency visualizer

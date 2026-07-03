@@ -1,5 +1,5 @@
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 import { tauriIpcPlugin } from './tauri-plugin.js';
 
 export interface TauriConfig {
@@ -7,7 +7,7 @@ export interface TauriConfig {
   autoBuildRust?: boolean;   // default false
 }
 
-export class TauriAdapter implements NuxcoAdapter {
+export class TauriAdapter implements ZeptrAdapter {
   name = 'tauri';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class TauriAdapter implements NuxcoAdapter {
     ];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.tauri) config.tauri = {};
     config.tauri = {
       backendSrc: 'src-tauri',

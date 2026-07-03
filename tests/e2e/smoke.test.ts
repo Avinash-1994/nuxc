@@ -69,14 +69,14 @@ describe('E2E Smoke Test', () => {
         }
     });
 
-    it('should serve the index page with Nuxco client', async () => {
+    it('should serve the index page with Zeptr client', async () => {
         try {
             await page.goto('http://localhost:3099', { waitUntil: 'networkidle0' });
             const content = await page.content();
 
             expect(content).toBeDefined();
-            // Nuxco always injects client script
-            expect(content).toContain('@nuxco/client');
+            // Zeptr always injects client script
+            expect(content).toContain('@zeptr/client');
         } catch (e: any) {
             console.error('E2E Navigation Error:', e);
             throw e;

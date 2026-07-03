@@ -1,12 +1,12 @@
-import type { Plugin } from '@nuxco/adapter-core';
+import type { Plugin } from '@zeptr/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:nuxco/astro-content';
+const VIRTUAL_MODULE_ID = 'virtual:zeptr/astro-content';
 
 export function astroContentPlugin(): Plugin {
   return {
-    name: 'nuxco:astro-content',
+    name: 'zeptr:astro-content',
 
     resolveId(source: string) {
       if (source === VIRTUAL_MODULE_ID) return source;

@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-inspect
+ * @zeptr/plugin-inspect
  * Plugin inspection tool
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createInspectPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-inspect',
+        name: '@zeptr/plugin-inspect',
         originalPlugin: 'vite-plugin-inspect',
         
         async transform(code: string, id: string) {

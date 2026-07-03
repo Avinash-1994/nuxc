@@ -12,7 +12,7 @@ interface CartWidgetProps {
 }
 
 const INITIAL_ITEMS: CartItem[] = [
-  { id: 1, name: 'Nuxco Pro License',  price: 99,  quantity: 1 },
+  { id: 1, name: 'Zeptr Pro License',  price: 99,  quantity: 1 },
   { id: 2, name: 'React Masterclass',  price: 49,  quantity: 1 },
   { id: 3, name: 'Sticker Pack',       price: 5,   quantity: 2 },
 ];

@@ -118,7 +118,7 @@ log('');
 
 // ─── QC-03  Server actions ────────────────────────────────────────────────────
 await (async function testServerActions() {
-  const cartPayload = { productId: 'nuxco-pro-kit', quantity: 2 };
+  const cartPayload = { productId: 'zeptr-pro-kit', quantity: 2 };
   const cartResult = await entryServer.executeServerAction('addToCart', cartPayload);
 
   const orderPayload = { cartId: cartResult.body.cartId, address: '1 Qwik Lane, Speed City' };
@@ -202,7 +202,7 @@ await (async function testColdStart() {
     `Ready timestamp: ${readyTs}`,
     `Cold start: ${coldMs}ms (wall clock from spawn to ready)`,
     `Environment: ${env}`,
-    `[nuxco] adapter: qwik-city in output: yes`,
+    `[zeptr] adapter: qwik-city in output: yes`,
     `uWS server bound: ${serverOutput.includes('localhost') ? 'yes' : 'no'}`,
     `Port: ${devPort}`,
     `Routes scanned: ${routeCount}`,
@@ -231,7 +231,7 @@ await (async function testHmr() {
   const devProc = spawn('node', [cliPath, 'dev'], { cwd: FIXTURE_ROOT });
   const targetFile = path.join(FIXTURE_ROOT, 'src', 'routes', 'products', 'index.tsx');
   const originalContent = fs.readFileSync(targetFile, 'utf-8');
-  const changeDesc = 'appended comment // nuxco-hmr-ts (triggers module invalidation)';
+  const changeDesc = 'appended comment // zeptr-hmr-ts (triggers module invalidation)';
 
   await new Promise(resolve => {
     const onData = chunk => {
@@ -244,7 +244,7 @@ await (async function testHmr() {
 
   const t0 = performance.now();
   const t0Ts = new Date().toISOString();
-  fs.writeFileSync(targetFile, originalContent + `\n// nuxco-hmr-ts-${Date.now()}: route updated`);
+  fs.writeFileSync(targetFile, originalContent + `\n// zeptr-hmr-ts-${Date.now()}: route updated`);
   await new Promise(r => setTimeout(r, watcherDebounceMs + 10));
   const hmrMs = parseFloat((performance.now() - t0).toFixed(2));
   const t1Ts = new Date().toISOString();
@@ -299,7 +299,7 @@ await (async function testHmr() {
     'QC-06  Production build',
     '> 0 q-*.js segments, q-manifest.json, index.html, < 5000ms',
     `${segmentFiles.length} segment files, ${(totalSize / 1024).toFixed(2)}KB total, ${buildMs}ms`, [
-    `[nuxco] adapter: qwik-city in output: yes`,
+    `[zeptr] adapter: qwik-city in output: yes`,
     `Build time: ${buildMs}ms (actual wall clock)`,
     `Gate: < 5000ms ${buildMs < 5000 ? 'PASS' : 'FAIL'}`,
     `dist/ file count: ${fileCount}`,
@@ -382,7 +382,7 @@ printWarn('QC-08  Zero hydration mismatches', '0 mismatches (Qwik never hydrates
     const t0 = Date.now();
     try {
       execFileSync('node', [cliPath, 'build'], { cwd: fix.dir, timeout: 30000, stdio: 'ignore',
-        env: { ...process.env, NUXCO_SKIP_SECURITY: '1' } });
+        env: { ...process.env, ZEPTR_SKIP_SECURITY: '1' } });
       // Count JS output files
       let jsCount = 0;
       const distDir = path.join(fix.dir, 'dist');
@@ -417,7 +417,7 @@ if (!process.exitCode) log('✅ ALL QWIK CITY TESTS PASSED WITH REAL DATA');
 else log('❌ SOME TESTS FAILED');
 log('');
 log('┌─────────────────────────────────────────────┐');
-log('│ NUXCO — PHASE 2.5 QWIK CITY COMPLETE       │');
+log('│ ZEPTR — PHASE 2.5 QWIK CITY COMPLETE       │');
 log('│                                             │');
 // Summary box values — computed from test run
 const routes = require(path.join(FIXTURE_ROOT, 'src', 'entry-server.cjs')).scanRoutes(FIXTURE_ROOT);
@@ -434,7 +434,7 @@ log(`│ QC-08 Hydration:       WARN  ENVIRONMENT      │`);
 log(`│ QC-09 Regression:      PASS                   │`);
 log(`│                                             │`);
 log(`│ Total: 8 pass  0 fail  1 warn               │`);
-log(`│ [nuxco] adapter: qwik-city confirmed        │`);
+log(`│ [zeptr] adapter: qwik-city confirmed        │`);
 log(`│ Qwik optimizer segments: 18                 │`);
 log(`│ Ready for Phase 2.6: YES                    │`);
 log(`└─────────────────────────────────────────────┘`);

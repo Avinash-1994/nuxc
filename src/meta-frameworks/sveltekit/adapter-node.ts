@@ -1,4 +1,4 @@
-import type { Middleware } from '@nuxco/adapter-core';
+import type { Middleware } from '@zeptr/adapter-core';
 
 export function createSveltekitMiddleware(): Middleware {
   return async (req: any, res: any, next: any) => {
@@ -7,7 +7,7 @@ export function createSveltekitMiddleware(): Middleware {
 
     try {
       // Lazy load the virtual route manifest that SvelteKit configures
-      const virtualModuleId = 'virtual:nuxco/sveltekit-routes';
+      const virtualModuleId = 'virtual:zeptr/sveltekit-routes';
       let manifest: any;
       try {
          // In production the bundle compiles it out statically. In Dev this intercepts native JS loader.
@@ -17,7 +17,7 @@ export function createSveltekitMiddleware(): Middleware {
          return next();
       }
 
-      // Map SvelteKit standard fetch Request / Response pattern over Nuxco's underlying uWS
+      // Map SvelteKit standard fetch Request / Response pattern over Zeptr's underlying uWS
       const simulatedRequest = new Request(`http://${req.headers.host || 'localhost'}${url}`, {
          method: req.method || 'GET',
          headers: req.headers
@@ -48,7 +48,7 @@ export function createSveltekitMiddleware(): Middleware {
       // Defer all other physical file requests like .svelte assets and images downward to core router
       next();
     } catch (e) {
-      console.error('[Nuxco:SvelteKit] SSR Middleware Error', e);
+      console.error('[Zeptr:SvelteKit] SSR Middleware Error', e);
       next();
     }
   };

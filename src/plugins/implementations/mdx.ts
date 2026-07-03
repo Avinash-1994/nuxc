@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-mdx
+ * @zeptr/plugin-mdx
  * MDX support
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMdxPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-mdx',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-mdx',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: MDX support

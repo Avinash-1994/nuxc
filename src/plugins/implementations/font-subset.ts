@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-font-subset
+ * @zeptr/plugin-font-subset
  * Font subsetting
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createFontSubsetPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-font-subset',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-font-subset',
+        originalPlugin: 'zeptr-native',
         
         async load(id: string) {
             // Asset loading for font-subset

@@ -4,12 +4,12 @@
  * Validates Day 18 Language Server Protocol Logic
  */
 
-import { NuxcoLSPServer } from './mocks/lsp_server.js';
+import { ZeptrLSPServer } from './mocks/lsp_server.js';
 
 async function runLSPTest() {
-    console.log('🧪 Testing Nuxco LSP Logic...');
+    console.log('🧪 Testing Zeptr LSP Logic...');
 
-    const server = new NuxcoLSPServer();
+    const server = new ZeptrLSPServer();
 
     // Test 1: Completions
     console.log('  Test 1: Auto-Completions...');
@@ -22,8 +22,8 @@ export default {
     // Position inside plugins: [
     const compl = server.onCompletion(docText, { line: 3, character: 10 });
 
-    const hasReact = compl.some(c => c.label === '@nuxco/plugin-react');
-    const hasVue = compl.some(c => c.label === '@nuxco/plugin-vue');
+    const hasReact = compl.some(c => c.label === '@zeptr/plugin-react');
+    const hasVue = compl.some(c => c.label === '@zeptr/plugin-vue');
 
     if (!hasReact || !hasVue) {
         throw new Error('Failed to suggest plugins');

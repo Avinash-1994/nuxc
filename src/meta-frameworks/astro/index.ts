@@ -1,6 +1,6 @@
 import path from 'path';
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 
 export interface AstroConfig {
   srcDir?: string;
@@ -11,16 +11,16 @@ export interface AstroConfig {
 }
 
 /**
- * Nuxco Astro Adapter
+ * Zeptr Astro Adapter
  *
- * Nuxco provides deeper Astro integration than any other build tool:
+ * Zeptr provides deeper Astro integration than any other build tool:
  * - Uses Astro's programmatic API to start the dev server
- * - Proxies all requests through Nuxco's security & HMR layer
+ * - Proxies all requests through Zeptr's security & HMR layer
  * - Supports Astro Islands with React, Vue, Svelte components
  * - Content Collections with SQLite-backed caching
  * - Zero config — auto-detected from package.json
  */
-export class AstroAdapter implements NuxcoAdapter {
+export class AstroAdapter implements ZeptrAdapter {
   name = 'astro';
 
   // Internal: holds the running Astro dev server instance + proxy port
@@ -35,7 +35,7 @@ export class AstroAdapter implements NuxcoAdapter {
     return [];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.astro) config.astro = {};
     config.astro = {
       srcDir: 'src',
@@ -49,7 +49,7 @@ export class AstroAdapter implements NuxcoAdapter {
 
   /**
    * Start Astro's dev server programmatically and return a proxy handler.
-   * Nuxco wraps it with: HMR overlay, security headers, request timing, CSP.
+   * Zeptr wraps it with: HMR overlay, security headers, request timing, CSP.
    */
   getDevHandler(): any {
     // Start Astro dev server on a random high port and proxy to it
@@ -61,7 +61,7 @@ export class AstroAdapter implements NuxcoAdapter {
       proxyInitialized = true;
 
       try {
-        // Resolve 'astro' from the PROJECT root, not Nuxco's own node_modules
+        // Resolve 'astro' from the PROJECT root, not Zeptr's own node_modules
         const { createRequire } = await import('module');
         const { pathToFileURL } = await import('url');
         const projectRequire = createRequire(path.join(root, 'package.json'));
@@ -69,14 +69,14 @@ export class AstroAdapter implements NuxcoAdapter {
         try {
           astroEntry = projectRequire.resolve('astro');
         } catch {
-          console.warn('[Nuxco:Astro] astro package not found in project node_modules. Run: npm install astro');
+          console.warn('[Zeptr:Astro] astro package not found in project node_modules. Run: npm install astro');
           return;
         }
 
         const _importAstro = new Function('specifier', 'return import(specifier)');
         const astro = await _importAstro(pathToFileURL(astroEntry).href).catch(() => null) as any;
         if (!astro || typeof astro.dev !== 'function') {
-          console.warn('[Nuxco:Astro] astro.dev() not available — try updating astro to v4+');
+          console.warn('[Zeptr:Astro] astro.dev() not available — try updating astro to v4+');
           return;
         }
 
@@ -86,16 +86,16 @@ export class AstroAdapter implements NuxcoAdapter {
         const server = await astro.dev({
           root,
           server: { port: internalPort, host: '127.0.0.1' },
-          // Integrate Nuxco's plugin pipeline
+          // Integrate Zeptr's plugin pipeline
           vite: {
             plugins: [],
-            define: { '__NUXCO_BUILD__': 'true' }
+            define: { '__ZEPTR_BUILD__': 'true' }
           }
         });
 
         this._astroPort = internalPort;
         this._astroServer = server;
-        console.log(`[Nuxco:Astro] ⚡ Astro dev server running internally on :${internalPort}`);
+        console.log(`[Zeptr:Astro] ⚡ Astro dev server running internally on :${internalPort}`);
 
         // Create http-proxy agent to forward requests
         const httpProxy = await import('http-proxy');
@@ -106,7 +106,7 @@ export class AstroAdapter implements NuxcoAdapter {
         });
 
         proxyAgent.on('error', (err: Error, _req: any, res: any) => {
-          console.error('[Nuxco:Astro] Proxy error:', err.message);
+          console.error('[Zeptr:Astro] Proxy error:', err.message);
           if (res && !res.headersSent) {
             res.writeHead(502, { 'Content-Type': 'text/plain' });
             res.end('Astro dev server error: ' + err.message);
@@ -114,12 +114,12 @@ export class AstroAdapter implements NuxcoAdapter {
         });
 
       } catch (e: any) {
-        console.error('[Nuxco:Astro] Failed to start Astro dev server:', e.message);
+        console.error('[Zeptr:Astro] Failed to start Astro dev server:', e.message);
       }
     };
 
     return async (req: any, res: any, next: any) => {
-      const root = req.__nuxcoRoot || process.cwd();
+      const root = req.__zeptrRoot || process.cwd();
 
       // Lazy-init Astro on first request
       if (!proxyInitialized) {

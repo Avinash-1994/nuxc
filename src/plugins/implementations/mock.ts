@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-mock
+ * @zeptr/plugin-mock
  * API mocking
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMockPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-mock',
+        name: '@zeptr/plugin-mock',
         originalPlugin: 'vite-plugin-mock',
         
         async transform(code: string, id: string) {

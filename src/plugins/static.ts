@@ -1,20 +1,20 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { NuxcoPlugin } from '../core/plugins/types.js';
+import { ZeptrPlugin } from '../core/plugins/types.js';
 import { log } from '../utils/logger.js';
 
-export function createStaticPlugin(rootDir: string, outDir: string): NuxcoPlugin {
+export function createStaticPlugin(rootDir: string, outDir: string): ZeptrPlugin {
     return {
         manifest: {
-            name: 'nuxco:static',
+            name: 'zeptr:static',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['buildEnd'],
             permissions: { fs: 'read' }
         },
-        id: 'nuxco:static',
+        id: 'zeptr:static',
         async runHook(hook, data) {
             if (hook !== 'buildEnd') return data;
 

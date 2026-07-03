@@ -1,15 +1,15 @@
 # Vue 3 Guide
 
-> Build Vue 3 apps with Nuxco — SFC hot-reload, Composition API, TypeScript, CSS Modules.
+> Build Vue 3 apps with Zeptr — SFC hot-reload, Composition API, TypeScript, CSS Modules.
 
 ---
 
 ## Quick Start
 
 ```bash
-nuxco bootstrap --name my-vue-app --template vue-ts
+zeptr bootstrap --name my-vue-app --template vue-ts
 cd my-vue-app
-nuxco dev
+zeptr dev
 ```
 
 ---
@@ -19,12 +19,12 @@ nuxco dev
 ### 1. Install
 
 ```bash
-npm install --save-dev nuxco
+npm install --save-dev zeptr
 npm install vue
 npm install --save-dev typescript @vue/tsconfig
 ```
 
-### 2. Create `nuxco.config.js`
+### 2. Create `zeptr.config.js`
 
 **JavaScript:**
 ```js
@@ -38,7 +38,7 @@ module.exports = {
 
 **TypeScript:**
 ```ts
-import { defineConfig } from 'nuxco';
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   entry: ['./src/main.ts'],
@@ -69,7 +69,7 @@ const count = ref(0);
 
 <template>
   <div>
-    <h1>Hello from Nuxco + Vue 3</h1>
+    <h1>Hello from Zeptr + Vue 3</h1>
     <button @click="count++">Count: {{ count }}</button>
   </div>
 </template>
@@ -89,7 +89,7 @@ button {
 
 ## HMR — SFC Hot-Reload
 
-Nuxco integrates **Vue SFC hot-reload** automatically for `.vue` files.
+Zeptr integrates **Vue SFC hot-reload** automatically for `.vue` files.
 
 - `<script setup>` changes: component re-mounts
 - `<template>` changes: hot-patched (state preserved)
@@ -240,7 +240,7 @@ export const useCounterStore = defineStore('counter', {
 ## Production Build
 
 ```bash
-nuxco build
+zeptr build
 ```
 
 Output:

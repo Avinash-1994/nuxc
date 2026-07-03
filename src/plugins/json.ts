@@ -1,19 +1,19 @@
 
-import { NuxcoPlugin } from '../core/plugins/types.js';
+import { ZeptrPlugin } from '../core/plugins/types.js';
 import path from 'path';
 import fs from 'fs/promises';
 
-export function createJsonPlugin(): NuxcoPlugin {
+export function createJsonPlugin(): ZeptrPlugin {
     return {
         manifest: {
-            name: 'nuxco:json',
+            name: 'zeptr:json',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['load'],
             permissions: { fs: 'read' }
         },
-        id: 'nuxco:json',
+        id: 'zeptr:json',
         async runHook(hook, input, context) {
             if (hook === 'load') {
                 if (input.path.endsWith('.json')) {

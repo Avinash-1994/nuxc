@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-testing-library
+ * @zeptr/plugin-testing-library
  * Testing Library integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTestingLibraryPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-testing-library',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-testing-library',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Testing Library integration

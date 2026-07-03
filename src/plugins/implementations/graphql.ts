@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-graphql
+ * @zeptr/plugin-graphql
  * GraphQL integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createGraphqlPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-graphql',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-graphql',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: GraphQL integration

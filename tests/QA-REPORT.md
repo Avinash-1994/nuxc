@@ -1,13 +1,13 @@
-# Nuxco Build Tool — Final QA Report
+# Zeptr Build Tool — Final QA Report
 
 ## Executive Summary
-Nuxco has undergone a comprehensive, automated test suite evaluating all seven core feature areas claimed for production readiness: HMR, Tree Shaking, Module Federation, Framework Support, Plugins, CSS Optimization, and Source Maps. 
+Zeptr has undergone a comprehensive, automated test suite evaluating all seven core feature areas claimed for production readiness: HMR, Tree Shaking, Module Federation, Framework Support, Plugins, CSS Optimization, and Source Maps. 
 
 **Total Tests Run:** 146
 **Total Tests Passed:** 146
 **Pass Rate:** 100%
 
-Nuxco has exceeded the 90% production readiness threshold and is officially verified for production release.
+Zeptr has exceeded the 90% production readiness threshold and is officially verified for production release.
 
 ---
 
@@ -18,7 +18,7 @@ Nuxco has exceeded the 90% production readiness threshold and is officially veri
 - Framework-aware classification accurately distinguishes between `.tsx`, `.vue`, `.svelte`, and `.css` files.
 - CSS updates trigger `HMR_SAFE` (no full reload).
 - Circular dependency handling escalates to `HMR_FULL_RELOAD` appropriately.
-- Config updates (`nuxco.config.js`, `package.json`) trigger `HMR_FULL_RELOAD`.
+- Config updates (`zeptr.config.js`, `package.json`) trigger `HMR_FULL_RELOAD`.
 - The `HMROverlay` instance exposes correct methods for error display.
 
 ### Agent 2: Tree Shaking
@@ -32,9 +32,9 @@ Nuxco has exceeded the 90% production readiness threshold and is officially veri
 ### Agent 3: Module Federation
 **Status:** ✅ PASS (15/15)
 - `generateRemoteEntry` correctly constructs Webpack 5 compatible container APIs (`init` and `get`).
-- Singleton shared dependencies (`__nuxco_shared__`) correctly prevent double loading.
+- Singleton shared dependencies (`__zeptr_shared__`) correctly prevent double loading.
 - Config validation cleanly catches missing names, bad identifiers, and malformed URLs.
-- Dynamic `__nuxco_import__` accurately handles multiple simultaneous URL remotes.
+- Dynamic `__zeptr_import__` accurately handles multiple simultaneous URL remotes.
 
 ### Agent 4: Framework Support
 **Status:** ✅ PASS (74/74)

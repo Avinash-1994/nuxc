@@ -1,4 +1,4 @@
-# Nuxco Documentation
+# Zeptr Documentation
 
 > Blazing-fast JavaScript build tool powered by SWC + LightningCSS
 
@@ -15,7 +15,7 @@
 | 📦 **[Module Federation](./guides/federation.md)** | Micro-frontend setup |
 | 🚚 **[Migration Guide](./migration.md)** | From Vite, Webpack, Rollup |
 | ❓ **[Troubleshooting](./TROUBLESHOOTING.md)** | Top 10 errors and fixes |
-| ⚖️ **[Why Nuxco?](./WHY_NUXCO.md)** | Honest comparison vs Vite, Rspack, Turbopack |
+| ⚖️ **[Why Zeptr?](./WHY_ZEPTR.md)** | Honest comparison vs Vite, Rspack, Turbopack |
 | 📊 **[Benchmarks](./benchmarks.md)** | Reproducible performance data |
 
 ---
@@ -33,8 +33,8 @@
 
 ## Online Resources
 
-- 🌐 [Documentation Website](https://avinash-1994.github.io/Nuxco/)
-- 📦 [npm Package](https://www.npmjs.com/package/nuxco)
-- 💻 [GitHub Repository](https://github.com/Avinash-1994/Nuxco)
-- 🐛 [Report a Bug](https://github.com/Avinash-1994/Nuxco/issues)
-- 💬 [Discussions](https://github.com/Avinash-1994/Nuxco/discussions)
+- 🌐 [Documentation Website](https://avinash-1994.github.io/Zeptr/)
+- 📦 [npm Package](https://www.npmjs.com/package/zeptr)
+- 💻 [GitHub Repository](https://github.com/Avinash-1994/Zeptr)
+- 🐛 [Report a Bug](https://github.com/Avinash-1994/Zeptr/issues)
+- 💬 [Discussions](https://github.com/Avinash-1994/Zeptr/discussions)

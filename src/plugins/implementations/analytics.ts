@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-analytics
+ * @zeptr/plugin-analytics
  * Build analytics
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createAnalyticsPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-analytics',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-analytics',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Build analytics

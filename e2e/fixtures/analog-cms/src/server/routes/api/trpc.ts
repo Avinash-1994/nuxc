@@ -3,7 +3,7 @@ export default function defineEventHandler(event) {
     hello: 'world from tRPC',
     posts: [
       { id: 1, title: 'Hello Analog' },
-      { id: 2, title: 'Nuxco Build Integration' }
+      { id: 2, title: 'Zeptr Build Integration' }
     ]
   };
 }

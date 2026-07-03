@@ -101,7 +101,7 @@ async function main() {
           .sort((a, b) => a.d - b.d)[0];
         if (closest.d <= 3) {
           console.error(`\nUnknown command: ${typed}`);
-          console.error(`Did you mean: nuxco ${closest.c} ?\n`);
+          console.error(`Did you mean: zeptr ${closest.c} ?\n`);
           process.exit(1);
         }
       }
@@ -117,7 +117,7 @@ async function main() {
     .command('security', 'Security commands (audit, scan, cve, sbom, plugin-audit, fix, headers, report)', securityCmd.builder, () => {})
     .command(
       'migrate',
-      'Migrate config and plugins from older Nuxco versions',
+      'Migrate config and plugins from older Zeptr versions',
       migrateCmd.options,
       migrateCmd.handler
     )
@@ -159,7 +159,7 @@ async function main() {
         const pipeline = await FrameworkPipeline.auto(config);
         const engine = pipeline.getEngine();
         const graph = engine.getGraph?.();
-        if (!graph) { console.error('No dependency graph — run nuxco build first.'); process.exit(1); }
+        if (!graph) { console.error('No dependency graph — run zeptr build first.'); process.exit(1); }
         const target = args.module as string;
         const entries = config.entry ?? [];
         let found = false;
@@ -196,15 +196,15 @@ async function main() {
         const config = await loadConfig(process.cwd());
         config.mode = 'production';
         let exitCode = 0;
-        process.stderr.write('[nuxco:check] Resolving module graph...\n');
+        process.stderr.write('[zeptr:check] Resolving module graph...\n');
         const { FrameworkPipeline } = await import('./core/pipeline/framework-pipeline.js');
         const pipeline = await FrameworkPipeline.auto(config);
         if (!args['no-types']) {
           try {
             const { execSync } = await import('child_process');
-            process.stderr.write('[nuxco:check] Running TypeScript type-check...\n');
+            process.stderr.write('[zeptr:check] Running TypeScript type-check...\n');
             execSync('npx tsc --noEmit 2>&1', { cwd: process.cwd(), stdio: 'inherit' });
-            process.stderr.write('[nuxco:check] TypeScript ✅\n');
+            process.stderr.write('[zeptr:check] TypeScript ✅\n');
           } catch { exitCode = 1; }
         }
         if (!args['no-circular']) {
@@ -223,16 +223,16 @@ async function main() {
               }
               for (const id of graph.nodes?.keys() ?? []) dfs(id, []);
               if (cycles.length > 0) {
-                process.stderr.write(`[nuxco:check] ❌ ${cycles.length} circular import(s) detected:\n`);
+                process.stderr.write(`[zeptr:check] ❌ ${cycles.length} circular import(s) detected:\n`);
                 cycles.slice(0, 5).forEach(c => process.stderr.write(`  ${c.join(' → ')}\n`));
                 exitCode = 1;
               } else {
-                process.stderr.write('[nuxco:check] Circular imports ✅\n');
+                process.stderr.write('[zeptr:check] Circular imports ✅\n');
               }
             }
-          } catch (e: any) { process.stderr.write(`[nuxco:check] Graph check skipped: ${e.message}\n`); }
+          } catch (e: any) { process.stderr.write(`[zeptr:check] Graph check skipped: ${e.message}\n`); }
         }
-        process.stderr.write(exitCode === 0 ? '\n[nuxco:check] All checks passed ✅\n' : '\n[nuxco:check] Check failed ❌\n');
+        process.stderr.write(exitCode === 0 ? '\n[zeptr:check] All checks passed ✅\n' : '\n[zeptr:check] Check failed ❌\n');
         process.exit(exitCode);
       }
     )
@@ -348,7 +348,7 @@ async function main() {
     )
     .command(
       'test',
-      'Run tests using Nuxco Custom Runner',
+      'Run tests using Zeptr Custom Runner',
       (yargs: any) => yargs.option('watch', { type: 'boolean', description: 'Watch mode', default: false }),
       async () => {
         const { run } = await import('./test/runner.js');
@@ -367,7 +367,7 @@ async function main() {
     )
     .command(
       'create [name]',
-      'Create a new Nuxco project',
+      'Create a new Zeptr project',
       (yargs: any) => yargs
         .positional('name', { type: 'string', description: 'Project name' })
         .option('framework', { type: 'string', description: 'Framework to use' })

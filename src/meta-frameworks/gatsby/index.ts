@@ -1,7 +1,7 @@
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 
-export class GatsbyAdapter implements NuxcoAdapter {
+export class GatsbyAdapter implements ZeptrAdapter {
   name = 'gatsby';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -11,27 +11,27 @@ export class GatsbyAdapter implements NuxcoAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'nuxco:gatsby-scaffold',
+        name: 'zeptr:gatsby-scaffold',
         // Gatsby's build process is entirely custom (gatsby build / gatsby develop)
-        // Nuxco scaffolds config detection + serves the built public/ directory.
+        // Zeptr scaffolds config detection + serves the built public/ directory.
         // For SSG pre-render outputs, we serve the static public/ folder natively.
         async buildStart() {
           // We warn users that Gatsby requires its own CLI for full builds.
-          console.log('[Nuxco:Gatsby] Detected Gatsby project. Use `gatsby build` for production.');
-          console.log('[Nuxco:Gatsby] Dev mode serves from public/ directory.');
+          console.log('[Zeptr:Gatsby] Detected Gatsby project. Use `gatsby build` for production.');
+          console.log('[Zeptr:Gatsby] Dev mode serves from public/ directory.');
         }
       }
     ];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.gatsby) config.gatsby = {};
     config.gatsby = {
       // Gatsby outputs to public/ by default
       outDir: 'public',
       ...(config.gatsby || {})
     };
-    // Ensure Nuxco serves from Gatsby's output directory in dev pass-through mode
+    // Ensure Zeptr serves from Gatsby's output directory in dev pass-through mode
     if (!config.outDir) config.outDir = 'public';
     return config;
   }
@@ -39,7 +39,7 @@ export class GatsbyAdapter implements NuxcoAdapter {
   serverMiddleware(): Middleware[] {
     return [
       async (req: any, res: any, next: any) => {
-        // Gatsby runs its own webpack dev server; Nuxco proxies requests to it when detected
+        // Gatsby runs its own webpack dev server; Zeptr proxies requests to it when detected
         next();
       }
     ];

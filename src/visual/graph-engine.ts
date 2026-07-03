@@ -1,6 +1,6 @@
 
 /**
- * Nuxco Dependency Graph Visualizer Engine
+ * Zeptr Dependency Graph Visualizer Engine
  * Logic Layer for WebGPU Visualizer
  * Day 16: WebGPU Visualizer v2 Lock
  */

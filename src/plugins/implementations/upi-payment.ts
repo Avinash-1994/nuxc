@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-upi-payment
+ * @zeptr/plugin-upi-payment
  * UPI payment integration (India)
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createUpiPaymentPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-upi-payment',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-upi-payment',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Fintech integration: UPI payment integration (India)
@@ -16,7 +16,7 @@ export function createUpiPaymentPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-upi-payment] Fintech integration ready');
+            console.log('[@zeptr/plugin-upi-payment] Fintech integration ready');
             // Initialize payment gateway, generate QR codes, etc.
         }
     };

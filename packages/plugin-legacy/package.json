@@ -1,7 +1,7 @@
 {
-  "name": "@nuxco/plugin-legacy",
+  "name": "@zeptr/plugin-legacy",
   "version": "1.0.0",
-  "description": "Official Nuxco plugin for legacy browser support — ES5 transpilation and core-js polyfills",
+  "description": "Official Zeptr plugin for legacy browser support — ES5 transpilation and core-js polyfills",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,11 +16,11 @@
     "build": "tsc",
     "test": "node --test src/__tests__/index.test.js"
   },
-  "keywords": ["nuxco", "plugin", "legacy", "es5", "polyfill", "core-js", "ie11"],
+  "keywords": ["zeptr", "plugin", "legacy", "es5", "polyfill", "core-js", "ie11"],
   "author": "Avinash-1994",
   "license": "MIT",
   "peerDependencies": {
-    "nuxco": ">=1.0.0"
+    "zeptr": ">=1.0.0"
   },
   "dependencies": {
     "core-js": "^3.0.0"

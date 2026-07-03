@@ -90,7 +90,7 @@
       "type": "const"
     },
     {
-      "name": "NuxcoConfig",
+      "name": "ZeptrConfig",
       "type": "const"
     },
     {
@@ -114,7 +114,7 @@
       "type": "const"
     },
     {
-      "name": "NuxcoLibConfig",
+      "name": "ZeptrLibConfig",
       "type": "const"
     },
     {
@@ -154,7 +154,7 @@
       "type": "const"
     },
     {
-      "name": "NuxcoPlugin",
+      "name": "ZeptrPlugin",
       "type": "const"
     },
     {

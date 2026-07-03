@@ -23,9 +23,9 @@ for (const file of files) {
     if (!file.match(/\.(js|ts|json|md|html|cjs|mjs|tsx|jsx|rs|toml)$/)) continue;
     let content = fs.readFileSync(file, 'utf8');
     let newContent = content
-        .replace(/nuxco/g, 'nuxcoo')
-        .replace(/Nuxco/g, 'Nuxcoo')
-        .replace(/NUXCO/g, 'NUXCOO');
+        .replace(/zeptr/g, 'zeptro')
+        .replace(/Zeptr/g, 'Zeptro')
+        .replace(/ZEPTR/g, 'ZEPTRO');
     if (content !== newContent) {
         fs.writeFileSync(file, newContent, 'utf8');
         console.log(`Updated content: ${file}`);
@@ -41,8 +41,8 @@ function renamePaths(dir) {
         if (fs.statSync(fullPath).isDirectory()) {
             renamePaths(fullPath);
         }
-        if (file.includes('nuxco')) {
-            const newPath = path.join(dir, file.replace(/nuxco/g, 'nuxcoo'));
+        if (file.includes('zeptr')) {
+            const newPath = path.join(dir, file.replace(/zeptr/g, 'zeptro'));
             fs.renameSync(fullPath, newPath);
             console.log(`Renamed: ${fullPath} -> ${newPath}`);
         }

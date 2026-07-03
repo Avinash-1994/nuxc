@@ -1,4 +1,4 @@
 export default {
     preset: 'react',
-    cacheDir: '.nuxco_cache'
+    cacheDir: '.zeptr_cache'
 };

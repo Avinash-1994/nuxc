@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-unocss
+ * @zeptr/plugin-unocss
  * UnoCSS integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createUnocssPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-unocss',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-unocss',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for unocss

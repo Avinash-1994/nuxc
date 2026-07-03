@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-code-split
+ * @zeptr/plugin-code-split
  * Smart code splitting
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCodeSplitPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-code-split',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-code-split',
+        originalPlugin: 'zeptr-native',
         
         async buildStart() {
-            console.log('[@nuxco/plugin-code-split] Starting performance optimization...');
+            console.log('[@zeptr/plugin-code-split] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createCodeSplitPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-code-split] Performance optimization complete');
+            console.log('[@zeptr/plugin-code-split] Performance optimization complete');
         }
     };
 }

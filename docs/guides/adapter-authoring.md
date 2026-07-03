@@ -1,15 +1,15 @@
-# Nuxco Adapter Authoring Guide
+# Zeptr Adapter Authoring Guide
 
 **Module**: 13 (Phase H.5)  
 **Status**: ✅ Active
 
-This guide explains how to build a production-grade framework adapter for Nuxco.
+This guide explains how to build a production-grade framework adapter for Zeptr.
 
 ---
 
 ## 🏗️ Mental Model
 
-An Nuxco Adapter is an **isolated bridge** between Nuxco's core and a framework's internal toolchain (e.g., Vite, esbuild, SWC). 
+An Zeptr Adapter is an **isolated bridge** between Zeptr's core and a framework's internal toolchain (e.g., Vite, esbuild, SWC). 
 
 **The Golden Rule**: The adapter MUST NOT know about other adapters, and the Core MUST NOT know about the adapter's framework.
 
@@ -19,7 +19,7 @@ An Nuxco Adapter is an **isolated bridge** between Nuxco's core and a framework'
 
 Every adapter must implement the `FrameworkAdapter` interface:
 
-1.  **`init(options)`**: Receives the user's `nuxco.config.js` and sets up the internal toolchain.
+1.  **`init(options)`**: Receives the user's `zeptr.config.js` and sets up the internal toolchain.
 2.  **`build()`**: Executes a production or dev build. Returns `AdapterOutput` containing assets and a module manifest.
 3.  **`handleHmr(event)`**: Accepts a file path and returns whether to `update` a specific module or trigger a `reload`.
 
@@ -55,7 +55,7 @@ Adapters graduation path:
 ## ✅ Validation Checklist (Before Submission)
 
 - [ ] Passes `npm run test` inside the adapter directory.
-- [ ] Passes `npx tsx scripts/verify.ts` in the Nuxco root.
+- [ ] Passes `npx tsx scripts/verify.ts` in the Zeptr root.
 - [ ] No `fs.writeFile` outside the designated output directory.
 - [ ] No `eval()` or `new Function()` in the adapter logic.
 - [ ] All dependencies are pinned to exact versions (no `^` or `~`).

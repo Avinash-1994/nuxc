@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-testing-library-react
+ * @zeptr/plugin-testing-library-react
  * React Testing Library
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTestingLibraryReactPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-testing-library-react',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-testing-library-react',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Testing: React Testing Library

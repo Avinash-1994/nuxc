@@ -1,17 +1,17 @@
 /**
- * Plugin Authoring Guide for Nuxco v1
+ * Plugin Authoring Guide for Zeptr v1
  * 
  * follow strict strict rules to ensure stability and compatibility.
  */
 
 /*
-# Nuxco Plugin API Reference
+# Zeptr Plugin API Reference
 
-Nuxco plugins are compatible with Rollup plugins, with additional governance for stability.
+Zeptr plugins are compatible with Rollup plugins, with additional governance for stability.
 
 ## Required Properties
 
-- `name` (string): Unique ID (e.g. `nuxco-plugin-my-feature`)
+- `name` (string): Unique ID (e.g. `zeptr-plugin-my-feature`)
 - `stability` (string): 'experimental' | 'stable' | 'deprecated'
 
 ## Hooks
@@ -26,11 +26,11 @@ All standard Rollup hooks are supported:
 ## Example
 
 ```typescript
-import { Plugin } from 'nuxco';
+import { Plugin } from 'zeptr';
 
 export function myPlugin(): Plugin {
   return {
-    name: 'nuxco-plugin-example',
+    name: 'zeptr-plugin-example',
     stability: 'stable',
     async transform(code, id) {
       if (id.endsWith('.foo')) {

@@ -1,12 +1,12 @@
-# ⚡ Nuxco — Modern Build Tool
+# ⚡ Zeptr — Modern Build Tool
 
-[![npm version](https://img.shields.io/npm/v/nuxco.svg)](https://www.npmjs.com/package/nuxco)
-[![CI](https://github.com/Avinash-1994/Nuxco/actions/workflows/ci.yml/badge.svg)](https://github.com/Avinash-1994/Nuxco/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/zeptr.svg)](https://www.npmjs.com/package/zeptr)
+[![CI](https://github.com/Avinash-1994/Zeptr/actions/workflows/ci.yml/badge.svg)](https://github.com/Avinash-1994/Zeptr/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://img.shields.io/badge/tests-303%2F303-brightgreen)](#test-status)
 [![Node >=20](https://img.shields.io/badge/node-%3E%3D20-blue)](https://nodejs.org)
 
-**Nuxco** is a production-grade JavaScript/TypeScript build tool powered by **SWC (Rust)** and **LightningCSS**. It delivers sub-100ms HMR, native Module Federation for micro-frontends, full ES2022+ support, automatic tree shaking, a security gate pipeline, and zero-config support for **19 meta-frameworks** — a modern alternative to Webpack/Vite with a Rust-native core.
+**Zeptr** is a production-grade JavaScript/TypeScript build tool powered by **SWC (Rust)** and **LightningCSS**. It delivers sub-100ms HMR, native Module Federation for micro-frontends, full ES2022+ support, automatic tree shaking, a security gate pipeline, and zero-config support for **19 meta-frameworks** — a modern alternative to Webpack/Vite with a Rust-native core.
 
 ---
 
@@ -23,7 +23,7 @@
 | 🗺️ **Workspace orchestrator** | Monorepo topological build ordering and parallel execution |
 | 💾 **Smart caching** | SQLite WAL incremental cache (warm start <100ms) |
 | 🎨 **CSS processing** | LightningCSS cascade layers, nesting, CSS Modules, Tailwind |
-| 🔍 **Inspect UI** | Live plugin timing visualization at `/__nuxco_inspect__` |
+| 🔍 **Inspect UI** | Live plugin timing visualization at `/__zeptr_inspect__` |
 
 ---
 
@@ -31,20 +31,20 @@
 
 ```bash
 # Install globally
-npm install -g nuxco
+npm install -g zeptr
 
 # Create a new project (interactive)
-nuxco create my-app --framework react --ts
+zeptr create my-app --framework react --ts
 
 # Or scaffold with a template
-nuxco bootstrap --name my-app --template react-ts
+zeptr bootstrap --name my-app --template react-ts
 
 # Start dev server
 cd my-app
-nuxco dev
+zeptr dev
 
 # Production build
-nuxco build
+zeptr build
 ```
 
 ---
@@ -52,26 +52,26 @@ nuxco build
 ## 📦 Installation
 
 ```bash
-npm install -g nuxco
+npm install -g zeptr
 # or per-project
-npm install -D nuxco
+npm install -D zeptr
 ```
 
 **Requirements:** Node.js ≥ 20
 
 ---
 
-## ⚙️ Configuration — `nuxco.config.ts`
+## ⚙️ Configuration — `zeptr.config.ts`
 
 ```ts
-// nuxco.config.ts
-import { defineConfig } from 'nuxco';
+// zeptr.config.ts
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   // ── Entry ────────────────────────────────────────
   entry: ['./src/main.tsx'],        // string | string[]
   outDir: './dist',                  // output directory
-  cacheDir: '.nuxco/cache',         // SQLite WAL cache location
+  cacheDir: '.zeptr/cache',         // SQLite WAL cache location
 
   // ── Build ────────────────────────────────────────
   build: {
@@ -106,7 +106,7 @@ export default defineConfig({
     secretPatterns: true,            // scan for AWS/Stripe/JWT/GitHub keys
     csp: true,                       // inject Content-Security-Policy
     sri: true,                       // inject Subresource Integrity hashes
-    sbom: true,                      // emit dist/nuxco-sbom.json
+    sbom: true,                      // emit dist/zeptr-sbom.json
     lockfileAudit: true,             // verify lockfile integrity
     pluginSandbox: true,             // restrict plugin fs/net permissions
   },
@@ -132,66 +132,66 @@ export default defineConfig({
 ## 🖥️ CLI Reference
 
 ```
-nuxco <command> [options]
+zeptr <command> [options]
 ```
 
 | Command | Description |
 |---|---|
-| `nuxco dev` | Start development server with HMR |
-| `nuxco build` | Production build with tree shaking + minification |
-| `nuxco preview` | Serve production build locally |
-| `nuxco create [name]` | Create a new project interactively |
-| `nuxco bootstrap` | Scaffold from a template |
-| `nuxco init` | Initialize config in an existing project |
-| `nuxco check` | Pre-build validation (type-check + circular imports) |
-| `nuxco analyze` | Bundle composition report (HTML or JSON) |
-| `nuxco why <module>` | Trace full import chain to a module |
-| `nuxco inspect` | Inspect the dependency graph |
-| `nuxco ssr` | Start SSR server for meta-frameworks |
-| `nuxco security` | Security sub-commands (see below) |
-| `nuxco migrate` | Migrate config from older Nuxco/Webpack/Vite |
-| `nuxco audit` | Accessibility, performance, and SEO audit |
-| `nuxco verify` | Project health and configuration check |
-| `nuxco report` | AI-narrated build report from latest session |
-| `nuxco doctor` | Diagnostics for project health |
-| `nuxco test` | Run tests using Nuxco custom runner |
-| `nuxco css purge` | Remove unused CSS |
-| `nuxco env` | List and validate environment variables |
-| `nuxco info` | Print environment info for bug reports |
-| `nuxco workspaces` | Monorepo workspace commands |
+| `zeptr dev` | Start development server with HMR |
+| `zeptr build` | Production build with tree shaking + minification |
+| `zeptr preview` | Serve production build locally |
+| `zeptr create [name]` | Create a new project interactively |
+| `zeptr bootstrap` | Scaffold from a template |
+| `zeptr init` | Initialize config in an existing project |
+| `zeptr check` | Pre-build validation (type-check + circular imports) |
+| `zeptr analyze` | Bundle composition report (HTML or JSON) |
+| `zeptr why <module>` | Trace full import chain to a module |
+| `zeptr inspect` | Inspect the dependency graph |
+| `zeptr ssr` | Start SSR server for meta-frameworks |
+| `zeptr security` | Security sub-commands (see below) |
+| `zeptr migrate` | Migrate config from older Zeptr/Webpack/Vite |
+| `zeptr audit` | Accessibility, performance, and SEO audit |
+| `zeptr verify` | Project health and configuration check |
+| `zeptr report` | AI-narrated build report from latest session |
+| `zeptr doctor` | Diagnostics for project health |
+| `zeptr test` | Run tests using Zeptr custom runner |
+| `zeptr css purge` | Remove unused CSS |
+| `zeptr env` | List and validate environment variables |
+| `zeptr info` | Print environment info for bug reports |
+| `zeptr workspaces` | Monorepo workspace commands |
 
 ### Security sub-commands
 
 ```bash
-nuxco security audit          # full CVE + secret scan
-nuxco security cve            # CVE-only scan against OSV API
-nuxco security sbom           # generate SBOM (dist/nuxco-sbom.json)
-nuxco security scan           # scan source for secret patterns
-nuxco security plugin-audit   # audit plugin sandbox permissions
-nuxco security headers        # generate security headers manifest
-nuxco security report         # print full security report
-nuxco security fix            # auto-upgrade vulnerable lockfile deps
+zeptr security audit          # full CVE + secret scan
+zeptr security cve            # CVE-only scan against OSV API
+zeptr security sbom           # generate SBOM (dist/zeptr-sbom.json)
+zeptr security scan           # scan source for secret patterns
+zeptr security plugin-audit   # audit plugin sandbox permissions
+zeptr security headers        # generate security headers manifest
+zeptr security report         # print full security report
+zeptr security fix            # auto-upgrade vulnerable lockfile deps
 ```
 
 ### Key options
 
 ```bash
-nuxco dev --port 3000 --host 0.0.0.0
-nuxco build --outDir ./out --sourcemap inline
-nuxco check --no-types           # skip tsc, only circular check
-nuxco analyze --json             # JSON output instead of HTML
-nuxco why react-dom              # trace import chain
-nuxco inspect --filter src/      # filter dependency graph
-nuxco ssr --framework remix --port 4000 --prod
-nuxco verify --ci --strict       # CI mode: exit 1 on any issue
-nuxco create my-app --framework vue --ts --tailwind
+zeptr dev --port 3000 --host 0.0.0.0
+zeptr build --outDir ./out --sourcemap inline
+zeptr check --no-types           # skip tsc, only circular check
+zeptr analyze --json             # JSON output instead of HTML
+zeptr why react-dom              # trace import chain
+zeptr inspect --filter src/      # filter dependency graph
+zeptr ssr --framework remix --port 4000 --prod
+zeptr verify --ci --strict       # CI mode: exit 1 on any issue
+zeptr create my-app --framework vue --ts --tailwind
 ```
 
 ---
 
 ## 🏗️ Meta-Framework Support
 
-Nuxco detects your framework automatically from config files and applies the correct adapter. Use `nuxco dev` and `nuxco build` — no extra setup required.
+Zeptr detects your framework automatically from config files and applies the correct adapter. Use `zeptr dev` and `zeptr build` — no extra setup required.
 
 | Framework | Adapter | SSR | HMR | Streaming |
 |---|---|---|---|---|
@@ -220,7 +220,7 @@ Nuxco detects your framework automatically from config files and applies the cor
 ### Example: SvelteKit
 
 ```ts
-// nuxco.config.ts
+// zeptr.config.ts
 export default defineConfig({
   preset: 'ssr',
   adapter: 'sveltekit',
@@ -257,26 +257,26 @@ export default defineConfig({
 Install any plugin via npm, then add to your config:
 
 ```bash
-npm install -D @nuxco/plugin-env @nuxco/plugin-pwa
+npm install -D @zeptr/plugin-env @zeptr/plugin-pwa
 ```
 
 ```ts
-import { envPlugin } from '@nuxco/plugin-env';
-import { pwaPlugin } from '@nuxco/plugin-pwa';
-import { iconsPlugin } from '@nuxco/plugin-icons';
-import { svgPlugin } from '@nuxco/plugin-svg';
-import { legacyPlugin } from '@nuxco/plugin-legacy';
-import { compressionPlugin } from '@nuxco/plugin-compression';
-import { autoImportPlugin } from '@nuxco/plugin-auto-import';
-import { inspectPlugin } from '@nuxco/plugin-inspect';
-import { checkerPlugin } from '@nuxco/plugin-checker';
-import { mockPlugin } from '@nuxco/plugin-mock';
-import { imagePlugin } from '@nuxco/plugin-image';
+import { envPlugin } from '@zeptr/plugin-env';
+import { pwaPlugin } from '@zeptr/plugin-pwa';
+import { iconsPlugin } from '@zeptr/plugin-icons';
+import { svgPlugin } from '@zeptr/plugin-svg';
+import { legacyPlugin } from '@zeptr/plugin-legacy';
+import { compressionPlugin } from '@zeptr/plugin-compression';
+import { autoImportPlugin } from '@zeptr/plugin-auto-import';
+import { inspectPlugin } from '@zeptr/plugin-inspect';
+import { checkerPlugin } from '@zeptr/plugin-checker';
+import { mockPlugin } from '@zeptr/plugin-mock';
+import { imagePlugin } from '@zeptr/plugin-image';
 
 export default defineConfig({
   plugins: [
     envPlugin({
-      prefix: 'NUXCO_',             // only expose NUXCO_* vars to bundle
+      prefix: 'ZEPTR_',             // only expose ZEPTR_* vars to bundle
       dts: 'src/env.d.ts',          // auto-generate type declarations
     }),
     pwaPlugin({
@@ -297,7 +297,7 @@ export default defineConfig({
       imports: ['vue', 'react'],     // auto-inject imports
       dts: 'src/auto-imports.d.ts',
     }),
-    inspectPlugin(),                 // UI at /__nuxco_inspect__
+    inspectPlugin(),                 // UI at /__zeptr_inspect__
     checkerPlugin({
       typescript: true,
       eslint: true,
@@ -320,23 +320,23 @@ export default defineConfig({
 
 | Plugin | What it does |
 |---|---|
-| `@nuxco/plugin-env` | Loads `.env`, filters to prefix, generates `env.d.ts`, blocks secret patterns |
-| `@nuxco/plugin-pwa` | Generates `manifest.json` + Service Worker with precache |
-| `@nuxco/plugin-icons` | On-demand icon loading via `~icons/mdi/home` (no unused icons in bundle) |
-| `@nuxco/plugin-svg` | SVG as URL, raw string, or React/Vue component |
-| `@nuxco/plugin-legacy` | `<script nomodule>` fallback bundle via SWC + core-js |
-| `@nuxco/plugin-compression` | Parallel Brotli + Gzip via Rust threads |
-| `@nuxco/plugin-auto-import` | Auto-inject framework imports, sync `.eslintrc-auto-import` |
-| `@nuxco/plugin-inspect` | Dev GUI at `/__nuxco_inspect__` showing per-plugin timings |
-| `@nuxco/plugin-checker` | Worker-thread tsc, eslint, stylelint with overlay error display |
-| `@nuxco/plugin-mock` | REST + GraphQL local mock server with fast intercept |
-| `@nuxco/plugin-image` | sharp AVIF/WebP optimization, responsive `srcset` |
+| `@zeptr/plugin-env` | Loads `.env`, filters to prefix, generates `env.d.ts`, blocks secret patterns |
+| `@zeptr/plugin-pwa` | Generates `manifest.json` + Service Worker with precache |
+| `@zeptr/plugin-icons` | On-demand icon loading via `~icons/mdi/home` (no unused icons in bundle) |
+| `@zeptr/plugin-svg` | SVG as URL, raw string, or React/Vue component |
+| `@zeptr/plugin-legacy` | `<script nomodule>` fallback bundle via SWC + core-js |
+| `@zeptr/plugin-compression` | Parallel Brotli + Gzip via Rust threads |
+| `@zeptr/plugin-auto-import` | Auto-inject framework imports, sync `.eslintrc-auto-import` |
+| `@zeptr/plugin-inspect` | Dev GUI at `/__zeptr_inspect__` showing per-plugin timings |
+| `@zeptr/plugin-checker` | Worker-thread tsc, eslint, stylelint with overlay error display |
+| `@zeptr/plugin-mock` | REST + GraphQL local mock server with fast intercept |
+| `@zeptr/plugin-image` | sharp AVIF/WebP optimization, responsive `srcset` |
 
 ---
 
 ## 🔒 Security Pipeline
 
-Nuxco has a built-in security gate that runs on every production build.
+Zeptr has a built-in security gate that runs on every production build.
 
 ### What it checks
 
@@ -346,7 +346,7 @@ Nuxco has a built-in security gate that runs on every production build.
 | **CVE gating** | OSV API scan — blocks at configured severity (`high` by default) |
 | **CSP injection** | Injects `<meta http-equiv="Content-Security-Policy">` into all HTML pages |
 | **SRI hashes** | Injects `integrity="sha384-..."` on all `<script>` and `<link>` tags |
-| **SBOM** | Generates `dist/nuxco-sbom.json` with full dependency inventory |
+| **SBOM** | Generates `dist/zeptr-sbom.json` with full dependency inventory |
 | **Lockfile audit** | Detects tampered `package-lock.json` checksums → abort |
 | **Plugin sandbox** | Blocks plugins from writing to the filesystem without explicit permission |
 
@@ -365,7 +365,7 @@ security: {
 ### Skip in CI (dev fixtures only)
 
 ```bash
-NUXCO_SKIP_SECURITY=1 nuxco build   # bypasses all security gates
+ZEPTR_SKIP_SECURITY=1 zeptr build   # bypasses all security gates
 ```
 
 > **Never** set this in production. It is only for dev fixture builds where `node_modules` contain dev-only packages with known CVEs.
@@ -409,7 +409,7 @@ const Widget = React.lazy(() => import('dashboard/Widget'));
 ## 🗺️ Monorepo / Workspace
 
 ```ts
-// nuxco.workspace.ts
+// zeptr.workspace.ts
 export default {
   packages: ['packages/*', 'apps/*'],
   build: {
@@ -420,8 +420,8 @@ export default {
 ```
 
 ```bash
-nuxco workspaces build        # build all packages in dependency order
-nuxco workspaces dev          # run dev servers for all packages
+zeptr workspaces build        # build all packages in dependency order
+zeptr workspaces dev          # run dev servers for all packages
 ```
 
 ---
@@ -541,11 +541,11 @@ export default defineConfig({
 
 | Issue | Fix |
 |---|---|
-| `ERR_MODULE_NOT_FOUND @nuxco/security` | Run `cd packages/nuxco-security && npx tsc` to build the package |
-| CVE scanner aborts dev build | Use `NUXCO_SKIP_SECURITY=1` for dev fixtures only |
+| `ERR_MODULE_NOT_FOUND @zeptr/security` | Run `cd packages/zeptr-security && npx tsc` to build the package |
+| CVE scanner aborts dev build | Use `ZEPTR_SKIP_SECURITY=1` for dev fixtures only |
 | HMR not working | Check `dev.hmr: true` in config; ensure port is not in use |
-| `build_output/` is empty | Nuxco writes to `dist/` by default; check your `outDir` config |
-| TypeScript errors on `@nuxco/*` | Verify `tsconfig.json` has the `paths` mapping to `packages/nuxco-*/src` |
+| `build_output/` is empty | Zeptr writes to `dist/` by default; check your `outDir` config |
+| TypeScript errors on `@zeptr/*` | Verify `tsconfig.json` has the `paths` mapping to `packages/zeptr-*/src` |
 | `--root` flag unknown | Use `cwd` option instead: `execFileSync('node', ['build'], { cwd: dir })` |
 
 ---
@@ -553,22 +553,22 @@ export default defineConfig({
 ## 📁 Package Structure
 
 ```
-nuxco/
+zeptr/
 ├── src/
 │   ├── cli.ts                    # CLI entry — 20+ commands
 │   ├── commands/                 # analyze, security, ssr, migrate, …
 │   ├── build/bundler.ts          # core bundler + security gate
-│   ├── config/types.ts           # NuxcoConfig type definitions
+│   ├── config/types.ts           # ZeptrConfig type definitions
 │   ├── dev/devServer.ts          # uWS dev server + HMR
 │   ├── meta-frameworks/          # 19 framework adapters
-│   └── plugins/inspect/          # inspect UI (/__nuxco_inspect__)
+│   └── plugins/inspect/          # inspect UI (/__zeptr_inspect__)
 ├── packages/
-│   ├── nuxco-security/           # CVE, CSP, SRI, SBOM, secret scan
-│   ├── nuxco-plugin-{name}/      # 11 official plugins
-│   ├── nuxco-ssr/                # SSR adapter core
-│   ├── nuxco-workspace/          # monorepo orchestration
-│   ├── nuxco-hmr-client/         # browser HMR client
-│   └── nuxco-module-registry/    # MFE module registry
+│   ├── zeptr-security/           # CVE, CSP, SRI, SBOM, secret scan
+│   ├── zeptr-plugin-{name}/      # 11 official plugins
+│   ├── zeptr-ssr/                # SSR adapter core
+│   ├── zeptr-workspace/          # monorepo orchestration
+│   ├── zeptr-hmr-client/         # browser HMR client
+│   └── zeptr-module-registry/    # MFE module registry
 └── e2e/fixtures/                 # 50+ real framework test fixtures
 ```
 
@@ -577,8 +577,8 @@ nuxco/
 ## 🤝 Contributing
 
 ```bash
-git clone https://github.com/Avinash-1994/nuxco
-cd nuxco
+git clone https://github.com/Avinash-1994/zeptr
+cd zeptr
 npm install
 npm run build
 npm run typecheck      # tsc --noEmit (0 errors expected)

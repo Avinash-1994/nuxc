@@ -1,4 +1,4 @@
-# How a Nuxco Plugin Works — Internal Guide
+# How a Zeptr Plugin Works — Internal Guide
 
 **Audience**: Core engineers, plugin authors (advanced)  
 **Purpose**: Mental model, not marketing  
@@ -8,7 +8,7 @@
 
 ## 🎯 Purpose
 
-This guide explains **HOW** Nuxco plugins work internally, not **WHY** you should use them.
+This guide explains **HOW** Zeptr plugins work internally, not **WHY** you should use them.
 
 Written as if onboarding a new core engineer.
 
@@ -31,7 +31,7 @@ Source Code → [Plugin 1] → [Plugin 2] → [Plugin N] → Bundled Code
 ### 1. **Registration** (Build Start)
 
 ```typescript
-// User's nuxco.config.ts
+// User's zeptr.config.ts
 export default {
   plugins: [
     myPlugin({ option: 'value' }),
@@ -41,8 +41,8 @@ export default {
 
 **What happens**:
 1. Config loader calls `myPlugin({ option: 'value' })`
-2. Plugin returns a `NuxcoPlugin` object
-3. Nuxco validates the plugin interface
+2. Plugin returns a `ZeptrPlugin` object
+3. Zeptr validates the plugin interface
 4. Plugin is added to the pipeline
 
 ---
@@ -145,7 +145,7 @@ transform(code: string, id: string): { code: string; map?: SourceMap } | null {
 
 ### Enforcement
 ```typescript
-const plugin: NuxcoPlugin = {
+const plugin: ZeptrPlugin = {
   name: 'my-plugin',
   enforce: 'pre', // Run before normal plugins
 };
@@ -224,7 +224,7 @@ export function replacePlugin(options: { from: string; to: string }) {
 
 **Usage**:
 ```typescript
-// nuxco.config.ts
+// zeptr.config.ts
 export default {
   plugins: [
     replacePlugin({ from: 'process.env.NODE_ENV', to: '"production"' }),
@@ -248,7 +248,7 @@ transform(code: string, id: string) {
 // ✅ GOOD
 transform(code: string, id: string) {
   return {
-    code: code + `\n// Built with Nuxco`,
+    code: code + `\n// Built with Zeptr`,
   };
 }
 ```

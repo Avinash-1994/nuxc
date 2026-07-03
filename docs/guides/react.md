@@ -1,6 +1,6 @@
 # React Guide
 
-> Build React apps (18 & 19) with Nuxco — Fast Refresh HMR, JSX, TypeScript, CSS Modules.
+> Build React apps (18 & 19) with Zeptr — Fast Refresh HMR, JSX, TypeScript, CSS Modules.
 
 ---
 
@@ -8,10 +8,10 @@
 
 ```bash
 # Scaffold a React + TypeScript project
-nuxco bootstrap --name my-react-app --template react-ts
+zeptr bootstrap --name my-react-app --template react-ts
 
 cd my-react-app
-nuxco dev
+zeptr dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -23,16 +23,16 @@ Open [http://localhost:3000](http://localhost:3000).
 ### 1. Install
 
 ```bash
-npm install --save-dev nuxco
+npm install --save-dev zeptr
 npm install react react-dom
 npm install --save-dev @types/react @types/react-dom typescript
 ```
 
-### 2. Create `nuxco.config.js`
+### 2. Create `zeptr.config.js`
 
 **JavaScript:**
 ```js
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   entry: ['./src/main.jsx'],
   outDir: './dist',
@@ -52,8 +52,8 @@ module.exports = {
 
 **TypeScript:**
 ```ts
-// nuxco.config.ts
-import { defineConfig } from 'nuxco';
+// zeptr.config.ts
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   entry: ['./src/main.tsx'],
@@ -113,7 +113,7 @@ function App() {
 
   return (
     <div>
-      <h1>Hello from Nuxco + React</h1>
+      <h1>Hello from Zeptr + React</h1>
       <button onClick={() => setCount(c => c + 1)}>
         Count: {count}
       </button>
@@ -128,14 +128,14 @@ export default App;
 
 ## Hot Module Replacement (Fast Refresh)
 
-Nuxco integrates **React Fast Refresh** automatically for `.jsx`/`.tsx` files.
+Zeptr integrates **React Fast Refresh** automatically for `.jsx`/`.tsx` files.
 
 - Component state is **preserved** across saves
 - Only the changed component re-renders — not the whole page
 - Error overlay appears on runtime errors
 
 **How it works:**
-- Nuxco detects React files by extension and framework config
+- Zeptr detects React files by extension and framework config
 - Injects React Refresh runtime in dev mode
 - Communicates via WebSocket to the browser client
 
@@ -148,7 +148,7 @@ Nuxco integrates **React Fast Refresh** automatically for `.jsx`/`.tsx` files.
 If HMR stops working, try:
 ```bash
 # Restart dev server
-nuxco dev --force
+zeptr dev --force
 ```
 
 ---
@@ -198,7 +198,7 @@ npx tailwindcss init
 ```
 
 ```js
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   css: {
     framework: 'tailwind',
@@ -239,7 +239,7 @@ module.exports = {
 ## Path Aliases
 
 ```js
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   resolve: {
     alias: {
@@ -262,7 +262,7 @@ import { useAuth } from '@hooks/useAuth';
 ## Production Build
 
 ```bash
-nuxco build
+zeptr build
 ```
 
 Output in `./dist/`:
@@ -277,7 +277,7 @@ dist/
 
 **Serve the production build:**
 ```bash
-nuxco preview
+zeptr preview
 # Serves dist/ at http://localhost:4173
 ```
 
@@ -285,7 +285,7 @@ nuxco preview
 
 ## React 19 Compatibility
 
-Nuxco fully supports React 19:
+Zeptr fully supports React 19:
 
 ```bash
 npm install react@19 react-dom@19
@@ -335,5 +335,5 @@ Put side-effect-only imports (like `import './styles.css'`) at the top of `main.
 ## Next Steps
 
 - [Module Federation with React](./federation.md) — share components across micro-frontends
-- [Plugin Guide](../plugins.md) — extend Nuxco
+- [Plugin Guide](../plugins.md) — extend Zeptr
 - [Migration from Vite](../migration.md) — step-by-step migration

@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-icon
+ * @zeptr/plugin-icon
  * Icon component generation
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createIconPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-icon',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-icon',
+        originalPlugin: 'zeptr-native',
         
         async load(id: string) {
             // Asset loading for icon

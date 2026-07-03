@@ -1,4 +1,4 @@
-# NUXCO Security Policy
+# ZEPTR Security Policy
 
 ## Reporting Vulnerabilities
 

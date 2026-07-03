@@ -3,7 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const jobs: Record<string, { id: string; title: string; company: string; salary: string; description: string; }> = {
-    "1": { id: "1", title: "Senior Engineer", company: "Nuxco", salary: "$180k", description: "Build next-gen build tooling." },
+    "1": { id: "1", title: "Senior Engineer", company: "Zeptr", salary: "$180k", description: "Build next-gen build tooling." },
     "2": { id: "2", title: "Product Designer", company: "Qwik Labs", salary: "$140k", description: "Design the future of resumable UIs." },
   };
   const job = jobs[params.id || ""] || null;

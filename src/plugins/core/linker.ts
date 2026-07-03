@@ -1,5 +1,5 @@
 
-import { NuxcoPlugin } from '../../core/plugins/types.js';
+import { ZeptrPlugin } from '../../core/plugins/types.js';
 import { canonicalHash } from '../../core/engine/hash.js';
 import { GraphNode } from '../../resolve/graph.js';
 
@@ -7,19 +7,19 @@ import { GraphNode } from '../../resolve/graph.js';
  * Internal Linker Plugin
  * 
  * Rewrites import/require specifiers using the DependencyGraph's specifierMap.
- * This runs after all other transformations to ensure final code uses Nuxco module IDs.
+ * This runs after all other transformations to ensure final code uses Zeptr module IDs.
  */
-export function createLinkerPlugin(): NuxcoPlugin {
+export function createLinkerPlugin(): ZeptrPlugin {
     return {
         manifest: {
-            name: 'nuxco:linker',
+            name: 'zeptr:linker',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['transformModule'],
             permissions: { fs: 'none' }
         },
-        id: canonicalHash('nuxco:linker'),
+        id: canonicalHash('zeptr:linker'),
         async runHook(hook, input, context) {
             if (hook !== 'transformModule') return input;
 

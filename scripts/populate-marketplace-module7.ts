@@ -3,7 +3,7 @@
  * 
  * Expands the plugin marketplace from 20 to 100+ plugins by:
  * 1. Porting popular Vite/Webpack plugins
- * 2. Creating Nuxco-native plugins
+ * 2. Creating Zeptr-native plugins
  * 3. Categorizing and publishing to marketplace
  */
 
@@ -17,7 +17,7 @@ interface PluginManifest {
     category: 'framework' | 'css' | 'assets' | 'perf' | 'security' | 'fintech' | 'utility' | 'i18n' | 'testing' | 'state' | 'deployment' | 'analytics';
     description: string;
     author: string;
-    source: 'vite-port' | 'webpack-port' | 'nuxco-native';
+    source: 'vite-port' | 'webpack-port' | 'zeptr-native';
     originalPlugin?: string;
     verified: boolean;
 }
@@ -67,126 +67,126 @@ const WEBPACK_PLUGINS = [
     { name: 'workbox-webpack-plugin', category: 'utility', desc: 'Service worker generation' },
 ];
 
-// Nuxco-native plugins
-const NUXCO_NATIVE_PLUGINS = [
-    { name: '@nuxco/plugin-audit', category: 'security', desc: 'Real-time security auditing' },
-    { name: '@nuxco/plugin-determinism', category: 'perf', desc: 'Build determinism checker' },
-    { name: '@nuxco/plugin-federation', category: 'utility', desc: 'Module federation' },
-    { name: '@nuxco/plugin-ssr', category: 'framework', desc: 'Universal SSR support' },
-    { name: '@nuxco/plugin-edge', category: 'framework', desc: 'Edge runtime adapter' },
-    { name: '@nuxco/plugin-wasm-sandbox', category: 'security', desc: 'WASM plugin sandbox' },
-    { name: '@nuxco/plugin-crypto-sign', category: 'security', desc: 'Plugin signature verification' },
-    { name: '@nuxco/plugin-observability', category: 'utility', desc: 'Build observability' },
-    { name: '@nuxco/plugin-root-cause', category: 'utility', desc: 'Error root cause analysis' },
-    { name: '@nuxco/plugin-auto-fix', category: 'utility', desc: 'Automatic error fixing' },
-    { name: '@nuxco/plugin-repro', category: 'utility', desc: 'Reproduction case generator' },
-    { name: '@nuxco/plugin-visualizer', category: 'utility', desc: 'WebGPU dependency visualizer' },
-    { name: '@nuxco/plugin-hmr-classify', category: 'perf', desc: 'HMR classification' },
-    { name: '@nuxco/plugin-prebundle', category: 'perf', desc: 'Dependency pre-bundling' },
-    { name: '@nuxco/plugin-css-framework', category: 'css', desc: 'CSS framework detection' },
-    { name: '@nuxco/plugin-tailwind', category: 'css', desc: 'Tailwind CSS integration' },
-    { name: '@nuxco/plugin-unocss', category: 'css', desc: 'UnoCSS integration' },
-    { name: '@nuxco/plugin-critical-css', category: 'css', desc: 'Critical CSS extraction' },
-    { name: '@nuxco/plugin-upi-payment', category: 'fintech', desc: 'UPI payment integration (India)' },
-    { name: '@nuxco/plugin-qr-code', category: 'fintech', desc: 'QR code generation' },
-    { name: '@nuxco/plugin-razorpay', category: 'fintech', desc: 'Razorpay integration' },
-    { name: '@nuxco/plugin-stripe', category: 'fintech', desc: 'Stripe integration' },
-    { name: '@nuxco/plugin-analytics', category: 'utility', desc: 'Build analytics' },
-    { name: '@nuxco/plugin-lighthouse', category: 'perf', desc: 'Lighthouse CI integration' },
-    { name: '@nuxco/plugin-sentry', category: 'utility', desc: 'Sentry error tracking' },
+// Zeptr-native plugins
+const ZEPTR_NATIVE_PLUGINS = [
+    { name: '@zeptr/plugin-audit', category: 'security', desc: 'Real-time security auditing' },
+    { name: '@zeptr/plugin-determinism', category: 'perf', desc: 'Build determinism checker' },
+    { name: '@zeptr/plugin-federation', category: 'utility', desc: 'Module federation' },
+    { name: '@zeptr/plugin-ssr', category: 'framework', desc: 'Universal SSR support' },
+    { name: '@zeptr/plugin-edge', category: 'framework', desc: 'Edge runtime adapter' },
+    { name: '@zeptr/plugin-wasm-sandbox', category: 'security', desc: 'WASM plugin sandbox' },
+    { name: '@zeptr/plugin-crypto-sign', category: 'security', desc: 'Plugin signature verification' },
+    { name: '@zeptr/plugin-observability', category: 'utility', desc: 'Build observability' },
+    { name: '@zeptr/plugin-root-cause', category: 'utility', desc: 'Error root cause analysis' },
+    { name: '@zeptr/plugin-auto-fix', category: 'utility', desc: 'Automatic error fixing' },
+    { name: '@zeptr/plugin-repro', category: 'utility', desc: 'Reproduction case generator' },
+    { name: '@zeptr/plugin-visualizer', category: 'utility', desc: 'WebGPU dependency visualizer' },
+    { name: '@zeptr/plugin-hmr-classify', category: 'perf', desc: 'HMR classification' },
+    { name: '@zeptr/plugin-prebundle', category: 'perf', desc: 'Dependency pre-bundling' },
+    { name: '@zeptr/plugin-css-framework', category: 'css', desc: 'CSS framework detection' },
+    { name: '@zeptr/plugin-tailwind', category: 'css', desc: 'Tailwind CSS integration' },
+    { name: '@zeptr/plugin-unocss', category: 'css', desc: 'UnoCSS integration' },
+    { name: '@zeptr/plugin-critical-css', category: 'css', desc: 'Critical CSS extraction' },
+    { name: '@zeptr/plugin-upi-payment', category: 'fintech', desc: 'UPI payment integration (India)' },
+    { name: '@zeptr/plugin-qr-code', category: 'fintech', desc: 'QR code generation' },
+    { name: '@zeptr/plugin-razorpay', category: 'fintech', desc: 'Razorpay integration' },
+    { name: '@zeptr/plugin-stripe', category: 'fintech', desc: 'Stripe integration' },
+    { name: '@zeptr/plugin-analytics', category: 'utility', desc: 'Build analytics' },
+    { name: '@zeptr/plugin-lighthouse', category: 'perf', desc: 'Lighthouse CI integration' },
+    { name: '@zeptr/plugin-sentry', category: 'utility', desc: 'Sentry error tracking' },
 ];
 
 // Additional utility plugins to reach 100+
 const ADDITIONAL_PLUGINS = [
-    { name: '@nuxco/plugin-env-validation', category: 'security', desc: 'Environment variable validation' },
-    { name: '@nuxco/plugin-bundle-size', category: 'perf', desc: 'Bundle size tracking' },
-    { name: '@nuxco/plugin-tree-shake', category: 'perf', desc: 'Advanced tree-shaking' },
-    { name: '@nuxco/plugin-code-split', category: 'perf', desc: 'Smart code splitting' },
-    { name: '@nuxco/plugin-lazy-load', category: 'perf', desc: 'Component lazy loading' },
-    { name: '@nuxco/plugin-preload', category: 'perf', desc: 'Resource preloading' },
-    { name: '@nuxco/plugin-prefetch', category: 'perf', desc: 'Route prefetching' },
-    { name: '@nuxco/plugin-webp', category: 'assets', desc: 'WebP image conversion' },
-    { name: '@nuxco/plugin-avif', category: 'assets', desc: 'AVIF image support' },
-    { name: '@nuxco/plugin-sprite', category: 'assets', desc: 'SVG sprite generation' },
-    { name: '@nuxco/plugin-icon', category: 'assets', desc: 'Icon component generation' },
-    { name: '@nuxco/plugin-font-subset', category: 'assets', desc: 'Font subsetting' },
-    { name: '@nuxco/plugin-i18n', category: 'utility', desc: 'Internationalization' },
-    { name: '@nuxco/plugin-sitemap', category: 'utility', desc: 'Sitemap generation' },
-    { name: '@nuxco/plugin-robots', category: 'utility', desc: 'Robots.txt generation' },
-    { name: '@nuxco/plugin-manifest', category: 'utility', desc: 'Web manifest generation' },
-    { name: '@nuxco/plugin-meta-tags', category: 'utility', desc: 'SEO meta tags' },
-    { name: '@nuxco/plugin-og-image', category: 'utility', desc: 'Open Graph image generation' },
-    { name: '@nuxco/plugin-rss', category: 'utility', desc: 'RSS feed generation' },
-    { name: '@nuxco/plugin-markdown', category: 'utility', desc: 'Markdown processing' },
-    { name: '@nuxco/plugin-mdx', category: 'utility', desc: 'MDX support' },
-    { name: '@nuxco/plugin-graphql', category: 'utility', desc: 'GraphQL integration' },
-    { name: '@nuxco/plugin-apollo', category: 'utility', desc: 'Apollo Client integration' },
-    { name: '@nuxco/plugin-relay', category: 'utility', desc: 'Relay integration' },
-    { name: '@nuxco/plugin-prisma', category: 'utility', desc: 'Prisma integration' },
-    { name: '@nuxco/plugin-trpc', category: 'utility', desc: 'tRPC integration' },
-    { name: '@nuxco/plugin-zod', category: 'utility', desc: 'Zod validation' },
-    { name: '@nuxco/plugin-react-query', category: 'framework', desc: 'React Query integration' },
-    { name: '@nuxco/plugin-zustand', category: 'framework', desc: 'Zustand state management' },
-    { name: '@nuxco/plugin-jotai', category: 'framework', desc: 'Jotai state management' },
-    { name: '@nuxco/plugin-recoil', category: 'framework', desc: 'Recoil state management' },
-    { name: '@nuxco/plugin-redux', category: 'framework', desc: 'Redux integration' },
-    { name: '@nuxco/plugin-mobx', category: 'framework', desc: 'MobX integration' },
-    { name: '@nuxco/plugin-pinia', category: 'framework', desc: 'Pinia (Vue) integration' },
-    { name: '@nuxco/plugin-vuex', category: 'framework', desc: 'Vuex integration' },
-    { name: '@nuxco/plugin-testing-library', category: 'utility', desc: 'Testing Library integration' },
-    { name: '@nuxco/plugin-vitest', category: 'utility', desc: 'Vitest integration' },
-    { name: '@nuxco/plugin-playwright', category: 'utility', desc: 'Playwright E2E' },
-    { name: '@nuxco/plugin-cypress', category: 'utility', desc: 'Cypress integration' },
-    { name: '@nuxco/plugin-storybook', category: 'utility', desc: 'Storybook integration' },
-    { name: '@nuxco/plugin-chromatic', category: 'utility', desc: 'Chromatic visual testing' },
+    { name: '@zeptr/plugin-env-validation', category: 'security', desc: 'Environment variable validation' },
+    { name: '@zeptr/plugin-bundle-size', category: 'perf', desc: 'Bundle size tracking' },
+    { name: '@zeptr/plugin-tree-shake', category: 'perf', desc: 'Advanced tree-shaking' },
+    { name: '@zeptr/plugin-code-split', category: 'perf', desc: 'Smart code splitting' },
+    { name: '@zeptr/plugin-lazy-load', category: 'perf', desc: 'Component lazy loading' },
+    { name: '@zeptr/plugin-preload', category: 'perf', desc: 'Resource preloading' },
+    { name: '@zeptr/plugin-prefetch', category: 'perf', desc: 'Route prefetching' },
+    { name: '@zeptr/plugin-webp', category: 'assets', desc: 'WebP image conversion' },
+    { name: '@zeptr/plugin-avif', category: 'assets', desc: 'AVIF image support' },
+    { name: '@zeptr/plugin-sprite', category: 'assets', desc: 'SVG sprite generation' },
+    { name: '@zeptr/plugin-icon', category: 'assets', desc: 'Icon component generation' },
+    { name: '@zeptr/plugin-font-subset', category: 'assets', desc: 'Font subsetting' },
+    { name: '@zeptr/plugin-i18n', category: 'utility', desc: 'Internationalization' },
+    { name: '@zeptr/plugin-sitemap', category: 'utility', desc: 'Sitemap generation' },
+    { name: '@zeptr/plugin-robots', category: 'utility', desc: 'Robots.txt generation' },
+    { name: '@zeptr/plugin-manifest', category: 'utility', desc: 'Web manifest generation' },
+    { name: '@zeptr/plugin-meta-tags', category: 'utility', desc: 'SEO meta tags' },
+    { name: '@zeptr/plugin-og-image', category: 'utility', desc: 'Open Graph image generation' },
+    { name: '@zeptr/plugin-rss', category: 'utility', desc: 'RSS feed generation' },
+    { name: '@zeptr/plugin-markdown', category: 'utility', desc: 'Markdown processing' },
+    { name: '@zeptr/plugin-mdx', category: 'utility', desc: 'MDX support' },
+    { name: '@zeptr/plugin-graphql', category: 'utility', desc: 'GraphQL integration' },
+    { name: '@zeptr/plugin-apollo', category: 'utility', desc: 'Apollo Client integration' },
+    { name: '@zeptr/plugin-relay', category: 'utility', desc: 'Relay integration' },
+    { name: '@zeptr/plugin-prisma', category: 'utility', desc: 'Prisma integration' },
+    { name: '@zeptr/plugin-trpc', category: 'utility', desc: 'tRPC integration' },
+    { name: '@zeptr/plugin-zod', category: 'utility', desc: 'Zod validation' },
+    { name: '@zeptr/plugin-react-query', category: 'framework', desc: 'React Query integration' },
+    { name: '@zeptr/plugin-zustand', category: 'framework', desc: 'Zustand state management' },
+    { name: '@zeptr/plugin-jotai', category: 'framework', desc: 'Jotai state management' },
+    { name: '@zeptr/plugin-recoil', category: 'framework', desc: 'Recoil state management' },
+    { name: '@zeptr/plugin-redux', category: 'framework', desc: 'Redux integration' },
+    { name: '@zeptr/plugin-mobx', category: 'framework', desc: 'MobX integration' },
+    { name: '@zeptr/plugin-pinia', category: 'framework', desc: 'Pinia (Vue) integration' },
+    { name: '@zeptr/plugin-vuex', category: 'framework', desc: 'Vuex integration' },
+    { name: '@zeptr/plugin-testing-library', category: 'utility', desc: 'Testing Library integration' },
+    { name: '@zeptr/plugin-vitest', category: 'utility', desc: 'Vitest integration' },
+    { name: '@zeptr/plugin-playwright', category: 'utility', desc: 'Playwright E2E' },
+    { name: '@zeptr/plugin-cypress', category: 'utility', desc: 'Cypress integration' },
+    { name: '@zeptr/plugin-storybook', category: 'utility', desc: 'Storybook integration' },
+    { name: '@zeptr/plugin-chromatic', category: 'utility', desc: 'Chromatic visual testing' },
 ];
 
 // New Categories (Day 45 Enhancement)
 const I18N_PLUGINS = [
-    { name: '@nuxco/plugin-react-i18next', category: 'i18n', desc: 'React i18next integration' },
-    { name: '@nuxco/plugin-vue-i18n-next', category: 'i18n', desc: 'Vue I18n integration' },
-    { name: '@nuxco/plugin-formatjs', category: 'i18n', desc: 'FormatJS (react-intl) integration' },
+    { name: '@zeptr/plugin-react-i18next', category: 'i18n', desc: 'React i18next integration' },
+    { name: '@zeptr/plugin-vue-i18n-next', category: 'i18n', desc: 'Vue I18n integration' },
+    { name: '@zeptr/plugin-formatjs', category: 'i18n', desc: 'FormatJS (react-intl) integration' },
 ];
 
 const TESTING_PLUGINS = [
-    { name: '@nuxco/plugin-jest', category: 'testing', desc: 'Jest testing framework' },
-    { name: '@nuxco/plugin-testing-library-react', category: 'testing', desc: 'React Testing Library' },
-    { name: '@nuxco/plugin-msw', category: 'testing', desc: 'Mock Service Worker integration' },
+    { name: '@zeptr/plugin-jest', category: 'testing', desc: 'Jest testing framework' },
+    { name: '@zeptr/plugin-testing-library-react', category: 'testing', desc: 'React Testing Library' },
+    { name: '@zeptr/plugin-msw', category: 'testing', desc: 'Mock Service Worker integration' },
 ];
 
 const STATE_PLUGINS = [
-    { name: '@nuxco/plugin-zustand-devtools', category: 'state', desc: 'Zustand DevTools integration' },
-    { name: '@nuxco/plugin-tanstack-query', category: 'state', desc: 'TanStack Query (React Query)' },
-    { name: '@nuxco/plugin-xstate', category: 'state', desc: 'XState state machines' },
-    { name: '@nuxco/plugin-nanostores', category: 'state', desc: 'Nano Stores integration' },
+    { name: '@zeptr/plugin-zustand-devtools', category: 'state', desc: 'Zustand DevTools integration' },
+    { name: '@zeptr/plugin-tanstack-query', category: 'state', desc: 'TanStack Query (React Query)' },
+    { name: '@zeptr/plugin-xstate', category: 'state', desc: 'XState state machines' },
+    { name: '@zeptr/plugin-nanostores', category: 'state', desc: 'Nano Stores integration' },
 ];
 
 const DEPLOYMENT_PLUGINS = [
-    { name: '@nuxco/plugin-vercel', category: 'deployment', desc: 'Vercel deployment adapter' },
-    { name: '@nuxco/plugin-netlify', category: 'deployment', desc: 'Netlify deployment adapter' },
-    { name: '@nuxco/plugin-cloudflare', category: 'deployment', desc: 'Cloudflare Pages adapter' },
+    { name: '@zeptr/plugin-vercel', category: 'deployment', desc: 'Vercel deployment adapter' },
+    { name: '@zeptr/plugin-netlify', category: 'deployment', desc: 'Netlify deployment adapter' },
+    { name: '@zeptr/plugin-cloudflare', category: 'deployment', desc: 'Cloudflare Pages adapter' },
 ];
 
 const ANALYTICS_PLUGINS = [
-    { name: '@nuxco/plugin-plausible', category: 'analytics', desc: 'Plausible Analytics integration' },
-    { name: '@nuxco/plugin-posthog', category: 'analytics', desc: 'PostHog analytics integration' },
+    { name: '@zeptr/plugin-plausible', category: 'analytics', desc: 'Plausible Analytics integration' },
+    { name: '@zeptr/plugin-posthog', category: 'analytics', desc: 'PostHog analytics integration' },
 ];
 
 export class PluginMarketplaceExpander {
     private plugins: PluginManifest[] = [];
 
     async expand(): Promise<void> {
-        console.log('🚀 Expanding Nuxco Plugin Marketplace to 100+...\n');
+        console.log('🚀 Expanding Zeptr Plugin Marketplace to 100+...\n');
 
         // Port Vite plugins
         console.log('📦 Porting Vite plugins...');
         for (const plugin of VITE_PLUGINS) {
             await this.addPluginWithManifest({
-                name: plugin.name.replace('vite-plugin-', '@nuxco/plugin-').replace('@vitejs/plugin-', '@nuxco/plugin-'),
+                name: plugin.name.replace('vite-plugin-', '@zeptr/plugin-').replace('@vitejs/plugin-', '@zeptr/plugin-'),
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxco Team',
+                author: 'Zeptr Team',
                 source: 'vite-port',
                 originalPlugin: plugin.name,
                 verified: true
@@ -205,11 +205,11 @@ export class PluginMarketplaceExpander {
             if (baseName === 'ts') baseName = 'typescript';
 
             await this.addPluginWithManifest({
-                name: `@nuxco/plugin-${baseName}`,
+                name: `@zeptr/plugin-${baseName}`,
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxco Team',
+                author: 'Zeptr Team',
                 source: 'webpack-port',
                 originalPlugin: plugin.name,
                 verified: true
@@ -217,20 +217,20 @@ export class PluginMarketplaceExpander {
         }
         console.log(`✅ Ported ${WEBPACK_PLUGINS.length} Webpack plugins\n`);
 
-        // Add Nuxco-native plugins
-        console.log('🔧 Adding Nuxco-native plugins...');
-        for (const plugin of NUXCO_NATIVE_PLUGINS) {
+        // Add Zeptr-native plugins
+        console.log('🔧 Adding Zeptr-native plugins...');
+        for (const plugin of ZEPTR_NATIVE_PLUGINS) {
             await this.addPluginWithManifest({
                 name: plugin.name,
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxco Team',
-                source: 'nuxco-native',
+                author: 'Zeptr Team',
+                source: 'zeptr-native',
                 verified: true
             });
         }
-        console.log(`✅ Added ${NUXCO_NATIVE_PLUGINS.length} Nuxco-native plugins\n`);
+        console.log(`✅ Added ${ZEPTR_NATIVE_PLUGINS.length} Zeptr-native plugins\n`);
 
         // Add additional plugins
         console.log('➕ Adding additional utility plugins...');
@@ -240,8 +240,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxco Team',
-                source: 'nuxco-native',
+                author: 'Zeptr Team',
+                source: 'zeptr-native',
                 verified: true
             });
         }
@@ -255,8 +255,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxco Team',
-                source: 'nuxco-native',
+                author: 'Zeptr Team',
+                source: 'zeptr-native',
                 verified: true
             });
         }
@@ -270,8 +270,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxco Team',
-                source: 'nuxco-native',
+                author: 'Zeptr Team',
+                source: 'zeptr-native',
                 verified: true
             });
         }
@@ -285,8 +285,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxco Team',
-                source: 'nuxco-native',
+                author: 'Zeptr Team',
+                source: 'zeptr-native',
                 verified: true
             });
         }
@@ -300,8 +300,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxco Team',
-                source: 'nuxco-native',
+                author: 'Zeptr Team',
+                source: 'zeptr-native',
                 verified: true
             });
         }
@@ -315,8 +315,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxco Team',
-                source: 'nuxco-native',
+                author: 'Zeptr Team',
+                source: 'zeptr-native',
                 verified: true
             });
         }
@@ -340,7 +340,7 @@ export class PluginMarketplaceExpander {
             wasmCompatible: true,
             sandboxed: true,
             permissions: this.determinePermissions(manifest),
-            entryPoint: `dist/${manifest.name.replace('@nuxco/', '')}.js`,
+            entryPoint: `dist/${manifest.name.replace('@zeptr/', '')}.js`,
             manifestVersion: '2.0'
         };
 
@@ -356,7 +356,7 @@ export class PluginMarketplaceExpander {
         });
 
         const hash = crypto.createHash('sha256').update(data).digest('hex');
-        return `nuxco-sig-${hash.substring(0, 16)}`;
+        return `zeptr-sig-${hash.substring(0, 16)}`;
     }
 
     private determinePermissions(manifest: PluginManifest): string[] {

@@ -1,12 +1,12 @@
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 import { wakuRscPlugin } from './rsc-plugin.js';
 
 export interface WakuConfig {
   rscPath?: string; // default '/RSC'
 }
 
-export class WakuAdapter implements NuxcoAdapter {
+export class WakuAdapter implements ZeptrAdapter {
   name = 'waku';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -19,7 +19,7 @@ export class WakuAdapter implements NuxcoAdapter {
     ];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.waku) config.waku = {};
     config.waku = {
       rscPath: '/RSC',
@@ -35,7 +35,7 @@ export class WakuAdapter implements NuxcoAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:nuxco/waku-rsc-router';
+         const virtualEntry = 'virtual:zeptr/waku-rsc-router';
          let router: any;
          try {
             router = await import(virtualEntry);
@@ -88,7 +88,7 @@ export class WakuAdapter implements NuxcoAdapter {
 
          next();
       } catch(e) {
-         console.error('[Nuxco:Waku] Error rendering RSC', e);
+         console.error('[Zeptr:Waku] Error rendering RSC', e);
          next();
       }
     };

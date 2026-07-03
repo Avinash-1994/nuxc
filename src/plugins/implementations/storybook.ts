@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-storybook
+ * @zeptr/plugin-storybook
  * Storybook integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createStorybookPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-storybook',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-storybook',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Storybook integration

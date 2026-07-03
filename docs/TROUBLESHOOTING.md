@@ -4,25 +4,25 @@
 
 ---
 
-## Error 1 — `Cannot find module 'nuxco'`
+## Error 1 — `Cannot find module 'zeptr'`
 
 **Symptom:**
 ```
-Error: Cannot find module 'nuxco'
+Error: Cannot find module 'zeptr'
 ```
 
-**Cause:** Nuxco is not installed in the current project.
+**Cause:** Zeptr is not installed in the current project.
 
 **Fix:**
 ```bash
 # Install locally
-npm install --save-dev nuxco
+npm install --save-dev zeptr
 
 # Or install globally
-npm install -g nuxco
+npm install -g zeptr
 ```
 
-If using a monorepo, ensure nuxco is in the root `package.json` or the specific workspace's `package.json`.
+If using a monorepo, ensure zeptr is in the root `package.json` or the specific workspace's `package.json`.
 
 ---
 
@@ -42,7 +42,7 @@ kill -9 <PID>
 
 **Fix — Option B:** Change the port in config:
 ```js
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   dev: {
     port: 4000, // Use a different port
@@ -60,7 +60,7 @@ module.exports = {
 
 **Fix:**
 ```js
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   dev: {
     hmr: true,  // Ensure HMR is enabled
@@ -106,7 +106,7 @@ module.exports = {
 
 **Fix:**
 ```js
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   css: {
     modules: true, // Enable CSS Modules
@@ -137,10 +137,10 @@ TypeError: Failed to fetch dynamically imported module: http://localhost:3001/re
 **Cause:** The remote app is not running, or the URL is wrong.
 
 **Fix:**
-1. Start the remote app first: `cd remote-app && nuxco dev`
+1. Start the remote app first: `cd remote-app && zeptr dev`
 2. Check the URL matches the remote's dev port:
 ```js
-// host nuxco.config.js
+// host zeptr.config.js
 module.exports = {
   federation: {
     name: 'host',
@@ -153,7 +153,7 @@ module.exports = {
 
 3. Verify the remote exposes the correct module:
 ```js
-// remote nuxco.config.js
+// remote zeptr.config.js
 module.exports = {
   federation: {
     name: 'cart',
@@ -177,14 +177,14 @@ TS2307: Cannot find module '*.svg' or its corresponding type declarations.
 ```json
 {
   "compilerOptions": {
-    "types": ["nuxco/client"]
+    "types": ["zeptr/client"]
   }
 }
 ```
 
 Or create a `src/vite-env.d.ts` (compatible):
 ```ts
-/// <reference types="nuxco/client" />
+/// <reference types="zeptr/client" />
 ```
 
 ---
@@ -200,12 +200,12 @@ FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memor
 
 **Fix — Option A:** Increase Node.js heap:
 ```bash
-NODE_OPTIONS=--max-old-space-size=4096 nuxco build
+NODE_OPTIONS=--max-old-space-size=4096 zeptr build
 ```
 
 **Fix — Option B:** Enable code splitting:
 ```js
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   build: {
     splitting: true,     // Enable chunk splitting
@@ -224,7 +224,7 @@ module.exports = {
 
 **Fix:**
 ```js
-// nuxco.config.js
+// zeptr.config.js
 module.exports = {
   css: {
     framework: 'tailwind',
@@ -248,18 +248,18 @@ npx tailwindcss init
 
 ---
 
-## Error 10 — `nuxco: command not found`
+## Error 10 — `zeptr: command not found`
 
 **Symptom:**
 ```
-bash: nuxco: command not found
+bash: zeptr: command not found
 ```
 
-**Cause:** Nuxco is not globally installed, or the global npm bin directory is not in your PATH.
+**Cause:** Zeptr is not globally installed, or the global npm bin directory is not in your PATH.
 
 **Fix — Option A:** Use `npx` instead:
 ```bash
-npx nuxco dev
+npx zeptr dev
 ```
 
 **Fix — Option B:** Fix global PATH:
@@ -276,22 +276,22 @@ source ~/.bashrc
 
 **Fix — Option C:** Reinstall globally:
 ```bash
-npm install -g nuxco
+npm install -g zeptr
 ```
 
 ---
 
 ## General Diagnostic Tool
 
-Run `nuxco doctor` to automatically detect common issues:
+Run `zeptr doctor` to automatically detect common issues:
 
 ```bash
-nuxco doctor
+zeptr doctor
 
 # Example output:
 ✅ Node.js version: v20.11.0 (OK)
-✅ nuxco version: 1.0.9 (latest)
-✅ nuxco.config.js found
+✅ zeptr version: 1.0.9 (latest)
+✅ zeptr.config.js found
 ✅ Entry file exists: ./src/main.tsx
 ⚠️  No .env file found (optional)
 ✅ TypeScript config valid
@@ -304,6 +304,6 @@ All checks passed! 🎉
 
 ## Still Stuck?
 
-- 💬 [GitHub Discussions](https://github.com/Avinash-1994/Nuxco/discussions)
-- 🐛 [File a Bug Report](https://github.com/Avinash-1994/Nuxco/issues/new)
-- 📖 [Full Documentation](https://avinash-1994.github.io/Nuxco/)
+- 💬 [GitHub Discussions](https://github.com/Avinash-1994/Zeptr/discussions)
+- 🐛 [File a Bug Report](https://github.com/Avinash-1994/Zeptr/issues/new)
+- 📖 [Full Documentation](https://avinash-1994.github.io/Zeptr/)

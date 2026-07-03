@@ -1,10 +1,10 @@
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 import { createHash } from 'crypto';
 
 let markoCompiler: any;
 
-export class MarkoAdapter implements NuxcoAdapter {
+export class MarkoAdapter implements ZeptrAdapter {
   name = 'marko';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -14,7 +14,7 @@ export class MarkoAdapter implements NuxcoAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'nuxco:marko-compiler',
+        name: 'zeptr:marko-compiler',
 
         async buildStart() {
           try {
@@ -56,7 +56,7 @@ export class MarkoAdapter implements NuxcoAdapter {
     ];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.marko) config.marko = {};
     config.marko = {
       output: 'dom',

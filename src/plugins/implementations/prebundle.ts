@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-prebundle
+ * @zeptr/plugin-prebundle
  * Dependency pre-bundling
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPrebundlePlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-prebundle',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-prebundle',
+        originalPlugin: 'zeptr-native',
         
         async buildStart() {
-            console.log('[@nuxco/plugin-prebundle] Starting performance optimization...');
+            console.log('[@zeptr/plugin-prebundle] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createPrebundlePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-prebundle] Performance optimization complete');
+            console.log('[@zeptr/plugin-prebundle] Performance optimization complete');
         }
     };
 }

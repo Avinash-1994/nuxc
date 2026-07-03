@@ -1,7 +1,7 @@
 /**
  * Template Manager (Day 46)
  * 
- * Manages production-ready starter templates for Nuxco.
+ * Manages production-ready starter templates for Zeptr.
  * Handles scaffolding, variable replacement, and initial setup.
  */
 
@@ -127,17 +127,17 @@ export class TemplateManager {
             private: true,
             type: 'module',
             scripts: {
-                "dev": "nuxco dev",
-                "build": "nuxco build",
-                "preview": "nuxco preview",
-                "test": "nuxco test",
+                "dev": "zeptr dev",
+                "build": "zeptr build",
+                "preview": "zeptr preview",
+                "test": "zeptr test",
                 "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
                 "check": "tsc --noEmit"
             },
             dependencies: template.dependencies,
             devDependencies: {
                 ...template.devDependencies,
-                "nuxco": "^2.0.0",
+                "zeptr": "^2.0.0",
                 "typescript": "^5.0.0",
                 "@types/node": "^20.0.0"
             }
@@ -191,7 +191,7 @@ export class TemplateManager {
                 "moduleResolution": "bundler",
                 "allowSyntheticDefaultImports": true
             },
-            "include": ["nuxco.config.ts"]
+            "include": ["zeptr.config.ts"]
         };
 
         fs.writeFileSync(
@@ -202,7 +202,7 @@ export class TemplateManager {
         // Create README.md
         const readme = `# ${projectName}
 
-Created with Nuxco - The High-Performance Build System.
+Created with Zeptr - The High-Performance Build System.
 
 ## Getting Started
 
@@ -223,14 +223,14 @@ npm run dev
         // Create .gitignore
         const gitignore = `node_modules
 dist
-.nuxco
+.zeptr
 .env
 .DS_Store
 coverage
 `;
         fs.writeFileSync(path.join(targetDir, '.gitignore'), gitignore);
 
-        console.log(`✅ ${template.name} created successfully! by Nuxco`);
+        console.log(`✅ ${template.name} created successfully! by Zeptr`);
     }
 }
 

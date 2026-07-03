@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-chromatic
+ * @zeptr/plugin-chromatic
  * Chromatic visual testing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createChromaticPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-chromatic',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-chromatic',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Chromatic visual testing

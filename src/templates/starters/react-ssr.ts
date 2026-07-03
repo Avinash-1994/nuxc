@@ -23,13 +23,13 @@ export const reactSsrTemplate: TemplateConfig = {
         "@types/react-dom": "^18.2.0",
         "@types/express": "^4.17.17",
         "@types/compression": "^1.7.3",
-        "@nuxco/plugin-react": "^1.0.0",
+        "@zeptr/plugin-react": "^1.0.0",
         "cross-env": "^7.0.3"
     },
     files: {
-        'nuxco.config.ts': `
-import { defineConfig } from 'nuxco';
-import react from '@nuxco/plugin-react';
+        'zeptr.config.ts': `
+import { defineConfig } from 'zeptr';
+import react from '@zeptr/plugin-react';
 
 export default defineConfig({
     plugins: [react()],
@@ -55,16 +55,16 @@ const templateHtml = isProduction
 // Create http server
 const app = express()
 
-// Add Nuxco or sirv
-let nuxco
+// Add Zeptr or sirv
+let zeptr
 if (!isProduction) {
-  const { createServer } = await import('nuxco')
-  nuxco = await createServer({
+  const { createServer } = await import('zeptr')
+  zeptr = await createServer({
     server: { middlewareMode: true },
     appType: 'custom',
     base
   })
-  app.use(nuxco.middlewares)
+  app.use(zeptr.middlewares)
 } else {
   const compression = (await import('compression')).default
   const sirv = (await import('sirv')).default
@@ -82,8 +82,8 @@ app.use('*', async (req, res) => {
     if (!isProduction) {
       // Always read fresh template in dev
       template = await fs.readFile('./index.html', 'utf-8')
-      template = await nuxco.transformIndexHtml(url, template)
-      render = (await nuxco.ssrLoadModule('/src/entry-server.tsx')).render
+      template = await zeptr.transformIndexHtml(url, template)
+      render = (await zeptr.ssrLoadModule('/src/entry-server.tsx')).render
     } else {
       template = templateHtml
       render = (await import('./dist/server/entry-server.js')).render
@@ -95,7 +95,7 @@ app.use('*', async (req, res) => {
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
-    !isProduction && nuxco.ssrFixStacktrace(e)
+    !isProduction && zeptr.ssrFixStacktrace(e)
     console.log(e.stack)
     res.status(500).end(e.stack)
   }
@@ -142,7 +142,7 @@ function App() {
 
   return (
     <>
-      <h1>Nuxco SSR + React</h1>
+      <h1>Zeptr SSR + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -152,7 +152,7 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">
-        Click on the Nuxco logo to learn more
+        Click on the Zeptr logo to learn more
       </p>
     </>
   )

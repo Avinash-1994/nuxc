@@ -14,7 +14,7 @@ export default class BlogPostComponent {
   @Input() slug!: string;
   
   get title() {
-    return this.slug === 'hello-analog' ? 'Hello Analog' : 'Nuxco Build Integration';
+    return this.slug === 'hello-analog' ? 'Hello Analog' : 'Zeptr Build Integration';
   }
   
   get content() {

@@ -3,11 +3,11 @@ import fs from 'fs/promises';
 import path from 'path';
 
 /**
- * NUXCO TIER B PLUGINS (IO / ASSETS)
+ * ZEPTR TIER B PLUGINS (IO / ASSETS)
  * 
  * Includes:
- * - nuxcoCopy (copy-webpack-plugin)
- * - nuxcoHtml (html-webpack-plugin)
+ * - zeptrCopy (copy-webpack-plugin)
+ * - zeptrHtml (html-webpack-plugin)
  */
 
 export interface CopyTarget {
@@ -21,12 +21,12 @@ export interface CopyOptions {
 }
 
 /**
- * Copy Plugin (nuxco-copy)
+ * Copy Plugin (zeptr-copy)
  * Copies files or directories from src to dest at build end.
  */
-export function nuxcoCopy(options: CopyOptions): Plugin {
+export function zeptrCopy(options: CopyOptions): Plugin {
     return {
-        name: 'nuxco-copy',
+        name: 'zeptr-copy',
         async buildEnd() {
             if (!options.targets || options.targets.length === 0) return;
 
@@ -39,10 +39,10 @@ export function nuxcoCopy(options: CopyOptions): Plugin {
                     await fs.cp(srcPath, destPath, { recursive: true, force: true });
 
                     if (options.verbose) {
-                        console.log(`[nuxco-copy] Copied ${target.src} -> ${target.dest}`);
+                        console.log(`[zeptr-copy] Copied ${target.src} -> ${target.dest}`);
                     }
                 } catch (e: any) {
-                    console.warn(`[nuxco-copy] Failed to copy ${target.src}: ${e.message}`);
+                    console.warn(`[zeptr-copy] Failed to copy ${target.src}: ${e.message}`);
                 }
             }
         }
@@ -58,17 +58,17 @@ export interface HtmlOptions {
 }
 
 /**
- * HTML Plugin (nuxco-html)
+ * HTML Plugin (zeptr-html)
  * Generates an index.html file in the output directory.
  * Advanced: Supports variable interpolation (e.g., %PUBLIC_URL%, %TITLE%)
  */
-export function nuxcoHtml(options: HtmlOptions = {}): Plugin {
+export function zeptrHtml(options: HtmlOptions = {}): Plugin {
     return {
-        name: 'nuxco-html',
+        name: 'zeptr-html',
         stability: 'stable',
         async buildEnd() {
             const filename = options.filename || 'index.html';
-            const title = options.title || 'Nuxco App';
+            const title = options.title || 'Zeptr App';
             const destPath = path.resolve(process.cwd(), 'dist', filename);
 
             let content = '';
@@ -78,7 +78,7 @@ export function nuxcoHtml(options: HtmlOptions = {}): Plugin {
                     const templatePath = path.resolve(process.cwd(), options.template);
                     content = await fs.readFile(templatePath, 'utf-8');
                 } catch (e) {
-                    console.warn(`[nuxco-html] Template not found: ${options.template}`);
+                    console.warn(`[zeptr-html] Template not found: ${options.template}`);
                     content = getDefaultHtml(title);
                 }
             } else {
@@ -101,7 +101,7 @@ export function nuxcoHtml(options: HtmlOptions = {}): Plugin {
                 await fs.mkdir(path.dirname(destPath), { recursive: true });
                 await fs.writeFile(destPath, content);
             } catch (e: any) {
-                console.error(`[nuxco-html] Failed to generate HTML: ${e.message}`);
+                console.error(`[zeptr-html] Failed to generate HTML: ${e.message}`);
             }
         }
     };

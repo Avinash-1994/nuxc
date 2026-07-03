@@ -1,4 +1,4 @@
-# Nuxco MFE Template — Module Federation
+# Zeptr MFE Template — Module Federation
 
 Three apps: 1 host + 2 remotes (Vue + React)
 

@@ -1,13 +1,13 @@
 import { Plugin } from '../index.js';
 
 /**
- * NUXCO TIER C PLUGINS (Graph-Aware / HMR)
+ * ZEPTR TIER C PLUGINS (Graph-Aware / HMR)
  * 
- * Since Nuxco v1.0 handles HMR natively via UniversalTransformer for React, Vue, and Svelte,
+ * Since Zeptr v1.0 handles HMR natively via UniversalTransformer for React, Vue, and Svelte,
  * these plugins act as compatibility wrappers or configuration providers.
  * 
  * They ensure that if a user migrates from Vite, they can map existing plugins to these
- * without breaking the build, while Nuxco's core engine handles the heavy lifting.
+ * without breaking the build, while Zeptr's core engine handles the heavy lifting.
  */
 
 interface ReactOptions {
@@ -18,12 +18,12 @@ interface ReactOptions {
 }
 
 /**
- * Nuxco React Plugin
+ * Zeptr React Plugin
  * Compatible with @vitejs/plugin-react
  */
-export function nuxcoReact(options: ReactOptions = {}): Plugin {
+export function zeptrReact(options: ReactOptions = {}): Plugin {
     return {
-        name: 'nuxco-react',
+        name: 'zeptr-react',
         setup(api) {
             // In the future, we can push options to the UniversalTransformer via API
             // For now, we log that React support is active.
@@ -44,12 +44,12 @@ interface VueOptions {
 }
 
 /**
- * Nuxco Vue Plugin
+ * Zeptr Vue Plugin
  * Compatible with @vitejs/plugin-vue
  */
-export function nuxcoVue(options: VueOptions = {}): Plugin {
+export function zeptrVue(options: VueOptions = {}): Plugin {
     return {
-        name: 'nuxco-vue',
+        name: 'zeptr-vue',
         setup() {
             // Vue support is built-in
         }
@@ -63,12 +63,12 @@ interface SvelteOptions {
 }
 
 /**
- * Nuxco Svelte Plugin
+ * Zeptr Svelte Plugin
  * Compatible with @sveltejs/vite-plugin-svelte
  */
-export function nuxcoSvelte(options: SvelteOptions = {}): Plugin {
+export function zeptrSvelte(options: SvelteOptions = {}): Plugin {
     return {
-        name: 'nuxco-svelte',
+        name: 'zeptr-svelte',
         setup() {
             // Svelte support is built-in
         }
@@ -78,6 +78,6 @@ export function nuxcoSvelte(options: SvelteOptions = {}): Plugin {
 /**
  * Compatibility aliases
  */
-export const nuxcoReactRefresh = nuxcoReact;
-export const nuxcoVueHmr = nuxcoVue;
-export const nuxcoSvelteHmr = nuxcoSvelte;
+export const zeptrReactRefresh = zeptrReact;
+export const zeptrVueHmr = zeptrVue;
+export const zeptrSvelteHmr = zeptrSvelte;

@@ -1,4 +1,4 @@
-// Plugin type compatible with both Nuxco and Vite plugin API
+// Plugin type compatible with both Zeptr and Vite plugin API
 type Plugin = { name: string; [hook: string]: any };
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 export interface VisualizerPluginOptions {
   /** Output file path for the HTML report (default: 'dist/stats.html') */
   filename?: string;
-  /** Title for the HTML report (default: 'Nuxco Bundle Visualizer') */
+  /** Title for the HTML report (default: 'Zeptr Bundle Visualizer') */
   title?: string;
   /** Open the report in browser after build (default: false) */
   open?: boolean;
@@ -23,16 +23,16 @@ interface ModuleInfo {
 }
 
 /**
- * @nuxco/plugin-visualizer
+ * @zeptr/plugin-visualizer
  *
- * Official Nuxco plugin for bundle visualization:
+ * Official Zeptr plugin for bundle visualization:
  * - Outputs an interactive HTML treemap showing bundle composition
  * - Shows module sizes, chunk assignments, and import relationships
  * - Similar to rollup-plugin-visualizer / webpack-bundle-analyzer
  *
  * @example
  * ```js
- * const visualizer = require('@nuxco/plugin-visualizer');
+ * const visualizer = require('@zeptr/plugin-visualizer');
  * module.exports = {
  *   plugins: [
  *     visualizer({ filename: 'dist/stats.html', open: true })
@@ -43,7 +43,7 @@ interface ModuleInfo {
 export function visualizerPlugin(options: VisualizerPluginOptions = {}): Plugin {
   const {
     filename = 'dist/stats.html',
-    title = 'Nuxco Bundle Visualizer',
+    title = 'Zeptr Bundle Visualizer',
     open = false,
     template = 'treemap',
     gzipSize = true,
@@ -52,7 +52,7 @@ export function visualizerPlugin(options: VisualizerPluginOptions = {}): Plugin 
   const modules: ModuleInfo[] = [];
 
   return {
-    name: '@nuxco/plugin-visualizer',
+    name: '@zeptr/plugin-visualizer',
 
     /**
      * Transform hook: record module size for visualization.
@@ -188,8 +188,8 @@ function generateHtmlReport(
 
   <script>
     const data = ${JSON.stringify(treemapData)};
-    console.log('[Nuxco Visualizer] Loaded', data.length, 'modules');
-    console.log('[Nuxco Visualizer] Total size:', ${totalSize}, 'bytes');
+    console.log('[Zeptr Visualizer] Loaded', data.length, 'modules');
+    console.log('[Zeptr Visualizer] Total size:', ${totalSize}, 'bytes');
   </script>
 </body>
 </html>`;

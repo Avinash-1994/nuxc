@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-stripe
+ * @zeptr/plugin-stripe
  * Stripe integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createStripePlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-stripe',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-stripe',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Fintech integration: Stripe integration
@@ -16,7 +16,7 @@ export function createStripePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-stripe] Fintech integration ready');
+            console.log('[@zeptr/plugin-stripe] Fintech integration ready');
             // Initialize payment gateway, generate QR codes, etc.
         }
     };

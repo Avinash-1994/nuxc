@@ -341,6 +341,6 @@ export class ErrorOverlay extends HTMLElement {
 (ErrorOverlay.prototype as any).dismiss = ErrorOverlay.prototype.dismiss;
 (ErrorOverlay.prototype as any).openInEditor = ErrorOverlay.prototype.openInEditor;
 
-if (!customElements.get('nuxco-error-overlay')) {
-  customElements.define('nuxco-error-overlay', ErrorOverlay);
+if (!customElements.get('zeptr-error-overlay')) {
+  customElements.define('zeptr-error-overlay', ErrorOverlay);
 }

@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-lazy-load
+ * @zeptr/plugin-lazy-load
  * Component lazy loading
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createLazyLoadPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-lazy-load',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-lazy-load',
+        originalPlugin: 'zeptr-native',
         
         async buildStart() {
-            console.log('[@nuxco/plugin-lazy-load] Starting performance optimization...');
+            console.log('[@zeptr/plugin-lazy-load] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createLazyLoadPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-lazy-load] Performance optimization complete');
+            console.log('[@zeptr/plugin-lazy-load] Performance optimization complete');
         }
     };
 }

@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-repro
+ * @zeptr/plugin-repro
  * Reproduction case generator
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReproPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-repro',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-repro',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Reproduction case generator

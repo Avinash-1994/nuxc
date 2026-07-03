@@ -1,6 +1,6 @@
 /**
  * Plugin Test Suites
- * Tests for all 10 official Nuxco launch plugins
+ * Tests for all 10 official Zeptr launch plugins
  */
 
 import { describe, it, expect, beforeAll } from '@jest/globals';
@@ -11,13 +11,13 @@ import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'nuxco-plugins-'));
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zeptr-plugins-'));
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-env Tests
+//  @zeptr/plugin-env Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-env', () => {
+describe('@zeptr/plugin-env', () => {
   const envDir = path.join(TMP, 'env-project');
   beforeAll(() => {
     fs.mkdirSync(envDir, { recursive: true });
@@ -55,10 +55,10 @@ describe('@nuxco/plugin-env', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-compression Tests
+//  @zeptr/plugin-compression Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-compression', () => {
+describe('@zeptr/plugin-compression', () => {
   let distDir: string;
 
   beforeAll(async () => {
@@ -98,10 +98,10 @@ describe('@nuxco/plugin-compression', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-svg Tests
+//  @zeptr/plugin-svg Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-svg', () => {
+describe('@zeptr/plugin-svg', () => {
   it('?raw suffix returns string type', () => {
     const svgContent = '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0"/></svg>';
     expect(typeof svgContent).toBe('string');
@@ -129,10 +129,10 @@ describe('@nuxco/plugin-svg', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-auto-import Tests
+//  @zeptr/plugin-auto-import Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-auto-import', () => {
+describe('@zeptr/plugin-auto-import', () => {
   it('resolves vue preset to Vue composables', () => {
     // The preset resolves 'vue' to a set of composables including ref, computed, etc.
     const vueComposables = ['ref', 'computed', 'watch', 'reactive', 'onMounted'];
@@ -160,14 +160,14 @@ describe('@nuxco/plugin-auto-import', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-inspect Tests
+//  @zeptr/plugin-inspect Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-inspect', () => {
+describe('@zeptr/plugin-inspect', () => {
   it('returns no-op in production', () => {
     // In production, the plugin returns a minimal object with only name
-    const noopPlugin = { name: '@nuxco/plugin-inspect' };
-    expect(noopPlugin.name).toBe('@nuxco/plugin-inspect');
+    const noopPlugin = { name: '@zeptr/plugin-inspect' };
+    expect(noopPlugin.name).toBe('@zeptr/plugin-inspect');
     expect((noopPlugin as any).configureServer).toBeUndefined();
   });
 
@@ -178,16 +178,16 @@ describe('@nuxco/plugin-inspect', () => {
   });
 
   it('zero overhead in production — plugin is no-op', () => {
-    const plugin = { name: '@nuxco/plugin-inspect' }; // No-op shape
+    const plugin = { name: '@zeptr/plugin-inspect' }; // No-op shape
     expect(Object.keys(plugin)).toHaveLength(1);
   });
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-mock Tests
+//  @zeptr/plugin-mock Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-mock', () => {
+describe('@zeptr/plugin-mock', () => {
   it('creates GET handler that returns JSON response', async () => {
     const GET = () => Response.json([{ id: 1, name: 'Alice' }]);
     const response = GET();
@@ -225,10 +225,10 @@ describe('@nuxco/plugin-mock', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-pwa Tests
+//  @zeptr/plugin-pwa Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-pwa', () => {
+describe('@zeptr/plugin-pwa', () => {
   it('generates manifest with correct fields', () => {
     const manifest = {
       name: 'My App',
@@ -254,10 +254,10 @@ describe('@nuxco/plugin-pwa', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-icons Tests
+//  @zeptr/plugin-icons Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-icons', () => {
+describe('@zeptr/plugin-icons', () => {
   it('resolves ~icons/ prefix to virtual module', () => {
     const id = '~icons/mdi/home';
     const isIconId = id.startsWith('~icons/');
@@ -286,10 +286,10 @@ describe('@nuxco/plugin-icons', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-legacy Tests
+//  @zeptr/plugin-legacy Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-legacy', () => {
+describe('@zeptr/plugin-legacy', () => {
   it('modern bundle contains type=module script', () => {
     const html = '<script type="module" src="/assets/main.js"></script>';
     expect(html).toContain('type="module"');
@@ -317,14 +317,14 @@ describe('@nuxco/plugin-legacy', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxco/plugin-checker Tests
+//  @zeptr/plugin-checker Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxco/plugin-checker', () => {
+describe('@zeptr/plugin-checker', () => {
   it('plugin factory returns correct name', () => {
     // checker() returns a plugin object with correct name
-    const plugin = { name: '@nuxco/plugin-checker' };
-    expect(plugin.name).toBe('@nuxco/plugin-checker');
+    const plugin = { name: '@zeptr/plugin-checker' };
+    expect(plugin.name).toBe('@zeptr/plugin-checker');
   });
 
   it('failOnError default is true', () => {

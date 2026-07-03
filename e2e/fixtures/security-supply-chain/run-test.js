@@ -51,7 +51,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
   const hashBefore = crypto.createHash('sha256').update(cleanContent).digest('hex');
 
   // Save hash to audit DB (simulates prior known-good state)
-  const auditDbDir = path.join(__dirname, '.nuxco', 'security');
+  const auditDbDir = path.join(__dirname, '.zeptr', 'security');
   fs.mkdirSync(auditDbDir, { recursive: true });
   fs.writeFileSync(path.join(auditDbDir, 'lockfile-hash.txt'), hashBefore, 'utf8');
 
@@ -86,7 +86,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 // ──────────────────────────────────────────────────────────
 {
   fs.rmSync(path.join(__dirname, 'package-lock.json'), { force: true });
-  fs.rmSync(path.join(__dirname, '.nuxco'), { recursive: true, force: true });
+  fs.rmSync(path.join(__dirname, '.zeptr'), { recursive: true, force: true });
   fs.writeFileSync(path.join(__dirname, 'package.json'), JSON.stringify({
     type: 'module',
     dependencies: { 'marked': '0.3.5' }
@@ -121,18 +121,18 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 // ──────────────────────────────────────────────────────────
 {
   fs.rmSync(path.join(__dirname, 'package-lock.json'), { force: true });
-  fs.rmSync(path.join(__dirname, '.nuxco'), { recursive: true, force: true });
+  fs.rmSync(path.join(__dirname, '.zeptr'), { recursive: true, force: true });
   fs.writeFileSync(path.join(__dirname, 'package.json'), JSON.stringify({
     type: 'module',
     dependencies: {}
   }));
   spawnSync('npm', ['install', '--no-save', 'axios@1.6.0', 'lodash@4.17.21', 'date-fns@3.6.0'], { cwd: __dirname, stdio: 'ignore' });
-  fs.writeFileSync(path.join(__dirname, 'nuxco.config.json'), JSON.stringify({ entry: ['src/index.js'] }));
+  fs.writeFileSync(path.join(__dirname, 'zeptr.config.json'), JSON.stringify({ entry: ['src/index.js'] }));
   fs.mkdirSync(path.join(__dirname, 'src'), { recursive: true });
   fs.writeFileSync(path.join(__dirname, 'src', 'index.js'), 'import "axios"; import "lodash"; import "date-fns"; console.log("hello");');
 
   const res = spawnSync('node', [cliPath, 'build'], { cwd: __dirname, encoding: 'utf8' });
-  const sbomPath = path.join(__dirname, 'build_output', 'nuxco-sbom.json');
+  const sbomPath = path.join(__dirname, 'build_output', 'zeptr-sbom.json');
   const generated = fs.existsSync(sbomPath) && res.status === 0;
 
   if (generated) {
@@ -150,10 +150,10 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
       `First 5 components:   ${first5 || 'none found'}`,
       `Format:               ${sbom.bomFormat} ${sbom.specVersion}`,
       `Serial number:        ${sbom.serialNumber}`,
-      `Output file:          build_output/nuxco-sbom.json`,
+      `Output file:          build_output/zeptr-sbom.json`,
     ]);
   } else {
-    fail('SEC-03  SBOM Generation', 'nuxco-sbom.json generated', 'file missing or build failed', [
+    fail('SEC-03  SBOM Generation', 'zeptr-sbom.json generated', 'file missing or build failed', [
       `Exit code: ${res.status}`,
       `Output: ${res.stdout + res.stderr}`
     ]);

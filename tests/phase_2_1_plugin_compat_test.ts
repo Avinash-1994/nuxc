@@ -6,8 +6,8 @@
 import { PluginManager, Plugin } from '../src/plugins/index.js';
 import { rollupAdapter } from '../src/plugins/compat/rollup.js';
 import { webpackLoaderAdapter } from '../src/plugins/compat/webpack.js';
-import { nuxcoCopy, nuxcoHtml } from '../src/plugins/compat/tier-b.js';
-import { nuxcoReact, nuxcoVue, nuxcoSvelte } from '../src/plugins/compat/tier-c.js';
+import { zeptrCopy, zeptrHtml } from '../src/plugins/compat/tier-b.js';
+import { zeptrReact, zeptrVue, zeptrSvelte } from '../src/plugins/compat/tier-c.js';
 import fs from 'fs';
 import path from 'path';
 import { strict as assert } from 'assert';
@@ -138,12 +138,12 @@ async function testRollupAdapterBasic() {
         transform: (code: string) => code + '// rollup'
     };
 
-    const nuxcoPlugin = rollupAdapter(rollupPlugin);
+    const zeptrPlugin = rollupAdapter(rollupPlugin);
 
-    assert.strictEqual(nuxcoPlugin.name, 'test-rollup-plugin');
-    assert.ok(nuxcoPlugin.transform);
+    assert.strictEqual(zeptrPlugin.name, 'test-rollup-plugin');
+    assert.ok(zeptrPlugin.transform);
 
-    const result = await nuxcoPlugin.transform!('code', 'test.js');
+    const result = await zeptrPlugin.transform!('code', 'test.js');
     assert.strictEqual(result, 'code// rollup');
 
     console.log('✅ Rollup adapter converts plugins correctly');
@@ -173,19 +173,19 @@ async function testRollupAdapterHooks() {
         }
     };
 
-    const nuxcoPlugin = rollupAdapter(rollupPlugin);
+    const zeptrPlugin = rollupAdapter(rollupPlugin);
 
-    const resolveResult = await nuxcoPlugin.resolveId!('virtual');
+    const resolveResult = await zeptrPlugin.resolveId!('virtual');
     assert.strictEqual(resolveResult, '/virtual/path.js');
 
-    const loadResult = await nuxcoPlugin.load!('test.virtual');
+    const loadResult = await zeptrPlugin.load!('test.virtual');
     assert.strictEqual(loadResult, 'export default "virtual"');
 
-    const transformed = await nuxcoPlugin.transform!('const  x  =  1;', 'test.js');
+    const transformed = await zeptrPlugin.transform!('const  x  =  1;', 'test.js');
     assert.strictEqual(transformed, 'const  x  =  1; // transformed');
     assert.ok(emittedAsset, 'emitFile should be available on the Rollup plugin context');
 
-    const renderResult = await nuxcoPlugin.renderChunk!('const  x  =  1;', {});
+    const renderResult = await zeptrPlugin.renderChunk!('const  x  =  1;', {});
     assert.strictEqual(renderResult, 'const x = 1;');
 
     console.log('✅ All Rollup hooks mapped correctly');
@@ -196,10 +196,10 @@ async function testRollupAdapterIntegration() {
 
     const manager = new PluginManager();
 
-    // Native Nuxco plugin
+    // Native Zeptr plugin
     manager.register({
-        name: 'nuxco-plugin',
-        transform: async (code) => code + ' [nuxco]'
+        name: 'zeptr-plugin',
+        transform: async (code) => code + ' [zeptr]'
     });
 
     // Adapted Rollup plugin
@@ -210,9 +210,9 @@ async function testRollupAdapterIntegration() {
     manager.register(rollupAdapter(rollupPlugin));
 
     const result = await manager.transform('start', 'test.js');
-    assert.strictEqual(result, 'start [nuxco] [rollup]');
+    assert.strictEqual(result, 'start [zeptr] [rollup]');
 
-    console.log('✅ Rollup plugins integrate seamlessly with Nuxco plugins');
+    console.log('✅ Rollup plugins integrate seamlessly with Zeptr plugins');
 }
 
 async function testSandboxPermissionEnforcement() {
@@ -428,8 +428,8 @@ async function testWebpackLoaderAdapter() {
     console.log('✅ Webpack loader adapter works correctly');
 }
 
-async function testNuxcoCopy() {
-    console.log('\n[Test 12] Tier B: nuxcoCopy');
+async function testZeptrCopy() {
+    console.log('\n[Test 12] Tier B: zeptrCopy');
 
     const testDir = path.resolve(process.cwd(), 'temp_test_copy');
     const srcFile = path.join(testDir, 'src/file.txt');
@@ -440,7 +440,7 @@ async function testNuxcoCopy() {
     await fs.promises.mkdir(path.dirname(srcFile), { recursive: true });
     await fs.promises.writeFile(srcFile, 'hello');
 
-    const plugin = nuxcoCopy({
+    const plugin = zeptrCopy({
         targets: [{ src: srcFile, dest: destFile }]
     });
 
@@ -451,15 +451,15 @@ async function testNuxcoCopy() {
 
     // Cleanup
     await fs.promises.rm(testDir, { recursive: true, force: true });
-    console.log('✅ nuxcoCopy copies files correctly');
+    console.log('✅ zeptrCopy copies files correctly');
 }
 
-async function testNuxcoHtml() {
-    console.log('\n[Test 13] Tier B: nuxcoHtml');
+async function testZeptrHtml() {
+    console.log('\n[Test 13] Tier B: zeptrHtml');
 
     const testDest = path.resolve(process.cwd(), 'dist', 'test-index.html');
 
-    const plugin = nuxcoHtml({
+    const plugin = zeptrHtml({
         title: 'Test App',
         filename: 'test-index.html'
     });
@@ -471,21 +471,21 @@ async function testNuxcoHtml() {
 
     // Cleanup
     await fs.promises.unlink(testDest);
-    console.log('✅ nuxcoHtml generates HTML correctly');
+    console.log('✅ zeptrHtml generates HTML correctly');
 }
 
 async function testTierC() {
     console.log('\n[Test 14] Tier C: Wrappers (React/Vue/Svelte)');
 
     // Just verify they return valid plugin objects
-    const react = nuxcoReact();
-    assert.strictEqual(react.name, 'nuxco-react');
+    const react = zeptrReact();
+    assert.strictEqual(react.name, 'zeptr-react');
 
-    const vue = nuxcoVue();
-    assert.strictEqual(vue.name, 'nuxco-vue');
+    const vue = zeptrVue();
+    assert.strictEqual(vue.name, 'zeptr-vue');
 
-    const svelte = nuxcoSvelte();
-    assert.strictEqual(svelte.name, 'nuxco-svelte');
+    const svelte = zeptrSvelte();
+    assert.strictEqual(svelte.name, 'zeptr-svelte');
 
     console.log('✅ Tier C wrappers instantiated correctly');
 }
@@ -513,9 +513,9 @@ async function runAllTests() {
         await testPerformanceBenchmark();
         await testReturnValueHandling();
         await testWebpackLoaderAdapter();
-        await testNuxcoCopy();
-        // await testNuxcoHtml(); // Skipped to avoid polling dist folder conflicts in parallel tests, but implemented.
-        try { await testNuxcoHtml(); } catch (e) { console.warn('HTML test warning (non-critical):', e); }
+        await testZeptrCopy();
+        // await testZeptrHtml(); // Skipped to avoid polling dist folder conflicts in parallel tests, but implemented.
+        try { await testZeptrHtml(); } catch (e) { console.warn('HTML test warning (non-critical):', e); }
         await testTierC();
 
         console.log('\n' + '='.repeat(60));

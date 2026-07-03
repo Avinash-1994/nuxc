@@ -1,4 +1,4 @@
-// @nuxco/plugin-visualizer — Self-contained Unit Tests
+// @zeptr/plugin-visualizer — Self-contained Unit Tests
 // Run: node --test packages/plugin-visualizer/src/__tests__/index.test.js
 
 import { describe, it } from 'node:test';
@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 function visualizerPlugin(options = {}) {
   const {
     filename = 'dist/stats.html',
-    title = 'Nuxco Bundle Visualizer',
+    title = 'Zeptr Bundle Visualizer',
     open = false,
     template = 'treemap',
     gzipSize = true,
@@ -17,7 +17,7 @@ function visualizerPlugin(options = {}) {
   const modules = [];
 
   return {
-    name: '@nuxco/plugin-visualizer',
+    name: '@zeptr/plugin-visualizer',
     _modules: modules,        // exposed for test assertions
     _options: { filename, title, open, template, gzipSize },
 
@@ -39,9 +39,9 @@ function visualizerPlugin(options = {}) {
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
-describe('@nuxco/plugin-visualizer — plugin structure', () => {
+describe('@zeptr/plugin-visualizer — plugin structure', () => {
   it('has correct name', () => {
-    assert.equal(visualizerPlugin().name, '@nuxco/plugin-visualizer');
+    assert.equal(visualizerPlugin().name, '@zeptr/plugin-visualizer');
   });
 
   it('exposes load and transform hooks', () => {
@@ -53,7 +53,7 @@ describe('@nuxco/plugin-visualizer — plugin structure', () => {
   it('uses correct defaults', () => {
     const p = visualizerPlugin();
     assert.equal(p._options.filename, 'dist/stats.html');
-    assert.equal(p._options.title, 'Nuxco Bundle Visualizer');
+    assert.equal(p._options.title, 'Zeptr Bundle Visualizer');
     assert.equal(p._options.open, false);
     assert.equal(p._options.template, 'treemap');
     assert.equal(p._options.gzipSize, true);
@@ -67,16 +67,16 @@ describe('@nuxco/plugin-visualizer — plugin structure', () => {
   });
 });
 
-describe('@nuxco/plugin-visualizer — load hook', () => {
+describe('@zeptr/plugin-visualizer — load hook', () => {
   it('returns null for all IDs', () => {
     const p = visualizerPlugin();
     assert.equal(p.load('/src/App.tsx'), null);
-    assert.equal(p.load('/__nuxco_entry__'), null);
+    assert.equal(p.load('/__zeptr_entry__'), null);
     assert.equal(p.load('/node_modules/react/index.js'), null);
   });
 });
 
-describe('@nuxco/plugin-visualizer — transform hook (passthrough)', () => {
+describe('@zeptr/plugin-visualizer — transform hook (passthrough)', () => {
   it('always returns null — pure data-collection side effect', () => {
     const p = visualizerPlugin();
     assert.equal(p.transform('export const x = 1;', '/src/utils.ts'), null);

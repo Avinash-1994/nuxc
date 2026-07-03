@@ -9,21 +9,21 @@ let nativeBinding = null;
 
 // Try all known locations for the compiled .node binary
 const candidates = [
-    path.join(__dirname, 'nuxco_native.win32-x64-msvc.node'),
-    path.join(__dirname, 'nuxco_native.win32-x64-gnu.node'),
-    path.join(__dirname, 'nuxco_native.linux-x64-gnu.node'),
-    path.join(__dirname, 'nuxco_native.linux-x64-musl.node'),
-    path.join(__dirname, 'nuxco_native.darwin-universal.node'),
-    path.join(__dirname, 'nuxco_native.darwin-arm64.node'),
-    path.join(__dirname, 'nuxco_native.darwin-x64.node'),
-    path.join(__dirname, 'nuxco_native.node'),
-    path.join(__dirname, '..', 'nuxco_native.node'),
-    path.join(__dirname, '..', 'dist', 'nuxco_native.node'),
-    path.join(process.cwd(), 'native', 'nuxco_native.win32-x64-msvc.node'),
-    path.join(process.cwd(), 'native', 'nuxco_native.linux-x64-gnu.node'),
-    path.join(process.cwd(), 'native', 'nuxco_native.darwin-universal.node'),
-    path.join(process.cwd(), 'nuxco_native.node'),
-    path.join(process.cwd(), 'dist', 'nuxco_native.node'),
+    path.join(__dirname, 'zeptr_native.win32-x64-msvc.node'),
+    path.join(__dirname, 'zeptr_native.win32-x64-gnu.node'),
+    path.join(__dirname, 'zeptr_native.linux-x64-gnu.node'),
+    path.join(__dirname, 'zeptr_native.linux-x64-musl.node'),
+    path.join(__dirname, 'zeptr_native.darwin-universal.node'),
+    path.join(__dirname, 'zeptr_native.darwin-arm64.node'),
+    path.join(__dirname, 'zeptr_native.darwin-x64.node'),
+    path.join(__dirname, 'zeptr_native.node'),
+    path.join(__dirname, '..', 'zeptr_native.node'),
+    path.join(__dirname, '..', 'dist', 'zeptr_native.node'),
+    path.join(process.cwd(), 'native', 'zeptr_native.win32-x64-msvc.node'),
+    path.join(process.cwd(), 'native', 'zeptr_native.linux-x64-gnu.node'),
+    path.join(process.cwd(), 'native', 'zeptr_native.darwin-universal.node'),
+    path.join(process.cwd(), 'zeptr_native.node'),
+    path.join(process.cwd(), 'dist', 'zeptr_native.node'),
 ];
 
 for (const candidate of candidates) {
@@ -86,9 +86,9 @@ const binding = nativeBinding || stub;
 
 if (!nativeBinding) {
     // Only warn once, not on every import
-    if (!global.__nuxco_native_warned) {
-        global.__nuxco_native_warned = true;
-        process.stderr.write('[nuxco] Native binding not found — using JS fallback stubs. Build/run `npm run build:native` to compile.\n');
+    if (!global.__zeptr_native_warned) {
+        global.__zeptr_native_warned = true;
+        process.stderr.write('[zeptr] Native binding not found — using JS fallback stubs. Build/run `npm run build:native` to compile.\n');
     }
 }
 

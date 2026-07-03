@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-tree-shake
+ * @zeptr/plugin-tree-shake
  * Advanced tree-shaking
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTreeShakePlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-tree-shake',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-tree-shake',
+        originalPlugin: 'zeptr-native',
         
         async buildStart() {
-            console.log('[@nuxco/plugin-tree-shake] Starting performance optimization...');
+            console.log('[@zeptr/plugin-tree-shake] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createTreeShakePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-tree-shake] Performance optimization complete');
+            console.log('[@zeptr/plugin-tree-shake] Performance optimization complete');
         }
     };
 }

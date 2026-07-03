@@ -1,4 +1,4 @@
-# Nuxco Plugin Contract — Binding Internal Specification
+# Zeptr Plugin Contract — Binding Internal Specification
 
 **Status**: 🔒 Binding Contract (Phase H2.2)  
 **Version**: 1.0.0  
@@ -81,7 +81,7 @@ load(id: string): LoadResult | null {
 
 **Allowed**:
 ```typescript
-const plugin: NuxcoPlugin = {
+const plugin: ZeptrPlugin = {
   name: 'my-plugin',
   version: '1.0.0',
   enforce: 'pre' | 'post', // Optional ordering
@@ -277,7 +277,7 @@ transform(code) {
 
 // ✅ GOOD
 transform(code) {
-  return { code: code + `\n// Built with Nuxco` };
+  return { code: code + `\n// Built with Zeptr` };
 }
 ```
 
@@ -371,12 +371,12 @@ Before submitting a plugin for "official" status:
 
 ## 🧠 Governance Rule
 
-**"If extending Nuxco is easier than understanding it, the extension surface is wrong."**
+**"If extending Zeptr is easier than understanding it, the extension surface is wrong."**
 
 This contract exists to make **correctness the easiest path**.
 
 ---
 
-**Signed**: Nuxco Core Team  
+**Signed**: Zeptr Core Team  
 **Binding**: All plugins (official, community, experimental)  
 **Effective**: Phase H2.2 Complete

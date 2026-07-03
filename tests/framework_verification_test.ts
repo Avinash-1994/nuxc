@@ -105,7 +105,7 @@ const FRAMEWORK_TESTS: FrameworkTest[] = [
                     template: '<h1>{{title}}</h1>'
                 })
                 export class AppComponent {
-                    title = 'nuxco-angular';
+                    title = 'zeptr-angular';
                 }
             `,
             'src/main.ts': `

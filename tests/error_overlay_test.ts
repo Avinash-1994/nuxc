@@ -13,8 +13,8 @@ async function runTests() {
     const { ErrorOverlay } = await import('../src/runtime/error-overlay.js');
 
     // Register component if not already registered (might need check)
-    if (!customElements.get('nuxco-error-overlay')) {
-        customElements.define('nuxco-error-overlay', ErrorOverlay);
+    if (!customElements.get('zeptr-error-overlay')) {
+        customElements.define('zeptr-error-overlay', ErrorOverlay);
     }
 
     console.log('🧪 Running Error Overlay Tests\n');

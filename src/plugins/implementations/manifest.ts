@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-manifest
+ * @zeptr/plugin-manifest
  * Web manifest generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createManifestPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-manifest',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-manifest',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Web manifest generation

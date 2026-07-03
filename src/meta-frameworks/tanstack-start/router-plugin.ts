@@ -1,12 +1,12 @@
-import type { Plugin } from '@nuxco/adapter-core';
+import type { Plugin } from '@zeptr/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:nuxco/tanstack-routes';
+const VIRTUAL_MODULE_ID = 'virtual:zeptr/tanstack-routes';
 
 export function tsRouterPlugin(): Plugin {
   return {
-    name: 'nuxco:tanstack-router',
+    name: 'zeptr:tanstack-router',
 
     // Intercept Route configs mapped directly for Tanstack
     resolveId(source: string) {
@@ -56,7 +56,7 @@ export function tsRouterPlugin(): Plugin {
       scan(appDir, '');
 
       return `
-        // Auto-generated Tanstack Route proxy for Nuxco native SSR engine
+        // Auto-generated Tanstack Route proxy for Zeptr native SSR engine
         export const routes = [
           ${routes.join(',\n')}
         ];

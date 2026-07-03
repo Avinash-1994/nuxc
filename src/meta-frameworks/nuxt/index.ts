@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { registry } from '@nuxco/adapter-core';
+import { registry } from '@zeptr/adapter-core';
 
 export interface NuxtAdapterOptions {
   ssr?: boolean;
@@ -163,7 +163,7 @@ export class NuxtAdapter {
 
   createPlugin() {
     return {
-      name: 'nuxco-nuxt-adapter',
+      name: 'zeptr-nuxt-adapter',
       setup: async () => {
         await this.setupNitroBridge();
       },

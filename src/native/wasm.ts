@@ -1,10 +1,10 @@
 
-// TypeScript bindings for Nuxco v2.0 native WASM runtime
+// TypeScript bindings for Zeptr v2.0 native WASM runtime
 // Day 8: Zero-Trust Ecosystem
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-const nativeModule = require('../../nuxco_native.node');
+const nativeModule = require('../../zeptr_native.node');
 
 const { PluginRuntime: NativePluginRuntime } = nativeModule;
 

@@ -1,6 +1,6 @@
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
-import nuxcoGovernance from 'eslint-plugin-nuxco-governance';
+import zeptrGovernance from 'eslint-plugin-zeptr-governance';
 import js from '@eslint/js';
 
 export default [
@@ -12,7 +12,7 @@ export default [
             'dist/**',
             '*.min.js',
             'coverage/**',
-            '.nuxco-cache/**'
+            '.zeptr-cache/**'
         ]
     },
     js.configs.recommended,
@@ -91,7 +91,7 @@ export default [
         },
         plugins: {
             '@typescript-eslint': tsPlugin,
-            'nuxco-governance': nuxcoGovernance,
+            'zeptr-governance': zeptrGovernance,
         },
         rules: {
             ...tsPlugin.configs.recommended.rules,
@@ -103,10 +103,10 @@ export default [
             'no-empty': 'off',
             'no-useless-escape': 'off',
             'no-case-declarations': 'off',
-            'nuxco-governance/no-internal-imports': 'error',
-            'nuxco-governance/require-experimental-flag': 'warn',
-            'nuxco-governance/no-graph-mutation': 'error',
-            'nuxco-governance/no-cache-access': 'error',
+            'zeptr-governance/no-internal-imports': 'error',
+            'zeptr-governance/require-experimental-flag': 'warn',
+            'zeptr-governance/no-graph-mutation': 'error',
+            'zeptr-governance/no-cache-access': 'error',
         },
     },
     {
@@ -130,16 +130,16 @@ export default [
             'src/marketplace/**/*.ts'
         ],
         rules: {
-            'nuxco-governance/no-internal-imports': 'off',
-            'nuxco-governance/no-graph-mutation': 'off',
-            'nuxco-governance/no-cache-access': 'off',
+            'zeptr-governance/no-internal-imports': 'off',
+            'zeptr-governance/no-graph-mutation': 'off',
+            'zeptr-governance/no-cache-access': 'off',
         }
     },
     {
         // Allow tests to be more permissive during stabilization
         files: ['tests/**/*.ts', 'examples/**/*.ts', 'benchmarks/**/*.ts', 'src/test/**/*.ts'],
         rules: {
-            'nuxco-governance/no-internal-imports': 'off',
+            'zeptr-governance/no-internal-imports': 'off',
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-unused-vars': 'off'
         }

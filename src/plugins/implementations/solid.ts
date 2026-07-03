@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-solid
+ * @zeptr/plugin-solid
  * SolidJS support
  * Ported from: vite-plugin-solid
  */
@@ -8,7 +8,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSolidPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-solid',
+        name: '@zeptr/plugin-solid',
         originalPlugin: 'vite-plugin-solid',
         
         async transform(code: string, id: string) {

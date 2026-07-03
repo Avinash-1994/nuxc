@@ -45,20 +45,20 @@ async function runTests() {
 
   // ── P4-01  plugin-env ─────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-env');
-    const factory = mod.nuxcoPluginEnv ?? mod.default;
-    const plugin = typeof factory === 'function' ? factory({ prefix: 'NUXCO_' }) : factory;
+    const mod = await loadPlugin('zeptr-plugin-env');
+    const factory = mod.zeptrPluginEnv ?? mod.default;
+    const plugin = typeof factory === 'function' ? factory({ prefix: 'ZEPTR_' }) : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const hasHook = typeof plugin?.transform === 'function' || typeof plugin?.configResolved === 'function';
     if (hasName && hasHook)
-      pass('P4-01', 'plugin-env', [`name: ${plugin.name}`, `prefix: NUXCO_`, `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`, `dts: src/env.d.ts`, `secret guard: yes`]);
+      pass('P4-01', 'plugin-env', [`name: ${plugin.name}`, `prefix: ZEPTR_`, `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`, `dts: src/env.d.ts`, `secret guard: yes`]);
     else fail('P4-01', `plugin-env name=${plugin?.name} hooks=${hasHook}`);
   }
 
   // ── P4-02  plugin-pwa ────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-pwa');
-    const factory = mod.nuxcoPluginPwa ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-pwa');
+    const factory = mod.zeptrPluginPwa ?? mod.default;
     const plugin = typeof factory === 'function' ? factory({ name: 'TestApp', themeColor: '#fff' }) : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const hooks = Object.keys(plugin).filter(k => typeof plugin[k] === 'function');
@@ -72,8 +72,8 @@ async function runTests() {
 
   // ── P4-03  plugin-icons ───────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-icons');
-    const factory = mod.nuxcoPluginIcons ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-icons');
+    const factory = mod.zeptrPluginIcons ?? mod.default;
     const plugin = typeof factory === 'function' ? factory() : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const hooks = Object.keys(plugin).filter(k => typeof plugin[k] === 'function');
@@ -84,8 +84,8 @@ async function runTests() {
 
   // ── P4-04  plugin-svg ────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-svg');
-    const factory = mod.nuxcoPluginSvg ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-svg');
+    const factory = mod.zeptrPluginSvg ?? mod.default;
     const plugin = typeof factory === 'function' ? factory() : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const hooks = Object.keys(plugin).filter(k => typeof plugin[k] === 'function');
@@ -96,8 +96,8 @@ async function runTests() {
 
   // ── P4-05  plugin-legacy ──────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-legacy');
-    const factory = mod.nuxcoPluginLegacy ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-legacy');
+    const factory = mod.zeptrPluginLegacy ?? mod.default;
     const plugin = typeof factory === 'function' ? factory({ targets: ['IE 11'] }) : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const html = '<html><head></head><body><script src="/assets/main.js"></script></body></html>';
@@ -110,8 +110,8 @@ async function runTests() {
 
   // ── P4-06  plugin-compression ─────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-compression');
-    const factory = mod.nuxcoPluginCompression ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-compression');
+    const factory = mod.zeptrPluginCompression ?? mod.default;
     const plugin = typeof factory === 'function' ? factory({ algorithm: 'brotli' }) : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const hooks = Object.keys(plugin).filter(k => typeof plugin[k] === 'function');
@@ -122,8 +122,8 @@ async function runTests() {
 
   // ── P4-07  plugin-auto-import ─────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-auto-import');
-    const factory = mod.nuxcoPluginAutoImport ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-auto-import');
+    const factory = mod.zeptrPluginAutoImport ?? mod.default;
     const plugin = typeof factory === 'function' ? factory({ imports: ['react', 'vue'] }) : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const hooks = Object.keys(plugin).filter(k => typeof plugin[k] === 'function');
@@ -134,20 +134,20 @@ async function runTests() {
 
   // ── P4-08  plugin-inspect ─────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-inspect');
-    const factory = mod.nuxcoPluginInspect ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-inspect');
+    const factory = mod.zeptrPluginInspect ?? mod.default;
     const plugin = typeof factory === 'function' ? factory() : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const hooks = Object.keys(plugin).filter(k => typeof plugin[k] === 'function');
     if (hasName)
-      pass('P4-08', 'plugin-inspect', [`name: ${plugin.name}`, `hooks: ${hooks.join(', ')}`, `GUI: /__nuxco_inspect__`, `timings: yes`, `module graph: yes`]);
+      pass('P4-08', 'plugin-inspect', [`name: ${plugin.name}`, `hooks: ${hooks.join(', ')}`, `GUI: /__zeptr_inspect__`, `timings: yes`, `module graph: yes`]);
     else fail('P4-08', `plugin-inspect missing name`);
   }
 
   // ── P4-09  plugin-checker ─────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-checker');
-    const factory = mod.nuxcoPluginChecker ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-checker');
+    const factory = mod.zeptrPluginChecker ?? mod.default;
     const plugin = typeof factory === 'function' ? factory({ typescript: true, eslint: true }) : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const hooks = Object.keys(plugin).filter(k => typeof plugin[k] === 'function');
@@ -158,8 +158,8 @@ async function runTests() {
 
   // ── P4-10  plugin-mock ────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-mock');
-    const factory = mod.nuxcoPluginMock ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-mock');
+    const factory = mod.zeptrPluginMock ?? mod.default;
     const plugin = typeof factory === 'function' ? factory() : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.length > 0;
     const hooks = Object.keys(plugin).filter(k => typeof plugin[k] === 'function');
@@ -170,8 +170,8 @@ async function runTests() {
 
   // ── P4-11  plugin-image ───────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxco-plugin-image');
-    const factory = mod.nuxcoPluginImage ?? mod.default;
+    const mod = await loadPlugin('zeptr-plugin-image');
+    const factory = mod.zeptrPluginImage ?? mod.default;
     const plugin = typeof factory === 'function' ? factory({ quality: 80 }) : factory;
     const hasName = typeof plugin?.name === 'string' && plugin.name.includes('image');
     // Test srcset generation
@@ -219,7 +219,7 @@ async function runTests() {
 
   // ── Summary ────────────────────────────────────────────────────────────────
   console.log('┌────────────────────────────────────────────────────┐');
-  console.log('│ NUXCO — PHASE 4 PLUGIN ECOSYSTEM COMPLETE         │');
+  console.log('│ ZEPTR — PHASE 4 PLUGIN ECOSYSTEM COMPLETE         │');
   console.log('│                                                    │');
   console.log('│ P4-01  plugin-env:          PASS                  │');
   console.log('│ P4-02  plugin-pwa:          PASS                  │');

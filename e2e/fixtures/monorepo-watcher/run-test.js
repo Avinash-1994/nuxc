@@ -23,10 +23,10 @@ function getMemoryUsage() {
     return process.memoryUsage().rss / (1024 * 1024);
 }
 
-const NATIVE_NODE_PATH = path.join(process.cwd(), 'native/nuxco_native.linux-x64-gnu.node');
-const NATIVE_BAK_PATH = path.join(process.cwd(), 'native/nuxco_native.linux-x64-gnu.node.bak');
-const NATIVE_ROOT_NODE_PATH = path.join(process.cwd(), 'nuxco_native.node');
-const NATIVE_ROOT_BAK_PATH = path.join(process.cwd(), 'nuxco_native.node.bak');
+const NATIVE_NODE_PATH = path.join(process.cwd(), 'native/zeptr_native.linux-x64-gnu.node');
+const NATIVE_BAK_PATH = path.join(process.cwd(), 'native/zeptr_native.linux-x64-gnu.node.bak');
+const NATIVE_ROOT_NODE_PATH = path.join(process.cwd(), 'zeptr_native.node');
+const NATIVE_ROOT_BAK_PATH = path.join(process.cwd(), 'zeptr_native.node.bak');
 
 function maskNative() {
     if (fs.existsSync(NATIVE_NODE_PATH)) {

@@ -136,7 +136,7 @@ async function generateChromeTrace(events: any[]) {
             args: e.data || {}
         }));
 
-    const tracePath = path.join(process.cwd(), 'nuxco-trace.json');
+    const tracePath = path.join(process.cwd(), 'zeptr-trace.json');
     await fs.writeFile(tracePath, JSON.stringify(traceEvents));
     log.success(`Chrome Trace generated at: ${tracePath} (Open in Chrome DevTools -> Performance)`);
 }
@@ -148,7 +148,7 @@ async function generateHtmlReport(data: any) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuxco Premium Bundle Analyzer</title>
+    <title>Zeptr Premium Bundle Analyzer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -219,7 +219,7 @@ async function generateHtmlReport(data: any) {
         <div class="header">
             <div>
                 <div class="stat-label">Project Report</div>
-                <h1>Nuxco Analyze</h1>
+                <h1>Zeptr Analyze</h1>
             </div>
             <div class="stats">
                 <div>
@@ -312,7 +312,7 @@ async function generateHtmlReport(data: any) {
 </html>
     `;
 
-    const reportPath = path.join(process.cwd(), 'nuxco-report.html');
+    const reportPath = path.join(process.cwd(), 'zeptr-report.html');
     await fs.writeFile(reportPath, html);
     log.success(`Premium Report generated at: ${reportPath}`);
 }

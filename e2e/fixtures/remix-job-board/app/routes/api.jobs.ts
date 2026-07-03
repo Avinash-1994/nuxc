@@ -2,7 +2,7 @@ import { json } from "@remix-run/node";
 
 export async function loader() {
   return json([
-    { id: "1", title: "Senior Engineer", company: "Nuxco" },
+    { id: "1", title: "Senior Engineer", company: "Zeptr" },
     { id: "2", title: "Product Designer", company: "Qwik Labs" },
     { id: "3", title: "DevRel Engineer", company: "Astro Inc" },
   ]);

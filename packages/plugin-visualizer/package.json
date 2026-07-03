@@ -1,7 +1,7 @@
 {
-  "name": "@nuxco/plugin-visualizer",
+  "name": "@zeptr/plugin-visualizer",
   "version": "1.0.0",
-  "description": "Official Nuxco plugin for bundle visualization — treemap HTML report of bundle composition",
+  "description": "Official Zeptr plugin for bundle visualization — treemap HTML report of bundle composition",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,11 +16,11 @@
     "build": "tsc",
     "test": "node --test src/__tests__/index.test.js"
   },
-  "keywords": ["nuxco", "plugin", "visualizer", "bundle-size", "treemap", "analysis"],
+  "keywords": ["zeptr", "plugin", "visualizer", "bundle-size", "treemap", "analysis"],
   "author": "Avinash-1994",
   "license": "MIT",
   "peerDependencies": {
-    "nuxco": ">=1.0.0"
+    "zeptr": ">=1.0.0"
   },
   "devDependencies": {
     "typescript": "^5.4.2"

@@ -1,5 +1,5 @@
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 import { analogCompilerPlugin } from './analog-plugin.js';
 
 export interface AnalogConfig {
@@ -7,7 +7,7 @@ export interface AnalogConfig {
   prerender?: string[];    // default: ['/']
 }
 
-export class AnalogAdapter implements NuxcoAdapter {
+export class AnalogAdapter implements ZeptrAdapter {
   name = 'analog';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class AnalogAdapter implements NuxcoAdapter {
     ];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.analog) config.analog = {};
     config.analog = {
       ssr: true,
@@ -62,7 +62,7 @@ export class AnalogAdapter implements NuxcoAdapter {
           }
         }
       } catch (e) {
-        console.error('[NUXCO Analog] Dev handler error:', e);
+        console.error('[ZEPTR Analog] Dev handler error:', e);
       }
       next();
     };

@@ -1,11 +1,11 @@
-import type { Plugin } from '@nuxco/adapter-core';
+import type { Plugin } from '@zeptr/adapter-core';
 import path from 'path';
 
 let remixVitePluginBuilder: any;
 
 export function remixRoutesPlugin(): Plugin {
   return {
-    name: 'nuxco:remix-routes',
+    name: 'zeptr:remix-routes',
 
     async buildStart() {
       try {
@@ -19,14 +19,14 @@ export function remixRoutesPlugin(): Plugin {
 
     async resolveId(source: string) {
        // Support virtual Remix build imports
-       if (source === 'virtual:nuxco/remix-server-build') {
+       if (source === 'virtual:zeptr/remix-server-build') {
           return source;
        }
        return null;
     },
 
     async load(id: string) {
-       if (id === 'virtual:nuxco/remix-server-build') {
+       if (id === 'virtual:zeptr/remix-server-build') {
           // Expose standard Route tree mappings natively mirroring Remix's output
           // In a real pipeline, we bridge this directly into the Vite manifest structure provided
           // by \`@remix-run/dev/vitePlugin\`

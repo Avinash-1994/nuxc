@@ -54,7 +54,7 @@ export class HMROverlay {
 
     private createOverlay(decision: HMRDecision): HTMLElement {
         const container = document.createElement('div');
-        container.className = 'nuxco-hmr-overlay';
+        container.className = 'zeptr-hmr-overlay';
         container.style.cssText = this.getContainerStyles();
 
         // Header

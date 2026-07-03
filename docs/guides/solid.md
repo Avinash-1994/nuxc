@@ -1,15 +1,15 @@
 # SolidJS Guide
 
-> Build SolidJS apps with Nuxco — fine-grained reactivity, signal-aware HMR, TypeScript.
+> Build SolidJS apps with Zeptr — fine-grained reactivity, signal-aware HMR, TypeScript.
 
 ---
 
 ## Quick Start
 
 ```bash
-nuxco bootstrap --name my-solid-app --template solid-ts
+zeptr bootstrap --name my-solid-app --template solid-ts
 cd my-solid-app
-nuxco dev
+zeptr dev
 ```
 
 ---
@@ -19,11 +19,11 @@ nuxco dev
 ### 1. Install
 
 ```bash
-npm install --save-dev nuxco typescript
+npm install --save-dev zeptr typescript
 npm install solid-js
 ```
 
-### 2. Create `nuxco.config.js`
+### 2. Create `zeptr.config.js`
 
 **JavaScript:**
 ```js
@@ -37,7 +37,7 @@ module.exports = {
 
 **TypeScript:**
 ```ts
-import { defineConfig } from 'nuxco';
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   entry: ['./src/index.tsx'],
@@ -67,7 +67,7 @@ function App() {
 
   return (
     <div>
-      <h1>Hello from Nuxco + SolidJS</h1>
+      <h1>Hello from Zeptr + SolidJS</h1>
       <button onClick={() => setCount(c => c + 1)}>
         Count: {count()}
       </button>
@@ -114,7 +114,7 @@ function Counter() {
 
 ## HMR — Signal-Aware Hot Reload
 
-Nuxco provides signal-aware HMR for SolidJS:
+Zeptr provides signal-aware HMR for SolidJS:
 
 - Signal values are **preserved** across saves when possible
 - Component re-renders when code structure changes
@@ -260,7 +260,7 @@ function App() {
 ## Production Build
 
 ```bash
-nuxco build
+zeptr build
 ```
 
 SolidJS compiles to **vanilla DOM operations** with no virtual DOM overhead. Bundles are typically 5–15KB gzipped for typical apps.

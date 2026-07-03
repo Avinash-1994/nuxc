@@ -1,5 +1,5 @@
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 import { electronPlugin } from './electron-plugin.js';
 
 export interface ElectronConfig {
@@ -7,7 +7,7 @@ export interface ElectronConfig {
   preloadSrc?: string;    // default 'electron/preload.ts'
 }
 
-export class ElectronAdapter implements NuxcoAdapter {
+export class ElectronAdapter implements ZeptrAdapter {
   name = 'electron';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class ElectronAdapter implements NuxcoAdapter {
     ];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.electron) config.electron = {};
     config.electron = {
       mainSrc: 'electron/main.ts',
@@ -32,10 +32,10 @@ export class ElectronAdapter implements NuxcoAdapter {
 
   getDevHandler(): Middleware {
     return async (req: any, res: any, next: any) => {
-      // Set ELECTRON_DEV_SERVER_URL for the main process to load renderer from Nuxco dev server
+      // Set ELECTRON_DEV_SERVER_URL for the main process to load renderer from Zeptr dev server
       const devUrl = process.env.ELECTRON_DEV_SERVER_URL || `http://localhost:${req?.socket?.localPort || 5173}`;
-      res.setHeader('X-Nuxco-Electron-Dev-URL', devUrl);
-      // Renderer requests are served directly by the Nuxco HMR dev server
+      res.setHeader('X-Zeptr-Electron-Dev-URL', devUrl);
+      // Renderer requests are served directly by the Zeptr HMR dev server
       next();
     };
   }

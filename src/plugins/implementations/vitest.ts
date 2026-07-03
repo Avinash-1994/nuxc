@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-vitest
+ * @zeptr/plugin-vitest
  * Vitest integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVitestPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-vitest',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-vitest',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Vitest integration

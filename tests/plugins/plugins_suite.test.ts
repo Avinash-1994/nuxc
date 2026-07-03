@@ -1,20 +1,20 @@
 /**
  * Plugin System Test Suite — Agent 5
- * Tests the Nuxco plugin system: load hooks, transform hooks, virtual modules,
+ * Tests the Zeptr plugin system: load hooks, transform hooks, virtual modules,
  * ordering, error handling, and context APIs.
  */
 
 import { PluginManager } from '../../src/core/plugins/manager.js';
-import type { NuxcoPlugin } from '../../src/core/plugins/types.js';
+import type { ZeptrPlugin } from '../../src/core/plugins/types.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 
-const TMP = path.join(os.tmpdir(), 'nuxco-plugin-tests');
+const TMP = path.join(os.tmpdir(), 'zeptr-plugin-tests');
 fs.mkdirSync(TMP, { recursive: true });
 
-// Helper: build a minimal NuxcoPlugin
-function makePlugin(name: string, runHookFn: NuxcoPlugin['runHook']): NuxcoPlugin {
+// Helper: build a minimal ZeptrPlugin
+function makePlugin(name: string, runHookFn: ZeptrPlugin['runHook']): ZeptrPlugin {
     return {
         id: name,
         manifest: {

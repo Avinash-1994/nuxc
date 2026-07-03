@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-auto-fix
+ * @zeptr/plugin-auto-fix
  * Automatic error fixing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createAutoFixPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-auto-fix',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-auto-fix',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Automatic error fixing

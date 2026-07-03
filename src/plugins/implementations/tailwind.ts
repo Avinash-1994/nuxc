@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-tailwind
+ * @zeptr/plugin-tailwind
  * Tailwind CSS integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTailwindPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-tailwind',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-tailwind',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for tailwind

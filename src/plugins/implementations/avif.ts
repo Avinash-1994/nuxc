@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-avif
+ * @zeptr/plugin-avif
  * AVIF image support
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createAvifPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-avif',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-avif',
+        originalPlugin: 'zeptr-native',
         
         async load(id: string) {
             // Asset loading for avif

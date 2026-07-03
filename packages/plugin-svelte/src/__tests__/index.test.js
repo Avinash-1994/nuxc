@@ -1,4 +1,4 @@
-// @nuxco/plugin-svelte — Self-contained Unit Tests
+// @zeptr/plugin-svelte — Self-contained Unit Tests
 // Run: node --test packages/plugin-svelte/src/__tests__/index.test.js
 
 import { describe, it, beforeEach, afterEach } from 'node:test';
@@ -9,7 +9,7 @@ function sveltePlugin(options = {}) {
   const { hmr = true, runes = false, compilerOptions = {} } = options;
 
   return {
-    name: '@nuxco/plugin-svelte',
+    name: '@zeptr/plugin-svelte',
 
     load(_id) { return null; },
 
@@ -28,9 +28,9 @@ function sveltePlugin(options = {}) {
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
-describe('@nuxco/plugin-svelte — plugin structure', () => {
+describe('@zeptr/plugin-svelte — plugin structure', () => {
   it('has correct name', () => {
-    assert.equal(sveltePlugin().name, '@nuxco/plugin-svelte');
+    assert.equal(sveltePlugin().name, '@zeptr/plugin-svelte');
   });
 
   it('exposes load and transform hooks', () => {
@@ -44,7 +44,7 @@ describe('@nuxco/plugin-svelte — plugin structure', () => {
   });
 });
 
-describe('@nuxco/plugin-svelte — load hook', () => {
+describe('@zeptr/plugin-svelte — load hook', () => {
   it('always returns null (core handles compilation)', () => {
     const p = sveltePlugin();
     assert.equal(p.load('/src/App.svelte'), null);
@@ -52,7 +52,7 @@ describe('@nuxco/plugin-svelte — load hook', () => {
   });
 });
 
-describe('@nuxco/plugin-svelte — transform hook', () => {
+describe('@zeptr/plugin-svelte — transform hook', () => {
   let savedEnv;
   beforeEach(() => { savedEnv = process.env.NODE_ENV; process.env.NODE_ENV = 'development'; });
   afterEach(() => { process.env.NODE_ENV = savedEnv; });

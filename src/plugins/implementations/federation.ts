@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-federation
+ * @zeptr/plugin-federation
  * Module federation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createFederationPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-federation',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-federation',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Module federation

@@ -4,19 +4,19 @@
  * Validates Day 26 Unified HMR & Config
  */
 
-import { NuxcoEnv } from '../src/env/api.js';
+import { ZeptrEnv } from '../src/env/api.js';
 
 async function runEnvTest() {
     console.log('🧪 Testing Environment API...');
 
     // 1. Initialize
-    const env = NuxcoEnv.init({
+    const env = ZeptrEnv.init({
         mode: 'development',
         ssr: true,
         base: '/'
     });
 
-    if (NuxcoEnv.get().config.mode !== 'development') {
+    if (ZeptrEnv.get().config.mode !== 'development') {
         throw new Error('Config mismatch');
     }
     console.log('  ✅ Env Initialization Verified');

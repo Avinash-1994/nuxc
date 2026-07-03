@@ -1,11 +1,11 @@
 /**
- * Nuxco — Discriminated Union Config Types (PART 4)
+ * Zeptr — Discriminated Union Config Types (PART 4)
  * Provides framework-specific IntelliSense via defineConfig overloads.
  */
 
 // ─── Base (shared by all) ──────────────────────────────────────────────────
 
-export interface NuxcoBaseConfig {
+export interface ZeptrBaseConfig {
   entry?:     string | string[];
   outDir?:    string;
   mode?:      'development' | 'production' | 'test';
@@ -57,7 +57,7 @@ export interface NuxcoBaseConfig {
 
 // ─── SSR Meta-Frameworks ───────────────────────────────────────────────────
 
-export interface NuxcoSSRConfig extends NuxcoBaseConfig {
+export interface ZeptrSSRConfig extends ZeptrBaseConfig {
   framework: 'nuxt' | 'sveltekit' | 'svelte-kit' | 'remix' | 'solidstart'
            | 'solid-start' | 'astro' | 'analog' | 'tanstack-start' | 'waku'
            | 'next' | 'nextjs';
@@ -68,7 +68,7 @@ export interface NuxcoSSRConfig extends NuxcoBaseConfig {
 
 // ─── Electron — dual bundle ────────────────────────────────────────────────
 
-export interface NuxcoElectronConfig extends NuxcoBaseConfig {
+export interface ZeptrElectronConfig extends ZeptrBaseConfig {
   framework:      'electron';
   preset?:        'spa';
   platform?:      'browser';
@@ -80,7 +80,7 @@ export interface NuxcoElectronConfig extends NuxcoBaseConfig {
 
 // ─── Tauri — WebView frontend ──────────────────────────────────────────────
 
-export interface NuxcoTauriConfig extends NuxcoBaseConfig {
+export interface ZeptrTauriConfig extends ZeptrBaseConfig {
   framework: 'tauri';
   preset?:   'spa';
   platform?: 'browser';
@@ -90,7 +90,7 @@ export interface NuxcoTauriConfig extends NuxcoBaseConfig {
 
 // ─── SPA frameworks ───────────────────────────────────────────────────────
 
-export interface NuxcoSPAConfig extends NuxcoBaseConfig {
+export interface ZeptrSPAConfig extends ZeptrBaseConfig {
   framework?: 'react' | 'vue' | 'svelte' | 'angular' | 'solid'
             | 'preact' | 'lit' | 'qwik' | 'vanilla';
   preset?:    'spa';
@@ -99,10 +99,10 @@ export interface NuxcoSPAConfig extends NuxcoBaseConfig {
 
 // ─── defineConfig overloads ────────────────────────────────────────────────
 /* eslint-disable no-redeclare */
-export function defineConfig(c: NuxcoElectronConfig): NuxcoElectronConfig;
-export function defineConfig(c: NuxcoTauriConfig):    NuxcoTauriConfig;
-export function defineConfig(c: NuxcoSSRConfig):      NuxcoSSRConfig;
-export function defineConfig(c: NuxcoSPAConfig):      NuxcoSPAConfig;
-export function defineConfig(c: NuxcoBaseConfig):     NuxcoBaseConfig;
+export function defineConfig(c: ZeptrElectronConfig): ZeptrElectronConfig;
+export function defineConfig(c: ZeptrTauriConfig):    ZeptrTauriConfig;
+export function defineConfig(c: ZeptrSSRConfig):      ZeptrSSRConfig;
+export function defineConfig(c: ZeptrSPAConfig):      ZeptrSPAConfig;
+export function defineConfig(c: ZeptrBaseConfig):     ZeptrBaseConfig;
 export function defineConfig(c: any): any { return c; }
 /* eslint-enable no-redeclare */

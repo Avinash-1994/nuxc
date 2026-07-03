@@ -1,15 +1,15 @@
 /**
- * @nuxco/plugin-mobx
+ * @zeptr/plugin-mobx
  * MobX integration
- * Nuxco-native
+ * Zeptr-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMobxPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-mobx',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-mobx',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // mobx transformation

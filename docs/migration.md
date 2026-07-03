@@ -1,6 +1,6 @@
-# Migration Guide: Moving to Nuxco
+# Migration Guide: Moving to Zeptr
 
-> **Goal**: Migrate from Vite, Webpack, Rollup, or Angular CLI to Nuxco in **under 30 minutes**.
+> **Goal**: Migrate from Vite, Webpack, Rollup, or Angular CLI to Zeptr in **under 30 minutes**.
 
 ---
 
@@ -8,10 +8,10 @@
 
 ```bash
 # Analyze your existing project
-npx nuxco migrate /path/to/your/project --dry-run
+npx zeptr migrate /path/to/your/project --dry-run
 
-# Apply migration (creates nuxco.config.ts, updates package.json)
-npx nuxco migrate /path/to/your/project
+# Apply migration (creates zeptr.config.ts, updates package.json)
+npx zeptr migrate /path/to/your/project
 
 # Install dependencies
 npm install
@@ -34,7 +34,7 @@ npm run dev
 - Tailwind CSS configuration
 - Build output settings
 
-### Example: Vite → Nuxco
+### Example: Vite → Zeptr
 
 **Before** (`vite.config.ts`):
 ```typescript
@@ -58,9 +58,9 @@ export default defineConfig({
 });
 ```
 
-**After** (`nuxco.config.ts`):
+**After** (`zeptr.config.ts`):
 ```typescript
-import { defineConfig } from 'nuxco';
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   preset: 'spa',
@@ -90,17 +90,17 @@ export default defineConfig({
 ```json
 {
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview",
-    "test": "nuxco test"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview",
+    "test": "zeptr test"
   }
 }
 ```
 
 ### Manual Steps
 
-1. **Vite Plugins**: Check if equivalent Nuxco plugins exist in marketplace
+1. **Vite Plugins**: Check if equivalent Zeptr plugins exist in marketplace
 2. **Custom Rollup Plugins**: May need adaptation (see [Plugins Guide](./plugins.md))
 3. **SSR**: Use `preset: 'ssr'` and configure server entry
 
@@ -112,12 +112,12 @@ export default defineConfig({
 
 - Entry points
 - Output configuration
-- Loaders → Nuxco plugins
+- Loaders → Zeptr plugins
 - Aliases
 - DevServer settings
 - Environment variables
 
-### Example: Webpack → Nuxco
+### Example: Webpack → Zeptr
 
 **Before** (`webpack.config.js`):
 ```javascript
@@ -159,9 +159,9 @@ module.exports = {
 };
 ```
 
-**After** (`nuxco.config.ts`):
+**After** (`zeptr.config.ts`):
 ```typescript
-import { defineConfig } from 'nuxco';
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   preset: 'spa',
@@ -187,23 +187,23 @@ export default defineConfig({
 });
 ```
 
-### Common Webpack Loaders → Nuxco
+### Common Webpack Loaders → Zeptr
 
-| Webpack Loader | Nuxco Equivalent |
+| Webpack Loader | Zeptr Equivalent |
 |----------------|------------------|
 | `ts-loader` | Built-in TypeScript support |
 | `babel-loader` | Built-in (via Bun parser) |
 | `css-loader` | Built-in CSS support |
-| `sass-loader` | `@nuxco/plugin-sass` |
+| `sass-loader` | `@zeptr/plugin-sass` |
 | `file-loader` | Built-in asset handling |
 | `url-loader` | Built-in (auto inline < 4KB) |
-| `svg-loader` | `@nuxco/plugin-svgr` |
+| `svg-loader` | `@zeptr/plugin-svgr` |
 
 ### Manual Steps
 
 1. **Complex Webpack Plugins**: Check marketplace or write custom plugin
-2. **Module Federation**: Use Nuxco's built-in federation
-3. **Custom Loaders**: Adapt to Nuxco plugin API
+2. **Module Federation**: Use Zeptr's built-in federation
+3. **Custom Loaders**: Adapt to Zeptr plugin API
 
 ---
 
@@ -216,7 +216,7 @@ export default defineConfig({
 - External dependencies
 - Tree-shaking settings
 
-### Example: Rollup → Nuxco
+### Example: Rollup → Zeptr
 
 **Before** (`rollup.config.js`):
 ```javascript
@@ -238,9 +238,9 @@ export default {
 };
 ```
 
-**After** (`nuxco.config.ts`):
+**After** (`zeptr.config.ts`):
 ```typescript
-import { defineConfig } from 'nuxco';
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   preset: 'spa',
@@ -268,7 +268,7 @@ export default defineConfig({
 - Environment files
 - Build configurations
 
-### Example: Angular CLI → Nuxco
+### Example: Angular CLI → Zeptr
 
 **Before** (`angular.json`):
 ```json
@@ -296,9 +296,9 @@ export default defineConfig({
 }
 ```
 
-**After** (`nuxco.config.ts`):
+**After** (`zeptr.config.ts`):
 ```typescript
-import { defineConfig } from 'nuxco';
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   preset: 'spa',
@@ -321,10 +321,10 @@ export default defineConfig({
 ```json
 {
   "scripts": {
-    "ng": "nuxco",
-    "start": "nuxco dev",
-    "build": "nuxco build",
-    "test": "nuxco test"
+    "ng": "zeptr",
+    "start": "zeptr dev",
+    "build": "zeptr build",
+    "test": "zeptr test"
   }
 }
 ```
@@ -333,10 +333,10 @@ export default defineConfig({
 
 ## Migration Analyzer
 
-Nuxco includes an intelligent migration analyzer:
+Zeptr includes an intelligent migration analyzer:
 
 ```bash
-npx nuxco migrate /path/to/project --dry-run
+npx zeptr migrate /path/to/project --dry-run
 ```
 
 **Output**:
@@ -356,7 +356,7 @@ npx nuxco migrate /path/to/project --dry-run
     ✓ React Fast Refresh
 
   Manual steps:
-    ⚠ vite-plugin-pwa → Check @nuxco/plugin-pwa
+    ⚠ vite-plugin-pwa → Check @zeptr/plugin-pwa
     ⚠ Custom Vite plugin → Needs adaptation
 
 📊 Expected Success Rate: 95%
@@ -372,8 +372,8 @@ Run without --dry-run to apply changes.
 ### 1. Monorepo Migration
 
 ```typescript
-// nuxco.config.ts (root)
-import { defineConfig } from 'nuxco';
+// zeptr.config.ts (root)
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   preset: 'monorepo',
@@ -389,8 +389,8 @@ export default defineConfig({
 ### 2. SSR Migration
 
 ```typescript
-// nuxco.config.ts
-import { defineConfig } from 'nuxco';
+// zeptr.config.ts
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   preset: 'ssr',
@@ -411,8 +411,8 @@ export default defineConfig({
 ### 3. Edge Function Migration
 
 ```typescript
-// nuxco.config.ts
-import { defineConfig } from 'nuxco';
+// zeptr.config.ts
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
   preset: 'edge',
@@ -436,7 +436,7 @@ export default defineConfig({
 
 **Solution**:
 ```typescript
-// nuxco.config.ts
+// zeptr.config.ts
 export default defineConfig({
   resolve: {
     alias: {
@@ -475,7 +475,7 @@ npm run build  # Second run: ~500ms (warm)
 
 ## Honest Limitations
 
-### What Nuxco Does Better ✅
+### What Zeptr Does Better ✅
 
 - **Memory efficiency**: ~0.1MB vs 20MB+ (Vite)
 - **HMR speed**: Fast updates with incremental reloads
@@ -499,10 +499,10 @@ npm run build  # Second run: ~500ms (warm)
 
 ## Migration Checklist
 
-- [ ] Run `nuxco migrate --dry-run`
+- [ ] Run `zeptr migrate --dry-run`
 - [ ] Review migration plan
 - [ ] Backup existing config files
-- [ ] Run `nuxco migrate`
+- [ ] Run `zeptr migrate`
 - [ ] Install dependencies (`npm install`)
 - [ ] Test dev server (`npm run dev`)
 - [ ] Test production build (`npm run build`)
@@ -515,10 +515,10 @@ npm run build  # Second run: ~500ms (warm)
 
 ## Getting Help
 
-- **Documentation**: [https://nuxco.dev/docs](https://nuxco.dev/docs)
-- **GitHub Issues**: [https://github.com/your-org/nuxco/issues](https://github.com/your-org/nuxco/issues)
-- **Discord**: [https://discord.gg/nuxco](https://discord.gg/nuxco)
-- **Migration Tool**: `nuxco doctor` for diagnostics
+- **Documentation**: [https://zeptr.dev/docs](https://zeptr.dev/docs)
+- **GitHub Issues**: [https://github.com/your-org/zeptr/issues](https://github.com/your-org/zeptr/issues)
+- **Discord**: [https://discord.gg/zeptr](https://discord.gg/zeptr)
+- **Migration Tool**: `zeptr doctor` for diagnostics
 
 ---
 

@@ -1,7 +1,7 @@
 {
-  "module": "nuxco",
+  "module": "zeptr",
   "entry": ["./src/main.jsx"],
-  "outDir": "./dist-nuxco",
+  "outDir": "./dist-zeptr",
   "build": {
     "minify": true,
     "sourcemap": false

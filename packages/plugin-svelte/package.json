@@ -1,7 +1,7 @@
 {
-  "name": "@nuxco/plugin-svelte",
+  "name": "@zeptr/plugin-svelte",
   "version": "1.0.0",
-  "description": "Official Nuxco plugin for Svelte — .svelte file transform, Svelte 5 Runes, HMR",
+  "description": "Official Zeptr plugin for Svelte — .svelte file transform, Svelte 5 Runes, HMR",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,11 +16,11 @@
     "build": "tsc",
     "test": "node --test src/__tests__/index.test.js"
   },
-  "keywords": ["nuxco", "plugin", "svelte", "svelte5", "runes", "hmr"],
+  "keywords": ["zeptr", "plugin", "svelte", "svelte5", "runes", "hmr"],
   "author": "Avinash-1994",
   "license": "MIT",
   "peerDependencies": {
-    "nuxco": ">=1.0.0",
+    "zeptr": ">=1.0.0",
     "svelte": ">=4.0.0"
   },
   "devDependencies": {

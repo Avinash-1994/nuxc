@@ -1,11 +1,11 @@
-import type { Plugin } from '@nuxco/adapter-core';
+import type { Plugin } from '@zeptr/adapter-core';
 import path from 'path';
 
 let analogVitePlugin: any;
 
 export function analogCompilerPlugin(): Plugin {
   return {
-    name: 'nuxco:analog-compiler',
+    name: 'zeptr:analog-compiler',
 
     async buildStart() {
       try {
@@ -19,14 +19,14 @@ export function analogCompilerPlugin(): Plugin {
 
     async resolveId(source: string) {
        // Support virtual entry for SSR mappings
-       if (source === 'virtual:nuxco/analog-ssr-entry') {
+       if (source === 'virtual:zeptr/analog-ssr-entry') {
           return source;
        }
        return null;
     },
 
     async load(id: string) {
-       if (id === 'virtual:nuxco/analog-ssr-entry') {
+       if (id === 'virtual:zeptr/analog-ssr-entry') {
           // This bridges the SSR compilation entry to Analog's \`render()\` runtime
           return `
              import { renderModule } from '@angular/platform-server';

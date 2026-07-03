@@ -85,7 +85,7 @@ export class ReportGenerator {
         const comparisons: ComparisonData[] = [];
         for (const [metric, toolData] of metrics) {
             const tools: Record<string, number | null> = {};
-            let winner: BuildTool = 'nuxco';
+            let winner: BuildTool = 'zeptr';
             let bestValue = Infinity;
 
             // Determine if lower is better (most metrics)
@@ -126,23 +126,23 @@ export class ReportGenerator {
         // Performance gaps
         const perfGaps: GapAnalysis['gaps'] = [];
         for (const comp of comparisons) {
-            const nuxcoValue = comp.tools.nuxco;
-            if (nuxcoValue === null) continue;
+            const zeptrValue = comp.tools.zeptr;
+            if (zeptrValue === null) continue;
 
             const winnerValue = comp.tools[comp.winner];
-            if (winnerValue === null || comp.winner === 'nuxco') continue;
+            if (winnerValue === null || comp.winner === 'zeptr') continue;
 
-            const diff = ((nuxcoValue - winnerValue) / winnerValue) * 100;
+            const diff = ((zeptrValue - winnerValue) / winnerValue) * 100;
 
             if (diff > 50) {
                 perfGaps.push({
-                    issue: `${comp.metric}: Nuxco is ${diff.toFixed(0)}% slower than ${comp.winner}`,
+                    issue: `${comp.metric}: Zeptr is ${diff.toFixed(0)}% slower than ${comp.winner}`,
                     severity: diff > 100 ? 'critical' : 'high',
                     recommendation: `Optimize ${comp.metric} to match ${comp.winner}'s performance`,
                 });
             } else if (diff > 20) {
                 perfGaps.push({
-                    issue: `${comp.metric}: Nuxco is ${diff.toFixed(0)}% slower than ${comp.winner}`,
+                    issue: `${comp.metric}: Zeptr is ${diff.toFixed(0)}% slower than ${comp.winner}`,
                     severity: 'medium',
                     recommendation: `Consider optimizing ${comp.metric}`,
                 });
@@ -195,14 +195,14 @@ export class ReportGenerator {
     ): string {
         const timestamp = new Date().toISOString();
 
-        let md = `# 🧪 Nuxco Comprehensive Test Report\n\n`;
+        let md = `# 🧪 Zeptr Comprehensive Test Report\n\n`;
         md += `**Generated:** ${timestamp}\n`;
         md += `**Environment:** ${process.platform}, Node ${process.version}\n\n`;
         md += `---\n\n`;
 
         // Executive Summary
         md += `## 📊 Executive Summary\n\n`;
-        const wins = comparisons.filter(c => c.winner === 'nuxco').length;
+        const wins = comparisons.filter(c => c.winner === 'zeptr').length;
         const total = comparisons.length;
         md += `- **Winning Metrics:** ${wins}/${total} (${((wins / total) * 100).toFixed(0)}%)\n`;
         md += `- **Critical Gaps:** ${gapAnalysis.reduce((sum, a) => sum + a.gaps.filter(g => g.severity === 'critical').length, 0)}\n`;
@@ -210,13 +210,13 @@ export class ReportGenerator {
 
         // Performance Comparison Table
         md += `## 🏆 Performance Comparison\n\n`;
-        md += `| Metric | Nuxco | Vite | Webpack | Rspack | esbuild | Turbopack | Parcel | Winner |\n`;
+        md += `| Metric | Zeptr | Vite | Webpack | Rspack | esbuild | Turbopack | Parcel | Winner |\n`;
         md += `|--------|-------|------|---------|--------|---------|-----------|--------|--------|\n`;
 
         for (const comp of comparisons) {
             const row = [
                 comp.metric,
-                this.formatValue(comp.tools.nuxco, comp.unit, comp.winner === 'nuxco'),
+                this.formatValue(comp.tools.zeptr, comp.unit, comp.winner === 'zeptr'),
                 this.formatValue(comp.tools.vite, comp.unit, comp.winner === 'vite'),
                 this.formatValue(comp.tools.webpack, comp.unit, comp.winner === 'webpack'),
                 this.formatValue(comp.tools.rspack, comp.unit, comp.winner === 'rspack'),
@@ -231,34 +231,34 @@ export class ReportGenerator {
 
         // Where We're Winning
         md += `## ✅ Where We're Winning\n\n`;
-        const winningMetrics = comparisons.filter(c => c.winner === 'nuxco');
+        const winningMetrics = comparisons.filter(c => c.winner === 'zeptr');
         if (winningMetrics.length > 0) {
             for (const metric of winningMetrics) {
                 const secondBest = this.getSecondBest(metric);
-                const improvement = secondBest ? this.calculateImprovement(metric.tools.nuxco!, secondBest.value) : 0;
-                md += `- **${metric.metric}**: ${metric.tools.nuxco}${metric.unit}`;
+                const improvement = secondBest ? this.calculateImprovement(metric.tools.zeptr!, secondBest.value) : 0;
+                md += `- **${metric.metric}**: ${metric.tools.zeptr}${metric.unit}`;
                 if (secondBest) {
                     md += ` (${improvement.toFixed(0)}% better than ${secondBest.tool})`;
                 }
                 md += `\n`;
             }
         } else {
-            md += `*No metrics where Nuxco is currently winning*\n`;
+            md += `*No metrics where Zeptr is currently winning*\n`;
         }
         md += `\n`;
 
         // Where We're Lagging
         md += `## ⚠️  Where We're Lagging\n\n`;
-        const laggingMetrics = comparisons.filter(c => c.winner !== 'nuxco' && c.tools.nuxco !== null);
+        const laggingMetrics = comparisons.filter(c => c.winner !== 'zeptr' && c.tools.zeptr !== null);
         if (laggingMetrics.length > 0) {
             for (const metric of laggingMetrics) {
                 const winnerValue = metric.tools[metric.winner]!;
-                const nuxcoValue = metric.tools.nuxco!;
-                const gap = this.calculateGap(nuxcoValue, winnerValue);
-                md += `- **${metric.metric}**: ${nuxcoValue}${metric.unit} vs ${metric.winner} ${winnerValue}${metric.unit} (${gap.toFixed(0)}% slower)\n`;
+                const zeptrValue = metric.tools.zeptr!;
+                const gap = this.calculateGap(zeptrValue, winnerValue);
+                md += `- **${metric.metric}**: ${zeptrValue}${metric.unit} vs ${metric.winner} ${winnerValue}${metric.unit} (${gap.toFixed(0)}% slower)\n`;
             }
         } else {
-            md += `*Nuxco is winning or competitive in all tested metrics!*\n`;
+            md += `*Zeptr is winning or competitive in all tested metrics!*\n`;
         }
         md += `\n`;
 
@@ -301,7 +301,7 @@ export class ReportGenerator {
         recommendations: string[]
     ): string {
         const timestamp = new Date().toISOString();
-        const wins = comparisons.filter(c => c.winner === 'nuxco').length;
+        const wins = comparisons.filter(c => c.winner === 'zeptr').length;
         const total = comparisons.length;
 
         return `<!DOCTYPE html>
@@ -309,7 +309,7 @@ export class ReportGenerator {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuxco Comprehensive Test Report</title>
+  <title>Zeptr Comprehensive Test Report</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -413,7 +413,7 @@ export class ReportGenerator {
 <body>
   <div class="container">
     <header>
-      <h1>🧪 Nuxco Comprehensive Test Report</h1>
+      <h1>🧪 Zeptr Comprehensive Test Report</h1>
       <p class="subtitle">Generated: ${timestamp}</p>
       <p class="subtitle">Environment: ${process.platform}, Node ${process.version}</p>
     </header>
@@ -444,7 +444,7 @@ export class ReportGenerator {
           <thead>
             <tr>
               <th>Metric</th>
-              <th>Nuxco</th>
+              <th>Zeptr</th>
               <th>Vite</th>
               <th>Webpack</th>
               <th>Rspack</th>
@@ -458,7 +458,7 @@ export class ReportGenerator {
             ${comparisons.map(comp => `
               <tr>
                 <td><strong>${comp.metric}</strong></td>
-                <td class="${comp.winner === 'nuxco' ? 'winner' : ''}">${this.formatValue(comp.tools.nuxco, comp.unit, comp.winner === 'nuxco')}</td>
+                <td class="${comp.winner === 'zeptr' ? 'winner' : ''}">${this.formatValue(comp.tools.zeptr, comp.unit, comp.winner === 'zeptr')}</td>
                 <td class="${comp.winner === 'vite' ? 'winner' : ''}">${this.formatValue(comp.tools.vite, comp.unit, comp.winner === 'vite')}</td>
                 <td class="${comp.winner === 'webpack' ? 'winner' : ''}">${this.formatValue(comp.tools.webpack, comp.unit, comp.winner === 'webpack')}</td>
                 <td class="${comp.winner === 'rspack' ? 'winner' : ''}">${this.formatValue(comp.tools.rspack, comp.unit, comp.winner === 'rspack')}</td>
@@ -505,7 +505,7 @@ export class ReportGenerator {
      * Helper methods
      */
     private getAllTools(): BuildTool[] {
-        return ['nuxco', 'vite', 'webpack', 'rspack', 'esbuild', 'turbopack', 'parcel'];
+        return ['zeptr', 'vite', 'webpack', 'rspack', 'esbuild', 'turbopack', 'parcel'];
     }
 
     private getUnitForMetric(metric: string): string {
@@ -525,18 +525,18 @@ export class ReportGenerator {
 
     private getSecondBest(comp: ComparisonData): { tool: BuildTool; value: number } | null {
         const values = Object.entries(comp.tools)
-            .filter(([tool, value]) => tool !== 'nuxco' && value !== null)
+            .filter(([tool, value]) => tool !== 'zeptr' && value !== null)
             .map(([tool, value]) => ({ tool: tool as BuildTool, value: value as number }))
             .sort((a, b) => a.value - b.value);
 
         return values[0] || null;
     }
 
-    private calculateImprovement(nuxcoValue: number, otherValue: number): number {
-        return ((otherValue - nuxcoValue) / otherValue) * 100;
+    private calculateImprovement(zeptrValue: number, otherValue: number): number {
+        return ((otherValue - zeptrValue) / otherValue) * 100;
     }
 
-    private calculateGap(nuxcoValue: number, winnerValue: number): number {
-        return ((nuxcoValue - winnerValue) / winnerValue) * 100;
+    private calculateGap(zeptrValue: number, winnerValue: number): number {
+        return ((zeptrValue - winnerValue) / winnerValue) * 100;
     }
 }

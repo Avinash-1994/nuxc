@@ -10,12 +10,12 @@ const __dirname = path.dirname(__filename);
 export async function bootstrapProject(cwd: string, template: string = 'react-ts') {
   log.info(`Bootstrapping new ${template} project in ${cwd}...`);
 
-  // 1. Get current nuxco version for package.json
-  let nuxcoVersion = 'latest';
+  // 1. Get current zeptr version for package.json
+  let zeptrVersion = 'latest';
   try {
     const pkgPath = path.resolve(__dirname, '../../package.json');
     const pkg = JSON.parse(await fs.readFile(pkgPath, 'utf8'));
-    nuxcoVersion = `^${pkg.version}`;
+    zeptrVersion = `^${pkg.version}`;
   } catch (e) { /* fallback to latest */ }
 
   // 2. Look up template definition from shared TEMPLATES registry
@@ -36,13 +36,13 @@ export async function bootstrapProject(cwd: string, template: string = 'react-ts
   await fs.mkdir(path.join(cwd, 'public'), { recursive: true });
 
   // Write every file defined in the template, injecting dynamic placeholders
-  const versionLabel = nuxcoVersion.replace('^', '');
+  const versionLabel = zeptrVersion.replace('^', '');
   const frameworkName = def.name.split(' ')[0];
   for (const file of def.files) {
     const filePath = path.join(cwd, file.path);
     await fs.mkdir(path.dirname(filePath), { recursive: true });
     const content = file.content
-      .replace(/\{\{NUXCO_VERSION\}\}/g, versionLabel)
+      .replace(/\{\{ZEPTR_VERSION\}\}/g, versionLabel)
       .replace(/\{\{FRAMEWORK_NAME\}\}/g, frameworkName)
       .replace(/\{\{FRAMEWORK_VERSION\}\}/g, 'Latest');
     await fs.writeFile(filePath, content, 'utf8');
@@ -54,7 +54,7 @@ export async function bootstrapProject(cwd: string, template: string = 'react-ts
     dynamicDependencies[pkg] = 'latest';
   }
 
-  const dynamicDevDependencies: Record<string, string> = { nuxco: nuxcoVersion };
+  const dynamicDevDependencies: Record<string, string> = { zeptr: zeptrVersion };
   for (const pkg of Object.keys(def.devDependencies)) {
     dynamicDevDependencies[pkg] = 'latest';
   }
@@ -65,9 +65,9 @@ export async function bootstrapProject(cwd: string, template: string = 'react-ts
     private: true,
     type: 'module',
     scripts: {
-      dev: 'nuxco dev',
-      build: 'nuxco build',
-      preview: 'nuxco dev --port 4173'
+      dev: 'zeptr dev',
+      build: 'zeptr build',
+      preview: 'zeptr dev --port 4173'
     },
     dependencies: dynamicDependencies,
     devDependencies: dynamicDevDependencies
@@ -88,7 +88,7 @@ export async function bootstrapProject(cwd: string, template: string = 'react-ts
     mode: 'development',
     preset: 'spa'
   };
-  await fs.writeFile(path.join(cwd, 'nuxco.config.json'), JSON.stringify(config, null, 2), 'utf8');
+  await fs.writeFile(path.join(cwd, 'zeptr.config.json'), JSON.stringify(config, null, 2), 'utf8');
 
   log.success(`Successfully bootstrapped ${def.name} project!`);
   log.info(`To get started:\n  cd ${path.basename(cwd)}\n  npm install\n  npm run dev`);

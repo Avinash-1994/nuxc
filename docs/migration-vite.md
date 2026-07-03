@@ -1,11 +1,11 @@
-# Migrating from Vite to Nuxco
+# Migrating from Vite to Zeptr
 
-Nuxco is designed to be a fast replacement for Vite.
+Zeptr is designed to be a fast replacement for Vite.
 
 ## 1. Quick Switch
 Run the auto-migration command:
 ```bash
-npx nuxco migrate
+npx zeptr migrate
 ```
 
 ## 2. Manual Migration
@@ -14,18 +14,18 @@ npx nuxco migrate
 Change your content in `package.json`:
 ```json
 "scripts": {
-  "dev": "nuxco dev",
-  "build": "nuxco build"
+  "dev": "zeptr dev",
+  "build": "zeptr build"
 }
 ```
 
 ### Reuse Vite Plugins
-Nuxco can reuse many Vite-compatible plugins through compatibility adapters.
+Zeptr can reuse many Vite-compatible plugins through compatibility adapters.
 
 ```ts
-// nuxco.config.ts
-import { defineConfig } from 'nuxco';
-import { rollupAdapter } from '@nuxco/plugin-compat';
+// zeptr.config.ts
+import { defineConfig } from 'zeptr';
+import { rollupAdapter } from '@zeptr/plugin-compat';
 import someVitePlugin from 'vite-plugin-cool';
 
 export default defineConfig({
@@ -36,10 +36,10 @@ export default defineConfig({
 ```
 
 ## 3. Environment Variables
-Nuxco respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
+Zeptr respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
 
 ## 4. Key Differences
-| Feature | Vite | Nuxco |
+| Feature | Vite | Zeptr |
 |---------|------|-------|
 | Startup | ~400ms | < 50ms |
 | Build | esbuild/Rollup | Native Rust |

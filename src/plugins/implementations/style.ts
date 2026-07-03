@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-style
+ * @zeptr/plugin-style
  * CSS injection
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createStylePlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-style',
+        name: '@zeptr/plugin-style',
         originalPlugin: 'style-loader',
         
         async transform(code: string, id: string) {

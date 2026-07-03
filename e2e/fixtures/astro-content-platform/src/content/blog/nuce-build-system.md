@@ -1,15 +1,15 @@
 ---
-title: "Nuxco Build System Deep Dive"
-description: "How Nuxco handles multi-framework compilation with sub-second HMR."
+title: "Zeptr Build System Deep Dive"
+description: "How Zeptr handles multi-framework compilation with sub-second HMR."
 date: "2025-01-20"
 author: "Avinash"
-tags: ["nuxco", "build", "performance"]
+tags: ["zeptr", "build", "performance"]
 featured: false
 ---
 
-# Nuxco Build System Deep Dive
+# Zeptr Build System Deep Dive
 
-Nuxco is a next-generation build system supporting Angular, Nuxt, SvelteKit, SolidStart, Qwik City, and Astro.
+Zeptr is a next-generation build system supporting Angular, Nuxt, SvelteKit, SolidStart, Qwik City, and Astro.
 
 ## Core Features
 

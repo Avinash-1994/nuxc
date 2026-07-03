@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-xstate
+ * @zeptr/plugin-xstate
  * XState state machines
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createXstatePlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-xstate',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-xstate',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // State management: XState state machines
@@ -16,7 +16,7 @@ export function createXstatePlugin(): PluginAdapter {
         },
 
         async buildStart() {
-            console.log('[@nuxco/plugin-xstate] State management initialized');
+            console.log('[@zeptr/plugin-xstate] State management initialized');
         }
     };
 }

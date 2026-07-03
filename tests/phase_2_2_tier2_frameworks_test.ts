@@ -3,15 +3,15 @@
  * Tests for Svelte, Solid, and Lit plugins
  */
 
-import { nuxcoSvelte } from '../src/plugins/frameworks/svelte.js';
-import { nuxcoSolid } from '../src/plugins/frameworks/solid.js';
-import { nuxcoLit } from '../src/plugins/frameworks/lit.js';
+import { zeptrSvelte } from '../src/plugins/frameworks/svelte.js';
+import { zeptrSolid } from '../src/plugins/frameworks/solid.js';
+import { zeptrLit } from '../src/plugins/frameworks/lit.js';
 import { strict as assert } from 'assert';
 
 async function testSvelteBasicCompilation() {
     console.log('\n[Test 1] Svelte - Basic Component Compilation');
 
-    const plugin = nuxcoSvelte({ development: true });
+    const plugin = zeptrSvelte({ development: true });
 
     const code = `
 <script>
@@ -41,7 +41,7 @@ async function testSvelteBasicCompilation() {
 async function testSvelteProductionMode() {
     console.log('\n[Test 2] Svelte - Production Mode');
 
-    const plugin = nuxcoSvelte({ development: false, hmr: false });
+    const plugin = zeptrSvelte({ development: false, hmr: false });
 
     const code = `
 <script>
@@ -63,7 +63,7 @@ async function testSvelteProductionMode() {
 async function testSvelteCaching() {
     console.log('\n[Test 3] Svelte - Component Caching');
 
-    const plugin = nuxcoSvelte({ development: true });
+    const plugin = zeptrSvelte({ development: true });
 
     const code = `<h1>Cached Component</h1>`;
 
@@ -81,7 +81,7 @@ async function testSvelteCaching() {
 async function testSolidBasicJSX() {
     console.log('\n[Test 4] Solid - Basic JSX Transform');
 
-    const plugin = nuxcoSolid({ development: true });
+    const plugin = zeptrSolid({ development: true });
 
     const code = `
 import { createSignal } from 'solid-js';
@@ -106,7 +106,7 @@ export default function Counter() {
 async function testSolidTypeScript() {
     console.log('\n[Test 5] Solid - TypeScript Support');
 
-    const plugin = nuxcoSolid({ development: true });
+    const plugin = zeptrSolid({ development: true });
 
     const code = `
 import { createSignal, Component } from 'solid-js';
@@ -133,7 +133,7 @@ export default Counter;
 async function testSolidProductionMode() {
     console.log('\n[Test 6] Solid - Production Mode');
 
-    const plugin = nuxcoSolid({ development: false, hmr: false });
+    const plugin = zeptrSolid({ development: false, hmr: false });
 
     const code = `
 import { createSignal } from 'solid-js';
@@ -155,7 +155,7 @@ export default function App() {
 async function testLitBasicComponent() {
     console.log('\n[Test 7] Lit - Basic Component');
 
-    const plugin = nuxcoLit({ development: true });
+    const plugin = zeptrLit({ development: true });
 
     const code = `
 import { LitElement, html, css } from 'lit';
@@ -188,7 +188,7 @@ export class MyElement extends LitElement {
 async function testLitDecorators() {
     console.log('\n[Test 8] Lit - Decorator Support');
 
-    const plugin = nuxcoLit({ development: true });
+    const plugin = zeptrLit({ development: true });
 
     const code = `
 import { LitElement, html } from 'lit';
@@ -221,7 +221,7 @@ export class CounterElement extends LitElement {
 async function testLitProductionMode() {
     console.log('\n[Test 9] Lit - Production Mode');
 
-    const plugin = nuxcoLit({ development: false, hmr: false });
+    const plugin = zeptrLit({ development: false, hmr: false });
 
     const code = `
 import { LitElement, html } from 'lit';
@@ -247,9 +247,9 @@ export class AppElement extends LitElement {
 async function testFrameworkDetection() {
     console.log('\n[Test 10] Framework Detection');
 
-    const sveltePlugin = nuxcoSvelte();
-    const solidPlugin = nuxcoSolid();
-    const litPlugin = nuxcoLit();
+    const sveltePlugin = zeptrSvelte();
+    const solidPlugin = zeptrSolid();
+    const litPlugin = zeptrLit();
 
     // Non-framework files should return undefined
     const jsResult = await sveltePlugin.transform!('const x = 1;', 'test.js');

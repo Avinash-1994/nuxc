@@ -1,4 +1,4 @@
-# Nuxco Plugins Guide
+# Zeptr Plugins Guide
 
 > **Plugin ecosystem with sandboxing support and WebCrypto signing support.**
 
@@ -8,29 +8,29 @@
 
 ```bash
 # Search for plugins
-nuxco plugin search react
+zeptr plugin search react
 
 # Install a plugin
-nuxco plugin install @nuxco/plugin-react
+zeptr plugin install @zeptr/plugin-react
 
 # List installed plugins
-nuxco plugin list
+zeptr plugin list
 
 # Verify plugin signatures
-nuxco plugin verify @nuxco/plugin-react
+zeptr plugin verify @zeptr/plugin-react
 ```
 
 ---
 
 ## Using Plugins
 
-### In `nuxco.config.ts`
+### In `zeptr.config.ts`
 
 ```typescript
-import { defineConfig } from 'nuxco';
-import react from '@nuxco/plugin-react';
-import tailwind from '@nuxco/plugin-tailwind';
-import pwa from '@nuxco/plugin-pwa';
+import { defineConfig } from 'zeptr';
+import react from '@zeptr/plugin-react';
+import tailwind from '@zeptr/plugin-tailwind';
+import pwa from '@zeptr/plugin-pwa';
 
 export default defineConfig({
   preset: 'spa',
@@ -66,90 +66,90 @@ export default defineConfig({
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-react` | React Fast Refresh + JSX | `nuxco plugin install @nuxco/plugin-react` |
-| `@nuxco/plugin-vue` | Vue 3 SFC support | `nuxco plugin install @nuxco/plugin-vue` |
-| `@nuxco/plugin-svelte` | Svelte compiler | `nuxco plugin install @nuxco/plugin-svelte` |
-| `@nuxco/plugin-solid` | Solid.js JSX | `nuxco plugin install @nuxco/plugin-solid` |
-| `@nuxco/plugin-angular` | Angular AOT compiler | `nuxco plugin install @nuxco/plugin-angular` |
-| `@nuxco/plugin-preact` | Preact with Fast Refresh | `nuxco plugin install @nuxco/plugin-preact` |
+| `@zeptr/plugin-react` | React Fast Refresh + JSX | `zeptr plugin install @zeptr/plugin-react` |
+| `@zeptr/plugin-vue` | Vue 3 SFC support | `zeptr plugin install @zeptr/plugin-vue` |
+| `@zeptr/plugin-svelte` | Svelte compiler | `zeptr plugin install @zeptr/plugin-svelte` |
+| `@zeptr/plugin-solid` | Solid.js JSX | `zeptr plugin install @zeptr/plugin-solid` |
+| `@zeptr/plugin-angular` | Angular AOT compiler | `zeptr plugin install @zeptr/plugin-angular` |
+| `@zeptr/plugin-preact` | Preact with Fast Refresh | `zeptr plugin install @zeptr/plugin-preact` |
 
 ### CSS & Styling
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-tailwind` | Tailwind CSS v3+ | `nuxco plugin install @nuxco/plugin-tailwind` |
-| `@nuxco/plugin-sass` | Sass/SCSS compiler | `nuxco plugin install @nuxco/plugin-sass` |
-| `@nuxco/plugin-less` | Less compiler | `nuxco plugin install @nuxco/plugin-less` |
-| `@nuxco/plugin-postcss` | PostCSS processor | `nuxco plugin install @nuxco/plugin-postcss` |
-| `@nuxco/plugin-styled-components` | CSS-in-JS support | `nuxco plugin install @nuxco/plugin-styled-components` |
-| `@nuxco/plugin-emotion` | Emotion CSS-in-JS | `nuxco plugin install @nuxco/plugin-emotion` |
+| `@zeptr/plugin-tailwind` | Tailwind CSS v3+ | `zeptr plugin install @zeptr/plugin-tailwind` |
+| `@zeptr/plugin-sass` | Sass/SCSS compiler | `zeptr plugin install @zeptr/plugin-sass` |
+| `@zeptr/plugin-less` | Less compiler | `zeptr plugin install @zeptr/plugin-less` |
+| `@zeptr/plugin-postcss` | PostCSS processor | `zeptr plugin install @zeptr/plugin-postcss` |
+| `@zeptr/plugin-styled-components` | CSS-in-JS support | `zeptr plugin install @zeptr/plugin-styled-components` |
+| `@zeptr/plugin-emotion` | Emotion CSS-in-JS | `zeptr plugin install @zeptr/plugin-emotion` |
 
 ### Assets & Media
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-svgr` | SVG to React components | `nuxco plugin install @nuxco/plugin-svgr` |
-| `@nuxco/plugin-image-optimizer` | Image compression | `nuxco plugin install @nuxco/plugin-image-optimizer` |
-| `@nuxco/plugin-webp` | WebP conversion | `nuxco plugin install @nuxco/plugin-webp` |
-| `@nuxco/plugin-fonts` | Font optimization | `nuxco plugin install @nuxco/plugin-fonts` |
+| `@zeptr/plugin-svgr` | SVG to React components | `zeptr plugin install @zeptr/plugin-svgr` |
+| `@zeptr/plugin-image-optimizer` | Image compression | `zeptr plugin install @zeptr/plugin-image-optimizer` |
+| `@zeptr/plugin-webp` | WebP conversion | `zeptr plugin install @zeptr/plugin-webp` |
+| `@zeptr/plugin-fonts` | Font optimization | `zeptr plugin install @zeptr/plugin-fonts` |
 
 ### Performance
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-compression` | Gzip/Brotli compression | `nuxco plugin install @nuxco/plugin-compression` |
-| `@nuxco/plugin-preload` | Resource preloading | `nuxco plugin install @nuxco/plugin-preload` |
-| `@nuxco/plugin-lazy-load` | Code splitting helpers | `nuxco plugin install @nuxco/plugin-lazy-load` |
-| `@nuxco/plugin-bundle-analyzer` | Bundle size analysis | `nuxco plugin install @nuxco/plugin-bundle-analyzer` |
+| `@zeptr/plugin-compression` | Gzip/Brotli compression | `zeptr plugin install @zeptr/plugin-compression` |
+| `@zeptr/plugin-preload` | Resource preloading | `zeptr plugin install @zeptr/plugin-preload` |
+| `@zeptr/plugin-lazy-load` | Code splitting helpers | `zeptr plugin install @zeptr/plugin-lazy-load` |
+| `@zeptr/plugin-bundle-analyzer` | Bundle size analysis | `zeptr plugin install @zeptr/plugin-bundle-analyzer` |
 
 ### Security
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-csp` | Content Security Policy | `nuxco plugin install @nuxco/plugin-csp` |
-| `@nuxco/plugin-sri` | Subresource Integrity | `nuxco plugin install @nuxco/plugin-sri` |
-| `@nuxco/plugin-security-headers` | HTTP security headers | `nuxco plugin install @nuxco/plugin-security-headers` |
+| `@zeptr/plugin-csp` | Content Security Policy | `zeptr plugin install @zeptr/plugin-csp` |
+| `@zeptr/plugin-sri` | Subresource Integrity | `zeptr plugin install @zeptr/plugin-sri` |
+| `@zeptr/plugin-security-headers` | HTTP security headers | `zeptr plugin install @zeptr/plugin-security-headers` |
 
 ### Testing
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-vitest` | Vitest integration | `nuxco plugin install @nuxco/plugin-vitest` |
-| `@nuxco/plugin-jest` | Jest integration | `nuxco plugin install @nuxco/plugin-jest` |
-| `@nuxco/plugin-playwright` | E2E testing | `nuxco plugin install @nuxco/plugin-playwright` |
+| `@zeptr/plugin-vitest` | Vitest integration | `zeptr plugin install @zeptr/plugin-vitest` |
+| `@zeptr/plugin-jest` | Jest integration | `zeptr plugin install @zeptr/plugin-jest` |
+| `@zeptr/plugin-playwright` | E2E testing | `zeptr plugin install @zeptr/plugin-playwright` |
 
 ### i18n
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-i18next` | i18next integration | `nuxco plugin install @nuxco/plugin-i18next` |
-| `@nuxco/plugin-react-intl` | React Intl | `nuxco plugin install @nuxco/plugin-react-intl` |
-| `@nuxco/plugin-vue-i18n` | Vue I18n | `nuxco plugin install @nuxco/plugin-vue-i18n` |
+| `@zeptr/plugin-i18next` | i18next integration | `zeptr plugin install @zeptr/plugin-i18next` |
+| `@zeptr/plugin-react-intl` | React Intl | `zeptr plugin install @zeptr/plugin-react-intl` |
+| `@zeptr/plugin-vue-i18n` | Vue I18n | `zeptr plugin install @zeptr/plugin-vue-i18n` |
 
 ### State Management
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-redux` | Redux DevTools | `nuxco plugin install @nuxco/plugin-redux` |
-| `@nuxco/plugin-zustand` | Zustand integration | `nuxco plugin install @nuxco/plugin-zustand` |
-| `@nuxco/plugin-jotai` | Jotai atoms | `nuxco plugin install @nuxco/plugin-jotai` |
+| `@zeptr/plugin-redux` | Redux DevTools | `zeptr plugin install @zeptr/plugin-redux` |
+| `@zeptr/plugin-zustand` | Zustand integration | `zeptr plugin install @zeptr/plugin-zustand` |
+| `@zeptr/plugin-jotai` | Jotai atoms | `zeptr plugin install @zeptr/plugin-jotai` |
 
 ### Deployment
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-vercel` | Vercel deployment | `nuxco plugin install @nuxco/plugin-vercel` |
-| `@nuxco/plugin-netlify` | Netlify deployment | `nuxco plugin install @nuxco/plugin-netlify` |
-| `@nuxco/plugin-cloudflare` | Cloudflare Workers | `nuxco plugin install @nuxco/plugin-cloudflare` |
-| `@nuxco/plugin-docker` | Docker containerization | `nuxco plugin install @nuxco/plugin-docker` |
+| `@zeptr/plugin-vercel` | Vercel deployment | `zeptr plugin install @zeptr/plugin-vercel` |
+| `@zeptr/plugin-netlify` | Netlify deployment | `zeptr plugin install @zeptr/plugin-netlify` |
+| `@zeptr/plugin-cloudflare` | Cloudflare Workers | `zeptr plugin install @zeptr/plugin-cloudflare` |
+| `@zeptr/plugin-docker` | Docker containerization | `zeptr plugin install @zeptr/plugin-docker` |
 
 ### Analytics
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxco/plugin-google-analytics` | GA4 integration | `nuxco plugin install @nuxco/plugin-google-analytics` |
-| `@nuxco/plugin-plausible` | Plausible Analytics | `nuxco plugin install @nuxco/plugin-plausible` |
-| `@nuxco/plugin-sentry` | Error tracking | `nuxco plugin install @nuxco/plugin-sentry` |
+| `@zeptr/plugin-google-analytics` | GA4 integration | `zeptr plugin install @zeptr/plugin-google-analytics` |
+| `@zeptr/plugin-plausible` | Plausible Analytics | `zeptr plugin install @zeptr/plugin-plausible` |
+| `@zeptr/plugin-sentry` | Error tracking | `zeptr plugin install @zeptr/plugin-sentry` |
 
 ---
 
@@ -157,7 +157,7 @@ export default defineConfig({
 
 ### Plugin Security Model
 
-Nuxco currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
+Zeptr currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
 
 Plugins are subject to explicit permissions:
 - Filesystem access is denied by default and only granted for approved paths.
@@ -184,11 +184,11 @@ Every plugin is **cryptographically signed**:
 
 ```bash
 # Verify plugin signature
-nuxco plugin verify @nuxco/plugin-react
+zeptr plugin verify @zeptr/plugin-react
 
 # Output:
 ✅ Signature valid
-✅ Publisher: Nuxco Team
+✅ Publisher: Zeptr Team
 ✅ Published: 2026-01-15
 ✅ SHA-256: a3f2...
 ```
@@ -197,9 +197,9 @@ nuxco plugin verify @nuxco/plugin-react
 
 ```json
 {
-  "name": "@nuxco/plugin-react",
+  "name": "@zeptr/plugin-react",
   "version": "2.0.0",
-  "author": "Nuxco Team",
+  "author": "Zeptr Team",
   "signature": "...",
   "permissions": [
     "transform:jsx",
@@ -218,9 +218,9 @@ nuxco plugin verify @nuxco/plugin-react
 
 ```typescript
 // my-plugin.ts
-import { NuxcoPlugin } from 'nuxco';
+import { ZeptrPlugin } from 'zeptr';
 
-export default function myPlugin(options = {}): NuxcoPlugin {
+export default function myPlugin(options = {}): ZeptrPlugin {
   return {
     name: 'my-plugin',
     version: '1.0.0',
@@ -251,7 +251,7 @@ export default function myPlugin(options = {}): NuxcoPlugin {
 ### Plugin Hooks
 
 ```typescript
-export interface NuxcoPlugin {
+export interface ZeptrPlugin {
   name: string;
   version: string;
   
@@ -277,12 +277,12 @@ export interface NuxcoPlugin {
 ### Example: Custom Markdown Plugin
 
 ```typescript
-import { NuxcoPlugin } from 'nuxco';
+import { ZeptrPlugin } from 'zeptr';
 import { marked } from 'marked';
 
-export default function markdownPlugin(): NuxcoPlugin {
+export default function markdownPlugin(): ZeptrPlugin {
   return {
-    name: 'nuxco-plugin-markdown',
+    name: 'zeptr-plugin-markdown',
     version: '1.0.0',
     
     transform(code, id) {
@@ -301,7 +301,7 @@ export default function markdownPlugin(): NuxcoPlugin {
 
 **Usage**:
 ```typescript
-// nuxco.config.ts
+// zeptr.config.ts
 import markdown from './my-plugin';
 
 export default defineConfig({
@@ -325,8 +325,8 @@ function App() {
 ### Vite Plugin Adapter
 
 ```typescript
-import { defineConfig } from 'nuxco';
-import { rollupAdapter } from '@nuxco/plugin-compat';
+import { defineConfig } from 'zeptr';
+import { rollupAdapter } from '@zeptr/plugin-compat';
 import viteReactSvgr from 'vite-plugin-svgr';
 
 export default defineConfig({
@@ -342,7 +342,7 @@ export default defineConfig({
 ### Webpack Loader Adapter
 
 ```typescript
-import { webpackLoaderAdapter } from '@nuxco/plugin-compat';
+import { webpackLoaderAdapter } from '@zeptr/plugin-compat';
 
 export default defineConfig({
   plugins: [
@@ -365,26 +365,26 @@ export default defineConfig({
 
 ```bash
 # List all plugins
-nuxco plugin list --all
+zeptr plugin list --all
 
 # Search by category
-nuxco plugin search --category framework
+zeptr plugin search --category framework
 
 # Filter by verified
-nuxco plugin search --verified
+zeptr plugin search --verified
 ```
 
 ### Plugin Ratings
 
 ```bash
 # View plugin details
-nuxco plugin info @nuxco/plugin-react
+zeptr plugin info @zeptr/plugin-react
 
 # Output:
-📦 @nuxco/plugin-react v2.0.0
+📦 @zeptr/plugin-react v2.0.0
 ⭐ 4.8/5.0 (1,234 reviews)
 📥 50,000 downloads/week
-✅ Verified by Nuxco Team
+✅ Verified by Zeptr Team
 🔒 Secure isolated plugin runtime
 📝 React Fast Refresh + JSX transform
 ```
@@ -414,11 +414,11 @@ export default defineConfig({
 **Solution**:
 ```bash
 # Re-install plugin
-npm uninstall @nuxco/plugin-name
-nuxco plugin install @nuxco/plugin-name
+npm uninstall @zeptr/plugin-name
+zeptr plugin install @zeptr/plugin-name
 
 # Or skip verification (not recommended)
-nuxco plugin install @nuxco/plugin-name --skip-verify
+zeptr plugin install @zeptr/plugin-name --skip-verify
 ```
 
 ### Plugin Conflicts
@@ -443,7 +443,7 @@ export default defineConfig({
 
 ✅ **Good**:
 ```typescript
-import react from '@nuxco/plugin-react';
+import react from '@zeptr/plugin-react';
 ```
 
 ⚠️ **Avoid** (unless necessary):
@@ -455,7 +455,7 @@ import react from 'some-unofficial-plugin';
 
 ```bash
 # Always verify before using
-nuxco plugin verify @nuxco/plugin-name
+zeptr plugin verify @zeptr/plugin-name
 ```
 
 ### 3. Minimal Plugin Configuration
@@ -480,7 +480,7 @@ plugins: [
 
 ```bash
 # Profile plugin impact
-nuxco build --profile
+zeptr build --profile
 
 # Output shows plugin timings
 ```
@@ -496,20 +496,20 @@ nuxco build --profile
 npm run build
 
 # 2. Sign plugin
-nuxco plugin sign ./dist
+zeptr plugin sign ./dist
 
 # 3. Publish to marketplace
-nuxco plugin publish
+zeptr plugin publish
 
 # 4. Verify published
-nuxco plugin verify @your-org/your-plugin
+zeptr plugin verify @your-org/your-plugin
 ```
 
 ### Plugin Testing
 
 ```typescript
 // plugin.test.ts
-import { describe, it, expect } from '@nuxco/test';
+import { describe, it, expect } from '@zeptr/test';
 import myPlugin from './plugin';
 
 describe('My Plugin', () => {

@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-formatjs
+ * @zeptr/plugin-formatjs
  * FormatJS (react-intl) integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createFormatjsPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-formatjs',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-formatjs',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // i18n: FormatJS (react-intl) integration
@@ -16,7 +16,7 @@ export function createFormatjsPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-formatjs] i18n setup complete');
+            console.log('[@zeptr/plugin-formatjs] i18n setup complete');
         }
     };
 }

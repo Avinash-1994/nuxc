@@ -6,7 +6,7 @@ module.exports = {
   renderRSC: async (url) => {
     // Return a realistic RSC flight data payload
     if (url.includes('/RSC/')) {
-       return `0:["$","div",null,{"children":["$","h1",null,{"children":"Products"}]}]\n1:{"id":"prod-1","name":"Widget","price":29}\n2:["$","div",null,{"children":["$","p",null,{"children":"Real Waku RSC Stream Payload Mock for Nuxco Tests. Padding to ensure size is greater than 200 bytes. This is a very realistic representation of how React Server Components transmit their serialized state tree. React Server Components transmit their serialized state tree React Server Components transmit their serialized state tree React Server Components transmit their serialized state tree"}]}]`;
+       return `0:["$","div",null,{"children":["$","h1",null,{"children":"Products"}]}]\n1:{"id":"prod-1","name":"Widget","price":29}\n2:["$","div",null,{"children":["$","p",null,{"children":"Real Waku RSC Stream Payload Mock for Zeptr Tests. Padding to ensure size is greater than 200 bytes. This is a very realistic representation of how React Server Components transmit their serialized state tree. React Server Components transmit their serialized state tree React Server Components transmit their serialized state tree React Server Components transmit their serialized state tree"}]}]`;
     }
     return null;
   },

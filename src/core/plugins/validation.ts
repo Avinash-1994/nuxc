@@ -1,5 +1,5 @@
 
-import { NuxcoPlugin, PluginValidation, PluginHookName } from './types.js';
+import { ZeptrPlugin, PluginValidation, PluginHookName } from './types.js';
 import { canonicalHash } from '../engine/hash.js';
 
 export class PluginValidator {
@@ -7,7 +7,7 @@ export class PluginValidator {
      * 6.3 Validation Pipeline
      * Runs the plugin twice and compares outputs to ensure determinism.
      */
-    async validate(plugin: NuxcoPlugin, sampleHook: PluginHookName, sampleInput: any): Promise<PluginValidation> {
+    async validate(plugin: ZeptrPlugin, sampleHook: PluginHookName, sampleInput: any): Promise<PluginValidation> {
         const start = Date.now();
 
         // First run

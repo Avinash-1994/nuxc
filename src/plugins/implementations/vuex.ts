@@ -1,15 +1,15 @@
 /**
- * @nuxco/plugin-vuex
+ * @zeptr/plugin-vuex
  * Vuex integration
- * Nuxco-native
+ * Zeptr-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVuexPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-vuex',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-vuex',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // vuex transformation

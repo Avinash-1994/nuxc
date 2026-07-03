@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const analyzeDist = path.resolve(__dirname, '../../../packages/nuxco-analyze/dist/index.js');
+const analyzeDist = path.resolve(__dirname, '../../../packages/zeptr-analyze/dist/index.js');
 const { buildTreemap, whyModule, checkBundle } = await import(analyzeDist);
 
 function log(msg) { process.stdout.write(msg + '\n'); }
@@ -79,31 +79,31 @@ if (usedLodash.length === 3 && unusedLodash.length === 3) {
   printFail('BA-02  Only 3 used lodash functions shown', '3 used, 3 unused', `${usedLodash.length} used, ${unusedLodash.length} unused`);
 }
 
-// BA-03: nuxco why prints dependency chain
+// BA-03: zeptr why prints dependency chain
 const whyFormat = whyModule(graph, 'lodash/format');
 if (whyFormat.found) {
-  printPass('BA-03  nuxco why prints dependency chain', 'chain found', whyFormat.chain.join(' → '), [
+  printPass('BA-03  zeptr why prints dependency chain', 'chain found', whyFormat.chain.join(' → '), [
     `Module: lodash/format`,
     `Chain: ${whyFormat.chain.join(' → ')}`,
     `Reason: ${whyFormat.reason}`,
   ]);
 } else {
-  printFail('BA-03  nuxco why prints dependency chain', 'chain found', 'not found');
+  printFail('BA-03  zeptr why prints dependency chain', 'chain found', 'not found');
 }
 
-// BA-04: nuxco why <missing-module> exits 1
+// BA-04: zeptr why <missing-module> exits 1
 const whyMissing = whyModule(graph, 'lodash/nonexistent');
 if (!whyMissing.found) {
-  printPass('BA-04  nuxco why missing-module exits 1', 'found: false', 'found: false', [
+  printPass('BA-04  zeptr why missing-module exits 1', 'found: false', 'found: false', [
     `Module: lodash/nonexistent`,
     `Reason: ${whyMissing.reason}`,
     `Exit code would be: 1`,
   ]);
 } else {
-  printFail('BA-04  nuxco why missing-module exits 1', 'found: false', 'found: true');
+  printFail('BA-04  zeptr why missing-module exits 1', 'found: false', 'found: true');
 }
 
-// BA-05: nuxco check catches circular dependencies & large modules
+// BA-05: zeptr check catches circular dependencies & large modules
 const issues = checkBundle(graph);
 const circularIssues = issues.filter(i => i.type === 'circular');
 const largeIssues    = issues.filter(i => i.type === 'large-module');
@@ -111,7 +111,7 @@ const unusedIssues   = issues.filter(i => i.type === 'unused-export');
 const hasCircular = circularIssues.length > 0;
 const hasLarge    = largeIssues.length > 0;
 if (hasCircular && hasLarge) {
-  printPass('BA-05  nuxco check catches circulars & large modules', 'circular + large detected', 'circular + large detected', [
+  printPass('BA-05  zeptr check catches circulars & large modules', 'circular + large detected', 'circular + large detected', [
     `Circular deps found: ${circularIssues.length}`,
     `  ${circularIssues[0]?.message}`,
     `Large modules found: ${largeIssues.length}`,
@@ -120,7 +120,7 @@ if (hasCircular && hasLarge) {
     `Total issues: ${issues.length}`,
   ]);
 } else {
-  printFail('BA-05  nuxco check catches circulars & large modules', 'both detected', `circular=${hasCircular} large=${hasLarge}`);
+  printFail('BA-05  zeptr check catches circulars & large modules', 'both detected', `circular=${hasCircular} large=${hasLarge}`);
 }
 
 log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');

@@ -1,7 +1,7 @@
 {
-  "name": "@nuxco/plugin-vue",
+  "name": "@zeptr/plugin-vue",
   "version": "1.0.0",
-  "description": "Official Nuxco plugin for Vue 3 — SFC parsing, template compilation, and HMR",
+  "description": "Official Zeptr plugin for Vue 3 — SFC parsing, template compilation, and HMR",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,11 +16,11 @@
     "build": "tsc",
     "test": "node --test src/__tests__/index.test.js"
   },
-  "keywords": ["nuxco", "plugin", "vue", "vue3", "sfc", "hmr"],
+  "keywords": ["zeptr", "plugin", "vue", "vue3", "sfc", "hmr"],
   "author": "Avinash-1994",
   "license": "MIT",
   "peerDependencies": {
-    "nuxco": ">=1.0.0",
+    "zeptr": ">=1.0.0",
     "vue": ">=3.0.0",
     "@vue/compiler-sfc": ">=3.0.0"
   },

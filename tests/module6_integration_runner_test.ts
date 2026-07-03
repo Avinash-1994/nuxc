@@ -3,7 +3,7 @@ import { CoreBuildEngine } from '../src/core/engine/index.js';
 import { BuildConfig } from '../src/config/index.js';
 import path from 'path';
 
-describe('Module 6 Integration: Core Engine on Nuxco Runner', () => {
+describe('Module 6 Integration: Core Engine on Zeptr Runner', () => {
     it('should initialize CoreBuildEngine', () => {
         const engine = new CoreBuildEngine();
         expect(engine).toBeDefined();

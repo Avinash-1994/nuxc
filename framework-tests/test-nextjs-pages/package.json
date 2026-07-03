@@ -1,20 +1,20 @@
 {
-  "name": "nuxco-nextjs-pages-template",
+  "name": "zeptr-nextjs-pages-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   },
-  "nuxco": {
+  "zeptr": {
     "template": true,
     "framework": "next",
-    "description": "Nuxco Store — Next.js e-commerce"
+    "description": "Zeptr Store — Next.js e-commerce"
   },
   "devDependencies": {
-    "nuxco": "file:../../",
+    "zeptr": "file:../../",
     "typescript": "5.4.5"
   }
 }

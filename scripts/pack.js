@@ -16,7 +16,7 @@ console.log('🔍 Running pre-pack checks...\n');
 
 const requiredFiles = [
     'dist/cli.js',
-    'dist/nuxco_native.node',
+    'dist/zeptr_native.node',
     'README.md',
     'LICENSE',
     'package.json'

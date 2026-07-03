@@ -1,24 +1,24 @@
 {
-  "name": "nuxco-preact-template",
+  "name": "zeptr-preact-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   },
-  "nuxco": {
+  "zeptr": {
     "template": true,
     "framework": "preact",
-    "description": "Nuxco Weather — real weather dashboard"
+    "description": "Zeptr Weather — real weather dashboard"
   },
   "dependencies": {
     "@preact/signals": "^2.9.0",
     "preact": "^10.22.0"
   },
   "devDependencies": {
-    "nuxco": "file:../../",
+    "zeptr": "file:../../",
     "typescript": "5.4.5"
   }
 }

@@ -1,5 +1,5 @@
 /**
- * Visual Regression Tests for Nuxco Dev Server UI
+ * Visual Regression Tests for Zeptr Dev Server UI
  * 
  * Tests visual components like error overlays, HMR indicators,
  * and build dashboards using screenshot comparison.
@@ -18,7 +18,7 @@ let serverInstance: any;
 
 test.beforeAll(async () => {
     // Create test project
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'nuxco-visual-test-'));
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'zeptr-visual-test-'));
     testProjectPath = path.join(tempDir, 'visual-app');
     fs.mkdirSync(testProjectPath, { recursive: true });
     fs.mkdirSync(path.join(testProjectPath, 'src'), { recursive: true });
@@ -43,7 +43,7 @@ test.beforeAll(async () => {
         path.join(testProjectPath, 'src', 'main.js'),
         `
         const root = document.getElementById('root');
-        root.innerHTML = '<h1>Hello, Nuxco!</h1>';
+        root.innerHTML = '<h1>Hello, Zeptr!</h1>';
         `
     );
 
@@ -91,7 +91,7 @@ test.describe('Visual Regression: Error Overlay', () => {
         await page.goto(serverUrl);
 
         // Wait for error overlay
-        await page.waitForSelector('[data-nuxco-error-overlay]', { timeout: 5000 })
+        await page.waitForSelector('[data-zeptr-error-overlay]', { timeout: 5000 })
             .catch(() => {
                 // Error overlay might not be implemented yet
                 console.log('Error overlay not found - feature may not be implemented');
@@ -104,7 +104,7 @@ test.describe('Visual Regression: Error Overlay', () => {
         });
 
         // Verify overlay is visible
-        const overlay = await page.$('[data-nuxco-error-overlay]');
+        const overlay = await page.$('[data-zeptr-error-overlay]');
         if (overlay) {
             const isVisible = await overlay.isVisible();
             expect(isVisible).toBe(true);
@@ -120,7 +120,7 @@ test.describe('Visual Regression: Error Overlay', () => {
         await page.goto(serverUrl);
 
         const errorText = await page.$eval(
-            '[data-nuxco-error-overlay]',
+            '[data-zeptr-error-overlay]',
             (el) => el.textContent
         ).catch(() => null);
 
@@ -221,7 +221,7 @@ test.describe('Visual Regression: Build Dashboard', () => {
         await page.goto(serverUrl);
 
         // Look for build dashboard elements
-        const dashboard = await page.$('[data-nuxco-dashboard]')
+        const dashboard = await page.$('[data-zeptr-dashboard]')
             .catch(() => null);
 
         if (dashboard) {

@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-md
+ * @zeptr/plugin-md
  * Markdown as components
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMdPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-md',
+        name: '@zeptr/plugin-md',
         originalPlugin: 'vite-plugin-md',
         
         async transform(code: string, id: string) {

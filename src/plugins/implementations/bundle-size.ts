@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-bundle-size
+ * @zeptr/plugin-bundle-size
  * Bundle size tracking
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createBundleSizePlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-bundle-size',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-bundle-size',
+        originalPlugin: 'zeptr-native',
         
         async buildStart() {
-            console.log('[@nuxco/plugin-bundle-size] Starting performance optimization...');
+            console.log('[@zeptr/plugin-bundle-size] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createBundleSizePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-bundle-size] Performance optimization complete');
+            console.log('[@zeptr/plugin-bundle-size] Performance optimization complete');
         }
     };
 }

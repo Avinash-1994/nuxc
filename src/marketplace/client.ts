@@ -1,6 +1,6 @@
 
 /**
- * Nuxco Marketplace CLI Client
+ * Zeptr Marketplace CLI Client
  * Implementation: tRPC Direct Caller (Simulates HTTP Client for Local MVP)
  * Day 10: Marketplace MVP Lock
  */

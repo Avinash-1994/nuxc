@@ -1,15 +1,15 @@
 /**
- * @nuxco/plugin-jotai
+ * @zeptr/plugin-jotai
  * Jotai state management
- * Nuxco-native
+ * Zeptr-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createJotaiPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-jotai',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-jotai',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // jotai transformation

@@ -1,8 +1,8 @@
-import type { Plugin } from '@nuxco/adapter-core';
+import type { Plugin } from '@zeptr/adapter-core';
 
 export function astroIslandPlugin(): Plugin {
   return {
-    name: 'nuxco:astro-islands',
+    name: 'zeptr:astro-islands',
 
     transform(code: string, id: string) {
       // Analyze React/Vue/Svelte/Solid components for client:* Astro directives
@@ -19,7 +19,7 @@ export function astroIslandPlugin(): Plugin {
       
       // We embed an AST marker for the chunker here. In a real SWC pipeline, 
       // we append an attribute or emit a chunk ID
-      const chunkMarker = `\n/* @@nuxco_island_entry@@ */\n`;
+      const chunkMarker = `\n/* @@zeptr_island_entry@@ */\n`;
 
       return {
         code: code + chunkMarker,

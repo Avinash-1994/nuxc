@@ -1,7 +1,7 @@
 {
   "build": {
-    "beforeDevCommand": "nuxco dev",
-    "beforeBuildCommand": "nuxco build",
+    "beforeDevCommand": "zeptr dev",
+    "beforeBuildCommand": "zeptr build",
     "devPath": "http://localhost:5173",
     "distDir": "../dist"
   },

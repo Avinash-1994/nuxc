@@ -78,7 +78,7 @@ function App() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="logo">⚡ Nuxco Build Tool</h1>
+          <h1 className="logo">⚡ Zeptr Build Tool</h1>
           <div className="stats-bar">
             <div className="stat-pill">
               <Zap size={16} />
@@ -214,7 +214,7 @@ function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <p>Edit <code>src/App.tsx</code> to see HMR in action • Built with ⚡ Nuxco</p>
+          <p>Edit <code>src/App.tsx</code> to see HMR in action • Built with ⚡ Zeptr</p>
         </motion.div>
       </div>
     </div>
@@ -701,7 +701,7 @@ body {
   min-height: 100vh;
 }`,
 
-    'nuxco.config.js': `module.exports = {
+    'zeptr.config.js': `module.exports = {
   entry: ['./src/main.tsx'],
   outDir: './dist',
   framework: 'react',
@@ -719,13 +719,13 @@ body {
 };`,
 
     'package.json': `{
-  "name": "nuxco-premium-dashboard",
+  "name": "zeptr-premium-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   },
   "dependencies": {
     "react": "^19.2.3",
@@ -761,7 +761,7 @@ body {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Premium Dashboard - Nuxco</title>
+    <title>Premium Dashboard - Zeptr</title>
   </head>
   <body>
     <div id="root"></div>

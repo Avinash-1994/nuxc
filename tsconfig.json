@@ -15,10 +15,10 @@
     "jsx": "react-jsx",
     "isolatedModules": true,
     "paths": {
-      "@nuxco/adapter-core": ["./packages/nuxco-adapter-core/src/index.js", "./packages/nuxco-adapter-core/src/index.ts"],
-      "@nuxco/adapter-core/*": ["./packages/nuxco-adapter-core/*"],
-      "@nuxco/security": ["./packages/nuxco-security/src/index.ts"],
-      "@nuxco/security/*": ["./packages/nuxco-security/src/*"]
+      "@zeptr/adapter-core": ["./packages/zeptr-adapter-core/src/index.js", "./packages/zeptr-adapter-core/src/index.ts"],
+      "@zeptr/adapter-core/*": ["./packages/zeptr-adapter-core/*"],
+      "@zeptr/security": ["./packages/zeptr-security/src/index.ts"],
+      "@zeptr/security/*": ["./packages/zeptr-security/src/*"]
     }
   },
   "include": [

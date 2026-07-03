@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-zustand-devtools
+ * @zeptr/plugin-zustand-devtools
  * Zustand DevTools integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createZustandDevtoolsPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-zustand-devtools',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-zustand-devtools',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // State management: Zustand DevTools integration
@@ -16,7 +16,7 @@ export function createZustandDevtoolsPlugin(): PluginAdapter {
         },
 
         async buildStart() {
-            console.log('[@nuxco/plugin-zustand-devtools] State management initialized');
+            console.log('[@zeptr/plugin-zustand-devtools] State management initialized');
         }
     };
 }

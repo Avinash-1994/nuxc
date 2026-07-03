@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-posthog
+ * @zeptr/plugin-posthog
  * PostHog analytics integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPosthogPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-posthog',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-posthog',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Analytics: PostHog analytics integration
@@ -16,7 +16,7 @@ export function createPosthogPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxco/plugin-posthog] Analytics integration ready');
+            console.log('[@zeptr/plugin-posthog] Analytics integration ready');
         }
     };
 }

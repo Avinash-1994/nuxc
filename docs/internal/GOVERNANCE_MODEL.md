@@ -1,4 +1,4 @@
-# Nuxco Governance Model — Operational Truth
+# Zeptr Governance Model — Operational Truth
 
 **Status**: 🔒 Active (Phase H2.3)  
 **Version**: 1.0.0  
@@ -34,10 +34,10 @@ Every plugin has a category that determines:
 - ✅ Performance benchmarked
 
 **Examples**:
-- `nuxco:js-transform` (Universal transformer)
-- `nuxco:assets` (Hashed asset pipeline)
-- `nuxco:postcss` (CSS processing)
-- `nuxco:federation` (Module federation)
+- `zeptr:js-transform` (Universal transformer)
+- `zeptr:assets` (Hashed asset pipeline)
+- `zeptr:postcss` (CSS processing)
+- `zeptr:federation` (Module federation)
 
 **Guarantees**:
 - No breaking changes in minor versions
@@ -61,9 +61,9 @@ Every plugin has a category that determines:
 - ⚠️ Not in official docs (linked only)
 
 **Examples**:
-- `nuxco-plugin-graphql` (Community)
-- `nuxco-plugin-wasm` (Community)
-- `nuxco-plugin-mdx` (Community)
+- `zeptr-plugin-graphql` (Community)
+- `zeptr-plugin-wasm` (Community)
+- `zeptr-plugin-mdx` (Community)
 
 **Guarantees**:
 - **NONE**
@@ -87,9 +87,9 @@ Every plugin has a category that determines:
 - 🧪 Not recommended for production
 
 **Examples**:
-- `nuxco:ai-optimizer` (Experimental)
-- `nuxco:edge-runtime` (Experimental)
-- `nuxco:ssr-streaming` (Experimental)
+- `zeptr:ai-optimizer` (Experimental)
+- `zeptr:edge-runtime` (Experimental)
+- `zeptr:ssr-streaming` (Experimental)
 
 **Guarantees**:
 - **NONE**
@@ -105,19 +105,19 @@ Every plugin has a category that determines:
 
 | Plugin Name | Category | Owner | Risk Level | Snapshot Tested | Docs |
 |-------------|----------|-------|------------|-----------------|------|
-| `nuxco:js-transform` | Official | Core Team | Low | ✅ | ✅ |
-| `nuxco:assets` | Official | Core Team | Low | ✅ | ✅ |
-| `nuxco:postcss` | Official | Core Team | Low | ✅ | ✅ |
-| `nuxco:federation` | Official | Core Team | Medium | ✅ | ✅ |
-| `nuxco:react-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `nuxco:vue-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `nuxco:svelte-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `nuxco:solid-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `nuxco:angular-preset` | Official | Core Team | Medium | ✅ | ✅ |
-| `nuxco:ai-optimizer` | Experimental | Core Team | High | ❌ | ⚠️ |
-| `nuxco:edge-runtime` | Experimental | Core Team | High | ❌ | ⚠️ |
-| `nuxco-plugin-graphql` | Community | @community | Unknown | ❌ | ❌ |
-| `nuxco-plugin-wasm` | Community | @community | Unknown | ❌ | ❌ |
+| `zeptr:js-transform` | Official | Core Team | Low | ✅ | ✅ |
+| `zeptr:assets` | Official | Core Team | Low | ✅ | ✅ |
+| `zeptr:postcss` | Official | Core Team | Low | ✅ | ✅ |
+| `zeptr:federation` | Official | Core Team | Medium | ✅ | ✅ |
+| `zeptr:react-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `zeptr:vue-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `zeptr:svelte-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `zeptr:solid-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `zeptr:angular-preset` | Official | Core Team | Medium | ✅ | ✅ |
+| `zeptr:ai-optimizer` | Experimental | Core Team | High | ❌ | ⚠️ |
+| `zeptr:edge-runtime` | Experimental | Core Team | High | ❌ | ⚠️ |
+| `zeptr-plugin-graphql` | Community | @community | Unknown | ❌ | ❌ |
+| `zeptr-plugin-wasm` | Community | @community | Unknown | ❌ | ❌ |
 
 ---
 
@@ -265,5 +265,5 @@ No exceptions.
 
 ---
 
-**Signed**: Nuxco Core Team  
+**Signed**: Zeptr Core Team  
 **Effective**: Phase H2.3 Complete

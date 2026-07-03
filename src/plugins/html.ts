@@ -1,19 +1,19 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { NuxcoPlugin } from '../core/plugins/types.js';
+import { ZeptrPlugin } from '../core/plugins/types.js';
 
-export function createHtmlPlugin(rootDir: string, outDir: string): NuxcoPlugin {
+export function createHtmlPlugin(rootDir: string, outDir: string): ZeptrPlugin {
     return {
         manifest: {
-            name: 'nuxco:html',
+            name: 'zeptr:html',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['buildEnd'],
             permissions: { fs: 'read' }
         },
-        id: 'nuxco:html',
+        id: 'zeptr:html',
         async runHook(hook, data) {
             if (hook !== 'buildEnd') return data;
 
@@ -29,7 +29,7 @@ export function createHtmlPlugin(rootDir: string, outDir: string): NuxcoPlugin {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuxco Build</title>
+    <title>Zeptr Build</title>
     ${links}
 </head>
 <body>

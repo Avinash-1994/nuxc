@@ -1,6 +1,6 @@
 
 /**
- * Nuxco HMR Client Runtime
+ * Zeptr HMR Client Runtime
  * Provides the `import.meta.hot` API and handles WebSocket updates.
  */
 
@@ -16,20 +16,20 @@ class HMRClient {
     }
 
     private handleMessage(msg: any) {
-        console.log('[Nuxco] HMR Message:', msg);
+        console.log('[Zeptr] HMR Message:', msg);
         switch (msg.type) {
             case 'connected':
-                console.log('[Nuxco] Connected to Dev Server');
+                console.log('[Zeptr] Connected to Dev Server');
                 break;
             case 'update':
                 this.applyUpdate(msg.payload.updates);
                 break;
             case 'reload':
-                console.warn('[Nuxco] Reload triggered:', msg.payload.reason);
+                console.warn('[Zeptr] Reload triggered:', msg.payload.reason);
                 location.reload();
                 break;
             case 'error':
-                console.error('[Nuxco] Build Error:', msg.payload.message);
+                console.error('[Zeptr] Build Error:', msg.payload.message);
                 // Show Error Overlay (Phase 5.11)
                 break;
         }
@@ -37,7 +37,7 @@ class HMRClient {
 
     private async applyUpdate(updates: any[]) {
         for (const update of updates) {
-            console.log(`[Nuxco] Hot Updating: ${update.moduleId}`);
+            console.log(`[Zeptr] Hot Updating: ${update.moduleId}`);
             try {
                 // 1. Dispose old module
                 const old = this.registry.get(update.moduleId);
@@ -52,7 +52,7 @@ class HMRClient {
                 // 3. Re-execute boundary or notify parents
                 // This requires a dependency map on the client
             } catch (err) {
-                console.error('[Nuxco] Update Failed:', err);
+                console.error('[Zeptr] Update Failed:', err);
                 location.reload();
             }
         }
@@ -74,4 +74,4 @@ class HMRClient {
     }
 }
 
-(window as any).__NUXCO_HMR__ = new HMRClient();
+(window as any).__ZEPTR_HMR__ = new HMRClient();

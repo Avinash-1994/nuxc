@@ -1,4 +1,4 @@
-# 🧪 Nuxco Testing - Quick Reference Guide
+# 🧪 Zeptr Testing - Quick Reference Guide
 
 ## 🚀 Quick Start
 
@@ -148,7 +148,7 @@ npm run test:snapshot -- --updateSnapshot
 
 ### Enable Debug Logging
 ```bash
-DEBUG=nuxco:* npm test
+DEBUG=zeptr:* npm test
 ```
 
 ### Run Single Test

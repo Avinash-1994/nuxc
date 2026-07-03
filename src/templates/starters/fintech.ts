@@ -20,17 +20,17 @@ export const fintechTemplate: TemplateConfig = {
   devDependencies: {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@nuxco/plugin-react": "^1.0.0",
-    "@nuxco/plugin-upi-payment": "^1.0.0",
-    "@nuxco/plugin-qr-code": "^1.0.0",
-    "@nuxco/plugin-security": "^1.0.0"
+    "@zeptr/plugin-react": "^1.0.0",
+    "@zeptr/plugin-upi-payment": "^1.0.0",
+    "@zeptr/plugin-qr-code": "^1.0.0",
+    "@zeptr/plugin-security": "^1.0.0"
   },
   files: {
-    'nuxco.config.ts': `    
-import { defineConfig } from 'nuxco';
-import react from '@nuxco/plugin-react';
-import upi from '@nuxco/plugin-upi-payment';
-import qr from '@nuxco/plugin-qr-code';
+    'zeptr.config.ts': `    
+import { defineConfig } from 'zeptr';
+import react from '@zeptr/plugin-react';
+import upi from '@zeptr/plugin-upi-payment';
+import qr from '@zeptr/plugin-qr-code';
 
 export default defineConfig({
     plugins: [react(), upi(), qr()],
@@ -73,7 +73,7 @@ export default function App() {
     <div className="container">
       <header className="header">
         <ShieldCheck size={40} className="icon secure" />
-        <h1>Nuxco Pay</h1>
+        <h1>Zeptr Pay</h1>
       </header>
       
       <div className="card">
@@ -202,7 +202,7 @@ button {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nuxco Pay</title>
+    <title>Zeptr Pay</title>
   </head>
   <body>
     <div id="root"></div>

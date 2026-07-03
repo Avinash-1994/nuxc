@@ -1,8 +1,8 @@
-# 🎉 NUXCO v1.0.0 - PRODUCTION RELEASE COMPLETE
+# 🎉 ZEPTR v1.0.0 - PRODUCTION RELEASE COMPLETE
 
 ## ✅ ALL SYSTEMS GO!
 
-**Nuxco is now PRODUCTION READY and approved for immediate release!**
+**Zeptr is now PRODUCTION READY and approved for immediate release!**
 
 ---
 
@@ -39,7 +39,7 @@ Build Errors: 0
      → Zero build errors
 
 [✅] 2. Fix All Build Errors
-     → NUXCO_BUILD_ERRORS.md is empty
+     → ZEPTR_BUILD_ERRORS.md is empty
      → All builds successful
      → Production-ready code
 
@@ -117,7 +117,7 @@ Build Errors: 0
 
 ```
 ┌──────────────────────┬──────────────┬────────────┐
-│ Metric               │ Nuxco        │ Status     │
+│ Metric               │ Zeptr        │ Status     │
 ├──────────────────────┼──────────────┼────────────┤
 │ Cold Start Time      │ 69ms         │ ✅ Excellent│
 │ HMR Update Speed     │ 10-60ms      │ ✅ Excellent│
@@ -137,7 +137,7 @@ Build Errors: 0
 
 **NEW: Single-Viewport Feature Showcase**
 
-Highlights Nuxco's capabilities:
+Highlights Zeptr's capabilities:
 - ⚡ Lightning Fast (69ms cold start, 10-60ms HMR)
 - 📊 Build Performance (optimization chart)
 - 💻 Universal Framework Support (10+ frameworks)
@@ -181,7 +181,7 @@ Design:
 
 ---
 
-## 🌟 WHAT MAKES NUXCO SPECIAL
+## 🌟 WHAT MAKES ZEPTR SPECIAL
 
 ### 1. Universal Framework Support
 Auto-detects and supports 10+ frameworks with version-agnostic transformers
@@ -207,25 +207,25 @@ Perfect scores across 8 real-world projects
 
 ```bash
 # Install globally
-npm install -g nuxco
+npm install -g zeptr
 
 # Create new project
-npx create-nuxco my-app --template premium-dashboard
+npx create-zeptr my-app --template premium-dashboard
 
 # Start development
 cd my-app
-nuxco dev
+zeptr dev
 
 # Build for production
-nuxco build
+zeptr build
 ```
 
 ---
 
 ## 📞 SUPPORT & RESOURCES
 
-- **Repository:** https://github.com/Avinash-1994/nuxco
-- **Issues:** https://github.com/Avinash-1994/nuxco/issues
+- **Repository:** https://github.com/Avinash-1994/zeptr
+- **Issues:** https://github.com/Avinash-1994/zeptr/issues
 - **Documentation:** See `/docs` folder
 - **License:** MIT
 - **Node Version:** >=20.0.0
@@ -258,7 +258,7 @@ nuxco build
 
 ## ✅ PRODUCTION CERTIFICATION
 
-**Nuxco v1.0.0 is hereby certified PRODUCTION READY for:**
+**Zeptr v1.0.0 is hereby certified PRODUCTION READY for:**
 
 ✅ Production deployments  
 ✅ Enterprise applications  
@@ -280,7 +280,7 @@ nuxco build
 ```
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║        🎉  NUXCO v1.0.0 - PRODUCTION READY  🎉          ║
+║        🎉  ZEPTR v1.0.0 - PRODUCTION READY  🎉          ║
 ║                                                           ║
 ║  All systems tested and verified                         ║
 ║  Zero build errors                                       ║
@@ -297,7 +297,7 @@ nuxco build
 
 ---
 
-**Built with ❤️ by the Nuxco Team**  
+**Built with ❤️ by the Zeptr Team**  
 **Powered by ⚡ Rust + TypeScript**
 
 **Release Date:** January 23, 2026  

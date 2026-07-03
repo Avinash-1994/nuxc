@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-sitemap
+ * @zeptr/plugin-sitemap
  * Sitemap generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSitemapPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-sitemap',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-sitemap',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Sitemap generation

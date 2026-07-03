@@ -58,7 +58,7 @@ export default {
       )
       .command(
         'plugin-audit',
-        'Audit installed Nuxco plugin permissions',
+        'Audit installed Zeptr plugin permissions',
         () => {},
         async () => {
           const { runPluginAuditCommand } = await import('../../commands/security.js');

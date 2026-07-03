@@ -1,7 +1,7 @@
 {
-    "name": "nuxco-native",
+    "name": "zeptr-native",
     "version": "0.1.0",
     "napi": {
-        "binaryName": "nuxco_native"
+        "binaryName": "zeptr_native"
     }
 }

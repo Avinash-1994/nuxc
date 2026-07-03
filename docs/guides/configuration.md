@@ -1,15 +1,15 @@
 # Configuration Guide
 
-Complete reference for configuring Nuxco.
+Complete reference for configuring Zeptr.
 
 ## Configuration File
 
-Nuxco supports multiple configuration formats:
+Zeptr supports multiple configuration formats:
 
-- `nuxco.config.js` (recommended)
-- `nuxco.config.ts`
-- `nuxco.config.mjs`
-- `nuxco.config.cjs`
+- `zeptr.config.js` (recommended)
+- `zeptr.config.ts`
+- `zeptr.config.mjs`
+- `zeptr.config.cjs`
 
 ## Basic Configuration
 
@@ -165,7 +165,7 @@ module.exports = {
     },
     
     // Or import external plugins
-    require('@nuxco/plugin-react-refresh'),
+    require('@zeptr/plugin-react-refresh'),
   ],
 };
 ```
@@ -208,7 +208,7 @@ module.exports = {
   },
   
   // Environment variable prefix
-  envPrefix: ['VITE_', 'NUXCO_'],
+  envPrefix: ['VITE_', 'ZEPTR_'],
 };
 ```
 
@@ -354,7 +354,7 @@ module.exports = {
 ## Environment-Specific Configuration
 
 ```javascript
-// nuxco.config.js
+// zeptr.config.js
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {

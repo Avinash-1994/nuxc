@@ -1,5 +1,5 @@
 /**
- * NUXCO — Phase 2.15 Next.js Pages Router Test Runner
+ * ZEPTR — Phase 2.15 Next.js Pages Router Test Runner
  * Tests: NX-01 through NX-09
  */
 
@@ -41,10 +41,10 @@ const {
   detectRouterType,
   injectWebpackOverride,
   buildWebpackOverride,
-  transformWithNuxcoSwc,
+  transformWithZeptrSwc,
   getCachedTransform,
   setCachedTransform,
-  NUXCO_NEXTJS_INFO_MESSAGE
+  ZEPTR_NEXTJS_INFO_MESSAGE
 } = adapterMod;
 
 const fixtureDir   = __dirname;
@@ -63,18 +63,18 @@ if (ok1) {
     `src/app/ absent: ${srcAppAbsent}`,
     `app/ absent: ${appAbsent}`,
     `Router type detected: ${routerType}`,
-    `Nuxco adapter activates: yes`,
+    `Zeptr adapter activates: yes`,
   ]);
 } else {
   fail('NX-01  Pages Router detection', 'pages detected', routerType);
 }
 
-// ─── NX-02  App Router → Nuxco does nothing ────────────────────────────────
+// ─── NX-02  App Router → Zeptr does nothing ────────────────────────────────
 // Create a synthetic App Router fixture in memory (temp dir)
 import { mkdtempSync, mkdirSync, writeFileSync } from 'fs';
 import os from 'os';
 
-const appRouterTmp = mkdtempSync(path.join(os.tmpdir(), 'nuxco-app-router-'));
+const appRouterTmp = mkdtempSync(path.join(os.tmpdir(), 'zeptr-app-router-'));
 mkdirSync(path.join(appRouterTmp, 'src', 'app'), { recursive: true });
 const appRouterConfigOrig = `/** @type {import('next').NextConfig} */\nmodule.exports = { reactStrictMode: true };\n`;
 writeFileSync(path.join(appRouterTmp, 'next.config.js'), appRouterConfigOrig, 'utf-8');
@@ -85,12 +85,12 @@ const configUnchanged = appRouterConfigAfter === appRouterConfigOrig;
 const ok2 = appRouterType === 'app' && configUnchanged;
 
 if (ok2) {
-  pass('NX-02  App Router detection → Nuxco does nothing', 'adapter inactive, next.config.js unchanged', 'confirmed', [
+  pass('NX-02  App Router detection → Zeptr does nothing', 'adapter inactive, next.config.js unchanged', 'confirmed', [
     `src/app/ present: yes`,
     `Router type detected: ${appRouterType}`,
-    `Nuxco adapter activates: no`,
+    `Zeptr adapter activates: no`,
     `next.config.js unchanged: ${configUnchanged}`,
-    `INFO message: ${NUXCO_NEXTJS_INFO_MESSAGE}`,
+    `INFO message: ${ZEPTR_NEXTJS_INFO_MESSAGE}`,
   ]);
 } else {
   fail('NX-02  App Router detection', 'config unchanged', `routerType=${appRouterType} unchanged=${configUnchanged}`);
@@ -99,10 +99,10 @@ if (ok2) {
 // ─── NX-03  HMR acceleration ───────────────────────────────────────────────
 // Honest cold/warm benchmark:
 //   Cold baseline  = ts.transpileModule() with no prior state
-//   Cold Nuxco     = Nuxco SWC transform with .nuxco-cache wiped
-//   Warm Nuxco     = second run on same file → SQLite cache hit
+//   Cold Zeptr     = Zeptr SWC transform with .zeptr-cache wiped
+//   Warm Zeptr     = second run on same file → SQLite cache hit
 //   Warm baseline  = subsequent regex-strip (no IO overhead)
-// The Nuxco VALUE is the warm cache hit — not the first cold run.
+// The Zeptr VALUE is the warm cache hit — not the first cold run.
 
 const sampleComponent = fs.readFileSync(path.join(fixtureDir, 'pages', 'index.jsx'), 'utf-8');
 
@@ -114,17 +114,17 @@ ts.transpileModule(sampleComponent, {
 });
 const coldBaseMs = performance.now() - coldBaseStart;
 
-// --- Cold Nuxco: wipe cache, then transform ---
-const nuxcoCacheDir = path.join(fixtureDir, '.nuxco-cache');
-if (fs.existsSync(nuxcoCacheDir)) fs.rmSync(nuxcoCacheDir, { recursive: true, force: true });
-const coldNuxcoStart = performance.now();
-const coldNuxcoResult = transformWithNuxcoSwc(sampleComponent, 'pages/index.jsx', nuxcoCacheDir);
-const coldNuxcoMs = performance.now() - coldNuxcoStart;
+// --- Cold Zeptr: wipe cache, then transform ---
+const zeptrCacheDir = path.join(fixtureDir, '.zeptr-cache');
+if (fs.existsSync(zeptrCacheDir)) fs.rmSync(zeptrCacheDir, { recursive: true, force: true });
+const coldZeptrStart = performance.now();
+const coldZeptrResult = transformWithZeptrSwc(sampleComponent, 'pages/index.jsx', zeptrCacheDir);
+const coldZeptrMs = performance.now() - coldZeptrStart;
 
-// --- Warm Nuxco: same file, should be a cache hit ---
-const warmNuxcoStart = performance.now();
-const warmNuxcoResult = transformWithNuxcoSwc(sampleComponent, 'pages/index.jsx', nuxcoCacheDir);
-const warmNuxcoMs = performance.now() - warmNuxcoStart;
+// --- Warm Zeptr: same file, should be a cache hit ---
+const warmZeptrStart = performance.now();
+const warmZeptrResult = transformWithZeptrSwc(sampleComponent, 'pages/index.jsx', zeptrCacheDir);
+const warmZeptrMs = performance.now() - warmZeptrStart;
 
 // --- Warm baseline: second regex-strip (no IO, just CPU) ---
 const warmBaseStart = performance.now();
@@ -133,65 +133,65 @@ sampleComponent
   .replace(/export\s+default\s+function/g, 'function');
 const warmBaseMs = performance.now() - warmBaseStart;
 
-const warmSpeedup = coldNuxcoMs > 0 ? (coldNuxcoMs / Math.max(warmNuxcoMs, 0.01)).toFixed(1) : 'N/A';
-const coldCompare = coldNuxcoMs <= coldBaseMs ? 'faster than baseline' : `${(coldNuxcoMs / Math.max(coldBaseMs, 0.01)).toFixed(1)}× slower (expected — SWC init overhead)`;
-const warmCompare = warmNuxcoMs < warmBaseMs ? 'faster than baseline' : (warmNuxcoMs <= warmBaseMs + 2 ? 'same as baseline' : 'slower');
+const warmSpeedup = coldZeptrMs > 0 ? (coldZeptrMs / Math.max(warmZeptrMs, 0.01)).toFixed(1) : 'N/A';
+const coldCompare = coldZeptrMs <= coldBaseMs ? 'faster than baseline' : `${(coldZeptrMs / Math.max(coldBaseMs, 0.01)).toFixed(1)}× slower (expected — SWC init overhead)`;
+const warmCompare = warmZeptrMs < warmBaseMs ? 'faster than baseline' : (warmZeptrMs <= warmBaseMs + 2 ? 'same as baseline' : 'slower');
 
-const ok3 = warmNuxcoResult.cached === true; // The REAL win is warm cache hit
+const ok3 = warmZeptrResult.cached === true; // The REAL win is warm cache hit
 
 log(`      Baseline cold transform:           ${coldBaseMs.toFixed(2)}ms  (ts.transpileModule, fresh)`);
-log(`      Nuxco cold transform:              ${coldNuxcoMs.toFixed(2)}ms  (cache miss — SWC init + parse)`);
-log(`      Nuxco warm transform (cache hit):  ${warmNuxcoMs.toFixed(2)}ms  (SQLite lookup, no re-parse)`);
+log(`      Zeptr cold transform:              ${coldZeptrMs.toFixed(2)}ms  (cache miss — SWC init + parse)`);
+log(`      Zeptr warm transform (cache hit):  ${warmZeptrMs.toFixed(2)}ms  (SQLite lookup, no re-parse)`);
 log(`      Baseline warm (subsequent):        ${warmBaseMs.toFixed(2)}ms  (regex-strip, no IO)`);
-log(`      Cold: Nuxco vs baseline:           ${coldCompare}`);
-log(`      Warm: Nuxco vs baseline:           ${warmCompare}`);
+log(`      Cold: Zeptr vs baseline:           ${coldCompare}`);
+log(`      Warm: Zeptr vs baseline:           ${warmCompare}`);
 log(`      Value proposition: cold first-run overhead acceptable,`);
-log(`        warm cache benefit: ${warmSpeedup}× faster than cold Nuxco run`);
+log(`        warm cache benefit: ${warmSpeedup}× faster than cold Zeptr run`);
 log('');
 
-(ok3 ? pass : fail)('NX-03  HMR acceleration', 'warm cache hit confirms SQLite speedup', ok3 ? `warm=${warmNuxcoMs.toFixed(2)}ms (${warmSpeedup}× faster than cold)` : 'cache miss on warm run', [
-  `Cold first run: ${coldNuxcoMs.toFixed(2)}ms (acceptable overhead — cache population)`,
-  `Warm cache hit: ${warmNuxcoMs.toFixed(2)}ms — ${warmSpeedup}× faster than cold`,
-  `Cache location: .nuxco-cache/ (SQLite)`,
-  `Cache hit confirmed: ${warmNuxcoResult.cached}`,
-  `Honest assessment: Nuxco value is in WARM transforms, not cold`,
+(ok3 ? pass : fail)('NX-03  HMR acceleration', 'warm cache hit confirms SQLite speedup', ok3 ? `warm=${warmZeptrMs.toFixed(2)}ms (${warmSpeedup}× faster than cold)` : 'cache miss on warm run', [
+  `Cold first run: ${coldZeptrMs.toFixed(2)}ms (acceptable overhead — cache population)`,
+  `Warm cache hit: ${warmZeptrMs.toFixed(2)}ms — ${warmSpeedup}× faster than cold`,
+  `Cache location: .zeptr-cache/ (SQLite)`,
+  `Cache hit confirmed: ${warmZeptrResult.cached}`,
+  `Honest assessment: Zeptr value is in WARM transforms, not cold`,
 ]);
 
 // ─── NX-04  Transform output parity ───────────────────────────────────────
 const parity = `import React from 'react';\nexport default function TestComp() { return React.createElement('div', null, 'hello'); }\n`;
-const nuxcoOut   = transformWithNuxcoSwc(parity, 'test.jsx', path.join(fixtureDir, '.nuxco-cache')).code;
+const zeptrOut   = transformWithZeptrSwc(parity, 'test.jsx', path.join(fixtureDir, '.zeptr-cache')).code;
 const baselineOut2 = parity; // pages-only: JSX passthrough (Next.js handles JSX compile in its own pipeline)
 
 // Functional parity: both contain core component structure
-const nuxcoHasComponent  = nuxcoOut.includes('TestComp') || nuxcoOut.includes('createElement');
-const nuxcoHasNoTsTypes  = !nuxcoOut.includes(': string') && !nuxcoOut.includes(': number');
-const ok4 = nuxcoHasComponent;
+const zeptrHasComponent  = zeptrOut.includes('TestComp') || zeptrOut.includes('createElement');
+const zeptrHasNoTsTypes  = !zeptrOut.includes(': string') && !zeptrOut.includes(': number');
+const ok4 = zeptrHasComponent;
 
-const nuxcoHash   = createHash('sha256').update(nuxcoOut).digest('hex').slice(0, 16);
+const zeptrHash   = createHash('sha256').update(zeptrOut).digest('hex').slice(0, 16);
 const baselineHash = createHash('sha256').update(baselineOut2).digest('hex').slice(0, 16);
 
 pass('NX-04  Transform output parity', 'component structure preserved', ok4 ? 'confirmed' : 'CHECK', [
-  `Nuxco output contains component: ${nuxcoHasComponent}`,
-  `TypeScript types stripped: ${nuxcoHasNoTsTypes}`,
-  `Nuxco SHA-256:    ${nuxcoHash}`,
+  `Zeptr output contains component: ${zeptrHasComponent}`,
+  `TypeScript types stripped: ${zeptrHasNoTsTypes}`,
+  `Zeptr SHA-256:    ${zeptrHash}`,
   `Baseline SHA-256: ${baselineHash}`,
-  `Note: hashes differ (Nuxco strips type annotations; Next compiles JSX separately)`,
+  `Note: hashes differ (Zeptr strips type annotations; Next compiles JSX separately)`,
   `Functional parity: yes`,
 ]);
 
 // ─── NX-05  SQLite cache ───────────────────────────────────────────────────
-const cacheDir = path.join(fixtureDir, '.nuxco-cache');
+const cacheDir = path.join(fixtureDir, '.zeptr-cache');
 const testSource = `export default function Cached() { return 'cached'; }`;
 const fingerprint = createHash('sha256').update(testSource).digest('hex');
 
 // First transform — cache miss
 const run1Start = performance.now();
-const run1 = transformWithNuxcoSwc(testSource, 'cached.jsx', cacheDir);
+const run1 = transformWithZeptrSwc(testSource, 'cached.jsx', cacheDir);
 const run1Ms = performance.now() - run1Start;
 
 // Second transform — cache hit
 const run2Start = performance.now();
-const run2 = transformWithNuxcoSwc(testSource, 'cached.jsx', cacheDir);
+const run2 = transformWithZeptrSwc(testSource, 'cached.jsx', cacheDir);
 const run2Ms = performance.now() - run2Start;
 
 const cacheHit = run2.cached;
@@ -200,7 +200,7 @@ const ok5 = cacheHit;
 
 if (ok5) {
   pass('NX-05  SQLite cache', 'second transform = cache hit', 'confirmed', [
-    `Cache dir: .nuxco-cache/`,
+    `Cache dir: .zeptr-cache/`,
     `First transform (cache miss): ${run1Ms.toFixed(2)}ms`,
     `Second transform (cache hit): ${run2Ms.toFixed(2)}ms`,
     `Cache hit rate after 2 builds: 50% (1 of 2 transforms)`,
@@ -214,30 +214,30 @@ if (ok5) {
 // ─── NX-06  getServerSideProps unchanged ───────────────────────────────────
 const indexSrc = fs.readFileSync(path.join(fixtureDir, 'pages', 'index.jsx'), 'utf-8');
 const hasGSSP      = indexSrc.includes('getServerSideProps');
-const nuxcoOutput6 = transformWithNuxcoSwc(indexSrc, 'pages/index.jsx', cacheDir).code;
-const nuxcoHasGSSP = nuxcoOutput6.includes('getServerSideProps');
-const ok6 = hasGSSP && nuxcoHasGSSP;
+const zeptrOutput6 = transformWithZeptrSwc(indexSrc, 'pages/index.jsx', cacheDir).code;
+const zeptrHasGSSP = zeptrOutput6.includes('getServerSideProps');
+const ok6 = hasGSSP && zeptrHasGSSP;
 
 pass('NX-06  getServerSideProps unchanged', 'SSR data fetching preserved', ok6 ? 'confirmed' : 'CHECK', [
   `getServerSideProps in source: ${hasGSSP}`,
-  `getServerSideProps in Nuxco output: ${nuxcoHasGSSP}`,
-  `Nuxco does not interfere with Next.js SSR APIs: yes`,
+  `getServerSideProps in Zeptr output: ${zeptrHasGSSP}`,
+  `Zeptr does not interfere with Next.js SSR APIs: yes`,
   `Props flow: pages/index.jsx → getServerSideProps → { posts } → component`,
 ]);
 
 // ─── NX-07  next/image, next/font, next/link unchanged ─────────────────────
 const hasNextImage = indexSrc.includes("next/image") || indexSrc.includes('next/link');
-const nuxcoOut7    = transformWithNuxcoSwc(indexSrc, 'pages/index.jsx', cacheDir).code;
-const nuxcoHasNextImage = nuxcoOut7.includes('next/image') || nuxcoOut7.includes('next/link');
-const ok7 = hasNextImage && nuxcoHasNextImage;
+const zeptrOut7    = transformWithZeptrSwc(indexSrc, 'pages/index.jsx', cacheDir).code;
+const zeptrHasNextImage = zeptrOut7.includes('next/image') || zeptrOut7.includes('next/link');
+const ok7 = hasNextImage && zeptrHasNextImage;
 
 pass('NX-07  next/image, next/font, next/link unchanged', 'Next.js macros preserved', ok7 ? 'confirmed' : 'CHECK', [
   `next/link import in source: ${indexSrc.includes('next/link')}`,
   `next/image import in source: ${indexSrc.includes('next/image')}`,
   `next/head import in source: ${indexSrc.includes('next/head')}`,
-  `next/link in Nuxco output: ${nuxcoOut7.includes('next/link')}`,
-  `next/image in Nuxco output: ${nuxcoOut7.includes('next/image')}`,
-  `Nuxco does not rewrite Next.js import paths: yes`,
+  `next/link in Zeptr output: ${zeptrOut7.includes('next/link')}`,
+  `next/image in Zeptr output: ${zeptrOut7.includes('next/image')}`,
+  `Zeptr does not rewrite Next.js import paths: yes`,
 ]);
 
 // ─── NX-08  App Router project: graceful skip ───────────────────────────────
@@ -252,22 +252,22 @@ detectRouterType(appRouterTmp); // triggers INFO log via adapter detect
 console.log = origLog;
 
 // The INFO is logged by the adapter when detect() returns false for App Router
-const infoMsg = NUXCO_NEXTJS_INFO_MESSAGE;
+const infoMsg = ZEPTR_NEXTJS_INFO_MESSAGE;
 const ok8 = true; // structural guarantee — app router check is coded into detect()
 
 pass('NX-08  App Router: graceful skip', 'INFO message printed, config unchanged', 'confirmed', [
   `Exact INFO message shown to user:`,
   `  "${infoMsg}"`,
   `next.config.js modified: no`,
-  `Nuxco adapter activates: no`,
+  `Zeptr adapter activates: no`,
   `App Router files untouched: yes`,
 ]);
 
 // ─── Webpack override injection (supporting NX-01/NX-06) ───────────────────
 const origConfig = fs.readFileSync(path.join(fixtureDir, 'next.config.js'), 'utf-8');
-const NUXCO_LOADER = '/node_modules/@nuxco/swc-loader/index.js';
-const patched = injectWebpackOverride(origConfig, NUXCO_LOADER);
-const overrideInjected = patched.includes('[nuxco] Pages Router webpack override');
+const ZEPTR_LOADER = '/node_modules/@zeptr/swc-loader/index.js';
+const patched = injectWebpackOverride(origConfig, ZEPTR_LOADER);
+const overrideInjected = patched.includes('[zeptr] Pages Router webpack override');
 const origUnchangedOnDisk = fs.readFileSync(path.join(fixtureDir, 'next.config.js'), 'utf-8') === origConfig;
 
 // ─── NX-09  Regression (all 14 prior fixtures) ─────────────────────────────
@@ -294,7 +294,7 @@ for (const fix of regFixtures) {
   const t0 = Date.now();
   try {
     execFileSync('node', [cliPath, 'build'], { cwd: fix.dir, timeout: 30000, stdio: 'ignore',
-        env: { ...process.env, NUXCO_SKIP_SECURITY: '1' } });
+        env: { ...process.env, ZEPTR_SKIP_SECURITY: '1' } });
     regLines.push(`${fix.name.padEnd(22)}: pass ${Date.now() - t0}ms`);
   } catch {
     regLines.push(`${fix.name.padEnd(22)}: FAIL`);
@@ -320,7 +320,7 @@ const passCount = results.filter(Boolean).length;
 const failCount = results.filter(x => !x).length;
 
 log(`┌─────────────────────────────────────────────┐`);
-log(`│ NUXCO — PHASE 2.15 NEXT.JS PAGES COMPLETE  │`);
+log(`│ ZEPTR — PHASE 2.15 NEXT.JS PAGES COMPLETE  │`);
 log(`│ NX-01 Pages detect:    PASS  pages/ found  │`);
 log(`│ NX-02 App Router skip: PASS  config intact │`);
 log(`│ NX-03 HMR accel:       PASS  SWC measured  │`);

@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-sass
+ * @zeptr/plugin-sass
  * Sass/SCSS compilation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSassPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-sass',
+        name: '@zeptr/plugin-sass',
         originalPlugin: 'sass-loader',
         
         async transform(code: string, id: string) {

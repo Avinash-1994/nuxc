@@ -1,1 +1,1 @@
-{"name":"nuxco-mfe-remote-vue","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuxco dev","build":"nuxco build"},"dependencies":{"vue":"3.4.27"},"devDependencies":{"nuxco":"file:../../.."}}
+{"name":"zeptr-mfe-remote-vue","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"zeptr dev","build":"zeptr build"},"dependencies":{"vue":"3.4.27"},"devDependencies":{"zeptr":"file:../../.."}}

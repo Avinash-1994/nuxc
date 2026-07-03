@@ -34,7 +34,7 @@ async function testSigningFlow() {
     const meta = {
         name: 'test-plugin',
         version: '1.0.0',
-        author: 'NuxcoBot',
+        author: 'ZeptrBot',
         description: 'Secure Test',
         permissions: {}
     };

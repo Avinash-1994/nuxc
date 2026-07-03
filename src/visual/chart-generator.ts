@@ -9,19 +9,19 @@ export class ChartGenerator {
      */
     generateComparison(
         metric: string,
-        nuxcoValue: number,
+        zeptrValue: number,
         rivals: Record<string, number>,
         unit: string = 'ms'
     ): string {
-        const maxLabelLength = Math.max('Nuxco'.length, ...Object.keys(rivals).map(k => k.length));
-        const maxValue = Math.max(nuxcoValue, ...Object.values(rivals));
+        const maxLabelLength = Math.max('Zeptr'.length, ...Object.keys(rivals).map(k => k.length));
+        const maxValue = Math.max(zeptrValue, ...Object.values(rivals));
         const chartWidth = 40;
 
         let output = `\n📊 ${metric} Comparison:\n`;
         output += '─'.repeat(chartWidth + maxLabelLength + 15) + '\n';
 
-        // Add Nuxco
-        output += this.createBar('Nuxco', nuxcoValue, maxValue, maxLabelLength, chartWidth, unit, true);
+        // Add Zeptr
+        output += this.createBar('Zeptr', zeptrValue, maxValue, maxLabelLength, chartWidth, unit, true);
 
         // Add Rivals
         for (const [name, value] of Object.entries(rivals)) {

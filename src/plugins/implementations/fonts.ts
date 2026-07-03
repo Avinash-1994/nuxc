@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-fonts
+ * @zeptr/plugin-fonts
  * Web font optimization
  */
 
@@ -9,7 +9,7 @@ import path from 'path';
 
 export function createFontsPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-fonts',
+        name: '@zeptr/plugin-fonts',
         originalPlugin: 'vite-plugin-fonts',
         
         async load(id: string) {

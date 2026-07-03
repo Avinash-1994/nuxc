@@ -1,20 +1,20 @@
 {
-  "name": "nuxco-angular-template",
+  "name": "zeptr-angular-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxco dev",
-    "build": "nuxco build",
-    "preview": "nuxco preview"
+    "dev": "zeptr dev",
+    "build": "zeptr build",
+    "preview": "zeptr preview"
   },
-  "nuxco": {
+  "zeptr": {
     "template": true,
     "framework": "angular",
-    "description": "Nuxco HR — employee management dashboard"
+    "description": "Zeptr HR — employee management dashboard"
   },
   "devDependencies": {
-    "nuxco": "file:../../",
+    "zeptr": "file:../../",
     "typescript": "5.4.5"
   }
 }

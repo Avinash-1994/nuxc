@@ -1,6 +1,6 @@
 
 /**
- * Nuxco Dashboard tRPC Router
+ * Zeptr Dashboard tRPC Router
  * Day 19: tRPC Dashboard Lock
  */
 

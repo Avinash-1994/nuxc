@@ -1,18 +1,18 @@
-# @nuxco/plugin-react
+# @zeptr/plugin-react
 
-> Official Nuxco plugin for React — JSX transform, React Fast Refresh HMR, and error overlay.
+> Official Zeptr plugin for React — JSX transform, React Fast Refresh HMR, and error overlay.
 
 ## Install
 
 ```bash
-npm install --save-dev @nuxco/plugin-react
+npm install --save-dev @zeptr/plugin-react
 ```
 
 ## Usage
 
 ```js
-// nuxco.config.js
-const react = require('@nuxco/plugin-react');
+// zeptr.config.js
+const react = require('@zeptr/plugin-react');
 
 module.exports = {
   entry: ['./src/main.tsx'],
@@ -23,9 +23,9 @@ module.exports = {
 ```
 
 ```ts
-// nuxco.config.ts
-import { defineConfig } from 'nuxco';
-import react from '@nuxco/plugin-react';
+// zeptr.config.ts
+import { defineConfig } from 'zeptr';
+import react from '@zeptr/plugin-react';
 
 export default defineConfig({
   entry: ['./src/main.tsx'],

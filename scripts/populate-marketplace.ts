@@ -1,7 +1,7 @@
 
 /**
  * populate-marketplace.ts
- * Mass publishes 20 Core Plugins to local Nuxco Registry
+ * Mass publishes 20 Core Plugins to local Zeptr Registry
  * Day 12: Curated Plugin Suite Lock
  */
 
@@ -10,26 +10,26 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const PLUGINS = [
-    { name: '@nuxco/plugin-react', desc: 'Secure React Fast Refresh & JSX' },
-    { name: '@nuxco/plugin-vue', desc: 'Vue 3 SFC Compiler (Sandboxed)' },
-    { name: '@nuxco/plugin-svelte', desc: 'Svelte 5 Compiler & HMR' },
-    { name: '@nuxco/plugin-solid', desc: 'SolidJS Fine-grained Reactivity' },
-    { name: '@nuxco/plugin-lit', desc: 'Web Components & Lit Support' },
-    { name: '@nuxco/plugin-angular', desc: 'Angular Ivy Compat' },
-    { name: '@nuxco/plugin-postcss', desc: 'PostCSS 8 Adapter' },
-    { name: '@nuxco/plugin-tailwindcss', desc: 'Tailwind JIT Engine' },
-    { name: '@nuxco/plugin-sass', desc: 'Dart Sass (WASM)' },
-    { name: '@nuxco/plugin-less', desc: 'Less CSS Support' },
-    { name: '@nuxco/plugin-mdx', desc: 'Markdown to JSX' },
-    { name: '@nuxco/plugin-optimize-css', desc: 'CSS Minification' },
-    { name: '@nuxco/plugin-terser', desc: 'JS Minification (Terser)' },
-    { name: '@nuxco/plugin-visualizer', desc: 'Bundle Analysis UI' },
-    { name: '@nuxco/plugin-audit', desc: 'Lighthouse & Performance Audit' },
-    { name: '@nuxco/plugin-pwa', desc: 'PWA Manifest & Service Workers' },
-    { name: '@nuxco/plugin-legacy', desc: 'Polyfills for older browsers' },
-    { name: '@nuxco/plugin-compression', desc: 'Gzip/Brotli Compression' },
-    { name: '@nuxco/plugin-inspector', desc: 'DevTools & Debugging Overlay' },
-    { name: '@nuxco/plugin-wasm', desc: 'Native WASM Modules Support' }
+    { name: '@zeptr/plugin-react', desc: 'Secure React Fast Refresh & JSX' },
+    { name: '@zeptr/plugin-vue', desc: 'Vue 3 SFC Compiler (Sandboxed)' },
+    { name: '@zeptr/plugin-svelte', desc: 'Svelte 5 Compiler & HMR' },
+    { name: '@zeptr/plugin-solid', desc: 'SolidJS Fine-grained Reactivity' },
+    { name: '@zeptr/plugin-lit', desc: 'Web Components & Lit Support' },
+    { name: '@zeptr/plugin-angular', desc: 'Angular Ivy Compat' },
+    { name: '@zeptr/plugin-postcss', desc: 'PostCSS 8 Adapter' },
+    { name: '@zeptr/plugin-tailwindcss', desc: 'Tailwind JIT Engine' },
+    { name: '@zeptr/plugin-sass', desc: 'Dart Sass (WASM)' },
+    { name: '@zeptr/plugin-less', desc: 'Less CSS Support' },
+    { name: '@zeptr/plugin-mdx', desc: 'Markdown to JSX' },
+    { name: '@zeptr/plugin-optimize-css', desc: 'CSS Minification' },
+    { name: '@zeptr/plugin-terser', desc: 'JS Minification (Terser)' },
+    { name: '@zeptr/plugin-visualizer', desc: 'Bundle Analysis UI' },
+    { name: '@zeptr/plugin-audit', desc: 'Lighthouse & Performance Audit' },
+    { name: '@zeptr/plugin-pwa', desc: 'PWA Manifest & Service Workers' },
+    { name: '@zeptr/plugin-legacy', desc: 'Polyfills for older browsers' },
+    { name: '@zeptr/plugin-compression', desc: 'Gzip/Brotli Compression' },
+    { name: '@zeptr/plugin-inspector', desc: 'DevTools & Debugging Overlay' },
+    { name: '@zeptr/plugin-wasm', desc: 'Native WASM Modules Support' }
 ];
 
 const TEMP_DIR = path.resolve('.temp_plugins');
@@ -54,7 +54,7 @@ async function run() {
         const meta = {
             name: p.name,
             version: '1.0.0',
-            author: 'Nuxco Core Team',
+            author: 'Zeptr Core Team',
             description: p.desc,
             permissions: { network: false, fs: false } // Zero-trust default
         };

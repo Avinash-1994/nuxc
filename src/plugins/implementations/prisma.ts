@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-prisma
+ * @zeptr/plugin-prisma
  * Prisma integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPrismaPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-prisma',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-prisma',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Prisma integration

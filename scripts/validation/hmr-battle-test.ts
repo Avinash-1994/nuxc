@@ -16,8 +16,8 @@ async function setupProject() {
     await fs.mkdir(path.join(testRoot, 'src'), { recursive: true });
     await fs.mkdir(path.join(testRoot, 'public'), { recursive: true });
 
-    // Create nuxco.config.js
-    await fs.writeFile(path.join(testRoot, 'nuxco.config.js'), `
+    // Create zeptr.config.js
+    await fs.writeFile(path.join(testRoot, 'zeptr.config.js'), `
     export default {
       root: process.cwd(),
       entry: ["src/main.js"],

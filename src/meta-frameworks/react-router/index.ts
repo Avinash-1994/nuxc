@@ -1,5 +1,5 @@
-import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson } from '@nuxco/adapter-core';
-import { detectDependencies, registry } from '@nuxco/adapter-core';
+import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson } from '@zeptr/adapter-core';
+import { detectDependencies, registry } from '@zeptr/adapter-core';
 import { rr7RoutesPlugin } from './routes-plugin.js';
 
 export interface ReactRouterConfig {
@@ -7,7 +7,7 @@ export interface ReactRouterConfig {
   ssr?: boolean;         // default true
 }
 
-export class ReactRouterAdapter implements NuxcoAdapter {
+export class ReactRouterAdapter implements ZeptrAdapter {
   name = 'react-router';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -32,7 +32,7 @@ export class ReactRouterAdapter implements NuxcoAdapter {
     ];
   }
 
-  config(config: NuxcoConfig): NuxcoConfig {
+  config(config: ZeptrConfig): ZeptrConfig {
     if (!config.reactRouter) config.reactRouter = {};
     config.reactRouter = {
       appDirectory: 'app',
@@ -83,7 +83,7 @@ export class ReactRouterAdapter implements NuxcoAdapter {
           }
         }
       } catch (e) {
-        console.error('[NUXCO ReactRouter] Dev handler error:', e);
+        console.error('[ZEPTR ReactRouter] Dev handler error:', e);
       }
       next();
     };

@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-pages
+ * @zeptr/plugin-pages
  * File-based routing
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPagesPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-pages',
+        name: '@zeptr/plugin-pages',
         originalPlugin: 'vite-plugin-pages',
         
         async transform(code: string, id: string) {

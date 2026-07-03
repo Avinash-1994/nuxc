@@ -7,14 +7,14 @@ import { TemplateConfig } from '../manager.js';
 
 export const monorepoTemplate: TemplateConfig = {
     id: 'monorepo',
-    name: 'Monorepo (PNPM via Nuxco)',
+    name: 'Monorepo (PNPM via Zeptr)',
     description: 'High-performance monorepo with apps and shared packages',
     framework: 'react',
     type: 'monorepo',
     dependencies: {},
     devDependencies: {
         "typescript": "^5.0.0",
-        "@nuxco/plugin-workspace": "^1.0.0"
+        "@zeptr/plugin-workspace": "^1.0.0"
     },
     files: {
         'pnpm-workspace.yaml': `packages:
@@ -26,19 +26,19 @@ export const monorepoTemplate: TemplateConfig = {
   "name": "{{PROJECT_NAME}}",
   "private": true,
   "scripts": {
-    "build": "nuxco build --filter=...",
-    "dev": "nuxco dev --parallel",
-    "test": "nuxco test",
-    "lint": "nuxco lint"
+    "build": "zeptr build --filter=...",
+    "dev": "zeptr dev --parallel",
+    "test": "zeptr test",
+    "lint": "zeptr lint"
   },
   "devDependencies": {
-    "nuxco": "latest",
+    "zeptr": "latest",
     "typescript": "^5.0.0"
   }
 }
 `,
-        'nuxco.config.ts': `
-import { defineConfig } from 'nuxco';
+        'zeptr.config.ts': `
+import { defineConfig } from 'zeptr';
 
 export default defineConfig({
     workspace: {
@@ -92,16 +92,16 @@ export const Button = ({ children }: { children: React.ReactNode }) => {
     "@{{PROJECT_NAME}}/ui": "workspace:*"
   },
   "devDependencies": {
-    "@nuxco/plugin-react": "^1.0.0",
+    "@zeptr/plugin-react": "^1.0.0",
     "typescript": "^5.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0"
   }
 }
 `,
-        'apps/web/nuxco.config.ts': `
-import { defineConfig } from 'nuxco';
-import react from '@nuxco/plugin-react';
+        'apps/web/zeptr.config.ts': `
+import { defineConfig } from 'zeptr';
+import react from '@zeptr/plugin-react';
 
 export default defineConfig({
     plugins: [react()]
@@ -115,7 +115,7 @@ import { Button } from '@{{PROJECT_NAME}}/ui';
 export default function App() {
   return (
     <div>
-      <h1>Nuxco Monorepo</h1>
+      <h1>Zeptr Monorepo</h1>
       <Button>Shared UI Button</Button>
     </div>
   );

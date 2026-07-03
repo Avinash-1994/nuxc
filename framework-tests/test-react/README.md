@@ -1,4 +1,4 @@
-# Nuxco Tasks — React Template
+# Zeptr Tasks — React Template
 ```bash
 npm install && npm run dev
 ```

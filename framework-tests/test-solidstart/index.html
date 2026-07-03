@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>SolidStart + Nuxco</title>
+<title>SolidStart + Zeptr</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -14,10 +14,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 /* Grid pattern */
 body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(99,102,241,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
 header{position:relative;z-index:1;padding:80px 24px 64px;text-align:center}
-.nuxco-logo{display:inline-flex;align-items:center;gap:10px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:600;color:var(--accent);margin-bottom:32px;backdrop-filter:blur(10px)}
-.nuxco-logo::before{content:'⚡';font-size:16px}
+.zeptr-logo{display:inline-flex;align-items:center;gap:10px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:600;color:var(--accent);margin-bottom:32px;backdrop-filter:blur(10px)}
+.zeptr-logo::before{content:'⚡';font-size:16px}
 h1{font-size:clamp(42px,7vw,80px);font-weight:900;line-height:1.05;margin-bottom:10px;letter-spacing:-2px}
-h1 .nuxco{background:linear-gradient(135deg,#e0e7ff,#818cf8,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+h1 .zeptr{background:linear-gradient(135deg,#e0e7ff,#818cf8,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .fw-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 16px;border-radius:999px;font-size:14px;font-weight:700;margin-left:8px;vertical-align:middle;border:1px solid;backdrop-filter:blur(10px)}
 .subtitle{color:#94a3b8;font-size:18px;max-width:580px;margin:20px auto 40px;line-height:1.7}
 .meta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
@@ -75,14 +75,14 @@ header,.cards,.steps,.term{animation:fadeUp .6s ease both}
 </head>
 <body>
 <header>
-  <div class="nuxco-logo">Nuxco Build Tool</div>
-  <h1><span class="nuxco">Welcome to Nuxco</span><br/>
+  <div class="zeptr-logo">Zeptr Build Tool</div>
+  <h1><span class="zeptr">Welcome to Zeptr</span><br/>
     <span class="fw-pill" style="background:#446b9e20;color:#446b9e;border-color:#446b9e55;box-shadow:0 0 20px #446b9e30">💎 SolidStart</span>
   </h1>
   <p class="subtitle">Solid.js meta-framework with server-side rendering.</p>
   <div class="meta-row">
     <div class="meta-chip"><strong>🔧 SolidStart v1</strong>Framework</div>
-    <div class="meta-chip"><strong>🏗️ Nuxco Engine</strong>Build Tool</div>
+    <div class="meta-chip"><strong>🏗️ Zeptr Engine</strong>Build Tool</div>
     <div class="meta-chip"><strong>⚡ Sub-10ms</strong>HMR Speed</div>
     <div class="meta-chip"><strong>🦀 Rust Native</strong>Core Engine</div>
   </div>
@@ -95,7 +95,7 @@ header,.cards,.steps,.term{animation:fadeUp .6s ease both}
       <div class="hero-icon">💎</div>
       <div class="hero-text">
         <h2>This project uses SolidStart v1</h2>
-        <p>Created with <strong>Nuxco</strong> — the high-performance build tool powered by Rust and esbuild. Edit <code style="color:#818cf8;background:#6366f115;padding:2px 8px;border-radius:6px;font-size:13px">src/App.ts</code> to start building your app.</p>
+        <p>Created with <strong>Zeptr</strong> — the high-performance build tool powered by Rust and esbuild. Edit <code style="color:#818cf8;background:#6366f115;padding:2px 8px;border-radius:6px;font-size:13px">src/App.ts</code> to start building your app.</p>
       </div>
     </div>
     
@@ -133,13 +133,13 @@ header,.cards,.steps,.term{animation:fadeUp .6s ease both}
 
   <div class="section-head"><span>Quick Start</span></div>
   <div class="steps">
-    <div class="step"><div class="sn">1</div><div><h4>Create project</h4><code>nuxco create my-app --framework solidstart</code></div></div>
-    <div class="step"><div class="sn">2</div><div><h4>Start dev server</h4><code>cd my-app && nuxco dev</code></div></div>
+    <div class="step"><div class="sn">1</div><div><h4>Create project</h4><code>zeptr create my-app --framework solidstart</code></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Start dev server</h4><code>cd my-app && zeptr dev</code></div></div>
     <div class="step"><div class="sn">3</div><div><h4>Edit your app</h4><code>src/App.ts</code></div></div>
-    <div class="step"><div class="sn">4</div><div><h4>Build for prod</h4><code>nuxco build --optimize</code></div></div>
+    <div class="step"><div class="sn">4</div><div><h4>Build for prod</h4><code>zeptr build --optimize</code></div></div>
   </div>
 
-  <div class="section-head"><span>Nuxco CLI</span></div>
+  <div class="section-head"><span>Zeptr CLI</span></div>
   <div class="term">
     <div class="th">
       <div class="dot" style="background:#ef4444"></div>
@@ -147,19 +147,19 @@ header,.cards,.steps,.term{animation:fadeUp .6s ease both}
       <div class="dot" style="background:#22c55e"></div>
       <span class="term-title">bash</span>
     </div>
-    <div class="ln"><span class="cmt"># Create a SolidStart project with Nuxco</span></div>
-    <div class="ln"><span class="prompt">$ </span><span class="cmd">nuxco create my-solidstart-app --framework solidstart</span></div>
+    <div class="ln"><span class="cmt"># Create a SolidStart project with Zeptr</span></div>
+    <div class="ln"><span class="prompt">$ </span><span class="cmd">zeptr create my-solidstart-app --framework solidstart</span></div>
     <div class="ln"><span class="ok">  ✓ Scaffolded SolidStart project in 0.3s</span></div>
-    <div class="ln"><span class="prompt">$ </span><span class="cmd">nuxco dev</span></div>
+    <div class="ln"><span class="prompt">$ </span><span class="cmd">zeptr dev</span></div>
     <div class="ln"><span class="ok">  ✓ Compiled successfully!</span> <span class="dim">→ http://localhost:5173</span></div>
-    <div class="ln"><span class="prompt">$ </span><span class="cmd">nuxco build --optimize</span></div>
+    <div class="ln"><span class="prompt">$ </span><span class="cmd">zeptr build --optimize</span></div>
     <div class="ln"><span class="ok">  ✓ Build complete in 1.2s — 42 modules bundled</span></div>
   </div>
 </main>
 
 <footer>
-  <div class="footer-glow">⚡ Powered by Nuxco</div>
-  <p>Built with <a href="#">Nuxco Build Tool</a> · Framework: <strong style="color:#446b9e">SolidStart v1</strong> · <a href="#">Documentation</a> · <a href="#">GitHub</a></p>
+  <div class="footer-glow">⚡ Powered by Zeptr</div>
+  <p>Built with <a href="#">Zeptr Build Tool</a> · Framework: <strong style="color:#446b9e">SolidStart v1</strong> · <a href="#">Documentation</a> · <a href="#">GitHub</a></p>
 </footer>
 </body>
 </html>

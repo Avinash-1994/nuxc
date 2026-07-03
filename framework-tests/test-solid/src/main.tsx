@@ -18,7 +18,7 @@ function App() {
   return (
     <div style="min-height:100vh;background:#0f172a;color:#f1f5f9;font-family:system-ui">
       <nav style="background:#1e293b;padding:0 24px;display:flex;gap:24px;align-items:center;height:56px">
-        <span style="font-weight:700;font-size:18px;margin-right:16px">📊 Nuxco Analytics</span>
+        <span style="font-weight:700;font-size:18px;margin-right:16px">📊 Zeptr Analytics</span>
         {(['overview','pages','sources','events'] as const).map(t => (
           <button onClick={() => setTab(t)} style={`background:none;border:none;color:${tab()===t?'#818cf8':'#94a3b8'};cursor:pointer;font-size:15px;font-weight:${tab()===t?'600':'400'}`}>{t.charAt(0).toUpperCase()+t.slice(1)}</button>
         ))}

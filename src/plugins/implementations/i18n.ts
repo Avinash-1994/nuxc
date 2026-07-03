@@ -1,5 +1,5 @@
 /**
- * @nuxco/plugin-i18n
+ * @zeptr/plugin-i18n
  * Internationalization
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createI18nPlugin(): PluginAdapter {
     return {
-        name: '@nuxco/plugin-i18n',
-        originalPlugin: 'nuxco-native',
+        name: '@zeptr/plugin-i18n',
+        originalPlugin: 'zeptr-native',
         
         async transform(code: string, id: string) {
             // Utility: Internationalization

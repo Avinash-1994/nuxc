@@ -1,6 +1,6 @@
 
 /**
- * Nuxco Environment API
+ * Zeptr Environment API
  * Unified Runtime for Browser, Node, and Edge
  * Day 26: Environment API Lock
  */
@@ -11,8 +11,8 @@ export interface EnvConfig {
     base: string;
 }
 
-export class NuxcoEnv {
-    private static instance: NuxcoEnv;
+export class ZeptrEnv {
+    private static instance: ZeptrEnv;
     public config: EnvConfig;
     private listeners: Function[] = [];
 
@@ -20,18 +20,18 @@ export class NuxcoEnv {
         this.config = config;
     }
 
-    static init(config: EnvConfig): NuxcoEnv {
-        if (!NuxcoEnv.instance) {
-            NuxcoEnv.instance = new NuxcoEnv(config);
+    static init(config: EnvConfig): ZeptrEnv {
+        if (!ZeptrEnv.instance) {
+            ZeptrEnv.instance = new ZeptrEnv(config);
         }
-        return NuxcoEnv.instance;
+        return ZeptrEnv.instance;
     }
 
-    static get(): NuxcoEnv {
-        if (!NuxcoEnv.instance) {
-            throw new Error('NuxcoEnv not initialized');
+    static get(): ZeptrEnv {
+        if (!ZeptrEnv.instance) {
+            throw new Error('ZeptrEnv not initialized');
         }
-        return NuxcoEnv.instance;
+        return ZeptrEnv.instance;
     }
 
     /**
