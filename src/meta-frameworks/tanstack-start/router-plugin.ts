@@ -1,12 +1,12 @@
-import type { Plugin } from '@nuxc/adapter-core';
+import type { Plugin } from '@nuxco/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:nuxc/tanstack-routes';
+const VIRTUAL_MODULE_ID = 'virtual:nuxco/tanstack-routes';
 
 export function tsRouterPlugin(): Plugin {
   return {
-    name: 'nuxc:tanstack-router',
+    name: 'nuxco:tanstack-router',
 
     // Intercept Route configs mapped directly for Tanstack
     resolveId(source: string) {
@@ -56,7 +56,7 @@ export function tsRouterPlugin(): Plugin {
       scan(appDir, '');
 
       return `
-        // Auto-generated Tanstack Route proxy for Nuxc native SSR engine
+        // Auto-generated Tanstack Route proxy for Nuxco native SSR engine
         export const routes = [
           ${routes.join(',\n')}
         ];

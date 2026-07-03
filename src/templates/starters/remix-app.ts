@@ -26,17 +26,17 @@ export default function App() {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Nuxc Remix App' },
-    { name: 'description', content: 'Welcome to Remix with Nuxc!' },
+    { title: 'Nuxco Remix App' },
+    { name: 'description', content: 'Welcome to Remix with Nuxco!' },
   ];
 };
 
 export default function Index() {
   return (
     <div className="container mx-auto p-8">
-      <h1 className="text-4xl font-bold">Welcome to Remix + Nuxc</h1>
+      <h1 className="text-4xl font-bold">Welcome to Remix + Nuxco</h1>
       <p className="mt-4">
-        This is a Remix-style application built with Nuxc.
+        This is a Remix-style application built with Nuxco.
       </p>
     </div>
   );
@@ -49,7 +49,7 @@ export default function Index() {
     </div>
   );
 }`,
-        'nuxc.config.js': `module.exports = {
+        'nuxco.config.js': `module.exports = {
   entry: ['./src/root.tsx'],
   outDir: './dist',
   framework: 'react',
@@ -71,13 +71,13 @@ export default function Index() {
   },
 };`,
         'package.json': `{
-  "name": "nuxc-remix-app",
+  "name": "nuxco-remix-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "start": "nuxc ssr"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "start": "nuxco ssr"
   },
   "dependencies": {
     "@remix-run/react": "^2.0.0",

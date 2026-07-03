@@ -1,11 +1,11 @@
 /**
- * Nuxc — Discriminated Union Config Types (PART 4)
+ * Nuxco — Discriminated Union Config Types (PART 4)
  * Provides framework-specific IntelliSense via defineConfig overloads.
  */
 
 // ─── Base (shared by all) ──────────────────────────────────────────────────
 
-export interface NuxcBaseConfig {
+export interface NuxcoBaseConfig {
   entry?:     string | string[];
   outDir?:    string;
   mode?:      'development' | 'production' | 'test';
@@ -57,7 +57,7 @@ export interface NuxcBaseConfig {
 
 // ─── SSR Meta-Frameworks ───────────────────────────────────────────────────
 
-export interface NuxcSSRConfig extends NuxcBaseConfig {
+export interface NuxcoSSRConfig extends NuxcoBaseConfig {
   framework: 'nuxt' | 'sveltekit' | 'svelte-kit' | 'remix' | 'solidstart'
            | 'solid-start' | 'astro' | 'analog' | 'tanstack-start' | 'waku'
            | 'next' | 'nextjs';
@@ -68,7 +68,7 @@ export interface NuxcSSRConfig extends NuxcBaseConfig {
 
 // ─── Electron — dual bundle ────────────────────────────────────────────────
 
-export interface NuxcElectronConfig extends NuxcBaseConfig {
+export interface NuxcoElectronConfig extends NuxcoBaseConfig {
   framework:      'electron';
   preset?:        'spa';
   platform?:      'browser';
@@ -80,7 +80,7 @@ export interface NuxcElectronConfig extends NuxcBaseConfig {
 
 // ─── Tauri — WebView frontend ──────────────────────────────────────────────
 
-export interface NuxcTauriConfig extends NuxcBaseConfig {
+export interface NuxcoTauriConfig extends NuxcoBaseConfig {
   framework: 'tauri';
   preset?:   'spa';
   platform?: 'browser';
@@ -90,7 +90,7 @@ export interface NuxcTauriConfig extends NuxcBaseConfig {
 
 // ─── SPA frameworks ───────────────────────────────────────────────────────
 
-export interface NuxcSPAConfig extends NuxcBaseConfig {
+export interface NuxcoSPAConfig extends NuxcoBaseConfig {
   framework?: 'react' | 'vue' | 'svelte' | 'angular' | 'solid'
             | 'preact' | 'lit' | 'qwik' | 'vanilla';
   preset?:    'spa';
@@ -99,10 +99,10 @@ export interface NuxcSPAConfig extends NuxcBaseConfig {
 
 // ─── defineConfig overloads ────────────────────────────────────────────────
 /* eslint-disable no-redeclare */
-export function defineConfig(c: NuxcElectronConfig): NuxcElectronConfig;
-export function defineConfig(c: NuxcTauriConfig):    NuxcTauriConfig;
-export function defineConfig(c: NuxcSSRConfig):      NuxcSSRConfig;
-export function defineConfig(c: NuxcSPAConfig):      NuxcSPAConfig;
-export function defineConfig(c: NuxcBaseConfig):     NuxcBaseConfig;
+export function defineConfig(c: NuxcoElectronConfig): NuxcoElectronConfig;
+export function defineConfig(c: NuxcoTauriConfig):    NuxcoTauriConfig;
+export function defineConfig(c: NuxcoSSRConfig):      NuxcoSSRConfig;
+export function defineConfig(c: NuxcoSPAConfig):      NuxcoSPAConfig;
+export function defineConfig(c: NuxcoBaseConfig):     NuxcoBaseConfig;
 export function defineConfig(c: any): any { return c; }
 /* eslint-enable no-redeclare */

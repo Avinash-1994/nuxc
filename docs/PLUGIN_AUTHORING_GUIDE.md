@@ -1,17 +1,17 @@
 /**
- * Plugin Authoring Guide for Nuxc v1
+ * Plugin Authoring Guide for Nuxco v1
  * 
  * follow strict strict rules to ensure stability and compatibility.
  */
 
 /*
-# Nuxc Plugin API Reference
+# Nuxco Plugin API Reference
 
-Nuxc plugins are compatible with Rollup plugins, with additional governance for stability.
+Nuxco plugins are compatible with Rollup plugins, with additional governance for stability.
 
 ## Required Properties
 
-- `name` (string): Unique ID (e.g. `nuxc-plugin-my-feature`)
+- `name` (string): Unique ID (e.g. `nuxco-plugin-my-feature`)
 - `stability` (string): 'experimental' | 'stable' | 'deprecated'
 
 ## Hooks
@@ -26,11 +26,11 @@ All standard Rollup hooks are supported:
 ## Example
 
 ```typescript
-import { Plugin } from 'nuxc';
+import { Plugin } from 'nuxco';
 
 export function myPlugin(): Plugin {
   return {
-    name: 'nuxc-plugin-example',
+    name: 'nuxco-plugin-example',
     stability: 'stable',
     async transform(code, id) {
       if (id.endsWith('.foo')) {

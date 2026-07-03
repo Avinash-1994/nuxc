@@ -1,17 +1,17 @@
-# @nuxc/plugin-vue
+# @nuxco/plugin-vue
 
-> Official Nuxc plugin for Vue 3 — SFC parsing, HMR, DevTools, scoped styles.
+> Official Nuxco plugin for Vue 3 — SFC parsing, HMR, DevTools, scoped styles.
 
 ## Install
 
 ```bash
-npm install --save-dev @nuxc/plugin-vue vue @vue/compiler-sfc
+npm install --save-dev @nuxco/plugin-vue vue @vue/compiler-sfc
 ```
 
 ## Usage
 
 ```js
-const vue = require('@nuxc/plugin-vue');
+const vue = require('@nuxco/plugin-vue');
 module.exports = {
   entry: ['./src/main.ts'],
   plugins: [vue()],

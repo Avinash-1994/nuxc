@@ -17,7 +17,7 @@ export class ShortIdMap {
     }
 
     toRuntime(): string {
-        return `const __nuxc_map = ${JSON.stringify(Object.fromEntries(this.map))};`;
+        return `const __nuxco_map = ${JSON.stringify(Object.fromEntries(this.map))};`;
     }
 
     getInverse(shortId: string): string | undefined {

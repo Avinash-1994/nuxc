@@ -1,1 +1,1 @@
-{"name":"nuxc-mfe-remote-react","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuxc dev","build":"nuxc build"},"dependencies":{"react":"18.3.1","react-dom":"18.3.1"},"devDependencies":{"nuxc":"file:../../.."}}
+{"name":"nuxco-mfe-remote-react","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuxco dev","build":"nuxco build"},"dependencies":{"react":"18.3.1","react-dom":"18.3.1"},"devDependencies":{"nuxco":"file:../../.."}}

@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-relay
+ * @nuxco/plugin-relay
  * Relay integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRelayPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-relay',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-relay',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Utility: Relay integration

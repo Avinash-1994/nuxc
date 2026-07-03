@@ -1,0 +1,19 @@
+{
+  "name": "@nuxco/remote-cache",
+  "version": "1.12.0",
+  "description": "Nuxco Remote Cache provider — S3 and Nuxco Cloud sync",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  }
+}

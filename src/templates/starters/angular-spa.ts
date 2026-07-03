@@ -27,12 +27,12 @@ export const angularSpaTemplate: TemplateConfig = {
         "@angular/cli": "^17.0.0",
         "@angular/compiler-cli": "^17.0.0",
         "typescript": "~5.2.0",
-        "@nuxc/plugin-angular": "^1.0.0"
+        "@nuxco/plugin-angular": "^1.0.0"
     },
     files: {
-        'nuxc.config.ts': `
-import { defineConfig } from 'nuxc';
-import angular from '@nuxc/plugin-angular';
+        'nuxco.config.ts': `
+import { defineConfig } from 'nuxco';
+import angular from '@nuxco/plugin-angular';
 
 export default defineConfig({
     plugins: [angular()],
@@ -77,13 +77,13 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'nuxc-angular';
+  title = 'nuxco-angular';
 }
 `,
         'src/app/app.component.html': `
 <main class="main">
   <div class="content">
-    <h1>Nuxc + Angular 17</h1>
+    <h1>Nuxco + Angular 17</h1>
     <p>Build with speed.</p>
   </div>
 </main>

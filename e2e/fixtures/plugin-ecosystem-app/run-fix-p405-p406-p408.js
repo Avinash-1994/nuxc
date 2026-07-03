@@ -40,11 +40,11 @@ async function runFixes() {
   console.log('\n  Phase 4 — Targeted Fixes: P4-05 · P4-06 · P4-08\n');
 
   // ══════════════════════════════════════════════════════════════════════
-  //  FIX P4-08 — /__nuclie_inspect → /__nuxc_inspect__
+  //  FIX P4-08 — /__nuclie_inspect → /__nuxco_inspect__
   // ══════════════════════════════════════════════════════════════════════
   {
-    const mod    = await loadPlugin('nuxc-plugin-inspect');
-    const factory = mod.inspect ?? mod.nuxcPluginInspect ?? mod.default;
+    const mod    = await loadPlugin('nuxco-plugin-inspect');
+    const factory = mod.inspect ?? mod.nuxcoPluginInspect ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory() : factory;
 
     // Capture log output
@@ -61,11 +61,11 @@ async function runFixes() {
 
     const logLine   = logs.find(l => l.includes('Inspect UI:')) ?? '';
     const hasNuclie = logLine.includes('nuclie');
-    const hasNuxc  = logLine.includes('__nuxc_inspect__');
-    const urlOk     = !hasNuclie && hasNuxc;
+    const hasNuxco  = logLine.includes('__nuxco_inspect__');
+    const urlOk     = !hasNuclie && hasNuxco;
 
-    // Verify the handler responds to /__nuxc_inspect__ not /__nuclie_inspect__
-    let nuxcResponds = false;
+    // Verify the handler responds to /__nuxco_inspect__ not /__nuclie_inspect__
+    let nuxcoResponds = false;
     let nuclieResponds = false;
     if (routes['handler']) {
       const makeReq = (url) => ({ url });
@@ -73,27 +73,27 @@ async function runFixes() {
         let body = '';
         return { setHeader: () => {}, end: (b) => { body = b; }, _body: () => body };
       };
-      const resNuxc = makeRes();
+      const resNuxco = makeRes();
       const resNuclie = makeRes();
-      await routes['handler'](makeReq('/__nuxc_inspect__'), resNuxc, () => {});
+      await routes['handler'](makeReq('/__nuxco_inspect__'), resNuxco, () => {});
       await routes['handler'](makeReq('/__nuclie_inspect'), resNuclie, () => {});
-      nuxcResponds = resNuxc._body().length > 0;
+      nuxcoResponds = resNuxco._body().length > 0;
       nuclieResponds = resNuclie._body().length > 0;
     }
 
     if (urlOk) {
-      pass('P4-08  @nuxc/plugin-inspect', [
+      pass('P4-08  @nuxco/plugin-inspect', [
         `name: ${plugin.name}`,
         `Log line: ${logLine}`,
         `URL contains 'nuclie': no ✓`,
-        `URL contains '__nuxc_inspect__': yes ✓`,
-        `/__nuxc_inspect__ responds: ${nuxcResponds ? 'yes' : 'yes (handler registered)'}`,
+        `URL contains '__nuxco_inspect__': yes ✓`,
+        `/__nuxco_inspect__ responds: ${nuxcoResponds ? 'yes' : 'yes (handler registered)'}`,
         `/__nuclie_inspect responds: no ✓`,
       ]);
     } else {
-      fail('P4-08  @nuxc/plugin-inspect',
-        `URL still contains 'nuclie' or missing '__nuxc_inspect__'`,
-        [`Log line: ${logLine}`, `hasNuclie=${hasNuclie}`, `hasNuxc=${hasNuxc}`]);
+      fail('P4-08  @nuxco/plugin-inspect',
+        `URL still contains 'nuclie' or missing '__nuxco_inspect__'`,
+        [`Log line: ${logLine}`, `hasNuclie=${hasNuclie}`, `hasNuxco=${hasNuxco}`]);
     }
   }
 
@@ -101,8 +101,8 @@ async function runFixes() {
   //  FIX P4-05 — Legacy bundle must contain real transpiled app code
   // ══════════════════════════════════════════════════════════════════════
   {
-    const mod     = await loadPlugin('nuxc-plugin-legacy');
-    const factory = mod.nuxcPluginLegacy ?? mod.default;
+    const mod     = await loadPlugin('nuxco-plugin-legacy');
+    const factory = mod.nuxcoPluginLegacy ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ targets: ['IE 11'], suffix: '.legacy' }) : factory;
 
     // Use a REAL modern JS app snippet (arrow fns, const, let, template literals,
@@ -176,7 +176,7 @@ async function runFixes() {
     console.log('');
 
     if (transpiled && hasNomodule) {
-      pass('P4-05  @nuxc/plugin-legacy', [
+      pass('P4-05  @nuxco/plugin-legacy', [
         `name: ${plugin.name}`,
         `Modern bundle: ${modernKB}KB  (arrow fns, const/let, template literals, optional chaining)`,
         `Legacy bundle (.legacy.js): ${legacyKB}KB`,
@@ -187,7 +187,7 @@ async function runFixes() {
         `SWC downlevel ran: yes`,
       ]);
     } else {
-      fail('P4-05  @nuxc/plugin-legacy',
+      fail('P4-05  @nuxco/plugin-legacy',
         `Legacy bundle missing transpiled code (hasVar=${hasVar} hasRegularFn=${hasRegularFn})`,
         [`Modern: ${modernKB}KB`, `Legacy: ${legacyKB}KB`, `Chars 200-400: ${slice200_400}`]);
     }
@@ -197,8 +197,8 @@ async function runFixes() {
   //  FIX P4-06 — Real compression measurements (exact bytes, real file)
   // ══════════════════════════════════════════════════════════════════════
   {
-    const mod     = await loadPlugin('nuxc-plugin-compression');
-    const factory = mod.nuxcPluginCompression ?? mod.default;
+    const mod     = await loadPlugin('nuxco-plugin-compression');
+    const factory = mod.nuxcoPluginCompression ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ algorithm: 'brotli', threshold: 1024 }) : factory;
 
     // Use the REAL client.js from the react-router fixture (142KB real-world bundle)
@@ -235,7 +235,7 @@ async function runFixes() {
     } catch {}
 
     if (bytesNotEqual && reductionOk) {
-      pass('P4-06  @nuxc/plugin-compression', [
+      pass('P4-06  @nuxco/plugin-compression', [
         `name: ${plugin.name}`,
         `Input:  ${inputBytes} bytes (${inputKB}KB) — client.js from react-router fixture`,
         `Brotli: ${brotliBytes} bytes (${brotliKB}KB) (${brotliPct}% reduction)`,
@@ -247,7 +247,7 @@ async function runFixes() {
         `Thread count: 4 (Rust parallel) / Node zlib fallback`,
       ]);
     } else {
-      fail('P4-06  @nuxc/plugin-compression',
+      fail('P4-06  @nuxco/plugin-compression',
         `Assertion failed: bytesNotEqual=${bytesNotEqual} reductionOk=${reductionOk}`,
         [
           `Input: ${inputBytes} bytes`,
@@ -263,6 +263,6 @@ async function runFixes() {
 }
 
 // Helper to strip polyfill section for const/let detection
-const POLYFILL_SECTION = /\/\* @nuxc\/plugin-legacy polyfill shims \*\/[\s\S]*?\n\n/;
+const POLYFILL_SECTION = /\/\* @nuxco\/plugin-legacy polyfill shims \*\/[\s\S]*?\n\n/;
 
 runFixes().catch(e => { console.error('Fatal:', e.message, '\n', e.stack); process.exit(1); });

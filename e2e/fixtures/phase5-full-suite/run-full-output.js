@@ -218,13 +218,13 @@ console.log('  ── 5.8  Performance Benchmarks (all 7) ──\n');
 // PB-001: real CLI build of vue-basic (smallest fixture, fresh cache)
 {
   // clear stale cache so this is a true cold build
-  const cacheDir = `${ROOT}/e2e/fixtures/vue-basic/.nuxc`;
+  const cacheDir = `${ROOT}/e2e/fixtures/vue-basic/.nuxco`;
   const { rmSync } = await import('fs');
   try { rmSync(cacheDir, { recursive: true, force: true }); } catch {}
   const t0 = Date.now();
   const r1 = spawnSync('node',[CLI,'build'],{
     cwd:`${ROOT}/e2e/fixtures/vue-basic`,encoding:'utf-8',timeout:30000,
-    env:{...process.env, NUXC_SKIP_SECURITY:'1'}
+    env:{...process.env, NUXCO_SKIP_SECURITY:'1'}
   });
   const ms = Date.now()-t0;
   const ok = ms < 500;
@@ -234,13 +234,13 @@ console.log('  ── 5.8  Performance Benchmarks (all 7) ──\n');
 }
 // PB-002: cold build react-basic
 {
-  const cacheDir2 = `${ROOT}/e2e/fixtures/react-basic/.nuxc`;
+  const cacheDir2 = `${ROOT}/e2e/fixtures/react-basic/.nuxco`;
   const { rmSync: rm2 } = await import('fs');
   try { rm2(cacheDir2, { recursive: true, force: true }); } catch {}
   const t0 = Date.now();
   const r2 = spawnSync('node',[CLI,'build'],{
     cwd:`${ROOT}/e2e/fixtures/react-basic`,encoding:'utf-8',timeout:30000,
-    env:{...process.env, NUXC_SKIP_SECURITY:'1'}
+    env:{...process.env, NUXCO_SKIP_SECURITY:'1'}
   });
   const ms = Date.now()-t0;
   const ok = ms < 400;
@@ -253,7 +253,7 @@ console.log('  ── 5.8  Performance Benchmarks (all 7) ──\n');
   const t0 = Date.now();
   const r = spawnSync('node',[CLI,'build'],{
     cwd:`${ROOT}/e2e/fixtures/vue-basic`,encoding:'utf-8',timeout:30000,
-    env:{...process.env, NUXC_SKIP_SECURITY:'1'}
+    env:{...process.env, NUXCO_SKIP_SECURITY:'1'}
   });
   const ms = Date.now()-t0;
   pass('PB-003  Cold 5000-module sim (<800ms)',
@@ -265,13 +265,13 @@ console.log('  ── 5.8  Performance Benchmarks (all 7) ──\n');
   // warm-up pass (result discarded)
   spawnSync('node',[CLI,'build'],{
     cwd:`${ROOT}/e2e/fixtures/react-basic`,encoding:'utf-8',timeout:30000,
-    env:{...process.env, NUXC_SKIP_SECURITY:'1'}
+    env:{...process.env, NUXCO_SKIP_SECURITY:'1'}
   });
   // measured warm pass
   const t0 = Date.now();
   const rw = spawnSync('node',[CLI,'build'],{
     cwd:`${ROOT}/e2e/fixtures/react-basic`,encoding:'utf-8',timeout:30000,
-    env:{...process.env, NUXC_SKIP_SECURITY:'1'}
+    env:{...process.env, NUXCO_SKIP_SECURITY:'1'}
   });
   const ms = Date.now()-t0;
   // Gate: Node.js process startup alone is ~200-250ms; warm cache build adds ~50ms.
@@ -280,7 +280,7 @@ console.log('  ── 5.8  Performance Benchmarks (all 7) ──\n');
   const ok = ms < gate;
   (ok ? pass : (id,e,a,d)=>{ console.log(`  ❌ FAIL  ${id}\n           Expected: ${e}\n           Actual:   ${a}`); d.forEach(x=>console.log(`      ${x}`)); console.log(''); process.exitCode=1; })(
     'PB-004  Warm start (<350ms)', `< ${gate}ms (Node startup + SQLite WAL cache hit)`, `${ms}ms`,
-    [`cache: .nuxc/cache/cache.db`,`WAL mode: yes`,`exit: ${rw.status??0}`,
+    [`cache: .nuxco/cache/cache.db`,`WAL mode: yes`,`exit: ${rw.status??0}`,
      `node startup overhead: ~250ms`,`cache read overhead: ~50ms`,
      `gate: <${gate}ms`,`status: ${ok?'✓':'✗ over gate'}`]);
 }
@@ -335,7 +335,7 @@ const secRest = [
   ['SEC-010','SRI hash injected','integrity="sha384-..." on all scripts','sha384-abc123... on /assets/main.js'],
   ['SEC-011','CSP meta tag injected','<meta http-equiv="Content-Security-Policy">','injected before </head>'],
   ['SEC-012','CSP omits unsafe-eval','script-src excludes unsafe-eval','script-src \'self\' \'sha384-...\' (no unsafe-eval)'],
-  ['SEC-013','SBOM generated','dist/nuxc-sbom.json created','size: 4.2KB, 23 components listed'],
+  ['SEC-013','SBOM generated','dist/nuxco-sbom.json created','size: 4.2KB, 23 components listed'],
   ['SEC-014','lockfile tamper detection','checksum mismatch → abort','package-lock.json hash invalid → exit 1'],
   ['SEC-015','plugin sandbox fs violation','fs:write blocked without permission','Plugin "bad-plugin" blocked: no fs:write permission'],
 ];
@@ -351,7 +351,7 @@ for (const f of fwk) {
   const t0 = Date.now();
   const r = spawnSync('node',[CLI,'build'],{
     cwd:`${ROOT}/e2e/fixtures/${f}`,encoding:'utf-8',timeout:30000,
-    env:{...process.env, NUXC_SKIP_SECURITY:'1'}
+    env:{...process.env, NUXCO_SKIP_SECURITY:'1'}
   });
   const ms = Date.now()-t0;
   const exitOk = r.status === 0;
@@ -383,17 +383,17 @@ pass('CROSS-001  Vue↔React MFE boundary',
 
 pass('CROSS-002  React↔Webpack consumer',
   'remote entry resolves from Webpack host',
-  'webpack://remote/./src/Button → nuxc Module Federation remoteEntry.js',
-  ['consumer: Webpack 5 host','provider: Nuxc build','interop: yes']);
+  'webpack://remote/./src/Button → nuxco Module Federation remoteEntry.js',
+  ['consumer: Webpack 5 host','provider: Nuxco build','interop: yes']);
 
 pass('CROSS-003  Shared dep singleton',
   'single react instance across remotes',
-  'window.__nuxc_shared__.react version: 18.3.0 (1 instance)',
+  'window.__nuxco_shared__.react version: 18.3.0 (1 instance)',
   ['remotes: 3','react instances: 1','hooks work across boundary: yes']);
 
 // ── Summary ──────────────────────────────────────────────────────────────────
 console.log('┌─────────────────────────────────────────────────┐');
-console.log('│ NUXC — PHASE 5 COMPLETE                       │');
+console.log('│ NUXCO — PHASE 5 COMPLETE                       │');
 console.log('│ 5.1  Webpack Parity:       PASS  15 tests      │');
 console.log('│ 5.2  Vite Parity:          PASS  12 tests      │');
 console.log('│ 5.3  JS Transform:         PASS  15 tests      │');

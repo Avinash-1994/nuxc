@@ -17,11 +17,11 @@ export const solidSpaTemplate: TemplateConfig = {
     devDependencies: {
         "vite-plugin-solid": "^2.7.2",
         "typescript": "^5.2.2",
-        "@nuxc/plugin-solid": "^1.0.0"
+        "@nuxco/plugin-solid": "^1.0.0"
     },
     files: {
-        'nuxc.config.ts': `
-import { defineConfig } from 'nuxc';
+        'nuxco.config.ts': `
+import { defineConfig } from 'nuxco';
 import solid from 'vite-plugin-solid';
 
 export default defineConfig({
@@ -63,7 +63,7 @@ const App: Component = () => {
       <header class={styles.header}>
         <img src={logo} class={styles.logo} alt="logo" />
         <p>
-          Nuxc + SolidJS
+          Nuxco + SolidJS
         </p>
         <button class={styles.button} onClick={() => setCount((c) => c + 1)}>
             Count: {count()}

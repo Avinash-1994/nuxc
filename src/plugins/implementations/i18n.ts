@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-i18n
+ * @nuxco/plugin-i18n
  * Internationalization
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createI18nPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-i18n',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-i18n',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Utility: Internationalization

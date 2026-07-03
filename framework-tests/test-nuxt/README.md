@@ -1,4 +1,4 @@
-# Nuxc nuxt Template — Nuxc SaaS — landing + dashboard
+# Nuxco nuxt Template — Nuxco SaaS — landing + dashboard
 ```bash
 npm install && npm run dev
 ```

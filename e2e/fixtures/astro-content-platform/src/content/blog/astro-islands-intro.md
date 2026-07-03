@@ -2,7 +2,7 @@
 title: "Introduction to Astro Islands"
 description: "Learn how Astro's Islands architecture delivers zero JS by default."
 date: "2025-01-10"
-author: "Nuxc Team"
+author: "Nuxco Team"
 tags: ["astro", "islands", "performance"]
 featured: true
 ---

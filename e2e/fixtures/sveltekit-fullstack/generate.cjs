@@ -73,7 +73,7 @@ write('404/+error.svelte', '<h1>404</h1>');
   write(route + '/+page.svelte', '<h1>' + route + '</h1>');
 });
 
-// Write package.json and index.html to allow Nuxc CLI build to succeed
+// Write package.json and index.html to allow Nuxco CLI build to succeed
 fs.writeFileSync(path.join(__dirname, 'package.json'), JSON.stringify({
   name: "sveltekit-fullstack",
   version: "1.0.0",
@@ -91,8 +91,8 @@ fs.writeFileSync(path.join(__dirname, 'index.html'), `
 </html>
 `);
 
-// Add nuxc.config.ts to enable SSR preset
-fs.writeFileSync(path.join(__dirname, 'nuxc.config.ts'), `
+// Add nuxco.config.ts to enable SSR preset
+fs.writeFileSync(path.join(__dirname, 'nuxco.config.ts'), `
 export default {
   preset: 'ssr',
   entry: ['src/entry-server.js']
@@ -110,7 +110,7 @@ var ssrLines = [
   "    var isAuthed = cookies && cookies['session'];",
   "    state = { userData: { name: 'SvelteKit Admin', email: 'admin@acme.com' }, authed: !!isAuthed };",
   "    html = [",
-  "      '<main id=\"nuxc-ssr-root\">',",
+  "      '<main id=\"nuxco-ssr-root\">',",
   "      '  <h1>Dashboard - SvelteKit SSR</h1>',",
   "      '  <p>Welcome, SvelteKit Admin (admin@acme.com)</p>',",
   "      '  <ul>',",
@@ -129,7 +129,7 @@ var ssrLines = [
   "  }",
   "  return {",
   "    html: html,",
-  "    head: '<title>Dashboard | Nuxc SSR</title><meta name=\"description\" content=\"SvelteKit SSR Dashboard\">',",
+  "    head: '<title>Dashboard | Nuxco SSR</title><meta name=\"description\" content=\"SvelteKit SSR Dashboard\">',",
   "    state: JSON.stringify(state)",
   "  };",
   "};",

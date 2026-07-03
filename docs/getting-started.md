@@ -1,4 +1,4 @@
-# Getting Started with Nuxc
+# Getting Started with Nuxco
 
 > Get from zero to a running app in **under 5 minutes**.
 
@@ -11,17 +11,17 @@
 
 ---
 
-## Step 1 — Install Nuxc
+## Step 1 — Install Nuxco
 
 ```bash
-npm install -g nuxc
+npm install -g nuxco
 ```
 
 Verify the installation:
 
 ```bash
-nuxc --version
-# ⚡ nuxc v1.0.9
+nuxco --version
+# ⚡ nuxco v1.0.9
 ```
 
 ---
@@ -32,16 +32,16 @@ Pick your framework:
 
 ```bash
 # React + TypeScript (recommended)
-nuxc bootstrap --name my-app --template react-ts
+nuxco bootstrap --name my-app --template react-ts
 
 # Vue 3 + TypeScript
-nuxc bootstrap --name my-app --template vue-ts
+nuxco bootstrap --name my-app --template vue-ts
 
 # Svelte + TypeScript
-nuxc bootstrap --name my-app --template svelte-ts
+nuxco bootstrap --name my-app --template svelte-ts
 
 # Vanilla TypeScript
-nuxc bootstrap --name my-app --template vanilla-ts
+nuxco bootstrap --name my-app --template vanilla-ts
 ```
 
 This creates a `my-app/` directory with a working starter project.
@@ -52,13 +52,13 @@ This creates a `my-app/` directory with a working starter project.
 
 ```bash
 cd my-app
-nuxc dev
+nuxco dev
 ```
 
 You should see:
 
 ```
-⚡ Nuxc v1.0.9
+⚡ Nuxco v1.0.9
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://192.168.x.x:3000/
 
@@ -72,7 +72,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. **HMR is ac
 ## Step 4 — Production Build
 
 ```bash
-nuxc build
+nuxco build
 ```
 
 Output goes to `./dist/`. The build is minified, tree-shaken, and ready to deploy.
@@ -82,7 +82,7 @@ Output goes to `./dist/`. The build is minified, tree-shaken, and ready to deplo
 ## Step 5 — Preview the Production Build
 
 ```bash
-nuxc preview
+nuxco preview
 ```
 
 Serves the `dist/` folder locally so you can verify before deploying.
@@ -100,7 +100,7 @@ my-app/
 │   ├── App.tsx         ← Root component
 │   └── index.css
 ├── index.html
-├── nuxc.config.js    ← Nuxc configuration
+├── nuxco.config.js    ← Nuxco configuration
 └── package.json
 ```
 
@@ -108,10 +108,10 @@ my-app/
 
 ## Minimal Configuration
 
-The scaffolded `nuxc.config.js` works out of the box:
+The scaffolded `nuxco.config.js` works out of the box:
 
 ```js
-// nuxc.config.js
+// nuxco.config.js
 module.exports = {
   entry: ['./src/main.tsx'],
   outDir: './dist',
@@ -134,14 +134,14 @@ module.exports = {
 
 ## Adding to an Existing Project
 
-If you already have a project, you can add Nuxc without scaffolding:
+If you already have a project, you can add Nuxco without scaffolding:
 
 ```bash
 # Install locally
-npm install --save-dev nuxc
+npm install --save-dev nuxco
 
 # Generate a config file
-npx nuxc init
+npx nuxco init
 ```
 
 Then update your `package.json` scripts:
@@ -149,9 +149,9 @@ Then update your `package.json` scripts:
 ```json
 {
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "preview": "nuxc preview"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "preview": "nuxco preview"
   }
 }
 ```
@@ -161,14 +161,14 @@ Then update your `package.json` scripts:
 ## CLI Reference
 
 ```bash
-nuxc dev                            # Start dev server with HMR
-nuxc build                          # Production build
-nuxc preview                        # Preview production build
-nuxc bootstrap --name n --template t  # Scaffold new project
-nuxc init                           # Generate nuxc.config.js
-nuxc inspect                        # Inspect module graph
-nuxc analyze                        # Analyze bundle size
-nuxc doctor                         # Diagnose common issues
+nuxco dev                            # Start dev server with HMR
+nuxco build                          # Production build
+nuxco preview                        # Preview production build
+nuxco bootstrap --name n --template t  # Scaffold new project
+nuxco init                           # Generate nuxco.config.js
+nuxco inspect                        # Inspect module graph
+nuxco analyze                        # Analyze bundle size
+nuxco doctor                         # Diagnose common issues
 ```
 
 ---
@@ -176,7 +176,7 @@ nuxc doctor                         # Diagnose common issues
 ## Next Steps
 
 - 📖 [Configuration Reference](./guides/configuration.md) — all config options with types and defaults
-- 🔌 [Plugin Guide](./plugins.md) — extend Nuxc with plugins
+- 🔌 [Plugin Guide](./plugins.md) — extend Nuxco with plugins
 - 📦 [Module Federation](./guides/federation.md) — micro-frontend architecture
 - 🔥 [HMR Guide](./HMR_IMPLEMENTATION_STATUS.md) — how HMR works and how to debug it
 - 🚚 [Migration Guide](./migration.md) — moving from Vite or Webpack

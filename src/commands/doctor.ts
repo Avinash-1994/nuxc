@@ -12,7 +12,7 @@ interface DoctorCheck {
     fix?: string;
 }
 
-export class NuxcDoctor {
+export class NuxcoDoctor {
     private cwd: string;
     private checks: DoctorCheck[] = [];
 
@@ -21,11 +21,11 @@ export class NuxcDoctor {
     }
 
     async diagnose(): Promise<void> {
-        console.log('\n🩺 Nuxc Doctor - Running Diagnostics...\n');
+        console.log('\n🩺 Nuxco Doctor - Running Diagnostics...\n');
 
         await this.checkNodeVersion();
         await this.checkPackageJson();
-        await this.checkNuxcConfig();
+        await this.checkNuxcoConfig();
         await this.checkDependencies();
         await this.checkGitIgnore();
         await this.checkEnvironment();
@@ -61,30 +61,30 @@ export class NuxcDoctor {
         try {
             const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
 
-            // Check for nuxc in dependencies
-            const hasNuxc = pkg.dependencies?.nuxc || pkg.devDependencies?.nuxc;
-            if (hasNuxc) {
-                this.addCheck('package.json', 'pass', `Nuxc ${hasNuxc} configured`);
+            // Check for nuxco in dependencies
+            const hasNuxco = pkg.dependencies?.nuxco || pkg.devDependencies?.nuxco;
+            if (hasNuxco) {
+                this.addCheck('package.json', 'pass', `Nuxco ${hasNuxco} configured`);
             } else {
-                this.addCheck('package.json', 'warn', 'Nuxc not in dependencies', 'Run `npm install nuxc`');
+                this.addCheck('package.json', 'warn', 'Nuxco not in dependencies', 'Run `npm install nuxco`');
             }
 
             // Check for scripts
             if (pkg.scripts?.dev || pkg.scripts?.build) {
                 this.addCheck('npm scripts', 'pass', 'Build scripts configured');
             } else {
-                this.addCheck('npm scripts', 'warn', 'No dev/build scripts', 'Add "dev": "nuxc dev" and "build": "nuxc build"');
+                this.addCheck('npm scripts', 'warn', 'No dev/build scripts', 'Add "dev": "nuxco dev" and "build": "nuxco build"');
             }
         } catch (e) {
             this.addCheck('package.json', 'fail', 'Invalid JSON', 'Fix JSON syntax errors');
         }
     }
 
-    private async checkNuxcConfig(): Promise<void> {
+    private async checkNuxcoConfig(): Promise<void> {
         const configPaths = [
-            'nuxc.config.ts',
-            'nuxc.config.js',
-            'nuxc.config.mjs'
+            'nuxco.config.ts',
+            'nuxco.config.js',
+            'nuxco.config.mjs'
         ];
 
         const configFile = configPaths.find(p => fs.existsSync(path.join(this.cwd, p)));
@@ -92,7 +92,7 @@ export class NuxcDoctor {
         if (configFile) {
             try {
                 const config = await loadConfig(this.cwd);
-                this.addCheck('Nuxc Config', 'pass', `Found ${configFile}`);
+                this.addCheck('Nuxco Config', 'pass', `Found ${configFile}`);
 
                 // Validate config
                 if (!config.entry || config.entry.length === 0) {
@@ -101,10 +101,10 @@ export class NuxcDoctor {
                     this.addCheck('Config Validation', 'pass', `${config.entry.length} entry point(s)`);
                 }
             } catch (e: any) {
-                this.addCheck('Nuxc Config', 'fail', `Error loading config: ${e.message}`, 'Check config syntax');
+                this.addCheck('Nuxco Config', 'fail', `Error loading config: ${e.message}`, 'Check config syntax');
             }
         } else {
-            this.addCheck('Nuxc Config', 'warn', 'No config file found', 'Run `nuxc init` to create one');
+            this.addCheck('Nuxco Config', 'warn', 'No config file found', 'Run `nuxco init` to create one');
         }
     }
 
@@ -227,7 +227,7 @@ export class NuxcDoctor {
     }
 
     private async checkCacheHealth(): Promise<void> {
-        const cacheDir = path.join(this.cwd, 'node_modules', '.nuxc');
+        const cacheDir = path.join(this.cwd, 'node_modules', '.nuxco');
 
         if (!fs.existsSync(cacheDir)) {
             this.addCheck('Build Cache', 'pass', 'No cache yet (will be created on first build)');
@@ -240,7 +240,7 @@ export class NuxcDoctor {
             const sizeMB = sizeBytes / (1024 ** 2);
 
             if (sizeMB > 1000) {
-                this.addCheck('Build Cache', 'warn', `${sizeMB.toFixed(0)} MB (large)`, 'Consider clearing cache with `rm -rf node_modules/.nuxc`');
+                this.addCheck('Build Cache', 'warn', `${sizeMB.toFixed(0)} MB (large)`, 'Consider clearing cache with `rm -rf node_modules/.nuxco`');
             } else {
                 this.addCheck('Build Cache', 'pass', `${sizeMB.toFixed(0)} MB`);
             }
@@ -275,7 +275,7 @@ export class NuxcDoctor {
         const outputDir = fs.existsSync(buildDir) ? buildDir : fs.existsSync(distDir) ? distDir : null;
 
         if (!outputDir) {
-            this.addCheck('Performance', 'pass', 'No build output yet (run `nuxc build` first)');
+            this.addCheck('Performance', 'pass', 'No build output yet (run `nuxco build` first)');
             return;
         }
 
@@ -367,12 +367,12 @@ export class NuxcDoctor {
         console.log(`   CPU: ${os.cpus()[0].model} (${os.cpus().length} cores)`);
         console.log(`   Memory: ${(os.totalmem() / (1024 ** 3)).toFixed(1)} GB total, ${(os.freemem() / (1024 ** 3)).toFixed(1)} GB free`);
 
-        // Try to get Nuxc version
+        // Try to get Nuxco version
         try {
-            const pkgPath = path.join(this.cwd, 'node_modules', 'nuxc', 'package.json');
+            const pkgPath = path.join(this.cwd, 'node_modules', 'nuxco', 'package.json');
             if (fs.existsSync(pkgPath)) {
                 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
-                console.log(`   Nuxc: v${pkg.version}`);
+                console.log(`   Nuxco: v${pkg.version}`);
             }
         } catch (e) {
             // Ignore
@@ -386,12 +386,12 @@ export class NuxcDoctor {
         } else if (warnings > 0) {
             console.log('⚠️  Some warnings detected. Consider addressing them for optimal performance.\n');
         } else {
-            console.log('✅ All checks passed! Your Nuxc project is healthy.\n');
+            console.log('✅ All checks passed! Your Nuxco project is healthy.\n');
         }
     }
 }
 
 export async function runDoctor(cwd: string = process.cwd()): Promise<void> {
-    const doctor = new NuxcDoctor(cwd);
+    const doctor = new NuxcoDoctor(cwd);
     await doctor.diagnose();
 }

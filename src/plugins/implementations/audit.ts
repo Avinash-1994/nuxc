@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-audit
+ * @nuxco/plugin-audit
  * Real-time security auditing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createAuditPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-audit',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-audit',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Security check: Real-time security auditing
@@ -29,7 +29,7 @@ export function createAuditPlugin(): PluginAdapter {
             }
             
             if (issues.length > 0) {
-                console.warn(`[@nuxc/plugin-audit] Security issues found:`, issues);
+                console.warn(`[@nuxco/plugin-audit] Security issues found:`, issues);
             }
         }
     };

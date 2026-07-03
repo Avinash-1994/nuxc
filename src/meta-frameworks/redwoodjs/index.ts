@@ -1,7 +1,7 @@
-import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
-import { detectDependencies, registry } from '@nuxc/adapter-core';
+import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
+import { detectDependencies, registry } from '@nuxco/adapter-core';
 
-export class RedwoodAdapter implements NuxcAdapter {
+export class RedwoodAdapter implements NuxcoAdapter {
   name = 'redwoodjs';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -11,17 +11,17 @@ export class RedwoodAdapter implements NuxcAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'nuxc:redwood-scaffold',
+        name: 'nuxco:redwood-scaffold',
         async buildStart() {
-          console.log('[Nuxc:RedwoodJS] Detected RedwoodJS project.');
-          console.log('[Nuxc:RedwoodJS] Use `yarn rw dev` for the full RedwoodJS dev experience.');
-          console.log('[Nuxc:RedwoodJS] Nuxc handles the web/ side bundling natively.');
+          console.log('[Nuxco:RedwoodJS] Detected RedwoodJS project.');
+          console.log('[Nuxco:RedwoodJS] Use `yarn rw dev` for the full RedwoodJS dev experience.');
+          console.log('[Nuxco:RedwoodJS] Nuxco handles the web/ side bundling natively.');
         }
       }
     ];
   }
 
-  config(config: NuxcConfig): NuxcConfig {
+  config(config: NuxcoConfig): NuxcoConfig {
     if (!config.redwood) config.redwood = {};
     config.redwood = {
       // RedwoodJS splits into web/ (frontend) and api/ (backend graphql)
@@ -39,7 +39,7 @@ export class RedwoodAdapter implements NuxcAdapter {
         const url = req.url || '/';
         if (url.startsWith('/.redwood/') || url.startsWith('/api/')) {
           // Log and pass; a full implementation would proxy to localhost:8911
-          console.log(`[Nuxc:RedwoodJS] API request detected: ${url} — ensure \`yarn rw dev api\` is running.`);
+          console.log(`[Nuxco:RedwoodJS] API request detected: ${url} — ensure \`yarn rw dev api\` is running.`);
         }
         next();
       }

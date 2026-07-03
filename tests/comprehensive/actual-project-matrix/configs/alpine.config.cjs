@@ -14,7 +14,7 @@ module.exports = {
     hmr: true,
   },
   federation: {
-    name: 'nuxc_remote',
+    name: 'nuxco_remote',
     filename: 'remoteEntry.js',
     exposes: {
       './Content': './packages/alpinejs/src/index.js'

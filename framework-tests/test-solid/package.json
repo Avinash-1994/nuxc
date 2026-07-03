@@ -1,20 +1,20 @@
 {
-  "name": "nuxc-solid-template",
+  "name": "nuxco-solid-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "preview": "nuxc preview"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "preview": "nuxco preview"
   },
-  "nuxc": {
+  "nuxco": {
     "template": true,
     "framework": "solid",
-    "description": "Nuxc Analytics — website analytics dashboard"
+    "description": "Nuxco Analytics — website analytics dashboard"
   },
   "devDependencies": {
-    "nuxc": "file:../../",
+    "nuxco": "file:../../",
     "typescript": "5.4.5"
   },
   "dependencies": {

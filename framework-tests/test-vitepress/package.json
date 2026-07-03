@@ -1,20 +1,20 @@
 {
-  "name": "nuxc-vitepress-template",
+  "name": "nuxco-vitepress-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "preview": "nuxc preview"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "preview": "nuxco preview"
   },
-  "nuxc": {
+  "nuxco": {
     "template": true,
     "framework": "vitepress",
-    "description": "Nuxc API Docs — full documentation site"
+    "description": "Nuxco API Docs — full documentation site"
   },
   "devDependencies": {
-    "nuxc": "file:../../",
+    "nuxco": "file:../../",
     "typescript": "5.4.5"
   }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "@nuxc/plugin-react",
+  "name": "@nuxco/plugin-react",
   "version": "1.0.0",
-  "description": "Official Nuxc plugin for React — JSX transform, React Fast Refresh HMR, and error overlay",
+  "description": "Official Nuxco plugin for React — JSX transform, React Fast Refresh HMR, and error overlay",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,11 +16,11 @@
     "build": "tsc",
     "test": "node --test src/__tests__/index.test.js"
   },
-  "keywords": ["nuxc", "plugin", "react", "jsx", "hmr", "fast-refresh"],
+  "keywords": ["nuxco", "plugin", "react", "jsx", "hmr", "fast-refresh"],
   "author": "Avinash-1994",
   "license": "MIT",
   "peerDependencies": {
-    "nuxc": ">=1.0.0",
+    "nuxco": ">=1.0.0",
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"
   },

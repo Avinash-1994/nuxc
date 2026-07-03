@@ -1,6 +1,6 @@
 
 /**
- * Nuxc Dependency Graph Renderer
+ * Nuxco Dependency Graph Renderer
  * Implementation: Three.js (WebGL/WebGPU)
  * Day 16: WebGPU Visualizer v2 Lock
  */

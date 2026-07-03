@@ -1,20 +1,20 @@
 {
-  "name": "nuxc-nextjs-pages-template",
+  "name": "nuxco-nextjs-pages-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "preview": "nuxc preview"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "preview": "nuxco preview"
   },
-  "nuxc": {
+  "nuxco": {
     "template": true,
     "framework": "next",
-    "description": "Nuxc Store — Next.js e-commerce"
+    "description": "Nuxco Store — Next.js e-commerce"
   },
   "devDependencies": {
-    "nuxc": "file:../../",
+    "nuxco": "file:../../",
     "typescript": "5.4.5"
   }
 }

@@ -4,11 +4,11 @@ const require = createRequire(import.meta.url);
 let nativeModule: any;
 
 const candidatePaths = [
-    './nuxc_native.node',
-    '../nuxc_native.node',
-    '../../nuxc_native.node',
-    path.join(process.cwd(), 'nuxc_native.node'),
-    path.join(process.cwd(), 'dist/nuxc_native.node')
+    './nuxco_native.node',
+    '../nuxco_native.node',
+    '../../nuxco_native.node',
+    path.join(process.cwd(), 'nuxco_native.node'),
+    path.join(process.cwd(), 'dist/nuxco_native.node')
 ];
 
 for (const p of candidatePaths) {
@@ -43,7 +43,7 @@ if (!nativeModule) {
 const { BuildCache: NativeBuildCache } = nativeModule;
 
 
-import type { BuildCache as NativeBuildCacheType, CacheStats } from '../../nuxc_native.node';
+import type { BuildCache as NativeBuildCacheType, CacheStats } from '../../nuxco_native.node';
 
 export { CacheStats };
 
@@ -58,7 +58,7 @@ export { CacheStats };
  * 
  * @example
  * ```ts
- * const cache = new BuildCache('.nuxc_cache');
+ * const cache = new BuildCache('.nuxco_cache');
  * 
  * // Set a value
  * cache.set('input:src/App.tsx:abc123', JSON.stringify(transformResult));

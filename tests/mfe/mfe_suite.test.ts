@@ -41,9 +41,9 @@ test('MFE-001: generateRemoteEntry produces valid JS with container API', () => 
 // ──────────────────────────────────────────────────────────────────────
 test('MFE-002: SHARED_SCOPE_RUNTIME prevents double-loading (singleton logic)', () => {
     // The shared scope runtime must guard against double-init
-    expect(SHARED_SCOPE_RUNTIME).toContain('__nuxc_shared__');
+    expect(SHARED_SCOPE_RUNTIME).toContain('__nuxco_shared__');
     // Guard: "if already defined, return"
-    expect(SHARED_SCOPE_RUNTIME).toContain('typeof __nuxc_shared__');
+    expect(SHARED_SCOPE_RUNTIME).toContain('typeof __nuxco_shared__');
     // Must have register + get + has functions
     expect(SHARED_SCOPE_RUNTIME).toContain('register');
     expect(SHARED_SCOPE_RUNTIME).toContain('singleton');
@@ -117,8 +117,8 @@ test('MFE-004: generateFederationRuntime supports dynamic remote URLs', () => {
     expect(runtime).toContain('localhost:3001');
     expect(runtime).toContain('localhost:3002');
     expect(runtime).toContain('cdn.example.com');
-    // Must have __nuxc_import__ function for dynamic imports
-    expect(runtime).toContain('__nuxc_import__');
+    // Must have __nuxco_import__ function for dynamic imports
+    expect(runtime).toContain('__nuxco_import__');
     // Must have loadRemote logic
     expect(runtime).toContain('loadRemote');
 });
@@ -132,7 +132,7 @@ test('MFE-005: [Reference] HMR-010 graph propagation covers MFE boundary concern
     // Here we just confirm the federation runtime includes the preload API
     // that enables host apps to warm up remote connections before HMR kicks in.
     const runtime = generateFederationRuntime({ remoteApp: 'http://localhost:3001/remoteEntry.js' });
-    expect(runtime).toContain('__nuxc_preload__');
+    expect(runtime).toContain('__nuxco_preload__');
 });
 
 // ──────────────────────────────────────────────────────────────────────
@@ -174,7 +174,7 @@ test('MFE-007: generateFederationRuntime handles 3+ simultaneous remotes', () =>
     }
 
     // Runtime must guard against double-init (singleton pattern)
-    expect(runtime).toContain('__nuxc_federation__');
+    expect(runtime).toContain('__nuxco_federation__');
 });
 
 // ──────────────────────────────────────────────────────────────────────
@@ -233,7 +233,7 @@ test('MFE-EXTRA: injectRemotesIntoHTML adds script tags before </head>', () => {
 // ──────────────────────────────────────────────────────────────────────
 test('MFE-EXTRA: Federation runtime guard prevents double-initialization', () => {
     const runtime = generateFederationRuntime({});
-    // Guard: if __nuxc_federation__ already defined, skip
-    expect(runtime).toContain('__nuxc_federation__');
-    expect(runtime).toContain('typeof globalThis.__nuxc_federation__');
+    // Guard: if __nuxco_federation__ already defined, skip
+    expect(runtime).toContain('__nuxco_federation__');
+    expect(runtime).toContain('typeof globalThis.__nuxco_federation__');
 });

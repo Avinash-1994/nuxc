@@ -1,6 +1,6 @@
 /**
  * Plugin Test Suites
- * Tests for all 10 official Nuxc launch plugins
+ * Tests for all 10 official Nuxco launch plugins
  */
 
 import { describe, it, expect, beforeAll } from '@jest/globals';
@@ -11,13 +11,13 @@ import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'nuxc-plugins-'));
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'nuxco-plugins-'));
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-env Tests
+//  @nuxco/plugin-env Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-env', () => {
+describe('@nuxco/plugin-env', () => {
   const envDir = path.join(TMP, 'env-project');
   beforeAll(() => {
     fs.mkdirSync(envDir, { recursive: true });
@@ -55,10 +55,10 @@ describe('@nuxc/plugin-env', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-compression Tests
+//  @nuxco/plugin-compression Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-compression', () => {
+describe('@nuxco/plugin-compression', () => {
   let distDir: string;
 
   beforeAll(async () => {
@@ -98,10 +98,10 @@ describe('@nuxc/plugin-compression', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-svg Tests
+//  @nuxco/plugin-svg Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-svg', () => {
+describe('@nuxco/plugin-svg', () => {
   it('?raw suffix returns string type', () => {
     const svgContent = '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0"/></svg>';
     expect(typeof svgContent).toBe('string');
@@ -129,10 +129,10 @@ describe('@nuxc/plugin-svg', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-auto-import Tests
+//  @nuxco/plugin-auto-import Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-auto-import', () => {
+describe('@nuxco/plugin-auto-import', () => {
   it('resolves vue preset to Vue composables', () => {
     // The preset resolves 'vue' to a set of composables including ref, computed, etc.
     const vueComposables = ['ref', 'computed', 'watch', 'reactive', 'onMounted'];
@@ -160,14 +160,14 @@ describe('@nuxc/plugin-auto-import', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-inspect Tests
+//  @nuxco/plugin-inspect Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-inspect', () => {
+describe('@nuxco/plugin-inspect', () => {
   it('returns no-op in production', () => {
     // In production, the plugin returns a minimal object with only name
-    const noopPlugin = { name: '@nuxc/plugin-inspect' };
-    expect(noopPlugin.name).toBe('@nuxc/plugin-inspect');
+    const noopPlugin = { name: '@nuxco/plugin-inspect' };
+    expect(noopPlugin.name).toBe('@nuxco/plugin-inspect');
     expect((noopPlugin as any).configureServer).toBeUndefined();
   });
 
@@ -178,16 +178,16 @@ describe('@nuxc/plugin-inspect', () => {
   });
 
   it('zero overhead in production — plugin is no-op', () => {
-    const plugin = { name: '@nuxc/plugin-inspect' }; // No-op shape
+    const plugin = { name: '@nuxco/plugin-inspect' }; // No-op shape
     expect(Object.keys(plugin)).toHaveLength(1);
   });
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-mock Tests
+//  @nuxco/plugin-mock Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-mock', () => {
+describe('@nuxco/plugin-mock', () => {
   it('creates GET handler that returns JSON response', async () => {
     const GET = () => Response.json([{ id: 1, name: 'Alice' }]);
     const response = GET();
@@ -225,10 +225,10 @@ describe('@nuxc/plugin-mock', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-pwa Tests
+//  @nuxco/plugin-pwa Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-pwa', () => {
+describe('@nuxco/plugin-pwa', () => {
   it('generates manifest with correct fields', () => {
     const manifest = {
       name: 'My App',
@@ -254,10 +254,10 @@ describe('@nuxc/plugin-pwa', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-icons Tests
+//  @nuxco/plugin-icons Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-icons', () => {
+describe('@nuxco/plugin-icons', () => {
   it('resolves ~icons/ prefix to virtual module', () => {
     const id = '~icons/mdi/home';
     const isIconId = id.startsWith('~icons/');
@@ -286,10 +286,10 @@ describe('@nuxc/plugin-icons', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-legacy Tests
+//  @nuxco/plugin-legacy Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-legacy', () => {
+describe('@nuxco/plugin-legacy', () => {
   it('modern bundle contains type=module script', () => {
     const html = '<script type="module" src="/assets/main.js"></script>';
     expect(html).toContain('type="module"');
@@ -317,14 +317,14 @@ describe('@nuxc/plugin-legacy', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuxc/plugin-checker Tests
+//  @nuxco/plugin-checker Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuxc/plugin-checker', () => {
+describe('@nuxco/plugin-checker', () => {
   it('plugin factory returns correct name', () => {
     // checker() returns a plugin object with correct name
-    const plugin = { name: '@nuxc/plugin-checker' };
-    expect(plugin.name).toBe('@nuxc/plugin-checker');
+    const plugin = { name: '@nuxco/plugin-checker' };
+    expect(plugin.name).toBe('@nuxco/plugin-checker');
   });
 
   it('failOnError default is true', () => {

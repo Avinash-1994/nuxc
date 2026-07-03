@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-netlify
+ * @nuxco/plugin-netlify
  * Netlify deployment adapter
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createNetlifyPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-netlify',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-netlify',
+        originalPlugin: 'nuxco-native',
         
         async buildEnd() {
-            console.log('[@nuxc/plugin-netlify] Deployment adapter ready');
+            console.log('[@nuxco/plugin-netlify] Deployment adapter ready');
             // Generate deployment config
         }
     };

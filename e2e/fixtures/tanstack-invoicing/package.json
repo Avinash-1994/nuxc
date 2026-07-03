@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build"
+    "dev": "nuxco dev",
+    "build": "nuxco build"
   },
   "dependencies": {
     "@tanstack/start": "latest",

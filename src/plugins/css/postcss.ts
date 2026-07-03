@@ -1,10 +1,10 @@
 
 import path from 'path';
 import { createRequire } from 'module';
-import { NuxcPlugin } from '../../core/plugins/types.js';
+import { NuxcoPlugin } from '../../core/plugins/types.js';
 import { log } from '../../utils/logger.js';
 
-export function createPostCssPlugin(rootDir: string): NuxcPlugin {
+export function createPostCssPlugin(rootDir: string): NuxcoPlugin {
     let processor: any = null;
     let initialized = false;
 
@@ -54,14 +54,14 @@ export function createPostCssPlugin(rootDir: string): NuxcPlugin {
 
     return {
         manifest: {
-            name: 'nuxc:postcss',
+            name: 'nuxco:postcss',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['transformModule'],
             permissions: { fs: 'read' }
         },
-        id: 'nuxc:postcss',
+        id: 'nuxco:postcss',
         async runHook(hook, input, context) {
             if (hook !== 'transformModule' || !input.path.endsWith('.css')) {
                 return input;

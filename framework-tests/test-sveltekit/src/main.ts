@@ -1,6 +1,6 @@
-// SvelteKit test project uses Nuxc to serve a static Svelte SPA
+// SvelteKit test project uses Nuxco to serve a static Svelte SPA
 // (SSR requires SvelteKit's own adapter, this shows the SPA shell)
-console.log('⚡ Nuxc SvelteKit template loaded');
+console.log('⚡ Nuxco SvelteKit template loaded');
 document.getElementById('app')!.innerHTML = `
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,15 +22,15 @@ document.getElementById('app')!.innerHTML = `
   .badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; background: #22c55e22; color: #22c55e; margin-left: 8px; }
 </style>
 <nav>
-  <span>⚡ Nuxc Blog</span>
+  <span>⚡ Nuxco Blog</span>
   <a href="#">Home</a><a href="#">Articles</a><a href="#">Docs</a><a href="#">About</a>
 </nav>
 <main>
   <h1>Engineering Insights</h1>
-  <p class="subtitle">From the Nuxc team — built with SvelteKit <span class="badge">SvelteKit</span></p>
+  <p class="subtitle">From the Nuxco team — built with SvelteKit <span class="badge">SvelteKit</span></p>
   <article>
     <div class="meta">Performance · May 2025</div>
-    <h2>How Nuxc Achieves Sub-10ms Cold Starts</h2>
+    <h2>How Nuxco Achieves Sub-10ms Cold Starts</h2>
     <p>We rebuilt the entire dependency graph resolver in Rust using SWC transforms and a SQLite-backed module registry to achieve near-zero cold start times for large TypeScript projects.</p>
     <div class="tags"><span class="tag">Rust</span><span class="tag">Performance</span><span class="tag">TypeScript</span></div>
   </article>
@@ -43,7 +43,7 @@ document.getElementById('app')!.innerHTML = `
   <article>
     <div class="meta">DX · March 2025</div>
     <h2>Zero-Config Framework Auto-Detection</h2>
-    <p>Nuxc reads your package.json dependencies and infers the correct transformer, preset, and dev server config — no nuxc.config.ts required for the most common setups.</p>
+    <p>Nuxco reads your package.json dependencies and infers the correct transformer, preset, and dev server config — no nuxco.config.ts required for the most common setups.</p>
     <div class="tags"><span class="tag">DX</span><span class="tag">Zero-Config</span><span class="tag">Frameworks</span></div>
   </article>
 </main>

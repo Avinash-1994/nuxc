@@ -1,10 +1,10 @@
-import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
-import { detectDependencies, registry } from '@nuxc/adapter-core';
+import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
+import { detectDependencies, registry } from '@nuxco/adapter-core';
 import { createHash } from 'crypto';
 
 let mdxCompiler: any;
 
-export class DocusaurusAdapter implements NuxcAdapter {
+export class DocusaurusAdapter implements NuxcoAdapter {
   name = 'docusaurus';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -14,7 +14,7 @@ export class DocusaurusAdapter implements NuxcAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'nuxc:docusaurus-mdx',
+        name: 'nuxco:docusaurus-mdx',
 
         async buildStart() {
           try {
@@ -57,7 +57,7 @@ export class DocusaurusAdapter implements NuxcAdapter {
     ];
   }
 
-  config(config: NuxcConfig): NuxcConfig {
+  config(config: NuxcoConfig): NuxcoConfig {
     if (!config.docusaurus) config.docusaurus = {};
     config.docusaurus = {
       // Docusaurus outputs to build/ by default
@@ -70,7 +70,7 @@ export class DocusaurusAdapter implements NuxcAdapter {
   serverMiddleware(): Middleware[] {
     return [
       async (req: any, res: any, next: any) => {
-        // Docusaurus runs its own dev server; Nuxc scaffolds detection + MDX transform support
+        // Docusaurus runs its own dev server; Nuxco scaffolds detection + MDX transform support
         next();
       }
     ];

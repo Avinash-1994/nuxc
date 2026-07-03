@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-testing-library
+ * @nuxco/plugin-testing-library
  * Testing Library integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTestingLibraryPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-testing-library',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-testing-library',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Utility: Testing Library integration

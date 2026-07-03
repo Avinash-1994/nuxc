@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-file
+ * @nuxco/plugin-file
  * File asset handling
  */
 
@@ -9,7 +9,7 @@ import path from 'path';
 
 export function createFilePlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-file',
+        name: '@nuxco/plugin-file',
         originalPlugin: 'file-loader',
         
         async load(id: string) {

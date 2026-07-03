@@ -1,7 +1,7 @@
-// Type definitions for nuxc_native.node
+// Type definitions for nuxco_native.node
 // Generated for Day 2: Tokio Orchestrator & RocksDB Cache
 
-declare module '../../nuxc_native.node' {
+declare module '../../nuxco_native.node' {
     // Cache types
     export interface CacheStats {
         totalEntries: number;

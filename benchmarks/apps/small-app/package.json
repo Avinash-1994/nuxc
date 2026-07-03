@@ -3,8 +3,8 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "dev": "nuxc dev",
-        "build": "nuxc build",
+        "dev": "nuxco dev",
+        "build": "nuxco build",
         "vite:dev": "vite",
         "vite:build": "vite build",
         "esbuild:build": "esbuild src/index.jsx --bundle --outfile=dist/esbuild.js --minify",
@@ -16,7 +16,7 @@
         "react-dom": "^18.2.0"
     },
     "devDependencies": {
-        "nuxc": "file:../../..",
+        "nuxco": "file:../../..",
         "vite": "^5.0.0",
         "@vitejs/plugin-react": "^4.2.0",
         "esbuild": "^0.19.0",

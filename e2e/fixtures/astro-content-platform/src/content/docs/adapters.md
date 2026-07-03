@@ -1,13 +1,13 @@
 ---
 title: "Framework Adapters"
-description: "Nuxc framework adapters for Angular, Vue, React, and more."
+description: "Nuxco framework adapters for Angular, Vue, React, and more."
 order: 2
 section: "reference"
 ---
 
 # Framework Adapters
 
-Nuxc supports 16 frameworks via its adapter system.
+Nuxco supports 16 frameworks via its adapter system.
 
 ## Supported Adapters
 

@@ -38,7 +38,7 @@ log(' Entry: src/entry-server.cjs');
 log(' BUG-002 null guard: ✅ PRESENT');
 log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
-// Build Nuxc first to apply our getDevHandler changes
+// Build Nuxco first to apply our getDevHandler changes
 execFileSync('npm', ['run', 'build'], { cwd: path.resolve(FIXTURE_ROOT, '../../..') });
 
 // Helper to spawn dev server and fetch a URL
@@ -182,7 +182,7 @@ try {
     `Spawn timestamp: ${htmlResult.spawnTs}`,
     `Ready timestamp: ${htmlResult.readyTs}`,
     `Cold start: ${htmlResult.coldMs}ms (wall clock)`,
-    `[nuxc] adapter: analog in output: yes`,
+    `[nuxco] adapter: analog in output: yes`,
   ]);
 })();
 
@@ -209,7 +209,7 @@ await (async function() {
   });
   
   const t0 = performance.now(); const t0Ts = new Date().toISOString();
-  fs.writeFileSync(targetFile, orig + `\n// nuxc-hmr-${Date.now()}`);
+  fs.writeFileSync(targetFile, orig + `\n// nuxco-hmr-${Date.now()}`);
   await new Promise(r => setTimeout(r, debounceMs + 10));
   const hmrMs = parseFloat((performance.now() - t0).toFixed(2));
   const t1Ts = new Date().toISOString();
@@ -270,9 +270,9 @@ await (async function() {
     && !clientContent.includes('ng.core.ɵcmp = function(opts) { return opts; }');
 
   const ok = htmlFiles.length >= 3 && clientBundle && serverBundle && buildMs < 5000 && bundleSizeKB >= 1 && isCompiled;
-  (ok ? pass : fail)('AG-07  Production build (Angular Ivy + Nuxc chunker)', `>= 3 HTML pages, client/server bundles, < 5000ms`,
+  (ok ? pass : fail)('AG-07  Production build (Angular Ivy + Nuxco chunker)', `>= 3 HTML pages, client/server bundles, < 5000ms`,
     `${htmlFiles.length} HTML pages, ${buildMs}ms`, [
-    `[nuxc] adapter: analog in output: yes`,
+    `[nuxco] adapter: analog in output: yes`,
     `Build time: ${buildMs}ms (actual wall clock)`,
     `dist/ file count: ${fileCount}`,
     `dist/ total size: ${(totalSize/1024).toFixed(2)}KB`,
@@ -314,7 +314,7 @@ await (async function() {
     const t0 = Date.now();
     try {
       execFileSync('node', [cliPath, 'build'], { cwd: fix.dir, timeout: 30000, stdio: 'ignore',
-        env: { ...process.env, NUXC_SKIP_SECURITY: '1' } });
+        env: { ...process.env, NUXCO_SKIP_SECURITY: '1' } });
       results.push({ name: fix.name, pass: true, ms: Date.now()-t0 });
     } catch(e) {
       results.push({ name: fix.name, pass: false, ms: Date.now()-t0, note: String(e.message||'').substring(0,60) });
@@ -339,7 +339,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 log(!process.exitCode ? '✅ ALL ANALOG TESTS PASSED WITH REAL DATA' : '❌ SOME TESTS FAILED');
 log('');
 log('┌─────────────────────────────────────────────┐');
-log('│ NUXC — PHASE 2.8 ANALOG COMPLETE          │');
+log('│ NUXCO — PHASE 2.8 ANALOG COMPLETE          │');
 log(`│ AG-01 Routing:       PASS                   │`);
 log(`│ AG-02 File-routing:  PASS                   │`);
 log(`│ AG-03 SSR HTML:      PASS                   │`);
@@ -351,6 +351,6 @@ log('│ AG-08 Hydration:     WARN                   │');
 log('│ AG-09 Regression:    PASS                   │');
 log('│                                             │');
 log('│ Total: 8 pass  0 fail  1 warn               │');
-log('│ [nuxc] adapter: analog confirmed           │');
+log('│ [nuxco] adapter: analog confirmed           │');
 log('│ Ready for Phase 2.9: YES                    │');
 log('└─────────────────────────────────────────────┘');

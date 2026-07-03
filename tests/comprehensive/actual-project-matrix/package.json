@@ -1,7 +1,7 @@
 {
-    "name": "nuxc-real-project-matrix",
+    "name": "nuxco-real-project-matrix",
     "version": "1.0.0",
-    "description": "Test Nuxc against 8 real production open-source projects",
+    "description": "Test Nuxco against 8 real production open-source projects",
     "main": "dist/runner.js",
     "scripts": {
         "build": "tsc",
@@ -13,11 +13,11 @@
         "test:report": "node dist/runner.js --report"
     },
     "keywords": [
-        "nuxc",
+        "nuxco",
         "benchmark",
         "testing",
         "matrix"
     ],
-    "author": "Nuxc Team",
+    "author": "Nuxco Team",
     "license": "MIT"
 }

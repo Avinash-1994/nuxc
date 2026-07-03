@@ -3,7 +3,7 @@
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-const nativeModule = require('../../nuxc_native.node');
+const nativeModule = require('../../nuxco_native.node');
 
 const {
     BuildOrchestrator: NativeBuildOrchestrator,
@@ -15,7 +15,7 @@ import type {
     BuildOrchestrator as NativeBuildOrchestratorType,
     BuildEvent,
     OrchestratorStats
-} from '../../nuxc_native.node';
+} from '../../nuxco_native.node';
 
 export { BuildEvent, OrchestratorStats };
 

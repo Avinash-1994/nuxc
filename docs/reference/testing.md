@@ -1,4 +1,4 @@
-# 🧪 Nuxc Testing - Quick Reference Guide
+# 🧪 Nuxco Testing - Quick Reference Guide
 
 ## 🚀 Quick Start
 
@@ -148,7 +148,7 @@ npm run test:snapshot -- --updateSnapshot
 
 ### Enable Debug Logging
 ```bash
-DEBUG=nuxc:* npm test
+DEBUG=nuxco:* npm test
 ```
 
 ### Run Single Test

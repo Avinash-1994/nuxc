@@ -1,6 +1,6 @@
-# Getting Started with Nuxc
+# Getting Started with Nuxco
 
-Welcome to Nuxc! This guide will help you get up and running in minutes.
+Welcome to Nuxco! This guide will help you get up and running in minutes.
 
 ## Quick Start
 
@@ -8,23 +8,23 @@ Welcome to Nuxc! This guide will help you get up and running in minutes.
 
 ```bash
 # Using npm
-npm install -g nuxc
+npm install -g nuxco
 
 # Using yarn
-yarn global add nuxc
+yarn global add nuxco
 
 # Using pnpm
-pnpm add -g nuxc
+pnpm add -g nuxco
 ```
 
 ### Create a New Project
 
 ```bash
 # Create a new project from template
-npx create-nuxc my-app
+npx create-nuxco my-app
 
 # Choose from available templates
-npx create-nuxc my-app --template react-spa
+npx create-nuxco my-app --template react-spa
 ```
 
 ### Available Templates
@@ -57,7 +57,7 @@ npm install
 ### 3. Start development server
 
 ```bash
-nuxc dev
+nuxco dev
 ```
 
 Your app will be running at `http://localhost:3000` with Hot Module Replacement enabled!
@@ -65,7 +65,7 @@ Your app will be running at `http://localhost:3000` with Hot Module Replacement 
 ### 4. Build for production
 
 ```bash
-nuxc build
+nuxco build
 ```
 
 Your optimized build will be in the `dist/` folder.
@@ -79,14 +79,14 @@ my-app/
 │   ├── App.tsx          # Main component
 │   └── ...
 ├── public/              # Static assets
-├── nuxc.config.js      # Nuxc configuration
+├── nuxco.config.js      # Nuxco configuration
 ├── package.json
 └── tsconfig.json
 ```
 
 ## Configuration
 
-Create a `nuxc.config.js` in your project root:
+Create a `nuxco.config.js` in your project root:
 
 ```javascript
 module.exports = {
@@ -122,7 +122,7 @@ module.exports = {
 
 ## Need Help?
 
-- 📖 [Documentation](https://nuxc.dev/docs)
-- 💬 [GitHub Discussions](https://github.com/Avinash-1994/nuxc/discussions)
-- 🐛 [Report Issues](https://github.com/Avinash-1994/nuxc/issues)
-- 🌟 [Star on GitHub](https://github.com/Avinash-1994/nuxc)
+- 📖 [Documentation](https://nuxco.dev/docs)
+- 💬 [GitHub Discussions](https://github.com/Avinash-1994/nuxco/discussions)
+- 🐛 [Report Issues](https://github.com/Avinash-1994/nuxco/issues)
+- 🌟 [Star on GitHub](https://github.com/Avinash-1994/nuxco)

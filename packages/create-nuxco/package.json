@@ -1,0 +1,14 @@
+{
+  "name": "create-nuxco",
+  "version": "1.0.10",
+  "description": "Scaffolding tool for Nuxco",
+  "type": "module",
+  "bin": {
+    "create-nuxco": "./index.js"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "nuxco": "^1.0.10"
+  },
+  "scripts": {}
+}

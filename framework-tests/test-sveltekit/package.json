@@ -1,17 +1,17 @@
 {
-  "name": "nuxc-sveltekit-template",
+  "name": "nuxco-sveltekit-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "preview": "nuxc preview"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "preview": "nuxco preview"
   },
-  "nuxc": {
+  "nuxco": {
     "template": true,
     "framework": "sveltekit",
-    "description": "Nuxc Blog — full-stack blog with CMS"
+    "description": "Nuxco Blog — full-stack blog with CMS"
   },
   "dependencies": {
     "@sveltejs/kit": "2.5.18",
@@ -19,7 +19,7 @@
     "marked": "12.0.0"
   },
   "devDependencies": {
-    "nuxc": "file:../../",
+    "nuxco": "file:../../",
     "typescript": "5.4.5"
   }
 }

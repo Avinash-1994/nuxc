@@ -105,7 +105,7 @@ const FRAMEWORK_TESTS: FrameworkTest[] = [
                     template: '<h1>{{title}}</h1>'
                 })
                 export class AppComponent {
-                    title = 'nuxc-angular';
+                    title = 'nuxco-angular';
                 }
             `,
             'src/main.ts': `

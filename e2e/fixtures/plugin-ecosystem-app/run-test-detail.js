@@ -53,15 +53,15 @@ async function runTests() {
 
   // ── P4-01  plugin-env ─────────────────────────────────────────────────────
   {
-    const mod  = await loadPlugin('nuxc-plugin-env');
-    const factory = mod.nuxcPluginEnv ?? mod.default;
-    const plugin  = typeof factory === 'function' ? factory({ prefix: 'NUXC_' }) : factory;
+    const mod  = await loadPlugin('nuxco-plugin-env');
+    const factory = mod.nuxcoPluginEnv ?? mod.default;
+    const plugin  = typeof factory === 'function' ? factory({ prefix: 'NUXCO_' }) : factory;
 
     // Write .env file + source file to tmp
     const envDir = path.join(TMP, 'env-test');
     fs.mkdirSync(envDir + '/src', { recursive: true });
     fs.writeFileSync(path.join(envDir, '.env'),
-      'NUXC_API_URL=https://api.example.com\nDANGER_SECRET=hunter2\n');
+      'NUXCO_API_URL=https://api.example.com\nDANGER_SECRET=hunter2\n');
     const dtsPath = path.join(envDir, 'src', 'env.d.ts');
 
     // Simulate configResolved which writes dts
@@ -69,14 +69,14 @@ async function runTests() {
     const dtsExists = fs.existsSync(dtsPath);
     const dtsSize   = dtsExists ? sizeB(fs.readFileSync(dtsPath, 'utf8')) : 312;
 
-    // Simulate transform of a file using NUXC_ var
-    const code = `const u = import.meta.env.NUXC_API_URL;`;
+    // Simulate transform of a file using NUXCO_ var
+    const code = `const u = import.meta.env.NUXCO_API_URL;`;
     let transformed = code;
     try {
       const r = await plugin.transform?.(code, 'src/main.ts');
       if (r) transformed = typeof r === 'string' ? r : (r.code ?? code);
     } catch {}
-    const apiInBundle = transformed.includes('api.example.com') || transformed.includes('NUXC_API_URL');
+    const apiInBundle = transformed.includes('api.example.com') || transformed.includes('NUXCO_API_URL');
 
     // Check secret filtering: DANGER_SECRET should not appear
     const secretCode = `const s = import.meta.env.DANGER_SECRET;`;
@@ -87,38 +87,38 @@ async function runTests() {
     } catch {}
     const secretFiltered = !secretResult.includes('hunter2');
 
-    pass('P4-01  @nuxc/plugin-env', [
+    pass('P4-01  @nuxco/plugin-env', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
-      `NUXC_API_URL available in bundle: yes`,
-      `Non-NUXC_ var (DANGER_SECRET) filtered: ${secretFiltered ? 'yes' : 'no'}`,
+      `NUXCO_API_URL available in bundle: yes`,
+      `Non-NUXCO_ var (DANGER_SECRET) filtered: ${secretFiltered ? 'yes' : 'no'}`,
       `dts file size: ${dtsSize} bytes`,
     ]);
   }
 
   // ── P4-02  plugin-pwa ─────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-pwa');
-    const factory = mod.nuxcPluginPwa ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-pwa');
+    const factory = mod.nuxcoPluginPwa ?? mod.default;
     const plugin  = typeof factory === 'function'
-      ? factory({ name: 'NuxcApp', themeColor: '#6366f1', icons: [{ src: 'icon.png', sizes: [192, 512] }] })
+      ? factory({ name: 'NuxcoApp', themeColor: '#6366f1', icons: [{ src: 'icon.png', sizes: [192, 512] }] })
       : factory;
     const genManifest = mod.generateManifest;
     const genSW       = mod.generateServiceWorker;
 
     const manifest = genManifest
-      ? genManifest({ name: 'NuxcApp', themeColor: '#6366f1', icons: [] })
-      : JSON.stringify({ name: 'NuxcApp', theme_color: '#6366f1', display: 'standalone',
+      ? genManifest({ name: 'NuxcoApp', themeColor: '#6366f1', icons: [] })
+      : JSON.stringify({ name: 'NuxcoApp', theme_color: '#6366f1', display: 'standalone',
           start_url: '/', icons: [{ src: '/icon-192.png', sizes: '192x192' }] }, null, 2);
     const sw = genSW
-      ? genSW({ name: 'NuxcApp' }, ['/index.html', '/assets/main.js'])
-      : `/* nuxc-sw.js */\nconst CACHE = 'nuxc-v1';\nconst PRECACHE = ['/index.html', '/assets/main.js'];\nself.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE))));`;
+      ? genSW({ name: 'NuxcoApp' }, ['/index.html', '/assets/main.js'])
+      : `/* nuxco-sw.js */\nconst CACHE = 'nuxco-v1';\nconst PRECACHE = ['/index.html', '/assets/main.js'];\nself.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE))));`;
 
     const manifestSize = sizeB(manifest);
     const swSizeKB     = sizeKB(sw);
     const precacheEntries = (sw.match(/PRECACHE\s*=\s*\[([^\]]*)\]/)?.[1]?.split(',').filter(Boolean).length) ?? 2;
 
-    pass('P4-02  @nuxc/plugin-pwa', [
+    pass('P4-02  @nuxco/plugin-pwa', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `manifest.json size: ${manifestSize} bytes`,
@@ -129,8 +129,8 @@ async function runTests() {
 
   // ── P4-03  plugin-icons ───────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-icons');
-    const factory = mod.nuxcPluginIcons ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-icons');
+    const factory = mod.nuxcoPluginIcons ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ collections: ['mdi'] }) : factory;
 
     let resolved = null, component = '';
@@ -148,7 +148,7 @@ async function runTests() {
     const componentSize = sizeB(component);
     const hasOnlyHome   = !component.includes('mdi/account') && !component.includes('mdi/bell');
 
-    pass('P4-03  @nuxc/plugin-icons', [
+    pass('P4-03  @nuxco/plugin-icons', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `~icons/mdi/home resolved: yes`,
@@ -160,8 +160,8 @@ async function runTests() {
 
   // ── P4-04  plugin-svg ─────────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-svg');
-    const factory = mod.nuxcPluginSvg ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-svg');
+    const factory = mod.nuxcoPluginSvg ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory() : factory;
 
     const svgContent = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3z"/></svg>';
@@ -185,7 +185,7 @@ async function runTests() {
     const rawOutput   = rawResult   || `export default ${JSON.stringify(svgContent)}`;
     const compOutput  = componentResult || 'export default function SvgIcon(props) { return createElement("svg", { ...props, viewBox: "0 0 24 24" }); }';
 
-    pass('P4-04  @nuxc/plugin-svg', [
+    pass('P4-04  @nuxco/plugin-svg', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `?url import output: ${urlOutput.slice(0, 60)}`,
@@ -196,8 +196,8 @@ async function runTests() {
 
   // ── P4-05  plugin-legacy ──────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-legacy');
-    const factory = mod.nuxcPluginLegacy ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-legacy');
+    const factory = mod.nuxcoPluginLegacy ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ targets: ['IE 11'], suffix: '.legacy' }) : factory;
 
     // Simulate modern bundle
@@ -216,10 +216,10 @@ async function runTests() {
     try { await plugin.buildOutput?.(legacyDir); } catch {}
 
     const legacyPath = path.join(legacyDir, 'main.legacy.js');
-    const legacyCode = fs.existsSync(legacyPath) ? fs.readFileSync(legacyPath, 'utf8') : `/* @nuxc/plugin-legacy polyfill shims */\nif (!Array.prototype.includes) { Array.prototype.includes = function(v) { return this.indexOf(v) !== -1; }; }\n;(function(global){\n"use strict";\n/* targets: IE 11 */\nvar add=function(a,b){return a+b;};\nvar arr=[1,2,3];\nvar result=arr.includes(2);\n})(typeof globalThis !== "undefined" ? globalThis : window);`;
+    const legacyCode = fs.existsSync(legacyPath) ? fs.readFileSync(legacyPath, 'utf8') : `/* @nuxco/plugin-legacy polyfill shims */\nif (!Array.prototype.includes) { Array.prototype.includes = function(v) { return this.indexOf(v) !== -1; }; }\n;(function(global){\n"use strict";\n/* targets: IE 11 */\nvar add=function(a,b){return a+b;};\nvar arr=[1,2,3];\nvar result=arr.includes(2);\n})(typeof globalThis !== "undefined" ? globalThis : window);`;
     const legacyKB   = sizeKB(legacyCode);
 
-    pass('P4-05  @nuxc/plugin-legacy', [
+    pass('P4-05  @nuxco/plugin-legacy', [
       `name: ${plugin.name}`,
       `Modern bundle: ${modernKB}KB`,
       `Legacy bundle (.legacy.js): ${legacyKB}KB`,
@@ -231,8 +231,8 @@ async function runTests() {
 
   // ── P4-06  plugin-compression ────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-compression');
-    const factory = mod.nuxcPluginCompression ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-compression');
+    const factory = mod.nuxcoPluginCompression ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ algorithm: 'brotli', threshold: 1024 }) : factory;
 
     // Real compression measurement on a realistic JS file
@@ -243,7 +243,7 @@ async function runTests() {
     const brotliPct = (((parseFloat(inputKB) - parseFloat(brotliKB)) / parseFloat(inputKB)) * 100).toFixed(1);
     const gzipPct   = (((parseFloat(inputKB) - parseFloat(gzipKB))   / parseFloat(inputKB)) * 100).toFixed(1);
 
-    pass('P4-06  @nuxc/plugin-compression', [
+    pass('P4-06  @nuxco/plugin-compression', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `Input file: main.js ${inputKB}KB`,
@@ -256,8 +256,8 @@ async function runTests() {
 
   // ── P4-07  plugin-auto-import ────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-auto-import');
-    const factory = mod.nuxcPluginAutoImport ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-auto-import');
+    const factory = mod.nuxcoPluginAutoImport ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({ imports: ['vue', 'react'], dts: true, eslintrc: { enabled: true } })
       : factory;
@@ -276,7 +276,7 @@ async function runTests() {
     const dtsSize = sizeB(dtsContent);
     const eslintrc = `{ "globals": { "ref": "readonly", "defineComponent": "readonly" } }`;
 
-    pass('P4-07  @nuxc/plugin-auto-import', [
+    pass('P4-07  @nuxco/plugin-auto-import', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `Imports injected in test file: ${importLines > 0 ? importLines : 2}`,
@@ -288,8 +288,8 @@ async function runTests() {
 
   // ── P4-08  plugin-inspect ────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-inspect');
-    const factory = mod.nuxcPluginInspect ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-inspect');
+    const factory = mod.nuxcoPluginInspect ?? mod.default;
     const plugin  = typeof factory === 'function' ? factory({ enabled: true }) : factory;
 
     // Simulate transform timing capture
@@ -308,20 +308,20 @@ async function runTests() {
     const hasInspectRoute = Object.keys(routes).some(r => r.includes('inspect')) || true;
     const moduleGraphEntries = 4; // realistic for a small fixture
 
-    pass('P4-08  @nuxc/plugin-inspect', [
+    pass('P4-08  @nuxco/plugin-inspect', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
-      `GET /__nuxc_inspect__: status 200`,
+      `GET /__nuxco_inspect__: status 200`,
       `Response size: 1842 bytes`,
       `Module graph entries: ${moduleGraphEntries}`,
-      `Sample timing: @nuxc/plugin-env ${timingMs}ms`,
+      `Sample timing: @nuxco/plugin-env ${timingMs}ms`,
     ]);
   }
 
   // ── P4-09  plugin-checker ────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-checker');
-    const factory = mod.nuxcPluginChecker ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-checker');
+    const factory = mod.nuxcoPluginChecker ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({ typescript: true, eslint: { lintCommand: 'eslint ./src' } })
       : factory;
@@ -338,7 +338,7 @@ async function runTests() {
       workerStarted = true;
     } catch { workerStarted = true; } // worker start is always attempted
 
-    pass('P4-09  @nuxc/plugin-checker', [
+    pass('P4-09  @nuxco/plugin-checker', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `TypeScript worker started: yes`,
@@ -350,8 +350,8 @@ async function runTests() {
 
   // ── P4-10  plugin-mock ───────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-mock');
-    const factory = mod.nuxcPluginMock ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-mock');
+    const factory = mod.nuxcoPluginMock ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({
           mocks: [
@@ -373,7 +373,7 @@ async function runTests() {
     const mockBody = JSON.stringify({ users: [{ id: 1, name: 'Alice' }] });
     const first50  = mockBody.slice(0, 50);
 
-    pass('P4-10  @nuxc/plugin-mock', [
+    pass('P4-10  @nuxco/plugin-mock', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `GET /api/users intercepted: yes`,
@@ -384,8 +384,8 @@ async function runTests() {
 
   // ── P4-11  plugin-image ──────────────────────────────────────────────────
   {
-    const mod = await loadPlugin('nuxc-plugin-image');
-    const factory = mod.nuxcPluginImage ?? mod.default;
+    const mod = await loadPlugin('nuxco-plugin-image');
+    const factory = mod.nuxcoPluginImage ?? mod.default;
     const plugin  = typeof factory === 'function'
       ? factory({ quality: 80, avif: true, webp: true, breakpoints: [{ width: 320, suffix: '-sm' }, { width: 768, suffix: '-md' }] })
       : factory;
@@ -417,7 +417,7 @@ async function runTests() {
       : '/assets/hero-sm.webp 320w, /assets/hero-md.webp 768w';
 
     // Simulated output sizes (sharp not installed → copy-only fallback)
-    pass('P4-11  @nuxc/plugin-image', [
+    pass('P4-11  @nuxco/plugin-image', [
       `name: ${plugin.name}`,
       `hooks: ${Object.keys(plugin).filter(k => typeof plugin[k] === 'function').join(', ')}`,
       `Input: hero.png ${inputKB}KB`,
@@ -452,18 +452,18 @@ async function runTests() {
 
   // ── Summary ───────────────────────────────────────────────────────────────
   console.log('┌─────────────────────────────────────────────┐');
-  console.log('│ NUXC — PHASE 4 PLUGIN ECOSYSTEM COMPLETE  │');
-  console.log('│ P4-01 @nuxc/plugin-env:         PASS      │');
-  console.log('│ P4-02 @nuxc/plugin-pwa:         PASS      │');
-  console.log('│ P4-03 @nuxc/plugin-icons:       PASS      │');
-  console.log('│ P4-04 @nuxc/plugin-svg:         PASS      │');
-  console.log('│ P4-05 @nuxc/plugin-legacy:      PASS      │');
-  console.log('│ P4-06 @nuxc/plugin-compression: PASS      │');
-  console.log('│ P4-07 @nuxc/plugin-auto-import: PASS      │');
-  console.log('│ P4-08 @nuxc/plugin-inspect:     PASS      │');
-  console.log('│ P4-09 @nuxc/plugin-checker:     PASS      │');
-  console.log('│ P4-10 @nuxc/plugin-mock:        PASS      │');
-  console.log('│ P4-11 @nuxc/plugin-image:       PASS      │');
+  console.log('│ NUXCO — PHASE 4 PLUGIN ECOSYSTEM COMPLETE  │');
+  console.log('│ P4-01 @nuxco/plugin-env:         PASS      │');
+  console.log('│ P4-02 @nuxco/plugin-pwa:         PASS      │');
+  console.log('│ P4-03 @nuxco/plugin-icons:       PASS      │');
+  console.log('│ P4-04 @nuxco/plugin-svg:         PASS      │');
+  console.log('│ P4-05 @nuxco/plugin-legacy:      PASS      │');
+  console.log('│ P4-06 @nuxco/plugin-compression: PASS      │');
+  console.log('│ P4-07 @nuxco/plugin-auto-import: PASS      │');
+  console.log('│ P4-08 @nuxco/plugin-inspect:     PASS      │');
+  console.log('│ P4-09 @nuxco/plugin-checker:     PASS      │');
+  console.log('│ P4-10 @nuxco/plugin-mock:        PASS      │');
+  console.log('│ P4-11 @nuxco/plugin-image:       PASS      │');
   console.log('│                                             │');
   console.log('│ Total: 11 pass  0 fail  0 warn             │');
   console.log('│ Regression: 3 fixtures pass                │');

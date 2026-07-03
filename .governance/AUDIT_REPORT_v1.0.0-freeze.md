@@ -1,4 +1,4 @@
-# Nuxc Stability Audit Report
+# Nuxco Stability Audit Report
 
 **Version**: v1.0.0-freeze
 **Date**: 2026-02-04T09:14:56.961Z

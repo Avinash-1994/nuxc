@@ -123,10 +123,10 @@ var BuildConfigSchema = z.object({
   esbuildPlugins: z.array(z.any()).optional()
 });
 async function loadConfig(cwd) {
-  const jsonPath = path.join(cwd, "nuxc.build.json");
-  const yamlPath = path.join(cwd, "nuxc.build.yaml");
-  const ymlPath = path.join(cwd, "nuxc.build.yml");
-  const tsPath = path.join(cwd, "nuxc.build.ts");
+  const jsonPath = path.join(cwd, "nuxco.build.json");
+  const yamlPath = path.join(cwd, "nuxco.build.yaml");
+  const ymlPath = path.join(cwd, "nuxco.build.yml");
+  const tsPath = path.join(cwd, "nuxco.build.ts");
   let rawConfig;
   try {
     if (await fs.access(jsonPath).then(() => true).catch(() => false)) {
@@ -141,7 +141,7 @@ async function loadConfig(cwd) {
     } else if (await fs.access(tsPath).then(() => true).catch(() => false)) {
       log.info("Loading TypeScript config...");
       const { build } = await import("esbuild");
-      const outfile = path.join(cwd, "nuxc.build.temp.mjs");
+      const outfile = path.join(cwd, "nuxco.build.temp.mjs");
       await build({
         entryPoints: [tsPath],
         outfile,
@@ -209,7 +209,7 @@ import assert from "assert";
 async function testYamlConfig() {
   console.log("Running YAML Config Test...");
   const cwd = process.cwd();
-  const yamlPath = path2.join(cwd, "nuxc.build.yaml");
+  const yamlPath = path2.join(cwd, "nuxco.build.yaml");
   const yamlContent = `
 root: .
 entry: 

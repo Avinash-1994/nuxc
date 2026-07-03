@@ -1,5 +1,5 @@
-import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
-import { detectDependencies, registry } from '@nuxc/adapter-core';
+import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
+import { detectDependencies, registry } from '@nuxco/adapter-core';
 import { vitepressMarkdownPlugin } from './press-plugin.js';
 
 export interface VitePressConfig {
@@ -8,7 +8,7 @@ export interface VitePressConfig {
   cleanUrls?: boolean;   // default false
 }
 
-export class VitePressAdapter implements NuxcAdapter {
+export class VitePressAdapter implements NuxcoAdapter {
   name = 'vitepress';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -21,7 +21,7 @@ export class VitePressAdapter implements NuxcAdapter {
     ];
   }
 
-  config(config: NuxcConfig): NuxcConfig {
+  config(config: NuxcoConfig): NuxcoConfig {
     if (!config.vitepress) config.vitepress = {};
     config.vitepress = {
       srcDir: '.',
@@ -39,7 +39,7 @@ export class VitePressAdapter implements NuxcAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:nuxc/vitepress-router';
+         const virtualEntry = 'virtual:nuxco/vitepress-router';
          let router: any;
          try {
             router = await import(virtualEntry);
@@ -70,7 +70,7 @@ export class VitePressAdapter implements NuxcAdapter {
 
          next();
       } catch(e) {
-         console.error('[Nuxc:VitePress] Error rendering SSR', e);
+         console.error('[Nuxco:VitePress] Error rendering SSR', e);
          next();
       }
     };

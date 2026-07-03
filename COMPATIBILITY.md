@@ -1,7 +1,7 @@
 # COMPATIBILITY MATRIX
 
 > Honest status of what works, what has known issues, and what is not yet supported.
-> Updated: 2026-04-07 | Nuxc v1.0.9
+> Updated: 2026-04-07 | Nuxco v1.0.9
 
 ---
 
@@ -137,7 +137,7 @@
 
 ### Issue 1: HMR breaks after circular imports
 **Severity:** Minor  
-**Workaround:** If HMR stops responding, run `nuxc dev --force` to restart. Break circular dependencies where possible.
+**Workaround:** If HMR stops responding, run `nuxco dev --force` to restart. Break circular dependencies where possible.
 
 ### Issue 2: Windows path separator edge cases
 **Severity:** Minor  
@@ -176,10 +176,10 @@
 
 If you encounter behavior not listed here:
 
-1. Run `nuxc doctor` to self-diagnose
-2. Check [GitHub Issues](https://github.com/Avinash-1994/Nuxc/issues)
-3. File a bug with: Nuxc version, OS, Node version, config file, and error output
-4. Use `nuxc build --verbose` for detailed logs
+1. Run `nuxco doctor` to self-diagnose
+2. Check [GitHub Issues](https://github.com/Avinash-1994/Nuxco/issues)
+3. File a bug with: Nuxco version, OS, Node version, config file, and error output
+4. Use `nuxco build --verbose` for detailed logs
 
 ---
 

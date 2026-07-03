@@ -1,19 +1,19 @@
 ---
-title: "Getting Started with Nuxc"
-description: "Set up Nuxc in under 60 seconds."
+title: "Getting Started with Nuxco"
+description: "Set up Nuxco in under 60 seconds."
 order: 1
 section: "guides"
 ---
 
-# Getting Started with Nuxc
+# Getting Started with Nuxco
 
 ## Installation
 
 ```bash
-npm install -g nuxc
-nuxc dev
+npm install -g nuxco
+nuxco dev
 ```
 
 ## Configuration
 
-Create a `nuxc.config.ts` in your project root.
+Create a `nuxco.config.ts` in your project root.

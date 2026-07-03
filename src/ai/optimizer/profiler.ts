@@ -28,7 +28,7 @@ export class ProjectProfiler {
             packageManager,
             dependencies: pkg.dependencies || {},
             devDependencies: pkg.devDependencies || {},
-            configSummary: {}, // TODO: Parse nuxc.config.ts
+            configSummary: {}, // TODO: Parse nuxco.config.ts
             entries: await this.detectEntries(),
             size: {
                 totalJs: 0, // Placeholder: would need actual build stats

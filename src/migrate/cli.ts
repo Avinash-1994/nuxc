@@ -1,7 +1,7 @@
 /**
  * Migration CLI Command (Day 44)
  * 
- * CLI interface for nuxc migrate command
+ * CLI interface for nuxco migrate command
  */
 
 import { MigrationAnalyzer } from './analyzer.js';
@@ -20,7 +20,7 @@ export async function migrateCommand(projectPath: string, options: MigrateComman
     console.log('🔍 Analyzing project...');
     console.log(`   Path: ${resolvedPath}\n`);
 
-    // Step 0: Migrate legacy Nuxc wasm plugins automatically
+    // Step 0: Migrate legacy Nuxco wasm plugins automatically
     const rewrittenFiles = rewriteWasmPlugins(resolvedPath);
     if (rewrittenFiles.length > 0) {
         console.log(`🔧 Rewrote legacy WASM plugin references in: ${rewrittenFiles.join(', ')}\n`);
@@ -47,7 +47,7 @@ export async function migrateCommand(projectPath: string, options: MigrateComman
     if (options.dryRun) {
         console.log('🔍 DRY RUN MODE - No files will be modified\n');
     } else {
-        console.log('⚙️  Generating Nuxc configuration...\n');
+        console.log('⚙️  Generating Nuxco configuration...\n');
     }
 
     const generator = new MigrationGenerator(plan, resolvedPath, {

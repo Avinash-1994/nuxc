@@ -1,1 +1,1 @@
-{ "name": "test-alpine", "private": true, "type": "module", "scripts": { "dev": "nuxc dev", "build": "nuxc build" }, "dependencies": { "alpinejs": "^3.13.5" }, "devDependencies": { "nuxc": "file:../../", "typescript": "^5.0.0" } }
+{ "name": "test-alpine", "private": true, "type": "module", "scripts": { "dev": "nuxco dev", "build": "nuxco build" }, "dependencies": { "alpinejs": "^3.13.5" }, "devDependencies": { "nuxco": "file:../../", "typescript": "^5.0.0" } }

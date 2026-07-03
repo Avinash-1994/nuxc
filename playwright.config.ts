@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Playwright configuration for Nuxc visual regression tests
+ * Playwright configuration for Nuxco visual regression tests
  * 
  * See https://playwright.dev/docs/test-configuration
  */

@@ -1,9 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson } from '@nuxc/adapter-core';
-import { registry } from '@nuxc/adapter-core';
+import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson } from '@nuxco/adapter-core';
+import { registry } from '@nuxco/adapter-core';
 
-export class SvelteKitAdapter implements NuxcAdapter {
+export class SvelteKitAdapter implements NuxcoAdapter {
   name = 'svelte-kit';
   private routesPath: string;
 
@@ -20,7 +20,7 @@ export class SvelteKitAdapter implements NuxcAdapter {
     return [];
   }
 
-  config(config: NuxcConfig): NuxcConfig {
+  config(config: NuxcoConfig): NuxcoConfig {
     const root = config.root || process.cwd();
     const clientEntry = path.join(root, 'src', 'entry-client.js');
     const serverEntry = path.join(root, 'src', 'entry-server.js');
@@ -33,11 +33,11 @@ export class SvelteKitAdapter implements NuxcAdapter {
     // Fall back to whatever the user configured if neither exists
     if (entries.length === 0) return config;
 
-    console.log(`[nuxc:sveltekit] entries: ${entries.map(e => e.replace(root + '/', '')).join(', ')}`);
+    console.log(`[nuxco:sveltekit] entries: ${entries.map(e => e.replace(root + '/', '')).join(', ')}`);
     return { ...config, entry: entries, preset: 'ssr' };
   }
 
-  ssrEntry(config: NuxcConfig): string {
+  ssrEntry(config: NuxcoConfig): string {
     return path.join(config.root || process.cwd(), 'src', 'entry-server.js');
   }
 
@@ -99,7 +99,7 @@ export class SvelteKitAdapter implements NuxcAdapter {
 
   /**
    * Evaluates a +page.server.ts file natively to test load/action outputs
-   * In Nuxc, this is bundled via esbuild, but for the adapter tests we dynamically parse it
+   * In Nuxco, this is bundled via esbuild, but for the adapter tests we dynamically parse it
    */
   async evaluateServerNode(filePath: string, mockRequest: any, mockCookies: any) {
     if (!fs.existsSync(filePath)) throw new Error('File not found');
@@ -165,7 +165,7 @@ export class SvelteKitAdapter implements NuxcAdapter {
 
   createPlugin() {
     return {
-      name: 'nuxc-sveltekit-adapter',
+      name: 'nuxco-sveltekit-adapter',
       setup: () => {},
       transform: (code: string, id: string) => { return null; }
     };

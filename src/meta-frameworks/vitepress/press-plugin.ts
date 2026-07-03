@@ -1,11 +1,11 @@
-import type { Plugin } from '@nuxc/adapter-core';
+import type { Plugin } from '@nuxco/adapter-core';
 import { createHash } from 'crypto';
 
 let mdCompiler: any;
 
 export function vitepressMarkdownPlugin(): Plugin {
   return {
-    name: 'nuxc:vitepress-markdown',
+    name: 'nuxco:vitepress-markdown',
 
     async buildStart() {
       try {
@@ -45,7 +45,7 @@ export function vitepressMarkdownPlugin(): Plugin {
             </script>
           `;
        } catch (e) {
-          console.error('[Nuxc:VitePress] Markdown transformation failed', e);
+          console.error('[Nuxco:VitePress] Markdown transformation failed', e);
        }
 
        db.set(cacheKey, transformedCode);

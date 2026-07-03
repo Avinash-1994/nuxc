@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-avif
+ * @nuxco/plugin-avif
  * AVIF image support
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createAvifPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-avif',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-avif',
+        originalPlugin: 'nuxco-native',
         
         async load(id: string) {
             // Asset loading for avif

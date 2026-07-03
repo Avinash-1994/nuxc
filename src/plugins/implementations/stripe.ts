@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-stripe
+ * @nuxco/plugin-stripe
  * Stripe integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createStripePlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-stripe',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-stripe',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Fintech integration: Stripe integration
@@ -16,7 +16,7 @@ export function createStripePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxc/plugin-stripe] Fintech integration ready');
+            console.log('[@nuxco/plugin-stripe] Fintech integration ready');
             // Initialize payment gateway, generate QR codes, etc.
         }
     };

@@ -1,13 +1,13 @@
-# Nuxc Adapter Registry
+# Nuxco Adapter Registry
 
 **Phase**: H.1 (Module 9)  
 **Status**: ✅ Active
 
-This registry indexes all supported framework adapters for the Nuxc build system.
+This registry indexes all supported framework adapters for the Nuxco build system.
 
 ## 📖 What is an Adapter?
 
-An **Adapter** is an isolated translation layer that allows Nuxc to build, bundle, and serve a specific frontend framework without modifying Nuxc's core logic. Adapters are **data producers**, not policy engines.
+An **Adapter** is an isolated translation layer that allows Nuxco to build, bundle, and serve a specific frontend framework without modifying Nuxco's core logic. Adapters are **data producers**, not policy engines.
 
 See: [Adapter Architecture](../MODULE_8_SCOPE.md)
 

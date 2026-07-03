@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-sentry
+ * @nuxco/plugin-sentry
  * Sentry error tracking
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSentryPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-sentry',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-sentry',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Utility: Sentry error tracking

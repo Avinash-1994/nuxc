@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-windicss
+ * @nuxco/plugin-windicss
  * WindiCSS integration
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createWindicssPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-windicss',
+        name: '@nuxco/plugin-windicss',
         originalPlugin: 'vite-plugin-windicss',
         
         async transform(code: string, id: string) {

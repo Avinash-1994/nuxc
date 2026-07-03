@@ -1,17 +1,17 @@
-# @nuxc/plugin-visualizer
+# @nuxco/plugin-visualizer
 
-> Official Nuxc plugin for bundle visualization — interactive HTML treemap report.
+> Official Nuxco plugin for bundle visualization — interactive HTML treemap report.
 
 ## Install
 
 ```bash
-npm install --save-dev @nuxc/plugin-visualizer
+npm install --save-dev @nuxco/plugin-visualizer
 ```
 
 ## Usage
 
 ```js
-const visualizer = require('@nuxc/plugin-visualizer');
+const visualizer = require('@nuxco/plugin-visualizer');
 module.exports = {
   entry: ['./src/main.ts'],
   plugins: [
@@ -28,14 +28,14 @@ module.exports = {
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `filename` | `string` | `'dist/stats.html'` | Output path for HTML report |
-| `title` | `string` | `'Nuxc Bundle Visualizer'` | Report page title |
+| `title` | `string` | `'Nuxco Bundle Visualizer'` | Report page title |
 | `open` | `boolean` | `false` | Auto-open in browser after build |
 | `template` | `'treemap' \| 'sunburst' \| 'network'` | `'treemap'` | Visualization type |
 | `gzipSize` | `boolean` | `true` | Include gzip size estimates |
 
 ## Report
 
-After `nuxc build`, open `dist/stats.html` to see:
+After `nuxco build`, open `dist/stats.html` to see:
 - **Treemap**: Visual proportional grid of all modules by size
 - **Module Table**: Sortable list of every module with size and chunk assignment
 - **Summary**: Total modules and bundle size at a glance

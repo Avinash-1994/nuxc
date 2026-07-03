@@ -44,7 +44,7 @@ export class CacheManager {
         try {
             const { getLazyCacheDatabase, initCacheInBackground } = await import('./cache/lazy-init.js');
             // Background init
-            const targetDir = this.cacheDir || path.join(this.root, '.nuxc/cache');
+            const targetDir = this.cacheDir || path.join(this.root, '.nuxco/cache');
             initCacheInBackground(targetDir);
 
             // The first 'get' or 'set' will await the database if it's not ready
@@ -57,7 +57,7 @@ export class CacheManager {
         if (!this.enabled) return null;
         try {
             const { getLazyCacheDatabase } = await import('./cache/lazy-init.js');
-            return await getLazyCacheDatabase(path.join(this.root, '.nuxc/cache'));
+            return await getLazyCacheDatabase(path.join(this.root, '.nuxco/cache'));
         } catch (e) {
             return null;
         }

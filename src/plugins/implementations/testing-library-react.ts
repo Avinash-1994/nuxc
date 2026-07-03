@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-testing-library-react
+ * @nuxco/plugin-testing-library-react
  * React Testing Library
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTestingLibraryReactPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-testing-library-react',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-testing-library-react',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Testing: React Testing Library

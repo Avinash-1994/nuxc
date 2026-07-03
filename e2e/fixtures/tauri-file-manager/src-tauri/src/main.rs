@@ -1,5 +1,5 @@
 // Tauri file manager Rust backend
-// Nuxc IPC type generator parses #[tauri::command] fns to emit TypeScript declarations
+// Nuxco IPC type generator parses #[tauri::command] fns to emit TypeScript declarations
 
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 

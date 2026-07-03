@@ -1,17 +1,17 @@
 /**
- * Tier-A Plugin Wrappers for Nuxc
+ * Tier-A Plugin Wrappers for Nuxco
  * 
  * These are pre-configured wrappers for popular Rollup plugins.
  * Users can import these directly or use the rollupAdapter for custom plugins.
  * 
  * Usage:
  * ```typescript
- * import { nuxcBabel, nuxcTerser } from 'nuxc/plugins/compat/tier-a';
+ * import { nuxcoBabel, nuxcoTerser } from 'nuxco/plugins/compat/tier-a';
  * 
  * export default {
  *   plugins: [
- *     nuxcBabel({ presets: ['@babel/preset-react'] }),
- *     nuxcTerser()
+ *     nuxcoBabel({ presets: ['@babel/preset-react'] }),
+ *     nuxcoTerser()
  *   ]
  * }
  * ```
@@ -33,14 +33,14 @@ function createStub(name: string): Plugin {
  * Babel plugin wrapper
  * Requires: npm install @rollup/plugin-babel @babel/core
  */
-export function nuxcBabel(options: any = {}): Plugin {
+export function nuxcoBabel(options: any = {}): Plugin {
     try {
         // Dynamic import to avoid hard dependency
         const babel = require('@rollup/plugin-babel');
         return rollupAdapter(babel.default ? babel.default(options) : babel(options));
     } catch (e) {
-        console.warn('[@nuxc/babel] @rollup/plugin-babel not found. Install with: npm install @rollup/plugin-babel @babel/core');
-        return createStub('nuxc-babel-stub');
+        console.warn('[@nuxco/babel] @rollup/plugin-babel not found. Install with: npm install @rollup/plugin-babel @babel/core');
+        return createStub('nuxco-babel-stub');
     }
 }
 
@@ -48,13 +48,13 @@ export function nuxcBabel(options: any = {}): Plugin {
  * Terser (minification) plugin wrapper
  * Requires: npm install @rollup/plugin-terser
  */
-export function nuxcTerser(options: any = {}): Plugin {
+export function nuxcoTerser(options: any = {}): Plugin {
     try {
         const terser = require('@rollup/plugin-terser');
         return rollupAdapter(terser.default ? terser.default(options) : terser(options));
     } catch (e) {
-        console.warn('[@nuxc/terser] @rollup/plugin-terser not found. Install with: npm install @rollup/plugin-terser');
-        return createStub('nuxc-terser-stub');
+        console.warn('[@nuxco/terser] @rollup/plugin-terser not found. Install with: npm install @rollup/plugin-terser');
+        return createStub('nuxco-terser-stub');
     }
 }
 
@@ -62,15 +62,15 @@ export function nuxcTerser(options: any = {}): Plugin {
  * JSON plugin wrapper
  * Requires: npm install @rollup/plugin-json
  */
-export function nuxcJson(options: any = {}): Plugin {
+export function nuxcoJson(options: any = {}): Plugin {
     try {
         const json = require('@rollup/plugin-json');
         return rollupAdapter(json.default ? json.default(options) : json(options));
     } catch (e) {
-        console.warn('[@nuxc/json] @rollup/plugin-json not found. Install with: npm install @rollup/plugin-json');
+        console.warn('[@nuxco/json] @rollup/plugin-json not found. Install with: npm install @rollup/plugin-json');
         // Provide basic fallback
         return {
-            name: 'nuxc-json-fallback',
+            name: 'nuxco-json-fallback',
             async transform(code: string, id: string) {
                 if (id.endsWith('.json')) {
                     return `export default ${code}`;
@@ -85,13 +85,13 @@ export function nuxcJson(options: any = {}): Plugin {
  * YAML plugin wrapper
  * Requires: npm install @rollup/plugin-yaml
  */
-export function nuxcYaml(options: any = {}): Plugin {
+export function nuxcoYaml(options: any = {}): Plugin {
     try {
         const yaml = require('@rollup/plugin-yaml');
         return rollupAdapter(yaml.default ? yaml.default(options) : yaml(options));
     } catch (e) {
-        console.warn('[@nuxc/yaml] @rollup/plugin-yaml not found. Install with: npm install @rollup/plugin-yaml');
-        return createStub('nuxc-yaml-stub');
+        console.warn('[@nuxco/yaml] @rollup/plugin-yaml not found. Install with: npm install @rollup/plugin-yaml');
+        return createStub('nuxco-yaml-stub');
     }
 }
 
@@ -99,13 +99,13 @@ export function nuxcYaml(options: any = {}): Plugin {
  * MDX plugin wrapper
  * Requires: npm install @mdx-js/rollup
  */
-export function nuxcMdx(options: any = {}): Plugin {
+export function nuxcoMdx(options: any = {}): Plugin {
     try {
         const mdx = require('@mdx-js/rollup');
         return rollupAdapter(mdx.default ? mdx.default(options) : mdx(options));
     } catch (e) {
-        console.warn('[@nuxc/mdx] @mdx-js/rollup not found. Install with: npm install @mdx-js/rollup');
-        return createStub('nuxc-mdx-stub');
+        console.warn('[@nuxco/mdx] @mdx-js/rollup not found. Install with: npm install @mdx-js/rollup');
+        return createStub('nuxco-mdx-stub');
     }
 }
 
@@ -113,13 +113,13 @@ export function nuxcMdx(options: any = {}): Plugin {
  * SVGR plugin wrapper (SVG to React components)
  * Requires: npm install rollup-plugin-svgr
  */
-export function nuxcSvgr(options: any = {}): Plugin {
+export function nuxcoSvgr(options: any = {}): Plugin {
     try {
         const svgr = require('rollup-plugin-svgr');
         return rollupAdapter(svgr.default ? svgr.default(options) : svgr(options));
     } catch (e) {
-        console.warn('[@nuxc/svgr] rollup-plugin-svgr not found. Install with: npm install rollup-plugin-svgr');
-        return createStub('nuxc-svgr-stub');
+        console.warn('[@nuxco/svgr] rollup-plugin-svgr not found. Install with: npm install rollup-plugin-svgr');
+        return createStub('nuxco-svgr-stub');
     }
 }
 
@@ -127,10 +127,10 @@ export function nuxcSvgr(options: any = {}): Plugin {
  * Export all Tier-A plugins
  */
 export const TierA = {
-    babel: nuxcBabel,
-    terser: nuxcTerser,
-    json: nuxcJson,
-    yaml: nuxcYaml,
-    mdx: nuxcMdx,
-    svgr: nuxcSvgr
+    babel: nuxcoBabel,
+    terser: nuxcoTerser,
+    json: nuxcoJson,
+    yaml: nuxcoYaml,
+    mdx: nuxcoMdx,
+    svgr: nuxcoSvgr
 };

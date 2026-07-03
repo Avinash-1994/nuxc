@@ -1,7 +1,7 @@
 // tests/runner_verification_test.ts
-// This file tests the custom @nuxc/test runner itself
+// This file tests the custom @nuxco/test runner itself
 
-describe('Nuxc Test Runner', () => {
+describe('Nuxco Test Runner', () => {
     it('should support describe/it blocks', () => {
         expect(true).toBe(true);
     });

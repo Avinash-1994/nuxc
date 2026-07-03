@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-wasm-sandbox
+ * @nuxco/plugin-wasm-sandbox
  * WASM plugin sandbox
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createWasmSandboxPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-wasm-sandbox',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-wasm-sandbox',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Security check: WASM plugin sandbox
@@ -29,7 +29,7 @@ export function createWasmSandboxPlugin(): PluginAdapter {
             }
             
             if (issues.length > 0) {
-                console.warn(`[@nuxc/plugin-wasm-sandbox] Security issues found:`, issues);
+                console.warn(`[@nuxco/plugin-wasm-sandbox] Security issues found:`, issues);
             }
         }
     };

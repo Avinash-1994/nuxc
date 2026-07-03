@@ -73,7 +73,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<div>Hello</div>);
         }
     });
 
-    it('should generate nuxc.config.ts in dry-run mode', async () => {
+    it('should generate nuxco.config.ts in dry-run mode', async () => {
         const analyzer = new MigrationAnalyzer(FIXTURE_DIR);
         const plan = await analyzer.analyze();
 
@@ -81,13 +81,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<div>Hello</div>);
         const result = await generator.generate();
 
         expect(result.success).toBe(true);
-        expect(result.files).toContain('nuxc.config.ts');
+        expect(result.files).toContain('nuxco.config.ts');
 
         // Should NOT create file in dry-run
-        expect(fs.existsSync(path.join(FIXTURE_DIR, 'nuxc.config.ts'))).toBe(false);
+        expect(fs.existsSync(path.join(FIXTURE_DIR, 'nuxco.config.ts'))).toBe(false);
     });
 
-    it('should generate nuxc.config.ts with correct framework', async () => {
+    it('should generate nuxco.config.ts with correct framework', async () => {
         const analyzer = new MigrationAnalyzer(FIXTURE_DIR);
         const plan = await analyzer.analyze();
 
@@ -97,7 +97,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<div>Hello</div>);
         expect(result.success).toBe(true);
 
         // Check file was created
-        const configPath = path.join(FIXTURE_DIR, 'nuxc.config.ts');
+        const configPath = path.join(FIXTURE_DIR, 'nuxco.config.ts');
         expect(fs.existsSync(configPath)).toBe(true);
 
         // Check content
@@ -106,7 +106,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<div>Hello</div>);
         expect(content).toContain('"framework": "react"');
     });
 
-    it('should update package.json with Nuxc scripts', async () => {
+    it('should update package.json with Nuxco scripts', async () => {
         const analyzer = new MigrationAnalyzer(FIXTURE_DIR);
         const plan = await analyzer.analyze();
 
@@ -116,9 +116,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<div>Hello</div>);
         const pkgPath = path.join(FIXTURE_DIR, 'package.json');
         const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
 
-        expect(pkg.scripts.dev).toBe('nuxc dev');
-        expect(pkg.scripts.build).toBe('nuxc build');
-        expect(pkg.devDependencies.nuxc).toBe('^2.0.0');
+        expect(pkg.scripts.dev).toBe('nuxco dev');
+        expect(pkg.scripts.build).toBe('nuxco build');
+        expect(pkg.devDependencies.nuxco).toBe('^2.0.0');
     });
 
     it('should generate MIGRATION_REPORT.md', async () => {
@@ -134,7 +134,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<div>Hello</div>);
         expect(fs.existsSync(reportPath)).toBe(true);
 
         const content = fs.readFileSync(reportPath, 'utf-8');
-        expect(content).toContain('# Nuxc Migration Report');
+        expect(content).toContain('# Nuxco Migration Report');
         expect(content).toContain('vite');
         expect(content).toContain('react');
     });
@@ -168,7 +168,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<div>Hello</div>);
         const generator = new MigrationGenerator(plan, FIXTURE_DIR, { dryRun: false, backup: true });
         await generator.generate();
 
-        const backupDir = path.join(FIXTURE_DIR, '.nuxc-migration-backup');
+        const backupDir = path.join(FIXTURE_DIR, '.nuxco-migration-backup');
         expect(fs.existsSync(backupDir)).toBe(true);
         expect(fs.existsSync(path.join(backupDir, 'package.json'))).toBe(true);
     });

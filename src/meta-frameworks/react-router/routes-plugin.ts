@@ -1,10 +1,10 @@
-import type { Plugin } from '@nuxc/adapter-core';
+import type { Plugin } from '@nuxco/adapter-core';
 
 let rr7VitePluginBuilder: any;
 
 export function rr7RoutesPlugin(): Plugin {
   return {
-    name: 'nuxc:rr7-routes',
+    name: 'nuxco:rr7-routes',
 
     async buildStart() {
       try {
@@ -18,14 +18,14 @@ export function rr7RoutesPlugin(): Plugin {
 
     async resolveId(source: string) {
        // Support virtual build imports
-       if (source === 'virtual:nuxc/rr7-server-build') {
+       if (source === 'virtual:nuxco/rr7-server-build') {
           return source;
        }
        return null;
     },
 
     async load(id: string) {
-       if (id === 'virtual:nuxc/rr7-server-build') {
+       if (id === 'virtual:nuxco/rr7-server-build') {
           // Output stub for React Router SSR Manifests
           return `
              export const routes = {};

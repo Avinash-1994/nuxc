@@ -1,7 +1,7 @@
 /**
  * Template Manager (Day 46)
  * 
- * Manages production-ready starter templates for Nuxc.
+ * Manages production-ready starter templates for Nuxco.
  * Handles scaffolding, variable replacement, and initial setup.
  */
 
@@ -127,17 +127,17 @@ export class TemplateManager {
             private: true,
             type: 'module',
             scripts: {
-                "dev": "nuxc dev",
-                "build": "nuxc build",
-                "preview": "nuxc preview",
-                "test": "nuxc test",
+                "dev": "nuxco dev",
+                "build": "nuxco build",
+                "preview": "nuxco preview",
+                "test": "nuxco test",
                 "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
                 "check": "tsc --noEmit"
             },
             dependencies: template.dependencies,
             devDependencies: {
                 ...template.devDependencies,
-                "nuxc": "^2.0.0",
+                "nuxco": "^2.0.0",
                 "typescript": "^5.0.0",
                 "@types/node": "^20.0.0"
             }
@@ -191,7 +191,7 @@ export class TemplateManager {
                 "moduleResolution": "bundler",
                 "allowSyntheticDefaultImports": true
             },
-            "include": ["nuxc.config.ts"]
+            "include": ["nuxco.config.ts"]
         };
 
         fs.writeFileSync(
@@ -202,7 +202,7 @@ export class TemplateManager {
         // Create README.md
         const readme = `# ${projectName}
 
-Created with Nuxc - The High-Performance Build System.
+Created with Nuxco - The High-Performance Build System.
 
 ## Getting Started
 
@@ -223,14 +223,14 @@ npm run dev
         // Create .gitignore
         const gitignore = `node_modules
 dist
-.nuxc
+.nuxco
 .env
 .DS_Store
 coverage
 `;
         fs.writeFileSync(path.join(targetDir, '.gitignore'), gitignore);
 
-        console.log(`✅ ${template.name} created successfully! by Nuxc`);
+        console.log(`✅ ${template.name} created successfully! by Nuxco`);
     }
 }
 

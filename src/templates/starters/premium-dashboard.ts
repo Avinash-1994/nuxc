@@ -78,7 +78,7 @@ function App() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="logo">⚡ Nuxc Build Tool</h1>
+          <h1 className="logo">⚡ Nuxco Build Tool</h1>
           <div className="stats-bar">
             <div className="stat-pill">
               <Zap size={16} />
@@ -214,7 +214,7 @@ function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <p>Edit <code>src/App.tsx</code> to see HMR in action • Built with ⚡ Nuxc</p>
+          <p>Edit <code>src/App.tsx</code> to see HMR in action • Built with ⚡ Nuxco</p>
         </motion.div>
       </div>
     </div>
@@ -701,7 +701,7 @@ body {
   min-height: 100vh;
 }`,
 
-    'nuxc.config.js': `module.exports = {
+    'nuxco.config.js': `module.exports = {
   entry: ['./src/main.tsx'],
   outDir: './dist',
   framework: 'react',
@@ -719,13 +719,13 @@ body {
 };`,
 
     'package.json': `{
-  "name": "nuxc-premium-dashboard",
+  "name": "nuxco-premium-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "preview": "nuxc preview"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "preview": "nuxco preview"
   },
   "dependencies": {
     "react": "^19.2.3",
@@ -761,7 +761,7 @@ body {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Premium Dashboard - Nuxc</title>
+    <title>Premium Dashboard - Nuxco</title>
   </head>
   <body>
     <div id="root"></div>

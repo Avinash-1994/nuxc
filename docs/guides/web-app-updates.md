@@ -1,7 +1,7 @@
-# 🎯 Nuxc Web App Update Requirements
+# 🎯 Nuxco Web App Update Requirements
 
 ## Current Status
-The nuxc-web-app exists at `/home/avinash/Desktop/framework_practis/build/nuxc-web-app` but needs updating with **accurate production data** from our v1.0 release.
+The nuxco-web-app exists at `/home/avinash/Desktop/framework_practis/build/nuxco-web-app` but needs updating with **accurate production data** from our v1.0 release.
 
 ---
 
@@ -61,20 +61,20 @@ The nuxc-web-app exists at `/home/avinash/Desktop/framework_practis/build/nuxc-w
 
 ### CLI Commands (ACTUAL)
 ```bash
-nuxc dev        # Start development server
-nuxc build      # Build for production
-nuxc analyze    # Analyze bundle
-nuxc ssr        # Start SSR server
-nuxc init       # Initialize config
-nuxc bootstrap  # Create from template
-nuxc css        # CSS utilities
-nuxc optimize   # Optimize config
-nuxc inspect    # Inspect dependency graph
-nuxc report     # Generate build report
-nuxc audit      # Run audits (A11y, Perf, SEO)
-nuxc verify     # Verify project health
-nuxc test       # Run tests
-nuxc doctor     # Health diagnostics
+nuxco dev        # Start development server
+nuxco build      # Build for production
+nuxco analyze    # Analyze bundle
+nuxco ssr        # Start SSR server
+nuxco init       # Initialize config
+nuxco bootstrap  # Create from template
+nuxco css        # CSS utilities
+nuxco optimize   # Optimize config
+nuxco inspect    # Inspect dependency graph
+nuxco report     # Generate build report
+nuxco audit      # Run audits (A11y, Perf, SEO)
+nuxco verify     # Verify project health
+nuxco test       # Run tests
+nuxco doctor     # Health diagnostics
 ```
 
 ---
@@ -116,17 +116,17 @@ nuxc doctor     # Health diagnostics
 **Update CLI Example (line 125):**
 ```tsx
 // OLD
-<CodeBlock code="$ npx nuxc build --preset react" />
+<CodeBlock code="$ npx nuxco build --preset react" />
 
 // NEW
 <CodeBlock code={`# Create new project
-npx create-nuxc my-app --template premium-dashboard
+npx create-nuxco my-app --template premium-dashboard
 
 # Start development
-cd my-app && nuxc dev
+cd my-app && nuxco dev
 
 # Build for production
-nuxc build`} />
+nuxco build`} />
 ```
 
 **Update Framework Status (line 147-169):**
@@ -164,17 +164,17 @@ nuxc build`} />
 ```tsx
 {
   coldStart: {
-    nuxc: 69,
+    nuxco: 69,
     vite: 100,
     webpack: 2000
   },
   hmr: {
-    nuxc: '10-60',
+    nuxco: '10-60',
     vite: '<100',
     webpack: '~500'
   },
   bundleSize: {
-    nuxc: 6.9,
+    nuxco: 6.9,
     vite: 7.2,
     webpack: 8.5
   }
@@ -186,10 +186,10 @@ nuxc build`} />
 **Update Getting Started:**
 ```bash
 # Install
-npm install -g nuxc
+npm install -g nuxco
 
 # Create project
-npx create-nuxc my-app
+npx create-nuxco my-app
 
 # Choose template
 - premium-dashboard (Feature showcase)
@@ -199,10 +199,10 @@ npx create-nuxc my-app
 - And 9 more...
 
 # Start dev server
-nuxc dev
+nuxco dev
 
 # Build
-nuxc build
+nuxco build
 ```
 
 ### 5. Templates Page (`src/pages/TemplateStarters.tsx`)

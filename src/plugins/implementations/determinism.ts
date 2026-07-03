@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-determinism
+ * @nuxco/plugin-determinism
  * Build determinism checker
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createDeterminismPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-determinism',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-determinism',
+        originalPlugin: 'nuxco-native',
         
         async buildStart() {
-            console.log('[@nuxc/plugin-determinism] Starting performance optimization...');
+            console.log('[@nuxco/plugin-determinism] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createDeterminismPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxc/plugin-determinism] Performance optimization complete');
+            console.log('[@nuxco/plugin-determinism] Performance optimization complete');
         }
     };
 }

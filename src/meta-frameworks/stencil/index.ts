@@ -1,8 +1,8 @@
-import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
-import { detectDependencies, registry } from '@nuxc/adapter-core';
+import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
+import { detectDependencies, registry } from '@nuxco/adapter-core';
 import { createHash } from 'crypto';
 
-export class StencilAdapter implements NuxcAdapter {
+export class StencilAdapter implements NuxcoAdapter {
   name = 'stencil';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -12,11 +12,11 @@ export class StencilAdapter implements NuxcAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'nuxc:stencil-compiler',
+        name: 'nuxco:stencil-compiler',
 
         async transform(code: string, id: string) {
           // Stencil uses TSX with custom decorators (@Component, @Prop, @State, @Event, @Watch)
-          // These are compiled down by Stencil CLI; here Nuxc intercepts .tsx files from Stencil
+          // These are compiled down by Stencil CLI; here Nuxco intercepts .tsx files from Stencil
           // and passes them through our SWC + decorator pipeline safely
           if (!id.endsWith('.tsx')) return null;
           if (!code.includes('@stencil/core')) return null;
@@ -31,7 +31,7 @@ export class StencilAdapter implements NuxcAdapter {
           if (cached) return { code: cached, map: null };
 
           // Stencil's compiler is deeply integrated into their own CLI build
-          // In dev mode Nuxc serves Stencil's www/ output directory natively
+          // In dev mode Nuxco serves Stencil's www/ output directory natively
           db.set(cacheKey, code);
           return null; // Stencil components pass through; decorators are handled by tsc
         }
@@ -39,7 +39,7 @@ export class StencilAdapter implements NuxcAdapter {
     ];
   }
 
-  config(config: NuxcConfig): NuxcConfig {
+  config(config: NuxcoConfig): NuxcoConfig {
     if (!config.stencil) config.stencil = {};
     config.stencil = {
       // Stencil outputs to www/ by default

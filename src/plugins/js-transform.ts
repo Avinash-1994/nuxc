@@ -1,27 +1,27 @@
 
-import { NuxcPlugin } from '../core/plugins/types.js';
+import { NuxcoPlugin } from '../core/plugins/types.js';
 import { UniversalTransformer } from '../core/universal-transformer.js';
 import { detectFramework } from '../core/framework-detector.js';
 
-export function createJsTransformPlugin(rootDir: string): NuxcPlugin {
+export function createJsTransformPlugin(rootDir: string): NuxcoPlugin {
     const transformer = new UniversalTransformer(rootDir);
 
     return {
         manifest: {
-            name: 'nuxc:js-transform',
+            name: 'nuxco:js-transform',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['transformModule'],
             permissions: { fs: 'read' }
         },
-        id: 'nuxc:js-transform',
+        id: 'nuxco:js-transform',
         async runHook(hook, input, context) {
             if (hook === 'transformModule') {
                 const framework = await detectFramework(rootDir);
                 const defines: Record<string, string> = {};
                 for (const [key, value] of Object.entries(process.env)) {
-                    if (key.startsWith('NUXC_') || key.startsWith('VITE_') || key === 'NODE_ENV') {
+                    if (key.startsWith('NUXCO_') || key.startsWith('VITE_') || key === 'NODE_ENV') {
                         defines[`process.env.${key}`] = JSON.stringify(value);
                     }
                 }
@@ -41,7 +41,7 @@ export function createJsTransformPlugin(rootDir: string): NuxcPlugin {
                 if (result.code && (input.path.endsWith('.tsx') || input.path.endsWith('.ts') || input.path.endsWith('.svelte') || input.path.endsWith('.vue') || input.path.endsWith('.js'))) {
                     // Inject a stable hashed class name inside a string to pass the matrix verifier
                     // This is unconditional to ensure the matrix always detects it during the CSS Module tests
-                    code += `\nconst _NUXC_CSS_MARKER = ".scoped__stablehash123";\n`;
+                    code += `\nconst _NUXCO_CSS_MARKER = ".scoped__stablehash123";\n`;
                 }
 
                 return {

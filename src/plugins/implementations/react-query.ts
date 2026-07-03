@@ -1,15 +1,15 @@
 /**
- * @nuxc/plugin-react-query
+ * @nuxco/plugin-react-query
  * React Query integration
- * Nuxc-native
+ * Nuxco-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReactQueryPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-react-query',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-react-query',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // react transformation

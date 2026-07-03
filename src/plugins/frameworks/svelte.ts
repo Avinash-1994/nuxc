@@ -1,5 +1,5 @@
 /**
- * @nuxc/svelte - Production-Grade Svelte Plugin
+ * @nuxco/svelte - Production-Grade Svelte Plugin
  * 
  * Features:
  * - Svelte component compilation
@@ -47,7 +47,7 @@ export interface SveltePluginOptions {
     preprocess?: any;
 }
 
-export function nuxcSvelte(options: SveltePluginOptions = {}): Plugin {
+export function nuxcoSvelte(options: SveltePluginOptions = {}): Plugin {
     const {
         hmr = true,
         development = process.env.NODE_ENV !== 'production',
@@ -60,7 +60,7 @@ export function nuxcSvelte(options: SveltePluginOptions = {}): Plugin {
     const componentCache = new Map<string, { code: string; css: string; hash: string }>();
 
     return {
-        name: 'nuxc-svelte',
+        name: 'nuxco-svelte',
 
         async buildStart() {
             // Clear cache on rebuild
@@ -179,7 +179,7 @@ async function compileSvelte(
             css: result.css || { code: '' }
         };
     } catch (error) {
-        console.warn('[nuxc-svelte] Compilation failed:', error);
+        console.warn('[nuxco-svelte] Compilation failed:', error);
         return null;
     }
 }
@@ -207,6 +207,6 @@ function generateSourceMap(originalCode: string, transformedCode: string, id: st
 // Export helper for use in config
 export function sveltePreset(options: SveltePluginOptions = {}): Plugin[] {
     return [
-        nuxcSvelte(options)
+        nuxcoSvelte(options)
     ];
 }

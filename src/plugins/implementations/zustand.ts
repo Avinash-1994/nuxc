@@ -1,15 +1,15 @@
 /**
- * @nuxc/plugin-zustand
+ * @nuxco/plugin-zustand
  * Zustand state management
- * Nuxc-native
+ * Nuxco-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createZustandPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-zustand',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-zustand',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // zustand transformation

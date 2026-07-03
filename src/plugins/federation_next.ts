@@ -1,5 +1,5 @@
 
-import { NuxcPlugin } from '../core/plugins/types.js';
+import { NuxcoPlugin } from '../core/plugins/types.js';
 import { canonicalHash } from '../core/engine/hash.js';
 import crypto from 'crypto';
 import path from 'path';
@@ -17,10 +17,10 @@ export interface FederationConfig {
     healthCheck?: string;
 }
 
-export function createFederationPlugin(config: FederationConfig): NuxcPlugin {
+export function createFederationPlugin(config: FederationConfig): NuxcoPlugin {
     return {
         manifest: {
-            name: 'nuxc:federation',
+            name: 'nuxco:federation',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
@@ -132,11 +132,11 @@ var ${config.name} = (() => {
           await __promises[exposed.chunk];
         }
         
-        // Use Nuxc's globalThis.r runtime short ID registration
+        // Use Nuxco's globalThis.r runtime short ID registration
         if (typeof globalThis.r === 'function') {
            return globalThis.r(exposed.shortId);
         }
-        throw new Error("Nuxc runtime missing in host!");
+        throw new Error("Nuxco runtime missing in host!");
       };
     },
     init: async (shareScope) => {

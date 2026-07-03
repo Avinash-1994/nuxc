@@ -64,7 +64,7 @@ async function runTest() {
         },
         rootDir: '/test',
         target: 'browser',
-        engine: { name: 'Nuxc', version: '1.0.0' }
+        engine: { name: 'Nuxco', version: '1.0.0' }
     };
 
     const configWarnings = detector.analyzeContext(mockContext as BuildContext);

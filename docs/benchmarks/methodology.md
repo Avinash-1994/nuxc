@@ -5,7 +5,7 @@
 
 ## Results
 
-| Metric | Nuxc | Vite | Webpack | Rspack | esbuild | Nuxc Rank |
+| Metric | Nuxco | Vite | Webpack | Rspack | esbuild | Nuxco Rank |
 |--------|-------|------|---------|--------|---------|------------|
 | Small - Cold Start (ms) | 118 🥇 | 257 🥈 | N/A | N/A | N/A | #1 |
 | Small - Build (ms) | 655 🥉 | 719 | 1793 | 385 🥈 | 141 🥇 | #3 |

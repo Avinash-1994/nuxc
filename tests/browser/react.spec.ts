@@ -9,7 +9,7 @@ const TEMPLATE = path.resolve(__dirname, '../../templates/react');
 
 test.beforeAll(async () => {
   server = spawn('node', [path.resolve(__dirname, '../../dist/cli.js'), 'dev', '--port', String(PORT)], {
-    cwd: TEMPLATE, stdio: 'pipe', env: { ...process.env, NUXC_SKIP_SECURITY: '1' }
+    cwd: TEMPLATE, stdio: 'pipe', env: { ...process.env, NUXCO_SKIP_SECURITY: '1' }
   });
   await new Promise<void>((res, rej) => {
     const timer = setTimeout(() => rej(new Error('Server start timeout')), 30000);
@@ -35,7 +35,7 @@ test('navigation works between pages', async ({ page }) => {
   await page.goto(BASE);
   await page.click('text=Projects');
   await expect(page).toHaveURL(/projects/);
-  await expect(page.locator('text=Nuxc Core')).toBeVisible();
+  await expect(page.locator('text=Nuxco Core')).toBeVisible();
 });
 
 test('form submission works — create task', async ({ page }) => {

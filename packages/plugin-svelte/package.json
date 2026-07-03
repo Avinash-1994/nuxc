@@ -1,7 +1,7 @@
 {
-  "name": "@nuxc/plugin-svelte",
+  "name": "@nuxco/plugin-svelte",
   "version": "1.0.0",
-  "description": "Official Nuxc plugin for Svelte — .svelte file transform, Svelte 5 Runes, HMR",
+  "description": "Official Nuxco plugin for Svelte — .svelte file transform, Svelte 5 Runes, HMR",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,11 +16,11 @@
     "build": "tsc",
     "test": "node --test src/__tests__/index.test.js"
   },
-  "keywords": ["nuxc", "plugin", "svelte", "svelte5", "runes", "hmr"],
+  "keywords": ["nuxco", "plugin", "svelte", "svelte5", "runes", "hmr"],
   "author": "Avinash-1994",
   "license": "MIT",
   "peerDependencies": {
-    "nuxc": ">=1.0.0",
+    "nuxco": ">=1.0.0",
     "svelte": ">=4.0.0"
   },
   "devDependencies": {

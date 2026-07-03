@@ -11,9 +11,9 @@ function log(msg) { process.stdout.write(msg + '\n'); }
 
 async function getNative() {
     const candidates = [
-        path.resolve(__dirname, '../../../nuxc_native.node'),
-        path.resolve(process.cwd(), 'nuxc_native.node'),
-        path.resolve(process.cwd(), 'dist/nuxc_native.node'),
+        path.resolve(__dirname, '../../../nuxco_native.node'),
+        path.resolve(process.cwd(), 'nuxco_native.node'),
+        path.resolve(process.cwd(), 'dist/nuxco_native.node'),
     ];
     for (const p of candidates) {
         try { return _require(p); } catch {}
@@ -33,7 +33,7 @@ async function run() {
         process.exit(1);
     }
 
-    const cacheRoot = path.join(__dirname, '.nuxc/cache');
+    const cacheRoot = path.join(__dirname, '.nuxco/cache');
     const config = { cacheRoot };
 
     // PB-01 Cold Start

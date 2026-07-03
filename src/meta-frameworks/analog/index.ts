@@ -1,5 +1,5 @@
-import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
-import { detectDependencies, registry } from '@nuxc/adapter-core';
+import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
+import { detectDependencies, registry } from '@nuxco/adapter-core';
 import { analogCompilerPlugin } from './analog-plugin.js';
 
 export interface AnalogConfig {
@@ -7,7 +7,7 @@ export interface AnalogConfig {
   prerender?: string[];    // default: ['/']
 }
 
-export class AnalogAdapter implements NuxcAdapter {
+export class AnalogAdapter implements NuxcoAdapter {
   name = 'analog';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class AnalogAdapter implements NuxcAdapter {
     ];
   }
 
-  config(config: NuxcConfig): NuxcConfig {
+  config(config: NuxcoConfig): NuxcoConfig {
     if (!config.analog) config.analog = {};
     config.analog = {
       ssr: true,
@@ -62,7 +62,7 @@ export class AnalogAdapter implements NuxcAdapter {
           }
         }
       } catch (e) {
-        console.error('[NUXC Analog] Dev handler error:', e);
+        console.error('[NUXCO Analog] Dev handler error:', e);
       }
       next();
     };

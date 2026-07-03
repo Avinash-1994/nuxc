@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Import the runner dynamically from dist
-const srcPath = path.resolve(__dirname, '../../../packages/nuxc-plugin-runner/dist/runner.js');
+const srcPath = path.resolve(__dirname, '../../../packages/nuxco-plugin-runner/dist/runner.js');
 let runnerModule;
 
 try {

@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-auto-fix
+ * @nuxco/plugin-auto-fix
  * Automatic error fixing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createAutoFixPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-auto-fix',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-auto-fix',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Utility: Automatic error fixing

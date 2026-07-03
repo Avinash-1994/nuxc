@@ -103,7 +103,7 @@ async function runTests() {
 
   // Build to generate bundles — run CLI then call adapter emitBuildArtifacts (dual bundle)
   execFileSync('node', [cliPath, 'build'], { cwd: __dirname, stdio: 'ignore',
-        env: { ...process.env, NUXC_SKIP_SECURITY: '1' } });
+        env: { ...process.env, NUXCO_SKIP_SECURITY: '1' } });
   const entryServerMod = await import('./src/entry-server.cjs');
   const entryServer = entryServerMod.default || entryServerMod;
   entryServer.emitBuildArtifacts(__dirname, path.join(__dirname, 'dist'));
@@ -185,11 +185,11 @@ async function runTests() {
     ok3 = htmlRes.status === 200;
     pass('EL-03  Dev mode startup', 'ELECTRON_DEV_SERVER_URL set + renderer loads', `port ${port}`, [
       `ELECTRON_DEV_SERVER_URL: ${devUrl}`,
-      `Renderer loads from Nuxc dev server: yes`,
+      `Renderer loads from Nuxco dev server: yes`,
       `Request: GET /`,
       `Response status: ${htmlRes.status}`,
       `Response Content-Type: ${htmlRes.headers['content-type']}`,
-      `[nuxc] adapter: electron in output: yes`,
+      `[nuxco] adapter: electron in output: yes`,
       `BUG-003: adapter name confirmed`,
       `BUG-004: getDevHandler registered: yes`,
     ]);
@@ -202,7 +202,7 @@ async function runTests() {
       `Spawn timestamp: ${t0Ts}`,
       `Ready timestamp: ${t1Ts}`,
       `Cold start: ${Math.round(startupTime)}ms`,
-      `[nuxc] adapter: electron in output: yes`,
+      `[nuxco] adapter: electron in output: yes`,
       `uWS bound: yes`,
       `BUG-002: null guard present: yes`,
     ]);
@@ -212,7 +212,7 @@ async function runTests() {
     // ─────────────────────────────────────────────
     const tHMRStart = performance.now();
     const hmrT0 = new Date().toISOString();
-    // Write to renderer file — triggers Nuxc HMR for renderer
+    // Write to renderer file — triggers Nuxco HMR for renderer
     const rendererSrcPath = path.join(__dirname, 'src', 'renderer.js');
     const rendererSrcContent = fs.readFileSync(rendererSrcPath, 'utf-8');
     fs.writeFileSync(rendererSrcPath, rendererSrcContent + ' ', 'utf-8');
@@ -238,7 +238,7 @@ async function runTests() {
   // ─────────────────────────────────────────────
   const tBuildStart = performance.now();
   execFileSync('node', [cliPath, 'build'], { cwd: __dirname, stdio: 'ignore',
-        env: { ...process.env, NUXC_SKIP_SECURITY: '1' } });
+        env: { ...process.env, NUXCO_SKIP_SECURITY: '1' } });
   const entryServerMod2 = await import('./src/entry-server.cjs?t=' + Date.now());
   const entryServer2 = entryServerMod2.default || entryServerMod2;
   entryServer2.emitBuildArtifacts(__dirname, path.join(__dirname, 'dist'));
@@ -252,8 +252,8 @@ async function runTests() {
   const rendererSize2KB = rendererExists2 ? (fs.statSync(rendererBundle).size / 1024).toFixed(2) : '0';
   const mainHash2     = mainExists2     ? createHash('sha256').update(mainContent2).digest('hex').slice(0, 16)     : 'MISSING';
   const rendererHash2 = rendererExists2 ? createHash('sha256').update(rendererContent2).digest('hex').slice(0, 16) : 'MISSING';
-  const mainHasMock     = mainContent2.includes('// [Nuxc]') || mainContent2.includes('mock');
-  const rendererHasMock = rendererContent2.includes('// [Nuxc]') || rendererContent2.includes('mock');
+  const mainHasMock     = mainContent2.includes('// [Nuxco]') || mainContent2.includes('mock');
+  const rendererHasMock = rendererContent2.includes('// [Nuxco]') || rendererContent2.includes('mock');
 
   // Verify platform targets
   // Main (CJS/Node): no import() meta, has require-style patterns
@@ -306,7 +306,7 @@ async function runTests() {
     const t0r = Date.now();
     try {
       execFileSync('node', [cliPathReg, 'build'], { cwd: fix.dir, timeout: 30000, stdio: 'ignore',
-        env: { ...process.env, NUXC_SKIP_SECURITY: '1' } });
+        env: { ...process.env, NUXCO_SKIP_SECURITY: '1' } });
       regLines.push(`${fix.name.padEnd(22)}: pass ${Date.now() - t0r}ms`);
     } catch (e) {
       regLines.push(`${fix.name.padEnd(22)}: FAIL`);
@@ -329,7 +329,7 @@ async function runTests() {
   // Summary box
   // ─────────────────────────────────────────────
   log(`┌─────────────────────────────────────────────────┐`);
-  log(`│ NUXC — PHASE 2.14 ELECTRON COMPLETE            │`);
+  log(`│ NUXCO — PHASE 2.14 ELECTRON COMPLETE            │`);
   log(`│ EL-01 Dual bundle:      ${ok1 ? 'PASS' : 'FAIL'}  main≠renderer distinct  │`);
   log(`│ EL-02 IPC types:        PASS  ${channels.length} channels typed       │`);
   log(`│ EL-03 Dev mode:         ${ok3 ? 'PASS' : 'FAIL'}  ELECTRON_DEV_SERVER_URL │`);

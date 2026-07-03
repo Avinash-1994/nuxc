@@ -75,7 +75,7 @@ export function loadEnv(
   root: string,
   config: EnvConfig = {}
 ): LoadedEnv {
-  const prefix = config.prefix ?? 'NUXC_'
+  const prefix = config.prefix ?? 'NUXCO_'
 
   // Files to load in order (later files override earlier ones)
   const defaultFiles = [
@@ -96,12 +96,12 @@ export function loadEnv(
         const parsed = parseEnvFile(content)
         Object.assign(loaded, parsed)
       } catch (err) {
-        console.warn(`[nuxc] Warning: Could not read ${file}:`, err)
+        console.warn(`[nuxco] Warning: Could not read ${file}:`, err)
       }
     }
   }
 
-  // Merge: process.env takes lowest priority (except for NUXC_ vars)
+  // Merge: process.env takes lowest priority (except for NUXCO_ vars)
   const raw: Record<string, string> = {
     ...process.env as Record<string, string>,
     ...loaded,
@@ -159,7 +159,7 @@ export function getEsbuildDefines(env: LoadedEnv): Record<string, string> {
  */
 export function warnSensitiveEnv(
   env: LoadedEnv,
-  prefix: string = 'NUXC_'
+  prefix: string = 'NUXCO_'
 ): void {
   const SENSITIVE_PATTERNS = [
     /secret/i,
@@ -175,7 +175,7 @@ export function warnSensitiveEnv(
     for (const pattern of SENSITIVE_PATTERNS) {
       if (pattern.test(key)) {
         console.warn(
-          `[nuxc] ⚠️  Warning: "${key}" matches a sensitive pattern and will be exposed to the client bundle. ` +
+          `[nuxco] ⚠️  Warning: "${key}" matches a sensitive pattern and will be exposed to the client bundle. ` +
           `Make sure this is intentional.`
         )
         break

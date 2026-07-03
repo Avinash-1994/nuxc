@@ -65,7 +65,7 @@ async function runTest() {
             styleUrls: ['./app.component.css']
         })
         export class AppComponent {
-            title = 'nuxc-angular';
+            title = 'nuxco-angular';
         }
     `);
 
@@ -159,7 +159,7 @@ async function runTest() {
         // Since we import it in main.ts?
         // Wait, main.ts imports app.component.ts. app.component.ts uses templateUrl.
         // The 'templateUrl' is a string. The bundler won't resolve it automatically unless we have an Angular plugin that parses decorators.
-        // Nuxc's 'angular' preset currently has 'custom: angular'.
+        // Nuxco's 'angular' preset currently has 'custom: angular'.
         // UniversalTransformer handles individual file transform.
         // It does NOT handle dependency resolution inside 'templateUrl'.
         // So 'app.component.html' will NOT be bundled unless imported explicitly.

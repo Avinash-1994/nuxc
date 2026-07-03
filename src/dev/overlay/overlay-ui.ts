@@ -1,6 +1,6 @@
 
 /**
- * Nuxc Error Overlay UI
+ * Nuxco Error Overlay UI
  * Implementation: Web Component with Shadow DOM
  * Day 15: Reliable Error Overlay Lock
  */
@@ -84,7 +84,7 @@ const STYLE = `
 }
 `;
 
-export class NuxcErrorOverlay extends HTMLElement {
+export class NuxcoErrorOverlay extends HTMLElement {
     root: ShadowRoot;
 
     constructor() {
@@ -146,6 +146,6 @@ export class NuxcErrorOverlay extends HTMLElement {
     }
 }
 
-if (!customElements.get('nuxc-error-overlay')) {
-    customElements.define('nuxc-error-overlay', NuxcErrorOverlay);
+if (!customElements.get('nuxco-error-overlay')) {
+    customElements.define('nuxco-error-overlay', NuxcoErrorOverlay);
 }

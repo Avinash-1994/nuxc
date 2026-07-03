@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-url
+ * @nuxco/plugin-url
  * URL/data URI assets
  */
 
@@ -9,7 +9,7 @@ import path from 'path';
 
 export function createUrlPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-url',
+        name: '@nuxco/plugin-url',
         originalPlugin: 'url-loader',
         
         async load(id: string) {

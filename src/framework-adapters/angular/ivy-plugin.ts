@@ -1,4 +1,4 @@
-import type { Plugin } from '@nuxc/adapter-core';
+import type { Plugin } from '@nuxco/adapter-core';
 import { createHash } from 'crypto';
 import path from 'path';
 
@@ -8,7 +8,7 @@ let ts: any;
 
 export function angularIvyPlugin(): Plugin {
   return {
-    name: 'nuxc:angular-ivy',
+    name: 'nuxco:angular-ivy',
     
     async buildStart() {
       try {
@@ -17,7 +17,7 @@ export function angularIvyPlugin(): Plugin {
         ts = await import('typescript');
       } catch (e: any) {
         if (e.code === 'ERR_MODULE_NOT_FOUND') {
-          console.error(`\n[Nuxc Angular] Error: Optional peer dependency missing.`);
+          console.error(`\n[Nuxco Angular] Error: Optional peer dependency missing.`);
           console.error(`Please install '@angular/compiler-cli' and 'typescript' to use the Angular adapter.\n`);
         }
       }
@@ -68,7 +68,7 @@ export function angularIvyPlugin(): Plugin {
       // 3. Save to SQLite
       db.set(cacheKey, transformedCode);
 
-      // 4. Return to Nuxc engine for final SWC down-leveling
+      // 4. Return to Nuxco engine for final SWC down-leveling
       return {
         code: transformedCode,
         map: null // Rely on SWC for source maps later

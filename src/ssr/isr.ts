@@ -1,6 +1,6 @@
 
 /**
- * Nuxc ISR Logic (Data Stale-While-Revalidate)
+ * Nuxco ISR Logic (Data Stale-While-Revalidate)
  * Day 23: Framework-Agnostic SSR Lock
  */
 

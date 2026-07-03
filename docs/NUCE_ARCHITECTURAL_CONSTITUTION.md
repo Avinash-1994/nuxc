@@ -1,7 +1,7 @@
-# NUXC — MASTER PROMPT (FINAL, LOCKED)
+# NUXCO — MASTER PROMPT (FINAL, LOCKED)
 
 ## Context
-Nuxc processes large dependency graphs (modules, CSS, micro-frontends).
+Nuxco processes large dependency graphs (modules, CSS, micro-frontends).
 Empirical benchmarks show that recursive JavaScript graph traversal fails at ~10k nodes due to call-stack limits. Iterative Rust traversal completes deterministically at much larger scales.
 
 ## 🔒 Locked Decisions
@@ -35,10 +35,10 @@ Empirical benchmarks show that recursive JavaScript graph traversal fails at ~10
 -   Marketing claims of “infinite scalability”
 
 ## 📐 Correct Wording
-Nuxc does not claim infinite scalability.
+Nuxco does not claim infinite scalability.
 
 **Correct phrasing**:
-> “Nuxc removes stack-based failure modes and scales until system memory limits.”
+> “Nuxco removes stack-based failure modes and scales until system memory limits.”
 
 ## 🧾 Benchmark Policy
 Benchmarks demonstrating JS failure vs Rust stability:

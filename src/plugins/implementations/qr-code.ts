@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-qr-code
+ * @nuxco/plugin-qr-code
  * QR code generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createQrCodePlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-qr-code',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-qr-code',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Fintech integration: QR code generation
@@ -16,7 +16,7 @@ export function createQrCodePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxc/plugin-qr-code] Fintech integration ready');
+            console.log('[@nuxco/plugin-qr-code] Fintech integration ready');
             // Initialize payment gateway, generate QR codes, etc.
         }
     };

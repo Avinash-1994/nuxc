@@ -1,10 +1,10 @@
-# Nuxc Build Tool - AI Agent Instructions
+# Nuxco Build Tool - AI Agent Instructions
 
-> Essential knowledge for productive development in the Nuxc codebase
+> Essential knowledge for productive development in the Nuxco codebase
 
 ## Architecture Overview
 
-**Nuxc** is a hybrid build tool combining TypeScript orchestration with Rust native extensions for performance. The architecture enforces **strict architectural boundaries**:
+**Nuxco** is a hybrid build tool combining TypeScript orchestration with Rust native extensions for performance. The architecture enforces **strict architectural boundaries**:
 
 - **Modules 1-8 (Core)**: Hard-frozen. Framework-agnostic engine using esbuild and SQLite caching. No framework-specific code allowed.
 - **Module 9 (Adapter Registry)**: Locked schema defining framework tier system (Tier 1=Stable, Tier 2=Candidate, Tier 3=Experimental).
@@ -46,7 +46,7 @@ npm run dev             # Start dev server with HMR
 ```
 
 **Build Pipeline Steps** (in `src/build/bundler.ts`):
-1. Load config via `loadConfig()` (reads nuxc.config.js)
+1. Load config via `loadConfig()` (reads nuxco.config.js)
 2. Auto-detect framework using `detectFramework()` from package.json
 3. Create `FrameworkPipeline` with detected framework
 4. Execute pipeline.build() which returns `{ success, artifacts, manifest }`
@@ -84,11 +84,11 @@ interface FrameworkAdapter {
 **Requirements**: Must include `adapter.manifest.json` declaring tier, renderModel (dom/string), ssr support.
 
 ### Plugin System
-Plugins are **pure functions** in a transformation pipeline, registered in `nuxc.config.js`:
+Plugins are **pure functions** in a transformation pipeline, registered in `nuxco.config.js`:
 
 ```typescript
 // src/plugins/ implementations
-export function myPlugin(options: PluginOptions): NuxcPlugin {
+export function myPlugin(options: PluginOptions): NuxcoPlugin {
   return {
     name: 'my-plugin',
     resolveId(source: string): string | null { /* deterministic */ },
@@ -106,12 +106,12 @@ export function myPlugin(options: PluginOptions): NuxcPlugin {
 
 ### Configuration
 Entry point: `src/config/index.ts` exports `loadConfig()` which:
-1. Reads `nuxc.config.js` from project root
+1. Reads `nuxco.config.js` from project root
 2. Detects framework from `package.json`
 3. Applies framework preset (CSS, plugins, etc.)
 4. Validates config against BuildConfig schema
 
-**Config location**: Root `nuxc.config.js` (see examples/ for templates)
+**Config location**: Root `nuxco.config.js` (see examples/ for templates)
 
 ### Universal Transformer
 `src/core/universal-transformer.ts` bridges framework compilation to esbuild:
@@ -124,8 +124,8 @@ Entry point: `src/config/index.ts` exports `loadConfig()` which:
 
 1. **Zero Core Change Policy**: Modules 1-8 are frozen. Only security/regression fixes allowed.
 2. **No Framework Coupling in Core**: Never add `if (framework === 'react')` logic to `src/core/` or `src/resolve/`.
-3. **Deterministic Builds**: Every build must hash the same given identical inputs (tracked in SQLite cache at `.nuxc_cache/build.db`).
-4. **ESLint Governance**: Custom rules in `eslint-plugin-nuxc-governance/` enforce boundaries. Run `npm run lint` before commits.
+3. **Deterministic Builds**: Every build must hash the same given identical inputs (tracked in SQLite cache at `.nuxco_cache/build.db`).
+4. **ESLint Governance**: Custom rules in `eslint-plugin-nuxco-governance/` enforce boundaries. Run `npm run lint` before commits.
 
 ## File Organization
 

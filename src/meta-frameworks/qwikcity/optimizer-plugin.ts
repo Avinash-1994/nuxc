@@ -1,11 +1,11 @@
-import type { Plugin } from '@nuxc/adapter-core';
+import type { Plugin } from '@nuxco/adapter-core';
 import { createHash } from 'crypto';
 
 let qwikOptimizer: any;
 
 export function qwikOptimizerPlugin(): Plugin {
   return {
-    name: 'nuxc:qwik-optimizer',
+    name: 'nuxco:qwik-optimizer',
     
     async buildStart() {
       try {
@@ -20,7 +20,7 @@ export function qwikOptimizerPlugin(): Plugin {
       if (!id.endsWith('.tsx') && !id.endsWith('.ts')) return null;
       if (!qwikOptimizer) return null;
 
-      // Access Nuxc's SQLite/RocksDB cache wrapper
+      // Access Nuxco's SQLite/RocksDB cache wrapper
       const { getLazyCacheDatabase } = await import('../../core/cache/lazy-init.js');
       const db = await getLazyCacheDatabase();
 
@@ -51,7 +51,7 @@ export function qwikOptimizerPlugin(): Plugin {
          if (mainOut) transformedCode = mainOut.code;
 
          // For other segmented files, we would dynamically register them to the `chunker` 
-         // manifest using Rollup's emitFile pattern or Nuxc equivalent natively
+         // manifest using Rollup's emitFile pattern or Nuxco equivalent natively
          // Example: 
          // result.modules.forEach(m => { if(m.isEntry) emitChunk(m) })
 

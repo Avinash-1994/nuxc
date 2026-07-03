@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-env-validation
+ * @nuxco/plugin-env-validation
  * Environment variable validation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createEnvValidationPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-env-validation',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-env-validation',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Security check: Environment variable validation
@@ -29,7 +29,7 @@ export function createEnvValidationPlugin(): PluginAdapter {
             }
             
             if (issues.length > 0) {
-                console.warn(`[@nuxc/plugin-env-validation] Security issues found:`, issues);
+                console.warn(`[@nuxco/plugin-env-validation] Security issues found:`, issues);
             }
         }
     };

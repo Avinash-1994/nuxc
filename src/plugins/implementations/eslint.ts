@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-eslint
+ * @nuxco/plugin-eslint
  * ESLint integration
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createEslintPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-eslint',
+        name: '@nuxco/plugin-eslint',
         originalPlugin: 'vite-plugin-eslint',
         
         async transform(code: string, id: string) {

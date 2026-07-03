@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-typescript
+ * @nuxco/plugin-typescript
  * TypeScript compilation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTypescriptPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-typescript',
+        name: '@nuxco/plugin-typescript',
         originalPlugin: 'ts-loader',
         
         async transform(code: string, id: string) {

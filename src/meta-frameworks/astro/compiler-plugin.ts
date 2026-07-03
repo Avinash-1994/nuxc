@@ -1,11 +1,11 @@
-import type { Plugin } from '@nuxc/adapter-core';
+import type { Plugin } from '@nuxco/adapter-core';
 import { createHash } from 'crypto';
 
 let astroCompiler: any;
 
 export function astroCompilerPlugin(): Plugin {
   return {
-    name: 'nuxc:astro-compiler',
+    name: 'nuxco:astro-compiler',
 
     async buildStart() {
       try {

@@ -1,11 +1,11 @@
 /**
- * Nuxc Language Server Logic (Mock for Tests)
+ * Nuxco Language Server Logic (Mock for Tests)
  * Copied from extensions/vscode-lsp to ensure reliable loading in tests
  */
 
-export class NuxcLSPServer {
+export class NuxcoLSPServer {
     constructor() {
-        console.log('Nuxc LSP Initialized');
+        console.log('Nuxco LSP Initialized');
     }
 
     onCompletion(documentText, position) {
@@ -14,10 +14,10 @@ export class NuxcLSPServer {
 
         if (line.includes('plugins:') || (line.trim().startsWith('[') && lines[position.line - 1]?.includes('plugins:'))) {
             return [
-                { label: '@nuxc/plugin-react', kind: 9, detail: 'React 19 Adapter' },
-                { label: '@nuxc/plugin-vue', kind: 9, detail: 'Vue 3 Adapter' },
-                { label: '@nuxc/plugin-tailwindcss', kind: 9, detail: 'Tailwind JIT' },
-                { label: '@nuxc/plugin-visualizer', kind: 9, detail: 'Bundle Analysis' }
+                { label: '@nuxco/plugin-react', kind: 9, detail: 'React 19 Adapter' },
+                { label: '@nuxco/plugin-vue', kind: 9, detail: 'Vue 3 Adapter' },
+                { label: '@nuxco/plugin-tailwindcss', kind: 9, detail: 'Tailwind JIT' },
+                { label: '@nuxco/plugin-visualizer', kind: 9, detail: 'Bundle Analysis' }
             ];
         }
 
@@ -41,7 +41,7 @@ export class NuxcLSPServer {
                     range: { start: { line: i, character: line.indexOf("'prod'") }, end: { line: i, character: line.indexOf("'prod'") + 6 } },
                     severity: 2,
                     message: "Did you mean 'production'?",
-                    source: 'Nuxc LSP'
+                    source: 'Nuxco LSP'
                 });
             }
 
@@ -50,7 +50,7 @@ export class NuxcLSPServer {
                     range: { start: { line: i, character: 0 }, end: { line: i, character: line.length } },
                     severity: 3,
                     message: "Performance: Prefer default import or lodash-es for better tree-shaking.",
-                    source: 'Nuxc Perf'
+                    source: 'Nuxco Perf'
                 });
             }
         });

@@ -106,7 +106,7 @@ export async function preview(options: PreviewOptions = {}): Promise<void> {
   // Guard: dist must exist
   if (!fs.existsSync(distDir)) {
     console.error(`\n  ❌ No "${outDir}" folder found.`)
-    console.error(`  Run \`nuxc build\` first.\n`)
+    console.error(`  Run \`nuxco build\` first.\n`)
     process.exit(1)
   }
 
@@ -188,7 +188,7 @@ export async function preview(options: PreviewOptions = {}): Promise<void> {
 
   const url = `http://${host}:${port}${base}`
 
-  console.log(`\n  ⚡ nuxc preview\n`)
+  console.log(`\n  ⚡ nuxco preview\n`)
   console.log(`  ➜  Local:   \x1b[36m${url}\x1b[0m`)
   console.log(`  ➜  Network: \x1b[36mhttp://0.0.0.0:${port}${base}\x1b[0m`)
   console.log(`\n  Serving \x1b[2m${outDir}/\x1b[0m — press Ctrl+C to stop\n`)

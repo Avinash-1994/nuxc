@@ -56,9 +56,9 @@ createRoot(document.getElementById('root')!).render(
 );`
                 );
 
-                // Nuxc config with federation
+                // Nuxco config with federation
                 fs.writeFileSync(
-                    path.join(hostPath, 'nuxc.config.json'),
+                    path.join(hostPath, 'nuxco.config.json'),
                     JSON.stringify({
                         entry: ['src/main.tsx'],
                         preset: 'spa',
@@ -145,7 +145,7 @@ createRoot(document.getElementById('root')!).render(<App />);`
                 );
 
                 fs.writeFileSync(
-                    path.join(consumerPath, 'nuxc.config.json'),
+                    path.join(consumerPath, 'nuxco.config.json'),
                     JSON.stringify({
                         entry: ['src/main.tsx'],
                         preset: 'spa',
@@ -199,7 +199,7 @@ createRoot(document.getElementById('root')!).render(
                 );
 
                 fs.writeFileSync(
-                    path.join(sharedPath, 'nuxc.config.json'),
+                    path.join(sharedPath, 'nuxco.config.json'),
                     JSON.stringify({
                         entry: ['src/main.tsx'],
                         preset: 'spa',
@@ -256,7 +256,7 @@ createRoot(document.getElementById('root')!).render(
 
                 // Config with conflicting version requirements
                 fs.writeFileSync(
-                    path.join(conflictPath, 'nuxc.config.json'),
+                    path.join(conflictPath, 'nuxco.config.json'),
                     JSON.stringify({
                         entry: ['src/main.ts'],
                         preset: 'spa',

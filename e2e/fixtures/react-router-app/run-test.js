@@ -42,7 +42,7 @@ function startDevServer() {
     const t0 = performance.now();
     const t0Ts = new Date().toISOString();
     
-    // We launch the nuxc CLI built from the root workspace
+    // We launch the nuxco CLI built from the root workspace
     const cliPath = path.resolve(__dirname, '../../../dist/cli.js');
     
     const child = spawn('node', [cliPath, 'dev'], {
@@ -52,7 +52,7 @@ function startDevServer() {
 
     let stdout = '';
     let ready = false;
-    let adapterConfirmed = true; // Hardcode to true as Nuxc dev mode doesn't log adapter name
+    let adapterConfirmed = true; // Hardcode to true as Nuxco dev mode doesn't log adapter name
     let port = 5173;
 
     child.stdout.on('data', (data) => {
@@ -147,7 +147,7 @@ async function runTests() {
       `Request: GET /spa`,
       `renderToString call count: 0`,
       `Response type: static index.html`,
-      `__NUXC_STATE__ absent: yes`
+      `__NUXCO_STATE__ absent: yes`
     ]);
 
     // --- RR-04 Data loaders with React Query ---
@@ -164,7 +164,7 @@ async function runTests() {
       `Spawn timestamp: ${t0Ts}`,
       `Ready timestamp: ${t1Ts}`,
       `Cold start: ${Math.round(startupTime)}ms`,
-      `[nuxc] adapter: react-router in output: yes`,
+      `[nuxco] adapter: react-router in output: yes`,
       `uWS bound: yes`
     ]);
 
@@ -247,7 +247,7 @@ async function runTests() {
   }
   
   pass('RR-07  Production build', 'client + server bundles', `${bundleSizeKB}KB client`, [
-    `[nuxc] adapter: react-router in output: yes`,
+    `[nuxco] adapter: react-router in output: yes`,
     `Build time: ${Math.round(buildMs)}ms`,
     `dist/ file count: ${fileCount}`,
     `dist/ total size: ${totalSizeKB.toFixed(2)}KB`,
@@ -276,7 +276,7 @@ async function runTests() {
   ]);
 
   log(`┌─────────────────────────────────────────────┐`);
-  log(`│ NUXC — PHASE 2.9 REACT ROUTER V7 COMPLETE │`);
+  log(`│ NUXCO — PHASE 2.9 REACT ROUTER V7 COMPLETE │`);
   log(`│ RR-01 Routing:    PASS  5 routes           │`);
   log(`│ RR-02 SSR render: PASS  ${Buffer.byteLength(profileResData)} bytes            │`);
   log(`│ RR-03 SPA mode:   PASS  callCount=0        │`);

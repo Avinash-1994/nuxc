@@ -1,12 +1,12 @@
-import type { Plugin } from '@nuxc/adapter-core';
+import type { Plugin } from '@nuxco/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:nuxc/solidstart-routes';
+const VIRTUAL_MODULE_ID = 'virtual:nuxco/solidstart-routes';
 
 export function solidStartRouterPlugin(): Plugin {
   return {
-    name: 'nuxc:solidstart-router',
+    name: 'nuxco:solidstart-router',
 
     // Intercept SolidStart component routes
     resolveId(source: string) {

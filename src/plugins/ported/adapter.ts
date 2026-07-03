@@ -2,7 +2,7 @@
  * Plugin Compatibility Layer (Day 45)
  * 
  * Provides compatibility adapters for ported Vite/Webpack plugins
- * to work seamlessly in Nuxc's isolated plugin runtime.
+ * to work seamlessly in Nuxco's isolated plugin runtime.
  */
 
 export interface PluginAdapter {
@@ -18,7 +18,7 @@ export interface PluginAdapter {
 
 /**
  * Vite Plugin Adapter
- * Converts Vite plugin API to Nuxc plugin API
+ * Converts Vite plugin API to Nuxco plugin API
  */
 export class VitePluginAdapter implements PluginAdapter {
     name: string;
@@ -59,7 +59,7 @@ export class VitePluginAdapter implements PluginAdapter {
 
 /**
  * Webpack Loader Adapter
- * Converts Webpack loader API to Nuxc plugin API
+ * Converts Webpack loader API to Nuxco plugin API
  */
 export class WebpackLoaderAdapter implements PluginAdapter {
     name: string;
@@ -119,11 +119,11 @@ export class PluginRegistry {
 export const pluginRegistry = new PluginRegistry();
 
 /**
- * React Plugin Adapter (Vite → Nuxc)
+ * React Plugin Adapter (Vite → Nuxco)
  */
 export function createReactAdapter(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-react',
+        name: '@nuxco/plugin-react',
         originalPlugin: '@vitejs/plugin-react',
         async transform(code: string, id: string) {
             // React Fast Refresh transformation
@@ -143,11 +143,11 @@ ${code}
 }
 
 /**
- * Vue Plugin Adapter (Vite → Nuxc)
+ * Vue Plugin Adapter (Vite → Nuxco)
  */
 export function createVueAdapter(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-vue',
+        name: '@nuxco/plugin-vue',
         originalPlugin: '@vitejs/plugin-vue',
         async transform(code: string, id: string) {
             // Vue SFC transformation
@@ -170,16 +170,16 @@ export default {
 }
 
 /**
- * Sass Loader Adapter (Webpack → Nuxc)
+ * Sass Loader Adapter (Webpack → Nuxco)
  */
 export function createSassAdapter(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-sass',
+        name: '@nuxco/plugin-sass',
         originalPlugin: 'sass-loader',
         async transform(code: string, id: string) {
             if (id.endsWith('.scss') || id.endsWith('.sass')) {
                 // In production, would use 'sass' package
-                // For now, pass through (Nuxc has built-in Sass support)
+                // For now, pass through (Nuxco has built-in Sass support)
                 return { code };
             }
             return { code };
@@ -188,15 +188,15 @@ export function createSassAdapter(): PluginAdapter {
 }
 
 /**
- * TypeScript Loader Adapter (Webpack → Nuxc)
+ * TypeScript Loader Adapter (Webpack → Nuxco)
  */
 export function createTypeScriptAdapter(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-typescript',
+        name: '@nuxco/plugin-typescript',
         originalPlugin: 'ts-loader',
         async transform(code: string, id: string) {
             if (id.endsWith('.ts') || id.endsWith('.tsx')) {
-                // Nuxc has built-in TypeScript support via universal-transformer
+                // Nuxco has built-in TypeScript support via universal-transformer
                 return { code };
             }
             return { code };
@@ -209,7 +209,7 @@ export function createTypeScriptAdapter(): PluginAdapter {
  */
 export function createImageOptimizer(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-imagemin',
+        name: '@nuxco/plugin-imagemin',
         originalPlugin: 'vite-plugin-imagemin',
         async transform(code: string, id: string) {
             if (/\.(png|jpg|jpeg|gif|webp|avif)$/.test(id)) {
@@ -227,7 +227,7 @@ export function createImageOptimizer(): PluginAdapter {
  */
 export function createPWAAdapter(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-pwa',
+        name: '@nuxco/plugin-pwa',
         originalPlugin: 'vite-plugin-pwa',
         async buildEnd() {
             // Generate service worker and manifest
@@ -241,7 +241,7 @@ export function createPWAAdapter(): PluginAdapter {
  */
 export function createCompressionAdapter(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-compression',
+        name: '@nuxco/plugin-compression',
         originalPlugin: 'vite-plugin-compression',
         async buildEnd() {
             // Generate gzip/brotli compressed assets

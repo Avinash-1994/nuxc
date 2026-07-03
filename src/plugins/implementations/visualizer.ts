@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-visualizer
+ * @nuxco/plugin-visualizer
  * WebGPU dependency visualizer
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVisualizerPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-visualizer',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-visualizer',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Utility: WebGPU dependency visualizer

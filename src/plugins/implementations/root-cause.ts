@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-root-cause
+ * @nuxco/plugin-root-cause
  * Error root cause analysis
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRootCausePlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-root-cause',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-root-cause',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Utility: Error root cause analysis

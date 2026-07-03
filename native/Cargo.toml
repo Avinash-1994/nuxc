@@ -1,5 +1,5 @@
 [package]
-name = "nuxc_native"
+name = "nuxco_native"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,8 +7,8 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [[bin]]
-name = "nuxc-native"
-path = "src/bin/nuxc_native.rs"
+name = "nuxco-native"
+path = "src/bin/nuxco_native.rs"
 
 [dependencies]
 lazy_static = "1.5.0"

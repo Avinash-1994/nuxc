@@ -1,15 +1,15 @@
 # Svelte 5 Guide
 
-> Build Svelte 5 apps with Nuxc — component HMR, Runes, TypeScript, scoped styles.
+> Build Svelte 5 apps with Nuxco — component HMR, Runes, TypeScript, scoped styles.
 
 ---
 
 ## Quick Start
 
 ```bash
-nuxc bootstrap --name my-svelte-app --template svelte-ts
+nuxco bootstrap --name my-svelte-app --template svelte-ts
 cd my-svelte-app
-nuxc dev
+nuxco dev
 ```
 
 ---
@@ -19,10 +19,10 @@ nuxc dev
 ### 1. Install
 
 ```bash
-npm install --save-dev nuxc svelte typescript
+npm install --save-dev nuxco svelte typescript
 ```
 
-### 2. Create `nuxc.config.js`
+### 2. Create `nuxco.config.js`
 
 **JavaScript:**
 ```js
@@ -37,7 +37,7 @@ module.exports = {
 
 **TypeScript:**
 ```ts
-import { defineConfig } from 'nuxc';
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   entry: ['./src/main.ts'],
@@ -66,7 +66,7 @@ export default app;
 </script>
 
 <main>
-  <h1>Hello from Nuxc + Svelte 5</h1>
+  <h1>Hello from Nuxco + Svelte 5</h1>
   <button onclick={() => count++}>Count: {count}</button>
 </main>
 
@@ -111,7 +111,7 @@ Svelte 5 introduces **Runes** — a new reactivity primitive:
 
 ## HMR — Component Hot-Reload
 
-Nuxc integrates **svelte-hmr** for `.svelte` files:
+Nuxco integrates **svelte-hmr** for `.svelte` files:
 
 - Component state is **reset** on save (Svelte's HMR model)
 - Styles hot-injected without reload
@@ -226,7 +226,7 @@ npm install -D less
 ## Production Build
 
 ```bash
-nuxc build
+nuxco build
 ```
 
 Output:

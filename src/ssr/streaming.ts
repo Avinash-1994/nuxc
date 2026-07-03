@@ -3,7 +3,7 @@ import { Readable } from 'stream';
 import type { SSRContext, RenderResult } from './universal-engine.js';
 
 /**
- * Nuxc Streaming Engine
+ * Nuxco Streaming Engine
  * Implements React 18+ Streaming SSR with Progressive Hydration
  * Day 54: SSR Power Locked
  */
@@ -18,7 +18,7 @@ export interface StreamingOptions {
     namespace?: string;
 }
 
-export class NuxcStreamingEngine {
+export class NuxcoStreamingEngine {
 
     /**
      * Create a Shell-First Stream
@@ -43,7 +43,7 @@ export class NuxcStreamingEngine {
 
                     // Inject hydration script before piping
                     if (ctx.manifest) {
-                        passThrough.write(NuxcStreamingEngine.getHydrationScript(ctx.manifest));
+                        passThrough.write(NuxcoStreamingEngine.getHydrationScript(ctx.manifest));
                     }
 
                     // Wrap the passThrough to detect errors and finish
@@ -110,6 +110,6 @@ export class NuxcStreamingEngine {
      * This allows the client to know which chunks are coming
      */
     static getHydrationScript(manifest: any): string {
-        return `<script>window.__NUXC_HYDRATION__ = ${JSON.stringify(manifest)};</script>`;
+        return `<script>window.__NUXCO_HYDRATION__ = ${JSON.stringify(manifest)};</script>`;
     }
 }

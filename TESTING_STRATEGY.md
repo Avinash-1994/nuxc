@@ -1,4 +1,4 @@
-# 🧪 Nuxc Testing Strategy - Current & Recommended
+# 🧪 Nuxco Testing Strategy - Current & Recommended
 
 ## 📊 Current Testing Coverage (41 Tests)
 

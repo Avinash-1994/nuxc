@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-jest
+ * @nuxco/plugin-jest
  * Jest testing framework
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createJestPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-jest',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-jest',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Testing: Jest testing framework

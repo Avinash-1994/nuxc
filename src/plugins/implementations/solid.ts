@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-solid
+ * @nuxco/plugin-solid
  * SolidJS support
  * Ported from: vite-plugin-solid
  */
@@ -8,7 +8,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSolidPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-solid',
+        name: '@nuxco/plugin-solid',
         originalPlugin: 'vite-plugin-solid',
         
         async transform(code: string, id: string) {

@@ -1,4 +1,4 @@
-// Plugin type compatible with both Nuxc and Vite plugin API
+// Plugin type compatible with both Nuxco and Vite plugin API
 type Plugin = { name: string; [hook: string]: any };
 
 export interface ReactPluginOptions {
@@ -11,17 +11,17 @@ export interface ReactPluginOptions {
 }
 
 /**
- * @nuxc/plugin-react
+ * @nuxco/plugin-react
  *
- * Official Nuxc plugin for React:
+ * Official Nuxco plugin for React:
  * - JSX transform via SWC (no Babel required)
  * - React Fast Refresh integration for HMR
  * - Error overlay for runtime errors
  *
  * @example
  * ```js
- * // nuxc.config.js
- * const react = require('@nuxc/plugin-react');
+ * // nuxco.config.js
+ * const react = require('@nuxco/plugin-react');
  * module.exports = {
  *   plugins: [react()],
  * };
@@ -35,21 +35,21 @@ export function reactPlugin(options: ReactPluginOptions = {}): Plugin {
   } = options;
 
   return {
-    name: '@nuxc/plugin-react',
+    name: '@nuxco/plugin-react',
 
     /**
      * Load hook: inject React Refresh runtime in dev mode for HMR.
      */
     load(id: string): { code: string } | null {
       // Inject React Refresh preamble for HMR
-      if (id === '/__nuxc_react_refresh__') {
+      if (id === '/__nuxco_react_refresh__') {
         return {
           code: `
 import RefreshRuntime from 'react-refresh/runtime';
 RefreshRuntime.injectIntoGlobalHook(window);
 window.$RefreshReg$ = () => {};
 window.$RefreshSig$ = () => (type) => type;
-window.__nuxc_react_refresh_active__ = true;
+window.__nuxco_react_refresh_active__ = true;
 `,
         };
       }
@@ -71,7 +71,7 @@ window.__nuxc_react_refresh_active__ = true;
 
       // In dev mode with Fast Refresh, wrap React components
       if (fastRefresh && isJSX) {
-        // The actual SWC transform happens in Nuxc's core pipeline.
+        // The actual SWC transform happens in Nuxco's core pipeline.
         // This plugin adds the Fast Refresh wrapper around the module.
         const hasReactComponents = /export\s+(default\s+function|function\s+[A-Z]|const\s+[A-Z])/.test(code);
 
@@ -90,7 +90,7 @@ if (import.meta.hot) {
 
       // Add overlay error boundary in dev mode
       if (overlay && isJSX && process.env.NODE_ENV !== 'production') {
-        // Error overlay is injected by Nuxc's dev server automatically
+        // Error overlay is injected by Nuxco's dev server automatically
         // This plugin only signals that overlay should be active
       }
 

@@ -1,19 +1,19 @@
 import path from 'path';
 import fs from 'fs/promises';
-import { NuxcPlugin } from '../core/plugins/types.js';
+import { NuxcoPlugin } from '../core/plugins/types.js';
 import { fastHash } from '../native/index.js';
 
-export function createAssetPlugin(outDir: string = 'build_output'): NuxcPlugin {
+export function createAssetPlugin(outDir: string = 'build_output'): NuxcoPlugin {
     return {
         manifest: {
-            name: 'nuxc:asset',
+            name: 'nuxco:asset',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['resolveId', 'load'],
             permissions: { fs: 'read' }
         },
-        id: 'nuxc:asset',
+        id: 'nuxco:asset',
         async runHook(hook, input, context) {
             const ASSET_REGEX = /\.(png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|otf)$/;
 

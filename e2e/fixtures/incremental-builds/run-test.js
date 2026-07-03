@@ -17,9 +17,9 @@ function assert(label, cond) {
 
 async function getNative() {
   const candidates = [
-      path.resolve(__dirname, '../../../nuxc_native.node'),
-      path.resolve(process.cwd(), 'nuxc_native.node'),
-      path.resolve(process.cwd(), 'dist/nuxc_native.node'),
+      path.resolve(__dirname, '../../../nuxco_native.node'),
+      path.resolve(process.cwd(), 'nuxco_native.node'),
+      path.resolve(process.cwd(), 'dist/nuxco_native.node'),
   ];
   for (const p of candidates) {
       try { return _require(p); } catch {}
@@ -129,7 +129,7 @@ async function runTests() {
   o3.configHash = "hash-config-2";
   const plan3 = native.planBuild(JSON.stringify(generateManifest(o3)));
   printPass('TG-03  Config change invalidation', 'entire config invalidates all', 'entire config invalidates all');
-  log(`      configHash scope: entire nuxc.config.ts`);
+  log(`      configHash scope: entire nuxco.config.ts`);
   log(`      Any config change = full rebuild: yes`);
   log(`      This is by design: yes`);
   log(`      Planned improvement: per-key hashing yes\n`);

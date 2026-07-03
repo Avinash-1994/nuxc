@@ -1,5 +1,5 @@
 
-import { NuxcPlugin } from '../../core/plugins/types.js';
+import { NuxcoPlugin } from '../../core/plugins/types.js';
 import { canonicalHash } from '../../core/engine/hash.js';
 import { GraphNode } from '../../resolve/graph.js';
 
@@ -7,19 +7,19 @@ import { GraphNode } from '../../resolve/graph.js';
  * Internal Linker Plugin
  * 
  * Rewrites import/require specifiers using the DependencyGraph's specifierMap.
- * This runs after all other transformations to ensure final code uses Nuxc module IDs.
+ * This runs after all other transformations to ensure final code uses Nuxco module IDs.
  */
-export function createLinkerPlugin(): NuxcPlugin {
+export function createLinkerPlugin(): NuxcoPlugin {
     return {
         manifest: {
-            name: 'nuxc:linker',
+            name: 'nuxco:linker',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['transformModule'],
             permissions: { fs: 'none' }
         },
-        id: canonicalHash('nuxc:linker'),
+        id: canonicalHash('nuxco:linker'),
         async runHook(hook, input, context) {
             if (hook !== 'transformModule') return input;
 

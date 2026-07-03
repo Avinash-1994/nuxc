@@ -3,7 +3,7 @@
  * 
  * Expands the plugin marketplace from 20 to 100+ plugins by:
  * 1. Porting popular Vite/Webpack plugins
- * 2. Creating Nuxc-native plugins
+ * 2. Creating Nuxco-native plugins
  * 3. Categorizing and publishing to marketplace
  */
 
@@ -17,7 +17,7 @@ interface PluginManifest {
     category: 'framework' | 'css' | 'assets' | 'perf' | 'security' | 'fintech' | 'utility' | 'i18n' | 'testing' | 'state' | 'deployment' | 'analytics';
     description: string;
     author: string;
-    source: 'vite-port' | 'webpack-port' | 'nuxc-native';
+    source: 'vite-port' | 'webpack-port' | 'nuxco-native';
     originalPlugin?: string;
     verified: boolean;
 }
@@ -67,126 +67,126 @@ const WEBPACK_PLUGINS = [
     { name: 'workbox-webpack-plugin', category: 'utility', desc: 'Service worker generation' },
 ];
 
-// Nuxc-native plugins
-const NUXC_NATIVE_PLUGINS = [
-    { name: '@nuxc/plugin-audit', category: 'security', desc: 'Real-time security auditing' },
-    { name: '@nuxc/plugin-determinism', category: 'perf', desc: 'Build determinism checker' },
-    { name: '@nuxc/plugin-federation', category: 'utility', desc: 'Module federation' },
-    { name: '@nuxc/plugin-ssr', category: 'framework', desc: 'Universal SSR support' },
-    { name: '@nuxc/plugin-edge', category: 'framework', desc: 'Edge runtime adapter' },
-    { name: '@nuxc/plugin-wasm-sandbox', category: 'security', desc: 'WASM plugin sandbox' },
-    { name: '@nuxc/plugin-crypto-sign', category: 'security', desc: 'Plugin signature verification' },
-    { name: '@nuxc/plugin-observability', category: 'utility', desc: 'Build observability' },
-    { name: '@nuxc/plugin-root-cause', category: 'utility', desc: 'Error root cause analysis' },
-    { name: '@nuxc/plugin-auto-fix', category: 'utility', desc: 'Automatic error fixing' },
-    { name: '@nuxc/plugin-repro', category: 'utility', desc: 'Reproduction case generator' },
-    { name: '@nuxc/plugin-visualizer', category: 'utility', desc: 'WebGPU dependency visualizer' },
-    { name: '@nuxc/plugin-hmr-classify', category: 'perf', desc: 'HMR classification' },
-    { name: '@nuxc/plugin-prebundle', category: 'perf', desc: 'Dependency pre-bundling' },
-    { name: '@nuxc/plugin-css-framework', category: 'css', desc: 'CSS framework detection' },
-    { name: '@nuxc/plugin-tailwind', category: 'css', desc: 'Tailwind CSS integration' },
-    { name: '@nuxc/plugin-unocss', category: 'css', desc: 'UnoCSS integration' },
-    { name: '@nuxc/plugin-critical-css', category: 'css', desc: 'Critical CSS extraction' },
-    { name: '@nuxc/plugin-upi-payment', category: 'fintech', desc: 'UPI payment integration (India)' },
-    { name: '@nuxc/plugin-qr-code', category: 'fintech', desc: 'QR code generation' },
-    { name: '@nuxc/plugin-razorpay', category: 'fintech', desc: 'Razorpay integration' },
-    { name: '@nuxc/plugin-stripe', category: 'fintech', desc: 'Stripe integration' },
-    { name: '@nuxc/plugin-analytics', category: 'utility', desc: 'Build analytics' },
-    { name: '@nuxc/plugin-lighthouse', category: 'perf', desc: 'Lighthouse CI integration' },
-    { name: '@nuxc/plugin-sentry', category: 'utility', desc: 'Sentry error tracking' },
+// Nuxco-native plugins
+const NUXCO_NATIVE_PLUGINS = [
+    { name: '@nuxco/plugin-audit', category: 'security', desc: 'Real-time security auditing' },
+    { name: '@nuxco/plugin-determinism', category: 'perf', desc: 'Build determinism checker' },
+    { name: '@nuxco/plugin-federation', category: 'utility', desc: 'Module federation' },
+    { name: '@nuxco/plugin-ssr', category: 'framework', desc: 'Universal SSR support' },
+    { name: '@nuxco/plugin-edge', category: 'framework', desc: 'Edge runtime adapter' },
+    { name: '@nuxco/plugin-wasm-sandbox', category: 'security', desc: 'WASM plugin sandbox' },
+    { name: '@nuxco/plugin-crypto-sign', category: 'security', desc: 'Plugin signature verification' },
+    { name: '@nuxco/plugin-observability', category: 'utility', desc: 'Build observability' },
+    { name: '@nuxco/plugin-root-cause', category: 'utility', desc: 'Error root cause analysis' },
+    { name: '@nuxco/plugin-auto-fix', category: 'utility', desc: 'Automatic error fixing' },
+    { name: '@nuxco/plugin-repro', category: 'utility', desc: 'Reproduction case generator' },
+    { name: '@nuxco/plugin-visualizer', category: 'utility', desc: 'WebGPU dependency visualizer' },
+    { name: '@nuxco/plugin-hmr-classify', category: 'perf', desc: 'HMR classification' },
+    { name: '@nuxco/plugin-prebundle', category: 'perf', desc: 'Dependency pre-bundling' },
+    { name: '@nuxco/plugin-css-framework', category: 'css', desc: 'CSS framework detection' },
+    { name: '@nuxco/plugin-tailwind', category: 'css', desc: 'Tailwind CSS integration' },
+    { name: '@nuxco/plugin-unocss', category: 'css', desc: 'UnoCSS integration' },
+    { name: '@nuxco/plugin-critical-css', category: 'css', desc: 'Critical CSS extraction' },
+    { name: '@nuxco/plugin-upi-payment', category: 'fintech', desc: 'UPI payment integration (India)' },
+    { name: '@nuxco/plugin-qr-code', category: 'fintech', desc: 'QR code generation' },
+    { name: '@nuxco/plugin-razorpay', category: 'fintech', desc: 'Razorpay integration' },
+    { name: '@nuxco/plugin-stripe', category: 'fintech', desc: 'Stripe integration' },
+    { name: '@nuxco/plugin-analytics', category: 'utility', desc: 'Build analytics' },
+    { name: '@nuxco/plugin-lighthouse', category: 'perf', desc: 'Lighthouse CI integration' },
+    { name: '@nuxco/plugin-sentry', category: 'utility', desc: 'Sentry error tracking' },
 ];
 
 // Additional utility plugins to reach 100+
 const ADDITIONAL_PLUGINS = [
-    { name: '@nuxc/plugin-env-validation', category: 'security', desc: 'Environment variable validation' },
-    { name: '@nuxc/plugin-bundle-size', category: 'perf', desc: 'Bundle size tracking' },
-    { name: '@nuxc/plugin-tree-shake', category: 'perf', desc: 'Advanced tree-shaking' },
-    { name: '@nuxc/plugin-code-split', category: 'perf', desc: 'Smart code splitting' },
-    { name: '@nuxc/plugin-lazy-load', category: 'perf', desc: 'Component lazy loading' },
-    { name: '@nuxc/plugin-preload', category: 'perf', desc: 'Resource preloading' },
-    { name: '@nuxc/plugin-prefetch', category: 'perf', desc: 'Route prefetching' },
-    { name: '@nuxc/plugin-webp', category: 'assets', desc: 'WebP image conversion' },
-    { name: '@nuxc/plugin-avif', category: 'assets', desc: 'AVIF image support' },
-    { name: '@nuxc/plugin-sprite', category: 'assets', desc: 'SVG sprite generation' },
-    { name: '@nuxc/plugin-icon', category: 'assets', desc: 'Icon component generation' },
-    { name: '@nuxc/plugin-font-subset', category: 'assets', desc: 'Font subsetting' },
-    { name: '@nuxc/plugin-i18n', category: 'utility', desc: 'Internationalization' },
-    { name: '@nuxc/plugin-sitemap', category: 'utility', desc: 'Sitemap generation' },
-    { name: '@nuxc/plugin-robots', category: 'utility', desc: 'Robots.txt generation' },
-    { name: '@nuxc/plugin-manifest', category: 'utility', desc: 'Web manifest generation' },
-    { name: '@nuxc/plugin-meta-tags', category: 'utility', desc: 'SEO meta tags' },
-    { name: '@nuxc/plugin-og-image', category: 'utility', desc: 'Open Graph image generation' },
-    { name: '@nuxc/plugin-rss', category: 'utility', desc: 'RSS feed generation' },
-    { name: '@nuxc/plugin-markdown', category: 'utility', desc: 'Markdown processing' },
-    { name: '@nuxc/plugin-mdx', category: 'utility', desc: 'MDX support' },
-    { name: '@nuxc/plugin-graphql', category: 'utility', desc: 'GraphQL integration' },
-    { name: '@nuxc/plugin-apollo', category: 'utility', desc: 'Apollo Client integration' },
-    { name: '@nuxc/plugin-relay', category: 'utility', desc: 'Relay integration' },
-    { name: '@nuxc/plugin-prisma', category: 'utility', desc: 'Prisma integration' },
-    { name: '@nuxc/plugin-trpc', category: 'utility', desc: 'tRPC integration' },
-    { name: '@nuxc/plugin-zod', category: 'utility', desc: 'Zod validation' },
-    { name: '@nuxc/plugin-react-query', category: 'framework', desc: 'React Query integration' },
-    { name: '@nuxc/plugin-zustand', category: 'framework', desc: 'Zustand state management' },
-    { name: '@nuxc/plugin-jotai', category: 'framework', desc: 'Jotai state management' },
-    { name: '@nuxc/plugin-recoil', category: 'framework', desc: 'Recoil state management' },
-    { name: '@nuxc/plugin-redux', category: 'framework', desc: 'Redux integration' },
-    { name: '@nuxc/plugin-mobx', category: 'framework', desc: 'MobX integration' },
-    { name: '@nuxc/plugin-pinia', category: 'framework', desc: 'Pinia (Vue) integration' },
-    { name: '@nuxc/plugin-vuex', category: 'framework', desc: 'Vuex integration' },
-    { name: '@nuxc/plugin-testing-library', category: 'utility', desc: 'Testing Library integration' },
-    { name: '@nuxc/plugin-vitest', category: 'utility', desc: 'Vitest integration' },
-    { name: '@nuxc/plugin-playwright', category: 'utility', desc: 'Playwright E2E' },
-    { name: '@nuxc/plugin-cypress', category: 'utility', desc: 'Cypress integration' },
-    { name: '@nuxc/plugin-storybook', category: 'utility', desc: 'Storybook integration' },
-    { name: '@nuxc/plugin-chromatic', category: 'utility', desc: 'Chromatic visual testing' },
+    { name: '@nuxco/plugin-env-validation', category: 'security', desc: 'Environment variable validation' },
+    { name: '@nuxco/plugin-bundle-size', category: 'perf', desc: 'Bundle size tracking' },
+    { name: '@nuxco/plugin-tree-shake', category: 'perf', desc: 'Advanced tree-shaking' },
+    { name: '@nuxco/plugin-code-split', category: 'perf', desc: 'Smart code splitting' },
+    { name: '@nuxco/plugin-lazy-load', category: 'perf', desc: 'Component lazy loading' },
+    { name: '@nuxco/plugin-preload', category: 'perf', desc: 'Resource preloading' },
+    { name: '@nuxco/plugin-prefetch', category: 'perf', desc: 'Route prefetching' },
+    { name: '@nuxco/plugin-webp', category: 'assets', desc: 'WebP image conversion' },
+    { name: '@nuxco/plugin-avif', category: 'assets', desc: 'AVIF image support' },
+    { name: '@nuxco/plugin-sprite', category: 'assets', desc: 'SVG sprite generation' },
+    { name: '@nuxco/plugin-icon', category: 'assets', desc: 'Icon component generation' },
+    { name: '@nuxco/plugin-font-subset', category: 'assets', desc: 'Font subsetting' },
+    { name: '@nuxco/plugin-i18n', category: 'utility', desc: 'Internationalization' },
+    { name: '@nuxco/plugin-sitemap', category: 'utility', desc: 'Sitemap generation' },
+    { name: '@nuxco/plugin-robots', category: 'utility', desc: 'Robots.txt generation' },
+    { name: '@nuxco/plugin-manifest', category: 'utility', desc: 'Web manifest generation' },
+    { name: '@nuxco/plugin-meta-tags', category: 'utility', desc: 'SEO meta tags' },
+    { name: '@nuxco/plugin-og-image', category: 'utility', desc: 'Open Graph image generation' },
+    { name: '@nuxco/plugin-rss', category: 'utility', desc: 'RSS feed generation' },
+    { name: '@nuxco/plugin-markdown', category: 'utility', desc: 'Markdown processing' },
+    { name: '@nuxco/plugin-mdx', category: 'utility', desc: 'MDX support' },
+    { name: '@nuxco/plugin-graphql', category: 'utility', desc: 'GraphQL integration' },
+    { name: '@nuxco/plugin-apollo', category: 'utility', desc: 'Apollo Client integration' },
+    { name: '@nuxco/plugin-relay', category: 'utility', desc: 'Relay integration' },
+    { name: '@nuxco/plugin-prisma', category: 'utility', desc: 'Prisma integration' },
+    { name: '@nuxco/plugin-trpc', category: 'utility', desc: 'tRPC integration' },
+    { name: '@nuxco/plugin-zod', category: 'utility', desc: 'Zod validation' },
+    { name: '@nuxco/plugin-react-query', category: 'framework', desc: 'React Query integration' },
+    { name: '@nuxco/plugin-zustand', category: 'framework', desc: 'Zustand state management' },
+    { name: '@nuxco/plugin-jotai', category: 'framework', desc: 'Jotai state management' },
+    { name: '@nuxco/plugin-recoil', category: 'framework', desc: 'Recoil state management' },
+    { name: '@nuxco/plugin-redux', category: 'framework', desc: 'Redux integration' },
+    { name: '@nuxco/plugin-mobx', category: 'framework', desc: 'MobX integration' },
+    { name: '@nuxco/plugin-pinia', category: 'framework', desc: 'Pinia (Vue) integration' },
+    { name: '@nuxco/plugin-vuex', category: 'framework', desc: 'Vuex integration' },
+    { name: '@nuxco/plugin-testing-library', category: 'utility', desc: 'Testing Library integration' },
+    { name: '@nuxco/plugin-vitest', category: 'utility', desc: 'Vitest integration' },
+    { name: '@nuxco/plugin-playwright', category: 'utility', desc: 'Playwright E2E' },
+    { name: '@nuxco/plugin-cypress', category: 'utility', desc: 'Cypress integration' },
+    { name: '@nuxco/plugin-storybook', category: 'utility', desc: 'Storybook integration' },
+    { name: '@nuxco/plugin-chromatic', category: 'utility', desc: 'Chromatic visual testing' },
 ];
 
 // New Categories (Day 45 Enhancement)
 const I18N_PLUGINS = [
-    { name: '@nuxc/plugin-react-i18next', category: 'i18n', desc: 'React i18next integration' },
-    { name: '@nuxc/plugin-vue-i18n-next', category: 'i18n', desc: 'Vue I18n integration' },
-    { name: '@nuxc/plugin-formatjs', category: 'i18n', desc: 'FormatJS (react-intl) integration' },
+    { name: '@nuxco/plugin-react-i18next', category: 'i18n', desc: 'React i18next integration' },
+    { name: '@nuxco/plugin-vue-i18n-next', category: 'i18n', desc: 'Vue I18n integration' },
+    { name: '@nuxco/plugin-formatjs', category: 'i18n', desc: 'FormatJS (react-intl) integration' },
 ];
 
 const TESTING_PLUGINS = [
-    { name: '@nuxc/plugin-jest', category: 'testing', desc: 'Jest testing framework' },
-    { name: '@nuxc/plugin-testing-library-react', category: 'testing', desc: 'React Testing Library' },
-    { name: '@nuxc/plugin-msw', category: 'testing', desc: 'Mock Service Worker integration' },
+    { name: '@nuxco/plugin-jest', category: 'testing', desc: 'Jest testing framework' },
+    { name: '@nuxco/plugin-testing-library-react', category: 'testing', desc: 'React Testing Library' },
+    { name: '@nuxco/plugin-msw', category: 'testing', desc: 'Mock Service Worker integration' },
 ];
 
 const STATE_PLUGINS = [
-    { name: '@nuxc/plugin-zustand-devtools', category: 'state', desc: 'Zustand DevTools integration' },
-    { name: '@nuxc/plugin-tanstack-query', category: 'state', desc: 'TanStack Query (React Query)' },
-    { name: '@nuxc/plugin-xstate', category: 'state', desc: 'XState state machines' },
-    { name: '@nuxc/plugin-nanostores', category: 'state', desc: 'Nano Stores integration' },
+    { name: '@nuxco/plugin-zustand-devtools', category: 'state', desc: 'Zustand DevTools integration' },
+    { name: '@nuxco/plugin-tanstack-query', category: 'state', desc: 'TanStack Query (React Query)' },
+    { name: '@nuxco/plugin-xstate', category: 'state', desc: 'XState state machines' },
+    { name: '@nuxco/plugin-nanostores', category: 'state', desc: 'Nano Stores integration' },
 ];
 
 const DEPLOYMENT_PLUGINS = [
-    { name: '@nuxc/plugin-vercel', category: 'deployment', desc: 'Vercel deployment adapter' },
-    { name: '@nuxc/plugin-netlify', category: 'deployment', desc: 'Netlify deployment adapter' },
-    { name: '@nuxc/plugin-cloudflare', category: 'deployment', desc: 'Cloudflare Pages adapter' },
+    { name: '@nuxco/plugin-vercel', category: 'deployment', desc: 'Vercel deployment adapter' },
+    { name: '@nuxco/plugin-netlify', category: 'deployment', desc: 'Netlify deployment adapter' },
+    { name: '@nuxco/plugin-cloudflare', category: 'deployment', desc: 'Cloudflare Pages adapter' },
 ];
 
 const ANALYTICS_PLUGINS = [
-    { name: '@nuxc/plugin-plausible', category: 'analytics', desc: 'Plausible Analytics integration' },
-    { name: '@nuxc/plugin-posthog', category: 'analytics', desc: 'PostHog analytics integration' },
+    { name: '@nuxco/plugin-plausible', category: 'analytics', desc: 'Plausible Analytics integration' },
+    { name: '@nuxco/plugin-posthog', category: 'analytics', desc: 'PostHog analytics integration' },
 ];
 
 export class PluginMarketplaceExpander {
     private plugins: PluginManifest[] = [];
 
     async expand(): Promise<void> {
-        console.log('🚀 Expanding Nuxc Plugin Marketplace to 100+...\n');
+        console.log('🚀 Expanding Nuxco Plugin Marketplace to 100+...\n');
 
         // Port Vite plugins
         console.log('📦 Porting Vite plugins...');
         for (const plugin of VITE_PLUGINS) {
             await this.addPluginWithManifest({
-                name: plugin.name.replace('vite-plugin-', '@nuxc/plugin-').replace('@vitejs/plugin-', '@nuxc/plugin-'),
+                name: plugin.name.replace('vite-plugin-', '@nuxco/plugin-').replace('@vitejs/plugin-', '@nuxco/plugin-'),
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxc Team',
+                author: 'Nuxco Team',
                 source: 'vite-port',
                 originalPlugin: plugin.name,
                 verified: true
@@ -205,11 +205,11 @@ export class PluginMarketplaceExpander {
             if (baseName === 'ts') baseName = 'typescript';
 
             await this.addPluginWithManifest({
-                name: `@nuxc/plugin-${baseName}`,
+                name: `@nuxco/plugin-${baseName}`,
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxc Team',
+                author: 'Nuxco Team',
                 source: 'webpack-port',
                 originalPlugin: plugin.name,
                 verified: true
@@ -217,20 +217,20 @@ export class PluginMarketplaceExpander {
         }
         console.log(`✅ Ported ${WEBPACK_PLUGINS.length} Webpack plugins\n`);
 
-        // Add Nuxc-native plugins
-        console.log('🔧 Adding Nuxc-native plugins...');
-        for (const plugin of NUXC_NATIVE_PLUGINS) {
+        // Add Nuxco-native plugins
+        console.log('🔧 Adding Nuxco-native plugins...');
+        for (const plugin of NUXCO_NATIVE_PLUGINS) {
             await this.addPluginWithManifest({
                 name: plugin.name,
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxc Team',
-                source: 'nuxc-native',
+                author: 'Nuxco Team',
+                source: 'nuxco-native',
                 verified: true
             });
         }
-        console.log(`✅ Added ${NUXC_NATIVE_PLUGINS.length} Nuxc-native plugins\n`);
+        console.log(`✅ Added ${NUXCO_NATIVE_PLUGINS.length} Nuxco-native plugins\n`);
 
         // Add additional plugins
         console.log('➕ Adding additional utility plugins...');
@@ -240,8 +240,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxc Team',
-                source: 'nuxc-native',
+                author: 'Nuxco Team',
+                source: 'nuxco-native',
                 verified: true
             });
         }
@@ -255,8 +255,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxc Team',
-                source: 'nuxc-native',
+                author: 'Nuxco Team',
+                source: 'nuxco-native',
                 verified: true
             });
         }
@@ -270,8 +270,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxc Team',
-                source: 'nuxc-native',
+                author: 'Nuxco Team',
+                source: 'nuxco-native',
                 verified: true
             });
         }
@@ -285,8 +285,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxc Team',
-                source: 'nuxc-native',
+                author: 'Nuxco Team',
+                source: 'nuxco-native',
                 verified: true
             });
         }
@@ -300,8 +300,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxc Team',
-                source: 'nuxc-native',
+                author: 'Nuxco Team',
+                source: 'nuxco-native',
                 verified: true
             });
         }
@@ -315,8 +315,8 @@ export class PluginMarketplaceExpander {
                 version: '1.0.0',
                 category: plugin.category as any,
                 description: plugin.desc,
-                author: 'Nuxc Team',
-                source: 'nuxc-native',
+                author: 'Nuxco Team',
+                source: 'nuxco-native',
                 verified: true
             });
         }
@@ -340,7 +340,7 @@ export class PluginMarketplaceExpander {
             wasmCompatible: true,
             sandboxed: true,
             permissions: this.determinePermissions(manifest),
-            entryPoint: `dist/${manifest.name.replace('@nuxc/', '')}.js`,
+            entryPoint: `dist/${manifest.name.replace('@nuxco/', '')}.js`,
             manifestVersion: '2.0'
         };
 
@@ -356,7 +356,7 @@ export class PluginMarketplaceExpander {
         });
 
         const hash = crypto.createHash('sha256').update(data).digest('hex');
-        return `nuxc-sig-${hash.substring(0, 16)}`;
+        return `nuxco-sig-${hash.substring(0, 16)}`;
     }
 
     private determinePermissions(manifest: PluginManifest): string[] {

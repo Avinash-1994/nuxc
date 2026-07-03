@@ -176,13 +176,13 @@ export const CommonPatterns: ErrorPattern[] = [
         }
     },
     {
-        id: 'nuxc-config-error',
-        name: 'Nuxc Config Validation Error',
+        id: 'nuxco-config-error',
+        name: 'Nuxco Config Validation Error',
         regex: /Invalid config file/i,
         generator: () => {
             return {
                 type: 'MANUAL_INSTRUCTION',
-                description: 'Fix nuxc.config configuration - check for type mismatches or missing fields.',
+                description: 'Fix nuxco.config configuration - check for type mismatches or missing fields.',
                 confidence: 0.95
             };
         }

@@ -1,3 +1,3 @@
 import './my-element';
 
-document.body.innerHTML = '<my-element name="Nuxc"></my-element>';
+document.body.innerHTML = '<my-element name="Nuxco"></my-element>';

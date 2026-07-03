@@ -50,7 +50,7 @@ export interface PluginExecutionRecord {
 }
 
 /** @public */
-export interface NuxcPlugin {
+export interface NuxcoPlugin {
     manifest: PluginManifest;
     id: string; // sha256(name + version)
 

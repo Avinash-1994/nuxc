@@ -5,7 +5,7 @@ export default function AboutPage() {
   return (
     <main>
       <h1>About</h1>
-      <p>This is a Pages Router app accelerated by Nuxc SWC.</p>
+      <p>This is a Pages Router app accelerated by Nuxco SWC.</p>
       <Link href="/">← Back home</Link>
     </main>
   );

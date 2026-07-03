@@ -6,7 +6,7 @@ exports.render = async function render({ url, cookies }) {
     var isAuthed = cookies && cookies['session'];
     state = { userData: { name: 'SvelteKit Admin', email: 'admin@acme.com' }, authed: !!isAuthed };
     html = [
-      '<main id="nuxc-ssr-root">',
+      '<main id="nuxco-ssr-root">',
       '  <header class="dashboard-header">',
       '    <h1>Dashboard - SvelteKit SSR</h1>',
       '    <nav class="dashboard-nav">',
@@ -43,14 +43,14 @@ exports.render = async function render({ url, cookies }) {
       '    </ul>',
       '  </section>',
       '  <footer class="dashboard-footer">',
-      '    <p>Powered by Nuxc SSR - SvelteKit Adapter v1.0.0</p>',
+      '    <p>Powered by Nuxco SSR - SvelteKit Adapter v1.0.0</p>',
       '  </footer>',
       '</main>'
     ].join('\n');
   }
   return {
     html: html,
-    head: '<title>Dashboard | Nuxc SSR</title><meta name="description" content="SvelteKit SSR Dashboard"><meta name="robots" content="noindex">',
+    head: '<title>Dashboard | Nuxco SSR</title><meta name="description" content="SvelteKit SSR Dashboard"><meta name="robots" content="noindex">',
     state: JSON.stringify(state)
   };
 };

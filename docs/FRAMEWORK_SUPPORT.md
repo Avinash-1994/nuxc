@@ -1,8 +1,8 @@
-# Nuxc Framework Support - Universal Production-Grade
+# Nuxco Framework Support - Universal Production-Grade
 
 ## 🌟 **All Frameworks Are Production-Ready**
 
-Nuxc provides **identical, production-grade support** for all major frameworks. There are no tiers - every framework receives:
+Nuxco provides **identical, production-grade support** for all major frameworks. There are no tiers - every framework receives:
 
 ### ✅ **Universal Guarantees (ALL Frameworks)**
 
@@ -12,7 +12,7 @@ Nuxc provides **identical, production-grade support** for all major frameworks. 
 - **CSS correctness** (scoped styles, extraction, injection)
 - **Graph-based rebuilds** (dependency tracking)
 - **Production builds work** (optimized, tree-shaken)
-- **Full `nuxc verify` support**
+- **Full `nuxco verify` support**
 
 ---
 
@@ -76,7 +76,7 @@ Nuxc provides **identical, production-grade support** for all major frameworks. 
 
 ## 🔧 **How It Works**
 
-All frameworks use Nuxc's **UniversalTransformer** which:
+All frameworks use Nuxco's **UniversalTransformer** which:
 
 1. **Detects** the framework from file extensions and imports
 2. **Transforms** using the framework's native compiler
@@ -103,4 +103,4 @@ We believe in **equality across frameworks**. Every framework deserves:
 - The same production-ready guarantees
 - The same developer experience
 
-**Nuxc treats all frameworks as first-class citizens.**
+**Nuxco treats all frameworks as first-class citizens.**

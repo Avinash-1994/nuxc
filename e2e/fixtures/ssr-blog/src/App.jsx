@@ -6,7 +6,7 @@ export default function App({ url }) {
 
     return (
         <div>
-            <h1>Nuxc SSR Web Blog</h1>
+            <h1>Nuxco SSR Web Blog</h1>
             <p>Current Path: <strong data-testid="url-display">{url}</strong></p>
             <ul>
                 {posts.map(p => <li key={p.id}>{p.title}</li>)}

@@ -12,7 +12,7 @@ import { HMRClassifier, HMRLevel } from '../../src/hmr/classifier.js';
 import { createPostCssPlugin } from '../../src/plugins/css/postcss.js';
 import { frameworkPresets } from '../../src/presets/frameworks.js';
 
-const TMP = path.join(os.tmpdir(), 'nuxc-css-tests');
+const TMP = path.join(os.tmpdir(), 'nuxco-css-tests');
 fs.mkdirSync(TMP, { recursive: true });
 
 function writeFile(name: string, content: string): string {
@@ -25,10 +25,10 @@ function writeFile(name: string, content: string): string {
 // ──────────────────────────────────────────────────────────────────────
 // CSS-001: CSS Modules scoping via PostCSS plugin creation
 // ──────────────────────────────────────────────────────────────────────
-test('CSS-001: createPostCssPlugin returns a valid NuxcPlugin', () => {
+test('CSS-001: createPostCssPlugin returns a valid NuxcoPlugin', () => {
     const plugin = createPostCssPlugin('/tmp');
     expect(plugin).toBeDefined();
-    expect(plugin.manifest.name).toBe('nuxc:postcss');
+    expect(plugin.manifest.name).toBe('nuxco:postcss');
     expect(plugin.manifest.hooks).toContain('transformModule');
 });
 

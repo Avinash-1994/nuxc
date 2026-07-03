@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-font-subset
+ * @nuxco/plugin-font-subset
  * Font subsetting
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createFontSubsetPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-font-subset',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-font-subset',
+        originalPlugin: 'nuxco-native',
         
         async load(id: string) {
             // Asset loading for font-subset

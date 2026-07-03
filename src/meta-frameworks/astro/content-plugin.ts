@@ -1,12 +1,12 @@
-import type { Plugin } from '@nuxc/adapter-core';
+import type { Plugin } from '@nuxco/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:nuxc/astro-content';
+const VIRTUAL_MODULE_ID = 'virtual:nuxco/astro-content';
 
 export function astroContentPlugin(): Plugin {
   return {
-    name: 'nuxc:astro-content',
+    name: 'nuxco:astro-content',
 
     resolveId(source: string) {
       if (source === VIRTUAL_MODULE_ID) return source;

@@ -1,7 +1,7 @@
 
 /**
  * populate-marketplace.ts
- * Mass publishes 20 Core Plugins to local Nuxc Registry
+ * Mass publishes 20 Core Plugins to local Nuxco Registry
  * Day 12: Curated Plugin Suite Lock
  */
 
@@ -10,26 +10,26 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const PLUGINS = [
-    { name: '@nuxc/plugin-react', desc: 'Secure React Fast Refresh & JSX' },
-    { name: '@nuxc/plugin-vue', desc: 'Vue 3 SFC Compiler (Sandboxed)' },
-    { name: '@nuxc/plugin-svelte', desc: 'Svelte 5 Compiler & HMR' },
-    { name: '@nuxc/plugin-solid', desc: 'SolidJS Fine-grained Reactivity' },
-    { name: '@nuxc/plugin-lit', desc: 'Web Components & Lit Support' },
-    { name: '@nuxc/plugin-angular', desc: 'Angular Ivy Compat' },
-    { name: '@nuxc/plugin-postcss', desc: 'PostCSS 8 Adapter' },
-    { name: '@nuxc/plugin-tailwindcss', desc: 'Tailwind JIT Engine' },
-    { name: '@nuxc/plugin-sass', desc: 'Dart Sass (WASM)' },
-    { name: '@nuxc/plugin-less', desc: 'Less CSS Support' },
-    { name: '@nuxc/plugin-mdx', desc: 'Markdown to JSX' },
-    { name: '@nuxc/plugin-optimize-css', desc: 'CSS Minification' },
-    { name: '@nuxc/plugin-terser', desc: 'JS Minification (Terser)' },
-    { name: '@nuxc/plugin-visualizer', desc: 'Bundle Analysis UI' },
-    { name: '@nuxc/plugin-audit', desc: 'Lighthouse & Performance Audit' },
-    { name: '@nuxc/plugin-pwa', desc: 'PWA Manifest & Service Workers' },
-    { name: '@nuxc/plugin-legacy', desc: 'Polyfills for older browsers' },
-    { name: '@nuxc/plugin-compression', desc: 'Gzip/Brotli Compression' },
-    { name: '@nuxc/plugin-inspector', desc: 'DevTools & Debugging Overlay' },
-    { name: '@nuxc/plugin-wasm', desc: 'Native WASM Modules Support' }
+    { name: '@nuxco/plugin-react', desc: 'Secure React Fast Refresh & JSX' },
+    { name: '@nuxco/plugin-vue', desc: 'Vue 3 SFC Compiler (Sandboxed)' },
+    { name: '@nuxco/plugin-svelte', desc: 'Svelte 5 Compiler & HMR' },
+    { name: '@nuxco/plugin-solid', desc: 'SolidJS Fine-grained Reactivity' },
+    { name: '@nuxco/plugin-lit', desc: 'Web Components & Lit Support' },
+    { name: '@nuxco/plugin-angular', desc: 'Angular Ivy Compat' },
+    { name: '@nuxco/plugin-postcss', desc: 'PostCSS 8 Adapter' },
+    { name: '@nuxco/plugin-tailwindcss', desc: 'Tailwind JIT Engine' },
+    { name: '@nuxco/plugin-sass', desc: 'Dart Sass (WASM)' },
+    { name: '@nuxco/plugin-less', desc: 'Less CSS Support' },
+    { name: '@nuxco/plugin-mdx', desc: 'Markdown to JSX' },
+    { name: '@nuxco/plugin-optimize-css', desc: 'CSS Minification' },
+    { name: '@nuxco/plugin-terser', desc: 'JS Minification (Terser)' },
+    { name: '@nuxco/plugin-visualizer', desc: 'Bundle Analysis UI' },
+    { name: '@nuxco/plugin-audit', desc: 'Lighthouse & Performance Audit' },
+    { name: '@nuxco/plugin-pwa', desc: 'PWA Manifest & Service Workers' },
+    { name: '@nuxco/plugin-legacy', desc: 'Polyfills for older browsers' },
+    { name: '@nuxco/plugin-compression', desc: 'Gzip/Brotli Compression' },
+    { name: '@nuxco/plugin-inspector', desc: 'DevTools & Debugging Overlay' },
+    { name: '@nuxco/plugin-wasm', desc: 'Native WASM Modules Support' }
 ];
 
 const TEMP_DIR = path.resolve('.temp_plugins');
@@ -54,7 +54,7 @@ async function run() {
         const meta = {
             name: p.name,
             version: '1.0.0',
-            author: 'Nuxc Core Team',
+            author: 'Nuxco Core Team',
             description: p.desc,
             permissions: { network: false, fs: false } // Zero-trust default
         };

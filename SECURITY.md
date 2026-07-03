@@ -1,4 +1,4 @@
-# NUXC Security Policy
+# NUXCO Security Policy
 
 ## Reporting Vulnerabilities
 

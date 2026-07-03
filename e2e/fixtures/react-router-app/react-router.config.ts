@@ -1,4 +1,4 @@
-// react-router.config.ts — Nuxc Phase 2.9
+// react-router.config.ts — Nuxco Phase 2.9
 import type { Config } from '@react-router/dev/config';
 
 export default {

@@ -1,7 +1,7 @@
 # Benchmarks
 
-> Honest, reproducible performance comparisons for Nuxc vs other build tools.
-> Last updated: 2026-04-07 | Nuxc v1.0.9
+> Honest, reproducible performance comparisons for Nuxco vs other build tools.
+> Last updated: 2026-04-07 | Nuxco v1.0.9
 
 ---
 
@@ -32,19 +32,19 @@
 
 ## Production Build Time
 
-| Fixture | Nuxc | Vite | Rspack |
+| Fixture | Nuxco | Vite | Rspack |
 |---------|--------|------|--------|
 | **small-app** (50 components, ~200 modules) | **1.84s** | 2.35s | 2.1s |
 | **medium-app** (500 components, ~1,500 modules) | **6.8s** | 9.2s | 7.4s |
 | **large-app** (2,000 components, ~5,000 modules) | **24.5s** | 38.0s | 28.0s |
 
-> ⚠️ **Note:** Cold-start (first-ever run) is ~1.5–2x slower for Nuxc due to RocksDB cache initialization. Subsequent builds are faster.
+> ⚠️ **Note:** Cold-start (first-ever run) is ~1.5–2x slower for Nuxco due to RocksDB cache initialization. Subsequent builds are faster.
 
 ---
 
 ## Bundle Size (gzipped)
 
-| Fixture | Nuxc | Vite |
+| Fixture | Nuxco | Vite |
 |---------|--------|------|
 | **small-app** | **51 KB** | 57 KB |
 | **medium-app** | **277 KB** | 305 KB |
@@ -54,7 +54,7 @@
 
 ## HMR Update Time (Average of 10 saves)
 
-| Fixture | Nuxc | Vite |
+| Fixture | Nuxco | Vite |
 |---------|--------|------|
 | **small-app** (leaf component) | **~45ms** | ~50ms |
 | **medium-app** (leaf component) | **~52ms** | ~65ms |
@@ -66,8 +66,8 @@
 
 ## Honest Caveats
 
-- **First cold-start** for Nuxc is slower than shown (cache warmup adds ~10–15s for large apps)
-- Vite's dev server (ESM-only) starts faster than Nuxc's dev server for the first request
+- **First cold-start** for Nuxco is slower than shown (cache warmup adds ~10–15s for large apps)
+- Vite's dev server (ESM-only) starts faster than Nuxco's dev server for the first request
 - These are approximations — real-world results depend on your project structure, import patterns, and machine
 - Rspack results are estimated based on public benchmarks; run the suite yourself to measure on your machine
 
@@ -77,13 +77,13 @@
 
 ```bash
 # Clone the repo
-git clone https://github.com/Avinash-1994/Nuxc.git
-cd Nuxc
+git clone https://github.com/Avinash-1994/Nuxco.git
+cd Nuxco
 
 # Install dependencies
 npm install
 
-# Build Nuxc first
+# Build Nuxco first
 npm run build
 
 # Run the full benchmark suite

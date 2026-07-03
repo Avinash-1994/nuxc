@@ -1,5 +1,5 @@
-import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
-import { detectDependencies, registry } from '@nuxc/adapter-core';
+import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
+import { detectDependencies, registry } from '@nuxco/adapter-core';
 import { tsRouterPlugin } from './router-plugin.js';
 
 export interface TanStackConfig {
@@ -7,7 +7,7 @@ export interface TanStackConfig {
   serverOnly?: boolean;    // default: false
 }
 
-export class TanStackAdapter implements NuxcAdapter {
+export class TanStackAdapter implements NuxcoAdapter {
   name = 'tanstack-start';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class TanStackAdapter implements NuxcAdapter {
     ];
   }
 
-  config(config: NuxcConfig): NuxcConfig {
+  config(config: NuxcoConfig): NuxcoConfig {
     if (!config.tanstack) config.tanstack = {};
     config.tanstack = {
       ssr: true,
@@ -36,7 +36,7 @@ export class TanStackAdapter implements NuxcAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:nuxc/tanstack-routes';
+         const virtualEntry = 'virtual:nuxco/tanstack-routes';
          let manifest: any;
          try {
             manifest = await import(virtualEntry);
@@ -79,7 +79,7 @@ export class TanStackAdapter implements NuxcAdapter {
 
          next();
       } catch(e) {
-         console.error('[Nuxc:TanStack] Dev Middleware SSR Error', e);
+         console.error('[Nuxco:TanStack] Dev Middleware SSR Error', e);
          next();
       }
     };

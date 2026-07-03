@@ -1,4 +1,4 @@
-# Nuxc Plugins Guide
+# Nuxco Plugins Guide
 
 > **Plugin ecosystem with sandboxing support and WebCrypto signing support.**
 
@@ -8,29 +8,29 @@
 
 ```bash
 # Search for plugins
-nuxc plugin search react
+nuxco plugin search react
 
 # Install a plugin
-nuxc plugin install @nuxc/plugin-react
+nuxco plugin install @nuxco/plugin-react
 
 # List installed plugins
-nuxc plugin list
+nuxco plugin list
 
 # Verify plugin signatures
-nuxc plugin verify @nuxc/plugin-react
+nuxco plugin verify @nuxco/plugin-react
 ```
 
 ---
 
 ## Using Plugins
 
-### In `nuxc.config.ts`
+### In `nuxco.config.ts`
 
 ```typescript
-import { defineConfig } from 'nuxc';
-import react from '@nuxc/plugin-react';
-import tailwind from '@nuxc/plugin-tailwind';
-import pwa from '@nuxc/plugin-pwa';
+import { defineConfig } from 'nuxco';
+import react from '@nuxco/plugin-react';
+import tailwind from '@nuxco/plugin-tailwind';
+import pwa from '@nuxco/plugin-pwa';
 
 export default defineConfig({
   preset: 'spa',
@@ -66,90 +66,90 @@ export default defineConfig({
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-react` | React Fast Refresh + JSX | `nuxc plugin install @nuxc/plugin-react` |
-| `@nuxc/plugin-vue` | Vue 3 SFC support | `nuxc plugin install @nuxc/plugin-vue` |
-| `@nuxc/plugin-svelte` | Svelte compiler | `nuxc plugin install @nuxc/plugin-svelte` |
-| `@nuxc/plugin-solid` | Solid.js JSX | `nuxc plugin install @nuxc/plugin-solid` |
-| `@nuxc/plugin-angular` | Angular AOT compiler | `nuxc plugin install @nuxc/plugin-angular` |
-| `@nuxc/plugin-preact` | Preact with Fast Refresh | `nuxc plugin install @nuxc/plugin-preact` |
+| `@nuxco/plugin-react` | React Fast Refresh + JSX | `nuxco plugin install @nuxco/plugin-react` |
+| `@nuxco/plugin-vue` | Vue 3 SFC support | `nuxco plugin install @nuxco/plugin-vue` |
+| `@nuxco/plugin-svelte` | Svelte compiler | `nuxco plugin install @nuxco/plugin-svelte` |
+| `@nuxco/plugin-solid` | Solid.js JSX | `nuxco plugin install @nuxco/plugin-solid` |
+| `@nuxco/plugin-angular` | Angular AOT compiler | `nuxco plugin install @nuxco/plugin-angular` |
+| `@nuxco/plugin-preact` | Preact with Fast Refresh | `nuxco plugin install @nuxco/plugin-preact` |
 
 ### CSS & Styling
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-tailwind` | Tailwind CSS v3+ | `nuxc plugin install @nuxc/plugin-tailwind` |
-| `@nuxc/plugin-sass` | Sass/SCSS compiler | `nuxc plugin install @nuxc/plugin-sass` |
-| `@nuxc/plugin-less` | Less compiler | `nuxc plugin install @nuxc/plugin-less` |
-| `@nuxc/plugin-postcss` | PostCSS processor | `nuxc plugin install @nuxc/plugin-postcss` |
-| `@nuxc/plugin-styled-components` | CSS-in-JS support | `nuxc plugin install @nuxc/plugin-styled-components` |
-| `@nuxc/plugin-emotion` | Emotion CSS-in-JS | `nuxc plugin install @nuxc/plugin-emotion` |
+| `@nuxco/plugin-tailwind` | Tailwind CSS v3+ | `nuxco plugin install @nuxco/plugin-tailwind` |
+| `@nuxco/plugin-sass` | Sass/SCSS compiler | `nuxco plugin install @nuxco/plugin-sass` |
+| `@nuxco/plugin-less` | Less compiler | `nuxco plugin install @nuxco/plugin-less` |
+| `@nuxco/plugin-postcss` | PostCSS processor | `nuxco plugin install @nuxco/plugin-postcss` |
+| `@nuxco/plugin-styled-components` | CSS-in-JS support | `nuxco plugin install @nuxco/plugin-styled-components` |
+| `@nuxco/plugin-emotion` | Emotion CSS-in-JS | `nuxco plugin install @nuxco/plugin-emotion` |
 
 ### Assets & Media
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-svgr` | SVG to React components | `nuxc plugin install @nuxc/plugin-svgr` |
-| `@nuxc/plugin-image-optimizer` | Image compression | `nuxc plugin install @nuxc/plugin-image-optimizer` |
-| `@nuxc/plugin-webp` | WebP conversion | `nuxc plugin install @nuxc/plugin-webp` |
-| `@nuxc/plugin-fonts` | Font optimization | `nuxc plugin install @nuxc/plugin-fonts` |
+| `@nuxco/plugin-svgr` | SVG to React components | `nuxco plugin install @nuxco/plugin-svgr` |
+| `@nuxco/plugin-image-optimizer` | Image compression | `nuxco plugin install @nuxco/plugin-image-optimizer` |
+| `@nuxco/plugin-webp` | WebP conversion | `nuxco plugin install @nuxco/plugin-webp` |
+| `@nuxco/plugin-fonts` | Font optimization | `nuxco plugin install @nuxco/plugin-fonts` |
 
 ### Performance
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-compression` | Gzip/Brotli compression | `nuxc plugin install @nuxc/plugin-compression` |
-| `@nuxc/plugin-preload` | Resource preloading | `nuxc plugin install @nuxc/plugin-preload` |
-| `@nuxc/plugin-lazy-load` | Code splitting helpers | `nuxc plugin install @nuxc/plugin-lazy-load` |
-| `@nuxc/plugin-bundle-analyzer` | Bundle size analysis | `nuxc plugin install @nuxc/plugin-bundle-analyzer` |
+| `@nuxco/plugin-compression` | Gzip/Brotli compression | `nuxco plugin install @nuxco/plugin-compression` |
+| `@nuxco/plugin-preload` | Resource preloading | `nuxco plugin install @nuxco/plugin-preload` |
+| `@nuxco/plugin-lazy-load` | Code splitting helpers | `nuxco plugin install @nuxco/plugin-lazy-load` |
+| `@nuxco/plugin-bundle-analyzer` | Bundle size analysis | `nuxco plugin install @nuxco/plugin-bundle-analyzer` |
 
 ### Security
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-csp` | Content Security Policy | `nuxc plugin install @nuxc/plugin-csp` |
-| `@nuxc/plugin-sri` | Subresource Integrity | `nuxc plugin install @nuxc/plugin-sri` |
-| `@nuxc/plugin-security-headers` | HTTP security headers | `nuxc plugin install @nuxc/plugin-security-headers` |
+| `@nuxco/plugin-csp` | Content Security Policy | `nuxco plugin install @nuxco/plugin-csp` |
+| `@nuxco/plugin-sri` | Subresource Integrity | `nuxco plugin install @nuxco/plugin-sri` |
+| `@nuxco/plugin-security-headers` | HTTP security headers | `nuxco plugin install @nuxco/plugin-security-headers` |
 
 ### Testing
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-vitest` | Vitest integration | `nuxc plugin install @nuxc/plugin-vitest` |
-| `@nuxc/plugin-jest` | Jest integration | `nuxc plugin install @nuxc/plugin-jest` |
-| `@nuxc/plugin-playwright` | E2E testing | `nuxc plugin install @nuxc/plugin-playwright` |
+| `@nuxco/plugin-vitest` | Vitest integration | `nuxco plugin install @nuxco/plugin-vitest` |
+| `@nuxco/plugin-jest` | Jest integration | `nuxco plugin install @nuxco/plugin-jest` |
+| `@nuxco/plugin-playwright` | E2E testing | `nuxco plugin install @nuxco/plugin-playwright` |
 
 ### i18n
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-i18next` | i18next integration | `nuxc plugin install @nuxc/plugin-i18next` |
-| `@nuxc/plugin-react-intl` | React Intl | `nuxc plugin install @nuxc/plugin-react-intl` |
-| `@nuxc/plugin-vue-i18n` | Vue I18n | `nuxc plugin install @nuxc/plugin-vue-i18n` |
+| `@nuxco/plugin-i18next` | i18next integration | `nuxco plugin install @nuxco/plugin-i18next` |
+| `@nuxco/plugin-react-intl` | React Intl | `nuxco plugin install @nuxco/plugin-react-intl` |
+| `@nuxco/plugin-vue-i18n` | Vue I18n | `nuxco plugin install @nuxco/plugin-vue-i18n` |
 
 ### State Management
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-redux` | Redux DevTools | `nuxc plugin install @nuxc/plugin-redux` |
-| `@nuxc/plugin-zustand` | Zustand integration | `nuxc plugin install @nuxc/plugin-zustand` |
-| `@nuxc/plugin-jotai` | Jotai atoms | `nuxc plugin install @nuxc/plugin-jotai` |
+| `@nuxco/plugin-redux` | Redux DevTools | `nuxco plugin install @nuxco/plugin-redux` |
+| `@nuxco/plugin-zustand` | Zustand integration | `nuxco plugin install @nuxco/plugin-zustand` |
+| `@nuxco/plugin-jotai` | Jotai atoms | `nuxco plugin install @nuxco/plugin-jotai` |
 
 ### Deployment
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-vercel` | Vercel deployment | `nuxc plugin install @nuxc/plugin-vercel` |
-| `@nuxc/plugin-netlify` | Netlify deployment | `nuxc plugin install @nuxc/plugin-netlify` |
-| `@nuxc/plugin-cloudflare` | Cloudflare Workers | `nuxc plugin install @nuxc/plugin-cloudflare` |
-| `@nuxc/plugin-docker` | Docker containerization | `nuxc plugin install @nuxc/plugin-docker` |
+| `@nuxco/plugin-vercel` | Vercel deployment | `nuxco plugin install @nuxco/plugin-vercel` |
+| `@nuxco/plugin-netlify` | Netlify deployment | `nuxco plugin install @nuxco/plugin-netlify` |
+| `@nuxco/plugin-cloudflare` | Cloudflare Workers | `nuxco plugin install @nuxco/plugin-cloudflare` |
+| `@nuxco/plugin-docker` | Docker containerization | `nuxco plugin install @nuxco/plugin-docker` |
 
 ### Analytics
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuxc/plugin-google-analytics` | GA4 integration | `nuxc plugin install @nuxc/plugin-google-analytics` |
-| `@nuxc/plugin-plausible` | Plausible Analytics | `nuxc plugin install @nuxc/plugin-plausible` |
-| `@nuxc/plugin-sentry` | Error tracking | `nuxc plugin install @nuxc/plugin-sentry` |
+| `@nuxco/plugin-google-analytics` | GA4 integration | `nuxco plugin install @nuxco/plugin-google-analytics` |
+| `@nuxco/plugin-plausible` | Plausible Analytics | `nuxco plugin install @nuxco/plugin-plausible` |
+| `@nuxco/plugin-sentry` | Error tracking | `nuxco plugin install @nuxco/plugin-sentry` |
 
 ---
 
@@ -157,7 +157,7 @@ export default defineConfig({
 
 ### Plugin Security Model
 
-Nuxc currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
+Nuxco currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
 
 Plugins are subject to explicit permissions:
 - Filesystem access is denied by default and only granted for approved paths.
@@ -184,11 +184,11 @@ Every plugin is **cryptographically signed**:
 
 ```bash
 # Verify plugin signature
-nuxc plugin verify @nuxc/plugin-react
+nuxco plugin verify @nuxco/plugin-react
 
 # Output:
 ✅ Signature valid
-✅ Publisher: Nuxc Team
+✅ Publisher: Nuxco Team
 ✅ Published: 2026-01-15
 ✅ SHA-256: a3f2...
 ```
@@ -197,9 +197,9 @@ nuxc plugin verify @nuxc/plugin-react
 
 ```json
 {
-  "name": "@nuxc/plugin-react",
+  "name": "@nuxco/plugin-react",
   "version": "2.0.0",
-  "author": "Nuxc Team",
+  "author": "Nuxco Team",
   "signature": "...",
   "permissions": [
     "transform:jsx",
@@ -218,9 +218,9 @@ nuxc plugin verify @nuxc/plugin-react
 
 ```typescript
 // my-plugin.ts
-import { NuxcPlugin } from 'nuxc';
+import { NuxcoPlugin } from 'nuxco';
 
-export default function myPlugin(options = {}): NuxcPlugin {
+export default function myPlugin(options = {}): NuxcoPlugin {
   return {
     name: 'my-plugin',
     version: '1.0.0',
@@ -251,7 +251,7 @@ export default function myPlugin(options = {}): NuxcPlugin {
 ### Plugin Hooks
 
 ```typescript
-export interface NuxcPlugin {
+export interface NuxcoPlugin {
   name: string;
   version: string;
   
@@ -277,12 +277,12 @@ export interface NuxcPlugin {
 ### Example: Custom Markdown Plugin
 
 ```typescript
-import { NuxcPlugin } from 'nuxc';
+import { NuxcoPlugin } from 'nuxco';
 import { marked } from 'marked';
 
-export default function markdownPlugin(): NuxcPlugin {
+export default function markdownPlugin(): NuxcoPlugin {
   return {
-    name: 'nuxc-plugin-markdown',
+    name: 'nuxco-plugin-markdown',
     version: '1.0.0',
     
     transform(code, id) {
@@ -301,7 +301,7 @@ export default function markdownPlugin(): NuxcPlugin {
 
 **Usage**:
 ```typescript
-// nuxc.config.ts
+// nuxco.config.ts
 import markdown from './my-plugin';
 
 export default defineConfig({
@@ -325,8 +325,8 @@ function App() {
 ### Vite Plugin Adapter
 
 ```typescript
-import { defineConfig } from 'nuxc';
-import { rollupAdapter } from '@nuxc/plugin-compat';
+import { defineConfig } from 'nuxco';
+import { rollupAdapter } from '@nuxco/plugin-compat';
 import viteReactSvgr from 'vite-plugin-svgr';
 
 export default defineConfig({
@@ -342,7 +342,7 @@ export default defineConfig({
 ### Webpack Loader Adapter
 
 ```typescript
-import { webpackLoaderAdapter } from '@nuxc/plugin-compat';
+import { webpackLoaderAdapter } from '@nuxco/plugin-compat';
 
 export default defineConfig({
   plugins: [
@@ -365,26 +365,26 @@ export default defineConfig({
 
 ```bash
 # List all plugins
-nuxc plugin list --all
+nuxco plugin list --all
 
 # Search by category
-nuxc plugin search --category framework
+nuxco plugin search --category framework
 
 # Filter by verified
-nuxc plugin search --verified
+nuxco plugin search --verified
 ```
 
 ### Plugin Ratings
 
 ```bash
 # View plugin details
-nuxc plugin info @nuxc/plugin-react
+nuxco plugin info @nuxco/plugin-react
 
 # Output:
-📦 @nuxc/plugin-react v2.0.0
+📦 @nuxco/plugin-react v2.0.0
 ⭐ 4.8/5.0 (1,234 reviews)
 📥 50,000 downloads/week
-✅ Verified by Nuxc Team
+✅ Verified by Nuxco Team
 🔒 Secure isolated plugin runtime
 📝 React Fast Refresh + JSX transform
 ```
@@ -414,11 +414,11 @@ export default defineConfig({
 **Solution**:
 ```bash
 # Re-install plugin
-npm uninstall @nuxc/plugin-name
-nuxc plugin install @nuxc/plugin-name
+npm uninstall @nuxco/plugin-name
+nuxco plugin install @nuxco/plugin-name
 
 # Or skip verification (not recommended)
-nuxc plugin install @nuxc/plugin-name --skip-verify
+nuxco plugin install @nuxco/plugin-name --skip-verify
 ```
 
 ### Plugin Conflicts
@@ -443,7 +443,7 @@ export default defineConfig({
 
 ✅ **Good**:
 ```typescript
-import react from '@nuxc/plugin-react';
+import react from '@nuxco/plugin-react';
 ```
 
 ⚠️ **Avoid** (unless necessary):
@@ -455,7 +455,7 @@ import react from 'some-unofficial-plugin';
 
 ```bash
 # Always verify before using
-nuxc plugin verify @nuxc/plugin-name
+nuxco plugin verify @nuxco/plugin-name
 ```
 
 ### 3. Minimal Plugin Configuration
@@ -480,7 +480,7 @@ plugins: [
 
 ```bash
 # Profile plugin impact
-nuxc build --profile
+nuxco build --profile
 
 # Output shows plugin timings
 ```
@@ -496,20 +496,20 @@ nuxc build --profile
 npm run build
 
 # 2. Sign plugin
-nuxc plugin sign ./dist
+nuxco plugin sign ./dist
 
 # 3. Publish to marketplace
-nuxc plugin publish
+nuxco plugin publish
 
 # 4. Verify published
-nuxc plugin verify @your-org/your-plugin
+nuxco plugin verify @your-org/your-plugin
 ```
 
 ### Plugin Testing
 
 ```typescript
 // plugin.test.ts
-import { describe, it, expect } from '@nuxc/test';
+import { describe, it, expect } from '@nuxco/test';
 import myPlugin from './plugin';
 
 describe('My Plugin', () => {

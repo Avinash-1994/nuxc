@@ -1,7 +1,7 @@
 /**
  * src/config-loader.ts
  *
- * Loads and merges nuxc.config.js / nuxc.config.ts,
+ * Loads and merges nuxco.config.js / nuxco.config.ts,
  * with support for `extends` (base config inheritance).
  *
  * Replace / augment your existing config loader with this.
@@ -12,8 +12,8 @@ import fs from 'fs'
 import { pathToFileURL } from 'url'
 import type { BuildConfig } from './config/index.js'
 
-// Use the existing BuildConfig type from config/index.ts as NuxcConfig alias
-export type NuxcConfig = BuildConfig
+// Use the existing BuildConfig type from config/index.ts as NuxcoConfig alias
+export type NuxcoConfig = BuildConfig
 
 // ─── Deep merge ───────────────────────────────────────────────────────────────
 
@@ -49,10 +49,10 @@ export function mergeConfig(
 // ─── Config file resolution ───────────────────────────────────────────────────
 
 const CONFIG_FILE_NAMES = [
-  'nuxc.config.ts',
-  'nuxc.config.js',
-  'nuxc.config.mjs',
-  'nuxc.config.cjs',
+  'nuxco.config.ts',
+  'nuxco.config.js',
+  'nuxco.config.mjs',
+  'nuxco.config.cjs',
 ]
 
 export async function findConfigFile(root: string): Promise<string | null> {
@@ -63,7 +63,7 @@ export async function findConfigFile(root: string): Promise<string | null> {
   return null
 }
 
-async function loadRawConfig(filePath: string): Promise<NuxcConfig & { extends?: string }> {
+async function loadRawConfig(filePath: string): Promise<NuxcoConfig & { extends?: string }> {
   const ext = path.extname(filePath)
   const fileUrl = pathToFileURL(filePath).href
 
@@ -91,7 +91,7 @@ async function loadRawConfig(filePath: string): Promise<NuxcConfig & { extends?:
     return config
   } catch (err) {
     throw new Error(
-      `[nuxc] Failed to load config from "${filePath}":\n  ${(err as Error).message}\n` +
+      `[nuxco] Failed to load config from "${filePath}":\n  ${(err as Error).message}\n` +
       `  Make sure the file is valid JS/TS and exports a default config object.`
     )
   }
@@ -100,21 +100,21 @@ async function loadRawConfig(filePath: string): Promise<NuxcConfig & { extends?:
 // ─── Main loader ──────────────────────────────────────────────────────────────
 
 export interface LoadConfigResult {
-  config: NuxcConfig
+  config: NuxcoConfig
   configFile: string | null
 }
 
 /**
- * Load nuxc config from the given root directory.
+ * Load nuxco config from the given root directory.
  * Supports:
- * - nuxc.config.ts / .js / .mjs / .cjs
+ * - nuxco.config.ts / .js / .mjs / .cjs
  * - `extends` field for base config inheritance
  * - Deep merge of extended + local config
  *
  * @example
- * // nuxc.config.js in a monorepo package
+ * // nuxco.config.js in a monorepo package
  * module.exports = {
- *   extends: '../../nuxc.base.config.js',
+ *   extends: '../../nuxco.base.config.js',
  *   dev: { port: 3001 }  // override only what changes
  * }
  */
@@ -135,7 +135,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
 
     if (!fs.existsSync(baseConfigPath)) {
       throw new Error(
-        `[nuxc] Config "extends" path not found: "${baseConfigPath}"\n` +
+        `[nuxco] Config "extends" path not found: "${baseConfigPath}"\n` +
         `  Resolved from: "${configFile}"`
       )
     }
@@ -143,7 +143,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
     const baseRaw = await loadRawConfig(baseConfigPath)
 
     // Recursively handle extends chain (base can also extend something)
-    let baseConfig: NuxcConfig = baseRaw
+    let baseConfig: NuxcoConfig = baseRaw
     if (baseRaw.extends) {
       const { config: resolvedBase } = await loadConfigExtended(path.dirname(baseConfigPath))
       baseConfig = resolvedBase
@@ -157,7 +157,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
     )
 
     return {
-      config: applyDefaults(merged as NuxcConfig),
+      config: applyDefaults(merged as NuxcoConfig),
       configFile,
     }
   }
@@ -170,7 +170,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
 
 // ─── Defaults ─────────────────────────────────────────────────────────────────
 
-function getDefaults(): NuxcConfig {
+function getDefaults(): NuxcoConfig {
   return {
     root: process.cwd(),
     entry: ['./src/main.ts'],
@@ -182,12 +182,12 @@ function getDefaults(): NuxcConfig {
   }
 }
 
-function applyDefaults(config: NuxcConfig): NuxcConfig {
+function applyDefaults(config: NuxcoConfig): NuxcoConfig {
   const defaults = getDefaults()
   return mergeConfig(
     defaults as unknown as Record<string, unknown>,
     config as unknown as Record<string, unknown>
-  ) as unknown as NuxcConfig
+  ) as unknown as NuxcoConfig
 }
 
 // ─── Config validator ─────────────────────────────────────────────────────────
@@ -198,7 +198,7 @@ export interface ConfigValidationResult {
   warnings: string[]
 }
 
-export function validateConfig(config: NuxcConfig): ConfigValidationResult {
+export function validateConfig(config: NuxcoConfig): ConfigValidationResult {
   const errors: string[] = []
   const warnings: string[] = []
 

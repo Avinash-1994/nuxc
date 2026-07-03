@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-pages
+ * @nuxco/plugin-pages
  * File-based routing
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPagesPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-pages',
+        name: '@nuxco/plugin-pages',
         originalPlugin: 'vite-plugin-pages',
         
         async transform(code: string, id: string) {

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Nuxc Benchmark Suite
+ * Nuxco Benchmark Suite
  *
- * Compares Nuxc against Vite across 3 fixture sizes:
+ * Compares Nuxco against Vite across 3 fixture sizes:
  *   - small-app  (50 components, ~200 modules)
  *   - medium-app (500 components, ~1,500 modules)
  *   - large-app  (2,000 components, ~5,000 modules)
@@ -89,7 +89,7 @@ async function runBenchmark(tool, fixture) {
 
   // 1. Production build time
   let buildCmd;
-  if (tool === 'nuxc') {
+  if (tool === 'nuxco') {
     buildCmd = `node ${ROOT}/dist/cli.js build --outDir ${distDir}`;
   } else if (tool === 'vite') {
     buildCmd = `npx vite build --outDir ${distDir}`;
@@ -124,12 +124,12 @@ async function main() {
   const toolArg = args.includes('--tool') ? args[args.indexOf('--tool') + 1] : null;
 
   const fixtures = fixtureArg ? [fixtureArg] : ['small-app', 'medium-app', 'large-app'];
-  const tools = toolArg ? [toolArg] : ['nuxc', 'vite'];
+  const tools = toolArg ? [toolArg] : ['nuxco', 'vite'];
 
   mkdirSync(RESULTS_DIR, { recursive: true });
 
   const hw = await getHardwareInfo();
-  console.log('\n⚡ Nuxc Benchmark Suite');
+  console.log('\n⚡ Nuxco Benchmark Suite');
   console.log(`  Platform: ${hw.platform} ${hw.arch} | Node: ${hw.nodeVersion}`);
   console.log(`  Fixtures: ${fixtures.join(', ')}`);
   console.log(`  Tools:    ${tools.join(', ')}`);

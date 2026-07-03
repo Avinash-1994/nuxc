@@ -38,7 +38,7 @@ async function measure() {
         process.exit(1);
     }
 
-    try { execSync('rm -rf .nuxc_rocksdb', { stdio: 'ignore' }); } catch { }
+    try { execSync('rm -rf .nuxco_rocksdb', { stdio: 'ignore' }); } catch { }
 
     const portArg = String(port);
 

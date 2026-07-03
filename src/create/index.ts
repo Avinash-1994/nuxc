@@ -38,12 +38,12 @@ import { text, select, multiselect, closeUI } from './ui.js';
 // ... (removing old helper definitions) ...
 
 // Main Flow
-export async function createNuxcProject(initialName?: string) {
+export async function createNuxcoProject(initialName?: string) {
     console.log(kleur.bold().magenta("\n" + "=".repeat(40)));
-    console.log(kleur.bold().white("  ⚡ NUXC: THE NEXT-GEN BUILD PROJECT  "));
+    console.log(kleur.bold().white("  ⚡ NUXCO: THE NEXT-GEN BUILD PROJECT  "));
     console.log(kleur.bold().magenta("=".repeat(40) + "\n"));
 
-    const name = initialName || await text('Project Name:', 'my-nuxc-app');
+    const name = initialName || await text('Project Name:', 'my-nuxco-app');
 
     // Validate name
     const nameSchema = z.string()
@@ -183,10 +183,10 @@ async function generateProject(config: ProjectConfig) {
     const packageJson = generatePackageJson(config);
     await fsPromises.writeFile(path.join(projectPath, 'package.json'), JSON.stringify(packageJson, null, 2));
 
-    // Generate nuxc.config.ts
-    const nuxcConfig = generateNuxcConfig(config);
-    const configFileName = config.language === 'TypeScript' ? 'nuxc.config.ts' : 'nuxc.config.js';
-    await fsPromises.writeFile(path.join(projectPath, configFileName), nuxcConfig);
+    // Generate nuxco.config.ts
+    const nuxcoConfig = generateNuxcoConfig(config);
+    const configFileName = config.language === 'TypeScript' ? 'nuxco.config.ts' : 'nuxco.config.js';
+    await fsPromises.writeFile(path.join(projectPath, configFileName), nuxcoConfig);
 
     // Generate Folder Structure
     await generateStructure(projectPath, config);
@@ -197,7 +197,7 @@ async function generateProject(config: ProjectConfig) {
     }
 
     // Note: tailwind.config.js and postcss.config.js are now OPTIONAL. 
-    // Nuxc handles them internally if missing.
+    // Nuxco handles them internally if missing.
 
     // Generate README.md
     const readme = generateReadme(config);
@@ -232,13 +232,13 @@ function generatePackageJson(config: ProjectConfig) {
         private: true,
         type: 'module',
         scripts: {
-            dev: 'nuxc dev',
-            build: 'nuxc build',
-            preview: 'nuxc preview'
+            dev: 'nuxco dev',
+            build: 'nuxco build',
+            preview: 'nuxco preview'
         },
         dependencies: {},
         devDependencies: {
-            nuxc: 'latest'
+            nuxco: 'latest'
         }
     };
 
@@ -251,7 +251,7 @@ function generatePackageJson(config: ProjectConfig) {
 
     // Add framework dependencies
     const frameworkKey = config.framework.toLowerCase();
-    pkg.devDependencies[`@nuxc/framework-${frameworkKey}`] = 'latest';
+    pkg.devDependencies[`@nuxco/framework-${frameworkKey}`] = 'latest';
 
     switch (config.framework) {
         case 'React':
@@ -304,16 +304,16 @@ function generatePackageJson(config: ProjectConfig) {
     return pkg;
 }
 
-function generateNuxcConfig(config: ProjectConfig) {
+function generateNuxcoConfig(config: ProjectConfig) {
     const isVanilla = config.framework === 'Vanilla';
     const frameworkImport = config.framework.toLowerCase();
-    const adapterPkg = `@nuxc/framework-${frameworkImport}`;
+    const adapterPkg = `@nuxco/framework-${frameworkImport}`;
     const isTS = config.language === 'TypeScript';
     const entryExt = isTS ?
         (['React', 'Preact', 'Mithril'].includes(config.framework) ? 'tsx' : 'ts') :
         (['React', 'Preact', 'Mithril'].includes(config.framework) ? 'jsx' : 'js');
 
-    let content = `import { defineConfig } from "nuxc";\n`;
+    let content = `import { defineConfig } from "nuxco";\n`;
 
     if (!isVanilla) {
         content += `import ${frameworkImport} from "${adapterPkg}";\n\n`;
@@ -393,7 +393,7 @@ async function generateStructure(projectPath: string, config: ProjectConfig) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${config.name} | Nuxc</title>
+    <title>${config.name} | Nuxco</title>
   </head>
   <body>
     <div id="root"></div>
@@ -463,7 +463,7 @@ h1 { font-size: 3.2em; line-height: 1.1; }
     // Public Assets
     const publicDir = path.join(projectPath, 'public');
     await fsPromises.mkdir(publicDir, { recursive: true });
-    await fsPromises.writeFile(path.join(publicDir, 'nuxc.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#38BDF8" /><path d="M50 20 L80 80 L20 80 Z" fill="white" /></svg>`);
+    await fsPromises.writeFile(path.join(publicDir, 'nuxco.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#38BDF8" /><path d="M50 20 L80 80 L20 80 Z" fill="white" /></svg>`);
 }
 
 function generateEslintConfig(config: ProjectConfig) {
@@ -505,7 +505,7 @@ function generateReadme(config: ProjectConfig) {
     let mfeWarning = '';
     if (config.projectType.includes('Micro-Frontend')) {
         mfeWarning = `
-> ⚠️ **Micro-Frontend Note**: Only one framework per micro-frontend is supported in the current version of Nuxc.
+> ⚠️ **Micro-Frontend Note**: Only one framework per micro-frontend is supported in the current version of Nuxco.
 `;
     }
 
@@ -518,7 +518,7 @@ ${mfeWarning}
 - Language: **${config.language}**
 - Styling: **${config.styling}**
 - CSS Framework: **${config.cssFramework}**
-- Bundler: **Nuxc ⚡**
+- Bundler: **Nuxco ⚡**
 
 ## Getting Started
 
@@ -528,10 +528,10 @@ ${runCmd} dev
 \`\`\`
 
 ## Architecture
-- **Adapter**: ${config.framework === 'Vanilla' ? 'None' : `@nuxc/framework-${config.framework.toLowerCase()}`}
-- **Config**: \`nuxc.config.${config.language === 'TypeScript' ? 'ts' : 'js'}\`
+- **Adapter**: ${config.framework === 'Vanilla' ? 'None' : `@nuxco/framework-${config.framework.toLowerCase()}`}
+- **Config**: \`nuxco.config.${config.language === 'TypeScript' ? 'ts' : 'js'}\`
 
-Built with energy, powered by Nuxc.
+Built with energy, powered by Nuxco.
 `;
 }
 
@@ -570,13 +570,13 @@ export default app;`;
 import { customElement, property } from 'lit/decorators.js';
 import '${styleImportSource}';
 
-@customElement('nuxc-app')
-export class NuxcApp extends LitElement {
+@customElement('nuxco-app')
+export class NuxcoApp extends LitElement {
   render() {
-    return html\`<h1>Hello from Lit + Nuxc</h1>\`;
+    return html\`<h1>Hello from Lit + Nuxco</h1>\`;
   }
 }
-document.getElementById('root')!.innerHTML = '<nuxc-app></nuxc-app>';`;
+document.getElementById('root')!.innerHTML = '<nuxco-app></nuxco-app>';`;
         case 'Alpine':
             return `import Alpine from 'alpinejs';
 import '${styleImportSource}';
@@ -584,7 +584,7 @@ import '${styleImportSource}';
 window.Alpine = Alpine;
 Alpine.start();
 document.getElementById('root')!.innerHTML = \`<div x-data="{ count: 0 }">
-  <h1>Alpine + Nuxc</h1>
+  <h1>Alpine + Nuxco</h1>
   <button @click="count++">Count: <span x-text="count"></span></button>
 </div>\`;`;
         case 'Mithril':
@@ -592,7 +592,7 @@ document.getElementById('root')!.innerHTML = \`<div x-data="{ count: 0 }">
 import '${styleImportSource}';
 
 m.mount(document.getElementById('root')!, {
-  view: () => m("h1", "Mithril + Nuxc")
+  view: () => m("h1", "Mithril + Nuxco")
 });`;
         case 'Vanilla':
             if (config.styling === 'CSS Modules') {
@@ -601,7 +601,7 @@ import styles from './App.module.css';
 
 document.querySelector('#root')!.innerHTML = \`
   <div class="\${styles.container}">
-    <h1 class="\${styles.title}">⚡ Vanilla JS + Nuxc</h1>
+    <h1 class="\${styles.title}">⚡ Vanilla JS + Nuxco</h1>
     <p>Zero dependencies. Pure speed. CSS Modules.</p>
   </div>
 \`;`;
@@ -610,13 +610,13 @@ document.querySelector('#root')!.innerHTML = \`
 // Vanilla Entry
 document.querySelector('#root')!.innerHTML = \`
   <div style="text-align: center; font-family: sans-serif;">
-    <h1>⚡ Vanilla JS + Nuxc</h1>
+    <h1>⚡ Vanilla JS + Nuxco</h1>
     <p>Zero dependencies. Pure speed.</p>
   </div>
 \`;`;
         default:
             return `import '${styleImportSource}';
-document.getElementById('root')!.innerHTML = '<h1>Hello Nuxc</h1>';`;
+document.getElementById('root')!.innerHTML = '<h1>Hello Nuxco</h1>';`;
     }
 }
 
@@ -631,7 +631,7 @@ function getAppComponentContent(config: ProjectConfig): string {
 export default function App() {
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Nuxc + ${config.framework} + CSS Modules</h1>
+      <h1 className={styles.title}>Nuxco + ${config.framework} + CSS Modules</h1>
       <p>Modern, Fast, Energy-powered building.</p>
     </div>
   );
@@ -640,7 +640,7 @@ export default function App() {
             return `export default function App() {
   return (
     <div>
-      <h1>Nuxc + ${config.framework}</h1>
+      <h1>Nuxco + ${config.framework}</h1>
       <p>Modern, Fast, Energy-powered building.</p>
     </div>
   );
@@ -648,7 +648,7 @@ export default function App() {
         case 'Vue':
             return `<template>
   <div class="app">
-    <h1>Nuxc + Vue</h1>
+    <h1>Nuxco + Vue</h1>
   </div>
 </template>
 <script setup>
@@ -660,7 +660,7 @@ export default function App() {
 </style>`;
         case 'Svelte':
             return `<main>
-  <h1>Nuxc + Svelte</h1>
+  <h1>Nuxco + Svelte</h1>
 </main>
 <style>
   main {

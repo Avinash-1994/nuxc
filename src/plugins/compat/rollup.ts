@@ -44,9 +44,9 @@ function createRollupContext(): RollupPluginContext {
 }
 
 /**
- * Adapter to use Rollup plugins within Nuxc
+ * Adapter to use Rollup plugins within Nuxco
  * @param plugin The Rollup plugin instance
- * @returns A Nuxc-compatible plugin
+ * @returns A Nuxco-compatible plugin
  */
 export function rollupAdapter(plugin: RollupPlugin): Plugin {
     return {
@@ -116,4 +116,4 @@ export function rollupAdapter(plugin: RollupPlugin): Plugin {
 
 export const createRollupAdapter = rollupAdapter;
 export const vitePluginAdapter = rollupAdapter;
-export const viteToNuxc = rollupAdapter;
+export const viteToNuxco = rollupAdapter;

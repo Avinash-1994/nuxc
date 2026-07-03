@@ -255,7 +255,7 @@ export const feature1 = () => util1() + ' modified';`
             });
 
             // Simulate cache corruption by writing invalid data
-            const cachePath = path.join(projectPath, '.nuxc-cache');
+            const cachePath = path.join(projectPath, '.nuxco-cache');
             if (fs.existsSync(cachePath)) {
                 // Write corrupted data
                 const cacheFiles = fs.readdirSync(cachePath);

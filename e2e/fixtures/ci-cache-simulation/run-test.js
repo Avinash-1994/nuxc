@@ -5,7 +5,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Import the remote cache code dynamically
-const srcPath = path.resolve(__dirname, '../../../packages/nuxc-remote-cache/src/index.js');
+const srcPath = path.resolve(__dirname, '../../../packages/nuxco-remote-cache/src/index.js');
 let remoteCacheModule;
 
 // Polyfill minimal fetch for Node tests

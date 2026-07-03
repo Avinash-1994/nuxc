@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Nuxc Adapter Manifest",
-    "description": "Canonical schema for Nuxc Framework Adapters",
+    "title": "Nuxco Adapter Manifest",
+    "description": "Canonical schema for Nuxco Framework Adapters",
     "type": "object",
     "required": [
         "name",
@@ -64,7 +64,7 @@
         },
         "maintainer": {
             "type": "string",
-            "description": "Primary maintainer (e.g. 'Nuxc Core Team')"
+            "description": "Primary maintainer (e.g. 'Nuxco Core Team')"
         },
         "version": {
             "type": "string",

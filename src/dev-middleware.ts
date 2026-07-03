@@ -6,7 +6,7 @@
  *
  * MIGRATION NOTE: Express-specific applyMiddleware / applyProxies / applyCORS signatures
  * are deprecated. The framework-agnostic Request/Response types are now used.
- * See https://nuxc.dev/migrate#dev-middleware
+ * See https://nuxco.dev/migrate#dev-middleware
  */
 
 import type { BuildConfig } from './config/index.js'
@@ -32,12 +32,12 @@ export type MiddlewareFn = (req: Request, res: Response, next: NextFunction) => 
  * These run BEFORE static file serving and HMR.
  *
  * @example
- * // nuxc.config.js
+ * // nuxco.config.js
  * module.exports = {
  *   server: {
  *     middleware: [
  *       (req, res, next) => {
- *         res.setHeader('X-Custom-Header', 'nuxc')
+ *         res.setHeader('X-Custom-Header', 'nuxco')
  *         next()
  *       }
  *     ]
@@ -80,7 +80,7 @@ interface ProxyTarget {
  * Apply proxy rules from config.server.proxy.
  *
  * @example
- * // nuxc.config.js
+ * // nuxco.config.js
  * module.exports = {
  *   server: {
  *     proxy: {
@@ -105,7 +105,7 @@ export function applyProxies(app: any, config: BuildConfig): void {
       })
     }
 
-    console.log(`  [nuxc] Proxy: ${prefix} → ${target.target}`)
+    console.log(`  [nuxco] Proxy: ${prefix} → ${target.target}`)
   }
 }
 
@@ -121,7 +121,7 @@ function proxyRequest(
     parsedTarget = new URL(targetBase)
   } catch {
     res.writeHead(502)
-    res.end(`[nuxc proxy] Invalid target URL: ${targetBase}`)
+    res.end(`[nuxco proxy] Invalid target URL: ${targetBase}`)
     return
   }
 
@@ -148,7 +148,7 @@ function proxyRequest(
     if (!res.headersSent) {
       res.writeHead(502, { 'Content-Type': 'application/json' })
       res.end(JSON.stringify({
-        error:   '[nuxc proxy] Connection failed',
+        error:   '[nuxco proxy] Connection failed',
         target:  targetBase,
         message: err.message,
       }))
@@ -174,7 +174,7 @@ export function applyCORS(app: any, config: BuildConfig): void {
         next()
       })
     }
-    console.log('  [nuxc] CORS enabled (federation remote mode)')
+    console.log('  [nuxco] CORS enabled (federation remote mode)')
   }
 }
 
@@ -183,7 +183,7 @@ export function applyCORS(app: any, config: BuildConfig): void {
 export function applyRequestLogger(app: any): void {
   if (typeof app.use !== 'function') return
   app.use((req: any, _res: any, next: any) => {
-    const skip = ['/__nuxc_hmr', '/favicon.ico', '/@nuxc']
+    const skip = ['/__nuxco_hmr', '/favicon.ico', '/@nuxco']
     if (!skip.some(s => req.url?.startsWith(s))) {
       const method = (req.method ?? 'GET').padEnd(4)
       console.log(`  \x1b[2m${method} ${req.url}\x1b[0m`)

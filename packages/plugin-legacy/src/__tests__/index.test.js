@@ -1,4 +1,4 @@
-// @nuxc/plugin-legacy — Self-contained Unit Tests
+// @nuxco/plugin-legacy — Self-contained Unit Tests
 // Run: node --test packages/plugin-legacy/src/__tests__/index.test.js
 
 import { describe, it, beforeEach, afterEach } from 'node:test';
@@ -14,10 +14,10 @@ function legacyPlugin(options = {}) {
   } = options;
 
   return {
-    name: '@nuxc/plugin-legacy',
+    name: '@nuxco/plugin-legacy',
 
     load(id) {
-      if (id !== '/__nuxc_legacy_polyfills__') return null;
+      if (id !== '/__nuxco_legacy_polyfills__') return null;
 
       const lines = [];
       if (polyfills) {
@@ -42,9 +42,9 @@ function legacyPlugin(options = {}) {
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
-describe('@nuxc/plugin-legacy — plugin structure', () => {
+describe('@nuxco/plugin-legacy — plugin structure', () => {
   it('has correct name', () => {
-    assert.equal(legacyPlugin().name, '@nuxc/plugin-legacy');
+    assert.equal(legacyPlugin().name, '@nuxco/plugin-legacy');
   });
 
   it('exposes load and transform hooks', () => {
@@ -60,35 +60,35 @@ describe('@nuxc/plugin-legacy — plugin structure', () => {
   });
 });
 
-describe('@nuxc/plugin-legacy — load hook', () => {
+describe('@nuxco/plugin-legacy — load hook', () => {
   it('returns core-js 3 import for the polyfill entry ID', () => {
     const p = legacyPlugin({ polyfills: true, corejs: 3 });
-    const r = p.load('/__nuxc_legacy_polyfills__');
+    const r = p.load('/__nuxco_legacy_polyfills__');
     assert.ok(r !== null);
     assert.ok(r.code.includes(`import 'core-js/stable'`));
   });
 
   it('returns core-js 2 import when corejs:2', () => {
     const p = legacyPlugin({ polyfills: true, corejs: 2 });
-    const r = p.load('/__nuxc_legacy_polyfills__');
+    const r = p.load('/__nuxco_legacy_polyfills__');
     assert.ok(r.code.includes(`import 'core-js/es'`));
   });
 
   it('includes regenerator-runtime when regenerator:true', () => {
     const p = legacyPlugin({ regenerator: true });
-    const r = p.load('/__nuxc_legacy_polyfills__');
+    const r = p.load('/__nuxco_legacy_polyfills__');
     assert.ok(r.code.includes('regenerator-runtime'));
   });
 
   it('omits regenerator-runtime when regenerator:false', () => {
     const p = legacyPlugin({ regenerator: false, polyfills: true });
-    const r = p.load('/__nuxc_legacy_polyfills__');
+    const r = p.load('/__nuxco_legacy_polyfills__');
     assert.ok(!r.code.includes('regenerator-runtime'));
   });
 
   it('returns empty code when polyfills and regenerator both false', () => {
     const p = legacyPlugin({ polyfills: false, regenerator: false });
-    const r = p.load('/__nuxc_legacy_polyfills__');
+    const r = p.load('/__nuxco_legacy_polyfills__');
     assert.equal(r.code.trim(), '');
   });
 
@@ -99,7 +99,7 @@ describe('@nuxc/plugin-legacy — load hook', () => {
   });
 });
 
-describe('@nuxc/plugin-legacy — transform hook', () => {
+describe('@nuxco/plugin-legacy — transform hook', () => {
   let savedEnv;
   beforeEach(() => { savedEnv = process.env.NODE_ENV; });
   afterEach(() => { process.env.NODE_ENV = savedEnv; });

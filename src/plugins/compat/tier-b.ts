@@ -3,11 +3,11 @@ import fs from 'fs/promises';
 import path from 'path';
 
 /**
- * NUXC TIER B PLUGINS (IO / ASSETS)
+ * NUXCO TIER B PLUGINS (IO / ASSETS)
  * 
  * Includes:
- * - nuxcCopy (copy-webpack-plugin)
- * - nuxcHtml (html-webpack-plugin)
+ * - nuxcoCopy (copy-webpack-plugin)
+ * - nuxcoHtml (html-webpack-plugin)
  */
 
 export interface CopyTarget {
@@ -21,12 +21,12 @@ export interface CopyOptions {
 }
 
 /**
- * Copy Plugin (nuxc-copy)
+ * Copy Plugin (nuxco-copy)
  * Copies files or directories from src to dest at build end.
  */
-export function nuxcCopy(options: CopyOptions): Plugin {
+export function nuxcoCopy(options: CopyOptions): Plugin {
     return {
-        name: 'nuxc-copy',
+        name: 'nuxco-copy',
         async buildEnd() {
             if (!options.targets || options.targets.length === 0) return;
 
@@ -39,10 +39,10 @@ export function nuxcCopy(options: CopyOptions): Plugin {
                     await fs.cp(srcPath, destPath, { recursive: true, force: true });
 
                     if (options.verbose) {
-                        console.log(`[nuxc-copy] Copied ${target.src} -> ${target.dest}`);
+                        console.log(`[nuxco-copy] Copied ${target.src} -> ${target.dest}`);
                     }
                 } catch (e: any) {
-                    console.warn(`[nuxc-copy] Failed to copy ${target.src}: ${e.message}`);
+                    console.warn(`[nuxco-copy] Failed to copy ${target.src}: ${e.message}`);
                 }
             }
         }
@@ -58,17 +58,17 @@ export interface HtmlOptions {
 }
 
 /**
- * HTML Plugin (nuxc-html)
+ * HTML Plugin (nuxco-html)
  * Generates an index.html file in the output directory.
  * Advanced: Supports variable interpolation (e.g., %PUBLIC_URL%, %TITLE%)
  */
-export function nuxcHtml(options: HtmlOptions = {}): Plugin {
+export function nuxcoHtml(options: HtmlOptions = {}): Plugin {
     return {
-        name: 'nuxc-html',
+        name: 'nuxco-html',
         stability: 'stable',
         async buildEnd() {
             const filename = options.filename || 'index.html';
-            const title = options.title || 'Nuxc App';
+            const title = options.title || 'Nuxco App';
             const destPath = path.resolve(process.cwd(), 'dist', filename);
 
             let content = '';
@@ -78,7 +78,7 @@ export function nuxcHtml(options: HtmlOptions = {}): Plugin {
                     const templatePath = path.resolve(process.cwd(), options.template);
                     content = await fs.readFile(templatePath, 'utf-8');
                 } catch (e) {
-                    console.warn(`[nuxc-html] Template not found: ${options.template}`);
+                    console.warn(`[nuxco-html] Template not found: ${options.template}`);
                     content = getDefaultHtml(title);
                 }
             } else {
@@ -101,7 +101,7 @@ export function nuxcHtml(options: HtmlOptions = {}): Plugin {
                 await fs.mkdir(path.dirname(destPath), { recursive: true });
                 await fs.writeFile(destPath, content);
             } catch (e: any) {
-                console.error(`[nuxc-html] Failed to generate HTML: ${e.message}`);
+                console.error(`[nuxco-html] Failed to generate HTML: ${e.message}`);
             }
         }
     };

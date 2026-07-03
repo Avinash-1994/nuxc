@@ -1,7 +1,7 @@
 /**
  * Plugin Registry and Loader (Production-Ready)
  * 
- * Centralized registry for all 101 Nuxc plugins with:
+ * Centralized registry for all 101 Nuxco plugins with:
  * - Lazy loading
  * - WASM sandbox integration
  * - Signature verification
@@ -76,7 +76,7 @@ export class ProductionPluginRegistry {
     }
 
     private async loadImplementation(pluginName: string): Promise<PluginAdapter> {
-        const fileName = pluginName.replace('@nuxc/plugin-', '') + '.ts';
+        const fileName = pluginName.replace('@nuxco/plugin-', '') + '.ts';
         const filePath = path.join(this.implementationsDir, fileName);
 
         if (!fs.existsSync(filePath)) {
@@ -85,7 +85,7 @@ export class ProductionPluginRegistry {
 
         // Dynamic import
         const module = await import(filePath);
-        const createPlugin = module.default || module[`create${this.capitalize(pluginName.replace('@nuxc/plugin-', ''))}Plugin`];
+        const createPlugin = module.default || module[`create${this.capitalize(pluginName.replace('@nuxco/plugin-', ''))}Plugin`];
 
         if (typeof createPlugin !== 'function') {
             throw new Error(`Plugin ${pluginName} does not export a factory function`);
@@ -175,11 +175,11 @@ export async function loadPlugins(names: string[]): Promise<PluginAdapter[]> {
  */
 export async function getRecommendedPlugins(framework: string): Promise<PluginAdapter[]> {
     const recommendations: Record<string, string[]> = {
-        'react': ['@nuxc/plugin-react', '@nuxc/plugin-react-query', '@nuxc/plugin-typescript'],
-        'vue': ['@nuxc/plugin-vue', '@nuxc/plugin-pinia', '@nuxc/plugin-typescript'],
-        'svelte': ['@nuxc/plugin-svelte', '@nuxc/plugin-typescript'],
-        'angular': ['@nuxc/plugin-typescript', '@nuxc/plugin-sass'],
-        'solid': ['@nuxc/plugin-solid', '@nuxc/plugin-typescript']
+        'react': ['@nuxco/plugin-react', '@nuxco/plugin-react-query', '@nuxco/plugin-typescript'],
+        'vue': ['@nuxco/plugin-vue', '@nuxco/plugin-pinia', '@nuxco/plugin-typescript'],
+        'svelte': ['@nuxco/plugin-svelte', '@nuxco/plugin-typescript'],
+        'angular': ['@nuxco/plugin-typescript', '@nuxco/plugin-sass'],
+        'solid': ['@nuxco/plugin-solid', '@nuxco/plugin-typescript']
     };
 
     const names = recommendations[framework] || [];

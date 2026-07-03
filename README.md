@@ -1,12 +1,12 @@
-# ⚡ Nuxc — Modern Build Tool
+# ⚡ Nuxco — Modern Build Tool
 
-[![npm version](https://img.shields.io/npm/v/nuxc.svg)](https://www.npmjs.com/package/nuxc)
-[![CI](https://github.com/Avinash-1994/Nuxc/actions/workflows/ci.yml/badge.svg)](https://github.com/Avinash-1994/Nuxc/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/nuxco.svg)](https://www.npmjs.com/package/nuxco)
+[![CI](https://github.com/Avinash-1994/Nuxco/actions/workflows/ci.yml/badge.svg)](https://github.com/Avinash-1994/Nuxco/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://img.shields.io/badge/tests-303%2F303-brightgreen)](#test-status)
 [![Node >=20](https://img.shields.io/badge/node-%3E%3D20-blue)](https://nodejs.org)
 
-**Nuxc** is a production-grade JavaScript/TypeScript build tool powered by **SWC (Rust)** and **LightningCSS**. It delivers sub-100ms HMR, native Module Federation for micro-frontends, full ES2022+ support, automatic tree shaking, a security gate pipeline, and zero-config support for **19 meta-frameworks** — a modern alternative to Webpack/Vite with a Rust-native core.
+**Nuxco** is a production-grade JavaScript/TypeScript build tool powered by **SWC (Rust)** and **LightningCSS**. It delivers sub-100ms HMR, native Module Federation for micro-frontends, full ES2022+ support, automatic tree shaking, a security gate pipeline, and zero-config support for **19 meta-frameworks** — a modern alternative to Webpack/Vite with a Rust-native core.
 
 ---
 
@@ -23,7 +23,7 @@
 | 🗺️ **Workspace orchestrator** | Monorepo topological build ordering and parallel execution |
 | 💾 **Smart caching** | SQLite WAL incremental cache (warm start <100ms) |
 | 🎨 **CSS processing** | LightningCSS cascade layers, nesting, CSS Modules, Tailwind |
-| 🔍 **Inspect UI** | Live plugin timing visualization at `/__nuxc_inspect__` |
+| 🔍 **Inspect UI** | Live plugin timing visualization at `/__nuxco_inspect__` |
 
 ---
 
@@ -31,20 +31,20 @@
 
 ```bash
 # Install globally
-npm install -g nuxc
+npm install -g nuxco
 
 # Create a new project (interactive)
-nuxc create my-app --framework react --ts
+nuxco create my-app --framework react --ts
 
 # Or scaffold with a template
-nuxc bootstrap --name my-app --template react-ts
+nuxco bootstrap --name my-app --template react-ts
 
 # Start dev server
 cd my-app
-nuxc dev
+nuxco dev
 
 # Production build
-nuxc build
+nuxco build
 ```
 
 ---
@@ -52,26 +52,26 @@ nuxc build
 ## 📦 Installation
 
 ```bash
-npm install -g nuxc
+npm install -g nuxco
 # or per-project
-npm install -D nuxc
+npm install -D nuxco
 ```
 
 **Requirements:** Node.js ≥ 20
 
 ---
 
-## ⚙️ Configuration — `nuxc.config.ts`
+## ⚙️ Configuration — `nuxco.config.ts`
 
 ```ts
-// nuxc.config.ts
-import { defineConfig } from 'nuxc';
+// nuxco.config.ts
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   // ── Entry ────────────────────────────────────────
   entry: ['./src/main.tsx'],        // string | string[]
   outDir: './dist',                  // output directory
-  cacheDir: '.nuxc/cache',         // SQLite WAL cache location
+  cacheDir: '.nuxco/cache',         // SQLite WAL cache location
 
   // ── Build ────────────────────────────────────────
   build: {
@@ -106,7 +106,7 @@ export default defineConfig({
     secretPatterns: true,            // scan for AWS/Stripe/JWT/GitHub keys
     csp: true,                       // inject Content-Security-Policy
     sri: true,                       // inject Subresource Integrity hashes
-    sbom: true,                      // emit dist/nuxc-sbom.json
+    sbom: true,                      // emit dist/nuxco-sbom.json
     lockfileAudit: true,             // verify lockfile integrity
     pluginSandbox: true,             // restrict plugin fs/net permissions
   },
@@ -132,66 +132,66 @@ export default defineConfig({
 ## 🖥️ CLI Reference
 
 ```
-nuxc <command> [options]
+nuxco <command> [options]
 ```
 
 | Command | Description |
 |---|---|
-| `nuxc dev` | Start development server with HMR |
-| `nuxc build` | Production build with tree shaking + minification |
-| `nuxc preview` | Serve production build locally |
-| `nuxc create [name]` | Create a new project interactively |
-| `nuxc bootstrap` | Scaffold from a template |
-| `nuxc init` | Initialize config in an existing project |
-| `nuxc check` | Pre-build validation (type-check + circular imports) |
-| `nuxc analyze` | Bundle composition report (HTML or JSON) |
-| `nuxc why <module>` | Trace full import chain to a module |
-| `nuxc inspect` | Inspect the dependency graph |
-| `nuxc ssr` | Start SSR server for meta-frameworks |
-| `nuxc security` | Security sub-commands (see below) |
-| `nuxc migrate` | Migrate config from older Nuxc/Webpack/Vite |
-| `nuxc audit` | Accessibility, performance, and SEO audit |
-| `nuxc verify` | Project health and configuration check |
-| `nuxc report` | AI-narrated build report from latest session |
-| `nuxc doctor` | Diagnostics for project health |
-| `nuxc test` | Run tests using Nuxc custom runner |
-| `nuxc css purge` | Remove unused CSS |
-| `nuxc env` | List and validate environment variables |
-| `nuxc info` | Print environment info for bug reports |
-| `nuxc workspaces` | Monorepo workspace commands |
+| `nuxco dev` | Start development server with HMR |
+| `nuxco build` | Production build with tree shaking + minification |
+| `nuxco preview` | Serve production build locally |
+| `nuxco create [name]` | Create a new project interactively |
+| `nuxco bootstrap` | Scaffold from a template |
+| `nuxco init` | Initialize config in an existing project |
+| `nuxco check` | Pre-build validation (type-check + circular imports) |
+| `nuxco analyze` | Bundle composition report (HTML or JSON) |
+| `nuxco why <module>` | Trace full import chain to a module |
+| `nuxco inspect` | Inspect the dependency graph |
+| `nuxco ssr` | Start SSR server for meta-frameworks |
+| `nuxco security` | Security sub-commands (see below) |
+| `nuxco migrate` | Migrate config from older Nuxco/Webpack/Vite |
+| `nuxco audit` | Accessibility, performance, and SEO audit |
+| `nuxco verify` | Project health and configuration check |
+| `nuxco report` | AI-narrated build report from latest session |
+| `nuxco doctor` | Diagnostics for project health |
+| `nuxco test` | Run tests using Nuxco custom runner |
+| `nuxco css purge` | Remove unused CSS |
+| `nuxco env` | List and validate environment variables |
+| `nuxco info` | Print environment info for bug reports |
+| `nuxco workspaces` | Monorepo workspace commands |
 
 ### Security sub-commands
 
 ```bash
-nuxc security audit          # full CVE + secret scan
-nuxc security cve            # CVE-only scan against OSV API
-nuxc security sbom           # generate SBOM (dist/nuxc-sbom.json)
-nuxc security scan           # scan source for secret patterns
-nuxc security plugin-audit   # audit plugin sandbox permissions
-nuxc security headers        # generate security headers manifest
-nuxc security report         # print full security report
-nuxc security fix            # auto-upgrade vulnerable lockfile deps
+nuxco security audit          # full CVE + secret scan
+nuxco security cve            # CVE-only scan against OSV API
+nuxco security sbom           # generate SBOM (dist/nuxco-sbom.json)
+nuxco security scan           # scan source for secret patterns
+nuxco security plugin-audit   # audit plugin sandbox permissions
+nuxco security headers        # generate security headers manifest
+nuxco security report         # print full security report
+nuxco security fix            # auto-upgrade vulnerable lockfile deps
 ```
 
 ### Key options
 
 ```bash
-nuxc dev --port 3000 --host 0.0.0.0
-nuxc build --outDir ./out --sourcemap inline
-nuxc check --no-types           # skip tsc, only circular check
-nuxc analyze --json             # JSON output instead of HTML
-nuxc why react-dom              # trace import chain
-nuxc inspect --filter src/      # filter dependency graph
-nuxc ssr --framework remix --port 4000 --prod
-nuxc verify --ci --strict       # CI mode: exit 1 on any issue
-nuxc create my-app --framework vue --ts --tailwind
+nuxco dev --port 3000 --host 0.0.0.0
+nuxco build --outDir ./out --sourcemap inline
+nuxco check --no-types           # skip tsc, only circular check
+nuxco analyze --json             # JSON output instead of HTML
+nuxco why react-dom              # trace import chain
+nuxco inspect --filter src/      # filter dependency graph
+nuxco ssr --framework remix --port 4000 --prod
+nuxco verify --ci --strict       # CI mode: exit 1 on any issue
+nuxco create my-app --framework vue --ts --tailwind
 ```
 
 ---
 
 ## 🏗️ Meta-Framework Support
 
-Nuxc detects your framework automatically from config files and applies the correct adapter. Use `nuxc dev` and `nuxc build` — no extra setup required.
+Nuxco detects your framework automatically from config files and applies the correct adapter. Use `nuxco dev` and `nuxco build` — no extra setup required.
 
 | Framework | Adapter | SSR | HMR | Streaming |
 |---|---|---|---|---|
@@ -220,7 +220,7 @@ Nuxc detects your framework automatically from config files and applies the corr
 ### Example: SvelteKit
 
 ```ts
-// nuxc.config.ts
+// nuxco.config.ts
 export default defineConfig({
   preset: 'ssr',
   adapter: 'sveltekit',
@@ -257,26 +257,26 @@ export default defineConfig({
 Install any plugin via npm, then add to your config:
 
 ```bash
-npm install -D @nuxc/plugin-env @nuxc/plugin-pwa
+npm install -D @nuxco/plugin-env @nuxco/plugin-pwa
 ```
 
 ```ts
-import { envPlugin } from '@nuxc/plugin-env';
-import { pwaPlugin } from '@nuxc/plugin-pwa';
-import { iconsPlugin } from '@nuxc/plugin-icons';
-import { svgPlugin } from '@nuxc/plugin-svg';
-import { legacyPlugin } from '@nuxc/plugin-legacy';
-import { compressionPlugin } from '@nuxc/plugin-compression';
-import { autoImportPlugin } from '@nuxc/plugin-auto-import';
-import { inspectPlugin } from '@nuxc/plugin-inspect';
-import { checkerPlugin } from '@nuxc/plugin-checker';
-import { mockPlugin } from '@nuxc/plugin-mock';
-import { imagePlugin } from '@nuxc/plugin-image';
+import { envPlugin } from '@nuxco/plugin-env';
+import { pwaPlugin } from '@nuxco/plugin-pwa';
+import { iconsPlugin } from '@nuxco/plugin-icons';
+import { svgPlugin } from '@nuxco/plugin-svg';
+import { legacyPlugin } from '@nuxco/plugin-legacy';
+import { compressionPlugin } from '@nuxco/plugin-compression';
+import { autoImportPlugin } from '@nuxco/plugin-auto-import';
+import { inspectPlugin } from '@nuxco/plugin-inspect';
+import { checkerPlugin } from '@nuxco/plugin-checker';
+import { mockPlugin } from '@nuxco/plugin-mock';
+import { imagePlugin } from '@nuxco/plugin-image';
 
 export default defineConfig({
   plugins: [
     envPlugin({
-      prefix: 'NUXC_',             // only expose NUXC_* vars to bundle
+      prefix: 'NUXCO_',             // only expose NUXCO_* vars to bundle
       dts: 'src/env.d.ts',          // auto-generate type declarations
     }),
     pwaPlugin({
@@ -297,7 +297,7 @@ export default defineConfig({
       imports: ['vue', 'react'],     // auto-inject imports
       dts: 'src/auto-imports.d.ts',
     }),
-    inspectPlugin(),                 // UI at /__nuxc_inspect__
+    inspectPlugin(),                 // UI at /__nuxco_inspect__
     checkerPlugin({
       typescript: true,
       eslint: true,
@@ -320,23 +320,23 @@ export default defineConfig({
 
 | Plugin | What it does |
 |---|---|
-| `@nuxc/plugin-env` | Loads `.env`, filters to prefix, generates `env.d.ts`, blocks secret patterns |
-| `@nuxc/plugin-pwa` | Generates `manifest.json` + Service Worker with precache |
-| `@nuxc/plugin-icons` | On-demand icon loading via `~icons/mdi/home` (no unused icons in bundle) |
-| `@nuxc/plugin-svg` | SVG as URL, raw string, or React/Vue component |
-| `@nuxc/plugin-legacy` | `<script nomodule>` fallback bundle via SWC + core-js |
-| `@nuxc/plugin-compression` | Parallel Brotli + Gzip via Rust threads |
-| `@nuxc/plugin-auto-import` | Auto-inject framework imports, sync `.eslintrc-auto-import` |
-| `@nuxc/plugin-inspect` | Dev GUI at `/__nuxc_inspect__` showing per-plugin timings |
-| `@nuxc/plugin-checker` | Worker-thread tsc, eslint, stylelint with overlay error display |
-| `@nuxc/plugin-mock` | REST + GraphQL local mock server with fast intercept |
-| `@nuxc/plugin-image` | sharp AVIF/WebP optimization, responsive `srcset` |
+| `@nuxco/plugin-env` | Loads `.env`, filters to prefix, generates `env.d.ts`, blocks secret patterns |
+| `@nuxco/plugin-pwa` | Generates `manifest.json` + Service Worker with precache |
+| `@nuxco/plugin-icons` | On-demand icon loading via `~icons/mdi/home` (no unused icons in bundle) |
+| `@nuxco/plugin-svg` | SVG as URL, raw string, or React/Vue component |
+| `@nuxco/plugin-legacy` | `<script nomodule>` fallback bundle via SWC + core-js |
+| `@nuxco/plugin-compression` | Parallel Brotli + Gzip via Rust threads |
+| `@nuxco/plugin-auto-import` | Auto-inject framework imports, sync `.eslintrc-auto-import` |
+| `@nuxco/plugin-inspect` | Dev GUI at `/__nuxco_inspect__` showing per-plugin timings |
+| `@nuxco/plugin-checker` | Worker-thread tsc, eslint, stylelint with overlay error display |
+| `@nuxco/plugin-mock` | REST + GraphQL local mock server with fast intercept |
+| `@nuxco/plugin-image` | sharp AVIF/WebP optimization, responsive `srcset` |
 
 ---
 
 ## 🔒 Security Pipeline
 
-Nuxc has a built-in security gate that runs on every production build.
+Nuxco has a built-in security gate that runs on every production build.
 
 ### What it checks
 
@@ -346,7 +346,7 @@ Nuxc has a built-in security gate that runs on every production build.
 | **CVE gating** | OSV API scan — blocks at configured severity (`high` by default) |
 | **CSP injection** | Injects `<meta http-equiv="Content-Security-Policy">` into all HTML pages |
 | **SRI hashes** | Injects `integrity="sha384-..."` on all `<script>` and `<link>` tags |
-| **SBOM** | Generates `dist/nuxc-sbom.json` with full dependency inventory |
+| **SBOM** | Generates `dist/nuxco-sbom.json` with full dependency inventory |
 | **Lockfile audit** | Detects tampered `package-lock.json` checksums → abort |
 | **Plugin sandbox** | Blocks plugins from writing to the filesystem without explicit permission |
 
@@ -365,7 +365,7 @@ security: {
 ### Skip in CI (dev fixtures only)
 
 ```bash
-NUXC_SKIP_SECURITY=1 nuxc build   # bypasses all security gates
+NUXCO_SKIP_SECURITY=1 nuxco build   # bypasses all security gates
 ```
 
 > **Never** set this in production. It is only for dev fixture builds where `node_modules` contain dev-only packages with known CVEs.
@@ -409,7 +409,7 @@ const Widget = React.lazy(() => import('dashboard/Widget'));
 ## 🗺️ Monorepo / Workspace
 
 ```ts
-// nuxc.workspace.ts
+// nuxco.workspace.ts
 export default {
   packages: ['packages/*', 'apps/*'],
   build: {
@@ -420,8 +420,8 @@ export default {
 ```
 
 ```bash
-nuxc workspaces build        # build all packages in dependency order
-nuxc workspaces dev          # run dev servers for all packages
+nuxco workspaces build        # build all packages in dependency order
+nuxco workspaces dev          # run dev servers for all packages
 ```
 
 ---
@@ -541,11 +541,11 @@ export default defineConfig({
 
 | Issue | Fix |
 |---|---|
-| `ERR_MODULE_NOT_FOUND @nuxc/security` | Run `cd packages/nuxc-security && npx tsc` to build the package |
-| CVE scanner aborts dev build | Use `NUXC_SKIP_SECURITY=1` for dev fixtures only |
+| `ERR_MODULE_NOT_FOUND @nuxco/security` | Run `cd packages/nuxco-security && npx tsc` to build the package |
+| CVE scanner aborts dev build | Use `NUXCO_SKIP_SECURITY=1` for dev fixtures only |
 | HMR not working | Check `dev.hmr: true` in config; ensure port is not in use |
-| `build_output/` is empty | Nuxc writes to `dist/` by default; check your `outDir` config |
-| TypeScript errors on `@nuxc/*` | Verify `tsconfig.json` has the `paths` mapping to `packages/nuxc-*/src` |
+| `build_output/` is empty | Nuxco writes to `dist/` by default; check your `outDir` config |
+| TypeScript errors on `@nuxco/*` | Verify `tsconfig.json` has the `paths` mapping to `packages/nuxco-*/src` |
 | `--root` flag unknown | Use `cwd` option instead: `execFileSync('node', ['build'], { cwd: dir })` |
 
 ---
@@ -553,22 +553,22 @@ export default defineConfig({
 ## 📁 Package Structure
 
 ```
-nuxc/
+nuxco/
 ├── src/
 │   ├── cli.ts                    # CLI entry — 20+ commands
 │   ├── commands/                 # analyze, security, ssr, migrate, …
 │   ├── build/bundler.ts          # core bundler + security gate
-│   ├── config/types.ts           # NuxcConfig type definitions
+│   ├── config/types.ts           # NuxcoConfig type definitions
 │   ├── dev/devServer.ts          # uWS dev server + HMR
 │   ├── meta-frameworks/          # 19 framework adapters
-│   └── plugins/inspect/          # inspect UI (/__nuxc_inspect__)
+│   └── plugins/inspect/          # inspect UI (/__nuxco_inspect__)
 ├── packages/
-│   ├── nuxc-security/           # CVE, CSP, SRI, SBOM, secret scan
-│   ├── nuxc-plugin-{name}/      # 11 official plugins
-│   ├── nuxc-ssr/                # SSR adapter core
-│   ├── nuxc-workspace/          # monorepo orchestration
-│   ├── nuxc-hmr-client/         # browser HMR client
-│   └── nuxc-module-registry/    # MFE module registry
+│   ├── nuxco-security/           # CVE, CSP, SRI, SBOM, secret scan
+│   ├── nuxco-plugin-{name}/      # 11 official plugins
+│   ├── nuxco-ssr/                # SSR adapter core
+│   ├── nuxco-workspace/          # monorepo orchestration
+│   ├── nuxco-hmr-client/         # browser HMR client
+│   └── nuxco-module-registry/    # MFE module registry
 └── e2e/fixtures/                 # 50+ real framework test fixtures
 ```
 
@@ -577,8 +577,8 @@ nuxc/
 ## 🤝 Contributing
 
 ```bash
-git clone https://github.com/Avinash-1994/nuxc
-cd nuxc
+git clone https://github.com/Avinash-1994/nuxco
+cd nuxco
 npm install
 npm run build
 npm run typecheck      # tsc --noEmit (0 errors expected)

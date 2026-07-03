@@ -20,7 +20,7 @@ async function run() {
     // Build the app
     log('Building the app...');
     try {
-        execSync('node ../../../dist/cli.js build', { stdio: 'ignore', cwd: __dirname, env: { ...process.env, NUXC_SKIP_SECURITY: '1' } });
+        execSync('node ../../../dist/cli.js build', { stdio: 'ignore', cwd: __dirname, env: { ...process.env, NUXCO_SKIP_SECURITY: '1' } });
     } catch (e) {
         log(e.stdout?.toString());
         log(e.stderr?.toString());

@@ -1,27 +1,27 @@
 
 import fs from 'fs/promises';
-import { NuxcPlugin, PluginHookName, PluginExecutionRecord, PluginValidation } from './types.js';
+import { NuxcoPlugin, PluginHookName, PluginExecutionRecord, PluginValidation } from './types.js';
 import { canonicalHash } from '../engine/hash.js';
 import { explainReporter } from '../engine/events.js';
 
 /**
  * Plugin Manager
  * 
- * PUBLIC: Responsible for registering and executing plugins in the Nuxc pipeline.
+ * PUBLIC: Responsible for registering and executing plugins in the Nuxco pipeline.
  * Use this to extend engine functionality via the official plugin contract.
  * 
  * @public
  */
 export class PluginManager {
     /** @internal */
-    private plugins: Map<string, NuxcPlugin> = new Map();
+    private plugins: Map<string, NuxcoPlugin> = new Map();
 
     /** @public */
-    async register(plugin: NuxcPlugin | any) {
+    async register(plugin: NuxcoPlugin | any) {
         // [SAFE REMOVAL] Phase 1.1: Wasmtime Sandbox removal
         if (plugin?.manifest?.type === 'wasm' || plugin?.path?.endsWith('.wasm')) {
-            console.warn('[NUXC:WARN] WASM plugins are deprecated. See https://nuxc.dev/migrate for the new JS/TS Hook API hook migration path.');
-            throw new Error(`[Nuxc] Error: .wasm plugin architecture has been removed for security and performance reasons. Plugin "${plugin?.manifest?.name || plugin?.name || 'unknown'}" must be migrated to a standard JS/TS hook format.`);
+            console.warn('[NUXCO:WARN] WASM plugins are deprecated. See https://nuxco.dev/migrate for the new JS/TS Hook API hook migration path.');
+            throw new Error(`[Nuxco] Error: .wasm plugin architecture has been removed for security and performance reasons. Plugin "${plugin?.manifest?.name || plugin?.name || 'unknown'}" must be migrated to a standard JS/TS hook format.`);
         }
 
         let activePlugin = plugin;
@@ -44,7 +44,7 @@ export class PluginManager {
                     }
                     return null;
                 }
-            } as NuxcPlugin;
+            } as NuxcoPlugin;
         }
 
         const { name, version } = activePlugin.manifest;
@@ -67,22 +67,22 @@ export class PluginManager {
      * Please migrate your plugin to standard JS/TS Hooks.
      */
     async registerWasmPlugin(wasmBytes: Buffer | Uint8Array | ArrayBuffer): Promise<void> {
-        console.warn('[NUXC:WARN] registerWasmPlugin() is deprecated. See https://nuxc.dev/migrate');
-        throw new Error('[Nuxc] Error: .wasm plugin architecture has been removed.');
+        console.warn('[NUXCO:WARN] registerWasmPlugin() is deprecated. See https://nuxco.dev/migrate');
+        throw new Error('[Nuxco] Error: .wasm plugin architecture has been removed.');
     }
 
     /**
      * @deprecated WASM plugin support has been removed (Phase 1.1).
      */
     async registerWasmPluginFromFile(filePath: string): Promise<void> {
-        console.warn('[NUXC:WARN] registerWasmPluginFromFile() is deprecated. See https://nuxc.dev/migrate');
-        throw new Error('[Nuxc] Error: .wasm plugin architecture has been removed.');
+        console.warn('[NUXCO:WARN] registerWasmPluginFromFile() is deprecated. See https://nuxco.dev/migrate');
+        throw new Error('[Nuxco] Error: .wasm plugin architecture has been removed.');
     }
 
     /** @internal */
     private metrics: Map<string, { time: number, calls: number }> = new Map();
     /** @internal */
-    private hookCache: Map<string, NuxcPlugin[]> = new Map();
+    private hookCache: Map<string, NuxcoPlugin[]> = new Map();
 
     /** @internal - Used by the engine to execute hooks. */
     async runHook(hookName: PluginHookName, input: any, context?: any): Promise<any> {

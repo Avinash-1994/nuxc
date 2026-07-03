@@ -53,18 +53,18 @@ export function createFederationDevRemoteEntry(federation: NonNullable<BuildConf
   const singletonPkgsJson = JSON.stringify(singletonPkgs);
 
   const sharedInitCode = federation.shared ? `
-      if (sharedScope && typeof globalThis.__nuxc_shared__ !== 'undefined') {
+      if (sharedScope && typeof globalThis.__nuxco_shared__ !== 'undefined') {
         Object.keys(sharedScope).forEach(function(name) {
-          if (!globalThis.__nuxc_shared__.has(name)) {
+          if (!globalThis.__nuxco_shared__.has(name)) {
             Object.keys(sharedScope[name] || {}).forEach(function(version) {
-              globalThis.__nuxc_shared__.register(name, version, sharedScope[name][version].get, false);
+              globalThis.__nuxco_shared__.register(name, version, sharedScope[name][version].get, false);
             });
           }
         });
       }
     ` : '';
 
-  return `// Nuxc Module Federation Remote Entry (dev)
+  return `// Nuxco Module Federation Remote Entry (dev)
 (function() {
   var remoteName = ${JSON.stringify(federation.name)};
   var exposedModules = {
@@ -77,7 +77,7 @@ ${exposeEntries}
   function resolvePath(moduleName) {
     var modulePath = exposedModules[moduleName];
     if (!modulePath) {
-      throw new Error('[Nuxc MF] Module not found: ' + moduleName);
+      throw new Error('[Nuxco MF] Module not found: ' + moduleName);
     }
     var base = typeof import.meta !== 'undefined' ? import.meta.url : window.location.href;
     return new URL(modulePath, base).toString();
@@ -92,14 +92,14 @@ ${exposeEntries}
     // If the shared scope is available, pre-seed the window module cache
     // by registering a global interception map that the remote's bundled
     // importmap-style imports will consult.
-    if (typeof globalThis.__nuxc_shared__ !== 'undefined' && SINGLETONS.length > 0) {
-      if (!globalThis.__nuxc_singleton_map__) {
-        globalThis.__nuxc_singleton_map__ = {};
+    if (typeof globalThis.__nuxco_shared__ !== 'undefined' && SINGLETONS.length > 0) {
+      if (!globalThis.__nuxco_singleton_map__) {
+        globalThis.__nuxco_singleton_map__ = {};
       }
       SINGLETONS.forEach(function(pkg) {
-        var instance = globalThis.__nuxc_shared__.get(pkg, '*');
+        var instance = globalThis.__nuxco_shared__.get(pkg, '*');
         if (instance) {
-          globalThis.__nuxc_singleton_map__[pkg] = instance;
+          globalThis.__nuxco_singleton_map__[pkg] = instance;
         }
       });
     }
@@ -119,9 +119,9 @@ ${exposeEntries}
     }
   };
 
-  globalThis['nuxc_remote_' + remoteName] = container;
+  globalThis['nuxco_remote_' + remoteName] = container;
   globalThis[remoteName] = container;
-  var event = new CustomEvent('nuxc:remote:ready', { detail: { name: remoteName } });
+  var event = new CustomEvent('nuxco:remote:ready', { detail: { name: remoteName } });
   if (typeof document !== 'undefined') {
     document.dispatchEvent(event);
   }

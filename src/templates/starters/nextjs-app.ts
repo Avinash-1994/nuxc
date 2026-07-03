@@ -6,7 +6,7 @@ export const nextjsTemplate = {
         'src/app/page.tsx': `export default function Home() {
   return (
     <main className="min-h-screen p-24">
-      <h1 className="text-4xl font-bold">Welcome to Nuxc + Next.js</h1>
+      <h1 className="text-4xl font-bold">Welcome to Nuxco + Next.js</h1>
       <p className="mt-4">Start building your app with App Router</p>
     </main>
   );
@@ -14,8 +14,8 @@ export const nextjsTemplate = {
         'src/app/layout.tsx': `import './globals.css';
 
 export const metadata = {
-  title: 'Nuxc Next.js App',
-  description: 'Built with Nuxc',
+  title: 'Nuxco Next.js App',
+  description: 'Built with Nuxco',
 };
 
 export default function RootLayout({
@@ -42,7 +42,7 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
 }`,
-        'nuxc.config.js': `module.exports = {
+        'nuxco.config.js': `module.exports = {
   entry: ['./src/app/page.tsx'],
   outDir: './dist',
   framework: 'react',
@@ -64,13 +64,13 @@ body {
   },
 };`,
         'package.json': `{
-  "name": "nuxc-nextjs-app",
+  "name": "nuxco-nextjs-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "start": "nuxc ssr"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "start": "nuxco ssr"
   },
   "dependencies": {
     "react": "^19.2.3",

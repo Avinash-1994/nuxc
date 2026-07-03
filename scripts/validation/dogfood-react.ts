@@ -19,7 +19,7 @@ async function run() {
     }
 
     // 2. Run Build
-    console.log('🏗️ Running nuxc build...');
+    console.log('🏗️ Running nuxco build...');
     execSync(`node ${cliPath} build`, { cwd: rootDir, stdio: 'inherit' });
 
     // 3. Verify Artifacts

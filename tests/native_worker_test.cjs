@@ -1,5 +1,5 @@
 // Test the Rust native worker
-const native = require('../nuxc_native.node');
+const native = require('../nuxco_native.node');
 
 console.log('Testing Rust Native Worker...\n');
 

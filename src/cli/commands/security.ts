@@ -58,7 +58,7 @@ export default {
       )
       .command(
         'plugin-audit',
-        'Audit installed Nuxc plugin permissions',
+        'Audit installed Nuxco plugin permissions',
         () => {},
         async () => {
           const { runPluginAuditCommand } = await import('../../commands/security.js');

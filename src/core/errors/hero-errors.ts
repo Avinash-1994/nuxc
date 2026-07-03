@@ -133,10 +133,10 @@ export function createModuleNotFoundError(
         file: importedFrom,
         fileChain,
         graphExplanation: `The module '${modulePath}' was imported but could not be found in the dependency graph. This breaks the module resolution chain.`,
-        suggestedFix: `1. Check if the file exists at: ${modulePath}\n2. Verify the import path is correct\n3. If it's an npm package, run: npm install ${modulePath}\n4. Check your nuxc.config resolve.alias settings`,
+        suggestedFix: `1. Check if the file exists at: ${modulePath}\n2. Verify the import path is correct\n3. If it's an npm package, run: npm install ${modulePath}\n4. Check your nuxco.config resolve.alias settings`,
         relatedDocs: [
-            'https://nuxc.dev/docs/module-resolution',
-            'https://nuxc.dev/docs/troubleshooting#module-not-found'
+            'https://nuxco.dev/docs/module-resolution',
+            'https://nuxco.dev/docs/troubleshooting#module-not-found'
         ],
         severity: 'error'
     });
@@ -153,8 +153,8 @@ export function createCircularDependencyError(
         graphExplanation: `A circular dependency creates an infinite loop in the module graph. This can cause runtime errors and unpredictable behavior.`,
         suggestedFix: `1. Refactor to break the circular dependency\n2. Extract shared code into a separate module\n3. Use dependency injection or lazy loading\n4. Consider using dynamic imports: import('./module')`,
         relatedDocs: [
-            'https://nuxc.dev/docs/circular-dependencies',
-            'https://nuxc.dev/docs/best-practices#module-design'
+            'https://nuxco.dev/docs/circular-dependencies',
+            'https://nuxco.dev/docs/best-practices#module-design'
         ],
         severity: 'error'
     });
@@ -171,11 +171,11 @@ export function createCSSImportError(
         message: `Failed to process CSS file: ${cssFile}`,
         file: cssFile,
         fileChain: importedFrom ? [importedFrom, cssFile] : [cssFile],
-        graphExplanation: `CSS files are first-class nodes in Nuxc's dependency graph. This CSS file could not be processed, breaking the graph.`,
-        suggestedFix: `1. Check CSS syntax: ${reason}\n2. Verify PostCSS config if using preprocessors\n3. Check for missing @import files\n4. Run: nuxc verify --explain to diagnose`,
+        graphExplanation: `CSS files are first-class nodes in Nuxco's dependency graph. This CSS file could not be processed, breaking the graph.`,
+        suggestedFix: `1. Check CSS syntax: ${reason}\n2. Verify PostCSS config if using preprocessors\n3. Check for missing @import files\n4. Run: nuxco verify --explain to diagnose`,
         relatedDocs: [
-            'https://nuxc.dev/docs/css-handling',
-            'https://nuxc.dev/docs/postcss-integration'
+            'https://nuxco.dev/docs/css-handling',
+            'https://nuxco.dev/docs/postcss-integration'
         ],
         severity: 'error'
     });
@@ -188,11 +188,11 @@ export function createFrameworkAdapterMissingError(
     return new HeroError({
         code: 'FRAMEWORK_ADAPTER_MISSING',
         message: `Framework adapter not found: ${framework}`,
-        graphExplanation: `Nuxc requires a framework adapter to transform framework-specific code. The adapter for '${framework}' is not installed.`,
-        suggestedFix: `1. Install the adapter: npm install @nuxc/framework-${framework.toLowerCase()}\n2. Add to nuxc.config:\n   import ${framework.toLowerCase()} from '@nuxc/framework-${framework.toLowerCase()}';\n   export default { framework: ${framework.toLowerCase()}() }`,
+        graphExplanation: `Nuxco requires a framework adapter to transform framework-specific code. The adapter for '${framework}' is not installed.`,
+        suggestedFix: `1. Install the adapter: npm install @nuxco/framework-${framework.toLowerCase()}\n2. Add to nuxco.config:\n   import ${framework.toLowerCase()} from '@nuxco/framework-${framework.toLowerCase()}';\n   export default { framework: ${framework.toLowerCase()}() }`,
         relatedDocs: [
-            'https://nuxc.dev/docs/framework-adapters',
-            `https://nuxc.dev/docs/frameworks/${framework.toLowerCase()}`
+            'https://nuxco.dev/docs/framework-adapters',
+            `https://nuxco.dev/docs/frameworks/${framework.toLowerCase()}`
         ],
         severity: 'error'
     });
@@ -207,11 +207,11 @@ export function createInvalidConfigError(
         code: 'INVALID_CONFIG',
         message: 'Configuration file is invalid',
         file: configPath,
-        graphExplanation: `The nuxc.config file failed validation. This prevents the build from starting.`,
-        suggestedFix: `Fix the following validation errors:\n${validationErrors.map((e, i) => `${i + 1}. ${e}`).join('\n')}\n\nRun: nuxc verify --explain for detailed diagnostics`,
+        graphExplanation: `The nuxco.config file failed validation. This prevents the build from starting.`,
+        suggestedFix: `Fix the following validation errors:\n${validationErrors.map((e, i) => `${i + 1}. ${e}`).join('\n')}\n\nRun: nuxco verify --explain for detailed diagnostics`,
         relatedDocs: [
-            'https://nuxc.dev/docs/configuration',
-            'https://nuxc.dev/docs/config-schema'
+            'https://nuxco.dev/docs/configuration',
+            'https://nuxco.dev/docs/config-schema'
         ],
         severity: 'error'
     });
@@ -226,10 +226,10 @@ export function createCacheCorruptedError(
         message: 'Build cache is corrupted',
         file: cachePath,
         graphExplanation: `The SQLite build cache has become corrupted. This can happen due to interrupted builds or disk errors.`,
-        suggestedFix: `1. Delete the cache: rm -rf ${cachePath}\n2. Rebuild: nuxc build\n3. If issue persists, check disk health\n4. Consider disabling cache temporarily: nuxc build --no-cache`,
+        suggestedFix: `1. Delete the cache: rm -rf ${cachePath}\n2. Rebuild: nuxco build\n3. If issue persists, check disk health\n4. Consider disabling cache temporarily: nuxco build --no-cache`,
         relatedDocs: [
-            'https://nuxc.dev/docs/caching',
-            'https://nuxc.dev/docs/troubleshooting#cache-issues'
+            'https://nuxco.dev/docs/caching',
+            'https://nuxco.dev/docs/troubleshooting#cache-issues'
         ],
         severity: 'warning'
     });
@@ -244,10 +244,10 @@ export function createHMRConnectionError(
         code: 'HMR_CONNECTION_FAILED',
         message: `Hot Module Replacement connection failed on port ${port}`,
         graphExplanation: `The HMR WebSocket connection could not be established. This prevents live updates during development.`,
-        suggestedFix: `1. Check if port ${port} is available\n2. Verify firewall settings\n3. Try a different port: nuxc dev --port ${port + 1}\n4. Check browser console for WebSocket errors\n\nReason: ${reason}`,
+        suggestedFix: `1. Check if port ${port} is available\n2. Verify firewall settings\n3. Try a different port: nuxco dev --port ${port + 1}\n4. Check browser console for WebSocket errors\n\nReason: ${reason}`,
         relatedDocs: [
-            'https://nuxc.dev/docs/hmr',
-            'https://nuxc.dev/docs/dev-server#troubleshooting'
+            'https://nuxco.dev/docs/hmr',
+            'https://nuxco.dev/docs/dev-server#troubleshooting'
         ],
         severity: 'warning'
     });
@@ -266,8 +266,8 @@ export function createAssetResolutionError(
         graphExplanation: `Assets (images, fonts, etc.) are tracked in the dependency graph. This asset could not be found.`,
         suggestedFix: `1. Check if file exists: ${assetPath}\n2. Verify the path is correct\n3. Check public directory configuration\n4. Ensure file extension is supported`,
         relatedDocs: [
-            'https://nuxc.dev/docs/assets',
-            'https://nuxc.dev/docs/static-assets'
+            'https://nuxco.dev/docs/assets',
+            'https://nuxco.dev/docs/static-assets'
         ],
         severity: 'error'
     });
@@ -287,10 +287,10 @@ export function createTypeScriptError(
         file,
         line,
         column,
-        graphExplanation: `TypeScript type checking failed. While Nuxc uses esbuild for fast transpilation, type errors indicate potential runtime issues.`,
+        graphExplanation: `TypeScript type checking failed. While Nuxco uses esbuild for fast transpilation, type errors indicate potential runtime issues.`,
         suggestedFix: `1. Fix the type error at ${file}:${line}:${column}\n2. Run: npx tsc --noEmit for full type checking\n3. Check tsconfig.json settings\n4. Error code: ${code}`,
         relatedDocs: [
-            'https://nuxc.dev/docs/typescript',
+            'https://nuxco.dev/docs/typescript',
             `https://www.typescriptlang.org/docs/handbook/error.html#${code}`
         ],
         severity: 'error'
@@ -309,8 +309,8 @@ export function createPluginHookError(
         graphExplanation: `A plugin hook threw an error during the build process. This indicates a bug in the plugin or incompatibility.`,
         suggestedFix: `1. Check plugin version compatibility\n2. Review plugin configuration\n3. Try disabling the plugin temporarily\n4. Report issue to plugin author\n\nOriginal error: ${error.message}`,
         relatedDocs: [
-            'https://nuxc.dev/docs/plugins',
-            'https://nuxc.dev/docs/plugin-api'
+            'https://nuxco.dev/docs/plugins',
+            'https://nuxco.dev/docs/plugin-api'
         ],
         severity: 'error',
         stack: error.stack
@@ -330,8 +330,8 @@ export function wrapError(error: Error, context?: Partial<ErrorContext>): HeroEr
         message: error.message,
         stack: error.stack,
         severity: 'error',
-        suggestedFix: 'This is an unexpected error. Please report it to: https://github.com/Avinash-1994/nuxc/issues',
-        relatedDocs: ['https://nuxc.dev/docs/troubleshooting'],
+        suggestedFix: 'This is an unexpected error. Please report it to: https://github.com/Avinash-1994/nuxco/issues',
+        relatedDocs: ['https://nuxco.dev/docs/troubleshooting'],
         ...context
     });
 }

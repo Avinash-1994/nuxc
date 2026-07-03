@@ -1,4 +1,4 @@
-import { NuxcPlugin, PluginHookName } from '../core/plugins/types.js';
+import { NuxcoPlugin, PluginHookName } from '../core/plugins/types.js';
 
 // Generic interface for Rollup/Vite-style plugins to make them compatible
 export interface CommunityPlugin {
@@ -11,16 +11,16 @@ export interface CommunityPlugin {
 }
 
 /**
- * Adapter to run Community (Vite/Rollup) plugins within Nuxc
- * Converts middleware-based plugins to Nuxc's Command Pattern
+ * Adapter to run Community (Vite/Rollup) plugins within Nuxco
+ * Converts middleware-based plugins to Nuxco's Command Pattern
  */
-export function adaptPlugin(plugin: CommunityPlugin): NuxcPlugin {
+export function adaptPlugin(plugin: CommunityPlugin): NuxcoPlugin {
     const hooks: PluginHookName[] = [];
     if (plugin.resolveId) hooks.push('resolveId');
     if (plugin.load) hooks.push('load');
     if (plugin.transform) hooks.push('transformModule');
 
-    // Nuxc mandates strict versioning, so we mock it for community plugins
+    // Nuxco mandates strict versioning, so we mock it for community plugins
     return {
         manifest: {
             name: `adapter:${plugin.name}`,
@@ -43,7 +43,7 @@ export function adaptPlugin(plugin: CommunityPlugin): NuxcPlugin {
                     error: (msg: string) => console.error(`[${plugin.name}] ${msg}`)
                 };
                 try {
-                    // Adapt input: Nuxc passes object { source, importer }, Rollup expects (source, importer)
+                    // Adapt input: Nuxco passes object { source, importer }, Rollup expects (source, importer)
                     const source = input.source || input.id;
                     const importer = input.importer;
 

@@ -1,24 +1,24 @@
 {
-  "name": "nuxc-preact-template",
+  "name": "nuxco-preact-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "preview": "nuxc preview"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "preview": "nuxco preview"
   },
-  "nuxc": {
+  "nuxco": {
     "template": true,
     "framework": "preact",
-    "description": "Nuxc Weather — real weather dashboard"
+    "description": "Nuxco Weather — real weather dashboard"
   },
   "dependencies": {
     "@preact/signals": "^2.9.0",
     "preact": "^10.22.0"
   },
   "devDependencies": {
-    "nuxc": "file:../../",
+    "nuxco": "file:../../",
     "typescript": "5.4.5"
   }
 }

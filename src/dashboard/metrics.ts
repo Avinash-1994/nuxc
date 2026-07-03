@@ -1,6 +1,6 @@
 
 /**
- * Nuxc Dashboard Metrics Collector
+ * Nuxco Dashboard Metrics Collector
  * Day 19: tRPC Dashboard Lock
  */
 
@@ -68,7 +68,7 @@ export class MetricsCollector {
     generateReport(): string {
         const summary = this.getSummary();
         return JSON.stringify({
-            title: 'Nuxc Build Report',
+            title: 'Nuxco Build Report',
             generatedAt: new Date().toISOString(),
             stats: summary,
             history: this.builds.slice(-10) // Last 10 details

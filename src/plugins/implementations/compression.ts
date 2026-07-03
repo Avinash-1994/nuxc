@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-compression
+ * @nuxco/plugin-compression
  * Asset compression
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCompressionPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-compression',
+        name: '@nuxco/plugin-compression',
         originalPlugin: 'compression-webpack-plugin',
         
         async buildStart() {
-            console.log('[@nuxc/plugin-compression] Starting performance optimization...');
+            console.log('[@nuxco/plugin-compression] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createCompressionPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxc/plugin-compression] Performance optimization complete');
+            console.log('[@nuxco/plugin-compression] Performance optimization complete');
         }
     };
 }

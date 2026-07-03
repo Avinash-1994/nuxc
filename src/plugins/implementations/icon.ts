@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-icon
+ * @nuxco/plugin-icon
  * Icon component generation
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createIconPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-icon',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-icon',
+        originalPlugin: 'nuxco-native',
         
         async load(id: string) {
             // Asset loading for icon

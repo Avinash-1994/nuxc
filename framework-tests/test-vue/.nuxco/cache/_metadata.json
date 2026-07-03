@@ -1,0 +1,15 @@
+{
+  "hash": "86ac8273",
+  "depsHash": "1abc5f8c",
+  "deps": [
+    "vue",
+    "vue-router",
+    "pinia"
+  ],
+  "depMap": {
+    "vue": "/@nuxco-deps/vue.js",
+    "vue-router": "/@nuxco-deps/vue-router.js",
+    "pinia": "/@nuxco-deps/pinia.js"
+  },
+  "timestamp": 1782994219020
+}

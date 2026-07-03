@@ -6,7 +6,7 @@ const App = () => {
         <div className="app-container">
             <header className="hero">
                 <span className="badge">v1.0.0 Stable</span>
-                <h1>Nuxc</h1>
+                <h1>Nuxco</h1>
                 <p className="subtitle">
                     The high-performance build engine for modern web applications.<br />
                     Engineered for speed. Built for stability.
@@ -29,7 +29,7 @@ const App = () => {
             </main>
 
             <div className="code-area">
-                <span style={{ color: '#6366F1' }}>$</span> nuxc build --optimize
+                <span style={{ color: '#6366F1' }}>$</span> nuxco build --optimize
                 <br />
                 <span style={{ color: '#94A3B8', opacity: 0.6 }}>// Generating optimized production bundle...</span>
                 <br />
@@ -37,7 +37,7 @@ const App = () => {
             </div>
 
             <footer className="footer">
-                Powered by <a href="https://nuxc.dev" target="_blank" rel="noopener noreferrer">Nuxc Build Tool</a>
+                Powered by <a href="https://nuxco.dev" target="_blank" rel="noopener noreferrer">Nuxco Build Tool</a>
             </footer>
         </div>
     );

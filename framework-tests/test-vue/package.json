@@ -1,17 +1,17 @@
 {
-  "name": "nuxc-vue-template",
+  "name": "nuxco-vue-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "preview": "nuxc preview"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "preview": "nuxco preview"
   },
-  "nuxc": {
+  "nuxco": {
     "template": true,
     "framework": "vue",
-    "description": "Nuxc Shop — e-commerce storefront"
+    "description": "Nuxco Shop — e-commerce storefront"
   },
   "dependencies": {
     "vue": "3.4.27",
@@ -19,7 +19,7 @@
     "pinia": "2.1.7"
   },
   "devDependencies": {
-    "nuxc": "file:../../",
+    "nuxco": "file:../../",
     "@vitejs/plugin-vue": "5.0.4",
     "typescript": "5.4.5"
   }

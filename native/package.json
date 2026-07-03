@@ -1,7 +1,7 @@
 {
-    "name": "nuxc-native",
+    "name": "nuxco-native",
     "version": "0.1.0",
     "napi": {
-        "binaryName": "nuxc_native"
+        "binaryName": "nuxco_native"
     }
 }

@@ -1,5 +1,5 @@
 /**
- * @nuxc/lit - Production-Grade Lit Plugin
+ * @nuxco/lit - Production-Grade Lit Plugin
  * 
  * Features:
  * - TypeScript decorator support
@@ -39,7 +39,7 @@ export interface LitPluginOptions {
     };
 }
 
-export function nuxcLit(options: LitPluginOptions = {}): Plugin {
+export function nuxcoLit(options: LitPluginOptions = {}): Plugin {
     const {
         hmr = true,
         development = process.env.NODE_ENV !== 'production',
@@ -48,7 +48,7 @@ export function nuxcLit(options: LitPluginOptions = {}): Plugin {
     } = options;
 
     return {
-        name: 'nuxc-lit',
+        name: 'nuxco-lit',
 
         async transform(code: string, id: string) {
             // Only process Lit files (.ts, .js with Lit imports)
@@ -144,7 +144,7 @@ async function transformLit(
 
         return result.code;
     } catch (error) {
-        console.warn('[nuxc-lit] Transform failed:', error);
+        console.warn('[nuxco-lit] Transform failed:', error);
         return null;
     }
 }
@@ -162,6 +162,6 @@ function generateSourceMap(originalCode: string, transformedCode: string, id: st
 // Export helper for use in config
 export function litPreset(options: LitPluginOptions = {}): Plugin[] {
     return [
-        nuxcLit(options)
+        nuxcoLit(options)
     ];
 }

@@ -7,7 +7,7 @@ const require = createRequire(import.meta.url);
 const pkg = require('../package.json');
 
 async function bundleCLI() {
-    console.log('🚀 Bundling Nuxc CLI for production performance...');
+    console.log('🚀 Bundling Nuxco CLI for production performance...');
     const start = performance.now();
 
     // Everything in dependencies should be external for a clean CLI bundle
@@ -15,7 +15,7 @@ async function bundleCLI() {
         ...Object.keys(pkg.dependencies || {}),
         ...Object.keys(pkg.devDependencies || {}).filter(d => !d.startsWith('@types/')),
         'fsevents',
-        './nuxc_native.node'
+        './nuxco_native.node'
     ];
 
     try {
@@ -34,8 +34,8 @@ async function bundleCLI() {
 
             // Polyfill require for ESM
             banner: {
-                js: `import { createRequire as __nuxc_createRequire } from 'module';
-const require = __nuxc_createRequire(import.meta.url);
+                js: `import { createRequire as __nuxco_createRequire } from 'module';
+const require = __nuxco_createRequire(import.meta.url);
 `,
             },
             logLevel: 'info',
@@ -52,10 +52,10 @@ const require = __nuxc_createRequire(import.meta.url);
         console.log(`📂 Output: dist/cli.mjs`);
 
         // Copy native node module to dist for runtime access
-        const nativeModulePath = path.resolve(process.cwd(), 'nuxc_native.node');
+        const nativeModulePath = path.resolve(process.cwd(), 'nuxco_native.node');
         if (fs.existsSync(nativeModulePath)) {
-            fs.copyFileSync(nativeModulePath, path.join(process.cwd(), 'dist/nuxc_native.node'));
-            console.log('✅ Native module [nuxc_native.node] copied to dist/');
+            fs.copyFileSync(nativeModulePath, path.join(process.cwd(), 'dist/nuxco_native.node'));
+            console.log('✅ Native module [nuxco_native.node] copied to dist/');
         }
 
     } catch (e) {

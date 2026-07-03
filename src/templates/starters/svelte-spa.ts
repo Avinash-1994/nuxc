@@ -19,11 +19,11 @@ export const svelteSpaTemplate: TemplateConfig = {
         "svelte-check": "^3.5.0",
         "tslib": "^2.6.2",
         "typescript": "^5.2.2",
-        "@nuxc/plugin-svelte": "^1.0.0"
+        "@nuxco/plugin-svelte": "^1.0.0"
     },
     files: {
-        'nuxc.config.ts': `
-import { defineConfig } from 'nuxc';
+        'nuxco.config.ts': `
+import { defineConfig } from 'nuxco';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
@@ -47,11 +47,11 @@ export default app
 <script lang="ts">
   import Counter from './lib/Counter.svelte'
 
-  let nuxcLogo = '/nuxc.svg'
+  let nuxcoLogo = '/nuxco.svg'
 </script>
 
 <main>
-  <h1>Nuxc + Svelte</h1>
+  <h1>Nuxco + Svelte</h1>
 
   <div class="card">
     <Counter />
@@ -62,7 +62,7 @@ export default app
   </p>
 
   <p class="read-the-docs">
-    Click on the Nuxc and Svelte logos to learn more
+    Click on the Nuxco and Svelte logos to learn more
   </p>
 </main>
 

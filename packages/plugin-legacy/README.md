@@ -1,18 +1,18 @@
-# @nuxc/plugin-legacy
+# @nuxco/plugin-legacy
 
-> Official Nuxc plugin for legacy browser support — ES5 transpilation and core-js polyfills.
+> Official Nuxco plugin for legacy browser support — ES5 transpilation and core-js polyfills.
 
 ## Install
 
 ```bash
-npm install --save-dev @nuxc/plugin-legacy
+npm install --save-dev @nuxco/plugin-legacy
 npm install core-js regenerator-runtime
 ```
 
 ## Usage
 
 ```js
-const legacy = require('@nuxc/plugin-legacy');
+const legacy = require('@nuxco/plugin-legacy');
 module.exports = {
   entry: ['./src/main.ts'],
   plugins: [

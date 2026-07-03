@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-robots
+ * @nuxco/plugin-robots
  * Robots.txt generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRobotsPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-robots',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-robots',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Utility: Robots.txt generation

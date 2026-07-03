@@ -24,10 +24,10 @@ const SEED: Col[] = [
   ]},
 ];
 
-let state: Col[] = JSON.parse(localStorage.getItem('nuxc-kanban') || 'null') ?? SEED;
+let state: Col[] = JSON.parse(localStorage.getItem('nuxco-kanban') || 'null') ?? SEED;
 let dragCard: {cardId:string; fromCol:string} | null = null;
 
-function save() { localStorage.setItem('nuxc-kanban', JSON.stringify(state)); }
+function save() { localStorage.setItem('nuxco-kanban', JSON.stringify(state)); }
 function priorityColor(p: string) { return p==='high'?'#ef4444':p==='medium'?'#f59e0b':'#22c55e'; }
 
 function render() {
@@ -35,7 +35,7 @@ function render() {
   app.innerHTML = `
     <div style="padding:24px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-        <h1>🗂️ Nuxc Kanban</h1>
+        <h1>🗂️ Nuxco Kanban</h1>
         <span style="color:#94a3b8;font-size:14px">${state.reduce((s,c)=>s+c.cards.length,0)} cards total</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">

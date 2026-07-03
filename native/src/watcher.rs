@@ -42,7 +42,7 @@ impl NativeWatcher {
 
     #[napi]
     pub fn get_version(&self) -> String {
-        format!("rust-notify (nuxc-native v{})", env!("CARGO_PKG_VERSION"))
+        format!("rust-notify (nuxco-native v{})", env!("CARGO_PKG_VERSION"))
     }
 
     /// Start watching the given paths.

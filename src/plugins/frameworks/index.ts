@@ -3,10 +3,10 @@
  */
 
 // Tier 1: Production-Ready
-export { nuxcReact, reactPreset, type ReactPluginOptions } from './react.js';
-export { nuxcVue, vuePreset, type VuePluginOptions } from './vue.js';
+export { nuxcoReact, reactPreset, type ReactPluginOptions } from './react.js';
+export { nuxcoVue, vuePreset, type VuePluginOptions } from './vue.js';
 
 // Tier 2: Stable
-export { nuxcSvelte, sveltePreset, type SveltePluginOptions } from './svelte.js';
-export { nuxcSolid, solidPreset, type SolidPluginOptions } from './solid.js';
-export { nuxcLit, litPreset, type LitPluginOptions } from './lit.js';
+export { nuxcoSvelte, sveltePreset, type SveltePluginOptions } from './svelte.js';
+export { nuxcoSolid, solidPreset, type SolidPluginOptions } from './solid.js';
+export { nuxcoLit, litPreset, type LitPluginOptions } from './lit.js';

@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-razorpay
+ * @nuxco/plugin-razorpay
  * Razorpay integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRazorpayPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-razorpay',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-razorpay',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Fintech integration: Razorpay integration
@@ -16,7 +16,7 @@ export function createRazorpayPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxc/plugin-razorpay] Fintech integration ready');
+            console.log('[@nuxco/plugin-razorpay] Fintech integration ready');
             // Initialize payment gateway, generate QR codes, etc.
         }
     };

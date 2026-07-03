@@ -1,7 +1,7 @@
 {
-  "module": "nuxc",
+  "module": "nuxco",
   "entry": ["./src/main.jsx"],
-  "outDir": "./dist-nuxc",
+  "outDir": "./dist-nuxco",
   "build": {
     "minify": true,
     "sourcemap": false

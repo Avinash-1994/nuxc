@@ -1,6 +1,6 @@
 /**
  * ConfigWatcher — Phase 3.3
- * Watches nuxc.config.ts, tsconfig.json, .env etc. for changes.
+ * Watches nuxco.config.ts, tsconfig.json, .env etc. for changes.
  * Uses native Rust watcher first; falls back to chokidar.
  */
 import path from 'path';
@@ -14,7 +14,7 @@ try {
     const native = await import('../native/index.js');
     NativeWatcher = native.NativeWatcher;
 } catch (e: any) {
-    console.warn(`[nuxc] Native watcher unavailable, falling back to chokidar: ${e?.message ?? e}`);
+    console.warn(`[nuxco] Native watcher unavailable, falling back to chokidar: ${e?.message ?? e}`);
 }
 
 export class ConfigWatcher {
@@ -28,7 +28,7 @@ export class ConfigWatcher {
 
     async start() {
         const configFiles = [
-            'nuxc.config.ts', 'nuxc.config.js', 'nuxc.config.json',
+            'nuxco.config.ts', 'nuxco.config.js', 'nuxco.config.json',
             'tailwind.config.js', 'tsconfig.json', '.env', '.env.local'
         ].map(f => path.join(this.root, f));
 
@@ -48,7 +48,7 @@ export class ConfigWatcher {
                 });
                 return;
             } catch (e: any) {
-                log.warn(`[nuxc] ConfigWatcher native failed (${e.message}), using chokidar.`);
+                log.warn(`[nuxco] ConfigWatcher native failed (${e.message}), using chokidar.`);
             }
         }
 
@@ -63,7 +63,7 @@ export class ConfigWatcher {
                 this.onReload(type, file);
             });
         } catch (e: any) {
-            log.error(`[nuxc] ConfigWatcher: both native and chokidar failed: ${e.message}`);
+            log.error(`[nuxco] ConfigWatcher: both native and chokidar failed: ${e.message}`);
         }
     }
 

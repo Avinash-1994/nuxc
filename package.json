@@ -1,7 +1,7 @@
 {
-  "name": "nuxc",
+  "name": "nuxco",
   "version": "1.0.0",
-  "description": "⚡ Nuxc — a modern JavaScript build tool powered by SWC and LightningCSS. Fast HMR, module federation, tree shaking, and multi-framework support (React, Vue, Svelte, Solid). A fast, Rust-native build pipeline.",
+  "description": "⚡ Nuxco — a modern JavaScript build tool powered by SWC and LightningCSS. Fast HMR, module federation, tree shaking, and multi-framework support (React, Vue, Svelte, Solid). A fast, Rust-native build pipeline.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -16,8 +16,8 @@
   },
   "sideEffects": false,
   "bin": {
-    "nuxc": "./dist/cli.js",
-    "create-nuxc": "./dist/create-nuxc.js"
+    "nuxco": "./dist/cli.js",
+    "create-nuxco": "./dist/create-nuxco.js"
   },
   "files": [
     "dist",
@@ -103,12 +103,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Avinash-1994/nuxc.git"
+    "url": "git+https://github.com/Avinash-1994/nuxco.git"
   },
   "bugs": {
-    "url": "https://github.com/Avinash-1994/nuxc/issues"
+    "url": "https://github.com/Avinash-1994/nuxco/issues"
   },
-  "homepage": "https://github.com/Avinash-1994/nuxc#readme",
+  "homepage": "https://github.com/Avinash-1994/nuxco#readme",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -118,8 +118,8 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@node-rs/xxhash": "^1.7.6",
-    "@nuxc/adapter-core": "file:packages/nuxc-adapter-core",
-    "@nuxc/security": "file:packages/nuxc-security",
+    "@nuxco/adapter-core": "file:packages/nuxco-adapter-core",
+    "@nuxco/security": "file:packages/nuxco-security",
     "@swc/core": "^1.15.24",
     "@tauri-apps/api": "^2.11.0",
     "@trpc/client": "^11.8.1",
@@ -179,7 +179,7 @@
     "autocannon": "^8.0.0",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.2",
-    "eslint-plugin-nuxc-governance": "file:eslint-plugin-nuxc-governance",
+    "eslint-plugin-nuxco-governance": "file:eslint-plugin-nuxco-governance",
     "fast-check": "^4.5.3",
     "jest": "^30.2.0",
     "jsdom": "^27.2.0",

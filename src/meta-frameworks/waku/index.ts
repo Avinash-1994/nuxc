@@ -1,12 +1,12 @@
-import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
-import { detectDependencies, registry } from '@nuxc/adapter-core';
+import type { NuxcoAdapter, Plugin, NuxcoConfig, PackageJson, Middleware } from '@nuxco/adapter-core';
+import { detectDependencies, registry } from '@nuxco/adapter-core';
 import { wakuRscPlugin } from './rsc-plugin.js';
 
 export interface WakuConfig {
   rscPath?: string; // default '/RSC'
 }
 
-export class WakuAdapter implements NuxcAdapter {
+export class WakuAdapter implements NuxcoAdapter {
   name = 'waku';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -19,7 +19,7 @@ export class WakuAdapter implements NuxcAdapter {
     ];
   }
 
-  config(config: NuxcConfig): NuxcConfig {
+  config(config: NuxcoConfig): NuxcoConfig {
     if (!config.waku) config.waku = {};
     config.waku = {
       rscPath: '/RSC',
@@ -35,7 +35,7 @@ export class WakuAdapter implements NuxcAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:nuxc/waku-rsc-router';
+         const virtualEntry = 'virtual:nuxco/waku-rsc-router';
          let router: any;
          try {
             router = await import(virtualEntry);
@@ -88,7 +88,7 @@ export class WakuAdapter implements NuxcAdapter {
 
          next();
       } catch(e) {
-         console.error('[Nuxc:Waku] Error rendering RSC', e);
+         console.error('[Nuxco:Waku] Error rendering RSC', e);
          next();
       }
     };

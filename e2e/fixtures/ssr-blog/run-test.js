@@ -2,7 +2,7 @@
  * Phase 1.9 — SSR Runner FULL validation
  * All 18 required checks. No fabricated values. Real HTML printed.
  */
-import { SsrRunner } from '@nuxc/ssr';
+import { SsrRunner } from '@nuxco/ssr';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -39,10 +39,10 @@ async function run() {
     log(' Phase 1.9 — SSR Runner — EXHAUSTIVE VALIDATION (18 tests)');
     log('══════════════════════════════════════════════════════════════\n');
 
-    // ── Build @nuxc/ssr ──────────────────────────────────────────
-    log('Building @nuxc/ssr package...');
+    // ── Build @nuxco/ssr ──────────────────────────────────────────
+    log('Building @nuxco/ssr package...');
     execSync('npm run build', {
-        cwd: path.resolve(__dirname, '../../../packages/nuxc-ssr'),
+        cwd: path.resolve(__dirname, '../../../packages/nuxco-ssr'),
         stdio: 'ignore'
     });
     log('Build complete.\n');
@@ -70,7 +70,7 @@ exports.render = async function render(context) {
         return {
             id: i + 1,
             title: 'Understanding Build System Internals — Part ' + (i + 1),
-            excerpt: 'A deep dive into how Nuxc resolves modules, splits chunks, and eliminates dead code. Post ' + (i + 1) + ' of the series.'
+            excerpt: 'A deep dive into how Nuxco resolves modules, splits chunks, and eliminates dead code. Post ' + (i + 1) + ' of the series.'
         };
     });
 
@@ -78,7 +78,7 @@ exports.render = async function render(context) {
 
     const html =
         '<div id="app">' +
-        '<header><h1>Nuxc SSR Web Blog</h1></header>' +
+        '<header><h1>Nuxco SSR Web Blog</h1></header>' +
         '<nav><a href="/">Home</a> <a href="/about">About</a></nav>' +
         '<main>' +
         '<p class="route-display">Current Path: <strong data-testid="url-display">' + url + '</strong></p>' +
@@ -89,10 +89,10 @@ exports.render = async function render(context) {
         '</div>';
 
     const head =
-        '<title>Nuxc SSR Blog — ' + url + '</title>' +
-        '<meta name="description" content="A comprehensive blog generated server-side by Nuxc SSR.">' +
-        '<meta property="og:title" content="Nuxc SSR Blog">' +
-        '<link rel="canonical" href="https://blog.nuxc.dev' + url + '">';
+        '<title>Nuxco SSR Blog — ' + url + '</title>' +
+        '<meta name="description" content="A comprehensive blog generated server-side by Nuxco SSR.">' +
+        '<meta property="og:title" content="Nuxco SSR Blog">' +
+        '<link rel="canonical" href="https://blog.nuxco.dev' + url + '">';
 
     const state = { url, posts: posts.length, count: initial.count || 0 };
 
@@ -117,7 +117,7 @@ exports.render = async function render(context) {
     // ── TEST 2: vm.Module isolation confirmed ────────────────────
     // Verify the runner uses vm.createContext (isolation boundary present)
     const runnerSrc = fs.readFileSync(
-        path.resolve(__dirname, '../../../packages/nuxc-ssr/src/runner.ts'), 'utf-8'
+        path.resolve(__dirname, '../../../packages/nuxco-ssr/src/runner.ts'), 'utf-8'
     );
     const hasVmIsolation = runnerSrc.includes('vm.createContext');
     if (hasVmIsolation) {
@@ -150,13 +150,13 @@ exports.render = async function render(context) {
     // ── TEST 4: context.headers respected ────────────────────────
     const result2 = await runner.renderToString(bundlePath, {
         url: '/home',
-        headers: { 'user-agent': 'NuxcTestBot/1.0' }
+        headers: { 'user-agent': 'NuxcoTestBot/1.0' }
     });
     if (result2.error) {
         fail('T4', 'context.headers respected', `Error: ${result2.error.message}`, 'renderToString threw');
-    } else if (result2.html.includes('NuxcTestBot/1.0')) {
+    } else if (result2.html.includes('NuxcoTestBot/1.0')) {
         pass('T4', 'context.headers respected',
-            'HTML contains user-agent "NuxcTestBot/1.0" from context.headers');
+            'HTML contains user-agent "NuxcoTestBot/1.0" from context.headers');
     } else {
         fail('T4', 'context.headers respected',
             `HTML snippet: ${result2.html.slice(0, 300)}`,
@@ -270,7 +270,7 @@ exports.render = async function render(context) {
 
     // ── TEST 12: SSR runner does NOT import browser globals ───────
     const runnerSource = fs.readFileSync(
-        path.resolve(__dirname, '../../../packages/nuxc-ssr/src/runner.ts'), 'utf-8'
+        path.resolve(__dirname, '../../../packages/nuxco-ssr/src/runner.ts'), 'utf-8'
     );
     const browserGlobals = ['window', 'document', 'navigator', 'localStorage'];
     const found = browserGlobals.filter(g => new RegExp(`\\b${g}\\b`).test(runnerSource));
@@ -301,7 +301,7 @@ exports.render = async function render(context) {
     const hasReact = runnerSource.includes("from 'react'") || runnerSource.includes('require("react")');
     if (!hasVue && !hasReact) {
         pass('T14', 'Framework-agnostic: runner has no Vue/React imports',
-            'No "from \'vue\'" or "from \'react\'" found in packages/nuxc-ssr/src/runner.ts');
+            'No "from \'vue\'" or "from \'react\'" found in packages/nuxco-ssr/src/runner.ts');
     } else {
         fail('T14', 'Framework-agnostic: runner has no Vue/React imports',
             `vue: ${hasVue} | react: ${hasReact}`,
@@ -325,7 +325,7 @@ exports.render = async function render(context) {
         }
         try {
             const t0 = process.hrtime.bigint();
-            execSync(`node ${cliPath} build`, { cwd: fixDir, stdio: 'ignore', env: { ...process.env, NUXC_SKIP_SECURITY: '1' } });
+            execSync(`node ${cliPath} build`, { cwd: fixDir, stdio: 'ignore', env: { ...process.env, NUXCO_SKIP_SECURITY: '1' } });
             const ms = Number(process.hrtime.bigint() - t0) / 1_000_000;
             pass(fix.id, `Regression: ${fix.name} still builds`, `exit 0 in ${ms.toFixed(0)}ms`);
         } catch (e) {

@@ -1,15 +1,15 @@
 # Configuration Guide
 
-Complete reference for configuring Nuxc.
+Complete reference for configuring Nuxco.
 
 ## Configuration File
 
-Nuxc supports multiple configuration formats:
+Nuxco supports multiple configuration formats:
 
-- `nuxc.config.js` (recommended)
-- `nuxc.config.ts`
-- `nuxc.config.mjs`
-- `nuxc.config.cjs`
+- `nuxco.config.js` (recommended)
+- `nuxco.config.ts`
+- `nuxco.config.mjs`
+- `nuxco.config.cjs`
 
 ## Basic Configuration
 
@@ -165,7 +165,7 @@ module.exports = {
     },
     
     // Or import external plugins
-    require('@nuxc/plugin-react-refresh'),
+    require('@nuxco/plugin-react-refresh'),
   ],
 };
 ```
@@ -208,7 +208,7 @@ module.exports = {
   },
   
   // Environment variable prefix
-  envPrefix: ['VITE_', 'NUXC_'],
+  envPrefix: ['VITE_', 'NUXCO_'],
 };
 ```
 
@@ -354,7 +354,7 @@ module.exports = {
 ## Environment-Specific Configuration
 
 ```javascript
-// nuxc.config.js
+// nuxco.config.js
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {

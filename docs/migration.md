@@ -1,6 +1,6 @@
-# Migration Guide: Moving to Nuxc
+# Migration Guide: Moving to Nuxco
 
-> **Goal**: Migrate from Vite, Webpack, Rollup, or Angular CLI to Nuxc in **under 30 minutes**.
+> **Goal**: Migrate from Vite, Webpack, Rollup, or Angular CLI to Nuxco in **under 30 minutes**.
 
 ---
 
@@ -8,10 +8,10 @@
 
 ```bash
 # Analyze your existing project
-npx nuxc migrate /path/to/your/project --dry-run
+npx nuxco migrate /path/to/your/project --dry-run
 
-# Apply migration (creates nuxc.config.ts, updates package.json)
-npx nuxc migrate /path/to/your/project
+# Apply migration (creates nuxco.config.ts, updates package.json)
+npx nuxco migrate /path/to/your/project
 
 # Install dependencies
 npm install
@@ -34,7 +34,7 @@ npm run dev
 - Tailwind CSS configuration
 - Build output settings
 
-### Example: Vite → Nuxc
+### Example: Vite → Nuxco
 
 **Before** (`vite.config.ts`):
 ```typescript
@@ -58,9 +58,9 @@ export default defineConfig({
 });
 ```
 
-**After** (`nuxc.config.ts`):
+**After** (`nuxco.config.ts`):
 ```typescript
-import { defineConfig } from 'nuxc';
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   preset: 'spa',
@@ -90,17 +90,17 @@ export default defineConfig({
 ```json
 {
   "scripts": {
-    "dev": "nuxc dev",
-    "build": "nuxc build",
-    "preview": "nuxc preview",
-    "test": "nuxc test"
+    "dev": "nuxco dev",
+    "build": "nuxco build",
+    "preview": "nuxco preview",
+    "test": "nuxco test"
   }
 }
 ```
 
 ### Manual Steps
 
-1. **Vite Plugins**: Check if equivalent Nuxc plugins exist in marketplace
+1. **Vite Plugins**: Check if equivalent Nuxco plugins exist in marketplace
 2. **Custom Rollup Plugins**: May need adaptation (see [Plugins Guide](./plugins.md))
 3. **SSR**: Use `preset: 'ssr'` and configure server entry
 
@@ -112,12 +112,12 @@ export default defineConfig({
 
 - Entry points
 - Output configuration
-- Loaders → Nuxc plugins
+- Loaders → Nuxco plugins
 - Aliases
 - DevServer settings
 - Environment variables
 
-### Example: Webpack → Nuxc
+### Example: Webpack → Nuxco
 
 **Before** (`webpack.config.js`):
 ```javascript
@@ -159,9 +159,9 @@ module.exports = {
 };
 ```
 
-**After** (`nuxc.config.ts`):
+**After** (`nuxco.config.ts`):
 ```typescript
-import { defineConfig } from 'nuxc';
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   preset: 'spa',
@@ -187,23 +187,23 @@ export default defineConfig({
 });
 ```
 
-### Common Webpack Loaders → Nuxc
+### Common Webpack Loaders → Nuxco
 
-| Webpack Loader | Nuxc Equivalent |
+| Webpack Loader | Nuxco Equivalent |
 |----------------|------------------|
 | `ts-loader` | Built-in TypeScript support |
 | `babel-loader` | Built-in (via Bun parser) |
 | `css-loader` | Built-in CSS support |
-| `sass-loader` | `@nuxc/plugin-sass` |
+| `sass-loader` | `@nuxco/plugin-sass` |
 | `file-loader` | Built-in asset handling |
 | `url-loader` | Built-in (auto inline < 4KB) |
-| `svg-loader` | `@nuxc/plugin-svgr` |
+| `svg-loader` | `@nuxco/plugin-svgr` |
 
 ### Manual Steps
 
 1. **Complex Webpack Plugins**: Check marketplace or write custom plugin
-2. **Module Federation**: Use Nuxc's built-in federation
-3. **Custom Loaders**: Adapt to Nuxc plugin API
+2. **Module Federation**: Use Nuxco's built-in federation
+3. **Custom Loaders**: Adapt to Nuxco plugin API
 
 ---
 
@@ -216,7 +216,7 @@ export default defineConfig({
 - External dependencies
 - Tree-shaking settings
 
-### Example: Rollup → Nuxc
+### Example: Rollup → Nuxco
 
 **Before** (`rollup.config.js`):
 ```javascript
@@ -238,9 +238,9 @@ export default {
 };
 ```
 
-**After** (`nuxc.config.ts`):
+**After** (`nuxco.config.ts`):
 ```typescript
-import { defineConfig } from 'nuxc';
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   preset: 'spa',
@@ -268,7 +268,7 @@ export default defineConfig({
 - Environment files
 - Build configurations
 
-### Example: Angular CLI → Nuxc
+### Example: Angular CLI → Nuxco
 
 **Before** (`angular.json`):
 ```json
@@ -296,9 +296,9 @@ export default defineConfig({
 }
 ```
 
-**After** (`nuxc.config.ts`):
+**After** (`nuxco.config.ts`):
 ```typescript
-import { defineConfig } from 'nuxc';
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   preset: 'spa',
@@ -321,10 +321,10 @@ export default defineConfig({
 ```json
 {
   "scripts": {
-    "ng": "nuxc",
-    "start": "nuxc dev",
-    "build": "nuxc build",
-    "test": "nuxc test"
+    "ng": "nuxco",
+    "start": "nuxco dev",
+    "build": "nuxco build",
+    "test": "nuxco test"
   }
 }
 ```
@@ -333,10 +333,10 @@ export default defineConfig({
 
 ## Migration Analyzer
 
-Nuxc includes an intelligent migration analyzer:
+Nuxco includes an intelligent migration analyzer:
 
 ```bash
-npx nuxc migrate /path/to/project --dry-run
+npx nuxco migrate /path/to/project --dry-run
 ```
 
 **Output**:
@@ -356,7 +356,7 @@ npx nuxc migrate /path/to/project --dry-run
     ✓ React Fast Refresh
 
   Manual steps:
-    ⚠ vite-plugin-pwa → Check @nuxc/plugin-pwa
+    ⚠ vite-plugin-pwa → Check @nuxco/plugin-pwa
     ⚠ Custom Vite plugin → Needs adaptation
 
 📊 Expected Success Rate: 95%
@@ -372,8 +372,8 @@ Run without --dry-run to apply changes.
 ### 1. Monorepo Migration
 
 ```typescript
-// nuxc.config.ts (root)
-import { defineConfig } from 'nuxc';
+// nuxco.config.ts (root)
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   preset: 'monorepo',
@@ -389,8 +389,8 @@ export default defineConfig({
 ### 2. SSR Migration
 
 ```typescript
-// nuxc.config.ts
-import { defineConfig } from 'nuxc';
+// nuxco.config.ts
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   preset: 'ssr',
@@ -411,8 +411,8 @@ export default defineConfig({
 ### 3. Edge Function Migration
 
 ```typescript
-// nuxc.config.ts
-import { defineConfig } from 'nuxc';
+// nuxco.config.ts
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   preset: 'edge',
@@ -436,7 +436,7 @@ export default defineConfig({
 
 **Solution**:
 ```typescript
-// nuxc.config.ts
+// nuxco.config.ts
 export default defineConfig({
   resolve: {
     alias: {
@@ -475,7 +475,7 @@ npm run build  # Second run: ~500ms (warm)
 
 ## Honest Limitations
 
-### What Nuxc Does Better ✅
+### What Nuxco Does Better ✅
 
 - **Memory efficiency**: ~0.1MB vs 20MB+ (Vite)
 - **HMR speed**: Fast updates with incremental reloads
@@ -499,10 +499,10 @@ npm run build  # Second run: ~500ms (warm)
 
 ## Migration Checklist
 
-- [ ] Run `nuxc migrate --dry-run`
+- [ ] Run `nuxco migrate --dry-run`
 - [ ] Review migration plan
 - [ ] Backup existing config files
-- [ ] Run `nuxc migrate`
+- [ ] Run `nuxco migrate`
 - [ ] Install dependencies (`npm install`)
 - [ ] Test dev server (`npm run dev`)
 - [ ] Test production build (`npm run build`)
@@ -515,10 +515,10 @@ npm run build  # Second run: ~500ms (warm)
 
 ## Getting Help
 
-- **Documentation**: [https://nuxc.dev/docs](https://nuxc.dev/docs)
-- **GitHub Issues**: [https://github.com/your-org/nuxc/issues](https://github.com/your-org/nuxc/issues)
-- **Discord**: [https://discord.gg/nuxc](https://discord.gg/nuxc)
-- **Migration Tool**: `nuxc doctor` for diagnostics
+- **Documentation**: [https://nuxco.dev/docs](https://nuxco.dev/docs)
+- **GitHub Issues**: [https://github.com/your-org/nuxco/issues](https://github.com/your-org/nuxco/issues)
+- **Discord**: [https://discord.gg/nuxco](https://discord.gg/nuxco)
+- **Migration Tool**: `nuxco doctor` for diagnostics
 
 ---
 

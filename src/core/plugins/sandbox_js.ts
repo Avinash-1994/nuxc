@@ -1,9 +1,9 @@
 
 import vm from 'vm';
-import { NuxcPlugin, PluginHookName, PluginManifest } from './types.js';
+import { NuxcoPlugin, PluginHookName, PluginManifest } from './types.js';
 import { canonicalHash } from '../engine/hash.js';
 
-export class JSPluginSandbox implements NuxcPlugin {
+export class JSPluginSandbox implements NuxcoPlugin {
     manifest: PluginManifest;
     id: string;
     private context: vm.Context;

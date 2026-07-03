@@ -1,5 +1,5 @@
 /**
- * NUXC — Phase 2.16 Community Scaffolds Test Runner
+ * NUXCO — Phase 2.16 Community Scaffolds Test Runner
  * Tests: SC-01 through SC-07
  *
  * Covers: Gatsby, RedwoodJS, Stencil, Marko, Docusaurus
@@ -86,7 +86,7 @@ for (const s of scaffolds) {
   });
   const ms = Date.now() - t0;
   const stdout = (result.stdout || '') + (result.stderr || '');
-  const adapterLine = stdout.match(/\[nuxc\] adapter: (\S+)/);
+  const adapterLine = stdout.match(/\[nuxco\] adapter: (\S+)/);
   const adapterName = adapterLine ? adapterLine[1] : null;
   const detected = adapterName === s.adapterTag;
   buildResults.push({
@@ -121,7 +121,7 @@ pass('SC-02  Build pipeline (all 5 scaffolds)',
 
 // ─── SC-03  Gatsby specific ────────────────────────────────────────────────
 const gatsby = buildResults.find(r => r.name === 'gatsby');
-const gatsbyHasInfoLine  = gatsby.stdout.includes('[Nuxc:Gatsby]');
+const gatsbyHasInfoLine  = gatsby.stdout.includes('[Nuxco:Gatsby]');
 const gatsbyAdapter = gatsby.adapterName;
 const gatsbyPkg = JSON.parse(fs.readFileSync(path.join(gatsby.fixture, 'package.json'), 'utf-8'));
 
@@ -130,17 +130,17 @@ pass('SC-03  Gatsby scaffold specifics',
   gatsby.detected ? 'confirmed' : 'CHECK',
   [
     `gatsby version: ${gatsbyPkg.dependencies.gatsby}`,
-    `[nuxc] adapter: ${gatsbyAdapter || 'NOT DETECTED'}`,
-    `[Nuxc:Gatsby] INFO line present: ${gatsbyHasInfoLine}`,
-    `INFO message: [Nuxc:Gatsby] Detected Gatsby project. Use \`gatsby build\` for production.`,
+    `[nuxco] adapter: ${gatsbyAdapter || 'NOT DETECTED'}`,
+    `[Nuxco:Gatsby] INFO line present: ${gatsbyHasInfoLine}`,
+    `INFO message: [Nuxco:Gatsby] Detected Gatsby project. Use \`gatsby build\` for production.`,
     `Dev mode: serves from public/ directory`,
-    `Nuxc does NOT replace gatsby CLI: yes`,
+    `Nuxco does NOT replace gatsby CLI: yes`,
   ]
 );
 
 // ─── SC-04  RedwoodJS specific ─────────────────────────────────────────────
 const redwood = buildResults.find(r => r.name === 'redwoodjs');
-const rwHasInfoLine = redwood.stdout.includes('[Nuxc:RedwoodJS]');
+const rwHasInfoLine = redwood.stdout.includes('[Nuxco:RedwoodJS]');
 const rwPkg = JSON.parse(fs.readFileSync(path.join(redwood.fixture, 'package.json'), 'utf-8'));
 
 pass('SC-04  RedwoodJS scaffold specifics',
@@ -148,12 +148,12 @@ pass('SC-04  RedwoodJS scaffold specifics',
   redwood.detected ? 'confirmed' : 'CHECK',
   [
     `@redwoodjs/core version: ${rwPkg.dependencies['@redwoodjs/core']}`,
-    `[nuxc] adapter: ${redwood.adapterName || 'NOT DETECTED'}`,
-    `[Nuxc:RedwoodJS] INFO line present: ${rwHasInfoLine}`,
+    `[nuxco] adapter: ${redwood.adapterName || 'NOT DETECTED'}`,
+    `[Nuxco:RedwoodJS] INFO line present: ${rwHasInfoLine}`,
     `webSrc: web/src`,
     `apiSrc: api/src`,
-    `INFO message: [Nuxc:RedwoodJS] Nuxc handles the web/ side bundling natively.`,
-    `Nuxc does NOT replace yarn rw dev: yes`,
+    `INFO message: [Nuxco:RedwoodJS] Nuxco handles the web/ side bundling natively.`,
+    `Nuxco does NOT replace yarn rw dev: yes`,
   ]
 );
 
@@ -166,15 +166,15 @@ const stencilAdapterMod = await import('../dist/src/meta-frameworks/stencil/inde
 const stencilAdapterCls = stencilAdapterMod ? Object.values(stencilAdapterMod).find(v => v?.prototype?.plugins) : null;
 const stencilInst = stencilAdapterCls ? new stencilAdapterCls() : null;
 const stencilPlugins = stencilInst ? stencilInst.plugins() : [];
-const stencilPlugin = stencilPlugins.find(p => p.name === 'nuxc:stencil-compiler');
+const stencilPlugin = stencilPlugins.find(p => p.name === 'nuxco:stencil-compiler');
 
 pass('SC-05  Stencil scaffold specifics',
   '@Component decorator pipeline registered',
   'confirmed',
   [
     `@stencil/core version: ${stencilPkg.dependencies['@stencil/core']}`,
-    `[nuxc] adapter: ${stencil.adapterName || stencil.detected ? stencil.adapterTag : 'check'}`,
-    `Plugin registered: ${stencilPlugin ? stencilPlugin.name : 'nuxc:stencil-compiler'}`,
+    `[nuxco] adapter: ${stencil.adapterName || stencil.detected ? stencil.adapterTag : 'check'}`,
+    `Plugin registered: ${stencilPlugin ? stencilPlugin.name : 'nuxco:stencil-compiler'}`,
     `transform() present: ${stencilPlugin?.transform ? 'yes' : 'declared in adapter'}`,
     `Filters: .tsx files containing @stencil/core import`,
     `Cache: SQLite per-file hash via lazy-init cache`,
@@ -193,22 +193,22 @@ const markoAdapterCls = markoMod ? Object.values(markoMod).find(v => v?.prototyp
 const docsAdapterCls  = docsMod  ? Object.values(docsMod).find(v => v?.prototype?.plugins)  : null;
 const markoInst = markoAdapterCls ? new markoAdapterCls() : null;
 const docsInst  = docsAdapterCls  ? new docsAdapterCls()  : null;
-const markoPlugin = markoInst ? markoInst.plugins().find(p => p.name === 'nuxc:marko-compiler') : null;
-const docsPlugin  = docsInst  ? docsInst.plugins().find(p => p.name === 'nuxc:docusaurus-mdx')  : null;
+const markoPlugin = markoInst ? markoInst.plugins().find(p => p.name === 'nuxco:marko-compiler') : null;
+const docsPlugin  = docsInst  ? docsInst.plugins().find(p => p.name === 'nuxco:docusaurus-mdx')  : null;
 
 pass('SC-06  Marko + Docusaurus compiler integration',
   'both compiler plugins declared',
   'confirmed',
   [
     `marko version: ${markoPkg.dependencies.marko}`,
-    `[nuxc] adapter: ${marko.adapterName || marko.adapterTag}`,
-    `Plugin: ${markoPlugin?.name || 'nuxc:marko-compiler'}`,
+    `[nuxco] adapter: ${marko.adapterName || marko.adapterTag}`,
+    `Plugin: ${markoPlugin?.name || 'nuxco:marko-compiler'}`,
     `transform() present: ${markoPlugin?.transform ? 'yes' : 'declared'}`,
     `Filters: .marko files`,
     ``,
     `@docusaurus/core version: ${docsPkg.dependencies['@docusaurus/core']}`,
-    `[nuxc] adapter: ${docs.adapterName || docs.adapterTag}`,
-    `Plugin: ${docsPlugin?.name || 'nuxc:docusaurus-mdx'}`,
+    `[nuxco] adapter: ${docs.adapterName || docs.adapterTag}`,
+    `Plugin: ${docsPlugin?.name || 'nuxco:docusaurus-mdx'}`,
     `transform() present: ${docsPlugin?.transform ? 'yes' : 'declared'}`,
     `Filters: .mdx and .md files`,
   ]
@@ -260,7 +260,7 @@ pass('SC-07  Regression', 'all 15 prior fixtures pass', regAllPass ? 'all pass' 
 // ─── Summary ──────────────────────────────────────────────────────────────
 const allPass = allDetected && allBuilt && regAllPass;
 log(`┌──────────────────────────────────────────────────┐`);
-log(`│ NUXC — PHASE 2.16 COMMUNITY SCAFFOLDS COMPLETE │`);
+log(`│ NUXCO — PHASE 2.16 COMMUNITY SCAFFOLDS COMPLETE │`);
 log(`│ SC-01 Detection:    ${allDetected ? 'PASS' : 'WARN'}  ${buildResults.filter(r=>r.detected).length} of 5 adapters        │`);
 log(`│ SC-02 Build:        PASS  5 scaffolds build ok   │`);
 log(`│ SC-03 Gatsby:       PASS  public/ + INFO logged  │`);

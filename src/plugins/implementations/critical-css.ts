@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-critical-css
+ * @nuxco/plugin-critical-css
  * Critical CSS extraction
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCriticalCssPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-critical-css',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-critical-css',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for critical-css

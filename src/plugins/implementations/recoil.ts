@@ -1,15 +1,15 @@
 /**
- * @nuxc/plugin-recoil
+ * @nuxco/plugin-recoil
  * Recoil state management
- * Nuxc-native
+ * Nuxco-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRecoilPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-recoil',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-recoil',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // recoil transformation

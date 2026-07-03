@@ -1,0 +1,11 @@
+{
+  "hash": "793c84d0",
+  "depsHash": "8340a99a",
+  "deps": [
+    "alpinejs"
+  ],
+  "depMap": {
+    "alpinejs": "/@nuxco-deps/alpinejs.js"
+  },
+  "timestamp": 1782994132922
+}

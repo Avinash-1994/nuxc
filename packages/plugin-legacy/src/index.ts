@@ -1,4 +1,4 @@
-// Plugin type compatible with both Nuxc and Vite plugin API
+// Plugin type compatible with both Nuxco and Vite plugin API
 type Plugin = { name: string; [hook: string]: any };
 
 export interface LegacyPluginOptions {
@@ -13,9 +13,9 @@ export interface LegacyPluginOptions {
 }
 
 /**
- * @nuxc/plugin-legacy
+ * @nuxco/plugin-legacy
  *
- * Official Nuxc plugin for legacy browser support:
+ * Official Nuxco plugin for legacy browser support:
  * - Transpiles modern JavaScript to ES5 for old browsers (IE11, etc.)
  * - Automatically injects core-js polyfills for missing features
  * - Adds regenerator-runtime for async/generator functions
@@ -27,7 +27,7 @@ export interface LegacyPluginOptions {
  *
  * @example
  * ```js
- * const legacy = require('@nuxc/plugin-legacy');
+ * const legacy = require('@nuxco/plugin-legacy');
  * module.exports = {
  *   plugins: [legacy({ targets: ['IE 11', 'Chrome 49'] })],
  * };
@@ -44,7 +44,7 @@ export function legacyPlugin(options: LegacyPluginOptions = {}): Plugin {
   const legacyChunks = new Map<string, string>();
 
   return {
-    name: '@nuxc/plugin-legacy',
+    name: '@nuxco/plugin-legacy',
 
     /**
      * Transform hook: detect if module needs ES5 transpilation.
@@ -58,7 +58,7 @@ export function legacyPlugin(options: LegacyPluginOptions = {}): Plugin {
       if (!isJS || id.includes('node_modules')) return null;
 
       // Mark this module for legacy transpilation
-      // (actual SWC ES5 transform happens in Nuxc's build pipeline)
+      // (actual SWC ES5 transform happens in Nuxco's build pipeline)
       legacyChunks.set(id, code);
 
       // Return the original modern code unchanged
@@ -70,7 +70,7 @@ export function legacyPlugin(options: LegacyPluginOptions = {}): Plugin {
      * Load hook: inject polyfill entry point for legacy builds.
      */
     load(id: string): { code: string } | null {
-      if (id !== '/__nuxc_legacy_polyfills__') return null;
+      if (id !== '/__nuxco_legacy_polyfills__') return null;
 
       const polyfillImports: string[] = [];
 

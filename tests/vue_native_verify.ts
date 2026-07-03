@@ -4,7 +4,7 @@ import path from 'path';
 import { strict as assert } from 'assert';
 
 // Locate native binary
-const nativePath = path.resolve(process.cwd(), 'nuxc_native.node');
+const nativePath = path.resolve(process.cwd(), 'nuxco_native.node');
 console.log('Loading native binary from:', nativePath);
 const { NativeWorker } = require(nativePath);
 

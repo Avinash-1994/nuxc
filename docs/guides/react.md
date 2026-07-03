@@ -1,6 +1,6 @@
 # React Guide
 
-> Build React apps (18 & 19) with Nuxc — Fast Refresh HMR, JSX, TypeScript, CSS Modules.
+> Build React apps (18 & 19) with Nuxco — Fast Refresh HMR, JSX, TypeScript, CSS Modules.
 
 ---
 
@@ -8,10 +8,10 @@
 
 ```bash
 # Scaffold a React + TypeScript project
-nuxc bootstrap --name my-react-app --template react-ts
+nuxco bootstrap --name my-react-app --template react-ts
 
 cd my-react-app
-nuxc dev
+nuxco dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -23,16 +23,16 @@ Open [http://localhost:3000](http://localhost:3000).
 ### 1. Install
 
 ```bash
-npm install --save-dev nuxc
+npm install --save-dev nuxco
 npm install react react-dom
 npm install --save-dev @types/react @types/react-dom typescript
 ```
 
-### 2. Create `nuxc.config.js`
+### 2. Create `nuxco.config.js`
 
 **JavaScript:**
 ```js
-// nuxc.config.js
+// nuxco.config.js
 module.exports = {
   entry: ['./src/main.jsx'],
   outDir: './dist',
@@ -52,8 +52,8 @@ module.exports = {
 
 **TypeScript:**
 ```ts
-// nuxc.config.ts
-import { defineConfig } from 'nuxc';
+// nuxco.config.ts
+import { defineConfig } from 'nuxco';
 
 export default defineConfig({
   entry: ['./src/main.tsx'],
@@ -113,7 +113,7 @@ function App() {
 
   return (
     <div>
-      <h1>Hello from Nuxc + React</h1>
+      <h1>Hello from Nuxco + React</h1>
       <button onClick={() => setCount(c => c + 1)}>
         Count: {count}
       </button>
@@ -128,14 +128,14 @@ export default App;
 
 ## Hot Module Replacement (Fast Refresh)
 
-Nuxc integrates **React Fast Refresh** automatically for `.jsx`/`.tsx` files.
+Nuxco integrates **React Fast Refresh** automatically for `.jsx`/`.tsx` files.
 
 - Component state is **preserved** across saves
 - Only the changed component re-renders — not the whole page
 - Error overlay appears on runtime errors
 
 **How it works:**
-- Nuxc detects React files by extension and framework config
+- Nuxco detects React files by extension and framework config
 - Injects React Refresh runtime in dev mode
 - Communicates via WebSocket to the browser client
 
@@ -148,7 +148,7 @@ Nuxc integrates **React Fast Refresh** automatically for `.jsx`/`.tsx` files.
 If HMR stops working, try:
 ```bash
 # Restart dev server
-nuxc dev --force
+nuxco dev --force
 ```
 
 ---
@@ -198,7 +198,7 @@ npx tailwindcss init
 ```
 
 ```js
-// nuxc.config.js
+// nuxco.config.js
 module.exports = {
   css: {
     framework: 'tailwind',
@@ -239,7 +239,7 @@ module.exports = {
 ## Path Aliases
 
 ```js
-// nuxc.config.js
+// nuxco.config.js
 module.exports = {
   resolve: {
     alias: {
@@ -262,7 +262,7 @@ import { useAuth } from '@hooks/useAuth';
 ## Production Build
 
 ```bash
-nuxc build
+nuxco build
 ```
 
 Output in `./dist/`:
@@ -277,7 +277,7 @@ dist/
 
 **Serve the production build:**
 ```bash
-nuxc preview
+nuxco preview
 # Serves dist/ at http://localhost:4173
 ```
 
@@ -285,7 +285,7 @@ nuxc preview
 
 ## React 19 Compatibility
 
-Nuxc fully supports React 19:
+Nuxco fully supports React 19:
 
 ```bash
 npm install react@19 react-dom@19
@@ -335,5 +335,5 @@ Put side-effect-only imports (like `import './styles.css'`) at the top of `main.
 ## Next Steps
 
 - [Module Federation with React](./federation.md) — share components across micro-frontends
-- [Plugin Guide](../plugins.md) — extend Nuxc
+- [Plugin Guide](../plugins.md) — extend Nuxco
 - [Migration from Vite](../migration.md) — step-by-step migration

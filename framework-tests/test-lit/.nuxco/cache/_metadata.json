@@ -1,0 +1,19 @@
+{
+  "hash": "c45c1d9e",
+  "depsHash": "1614a012",
+  "deps": [
+    "lit",
+    "lit/html.js",
+    "lit/directives/class-map.js",
+    "lit/directives/style-map.js",
+    "lit/directives/repeat.js"
+  ],
+  "depMap": {
+    "lit": "/@nuxco-deps/lit.js",
+    "lit/html.js": "/@nuxco-deps/lit_html.js.js",
+    "lit/directives/class-map.js": "/@nuxco-deps/lit_directives_class-map.js.js",
+    "lit/directives/style-map.js": "/@nuxco-deps/lit_directives_style-map.js.js",
+    "lit/directives/repeat.js": "/@nuxco-deps/lit_directives_repeat.js.js"
+  },
+  "timestamp": 1782994154060
+}

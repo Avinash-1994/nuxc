@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-msw
+ * @nuxco/plugin-msw
  * Mock Service Worker integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMswPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-msw',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-msw',
+        originalPlugin: 'nuxco-native',
         
         async transform(code: string, id: string) {
             // Testing: Mock Service Worker integration

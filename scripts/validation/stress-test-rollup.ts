@@ -18,7 +18,7 @@ async function run() {
     }
 
     // 2. Run Build
-    console.log('🏗️ Running nuxc build with @rollup/plugin-alias...');
+    console.log('🏗️ Running nuxco build with @rollup/plugin-alias...');
     execSync(`node ${cliPath} build`, { cwd: rootDir, stdio: 'inherit' });
 
     // 2. Verify Artifacts

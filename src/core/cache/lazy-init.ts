@@ -41,7 +41,7 @@ export class LazyCacheInitializer {
      */
     private setupPersistentStorage() {
         // Task Day 51: Persistent cache for Docker/Edge
-        const tmpCache = '/tmp/nuxc-cache';
+        const tmpCache = '/tmp/nuxco-cache';
         if (process.env.DOCKER_CONTAINER && !fs.existsSync(this.cacheDir)) {
             try {
                 if (!fs.existsSync(tmpCache)) fs.mkdirSync(tmpCache, { recursive: true });
@@ -90,19 +90,19 @@ export class LazyCacheInitializer {
         const startTime = Date.now();
 
         try {
-            // Phase 1.2 [SAFE REMOVAL] - Migrate legacy `.nuxc/cache` or `.nuxc_cache` naming conventions
+            // Phase 1.2 [SAFE REMOVAL] - Migrate legacy `.nuxco/cache` or `.nuxco_cache` naming conventions
             const projectRoot = path.dirname(path.dirname(this.cacheDir));
-            const legacyNuclie = path.join(projectRoot, '.nuxc', 'cache');
-            const legacyNuxc = path.join(projectRoot, '.nuxc_cache');
+            const legacyNuclie = path.join(projectRoot, '.nuxco', 'cache');
+            const legacyNuxco = path.join(projectRoot, '.nuxco_cache');
             
             if (fs.existsSync(legacyNuclie) && !fs.existsSync(this.cacheDir)) {
-                log.info(`Migrating legacy LevelDB cache from .nuxc/cache -> .nuxc/cache`);
+                log.info(`Migrating legacy LevelDB cache from .nuxco/cache -> .nuxco/cache`);
                 fs.mkdirSync(path.dirname(this.cacheDir), { recursive: true });
                 fs.renameSync(legacyNuclie, this.cacheDir);
-            } else if (fs.existsSync(legacyNuxc) && !fs.existsSync(this.cacheDir)) {
-                log.info(`Migrating legacy .nuxc_cache -> .nuxc/cache`);
+            } else if (fs.existsSync(legacyNuxco) && !fs.existsSync(this.cacheDir)) {
+                log.info(`Migrating legacy .nuxco_cache -> .nuxco/cache`);
                 fs.mkdirSync(path.dirname(this.cacheDir), { recursive: true });
-                fs.renameSync(legacyNuxc, this.cacheDir);
+                fs.renameSync(legacyNuxco, this.cacheDir);
             }
 
             if (!fs.existsSync(this.cacheDir)) {
@@ -174,7 +174,7 @@ let globalLazyCache: LazyCacheInitializer | null = null;
 
 export function getLazyCache(cacheDir?: string): LazyCacheInitializer {
     if (!globalLazyCache) {
-        const dir = cacheDir || path.join(process.cwd(), '.nuxc', 'cache');
+        const dir = cacheDir || path.join(process.cwd(), '.nuxco', 'cache');
         globalLazyCache = new LazyCacheInitializer({
             cacheDir: dir,
             preload: true,

@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-webp
+ * @nuxco/plugin-webp
  * WebP image conversion
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createWebpPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-webp',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-webp',
+        originalPlugin: 'nuxco-native',
         
         async load(id: string) {
             // Asset loading for webp

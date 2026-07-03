@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-preload
+ * @nuxco/plugin-preload
  * Resource preloading
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPreloadPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-preload',
-        originalPlugin: 'nuxc-native',
+        name: '@nuxco/plugin-preload',
+        originalPlugin: 'nuxco-native',
         
         async buildStart() {
-            console.log('[@nuxc/plugin-preload] Starting performance optimization...');
+            console.log('[@nuxco/plugin-preload] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createPreloadPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuxc/plugin-preload] Performance optimization complete');
+            console.log('[@nuxco/plugin-preload] Performance optimization complete');
         }
     };
 }

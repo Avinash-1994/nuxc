@@ -1,11 +1,11 @@
-# Migrating from Vite to Nuxc
+# Migrating from Vite to Nuxco
 
-Nuxc is designed to be a fast replacement for Vite.
+Nuxco is designed to be a fast replacement for Vite.
 
 ## 1. Quick Switch
 Run the auto-migration command:
 ```bash
-npx nuxc migrate
+npx nuxco migrate
 ```
 
 ## 2. Manual Migration
@@ -14,18 +14,18 @@ npx nuxc migrate
 Change your content in `package.json`:
 ```json
 "scripts": {
-  "dev": "nuxc dev",
-  "build": "nuxc build"
+  "dev": "nuxco dev",
+  "build": "nuxco build"
 }
 ```
 
 ### Reuse Vite Plugins
-Nuxc can reuse many Vite-compatible plugins through compatibility adapters.
+Nuxco can reuse many Vite-compatible plugins through compatibility adapters.
 
 ```ts
-// nuxc.config.ts
-import { defineConfig } from 'nuxc';
-import { rollupAdapter } from '@nuxc/plugin-compat';
+// nuxco.config.ts
+import { defineConfig } from 'nuxco';
+import { rollupAdapter } from '@nuxco/plugin-compat';
 import someVitePlugin from 'vite-plugin-cool';
 
 export default defineConfig({
@@ -36,10 +36,10 @@ export default defineConfig({
 ```
 
 ## 3. Environment Variables
-Nuxc respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
+Nuxco respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
 
 ## 4. Key Differences
-| Feature | Vite | Nuxc |
+| Feature | Vite | Nuxco |
 |---------|------|-------|
 | Startup | ~400ms | < 50ms |
 | Build | esbuild/Rollup | Native Rust |

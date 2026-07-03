@@ -1,20 +1,20 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { NuxcPlugin } from '../core/plugins/types.js';
+import { NuxcoPlugin } from '../core/plugins/types.js';
 import { log } from '../utils/logger.js';
 
-export function createStaticPlugin(rootDir: string, outDir: string): NuxcPlugin {
+export function createStaticPlugin(rootDir: string, outDir: string): NuxcoPlugin {
     return {
         manifest: {
-            name: 'nuxc:static',
+            name: 'nuxco:static',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['buildEnd'],
             permissions: { fs: 'read' }
         },
-        id: 'nuxc:static',
+        id: 'nuxco:static',
         async runHook(hook, data) {
             if (hook !== 'buildEnd') return data;
 

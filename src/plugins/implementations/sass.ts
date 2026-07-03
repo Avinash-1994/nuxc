@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-sass
+ * @nuxco/plugin-sass
  * Sass/SCSS compilation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSassPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-sass',
+        name: '@nuxco/plugin-sass',
         originalPlugin: 'sass-loader',
         
         async transform(code: string, id: string) {

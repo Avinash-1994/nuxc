@@ -35,7 +35,7 @@ export class DevWatcher extends EventEmitter {
 
     private start() {
         const ignoredPatterns = [
-            '**/node_modules/**', '**/.git/**', '**/dist/**', '**/.nuxc/**', '**/.nuxc_cache/**'
+            '**/node_modules/**', '**/.git/**', '**/dist/**', '**/.nuxco/**', '**/.nuxco_cache/**'
         ];
 
         if (NativeWatcher) {
@@ -56,21 +56,21 @@ export class DevWatcher extends EventEmitter {
                 });
                 this.engine = 'rust-notify';
                 // Resolve real version from package.json; never use a hardcoded placeholder
-                let nuxcNativeVer = '0.1.0';
+                let nuxcoNativeVer = '0.1.0';
                 try {
                     const pkg = require('../../package.json');
-                    nuxcNativeVer = pkg.version ?? '0.1.0';
+                    nuxcoNativeVer = pkg.version ?? '0.1.0';
                 } catch { /* package.json not readable — use safe default */ }
                 const ver = typeof this.nativeWatcher.getVersion === 'function'
                     ? this.nativeWatcher.getVersion()
-                    : `rust-notify (nuxc-native v${nuxcNativeVer})`;
-                console.log(`[nuxc] watcher: ${ver}`);
+                    : `rust-notify (nuxco-native v${nuxcoNativeVer})`;
+                console.log(`[nuxco] watcher: ${ver}`);
                 return;
             } catch (err: any) {
-                console.warn(`[nuxc] WARN: native watcher failed to load, falling back to chokidar (`, err?.message ?? err, `)`);
+                console.warn(`[nuxco] WARN: native watcher failed to load, falling back to chokidar (`, err?.message ?? err, `)`);
             }
         } else {
-            console.warn(`[nuxc] WARN: native watcher failed to load, falling back to chokidar`);
+            console.warn(`[nuxco] WARN: native watcher failed to load, falling back to chokidar`);
         }
 
         // Chokidar fallback
@@ -91,7 +91,7 @@ export class DevWatcher extends EventEmitter {
             });
             this.engine = 'chokidar';
         } catch (err: any) {
-            console.error(`[nuxc] Both native watcher and chokidar failed: ${err.message}`);
+            console.error(`[nuxco] Both native watcher and chokidar failed: ${err.message}`);
         }
     }
 

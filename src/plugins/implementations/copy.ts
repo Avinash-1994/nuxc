@@ -1,5 +1,5 @@
 /**
- * @nuxc/plugin-copy
+ * @nuxco/plugin-copy
  * Static file copying
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCopyPlugin(): PluginAdapter {
     return {
-        name: '@nuxc/plugin-copy',
+        name: '@nuxco/plugin-copy',
         originalPlugin: 'copy-webpack-plugin',
         
         async transform(code: string, id: string) {

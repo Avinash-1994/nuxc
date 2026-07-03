@@ -1,4 +1,4 @@
-import type { Plugin } from '@nuxc/adapter-core';
+import type { Plugin } from '@nuxco/adapter-core';
 import { spawn } from 'child_process';
 import path from 'path';
 
@@ -6,7 +6,7 @@ let electronProcess: any = null;
 
 export function electronPlugin(): Plugin {
   return {
-    name: 'nuxc:electron-process',
+    name: 'nuxco:electron-process',
 
     async transform(code: string, id: string) {
        // Identify and externalize common Node.js / Electron APIs like 'ipcRenderer', 'fs', etc.

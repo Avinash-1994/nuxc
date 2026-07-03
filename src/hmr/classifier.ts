@@ -38,8 +38,8 @@ export interface FileChange {
 
 export class HMRClassifier {
     private configFiles = new Set([
-        'nuxc.config.js',
-        'nuxc.config.ts',
+        'nuxco.config.js',
+        'nuxco.config.ts',
         'package.json',
         'tsconfig.json',
         'vite.config.js',

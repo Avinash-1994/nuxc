@@ -1,4 +1,4 @@
-# Nuxc Ecosystem Stability Audit — Release Gate Checklist
+# Nuxco Ecosystem Stability Audit — Release Gate Checklist
 
 **Purpose**: Recurring audit for every minor release  
 **Frequency**: Before every `v1.x.0` release  
@@ -239,7 +239,7 @@ npm run audit:breaking-changes
 ## 📊 Audit Report Template
 
 ```markdown
-# Nuxc v1.x.0 Stability Audit Report
+# Nuxco v1.x.0 Stability Audit Report
 
 **Date**: YYYY-MM-DD
 **Auditor**: [Name]
@@ -355,5 +355,5 @@ node scripts/audit-breaking-changes.js
 
 **This audit is mandatory. No exceptions.**
 
-**Signed**: Nuxc Core Team  
+**Signed**: Nuxco Core Team  
 **Effective**: Phase H2.6 Complete

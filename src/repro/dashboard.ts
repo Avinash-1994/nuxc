@@ -267,7 +267,7 @@ export class ReproDashboard {
      * Generate shareable link
      */
     private generateShareableLink(id: string): string {
-        return `https://nuxc.dev/repro/${id}`;
+        return `https://nuxco.dev/repro/${id}`;
     }
 
     /**

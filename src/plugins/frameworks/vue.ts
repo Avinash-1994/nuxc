@@ -1,5 +1,5 @@
 /**
- * @nuxc/vue - Production-Grade Vue Plugin
+ * @nuxco/vue - Production-Grade Vue Plugin
  * 
  * Features:
  * - Graph-derived HMR
@@ -47,7 +47,7 @@ export interface VuePluginOptions {
     };
 }
 
-export function nuxcVue(options: VuePluginOptions = {}): Plugin {
+export function nuxcoVue(options: VuePluginOptions = {}): Plugin {
     const {
         hmr = true,
         development = process.env.NODE_ENV !== 'production',
@@ -68,7 +68,7 @@ export function nuxcVue(options: VuePluginOptions = {}): Plugin {
     }>();
 
     return {
-        name: 'nuxc-vue',
+        name: 'nuxco-vue',
 
         async buildStart() {
             // Clear caches on rebuild
@@ -232,7 +232,7 @@ async function parseSFC(code: string, id: string): Promise<{ descriptor: SFCDesc
 
         return { descriptor, rawDescriptor };
     } catch (error) {
-        console.warn('[nuxc-vue] @vue/compiler-sfc not available, using basic parser');
+        console.warn('[nuxco-vue] @vue/compiler-sfc not available, using basic parser');
         return { descriptor: basicParseSFC(code) };
     }
 }
@@ -264,7 +264,7 @@ async function compileTemplate(template: string, options: any): Promise<string> 
         });
         return code;
     } catch (error) {
-        console.warn('[nuxc-vue] Template compilation failed:', error);
+        console.warn('[nuxco-vue] Template compilation failed:', error);
         return `export function render() { return null; }`;
     }
 }
@@ -280,7 +280,7 @@ async function compileScriptSetup(rawDescriptor: any, options: any): Promise<str
         });
         return content;
     } catch (error) {
-        console.warn('[nuxc-vue] Script setup compilation failed:', error);
+        console.warn('[nuxco-vue] Script setup compilation failed:', error);
         return rawDescriptor.scriptSetup?.content || '';
     }
 }
@@ -317,6 +317,6 @@ function generateSourceMap(originalCode: string, transformedCode: string, id: st
 // Export helper for use in config
 export function vuePreset(options: VuePluginOptions = {}): Plugin[] {
     return [
-        nuxcVue(options)
+        nuxcoVue(options)
     ];
 }

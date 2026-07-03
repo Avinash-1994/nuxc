@@ -5,7 +5,7 @@ let overlay: any;
 
 function getOverlay() {
     if (!overlay) {
-        overlay = document.createElement('nuxc-error-overlay');
+        overlay = document.createElement('nuxco-error-overlay');
         document.body.appendChild(overlay);
     }
     return overlay;
@@ -92,7 +92,7 @@ function connect() {
     ws = new WebSocket(`${protocol}//${window.location.host}`);
 
     ws.onopen = () => {
-        // console.log('[nuxc] Connected to dev server');
+        // console.log('[nuxco] Connected to dev server');
         reconnectAttempts = 0;
         flushClientErrors();
         // Notify server we are ready?
@@ -103,7 +103,7 @@ function connect() {
             const message = JSON.parse(event.data);
 
             if (message.type === 'connected') {
-                console.log('[nuxc] Connected.');
+                console.log('[nuxco] Connected.');
             }
 
             // Security: Config Sync
@@ -114,16 +114,16 @@ function connect() {
 
             if (message.type === 'config:changed') {
                 config = message.config;
-                // console.log('[nuxc] Config updated remotely:', message.update);
+                // console.log('[nuxco] Config updated remotely:', message.update);
             }
 
             if (message.type === 'error') {
-                console.error('[nuxc] Build Error:', message.error);
+                console.error('[nuxco] Build Error:', message.error);
                 showError({ type: 'build', ...message.error });
             }
 
             if (message.type === 'reload' || message.type === 'restarting') {
-                console.log('[nuxc] Reloading page...');
+                console.log('[nuxco] Reloading page...');
                 window.location.reload();
             }
 
@@ -150,12 +150,12 @@ function connect() {
 
                 // Handle <style> tags (CSS-in-JS or Vue/Angular injections)
                 if (!handled) {
-                    // This is harder without IDs. Nuxc's CSS plugin injects with IDs?
+                    // This is harder without IDs. Nuxco's CSS plugin injects with IDs?
                     // Assuming global reload for now if not found
                     // Or trying to find style tag with data-vite-dev-id equivalent
                 }
 
-                if (handled) console.log(`[nuxc] CSS updated: ${path}`);
+                if (handled) console.log(`[nuxco] CSS updated: ${path}`);
             }
 
             if (message.type === 'update') {
@@ -165,14 +165,14 @@ function connect() {
             }
 
         } catch (e) {
-            console.error('[nuxc] Failed to parse WebSocket message', e);
+            console.error('[nuxco] Failed to parse WebSocket message', e);
         }
     };
 
     ws.onclose = () => {
         if (reconnectAttempts < MAX_ATTEMPTS) {
             const timeout = Math.min(1000 * Math.pow(2, reconnectAttempts), 5000);
-            console.log(`[nuxc] Disconnected. Reconnecting in ${timeout}ms...`);
+            console.log(`[nuxco] Disconnected. Reconnecting in ${timeout}ms...`);
             setTimeout(connect, timeout);
             reconnectAttempts++;
         }
@@ -184,7 +184,7 @@ async function applyUpdates(updates: any[]) {
     for (const update of updates) {
         const mod = hotModulesMap.get(update.path);
         if (mod) {
-            console.log(`[nuxc] HMR Update: ${update.path}`);
+            console.log(`[nuxco] HMR Update: ${update.path}`);
 
             // 1. Call dispose
             const data = {};
@@ -202,7 +202,7 @@ async function applyUpdates(updates: any[]) {
                     cb.fn([newMod]);
                 });
             } catch (e) {
-                console.error(`[nuxc] HMR Error in ${update.path}:`, e);
+                console.error(`[nuxco] HMR Error in ${update.path}:`, e);
                 window.location.reload(); // Fallback
             }
         } else {
@@ -212,7 +212,7 @@ async function applyUpdates(updates: any[]) {
 }
 
 // 2. Global API
-(window as any).nuxc = {
+(window as any).nuxco = {
     getConfig: () => config,
     updateConfig: (path: string, value: any, persist = false) => {
         if (ws && ws.readyState === WebSocket.OPEN) {
@@ -255,7 +255,7 @@ export function createHotContext(ownerPath: string) {
                 });
             } else {
                 // Dep-accept: accept(['./foo'], cb)
-                // Nuxc v1 simplified: treat as self-accept for now or reload
+                // Nuxco v1 simplified: treat as self-accept for now or reload
                 // Proper dep support requires graph analysis on client or server sending graph
             }
         },

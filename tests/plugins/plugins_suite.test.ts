@@ -1,20 +1,20 @@
 /**
  * Plugin System Test Suite — Agent 5
- * Tests the Nuxc plugin system: load hooks, transform hooks, virtual modules,
+ * Tests the Nuxco plugin system: load hooks, transform hooks, virtual modules,
  * ordering, error handling, and context APIs.
  */
 
 import { PluginManager } from '../../src/core/plugins/manager.js';
-import type { NuxcPlugin } from '../../src/core/plugins/types.js';
+import type { NuxcoPlugin } from '../../src/core/plugins/types.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 
-const TMP = path.join(os.tmpdir(), 'nuxc-plugin-tests');
+const TMP = path.join(os.tmpdir(), 'nuxco-plugin-tests');
 fs.mkdirSync(TMP, { recursive: true });
 
-// Helper: build a minimal NuxcPlugin
-function makePlugin(name: string, runHookFn: NuxcPlugin['runHook']): NuxcPlugin {
+// Helper: build a minimal NuxcoPlugin
+function makePlugin(name: string, runHookFn: NuxcoPlugin['runHook']): NuxcoPlugin {
     return {
         id: name,
         manifest: {
