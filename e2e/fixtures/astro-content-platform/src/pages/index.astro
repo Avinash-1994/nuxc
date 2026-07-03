@@ -6,9 +6,9 @@ import { getCollection } from 'astro:content';
 const posts = await getCollection('blog');
 const featuredPosts = posts.filter(p => p.data.featured);
 ---
-<BaseLayout title="Home | Nuce Astro Platform">
+<BaseLayout title="Home | Nuxc Astro Platform">
   <section class="hero">
-    <h1>⚡ Nuce Astro Platform</h1>
+    <h1>⚡ Nuxc Astro Platform</h1>
     <p>Zero JS by default. Islands on demand.</p>
     <Counter client:idle initialCount={0} />
   </section>

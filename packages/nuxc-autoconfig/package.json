@@ -1,0 +1,13 @@
+{
+  "name": "@nuxc/autoconfig",
+  "version": "1.15.0",
+  "description": "Nuxc zero-config framework auto-detection",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "import": "./dist/index.js", "types": "./dist/index.d.ts" }
+  },
+  "files": ["dist"],
+  "sideEffects": false
+}

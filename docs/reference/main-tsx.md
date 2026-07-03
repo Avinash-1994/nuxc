@@ -91,7 +91,7 @@ ContentType: application/javascript ✅
 
 ### Test 2: Transformed Content
 ```javascript
-/** Nuce Dev Preamble **/
+/** Nuxc Dev Preamble **/
 if (!window.process) window.process = { env: {} };
 Object.assign(window.process.env, { "NODE_ENV": "development" });
 

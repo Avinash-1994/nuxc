@@ -1,6 +1,6 @@
 /**
  * S4 — Security CLI Commands
- * nuce security audit | sbom | plugin-audit | fix
+ * nuxc security audit | sbom | plugin-audit | fix
  *
  * Uses direct relative imports — works with NodeNext module resolution.
  */
@@ -9,7 +9,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 
 const PROJECT_ROOT = process.cwd();
-const SECURITY_DIR = path.join(PROJECT_ROOT, '.nuce', 'security');
+const SECURITY_DIR = path.join(PROJECT_ROOT, '.nuxc', 'security');
 const DIST_DIR = path.join(PROJECT_ROOT, 'dist');
 
 // ── Inline security implementations ──────────────────────────────────────────
@@ -69,7 +69,7 @@ interface LockfileViolation { name: string; version: string; expected: string; f
 function auditLockfileIntegrity(): { clean: boolean; checked: number; violations: LockfileViolation[] } {
   const lockPath = path.join(PROJECT_ROOT, 'package-lock.json');
   if (!fs.existsSync(lockPath)) {
-    console.warn('[nuce:security] No package-lock.json found — skipping lockfile audit.');
+    console.warn('[nuxc:security] No package-lock.json found — skipping lockfile audit.');
     return { clean: true, checked: 0, violations: [] };
   }
 
@@ -99,7 +99,7 @@ function auditLockfileIntegrity(): { clean: boolean; checked: number; violations
       `\nSECURITY: Lockfile integrity violation.\n` +
       `  Package: ${v.name}@${v.version}\n` +
       `  Expected: ${v.expected}\n  Found: ${v.found}\n` +
-      `  Run: nuce security audit --fix to investigate.`
+      `  Run: nuxc security audit --fix to investigate.`
     );
   }
 
@@ -108,9 +108,9 @@ function auditLockfileIntegrity(): { clean: boolean; checked: number; violations
 
 // ── Public command implementations ────────────────────────────────────────────
 
-/** nuce security audit — lockfile + CVE + secret scan */
+/** nuxc security audit — lockfile + CVE + secret scan */
 export async function runSecurityAudit(options: { output?: string } = {}): Promise<{ exitCode: 0 | 1 }> {
-  console.log('\n🔒 Nuce Security Audit\n' + '─'.repeat(40));
+  console.log('\n🔒 Nuxc Security Audit\n' + '─'.repeat(40));
   fs.mkdirSync(SECURITY_DIR, { recursive: true });
   let hasViolations = false;
 
@@ -135,9 +135,9 @@ export async function runSecurityAudit(options: { output?: string } = {}): Promi
       const pkgs = (lock['packages'] as Record<string, unknown> | undefined) ?? {};
       pkgCount = Object.keys(pkgs).filter((k) => k && k !== '').length;
     }
-    // CVE scan via OSV is done via the dedicated nuce-security package
+    // CVE scan via OSV is done via the dedicated nuxc-security package
     // For the CLI command, we report that the check defers to the full audit
-    console.log(`  ✅ ${pkgCount} packages queued for OSV scan (run \`nuce security audit\` for full CVE report)`);
+    console.log(`  ✅ ${pkgCount} packages queued for OSV scan (run \`nuxc security audit\` for full CVE report)`);
   } catch (err) {
     console.warn('  ⚠️  CVE scan setup failed:', (err as Error).message);
   }
@@ -175,7 +175,7 @@ export async function runSecurityAudit(options: { output?: string } = {}): Promi
   return { exitCode: 0 };
 }
 
-/** nuce security sbom — generate SBOM from installed deps */
+/** nuxc security sbom — generate SBOM from installed deps */
 export async function runSBOMCommand(): Promise<void> {
   const { createHash } = await import('node:crypto');
   console.log('🔒 Generating SBOM (CycloneDX 1.5)...');
@@ -212,18 +212,18 @@ export async function runSBOMCommand(): Promise<void> {
     version: 1,
     metadata: {
       timestamp: new Date().toISOString(),
-      tools: [{ name: 'nuce', version: '1.4.0' }],
+      tools: [{ name: 'nuxc', version: '1.4.0' }],
     },
     components,
   };
 
   fs.mkdirSync(DIST_DIR, { recursive: true });
-  const outPath = path.join(DIST_DIR, 'nuce-sbom.json');
+  const outPath = path.join(DIST_DIR, 'nuxc-sbom.json');
   fs.writeFileSync(outPath, JSON.stringify(sbom, null, 2), 'utf8');
   console.log(`✅ SBOM written → ${outPath} (${components.length} components)`);
 }
 
-/** nuce security plugin-audit — list installed plugins with permissions */
+/** nuxc security plugin-audit — list installed plugins with permissions */
 export async function runPluginAuditCommand(): Promise<void> {
   console.log('🔒 Plugin Permission Audit\n' + '─'.repeat(40));
 
@@ -244,13 +244,13 @@ export async function runPluginAuditCommand(): Promise<void> {
           if (sub.startsWith('plugin-')) pluginDirs.push(`${dir}/${sub}`);
         }
       }
-    } else if (dir.startsWith('nuce-plugin-')) {
+    } else if (dir.startsWith('nuxc-plugin-')) {
       pluginDirs.push(dir);
     }
   }
 
   if (pluginDirs.length === 0) {
-    console.log('  No Nuce plugins found in node_modules.');
+    console.log('  No Nuxc plugins found in node_modules.');
     return;
   }
 
@@ -259,14 +259,14 @@ export async function runPluginAuditCommand(): Promise<void> {
     if (!fs.existsSync(pkgJsonPath)) continue;
 
     const pkg = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8')) as Record<string, unknown>;
-    const perms: string[] = ((pkg['nuce'] as Record<string, unknown> | undefined)?.['permissions'] as string[]) ?? [];
+    const perms: string[] = ((pkg['nuxc'] as Record<string, unknown> | undefined)?.['permissions'] as string[]) ?? [];
     const isDangerous = perms.some((p) => DANGEROUS.includes(p));
     const flag = isDangerous ? '⚠️  DANGEROUS' : '✅';
     console.log(`  ${flag} ${dir}: [${perms.join(', ') || 'none'}]`);
   }
 }
 
-/** nuce security fix — auto-upgrades lockfiles and rewrites process.env to import.meta.env */
+/** nuxc security fix — auto-upgrades lockfiles and rewrites process.env to import.meta.env */
 export async function runSecurityFix(): Promise<void> {
   console.log('🔒 Security Auto-Fix\n' + '─'.repeat(40));
   
@@ -289,7 +289,7 @@ export async function runSecurityFix(): Promise<void> {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       const fullPath = path.join(dir, entry.name);
       if (entry.isDirectory()) {
-        if (!['node_modules', 'dist', 'build_output', '.nuce', '.git'].includes(entry.name)) {
+        if (!['node_modules', 'dist', 'build_output', '.nuxc', '.git'].includes(entry.name)) {
           scanAndRewrite(fullPath);
         }
       } else if (entry.isFile()) {
@@ -331,14 +331,14 @@ export async function runSecurityFix(): Promise<void> {
 
 // ── BUG-CLI-05: 4 additional security subcommands ─────────────────────────────
 
-/** nuce security scan — scan source files for leaked secrets */
+/** nuxc security scan — scan source files for leaked secrets */
 export async function runSecurityScan(
   args: { dir?: string; 'include-dist'?: boolean; allowlist?: string; ci?: boolean } = {}
 ): Promise<{ exitCode: 0 | 1 }> {
   const targetDir = path.join(PROJECT_ROOT, args.dir ?? 'src');
   const allowedPatterns: RegExp[] = args.allowlist ? [new RegExp(args.allowlist)] : [];
 
-  console.log(`\n🔍 Nuce Secret Scan — ${targetDir}\n` + '─'.repeat(40));
+  console.log(`\n🔍 Nuxc Secret Scan — ${targetDir}\n` + '─'.repeat(40));
 
   function deepScan(dir: string): SecretViolation[] {
     const found: SecretViolation[] = [];
@@ -346,7 +346,7 @@ export async function runSecurityScan(
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       const full = path.join(dir, entry.name);
       if (entry.isDirectory()) {
-        if (!['node_modules', '.git', '.nuce', 'build_output', 'dist'].includes(entry.name))
+        if (!['node_modules', '.git', '.nuxc', 'build_output', 'dist'].includes(entry.name))
           found.push(...deepScan(full));
       } else if (entry.isFile()) {
         const ext = path.extname(entry.name).toLowerCase();
@@ -379,12 +379,12 @@ export async function runSecurityScan(
   return { exitCode: args.ci ? 1 : 0 };
 }
 
-/** nuce security cve — check dependencies against CVE database (OSV.dev) */
+/** nuxc security cve — check dependencies against CVE database (OSV.dev) */
 export async function runCVEScan(
   args: { severity?: string; 'no-cache'?: boolean; json?: boolean } = {}
 ): Promise<{ exitCode: 0 | 1 }> {
   const severity = (args.severity ?? 'high').toUpperCase();
-  console.log(`\n🛡️  Nuce CVE Scan (min severity: ${severity})\n` + '─'.repeat(40));
+  console.log(`\n🛡️  Nuxc CVE Scan (min severity: ${severity})\n` + '─'.repeat(40));
 
   const lockPath = path.join(PROJECT_ROOT, 'package-lock.json');
   if (!fs.existsSync(lockPath)) {
@@ -404,8 +404,8 @@ export async function runCVEScan(
   console.log(`  Scanning ${packages.length} packages against OSV.dev...`);
 
   try {
-    const cacheDir = path.join(PROJECT_ROOT, '.nuce', 'security');
-    const { scanCVE } = await import('@nuce/security');
+    const cacheDir = path.join(PROJECT_ROOT, '.nuxc', 'security');
+    const { scanCVE } = await import('@nuxc/security');
     const result = await scanCVE(packages, { cacheDir, distDir: DIST_DIR });
     if (args.json) {
       console.log(JSON.stringify(result, null, 2));
@@ -425,14 +425,14 @@ export async function runCVEScan(
   return { exitCode: 0 };
 }
 
-/** nuce security headers — generate server security headers */
+/** nuxc security headers — generate server security headers */
 export async function runSecurityHeaders(
   args: { format?: string; strict?: boolean; output?: string } = {}
 ): Promise<void> {
   const format = args.format ?? 'vercel';
   console.log(`\n🔒 Security Headers Generator (format: ${format})\n` + '─'.repeat(40));
 
-  const { generateCSP, generateSecurityHeaders } = await import('@nuce/security');
+  const { generateCSP, generateSecurityHeaders } = await import('@nuxc/security');
 
   const cspConfig = {
     defaultSrc: ["'self'"],
@@ -470,13 +470,13 @@ export async function runSecurityHeaders(
   }
 }
 
-/** nuce security report — full security report (HTML or JSON) */
+/** nuxc security report — full security report (HTML or JSON) */
 export async function runSecurityReport(
   args: { format?: string; output?: string } = {}
 ): Promise<void> {
   const format = args.format ?? 'html';
   const outFile = args.output ?? `security-report.${format === 'html' ? 'html' : 'json'}`;
-  console.log(`\n📊 Nuce Security Report (format: ${format})\n` + '─'.repeat(40));
+  console.log(`\n📊 Nuxc Security Report (format: ${format})\n` + '─'.repeat(40));
 
   const lockResult = auditLockfileIntegrity();
   const secretViolations = scanSecretsInDir(DIST_DIR);
@@ -494,11 +494,11 @@ export async function runSecurityReport(
     fs.writeFileSync(outFile, JSON.stringify(reportData, null, 2), 'utf8');
   } else {
     const scoreColor = overall === 'PASS' ? '#22c55e' : '#ef4444';
-    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Nuce Security Report</title>
+    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Nuxc Security Report</title>
 <style>body{font-family:system-ui,sans-serif;background:#0f172a;color:#e2e8f0;padding:2rem}
 h1{color:#38bdf8}.card{background:#1e293b;border-radius:8px;padding:1.5rem;margin:1rem 0}
 .pass{color:#22c55e}.fail{color:#ef4444}.badge{display:inline-block;padding:.25rem .75rem;border-radius:9999px;font-weight:700}</style></head>
-<body><h1>⚡ Nuce Security Report</h1><p>Generated: ${reportData.generatedAt}</p>
+<body><h1>⚡ Nuxc Security Report</h1><p>Generated: ${reportData.generatedAt}</p>
 <div class="card"><h2>Overall: <span class="badge" style="background:${scoreColor}">${overall}</span></h2></div>
 <div class="card"><h3>Lockfile Integrity</h3>
 <p class="${lockResult.clean ? 'pass' : 'fail'}">${lockResult.clean ? '✅ Clean' : `❌ ${reportData.lockfile.violations} violation(s)`} (${lockResult.checked} packages checked)</p></div>

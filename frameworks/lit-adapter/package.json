@@ -1,12 +1,12 @@
 {
-    "name": "@nuce/lit-adapter",
+    "name": "@nuxc/lit-adapter",
     "version": "0.1.0",
-    "description": "Nuce Framework Adapter for Lit (Tier-1 Supported)",
+    "description": "Nuxc Framework Adapter for Lit (Tier-1 Supported)",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
         "build": "tsc",
-        "test": "echo 'Run integration tests via Nuce runner'"
+        "test": "echo 'Run integration tests via Nuxc runner'"
     },
     "dependencies": {
         "vite": "^5.0.0"
@@ -16,10 +16,10 @@
         "lit": "^3.1.0",
         "@types/node": "^20.0.0"
     },
-    "nuce": {
+    "nuxc": {
         "name": "Lit Adapter",
         "state": "candidate",
-        "maintainer": "Nuce Core Team",
+        "maintainer": "Nuxc Core Team",
         "supported_capabilities": [
             "build",
             "hmr",

@@ -1,5 +1,5 @@
 // tests/harness/index.ts
-// Nuce test harness for executing builds, starting dev servers, and validating bundles.
+// Nuxc test harness for executing builds, starting dev servers, and validating bundles.
 
 import { exec, spawn } from 'child_process';
 import util from 'util';
@@ -71,7 +71,7 @@ export function securityScan(distPath: string): boolean {
 
 export function cacheSizeCheck(projectRoot: string, config: any = {}): { exists: boolean, sizeMb: number, rowCount: number } {
     // Dynamically resolve from config or fallback
-    const cacheDir = config.cacheDir ?? path.join(projectRoot, '.nuce', 'cache');
+    const cacheDir = config.cacheDir ?? path.join(projectRoot, '.nuxc', 'cache');
     const dbPath = path.join(cacheDir, 'cache.db');
     
     let exists = false;

@@ -4,8 +4,8 @@ export const litSpaTemplate: TemplateConfig = {
     dependencies: { 'lit': '^3.1.2' },
     devDependencies: { '@types/node': '^20.0.0' },
     files: {
-        'nuce.config.ts': "import { defineConfig } from 'nuce';\nexport default defineConfig({ framework: 'lit', entry: 'src/main.ts' });",
-        'index.html': `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>{{PROJECT_NAME}}</title><style>body{background:#0f172a;margin:0;display:flex;align-items:center;justify-content:center;height:100vh}</style></head><body><nuce-app></nuce-app><script type="module" src="/src/main.ts"></script></body></html>`,
-        'src/main.ts': `import { LitElement, html, css } from 'lit';\nimport { customElement } from 'lit/decorators.js';\n@customElement('nuce-app')\nexport class NuceApp extends LitElement {\n  static styles = css\`:host{display:block;font-family:system-ui;color:#f1f5f9} .card{background:#1e293b;padding:40px;border-radius:12px;text-align:center;border:1px solid #334155} h1{color:#818cf8;margin:0 0 10px;font-size:32px} p{color:#94a3b8;margin:0}\`;\n  render() { return html\`<div class="card"><h1>⚡ Nuce + Lit</h1><p>Web components built with the Nuce engine.</p></div>\`; }\n}`
+        'nuxc.config.ts': "import { defineConfig } from 'nuxc';\nexport default defineConfig({ framework: 'lit', entry: 'src/main.ts' });",
+        'index.html': `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>{{PROJECT_NAME}}</title><style>body{background:#0f172a;margin:0;display:flex;align-items:center;justify-content:center;height:100vh}</style></head><body><nuxc-app></nuxc-app><script type="module" src="/src/main.ts"></script></body></html>`,
+        'src/main.ts': `import { LitElement, html, css } from 'lit';\nimport { customElement } from 'lit/decorators.js';\n@customElement('nuxc-app')\nexport class NuxcApp extends LitElement {\n  static styles = css\`:host{display:block;font-family:system-ui;color:#f1f5f9} .card{background:#1e293b;padding:40px;border-radius:12px;text-align:center;border:1px solid #334155} h1{color:#818cf8;margin:0 0 10px;font-size:32px} p{color:#94a3b8;margin:0}\`;\n  render() { return html\`<div class="card"><h1>⚡ Nuxc + Lit</h1><p>Web components built with the Nuxc engine.</p></div>\`; }\n}`
     }
 };

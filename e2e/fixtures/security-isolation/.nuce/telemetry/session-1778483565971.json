@@ -1,0 +1,10 @@
+{
+  "id": "58c87cb5-dedf-4cad-a5b2-71b30d40421b",
+  "timestamp": 1778483565971,
+  "duration": 21,
+  "success": false,
+  "metrics": {},
+  "errors": [
+    "Potential secret detected in bundle output! Aborting build."
+  ]
+}

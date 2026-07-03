@@ -18,12 +18,12 @@ export const reactSpaTemplate: TemplateConfig = {
     devDependencies: {
         "@types/react": "^18.2.0",
         "@types/react-dom": "^18.2.0",
-        "@nuce/plugin-react": "^1.0.0"
+        "@nuxc/plugin-react": "^1.0.0"
     },
     files: {
-        'nuce.config.ts': `
-import { defineConfig } from 'nuce';
-import react from '@nuce/plugin-react';
+        'nuxc.config.ts': `
+import { defineConfig } from 'nuxc';
+import react from '@nuxc/plugin-react';
 
 export default defineConfig({
     plugins: [react()],
@@ -55,7 +55,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Nuce + React</h1>
+        <h1>Nuxc + React</h1>
         <div className="card">
           <button onClick={() => setCount((count) => count + 1)}>
             count is {count}
@@ -65,7 +65,7 @@ function App() {
           </p>
         </div>
         <p className="read-the-docs">
-          Click on the Nuce logo to learn more
+          Click on the Nuxc logo to learn more
         </p>
       </header>
     </div>

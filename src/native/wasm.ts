@@ -1,10 +1,10 @@
 
-// TypeScript bindings for Nuce v2.0 native WASM runtime
+// TypeScript bindings for Nuxc v2.0 native WASM runtime
 // Day 8: Zero-Trust Ecosystem
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-const nativeModule = require('../../nuce_native.node');
+const nativeModule = require('../../nuxc_native.node');
 
 const { PluginRuntime: NativePluginRuntime } = nativeModule;
 

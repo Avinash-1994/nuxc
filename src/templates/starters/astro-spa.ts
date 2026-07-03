@@ -4,7 +4,7 @@ export const astroSpaTemplate: TemplateConfig = {
     dependencies: { 'astro': '^4.8.0' },
     devDependencies: { '@types/node': '^20.0.0' },
     files: {
-        'nuce.config.ts': "import { defineConfig } from 'nuce';\nexport default defineConfig({ framework: 'astro' });",
+        'nuxc.config.ts': "import { defineConfig } from 'nuxc';\nexport default defineConfig({ framework: 'astro' });",
         'src/pages/index.astro': `---
 ---
 <html lang="en">
@@ -16,8 +16,8 @@ export const astroSpaTemplate: TemplateConfig = {
 </head>
 <body>
   <div class="card">
-    <h1>⚡ Nuce + Astro</h1>
-    <p>Blazing fast MPA built with the Nuce engine.</p>
+    <h1>⚡ Nuxc + Astro</h1>
+    <p>Blazing fast MPA built with the Nuxc engine.</p>
   </div>
 </body>
 </html>`

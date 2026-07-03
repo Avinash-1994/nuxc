@@ -1,0 +1,10 @@
+{
+  "id": "c3dcf183-68e5-4af1-a837-509560ed65a9",
+  "timestamp": 1777373172793,
+  "duration": 1,
+  "success": false,
+  "metrics": {},
+  "errors": [
+    "Cannot find package '/home/avinash/Desktop/framework_practis/build/node_modules/@nuxc/adapter-core/dist/index.js' imported from /home/avinash/Desktop/framework_practis/build/dist/src/meta-frameworks/solidstart/index.js"
+  ]
+}

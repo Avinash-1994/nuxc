@@ -1,6 +1,6 @@
-# Migration Guide: Moving to Nuce
+# Migration Guide: Moving to Nuxc
 
-> **Goal**: Migrate from Vite, Webpack, Rollup, or Angular CLI to Nuce in **under 30 minutes**.
+> **Goal**: Migrate from Vite, Webpack, Rollup, or Angular CLI to Nuxc in **under 30 minutes**.
 
 ---
 
@@ -8,10 +8,10 @@
 
 ```bash
 # Analyze your existing project
-npx nuce migrate /path/to/your/project --dry-run
+npx nuxc migrate /path/to/your/project --dry-run
 
-# Apply migration (creates nuce.config.ts, updates package.json)
-npx nuce migrate /path/to/your/project
+# Apply migration (creates nuxc.config.ts, updates package.json)
+npx nuxc migrate /path/to/your/project
 
 # Install dependencies
 npm install
@@ -34,7 +34,7 @@ npm run dev
 - Tailwind CSS configuration
 - Build output settings
 
-### Example: Vite → Nuce
+### Example: Vite → Nuxc
 
 **Before** (`vite.config.ts`):
 ```typescript
@@ -58,9 +58,9 @@ export default defineConfig({
 });
 ```
 
-**After** (`nuce.config.ts`):
+**After** (`nuxc.config.ts`):
 ```typescript
-import { defineConfig } from 'nuce';
+import { defineConfig } from 'nuxc';
 
 export default defineConfig({
   preset: 'spa',
@@ -90,17 +90,17 @@ export default defineConfig({
 ```json
 {
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview",
-    "test": "nuce test"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview",
+    "test": "nuxc test"
   }
 }
 ```
 
 ### Manual Steps
 
-1. **Vite Plugins**: Check if equivalent Nuce plugins exist in marketplace
+1. **Vite Plugins**: Check if equivalent Nuxc plugins exist in marketplace
 2. **Custom Rollup Plugins**: May need adaptation (see [Plugins Guide](./plugins.md))
 3. **SSR**: Use `preset: 'ssr'` and configure server entry
 
@@ -112,12 +112,12 @@ export default defineConfig({
 
 - Entry points
 - Output configuration
-- Loaders → Nuce plugins
+- Loaders → Nuxc plugins
 - Aliases
 - DevServer settings
 - Environment variables
 
-### Example: Webpack → Nuce
+### Example: Webpack → Nuxc
 
 **Before** (`webpack.config.js`):
 ```javascript
@@ -159,9 +159,9 @@ module.exports = {
 };
 ```
 
-**After** (`nuce.config.ts`):
+**After** (`nuxc.config.ts`):
 ```typescript
-import { defineConfig } from 'nuce';
+import { defineConfig } from 'nuxc';
 
 export default defineConfig({
   preset: 'spa',
@@ -187,23 +187,23 @@ export default defineConfig({
 });
 ```
 
-### Common Webpack Loaders → Nuce
+### Common Webpack Loaders → Nuxc
 
-| Webpack Loader | Nuce Equivalent |
+| Webpack Loader | Nuxc Equivalent |
 |----------------|------------------|
 | `ts-loader` | Built-in TypeScript support |
 | `babel-loader` | Built-in (via Bun parser) |
 | `css-loader` | Built-in CSS support |
-| `sass-loader` | `@nuce/plugin-sass` |
+| `sass-loader` | `@nuxc/plugin-sass` |
 | `file-loader` | Built-in asset handling |
 | `url-loader` | Built-in (auto inline < 4KB) |
-| `svg-loader` | `@nuce/plugin-svgr` |
+| `svg-loader` | `@nuxc/plugin-svgr` |
 
 ### Manual Steps
 
 1. **Complex Webpack Plugins**: Check marketplace or write custom plugin
-2. **Module Federation**: Use Nuce's built-in federation
-3. **Custom Loaders**: Adapt to Nuce plugin API
+2. **Module Federation**: Use Nuxc's built-in federation
+3. **Custom Loaders**: Adapt to Nuxc plugin API
 
 ---
 
@@ -216,7 +216,7 @@ export default defineConfig({
 - External dependencies
 - Tree-shaking settings
 
-### Example: Rollup → Nuce
+### Example: Rollup → Nuxc
 
 **Before** (`rollup.config.js`):
 ```javascript
@@ -238,9 +238,9 @@ export default {
 };
 ```
 
-**After** (`nuce.config.ts`):
+**After** (`nuxc.config.ts`):
 ```typescript
-import { defineConfig } from 'nuce';
+import { defineConfig } from 'nuxc';
 
 export default defineConfig({
   preset: 'spa',
@@ -268,7 +268,7 @@ export default defineConfig({
 - Environment files
 - Build configurations
 
-### Example: Angular CLI → Nuce
+### Example: Angular CLI → Nuxc
 
 **Before** (`angular.json`):
 ```json
@@ -296,9 +296,9 @@ export default defineConfig({
 }
 ```
 
-**After** (`nuce.config.ts`):
+**After** (`nuxc.config.ts`):
 ```typescript
-import { defineConfig } from 'nuce';
+import { defineConfig } from 'nuxc';
 
 export default defineConfig({
   preset: 'spa',
@@ -321,10 +321,10 @@ export default defineConfig({
 ```json
 {
   "scripts": {
-    "ng": "nuce",
-    "start": "nuce dev",
-    "build": "nuce build",
-    "test": "nuce test"
+    "ng": "nuxc",
+    "start": "nuxc dev",
+    "build": "nuxc build",
+    "test": "nuxc test"
   }
 }
 ```
@@ -333,10 +333,10 @@ export default defineConfig({
 
 ## Migration Analyzer
 
-Nuce includes an intelligent migration analyzer:
+Nuxc includes an intelligent migration analyzer:
 
 ```bash
-npx nuce migrate /path/to/project --dry-run
+npx nuxc migrate /path/to/project --dry-run
 ```
 
 **Output**:
@@ -356,7 +356,7 @@ npx nuce migrate /path/to/project --dry-run
     ✓ React Fast Refresh
 
   Manual steps:
-    ⚠ vite-plugin-pwa → Check @nuce/plugin-pwa
+    ⚠ vite-plugin-pwa → Check @nuxc/plugin-pwa
     ⚠ Custom Vite plugin → Needs adaptation
 
 📊 Expected Success Rate: 95%
@@ -372,8 +372,8 @@ Run without --dry-run to apply changes.
 ### 1. Monorepo Migration
 
 ```typescript
-// nuce.config.ts (root)
-import { defineConfig } from 'nuce';
+// nuxc.config.ts (root)
+import { defineConfig } from 'nuxc';
 
 export default defineConfig({
   preset: 'monorepo',
@@ -389,8 +389,8 @@ export default defineConfig({
 ### 2. SSR Migration
 
 ```typescript
-// nuce.config.ts
-import { defineConfig } from 'nuce';
+// nuxc.config.ts
+import { defineConfig } from 'nuxc';
 
 export default defineConfig({
   preset: 'ssr',
@@ -411,8 +411,8 @@ export default defineConfig({
 ### 3. Edge Function Migration
 
 ```typescript
-// nuce.config.ts
-import { defineConfig } from 'nuce';
+// nuxc.config.ts
+import { defineConfig } from 'nuxc';
 
 export default defineConfig({
   preset: 'edge',
@@ -436,7 +436,7 @@ export default defineConfig({
 
 **Solution**:
 ```typescript
-// nuce.config.ts
+// nuxc.config.ts
 export default defineConfig({
   resolve: {
     alias: {
@@ -475,7 +475,7 @@ npm run build  # Second run: ~500ms (warm)
 
 ## Honest Limitations
 
-### What Nuce Does Better ✅
+### What Nuxc Does Better ✅
 
 - **Memory efficiency**: ~0.1MB vs 20MB+ (Vite)
 - **HMR speed**: Fast updates with incremental reloads
@@ -499,10 +499,10 @@ npm run build  # Second run: ~500ms (warm)
 
 ## Migration Checklist
 
-- [ ] Run `nuce migrate --dry-run`
+- [ ] Run `nuxc migrate --dry-run`
 - [ ] Review migration plan
 - [ ] Backup existing config files
-- [ ] Run `nuce migrate`
+- [ ] Run `nuxc migrate`
 - [ ] Install dependencies (`npm install`)
 - [ ] Test dev server (`npm run dev`)
 - [ ] Test production build (`npm run build`)
@@ -515,10 +515,10 @@ npm run build  # Second run: ~500ms (warm)
 
 ## Getting Help
 
-- **Documentation**: [https://nuce.dev/docs](https://nuce.dev/docs)
-- **GitHub Issues**: [https://github.com/your-org/nuce/issues](https://github.com/your-org/nuce/issues)
-- **Discord**: [https://discord.gg/nuce](https://discord.gg/nuce)
-- **Migration Tool**: `nuce doctor` for diagnostics
+- **Documentation**: [https://nuxc.dev/docs](https://nuxc.dev/docs)
+- **GitHub Issues**: [https://github.com/your-org/nuxc/issues](https://github.com/your-org/nuxc/issues)
+- **Discord**: [https://discord.gg/nuxc](https://discord.gg/nuxc)
+- **Migration Tool**: `nuxc doctor` for diagnostics
 
 ---
 

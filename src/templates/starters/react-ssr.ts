@@ -23,13 +23,13 @@ export const reactSsrTemplate: TemplateConfig = {
         "@types/react-dom": "^18.2.0",
         "@types/express": "^4.17.17",
         "@types/compression": "^1.7.3",
-        "@nuce/plugin-react": "^1.0.0",
+        "@nuxc/plugin-react": "^1.0.0",
         "cross-env": "^7.0.3"
     },
     files: {
-        'nuce.config.ts': `
-import { defineConfig } from 'nuce';
-import react from '@nuce/plugin-react';
+        'nuxc.config.ts': `
+import { defineConfig } from 'nuxc';
+import react from '@nuxc/plugin-react';
 
 export default defineConfig({
     plugins: [react()],
@@ -55,16 +55,16 @@ const templateHtml = isProduction
 // Create http server
 const app = express()
 
-// Add Nuce or sirv
-let nuce
+// Add Nuxc or sirv
+let nuxc
 if (!isProduction) {
-  const { createServer } = await import('nuce')
-  nuce = await createServer({
+  const { createServer } = await import('nuxc')
+  nuxc = await createServer({
     server: { middlewareMode: true },
     appType: 'custom',
     base
   })
-  app.use(nuce.middlewares)
+  app.use(nuxc.middlewares)
 } else {
   const compression = (await import('compression')).default
   const sirv = (await import('sirv')).default
@@ -82,8 +82,8 @@ app.use('*', async (req, res) => {
     if (!isProduction) {
       // Always read fresh template in dev
       template = await fs.readFile('./index.html', 'utf-8')
-      template = await nuce.transformIndexHtml(url, template)
-      render = (await nuce.ssrLoadModule('/src/entry-server.tsx')).render
+      template = await nuxc.transformIndexHtml(url, template)
+      render = (await nuxc.ssrLoadModule('/src/entry-server.tsx')).render
     } else {
       template = templateHtml
       render = (await import('./dist/server/entry-server.js')).render
@@ -95,7 +95,7 @@ app.use('*', async (req, res) => {
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
-    !isProduction && nuce.ssrFixStacktrace(e)
+    !isProduction && nuxc.ssrFixStacktrace(e)
     console.log(e.stack)
     res.status(500).end(e.stack)
   }
@@ -142,7 +142,7 @@ function App() {
 
   return (
     <>
-      <h1>Nuce SSR + React</h1>
+      <h1>Nuxc SSR + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -152,7 +152,7 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">
-        Click on the Nuce logo to learn more
+        Click on the Nuxc logo to learn more
       </p>
     </>
   )

@@ -1,4 +1,4 @@
-# 🧪 Nuce Testing Strategy - Current & Recommended
+# 🧪 Nuxc Testing Strategy - Current & Recommended
 
 ## 📊 Current Testing Coverage (41 Tests)
 

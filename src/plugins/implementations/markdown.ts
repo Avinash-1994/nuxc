@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-markdown
+ * @nuxc/plugin-markdown
  * Markdown processing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMarkdownPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-markdown',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-markdown',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Markdown processing

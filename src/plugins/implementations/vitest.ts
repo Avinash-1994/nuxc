@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-vitest
+ * @nuxc/plugin-vitest
  * Vitest integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVitestPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-vitest',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-vitest',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Vitest integration

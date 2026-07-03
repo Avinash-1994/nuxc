@@ -1,5 +1,5 @@
-import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
-import { detectDependencies, registry } from '@nuce/adapter-core';
+import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
+import { detectDependencies, registry } from '@nuxc/adapter-core';
 import { tauriIpcPlugin } from './tauri-plugin.js';
 
 export interface TauriConfig {
@@ -7,7 +7,7 @@ export interface TauriConfig {
   autoBuildRust?: boolean;   // default false
 }
 
-export class TauriAdapter implements NuceAdapter {
+export class TauriAdapter implements NuxcAdapter {
   name = 'tauri';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class TauriAdapter implements NuceAdapter {
     ];
   }
 
-  config(config: NuceConfig): NuceConfig {
+  config(config: NuxcConfig): NuxcConfig {
     if (!config.tauri) config.tauri = {};
     config.tauri = {
       backendSrc: 'src-tauri',

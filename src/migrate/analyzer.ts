@@ -2,7 +2,7 @@
  * Migration Analyzer (Day 43)
  * 
  * Analyzes existing projects (Vite/Webpack/Rollup/Angular CLI) and generates
- * a migration plan for converting to Nuce.
+ * a migration plan for converting to Nuxc.
  */
 
 import fs from 'fs';
@@ -264,7 +264,7 @@ export class MigrationAnalyzer {
             autoMigrate.push('Development server settings');
         }
 
-        // Common plugins that have Nuce equivalents
+        // Common plugins that have Nuxc equivalents
         const autoMigratablePlugins = [
             '@vitejs/plugin-react',
             '@vitejs/plugin-vue',
@@ -278,7 +278,7 @@ export class MigrationAnalyzer {
 
         for (const plugin of plugins) {
             if (autoMigratablePlugins.includes(plugin)) {
-                autoMigrate.push(`Plugin: ${plugin} → Nuce preset`);
+                autoMigrate.push(`Plugin: ${plugin} → Nuxc preset`);
             }
         }
 
@@ -319,7 +319,7 @@ export class MigrationAnalyzer {
         manualSteps.push('Review environment variable usage (process.env → import.meta.env)');
 
         // Build scripts
-        manualSteps.push('Update package.json scripts to use Nuce commands');
+        manualSteps.push('Update package.json scripts to use Nuxc commands');
 
         return manualSteps;
     }

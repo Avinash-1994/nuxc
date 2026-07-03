@@ -30,14 +30,14 @@ declare -A PROJECTS=(
   ["test-waku"]=5033
 )
 
-echo "⚡ Starting all Nuce framework test projects..."
+echo "⚡ Starting all Nuxc framework test projects..."
 echo ""
 
 for project in "${!PROJECTS[@]}"; do
   port="${PROJECTS[$project]}"
   dir="$TESTS_DIR/$project"
   if [ -d "$dir" ]; then
-    PORT=$port npm run dev --prefix "$dir" > /tmp/nuce-${project}.log 2>&1 &
+    PORT=$port npm run dev --prefix "$dir" > /tmp/nuxc-${project}.log 2>&1 &
     echo "  ✓ $project → http://localhost:$port"
   fi
 done

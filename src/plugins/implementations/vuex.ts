@@ -1,15 +1,15 @@
 /**
- * @nuce/plugin-vuex
+ * @nuxc/plugin-vuex
  * Vuex integration
- * Nuce-native
+ * Nuxc-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVuexPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-vuex',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-vuex',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // vuex transformation

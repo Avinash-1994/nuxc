@@ -5,8 +5,8 @@ import { execSync } from 'child_process';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const { NuceWorkspace } = await import(
-  path.resolve(__dirname, '../../../packages/nuce-workspace/dist/index.js')
+const { NuxcWorkspace } = await import(
+  path.resolve(__dirname, '../../../packages/nuxc-workspace/dist/index.js')
 );
 
 function log(msg) { process.stdout.write(msg + '\n'); }
@@ -38,7 +38,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 log(`Module type warning: ${moduleTypeOk ? 'absent ✓' : 'STILL PRESENT ✗'}\n`);
 
 const root = path.resolve(__dirname);
-const ws = new NuceWorkspace(root);
+const ws = new NuxcWorkspace(root);
 const plan = ws.buildPlan();
 
 // WS-01
@@ -124,7 +124,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 const buildStart = Date.now();
 const buildStartTs = new Date(buildStart).toISOString();
 
-// Actual Build using Nuce CLI
+// Actual Build using Nuxc CLI
 const cliPath = path.resolve(__dirname, '../../../src/cli.ts');
 try {
   const { execSync } = await import('child_process');

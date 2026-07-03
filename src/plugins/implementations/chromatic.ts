@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-chromatic
+ * @nuxc/plugin-chromatic
  * Chromatic visual testing
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createChromaticPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-chromatic',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-chromatic',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Chromatic visual testing

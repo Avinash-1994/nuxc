@@ -1,0 +1,35 @@
+{
+  "svelte@4.0.0": {
+    "result": [
+      {
+        "id": "GHSA-8266-84wp-wv5c",
+        "modified": "2024-08-30T20:01:23Z"
+      },
+      {
+        "id": "GHSA-crpf-4hrx-3jrp",
+        "modified": "2026-04-04T20:29:21.550783Z"
+      },
+      {
+        "id": "GHSA-f7gr-6p89-r883",
+        "modified": "2026-04-04T20:29:21.384408Z"
+      },
+      {
+        "id": "GHSA-m56q-vw4c-c2cp",
+        "modified": "2026-04-04T20:29:20.929885Z"
+      },
+      {
+        "id": "GHSA-phwv-c562-gvmh",
+        "modified": "2026-04-04T20:29:20.686899Z"
+      },
+      {
+        "id": "GHSA-pr6f-5x2q-rwfp",
+        "modified": "2026-05-14T20:35:15.889706Z"
+      },
+      {
+        "id": "GHSA-rcqx-6q8c-2c42",
+        "modified": "2026-05-14T20:52:30.008507Z"
+      }
+    ],
+    "ts": 1779076666871
+  }
+}

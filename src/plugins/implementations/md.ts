@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-md
+ * @nuxc/plugin-md
  * Markdown as components
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMdPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-md',
+        name: '@nuxc/plugin-md',
         originalPlugin: 'vite-plugin-md',
         
         async transform(code: string, id: string) {

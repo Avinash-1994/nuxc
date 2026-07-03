@@ -26,17 +26,17 @@ export default function App() {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Nuce Remix App' },
-    { name: 'description', content: 'Welcome to Remix with Nuce!' },
+    { title: 'Nuxc Remix App' },
+    { name: 'description', content: 'Welcome to Remix with Nuxc!' },
   ];
 };
 
 export default function Index() {
   return (
     <div className="container mx-auto p-8">
-      <h1 className="text-4xl font-bold">Welcome to Remix + Nuce</h1>
+      <h1 className="text-4xl font-bold">Welcome to Remix + Nuxc</h1>
       <p className="mt-4">
-        This is a Remix-style application built with Nuce.
+        This is a Remix-style application built with Nuxc.
       </p>
     </div>
   );
@@ -49,7 +49,7 @@ export default function Index() {
     </div>
   );
 }`,
-        'nuce.config.js': `module.exports = {
+        'nuxc.config.js': `module.exports = {
   entry: ['./src/root.tsx'],
   outDir: './dist',
   framework: 'react',
@@ -71,13 +71,13 @@ export default function Index() {
   },
 };`,
         'package.json': `{
-  "name": "nuce-remix-app",
+  "name": "nuxc-remix-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "start": "nuce ssr"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "start": "nuxc ssr"
   },
   "dependencies": {
     "@remix-run/react": "^2.0.0",

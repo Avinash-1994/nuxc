@@ -18,7 +18,7 @@ export interface BenchmarkConfig {
     timeout?: number;
 }
 
-export type BuildTool = 'nuce' | 'vite' | 'webpack' | 'rspack' | 'esbuild' | 'turbopack' | 'parcel';
+export type BuildTool = 'nuxc' | 'vite' | 'webpack' | 'rspack' | 'esbuild' | 'turbopack' | 'parcel';
 
 export interface BenchmarkResult {
     tool: BuildTool;
@@ -336,7 +336,7 @@ export class BenchmarkRunner {
      */
     private isServerReady(tool: BuildTool, output: string): boolean {
         const patterns: Record<BuildTool, RegExp[]> = {
-            nuce: [/ready in/i, /server running/i, /http:\/\/localhost/i],
+            nuxc: [/ready in/i, /server running/i, /http:\/\/localhost/i],
             vite: [/ready in/i, /local:.*http/i],
             webpack: [/compiled successfully/i, /webpack.*compiled/i],
             rspack: [/compiled successfully/i, /rspack.*compiled/i],
@@ -369,7 +369,7 @@ export class BenchmarkRunner {
         const cacheDirs = [
             'node_modules/.vite',
             'node_modules/.cache',
-            '.nuce_cache',
+            '.nuxc_cache',
             'dist',
             'build',
             '.next',
@@ -396,7 +396,7 @@ export class BenchmarkRunner {
      */
     private getDistPath(appPath: string, tool: BuildTool): string {
         const distPaths: Record<BuildTool, string> = {
-            nuce: 'dist',
+            nuxc: 'dist',
             vite: 'dist',
             webpack: 'dist',
             rspack: 'dist',

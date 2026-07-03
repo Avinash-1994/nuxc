@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-nanostores
+ * @nuxc/plugin-nanostores
  * Nano Stores integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createNanostoresPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-nanostores',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-nanostores',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // State management: Nano Stores integration
@@ -16,7 +16,7 @@ export function createNanostoresPlugin(): PluginAdapter {
         },
 
         async buildStart() {
-            console.log('[@nuce/plugin-nanostores] State management initialized');
+            console.log('[@nuxc/plugin-nanostores] State management initialized');
         }
     };
 }

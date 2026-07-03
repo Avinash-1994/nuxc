@@ -1,7 +1,7 @@
 {
-  "name": "@nuce/plugin-visualizer",
+  "name": "@nuxc/plugin-visualizer",
   "version": "1.0.0",
-  "description": "Official Nuce plugin for bundle visualization — treemap HTML report of bundle composition",
+  "description": "Official Nuxc plugin for bundle visualization — treemap HTML report of bundle composition",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,11 +16,11 @@
     "build": "tsc",
     "test": "node --test src/__tests__/index.test.js"
   },
-  "keywords": ["nuce", "plugin", "visualizer", "bundle-size", "treemap", "analysis"],
+  "keywords": ["nuxc", "plugin", "visualizer", "bundle-size", "treemap", "analysis"],
   "author": "Avinash-1994",
   "license": "MIT",
   "peerDependencies": {
-    "nuce": ">=1.0.0"
+    "nuxc": ">=1.0.0"
   },
   "devDependencies": {
     "typescript": "^5.4.2"

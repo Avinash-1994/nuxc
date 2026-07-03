@@ -16,7 +16,7 @@ export class AngularCompilerAdapter {
   
   constructor(private rootPath: string, private options: AngularAdapterOptions = {}) {
     // Initialize SQLite Cache
-    const cacheDir = path.join(this.rootPath, '.nuce');
+    const cacheDir = path.join(this.rootPath, '.nuxc');
     try {
       // Create cache dir if it doesn't exist. In real world we use fs.mkdirSync
       import('fs').then(fs => {
@@ -48,7 +48,7 @@ export class AngularCompilerAdapter {
     (globalThis as any).__angularCompilerInitTime = (this as any).compilerInitTime;
     
     // Log for test harness to capture
-    console.log(`[NUCE-TEST] Angular compiler init time: ${(this as any).compilerInitTime}ms`);
+    console.log(`[NUXC-TEST] Angular compiler init time: ${(this as any).compilerInitTime}ms`);
   }
 
   private getCache(hash: string): { code: string, map?: string } | null {
@@ -72,7 +72,7 @@ export class AngularCompilerAdapter {
   }
 
   /**
-   * Main transform hook for Nuce Plugin Runner
+   * Main transform hook for Nuxc Plugin Runner
    */
   async transform(code: string, id: string): Promise<{ code: string; map?: any } | null> {
     if (!id.endsWith('.ts') && !id.endsWith('.html') && !id.endsWith('.css') && !id.endsWith('.scss')) {
@@ -81,17 +81,17 @@ export class AngularCompilerAdapter {
 
     const hash = this.hashSource(code, id);
     const cached = this.getCache(hash);
-    const statusPath = '/tmp/nuce-hmr-status.txt';
+    const statusPath = '/tmp/nuxc-hmr-status.txt';
     if (cached) {
       if (id.endsWith('.ts')) {
-         console.log(`[NUCE-TEST] Ivy cache hit (served from cache)`);
+         console.log(`[NUXC-TEST] Ivy cache hit (served from cache)`);
          require('fs').writeFileSync(statusPath, 'hit');
       }
       return { code: cached.code, map: cached.map ? JSON.parse(cached.map) : undefined };
     }
 
     if (id.endsWith('.ts')) {
-       console.log(`[NUCE-TEST] Ivy recompile: yes`);
+       console.log(`[NUXC-TEST] Ivy recompile: yes`);
        require('fs').writeFileSync(statusPath, 'recompile');
     }
     
@@ -156,13 +156,13 @@ export class AngularCompilerAdapter {
 
   createPlugin() {
     return {
-      name: 'nuce-angular-adapter',
+      name: 'nuxc-angular-adapter',
       transform: (code: string, id: string) => this.transform(code, id)
     };
   }
 }
 
-export class NuceAngularAdapter {
+export class NuxcAngularAdapter {
   name = 'angular';
   private compiler: AngularCompilerAdapter;
 
@@ -176,7 +176,7 @@ export class NuceAngularAdapter {
   }
 
   config(config: any) {
-    console.log('[nuce] adapter: angular');
+    console.log('[nuxc] adapter: angular');
     
     // Automatically find entry point in angular-enterprise if no entry is set
     const fs = require('fs');
@@ -219,5 +219,5 @@ export class NuceAngularAdapter {
   }
 }
 
-import { registry } from '@nuce/adapter-core';
-registry.register(new NuceAngularAdapter(process.cwd()));
+import { registry } from '@nuxc/adapter-core';
+registry.register(new NuxcAngularAdapter(process.cwd()));

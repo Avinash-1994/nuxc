@@ -1,4 +1,4 @@
-// Tokio-based parallel orchestrator for Nuce v2.0
+// Tokio-based parallel orchestrator for Nuxc v2.0
 // Day 2: Module 1 - Speed Mastery
 //
 // This module provides multi-core parallel orchestration with:
@@ -71,7 +71,7 @@ impl BuildOrchestrator {
         // Create Tokio runtime with work-stealing scheduler
         let runtime = tokio::runtime::Builder::new_multi_thread()
             .worker_threads(parallelism as usize)
-            .thread_name("nuce-worker")
+            .thread_name("nuxc-worker")
             .enable_all()
             .build()
             .map_err(|e| Error::from_reason(format!("Failed to create runtime: {}", e)))?;

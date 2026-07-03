@@ -1,7 +1,7 @@
 use serde::Deserialize;
 use std::fs;
 use std::env;
-use nuce_native::GraphAnalyzer;
+use nuxc_native::GraphAnalyzer;
 
 #[derive(Deserialize, Debug)]
 struct Snapshot {
@@ -14,7 +14,7 @@ struct Snapshot {
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 3 || args[1] != "replay" {
-        eprintln!("Usage: nuce-native replay <snapshot.json>");
+        eprintln!("Usage: nuxc-native replay <snapshot.json>");
         std::process::exit(1);
     }
 

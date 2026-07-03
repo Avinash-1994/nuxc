@@ -1,4 +1,4 @@
-# Nuce Governance Model — Operational Truth
+# Nuxc Governance Model — Operational Truth
 
 **Status**: 🔒 Active (Phase H2.3)  
 **Version**: 1.0.0  
@@ -34,10 +34,10 @@ Every plugin has a category that determines:
 - ✅ Performance benchmarked
 
 **Examples**:
-- `nuce:js-transform` (Universal transformer)
-- `nuce:assets` (Hashed asset pipeline)
-- `nuce:postcss` (CSS processing)
-- `nuce:federation` (Module federation)
+- `nuxc:js-transform` (Universal transformer)
+- `nuxc:assets` (Hashed asset pipeline)
+- `nuxc:postcss` (CSS processing)
+- `nuxc:federation` (Module federation)
 
 **Guarantees**:
 - No breaking changes in minor versions
@@ -61,9 +61,9 @@ Every plugin has a category that determines:
 - ⚠️ Not in official docs (linked only)
 
 **Examples**:
-- `nuce-plugin-graphql` (Community)
-- `nuce-plugin-wasm` (Community)
-- `nuce-plugin-mdx` (Community)
+- `nuxc-plugin-graphql` (Community)
+- `nuxc-plugin-wasm` (Community)
+- `nuxc-plugin-mdx` (Community)
 
 **Guarantees**:
 - **NONE**
@@ -87,9 +87,9 @@ Every plugin has a category that determines:
 - 🧪 Not recommended for production
 
 **Examples**:
-- `nuce:ai-optimizer` (Experimental)
-- `nuce:edge-runtime` (Experimental)
-- `nuce:ssr-streaming` (Experimental)
+- `nuxc:ai-optimizer` (Experimental)
+- `nuxc:edge-runtime` (Experimental)
+- `nuxc:ssr-streaming` (Experimental)
 
 **Guarantees**:
 - **NONE**
@@ -105,19 +105,19 @@ Every plugin has a category that determines:
 
 | Plugin Name | Category | Owner | Risk Level | Snapshot Tested | Docs |
 |-------------|----------|-------|------------|-----------------|------|
-| `nuce:js-transform` | Official | Core Team | Low | ✅ | ✅ |
-| `nuce:assets` | Official | Core Team | Low | ✅ | ✅ |
-| `nuce:postcss` | Official | Core Team | Low | ✅ | ✅ |
-| `nuce:federation` | Official | Core Team | Medium | ✅ | ✅ |
-| `nuce:react-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `nuce:vue-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `nuce:svelte-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `nuce:solid-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `nuce:angular-preset` | Official | Core Team | Medium | ✅ | ✅ |
-| `nuce:ai-optimizer` | Experimental | Core Team | High | ❌ | ⚠️ |
-| `nuce:edge-runtime` | Experimental | Core Team | High | ❌ | ⚠️ |
-| `nuce-plugin-graphql` | Community | @community | Unknown | ❌ | ❌ |
-| `nuce-plugin-wasm` | Community | @community | Unknown | ❌ | ❌ |
+| `nuxc:js-transform` | Official | Core Team | Low | ✅ | ✅ |
+| `nuxc:assets` | Official | Core Team | Low | ✅ | ✅ |
+| `nuxc:postcss` | Official | Core Team | Low | ✅ | ✅ |
+| `nuxc:federation` | Official | Core Team | Medium | ✅ | ✅ |
+| `nuxc:react-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `nuxc:vue-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `nuxc:svelte-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `nuxc:solid-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `nuxc:angular-preset` | Official | Core Team | Medium | ✅ | ✅ |
+| `nuxc:ai-optimizer` | Experimental | Core Team | High | ❌ | ⚠️ |
+| `nuxc:edge-runtime` | Experimental | Core Team | High | ❌ | ⚠️ |
+| `nuxc-plugin-graphql` | Community | @community | Unknown | ❌ | ❌ |
+| `nuxc-plugin-wasm` | Community | @community | Unknown | ❌ | ❌ |
 
 ---
 
@@ -265,5 +265,5 @@ No exceptions.
 
 ---
 
-**Signed**: Nuce Core Team  
+**Signed**: Nuxc Core Team  
 **Effective**: Phase H2.3 Complete

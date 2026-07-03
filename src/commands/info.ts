@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// NEW-02: nuce info — environment info for bug reports
+// NEW-02: nuxc info — environment info for bug reports
 
 function detectPackageManager(cwd: string): string {
   if (fs.existsSync(path.join(cwd, 'pnpm-lock.yaml'))) return 'pnpm';
@@ -32,7 +32,7 @@ export async function runInfo() {
     framework = config.framework ?? 'auto-detect';
   } catch {}
 
-  const cacheDb = path.join(cwd, '.nuce/cache/cache.db');
+  const cacheDb = path.join(cwd, '.nuxc/cache/cache.db');
   let cacheSize = 'not found';
   try {
     const stat = fs.statSync(cacheDb);
@@ -40,15 +40,15 @@ export async function runInfo() {
   } catch {}
 
   console.log(`
-  Nuce:           ${pkg.version}
+  Nuxc:           ${pkg.version}
   Node.js:         ${nodeVersion}
   OS:              ${platform}
   Package manager: ${pm}
   Framework:       ${framework}
-  nuce_native:    ${pkg.version} (rust-notify)
-  Cache:           .nuce/cache/cache.db (${cacheSize})
+  nuxc_native:    ${pkg.version} (rust-notify)
+  Cache:           .nuxc/cache/cache.db (${cacheSize})
 
   Copy this when filing a bug report:
-  https://github.com/Avinash-1994/nuce/issues/new
+  https://github.com/Avinash-1994/nuxc/issues/new
   `);
 }

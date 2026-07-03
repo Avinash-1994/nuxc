@@ -1,4 +1,4 @@
-// @nuce/plugin-visualizer — Self-contained Unit Tests
+// @nuxc/plugin-visualizer — Self-contained Unit Tests
 // Run: node --test packages/plugin-visualizer/src/__tests__/index.test.js
 
 import { describe, it } from 'node:test';
@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 function visualizerPlugin(options = {}) {
   const {
     filename = 'dist/stats.html',
-    title = 'Nuce Bundle Visualizer',
+    title = 'Nuxc Bundle Visualizer',
     open = false,
     template = 'treemap',
     gzipSize = true,
@@ -17,7 +17,7 @@ function visualizerPlugin(options = {}) {
   const modules = [];
 
   return {
-    name: '@nuce/plugin-visualizer',
+    name: '@nuxc/plugin-visualizer',
     _modules: modules,        // exposed for test assertions
     _options: { filename, title, open, template, gzipSize },
 
@@ -39,9 +39,9 @@ function visualizerPlugin(options = {}) {
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
-describe('@nuce/plugin-visualizer — plugin structure', () => {
+describe('@nuxc/plugin-visualizer — plugin structure', () => {
   it('has correct name', () => {
-    assert.equal(visualizerPlugin().name, '@nuce/plugin-visualizer');
+    assert.equal(visualizerPlugin().name, '@nuxc/plugin-visualizer');
   });
 
   it('exposes load and transform hooks', () => {
@@ -53,7 +53,7 @@ describe('@nuce/plugin-visualizer — plugin structure', () => {
   it('uses correct defaults', () => {
     const p = visualizerPlugin();
     assert.equal(p._options.filename, 'dist/stats.html');
-    assert.equal(p._options.title, 'Nuce Bundle Visualizer');
+    assert.equal(p._options.title, 'Nuxc Bundle Visualizer');
     assert.equal(p._options.open, false);
     assert.equal(p._options.template, 'treemap');
     assert.equal(p._options.gzipSize, true);
@@ -67,16 +67,16 @@ describe('@nuce/plugin-visualizer — plugin structure', () => {
   });
 });
 
-describe('@nuce/plugin-visualizer — load hook', () => {
+describe('@nuxc/plugin-visualizer — load hook', () => {
   it('returns null for all IDs', () => {
     const p = visualizerPlugin();
     assert.equal(p.load('/src/App.tsx'), null);
-    assert.equal(p.load('/__nuce_entry__'), null);
+    assert.equal(p.load('/__nuxc_entry__'), null);
     assert.equal(p.load('/node_modules/react/index.js'), null);
   });
 });
 
-describe('@nuce/plugin-visualizer — transform hook (passthrough)', () => {
+describe('@nuxc/plugin-visualizer — transform hook (passthrough)', () => {
   it('always returns null — pure data-collection side effect', () => {
     const p = visualizerPlugin();
     assert.equal(p.transform('export const x = 1;', '/src/utils.ts'), null);

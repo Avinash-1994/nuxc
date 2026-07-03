@@ -1,19 +1,19 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { NucePlugin } from '../core/plugins/types.js';
+import { NuxcPlugin } from '../core/plugins/types.js';
 
-export function createHtmlPlugin(rootDir: string, outDir: string): NucePlugin {
+export function createHtmlPlugin(rootDir: string, outDir: string): NuxcPlugin {
     return {
         manifest: {
-            name: 'nuce:html',
+            name: 'nuxc:html',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['buildEnd'],
             permissions: { fs: 'read' }
         },
-        id: 'nuce:html',
+        id: 'nuxc:html',
         async runHook(hook, data) {
             if (hook !== 'buildEnd') return data;
 
@@ -29,7 +29,7 @@ export function createHtmlPlugin(rootDir: string, outDir: string): NucePlugin {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuce Build</title>
+    <title>Nuxc Build</title>
     ${links}
 </head>
 <body>

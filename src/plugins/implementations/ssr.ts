@@ -1,15 +1,15 @@
 /**
- * @nuce/plugin-ssr
+ * @nuxc/plugin-ssr
  * Universal SSR support
- * Nuce-native
+ * Nuxc-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSsrPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-ssr',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-ssr',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // ssr transformation

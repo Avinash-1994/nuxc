@@ -16,7 +16,7 @@ console.log('🔍 Running pre-pack checks...\n');
 
 const requiredFiles = [
     'dist/cli.js',
-    'dist/nuce_native.node',
+    'dist/nuxc_native.node',
     'README.md',
     'LICENSE',
     'package.json'

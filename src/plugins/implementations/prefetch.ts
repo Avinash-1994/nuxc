@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-prefetch
+ * @nuxc/plugin-prefetch
  * Route prefetching
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPrefetchPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-prefetch',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-prefetch',
+        originalPlugin: 'nuxc-native',
         
         async buildStart() {
-            console.log('[@nuce/plugin-prefetch] Starting performance optimization...');
+            console.log('[@nuxc/plugin-prefetch] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createPrefetchPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-prefetch] Performance optimization complete');
+            console.log('[@nuxc/plugin-prefetch] Performance optimization complete');
         }
     };
 }

@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-tree-shake
+ * @nuxc/plugin-tree-shake
  * Advanced tree-shaking
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTreeShakePlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-tree-shake',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-tree-shake',
+        originalPlugin: 'nuxc-native',
         
         async buildStart() {
-            console.log('[@nuce/plugin-tree-shake] Starting performance optimization...');
+            console.log('[@nuxc/plugin-tree-shake] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createTreeShakePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-tree-shake] Performance optimization complete');
+            console.log('[@nuxc/plugin-tree-shake] Performance optimization complete');
         }
     };
 }

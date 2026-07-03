@@ -1,17 +1,17 @@
 {
-  "name": "nuce-remix-template",
+  "name": "nuxc-remix-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview"
   },
-  "nuce": {
+  "nuxc": {
     "template": true,
     "framework": "remix",
-    "description": "Nuce Jobs — job board with applications"
+    "description": "Nuxc Jobs — job board with applications"
   },
   "dependencies": {
     "@remix-run/react": "2.9.2",
@@ -20,7 +20,7 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "nuce": "file:../../",
+    "nuxc": "file:../../",
     "typescript": "5.4.5"
   }
 }

@@ -1,6 +1,6 @@
 
 /**
- * Nuce HMR Client Runtime
+ * Nuxc HMR Client Runtime
  * Provides the `import.meta.hot` API and handles WebSocket updates.
  */
 
@@ -16,20 +16,20 @@ class HMRClient {
     }
 
     private handleMessage(msg: any) {
-        console.log('[Nuce] HMR Message:', msg);
+        console.log('[Nuxc] HMR Message:', msg);
         switch (msg.type) {
             case 'connected':
-                console.log('[Nuce] Connected to Dev Server');
+                console.log('[Nuxc] Connected to Dev Server');
                 break;
             case 'update':
                 this.applyUpdate(msg.payload.updates);
                 break;
             case 'reload':
-                console.warn('[Nuce] Reload triggered:', msg.payload.reason);
+                console.warn('[Nuxc] Reload triggered:', msg.payload.reason);
                 location.reload();
                 break;
             case 'error':
-                console.error('[Nuce] Build Error:', msg.payload.message);
+                console.error('[Nuxc] Build Error:', msg.payload.message);
                 // Show Error Overlay (Phase 5.11)
                 break;
         }
@@ -37,7 +37,7 @@ class HMRClient {
 
     private async applyUpdate(updates: any[]) {
         for (const update of updates) {
-            console.log(`[Nuce] Hot Updating: ${update.moduleId}`);
+            console.log(`[Nuxc] Hot Updating: ${update.moduleId}`);
             try {
                 // 1. Dispose old module
                 const old = this.registry.get(update.moduleId);
@@ -52,7 +52,7 @@ class HMRClient {
                 // 3. Re-execute boundary or notify parents
                 // This requires a dependency map on the client
             } catch (err) {
-                console.error('[Nuce] Update Failed:', err);
+                console.error('[Nuxc] Update Failed:', err);
                 location.reload();
             }
         }
@@ -74,4 +74,4 @@ class HMRClient {
     }
 }
 
-(window as any).__NUCE_HMR__ = new HMRClient();
+(window as any).__NUXC_HMR__ = new HMRClient();

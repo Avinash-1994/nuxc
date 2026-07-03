@@ -1,24 +1,24 @@
 {
-  "name": "nuce-preact-template",
+  "name": "nuxc-preact-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview"
   },
-  "nuce": {
+  "nuxc": {
     "template": true,
     "framework": "preact",
-    "description": "Nuce Weather — real weather dashboard"
+    "description": "Nuxc Weather — real weather dashboard"
   },
   "dependencies": {
     "@preact/signals": "^2.9.0",
     "preact": "^10.22.0"
   },
   "devDependencies": {
-    "nuce": "file:../../",
+    "nuxc": "file:../../",
     "typescript": "5.4.5"
   }
 }

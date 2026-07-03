@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-code-split
+ * @nuxc/plugin-code-split
  * Smart code splitting
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCodeSplitPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-code-split',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-code-split',
+        originalPlugin: 'nuxc-native',
         
         async buildStart() {
-            console.log('[@nuce/plugin-code-split] Starting performance optimization...');
+            console.log('[@nuxc/plugin-code-split] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createCodeSplitPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-code-split] Performance optimization complete');
+            console.log('[@nuxc/plugin-code-split] Performance optimization complete');
         }
     };
 }

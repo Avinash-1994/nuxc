@@ -1,0 +1,27 @@
+{
+  "hash": "bce3b57e",
+  "depsHash": "7d8b8620",
+  "deps": [
+    "svelte/internal/disclose-version",
+    "svelte",
+    "svelte/animate",
+    "svelte/easing",
+    "svelte/motion",
+    "svelte/store",
+    "svelte/transition",
+    "svelte/internal/client",
+    "svelte/internal/flags/legacy"
+  ],
+  "depMap": {
+    "svelte/internal/disclose-version": "/@nuxc-deps/svelte_internal_disclose-version.js",
+    "svelte": "/@nuxc-deps/svelte.js",
+    "svelte/animate": "/@nuxc-deps/svelte_animate.js",
+    "svelte/easing": "/@nuxc-deps/svelte_easing.js",
+    "svelte/motion": "/@nuxc-deps/svelte_motion.js",
+    "svelte/store": "/@nuxc-deps/svelte_store.js",
+    "svelte/transition": "/@nuxc-deps/svelte_transition.js",
+    "svelte/internal/client": "/@nuxc-deps/svelte_internal_client.js",
+    "svelte/internal/flags/legacy": "/@nuxc-deps/svelte_internal_flags_legacy.js"
+  },
+  "timestamp": 1778471579341
+}

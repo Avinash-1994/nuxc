@@ -4,16 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview"
   },
   "dependencies": {
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "nuce": "file:../../",
+    "nuxc": "file:../../",
     "typescript": "latest"
   }
 }

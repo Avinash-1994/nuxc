@@ -33,7 +33,7 @@ function App() {
     <div style="min-height:100vh;background:linear-gradient(135deg,#0f172a,#1e293b);color:#f1f5f9;font-family:system-ui;padding:24px">
       <div style="max-width:600px;margin:0 auto">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-          <h1 style="margin:0">⛅ Nuce Weather</h1>
+          <h1 style="margin:0">⛅ Nuxc Weather</h1>
           <button onClick={() => unit.value = unit.value === 'C' ? 'F' : 'C'} style="padding:8px 16px;background:#334155;color:#fff;border:none;border-radius:8px;cursor:pointer">°{unit.value === 'C' ? 'F' : 'C'}</button>
         </div>
         <div style="display:flex;gap:8px;margin-bottom:24px">

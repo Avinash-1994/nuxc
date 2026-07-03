@@ -1,20 +1,20 @@
 {
-  "name": "nuce-solid-template",
+  "name": "nuxc-solid-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview"
   },
-  "nuce": {
+  "nuxc": {
     "template": true,
     "framework": "solid",
-    "description": "Nuce Analytics — website analytics dashboard"
+    "description": "Nuxc Analytics — website analytics dashboard"
   },
   "devDependencies": {
-    "nuce": "file:../../",
+    "nuxc": "file:../../",
     "typescript": "5.4.5"
   },
   "dependencies": {

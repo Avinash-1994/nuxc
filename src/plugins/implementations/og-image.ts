@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-og-image
+ * @nuxc/plugin-og-image
  * Open Graph image generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createOgImagePlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-og-image',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-og-image',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Open Graph image generation

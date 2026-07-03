@@ -1,5 +1,5 @@
 /**
- * NUCE — Phase 2.15 Next.js Pages Router Test Runner
+ * NUXC — Phase 2.15 Next.js Pages Router Test Runner
  * Tests: NX-01 through NX-09
  */
 
@@ -41,10 +41,10 @@ const {
   detectRouterType,
   injectWebpackOverride,
   buildWebpackOverride,
-  transformWithNuceSwc,
+  transformWithNuxcSwc,
   getCachedTransform,
   setCachedTransform,
-  NUCE_NEXTJS_INFO_MESSAGE
+  NUXC_NEXTJS_INFO_MESSAGE
 } = adapterMod;
 
 const fixtureDir   = __dirname;
@@ -63,18 +63,18 @@ if (ok1) {
     `src/app/ absent: ${srcAppAbsent}`,
     `app/ absent: ${appAbsent}`,
     `Router type detected: ${routerType}`,
-    `Nuce adapter activates: yes`,
+    `Nuxc adapter activates: yes`,
   ]);
 } else {
   fail('NX-01  Pages Router detection', 'pages detected', routerType);
 }
 
-// ─── NX-02  App Router → Nuce does nothing ────────────────────────────────
+// ─── NX-02  App Router → Nuxc does nothing ────────────────────────────────
 // Create a synthetic App Router fixture in memory (temp dir)
 import { mkdtempSync, mkdirSync, writeFileSync } from 'fs';
 import os from 'os';
 
-const appRouterTmp = mkdtempSync(path.join(os.tmpdir(), 'nuce-app-router-'));
+const appRouterTmp = mkdtempSync(path.join(os.tmpdir(), 'nuxc-app-router-'));
 mkdirSync(path.join(appRouterTmp, 'src', 'app'), { recursive: true });
 const appRouterConfigOrig = `/** @type {import('next').NextConfig} */\nmodule.exports = { reactStrictMode: true };\n`;
 writeFileSync(path.join(appRouterTmp, 'next.config.js'), appRouterConfigOrig, 'utf-8');
@@ -85,12 +85,12 @@ const configUnchanged = appRouterConfigAfter === appRouterConfigOrig;
 const ok2 = appRouterType === 'app' && configUnchanged;
 
 if (ok2) {
-  pass('NX-02  App Router detection → Nuce does nothing', 'adapter inactive, next.config.js unchanged', 'confirmed', [
+  pass('NX-02  App Router detection → Nuxc does nothing', 'adapter inactive, next.config.js unchanged', 'confirmed', [
     `src/app/ present: yes`,
     `Router type detected: ${appRouterType}`,
-    `Nuce adapter activates: no`,
+    `Nuxc adapter activates: no`,
     `next.config.js unchanged: ${configUnchanged}`,
-    `INFO message: ${NUCE_NEXTJS_INFO_MESSAGE}`,
+    `INFO message: ${NUXC_NEXTJS_INFO_MESSAGE}`,
   ]);
 } else {
   fail('NX-02  App Router detection', 'config unchanged', `routerType=${appRouterType} unchanged=${configUnchanged}`);
@@ -99,10 +99,10 @@ if (ok2) {
 // ─── NX-03  HMR acceleration ───────────────────────────────────────────────
 // Honest cold/warm benchmark:
 //   Cold baseline  = ts.transpileModule() with no prior state
-//   Cold Nuce     = Nuce SWC transform with .nuce-cache wiped
-//   Warm Nuce     = second run on same file → SQLite cache hit
+//   Cold Nuxc     = Nuxc SWC transform with .nuxc-cache wiped
+//   Warm Nuxc     = second run on same file → SQLite cache hit
 //   Warm baseline  = subsequent regex-strip (no IO overhead)
-// The Nuce VALUE is the warm cache hit — not the first cold run.
+// The Nuxc VALUE is the warm cache hit — not the first cold run.
 
 const sampleComponent = fs.readFileSync(path.join(fixtureDir, 'pages', 'index.jsx'), 'utf-8');
 
@@ -114,17 +114,17 @@ ts.transpileModule(sampleComponent, {
 });
 const coldBaseMs = performance.now() - coldBaseStart;
 
-// --- Cold Nuce: wipe cache, then transform ---
-const nuceCacheDir = path.join(fixtureDir, '.nuce-cache');
-if (fs.existsSync(nuceCacheDir)) fs.rmSync(nuceCacheDir, { recursive: true, force: true });
-const coldNuceStart = performance.now();
-const coldNuceResult = transformWithNuceSwc(sampleComponent, 'pages/index.jsx', nuceCacheDir);
-const coldNuceMs = performance.now() - coldNuceStart;
+// --- Cold Nuxc: wipe cache, then transform ---
+const nuxcCacheDir = path.join(fixtureDir, '.nuxc-cache');
+if (fs.existsSync(nuxcCacheDir)) fs.rmSync(nuxcCacheDir, { recursive: true, force: true });
+const coldNuxcStart = performance.now();
+const coldNuxcResult = transformWithNuxcSwc(sampleComponent, 'pages/index.jsx', nuxcCacheDir);
+const coldNuxcMs = performance.now() - coldNuxcStart;
 
-// --- Warm Nuce: same file, should be a cache hit ---
-const warmNuceStart = performance.now();
-const warmNuceResult = transformWithNuceSwc(sampleComponent, 'pages/index.jsx', nuceCacheDir);
-const warmNuceMs = performance.now() - warmNuceStart;
+// --- Warm Nuxc: same file, should be a cache hit ---
+const warmNuxcStart = performance.now();
+const warmNuxcResult = transformWithNuxcSwc(sampleComponent, 'pages/index.jsx', nuxcCacheDir);
+const warmNuxcMs = performance.now() - warmNuxcStart;
 
 // --- Warm baseline: second regex-strip (no IO, just CPU) ---
 const warmBaseStart = performance.now();
@@ -133,65 +133,65 @@ sampleComponent
   .replace(/export\s+default\s+function/g, 'function');
 const warmBaseMs = performance.now() - warmBaseStart;
 
-const warmSpeedup = coldNuceMs > 0 ? (coldNuceMs / Math.max(warmNuceMs, 0.01)).toFixed(1) : 'N/A';
-const coldCompare = coldNuceMs <= coldBaseMs ? 'faster than baseline' : `${(coldNuceMs / Math.max(coldBaseMs, 0.01)).toFixed(1)}× slower (expected — SWC init overhead)`;
-const warmCompare = warmNuceMs < warmBaseMs ? 'faster than baseline' : (warmNuceMs <= warmBaseMs + 2 ? 'same as baseline' : 'slower');
+const warmSpeedup = coldNuxcMs > 0 ? (coldNuxcMs / Math.max(warmNuxcMs, 0.01)).toFixed(1) : 'N/A';
+const coldCompare = coldNuxcMs <= coldBaseMs ? 'faster than baseline' : `${(coldNuxcMs / Math.max(coldBaseMs, 0.01)).toFixed(1)}× slower (expected — SWC init overhead)`;
+const warmCompare = warmNuxcMs < warmBaseMs ? 'faster than baseline' : (warmNuxcMs <= warmBaseMs + 2 ? 'same as baseline' : 'slower');
 
-const ok3 = warmNuceResult.cached === true; // The REAL win is warm cache hit
+const ok3 = warmNuxcResult.cached === true; // The REAL win is warm cache hit
 
 log(`      Baseline cold transform:           ${coldBaseMs.toFixed(2)}ms  (ts.transpileModule, fresh)`);
-log(`      Nuce cold transform:              ${coldNuceMs.toFixed(2)}ms  (cache miss — SWC init + parse)`);
-log(`      Nuce warm transform (cache hit):  ${warmNuceMs.toFixed(2)}ms  (SQLite lookup, no re-parse)`);
+log(`      Nuxc cold transform:              ${coldNuxcMs.toFixed(2)}ms  (cache miss — SWC init + parse)`);
+log(`      Nuxc warm transform (cache hit):  ${warmNuxcMs.toFixed(2)}ms  (SQLite lookup, no re-parse)`);
 log(`      Baseline warm (subsequent):        ${warmBaseMs.toFixed(2)}ms  (regex-strip, no IO)`);
-log(`      Cold: Nuce vs baseline:           ${coldCompare}`);
-log(`      Warm: Nuce vs baseline:           ${warmCompare}`);
+log(`      Cold: Nuxc vs baseline:           ${coldCompare}`);
+log(`      Warm: Nuxc vs baseline:           ${warmCompare}`);
 log(`      Value proposition: cold first-run overhead acceptable,`);
-log(`        warm cache benefit: ${warmSpeedup}× faster than cold Nuce run`);
+log(`        warm cache benefit: ${warmSpeedup}× faster than cold Nuxc run`);
 log('');
 
-(ok3 ? pass : fail)('NX-03  HMR acceleration', 'warm cache hit confirms SQLite speedup', ok3 ? `warm=${warmNuceMs.toFixed(2)}ms (${warmSpeedup}× faster than cold)` : 'cache miss on warm run', [
-  `Cold first run: ${coldNuceMs.toFixed(2)}ms (acceptable overhead — cache population)`,
-  `Warm cache hit: ${warmNuceMs.toFixed(2)}ms — ${warmSpeedup}× faster than cold`,
-  `Cache location: .nuce-cache/ (SQLite)`,
-  `Cache hit confirmed: ${warmNuceResult.cached}`,
-  `Honest assessment: Nuce value is in WARM transforms, not cold`,
+(ok3 ? pass : fail)('NX-03  HMR acceleration', 'warm cache hit confirms SQLite speedup', ok3 ? `warm=${warmNuxcMs.toFixed(2)}ms (${warmSpeedup}× faster than cold)` : 'cache miss on warm run', [
+  `Cold first run: ${coldNuxcMs.toFixed(2)}ms (acceptable overhead — cache population)`,
+  `Warm cache hit: ${warmNuxcMs.toFixed(2)}ms — ${warmSpeedup}× faster than cold`,
+  `Cache location: .nuxc-cache/ (SQLite)`,
+  `Cache hit confirmed: ${warmNuxcResult.cached}`,
+  `Honest assessment: Nuxc value is in WARM transforms, not cold`,
 ]);
 
 // ─── NX-04  Transform output parity ───────────────────────────────────────
 const parity = `import React from 'react';\nexport default function TestComp() { return React.createElement('div', null, 'hello'); }\n`;
-const nuceOut   = transformWithNuceSwc(parity, 'test.jsx', path.join(fixtureDir, '.nuce-cache')).code;
+const nuxcOut   = transformWithNuxcSwc(parity, 'test.jsx', path.join(fixtureDir, '.nuxc-cache')).code;
 const baselineOut2 = parity; // pages-only: JSX passthrough (Next.js handles JSX compile in its own pipeline)
 
 // Functional parity: both contain core component structure
-const nuceHasComponent  = nuceOut.includes('TestComp') || nuceOut.includes('createElement');
-const nuceHasNoTsTypes  = !nuceOut.includes(': string') && !nuceOut.includes(': number');
-const ok4 = nuceHasComponent;
+const nuxcHasComponent  = nuxcOut.includes('TestComp') || nuxcOut.includes('createElement');
+const nuxcHasNoTsTypes  = !nuxcOut.includes(': string') && !nuxcOut.includes(': number');
+const ok4 = nuxcHasComponent;
 
-const nuceHash   = createHash('sha256').update(nuceOut).digest('hex').slice(0, 16);
+const nuxcHash   = createHash('sha256').update(nuxcOut).digest('hex').slice(0, 16);
 const baselineHash = createHash('sha256').update(baselineOut2).digest('hex').slice(0, 16);
 
 pass('NX-04  Transform output parity', 'component structure preserved', ok4 ? 'confirmed' : 'CHECK', [
-  `Nuce output contains component: ${nuceHasComponent}`,
-  `TypeScript types stripped: ${nuceHasNoTsTypes}`,
-  `Nuce SHA-256:    ${nuceHash}`,
+  `Nuxc output contains component: ${nuxcHasComponent}`,
+  `TypeScript types stripped: ${nuxcHasNoTsTypes}`,
+  `Nuxc SHA-256:    ${nuxcHash}`,
   `Baseline SHA-256: ${baselineHash}`,
-  `Note: hashes differ (Nuce strips type annotations; Next compiles JSX separately)`,
+  `Note: hashes differ (Nuxc strips type annotations; Next compiles JSX separately)`,
   `Functional parity: yes`,
 ]);
 
 // ─── NX-05  SQLite cache ───────────────────────────────────────────────────
-const cacheDir = path.join(fixtureDir, '.nuce-cache');
+const cacheDir = path.join(fixtureDir, '.nuxc-cache');
 const testSource = `export default function Cached() { return 'cached'; }`;
 const fingerprint = createHash('sha256').update(testSource).digest('hex');
 
 // First transform — cache miss
 const run1Start = performance.now();
-const run1 = transformWithNuceSwc(testSource, 'cached.jsx', cacheDir);
+const run1 = transformWithNuxcSwc(testSource, 'cached.jsx', cacheDir);
 const run1Ms = performance.now() - run1Start;
 
 // Second transform — cache hit
 const run2Start = performance.now();
-const run2 = transformWithNuceSwc(testSource, 'cached.jsx', cacheDir);
+const run2 = transformWithNuxcSwc(testSource, 'cached.jsx', cacheDir);
 const run2Ms = performance.now() - run2Start;
 
 const cacheHit = run2.cached;
@@ -200,7 +200,7 @@ const ok5 = cacheHit;
 
 if (ok5) {
   pass('NX-05  SQLite cache', 'second transform = cache hit', 'confirmed', [
-    `Cache dir: .nuce-cache/`,
+    `Cache dir: .nuxc-cache/`,
     `First transform (cache miss): ${run1Ms.toFixed(2)}ms`,
     `Second transform (cache hit): ${run2Ms.toFixed(2)}ms`,
     `Cache hit rate after 2 builds: 50% (1 of 2 transforms)`,
@@ -214,30 +214,30 @@ if (ok5) {
 // ─── NX-06  getServerSideProps unchanged ───────────────────────────────────
 const indexSrc = fs.readFileSync(path.join(fixtureDir, 'pages', 'index.jsx'), 'utf-8');
 const hasGSSP      = indexSrc.includes('getServerSideProps');
-const nuceOutput6 = transformWithNuceSwc(indexSrc, 'pages/index.jsx', cacheDir).code;
-const nuceHasGSSP = nuceOutput6.includes('getServerSideProps');
-const ok6 = hasGSSP && nuceHasGSSP;
+const nuxcOutput6 = transformWithNuxcSwc(indexSrc, 'pages/index.jsx', cacheDir).code;
+const nuxcHasGSSP = nuxcOutput6.includes('getServerSideProps');
+const ok6 = hasGSSP && nuxcHasGSSP;
 
 pass('NX-06  getServerSideProps unchanged', 'SSR data fetching preserved', ok6 ? 'confirmed' : 'CHECK', [
   `getServerSideProps in source: ${hasGSSP}`,
-  `getServerSideProps in Nuce output: ${nuceHasGSSP}`,
-  `Nuce does not interfere with Next.js SSR APIs: yes`,
+  `getServerSideProps in Nuxc output: ${nuxcHasGSSP}`,
+  `Nuxc does not interfere with Next.js SSR APIs: yes`,
   `Props flow: pages/index.jsx → getServerSideProps → { posts } → component`,
 ]);
 
 // ─── NX-07  next/image, next/font, next/link unchanged ─────────────────────
 const hasNextImage = indexSrc.includes("next/image") || indexSrc.includes('next/link');
-const nuceOut7    = transformWithNuceSwc(indexSrc, 'pages/index.jsx', cacheDir).code;
-const nuceHasNextImage = nuceOut7.includes('next/image') || nuceOut7.includes('next/link');
-const ok7 = hasNextImage && nuceHasNextImage;
+const nuxcOut7    = transformWithNuxcSwc(indexSrc, 'pages/index.jsx', cacheDir).code;
+const nuxcHasNextImage = nuxcOut7.includes('next/image') || nuxcOut7.includes('next/link');
+const ok7 = hasNextImage && nuxcHasNextImage;
 
 pass('NX-07  next/image, next/font, next/link unchanged', 'Next.js macros preserved', ok7 ? 'confirmed' : 'CHECK', [
   `next/link import in source: ${indexSrc.includes('next/link')}`,
   `next/image import in source: ${indexSrc.includes('next/image')}`,
   `next/head import in source: ${indexSrc.includes('next/head')}`,
-  `next/link in Nuce output: ${nuceOut7.includes('next/link')}`,
-  `next/image in Nuce output: ${nuceOut7.includes('next/image')}`,
-  `Nuce does not rewrite Next.js import paths: yes`,
+  `next/link in Nuxc output: ${nuxcOut7.includes('next/link')}`,
+  `next/image in Nuxc output: ${nuxcOut7.includes('next/image')}`,
+  `Nuxc does not rewrite Next.js import paths: yes`,
 ]);
 
 // ─── NX-08  App Router project: graceful skip ───────────────────────────────
@@ -252,22 +252,22 @@ detectRouterType(appRouterTmp); // triggers INFO log via adapter detect
 console.log = origLog;
 
 // The INFO is logged by the adapter when detect() returns false for App Router
-const infoMsg = NUCE_NEXTJS_INFO_MESSAGE;
+const infoMsg = NUXC_NEXTJS_INFO_MESSAGE;
 const ok8 = true; // structural guarantee — app router check is coded into detect()
 
 pass('NX-08  App Router: graceful skip', 'INFO message printed, config unchanged', 'confirmed', [
   `Exact INFO message shown to user:`,
   `  "${infoMsg}"`,
   `next.config.js modified: no`,
-  `Nuce adapter activates: no`,
+  `Nuxc adapter activates: no`,
   `App Router files untouched: yes`,
 ]);
 
 // ─── Webpack override injection (supporting NX-01/NX-06) ───────────────────
 const origConfig = fs.readFileSync(path.join(fixtureDir, 'next.config.js'), 'utf-8');
-const NUCE_LOADER = '/node_modules/@nuce/swc-loader/index.js';
-const patched = injectWebpackOverride(origConfig, NUCE_LOADER);
-const overrideInjected = patched.includes('[nuce] Pages Router webpack override');
+const NUXC_LOADER = '/node_modules/@nuxc/swc-loader/index.js';
+const patched = injectWebpackOverride(origConfig, NUXC_LOADER);
+const overrideInjected = patched.includes('[nuxc] Pages Router webpack override');
 const origUnchangedOnDisk = fs.readFileSync(path.join(fixtureDir, 'next.config.js'), 'utf-8') === origConfig;
 
 // ─── NX-09  Regression (all 14 prior fixtures) ─────────────────────────────
@@ -294,7 +294,7 @@ for (const fix of regFixtures) {
   const t0 = Date.now();
   try {
     execFileSync('node', [cliPath, 'build'], { cwd: fix.dir, timeout: 30000, stdio: 'ignore',
-        env: { ...process.env, NUCE_SKIP_SECURITY: '1' } });
+        env: { ...process.env, NUXC_SKIP_SECURITY: '1' } });
     regLines.push(`${fix.name.padEnd(22)}: pass ${Date.now() - t0}ms`);
   } catch {
     regLines.push(`${fix.name.padEnd(22)}: FAIL`);
@@ -320,7 +320,7 @@ const passCount = results.filter(Boolean).length;
 const failCount = results.filter(x => !x).length;
 
 log(`┌─────────────────────────────────────────────┐`);
-log(`│ NUCE — PHASE 2.15 NEXT.JS PAGES COMPLETE  │`);
+log(`│ NUXC — PHASE 2.15 NEXT.JS PAGES COMPLETE  │`);
 log(`│ NX-01 Pages detect:    PASS  pages/ found  │`);
 log(`│ NX-02 App Router skip: PASS  config intact │`);
 log(`│ NX-03 HMR accel:       PASS  SWC measured  │`);

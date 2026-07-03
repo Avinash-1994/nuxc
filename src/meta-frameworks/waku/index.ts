@@ -1,12 +1,12 @@
-import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
-import { detectDependencies, registry } from '@nuce/adapter-core';
+import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
+import { detectDependencies, registry } from '@nuxc/adapter-core';
 import { wakuRscPlugin } from './rsc-plugin.js';
 
 export interface WakuConfig {
   rscPath?: string; // default '/RSC'
 }
 
-export class WakuAdapter implements NuceAdapter {
+export class WakuAdapter implements NuxcAdapter {
   name = 'waku';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -19,7 +19,7 @@ export class WakuAdapter implements NuceAdapter {
     ];
   }
 
-  config(config: NuceConfig): NuceConfig {
+  config(config: NuxcConfig): NuxcConfig {
     if (!config.waku) config.waku = {};
     config.waku = {
       rscPath: '/RSC',
@@ -35,7 +35,7 @@ export class WakuAdapter implements NuceAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:nuce/waku-rsc-router';
+         const virtualEntry = 'virtual:nuxc/waku-rsc-router';
          let router: any;
          try {
             router = await import(virtualEntry);
@@ -88,7 +88,7 @@ export class WakuAdapter implements NuceAdapter {
 
          next();
       } catch(e) {
-         console.error('[Nuce:Waku] Error rendering RSC', e);
+         console.error('[Nuxc:Waku] Error rendering RSC', e);
          next();
       }
     };

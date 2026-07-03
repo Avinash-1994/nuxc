@@ -1,0 +1,11 @@
+{
+  "hash": "40cdf3c8",
+  "depsHash": "e3e66498",
+  "deps": [
+    "vue"
+  ],
+  "depMap": {
+    "vue": "/@nuxc-deps/vue.js"
+  },
+  "timestamp": 1779164077316
+}

@@ -119,7 +119,7 @@ export class LiveConfigManager {
     }
 
     public async persist(): Promise<void> {
-        const configPath = path.join(this.cwd, 'nuce.config.json');
+        const configPath = path.join(this.cwd, 'nuxc.config.json');
         await fs.writeFile(configPath, JSON.stringify(this.currentConfig, null, 2), 'utf-8');
         log.info(`Live configuration persisted to ${configPath}`);
     }

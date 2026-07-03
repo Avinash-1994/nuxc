@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-msw
+ * @nuxc/plugin-msw
  * Mock Service Worker integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMswPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-msw',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-msw',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Testing: Mock Service Worker integration

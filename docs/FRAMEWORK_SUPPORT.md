@@ -1,8 +1,8 @@
-# Nuce Framework Support - Universal Production-Grade
+# Nuxc Framework Support - Universal Production-Grade
 
 ## 🌟 **All Frameworks Are Production-Ready**
 
-Nuce provides **identical, production-grade support** for all major frameworks. There are no tiers - every framework receives:
+Nuxc provides **identical, production-grade support** for all major frameworks. There are no tiers - every framework receives:
 
 ### ✅ **Universal Guarantees (ALL Frameworks)**
 
@@ -12,7 +12,7 @@ Nuce provides **identical, production-grade support** for all major frameworks. 
 - **CSS correctness** (scoped styles, extraction, injection)
 - **Graph-based rebuilds** (dependency tracking)
 - **Production builds work** (optimized, tree-shaken)
-- **Full `nuce verify` support**
+- **Full `nuxc verify` support**
 
 ---
 
@@ -76,7 +76,7 @@ Nuce provides **identical, production-grade support** for all major frameworks. 
 
 ## 🔧 **How It Works**
 
-All frameworks use Nuce's **UniversalTransformer** which:
+All frameworks use Nuxc's **UniversalTransformer** which:
 
 1. **Detects** the framework from file extensions and imports
 2. **Transforms** using the framework's native compiler
@@ -103,4 +103,4 @@ We believe in **equality across frameworks**. Every framework deserves:
 - The same production-ready guarantees
 - The same developer experience
 
-**Nuce treats all frameworks as first-class citizens.**
+**Nuxc treats all frameworks as first-class citizens.**

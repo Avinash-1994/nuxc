@@ -1,4 +1,4 @@
-# Nuce nextjs-pages Template — Nuce Store — Next.js e-commerce
+# Nuxc nextjs-pages Template — Nuxc Store — Next.js e-commerce
 ```bash
 npm install && npm run dev
 ```

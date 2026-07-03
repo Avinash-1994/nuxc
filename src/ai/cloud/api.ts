@@ -27,8 +27,8 @@ export class CloudAPI {
 
     constructor(private config: AIConfig) {
         // Production API endpoint
-        this.baseUrl = process.env.NUCE_CLOUD_API || 'https://api.nuce.build';
-        this.apiKey = config.apiKey || process.env.NUCE_API_KEY || '';
+        this.baseUrl = process.env.NUXC_CLOUD_API || 'https://api.nuxc.build';
+        this.apiKey = config.apiKey || process.env.NUXC_API_KEY || '';
         this.userId = this.getOrCreateUserId();
     }
 
@@ -36,7 +36,7 @@ export class CloudAPI {
         // Generate anonymous user ID (stored locally)
         const fs = require('fs');
         const path = require('path');
-        const configPath = path.join(process.env.HOME || process.env.USERPROFILE || '', '.nuce', 'user.json');
+        const configPath = path.join(process.env.HOME || process.env.USERPROFILE || '', '.nuxc', 'user.json');
 
         try {
             if (fs.existsSync(configPath)) {

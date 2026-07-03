@@ -1,7 +1,7 @@
-# 🎯 Nuce Web App Update Requirements
+# 🎯 Nuxc Web App Update Requirements
 
 ## Current Status
-The nuce-web-app exists at `/home/avinash/Desktop/framework_practis/build/nuce-web-app` but needs updating with **accurate production data** from our v1.0 release.
+The nuxc-web-app exists at `/home/avinash/Desktop/framework_practis/build/nuxc-web-app` but needs updating with **accurate production data** from our v1.0 release.
 
 ---
 
@@ -61,20 +61,20 @@ The nuce-web-app exists at `/home/avinash/Desktop/framework_practis/build/nuce-w
 
 ### CLI Commands (ACTUAL)
 ```bash
-nuce dev        # Start development server
-nuce build      # Build for production
-nuce analyze    # Analyze bundle
-nuce ssr        # Start SSR server
-nuce init       # Initialize config
-nuce bootstrap  # Create from template
-nuce css        # CSS utilities
-nuce optimize   # Optimize config
-nuce inspect    # Inspect dependency graph
-nuce report     # Generate build report
-nuce audit      # Run audits (A11y, Perf, SEO)
-nuce verify     # Verify project health
-nuce test       # Run tests
-nuce doctor     # Health diagnostics
+nuxc dev        # Start development server
+nuxc build      # Build for production
+nuxc analyze    # Analyze bundle
+nuxc ssr        # Start SSR server
+nuxc init       # Initialize config
+nuxc bootstrap  # Create from template
+nuxc css        # CSS utilities
+nuxc optimize   # Optimize config
+nuxc inspect    # Inspect dependency graph
+nuxc report     # Generate build report
+nuxc audit      # Run audits (A11y, Perf, SEO)
+nuxc verify     # Verify project health
+nuxc test       # Run tests
+nuxc doctor     # Health diagnostics
 ```
 
 ---
@@ -116,17 +116,17 @@ nuce doctor     # Health diagnostics
 **Update CLI Example (line 125):**
 ```tsx
 // OLD
-<CodeBlock code="$ npx nuce build --preset react" />
+<CodeBlock code="$ npx nuxc build --preset react" />
 
 // NEW
 <CodeBlock code={`# Create new project
-npx create-nuce my-app --template premium-dashboard
+npx create-nuxc my-app --template premium-dashboard
 
 # Start development
-cd my-app && nuce dev
+cd my-app && nuxc dev
 
 # Build for production
-nuce build`} />
+nuxc build`} />
 ```
 
 **Update Framework Status (line 147-169):**
@@ -164,17 +164,17 @@ nuce build`} />
 ```tsx
 {
   coldStart: {
-    nuce: 69,
+    nuxc: 69,
     vite: 100,
     webpack: 2000
   },
   hmr: {
-    nuce: '10-60',
+    nuxc: '10-60',
     vite: '<100',
     webpack: '~500'
   },
   bundleSize: {
-    nuce: 6.9,
+    nuxc: 6.9,
     vite: 7.2,
     webpack: 8.5
   }
@@ -186,10 +186,10 @@ nuce build`} />
 **Update Getting Started:**
 ```bash
 # Install
-npm install -g nuce
+npm install -g nuxc
 
 # Create project
-npx create-nuce my-app
+npx create-nuxc my-app
 
 # Choose template
 - premium-dashboard (Feature showcase)
@@ -199,10 +199,10 @@ npx create-nuce my-app
 - And 9 more...
 
 # Start dev server
-nuce dev
+nuxc dev
 
 # Build
-nuce build
+nuxc build
 ```
 
 ### 5. Templates Page (`src/pages/TemplateStarters.tsx`)

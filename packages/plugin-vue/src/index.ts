@@ -1,4 +1,4 @@
-// Plugin type compatible with both Nuce and Vite plugin API
+// Plugin type compatible with both Nuxc and Vite plugin API
 type Plugin = { name: string; [hook: string]: any };
 
 export interface VuePluginOptions {
@@ -11,9 +11,9 @@ export interface VuePluginOptions {
 }
 
 /**
- * @nuce/plugin-vue
+ * @nuxc/plugin-vue
  *
- * Official Nuce plugin for Vue 3:
+ * Official Nuxc plugin for Vue 3:
  * - Full Vue SFC (.vue) parsing and compilation
  * - Vue 3 HMR — template hot-patching, script remount
  * - TypeScript via `lang="ts"` in script blocks
@@ -21,7 +21,7 @@ export interface VuePluginOptions {
  *
  * @example
  * ```js
- * const vue = require('@nuce/plugin-vue');
+ * const vue = require('@nuxc/plugin-vue');
  * module.exports = { plugins: [vue()] };
  * ```
  */
@@ -33,20 +33,20 @@ export function vuePlugin(options: VuePluginOptions = {}): Plugin {
   } = options;
 
   return {
-    name: '@nuce/plugin-vue',
+    name: '@nuxc/plugin-vue',
 
     /**
      * Load hook: handle .vue SFC files.
-     * The actual compilation is done by @vue/compiler-sfc (already in Nuce core).
+     * The actual compilation is done by @vue/compiler-sfc (already in Nuxc core).
      * This plugin configures and extends that behavior.
      */
     load(id: string): { code: string } | null {
       if (!id.endsWith('.vue')) return null;
 
-      // Vue SFC loading is handled natively by Nuce's framework-detector.
+      // Vue SFC loading is handled natively by Nuxc's framework-detector.
       // This plugin hook adds HMR metadata injection on top.
       if (hmr) {
-        // Signal to the Nuce HMR system that this is a Vue SFC
+        // Signal to the Nuxc HMR system that this is a Vue SFC
         // The actual hot.accept() logic is injected by the core bundler
         return null; // Let the core handle the actual load
       }

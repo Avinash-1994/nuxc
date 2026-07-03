@@ -1,6 +1,6 @@
-# Getting Started with Nuce
+# Getting Started with Nuxc
 
-Welcome to Nuce! This guide will help you get up and running in minutes.
+Welcome to Nuxc! This guide will help you get up and running in minutes.
 
 ## Quick Start
 
@@ -8,23 +8,23 @@ Welcome to Nuce! This guide will help you get up and running in minutes.
 
 ```bash
 # Using npm
-npm install -g nuce
+npm install -g nuxc
 
 # Using yarn
-yarn global add nuce
+yarn global add nuxc
 
 # Using pnpm
-pnpm add -g nuce
+pnpm add -g nuxc
 ```
 
 ### Create a New Project
 
 ```bash
 # Create a new project from template
-npx create-nuce my-app
+npx create-nuxc my-app
 
 # Choose from available templates
-npx create-nuce my-app --template react-spa
+npx create-nuxc my-app --template react-spa
 ```
 
 ### Available Templates
@@ -57,7 +57,7 @@ npm install
 ### 3. Start development server
 
 ```bash
-nuce dev
+nuxc dev
 ```
 
 Your app will be running at `http://localhost:3000` with Hot Module Replacement enabled!
@@ -65,7 +65,7 @@ Your app will be running at `http://localhost:3000` with Hot Module Replacement 
 ### 4. Build for production
 
 ```bash
-nuce build
+nuxc build
 ```
 
 Your optimized build will be in the `dist/` folder.
@@ -79,14 +79,14 @@ my-app/
 │   ├── App.tsx          # Main component
 │   └── ...
 ├── public/              # Static assets
-├── nuce.config.js      # Nuce configuration
+├── nuxc.config.js      # Nuxc configuration
 ├── package.json
 └── tsconfig.json
 ```
 
 ## Configuration
 
-Create a `nuce.config.js` in your project root:
+Create a `nuxc.config.js` in your project root:
 
 ```javascript
 module.exports = {
@@ -122,7 +122,7 @@ module.exports = {
 
 ## Need Help?
 
-- 📖 [Documentation](https://nuce.dev/docs)
-- 💬 [GitHub Discussions](https://github.com/Avinash-1994/nuce/discussions)
-- 🐛 [Report Issues](https://github.com/Avinash-1994/nuce/issues)
-- 🌟 [Star on GitHub](https://github.com/Avinash-1994/nuce)
+- 📖 [Documentation](https://nuxc.dev/docs)
+- 💬 [GitHub Discussions](https://github.com/Avinash-1994/nuxc/discussions)
+- 🐛 [Report Issues](https://github.com/Avinash-1994/nuxc/issues)
+- 🌟 [Star on GitHub](https://github.com/Avinash-1994/nuxc)

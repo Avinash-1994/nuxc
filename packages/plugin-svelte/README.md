@@ -1,17 +1,17 @@
-# @nuce/plugin-svelte
+# @nuxc/plugin-svelte
 
-> Official Nuce plugin for Svelte — .svelte file transform, Runes, HMR.
+> Official Nuxc plugin for Svelte — .svelte file transform, Runes, HMR.
 
 ## Install
 
 ```bash
-npm install --save-dev @nuce/plugin-svelte svelte
+npm install --save-dev @nuxc/plugin-svelte svelte
 ```
 
 ## Usage
 
 ```js
-const svelte = require('@nuce/plugin-svelte');
+const svelte = require('@nuxc/plugin-svelte');
 module.exports = {
   entry: ['./src/main.ts'],
   plugins: [svelte()],

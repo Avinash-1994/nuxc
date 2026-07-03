@@ -243,8 +243,8 @@ function broadcast(clients: Set<any>, message: any) {
 // ===== File Watcher =====
 function watchConfigFile(root: string, onChange: (config: any) => void) {
     const configPaths = [
-        path.join(root, 'nuce.build.json'),
-        path.join(root, 'nuce.build.ts')
+        path.join(root, 'nuxc.build.json'),
+        path.join(root, 'nuxc.build.ts')
     ];
 
     configPaths.forEach(configPath => {

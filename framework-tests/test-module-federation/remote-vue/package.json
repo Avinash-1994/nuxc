@@ -1,1 +1,1 @@
-{"name":"nuce-mfe-remote-vue","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuce dev","build":"nuce build"},"dependencies":{"vue":"3.4.27"},"devDependencies":{"nuce":"file:../../.."}}
+{"name":"nuxc-mfe-remote-vue","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuxc dev","build":"nuxc build"},"dependencies":{"vue":"3.4.27"},"devDependencies":{"nuxc":"file:../../.."}}

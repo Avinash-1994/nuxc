@@ -1,4 +1,4 @@
 export default {
     preset: 'react',
-    cacheDir: '.nuce_cache'
+    cacheDir: '.nuxc_cache'
 };

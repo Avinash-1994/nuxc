@@ -21,32 +21,32 @@ describe('Plugin Loading - Production Ready', () => {
     });
 
     it('should load React plugin', async () => {
-        const plugin = await pluginRegistry.load('@nuce/plugin-react');
+        const plugin = await pluginRegistry.load('@nuxc/plugin-react');
 
         expect(plugin).toBeDefined();
-        expect(plugin.name).toBe('@nuce/plugin-react');
+        expect(plugin.name).toBe('@nuxc/plugin-react');
         expect(plugin.transform).toBeDefined();
     });
 
     it('should load Vue plugin', async () => {
-        const plugin = await pluginRegistry.load('@nuce/plugin-vue');
+        const plugin = await pluginRegistry.load('@nuxc/plugin-vue');
 
         expect(plugin).toBeDefined();
-        expect(plugin.name).toBe('@nuce/plugin-vue');
+        expect(plugin.name).toBe('@nuxc/plugin-vue');
     });
 
     it('should load Sass plugin', async () => {
-        const plugin = await pluginRegistry.load('@nuce/plugin-sass');
+        const plugin = await pluginRegistry.load('@nuxc/plugin-sass');
 
         expect(plugin).toBeDefined();
-        expect(plugin.name).toBe('@nuce/plugin-sass');
+        expect(plugin.name).toBe('@nuxc/plugin-sass');
     });
 
     it('should load TypeScript plugin', async () => {
-        const plugin = await pluginRegistry.load('@nuce/plugin-typescript');
+        const plugin = await pluginRegistry.load('@nuxc/plugin-typescript');
 
         expect(plugin).toBeDefined();
-        expect(plugin.name).toBe('@nuce/plugin-typescript');
+        expect(plugin.name).toBe('@nuxc/plugin-typescript');
     });
 
     it('should load security plugins', async () => {
@@ -109,7 +109,7 @@ describe('Plugin Loading - Production Ready', () => {
 
         for (const plugin of marketplace.plugins) {
             expect(plugin.signature).toBeDefined();
-            expect(plugin.signature).toContain('nuce-sig-');
+            expect(plugin.signature).toContain('nuxc-sig-');
         }
     });
 

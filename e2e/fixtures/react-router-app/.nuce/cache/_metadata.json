@@ -1,0 +1,21 @@
+{
+  "hash": "a3157abe",
+  "depsHash": "807d3f22",
+  "deps": [
+    "react",
+    "react-dom",
+    "react-dom/client",
+    "react/jsx-dev-runtime",
+    "react/jsx-runtime",
+    "react-router"
+  ],
+  "depMap": {
+    "react": "/@nuxc-deps/react.js",
+    "react-dom": "/@nuxc-deps/react-dom.js",
+    "react-dom/client": "/@nuxc-deps/react-dom_client.js",
+    "react/jsx-dev-runtime": "/@nuxc-deps/react_jsx-dev-runtime.js",
+    "react/jsx-runtime": "/@nuxc-deps/react_jsx-runtime.js",
+    "react-router": "/@nuxc-deps/react-router.js"
+  },
+  "timestamp": 1777866346093
+}

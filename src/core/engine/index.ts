@@ -18,7 +18,7 @@ import { normalizePath, generateModuleId } from '../../resolve/utils.js';
 /**
  * Core Build Engine
  * 
- * PUBLIC: The main orchestrator for the Nuce build pipeline.
+ * PUBLIC: The main orchestrator for the Nuxc build pipeline.
  * Use this class to run builds programmatically.
  * 
  * @public

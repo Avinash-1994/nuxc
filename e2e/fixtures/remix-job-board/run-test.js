@@ -145,7 +145,7 @@ await (async function () {
     `Ready timestamp: ${readyTs}`,
     `Cold start: ${coldMs}ms (wall clock from spawn to ready)`,
     `Environment: ${env}`,
-    `[nuce] adapter: remix in output: yes`,
+    `[nuxc] adapter: remix in output: yes`,
     `Port: ${devPort}`,
     `Routes scanned: ${routeCount}`,
     `Gate: < ${gate}ms ${coldMs < gate ? 'PASS' : 'FAIL'}`,
@@ -173,7 +173,7 @@ await (async function () {
     devProc.stdout.on('data', o); devProc.stderr.on('data', o); setTimeout(resolve, 6000);
   });
   const t0 = performance.now(); const t0Ts = new Date().toISOString();
-  fs.writeFileSync(targetFile, orig + `\n// nuce-hmr-${Date.now()}`);
+  fs.writeFileSync(targetFile, orig + `\n// nuxc-hmr-${Date.now()}`);
   await new Promise(r => setTimeout(r, debounceMs + 10));
   const hmrMs = parseFloat((performance.now() - t0).toFixed(2));
   const t1Ts = new Date().toISOString();
@@ -222,7 +222,7 @@ await (async function () {
   const ok = htmlFiles.length >= 2 && clientBundle && serverBundle && buildMs < 5000;
   (ok ? pass : fail)('RMX-07  Production build', `>= 2 HTML pages, client/server bundles, < 5000ms`,
     `${htmlFiles.length} HTML pages, ${buildMs}ms`, [
-      `[nuce] adapter: remix in output: yes`,
+      `[nuxc] adapter: remix in output: yes`,
       `Build time: ${buildMs}ms (actual wall clock)`,
       `Gate: < 5000ms ${buildMs < 5000 ? 'PASS' : 'FAIL'}`,
       `dist/ file count: ${fileCount}`,
@@ -255,7 +255,7 @@ await (async function () {
     try {
       execFileSync('node', [cliPath, 'build'], {
         cwd: fix.dir, timeout: 30000, stdio: 'ignore',
-        env: { ...process.env, NUCE_SKIP_SECURITY: '1' }
+        env: { ...process.env, NUXC_SKIP_SECURITY: '1' }
       });
       results.push({ name: fix.name, pass: true, ms: Date.now() - t0 });
     } catch (e) {
@@ -285,7 +285,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 log(!process.exitCode ? '✅ ALL REMIX TESTS PASSED WITH REAL DATA' : '❌ SOME TESTS FAILED');
 log('');
 log('┌─────────────────────────────────────────────┐');
-log('│ NUCE — PHASE 2.7 REMIX COMPLETE           │');
+log('│ NUXC — PHASE 2.7 REMIX COMPLETE           │');
 log(`│ RMX-01 Routing:      PASS  ${String(routes.length + ' routes').padEnd(15)}│`);
 log(`│ RMX-02 Loader exec:  PASS  fetch shim       │`);
 log('│ RMX-03 Action exec:  PASS  formData         │');
@@ -296,7 +296,7 @@ log('│ RMX-07 Build output: PASS  client+server    │');
 log('│ RMX-08 Regression:   PASS                   │');
 log('│                                             │');
 log('│ Total: 8 pass  0 fail  0 warn               │');
-log('│ [nuce] adapter: remix confirmed            │');
+log('│ [nuxc] adapter: remix confirmed            │');
 log('│ fetch shim over uWS: active                 │');
 log('│ Ready for Phase 2.8: YES                    │');
 log('└─────────────────────────────────────────────┘');

@@ -1,5 +1,5 @@
 /**
- * Nuce Plugin Governance & Stability System
+ * Nuxc Plugin Governance & Stability System
  * 
  * Enforces strict typing, stability levels, and rules for the ecosystem.
  * This ensures "Production Ready" quality for all loaded plugins.
@@ -24,7 +24,7 @@ export interface GovernanceResult {
 }
 
 /**
- * Validates a plugin against Nuce's strict governance rules.
+ * Validates a plugin against Nuxc's strict governance rules.
  * 
  * Rules:
  * 1. Must have a valid name (kebab-case, @scope/name)
@@ -43,7 +43,7 @@ export function validatePlugin(plugin: any): GovernanceResult {
 
     // Name format check
     if (!/^(@[a-z0-9-]+\/)?[a-z0-9-]+$/.test(plugin.name)) {
-        result.warnings.push(`Plugin name "${plugin.name}" should be kebab-case (e.g. nuce-plugin-foo).`);
+        result.warnings.push(`Plugin name "${plugin.name}" should be kebab-case (e.g. nuxc-plugin-foo).`);
     }
 
     // Advanced: Check for legacy/unsafe patterns
@@ -63,14 +63,14 @@ export function validatePlugin(plugin: any): GovernanceResult {
  * In a real scenario, this would fetch from a CDN or verified list.
  */
 export const VERIFIED_PLUGINS = new Set([
-    'nuce-react',
-    'nuce-vue',
-    'nuce-svelte',
-    'nuce-copy',
-    'nuce-html',
-    'nuce-compress'
+    'nuxc-react',
+    'nuxc-vue',
+    'nuxc-svelte',
+    'nuxc-copy',
+    'nuxc-html',
+    'nuxc-compress'
 ]);
 
 export function isVerified(name: string): boolean {
-    return VERIFIED_PLUGINS.has(name) || name.startsWith('@nuce/');
+    return VERIFIED_PLUGINS.has(name) || name.startsWith('@nuxc/');
 }

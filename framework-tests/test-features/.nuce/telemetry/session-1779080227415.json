@@ -1,0 +1,10 @@
+{
+  "id": "cb31b39d-0928-4a45-ad5a-db5b229cd3e8",
+  "timestamp": 1779080227415,
+  "duration": 305,
+  "success": false,
+  "metrics": {},
+  "errors": [
+    "Build failed with 5 errors:\n../../node_modules/@node-rs/xxhash/index.js:207:23: ERROR: No loader is configured for \".node\" files: ../../node_modules/@node-rs/xxhash-linux-x64-musl/xxhash.linux-x64-musl.node\n../../node_modules/@node-rs/xxhash/index.js:219:23: ERROR: No loader is configured for \".node\" files: ../../node_modules/@node-rs/xxhash-linux-x64-gnu/xxhash.linux-x64-gnu.node\n../../node_modules/@swc/core/binding.js:204:23: ERROR: No loader is configured for \".node\" files: ../../node_modules/@swc/core-linux-x64-musl/swc.linux-x64-musl.node\n../../node_modules/@swc/core/binding.js:216:23: ERROR: No loader is configured for \".node\" files: ../../node_modules/@swc/core-linux-x64-gnu/swc.linux-x64-gnu.node\n../../node_modules/@swc/core/index.js:71:35: ERROR: Could not resolve \"@swc/wasm\""
+  ]
+}

@@ -29,7 +29,7 @@ async function createStaticProject() {
 }
 
 async function runSnapshotTest() {
-    console.log('--- Nuce Determinism Snapshot Test ---');
+    console.log('--- Nuxc Determinism Snapshot Test ---');
     await setup();
     await createStaticProject();
 

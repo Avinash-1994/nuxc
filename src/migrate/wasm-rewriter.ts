@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 export function rewriteWasmPlugins(projectPath: string): string[] {
-    const filesToExamine = ['nuce.config.ts', 'nuce.config.js', 'nuce.config.cjs', 'nuce.config.json', 'nuce.build.json', 'nuce.build.ts'];
+    const filesToExamine = ['nuxc.config.ts', 'nuxc.config.js', 'nuxc.config.cjs', 'nuxc.config.json', 'nuxc.build.json', 'nuxc.build.ts'];
     const rewrittenFiles: string[] = [];
 
     for (const file of filesToExamine) {

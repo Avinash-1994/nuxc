@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-tanstack-query
+ * @nuxc/plugin-tanstack-query
  * TanStack Query (React Query)
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTanstackQueryPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-tanstack-query',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-tanstack-query',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // State management: TanStack Query (React Query)
@@ -16,7 +16,7 @@ export function createTanstackQueryPlugin(): PluginAdapter {
         },
 
         async buildStart() {
-            console.log('[@nuce/plugin-tanstack-query] State management initialized');
+            console.log('[@nuxc/plugin-tanstack-query] State management initialized');
         }
     };
 }

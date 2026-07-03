@@ -1,11 +1,11 @@
-# Migrating from Vite to Nuce
+# Migrating from Vite to Nuxc
 
-Nuce is designed to be a fast replacement for Vite.
+Nuxc is designed to be a fast replacement for Vite.
 
 ## 1. Quick Switch
 Run the auto-migration command:
 ```bash
-npx nuce migrate
+npx nuxc migrate
 ```
 
 ## 2. Manual Migration
@@ -14,18 +14,18 @@ npx nuce migrate
 Change your content in `package.json`:
 ```json
 "scripts": {
-  "dev": "nuce dev",
-  "build": "nuce build"
+  "dev": "nuxc dev",
+  "build": "nuxc build"
 }
 ```
 
 ### Reuse Vite Plugins
-Nuce can reuse many Vite-compatible plugins through compatibility adapters.
+Nuxc can reuse many Vite-compatible plugins through compatibility adapters.
 
 ```ts
-// nuce.config.ts
-import { defineConfig } from 'nuce';
-import { rollupAdapter } from '@nuce/plugin-compat';
+// nuxc.config.ts
+import { defineConfig } from 'nuxc';
+import { rollupAdapter } from '@nuxc/plugin-compat';
 import someVitePlugin from 'vite-plugin-cool';
 
 export default defineConfig({
@@ -36,10 +36,10 @@ export default defineConfig({
 ```
 
 ## 3. Environment Variables
-Nuce respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
+Nuxc respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
 
 ## 4. Key Differences
-| Feature | Vite | Nuce |
+| Feature | Vite | Nuxc |
 |---------|------|-------|
 | Startup | ~400ms | < 50ms |
 | Build | esbuild/Rollup | Native Rust |

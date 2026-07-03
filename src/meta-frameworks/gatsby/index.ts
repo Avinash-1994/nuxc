@@ -1,7 +1,7 @@
-import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
-import { detectDependencies, registry } from '@nuce/adapter-core';
+import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
+import { detectDependencies, registry } from '@nuxc/adapter-core';
 
-export class GatsbyAdapter implements NuceAdapter {
+export class GatsbyAdapter implements NuxcAdapter {
   name = 'gatsby';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -11,27 +11,27 @@ export class GatsbyAdapter implements NuceAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'nuce:gatsby-scaffold',
+        name: 'nuxc:gatsby-scaffold',
         // Gatsby's build process is entirely custom (gatsby build / gatsby develop)
-        // Nuce scaffolds config detection + serves the built public/ directory.
+        // Nuxc scaffolds config detection + serves the built public/ directory.
         // For SSG pre-render outputs, we serve the static public/ folder natively.
         async buildStart() {
           // We warn users that Gatsby requires its own CLI for full builds.
-          console.log('[Nuce:Gatsby] Detected Gatsby project. Use `gatsby build` for production.');
-          console.log('[Nuce:Gatsby] Dev mode serves from public/ directory.');
+          console.log('[Nuxc:Gatsby] Detected Gatsby project. Use `gatsby build` for production.');
+          console.log('[Nuxc:Gatsby] Dev mode serves from public/ directory.');
         }
       }
     ];
   }
 
-  config(config: NuceConfig): NuceConfig {
+  config(config: NuxcConfig): NuxcConfig {
     if (!config.gatsby) config.gatsby = {};
     config.gatsby = {
       // Gatsby outputs to public/ by default
       outDir: 'public',
       ...(config.gatsby || {})
     };
-    // Ensure Nuce serves from Gatsby's output directory in dev pass-through mode
+    // Ensure Nuxc serves from Gatsby's output directory in dev pass-through mode
     if (!config.outDir) config.outDir = 'public';
     return config;
   }
@@ -39,7 +39,7 @@ export class GatsbyAdapter implements NuceAdapter {
   serverMiddleware(): Middleware[] {
     return [
       async (req: any, res: any, next: any) => {
-        // Gatsby runs its own webpack dev server; Nuce proxies requests to it when detected
+        // Gatsby runs its own webpack dev server; Nuxc proxies requests to it when detected
         next();
       }
     ];

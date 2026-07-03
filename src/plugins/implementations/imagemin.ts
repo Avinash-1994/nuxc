@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-imagemin
+ * @nuxc/plugin-imagemin
  * Image optimization
  */
 
@@ -9,7 +9,7 @@ import path from 'path';
 
 export function createImageminPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-imagemin',
+        name: '@nuxc/plugin-imagemin',
         originalPlugin: 'vite-plugin-imagemin',
         
         async load(id: string) {

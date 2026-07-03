@@ -3,11 +3,11 @@ import fs from 'fs/promises';
 import path from 'path';
 
 /**
- * NUCE TIER B PLUGINS (IO / ASSETS)
+ * NUXC TIER B PLUGINS (IO / ASSETS)
  * 
  * Includes:
- * - nuceCopy (copy-webpack-plugin)
- * - nuceHtml (html-webpack-plugin)
+ * - nuxcCopy (copy-webpack-plugin)
+ * - nuxcHtml (html-webpack-plugin)
  */
 
 export interface CopyTarget {
@@ -21,12 +21,12 @@ export interface CopyOptions {
 }
 
 /**
- * Copy Plugin (nuce-copy)
+ * Copy Plugin (nuxc-copy)
  * Copies files or directories from src to dest at build end.
  */
-export function nuceCopy(options: CopyOptions): Plugin {
+export function nuxcCopy(options: CopyOptions): Plugin {
     return {
-        name: 'nuce-copy',
+        name: 'nuxc-copy',
         async buildEnd() {
             if (!options.targets || options.targets.length === 0) return;
 
@@ -39,10 +39,10 @@ export function nuceCopy(options: CopyOptions): Plugin {
                     await fs.cp(srcPath, destPath, { recursive: true, force: true });
 
                     if (options.verbose) {
-                        console.log(`[nuce-copy] Copied ${target.src} -> ${target.dest}`);
+                        console.log(`[nuxc-copy] Copied ${target.src} -> ${target.dest}`);
                     }
                 } catch (e: any) {
-                    console.warn(`[nuce-copy] Failed to copy ${target.src}: ${e.message}`);
+                    console.warn(`[nuxc-copy] Failed to copy ${target.src}: ${e.message}`);
                 }
             }
         }
@@ -58,17 +58,17 @@ export interface HtmlOptions {
 }
 
 /**
- * HTML Plugin (nuce-html)
+ * HTML Plugin (nuxc-html)
  * Generates an index.html file in the output directory.
  * Advanced: Supports variable interpolation (e.g., %PUBLIC_URL%, %TITLE%)
  */
-export function nuceHtml(options: HtmlOptions = {}): Plugin {
+export function nuxcHtml(options: HtmlOptions = {}): Plugin {
     return {
-        name: 'nuce-html',
+        name: 'nuxc-html',
         stability: 'stable',
         async buildEnd() {
             const filename = options.filename || 'index.html';
-            const title = options.title || 'Nuce App';
+            const title = options.title || 'Nuxc App';
             const destPath = path.resolve(process.cwd(), 'dist', filename);
 
             let content = '';
@@ -78,7 +78,7 @@ export function nuceHtml(options: HtmlOptions = {}): Plugin {
                     const templatePath = path.resolve(process.cwd(), options.template);
                     content = await fs.readFile(templatePath, 'utf-8');
                 } catch (e) {
-                    console.warn(`[nuce-html] Template not found: ${options.template}`);
+                    console.warn(`[nuxc-html] Template not found: ${options.template}`);
                     content = getDefaultHtml(title);
                 }
             } else {
@@ -101,7 +101,7 @@ export function nuceHtml(options: HtmlOptions = {}): Plugin {
                 await fs.mkdir(path.dirname(destPath), { recursive: true });
                 await fs.writeFile(destPath, content);
             } catch (e: any) {
-                console.error(`[nuce-html] Failed to generate HTML: ${e.message}`);
+                console.error(`[nuxc-html] Failed to generate HTML: ${e.message}`);
             }
         }
     };

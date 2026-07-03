@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-inspect
+ * @nuxc/plugin-inspect
  * Plugin inspection tool
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createInspectPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-inspect',
+        name: '@nuxc/plugin-inspect',
         originalPlugin: 'vite-plugin-inspect',
         
         async transform(code: string, id: string) {

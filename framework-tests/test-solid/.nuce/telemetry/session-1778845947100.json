@@ -1,0 +1,10 @@
+{
+  "id": "462b9593-2dcf-4f94-8613-21763472996c",
+  "timestamp": 1778845947100,
+  "duration": 154,
+  "success": false,
+  "metrics": {},
+  "errors": [
+    "[nuxc:solidstart] Build completed but no .js files were emitted. Check that solid-js is installed and the entry file resolves. See https://nuxc.dev/adapters/solidstart"
+  ]
+}

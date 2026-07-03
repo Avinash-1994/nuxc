@@ -1,4 +1,4 @@
-# 🧪 Nuce Testing - Quick Reference Guide
+# 🧪 Nuxc Testing - Quick Reference Guide
 
 ## 🚀 Quick Start
 
@@ -148,7 +148,7 @@ npm run test:snapshot -- --updateSnapshot
 
 ### Enable Debug Logging
 ```bash
-DEBUG=nuce:* npm test
+DEBUG=nuxc:* npm test
 ```
 
 ### Run Single Test

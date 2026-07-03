@@ -77,7 +77,7 @@ The hook cache is built on-demand:
 To measure actual performance:
 
 ```typescript
-import { PluginManager } from 'nuce/plugins';
+import { PluginManager } from 'nuxc/plugins';
 
 const manager = new PluginManager();
 

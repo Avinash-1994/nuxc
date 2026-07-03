@@ -1,5 +1,5 @@
 // SolidStart client entry point
-// Nuce Phase 2.4 — SolidStart Streaming SSR Fixture
+// Nuxc Phase 2.4 — SolidStart Streaming SSR Fixture
 
 import { hydrate } from 'solid-js/web';
 

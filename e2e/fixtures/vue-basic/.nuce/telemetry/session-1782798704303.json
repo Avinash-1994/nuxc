@@ -1,0 +1,10 @@
+{
+  "id": "b1dbf974-7f3c-4d33-9959-17a47fc83286",
+  "timestamp": 1782798704303,
+  "duration": 258,
+  "success": false,
+  "metrics": {},
+  "errors": [
+    "Cannot find module '/home/avinash/Desktop/framework_practis/build/node_modules/@nuxc/security/dist/index.js' imported from /home/avinash/Desktop/framework_practis/build/dist/build/bundler.js"
+  ]
+}

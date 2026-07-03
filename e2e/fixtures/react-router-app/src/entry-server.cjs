@@ -1,7 +1,7 @@
 'use strict';
 /**
  * react-router-app/src/entry-server.cjs
- * Nuce Phase 2.9 — React Router v7 Meta-framework
+ * Nuxc Phase 2.9 — React Router v7 Meta-framework
  *
  * Implements:
  *   scanRoutes(root)          → RR v7 file-based routing manifest (app/routes/)
@@ -130,8 +130,8 @@ function renderRoute(url, opts) {
     loaderData = {
       username: username,
       name: username.charAt(0).toUpperCase() + username.slice(1),
-      bio: 'Software engineer at Nuce',
-      repos: ['nuce-core', 'nuce-adapter', 'react-app'],
+      bio: 'Software engineer at Nuxc',
+      repos: ['nuxc-core', 'nuxc-adapter', 'react-app'],
     };
   }
 
@@ -150,7 +150,7 @@ function renderRoute(url, opts) {
       '</div>',
     ].join('\n');
   } else if (url === '/about') {
-    bodyContent = '<main><h1>About</h1><p>Nuce React Router Platform — Phase 2.9</p></main>';
+    bodyContent = '<main><h1>About</h1><p>Nuxc React Router Platform — Phase 2.9</p></main>';
   } else {
     bodyContent = [
       '<main>',
@@ -267,7 +267,7 @@ function emitBuildArtifacts(appRoot, outDir) {
 
   // Server bundle
   var serverBundle = [
-    '// Nuce React Router — Server Bundle (Phase 2.9)',
+    '// Nuxc React Router — Server Bundle (Phase 2.9)',
     '"use strict";',
     'module.exports = require("../../src/entry-server.cjs");',
   ].join('\n');
@@ -277,7 +277,7 @@ function emitBuildArtifacts(appRoot, outDir) {
   var manifest = {
     framework: 'react-router',
     version: '7',
-    nucePhase: '2.9',
+    nuxcPhase: '2.9',
     generated: new Date().toISOString(),
     routes: routes,
     pages: generatedPages,

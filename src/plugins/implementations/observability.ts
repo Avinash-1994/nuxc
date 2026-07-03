@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-observability
+ * @nuxc/plugin-observability
  * Build observability
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createObservabilityPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-observability',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-observability',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Build observability

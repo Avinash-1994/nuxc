@@ -7,14 +7,14 @@ import { TemplateConfig } from '../manager.js';
 
 export const monorepoTemplate: TemplateConfig = {
     id: 'monorepo',
-    name: 'Monorepo (PNPM via Nuce)',
+    name: 'Monorepo (PNPM via Nuxc)',
     description: 'High-performance monorepo with apps and shared packages',
     framework: 'react',
     type: 'monorepo',
     dependencies: {},
     devDependencies: {
         "typescript": "^5.0.0",
-        "@nuce/plugin-workspace": "^1.0.0"
+        "@nuxc/plugin-workspace": "^1.0.0"
     },
     files: {
         'pnpm-workspace.yaml': `packages:
@@ -26,19 +26,19 @@ export const monorepoTemplate: TemplateConfig = {
   "name": "{{PROJECT_NAME}}",
   "private": true,
   "scripts": {
-    "build": "nuce build --filter=...",
-    "dev": "nuce dev --parallel",
-    "test": "nuce test",
-    "lint": "nuce lint"
+    "build": "nuxc build --filter=...",
+    "dev": "nuxc dev --parallel",
+    "test": "nuxc test",
+    "lint": "nuxc lint"
   },
   "devDependencies": {
-    "nuce": "latest",
+    "nuxc": "latest",
     "typescript": "^5.0.0"
   }
 }
 `,
-        'nuce.config.ts': `
-import { defineConfig } from 'nuce';
+        'nuxc.config.ts': `
+import { defineConfig } from 'nuxc';
 
 export default defineConfig({
     workspace: {
@@ -92,16 +92,16 @@ export const Button = ({ children }: { children: React.ReactNode }) => {
     "@{{PROJECT_NAME}}/ui": "workspace:*"
   },
   "devDependencies": {
-    "@nuce/plugin-react": "^1.0.0",
+    "@nuxc/plugin-react": "^1.0.0",
     "typescript": "^5.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0"
   }
 }
 `,
-        'apps/web/nuce.config.ts': `
-import { defineConfig } from 'nuce';
-import react from '@nuce/plugin-react';
+        'apps/web/nuxc.config.ts': `
+import { defineConfig } from 'nuxc';
+import react from '@nuxc/plugin-react';
 
 export default defineConfig({
     plugins: [react()]
@@ -115,7 +115,7 @@ import { Button } from '@{{PROJECT_NAME}}/ui';
 export default function App() {
   return (
     <div>
-      <h1>Nuce Monorepo</h1>
+      <h1>Nuxc Monorepo</h1>
       <Button>Shared UI Button</Button>
     </div>
   );

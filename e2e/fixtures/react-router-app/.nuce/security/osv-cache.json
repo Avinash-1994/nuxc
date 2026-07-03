@@ -1,0 +1,60 @@
+{
+  "react@18.3.0": {
+    "result": [],
+    "ts": 1779076632578
+  },
+  "react-dom@18.3.0": {
+    "result": [],
+    "ts": 1779076632578
+  },
+  "react-router@7.5.0": {
+    "result": [
+      {
+        "id": "GHSA-2w69-qvjg-hvjx",
+        "modified": "2026-02-03T03:15:00.320749Z"
+      },
+      {
+        "id": "GHSA-3cgp-3xvw-98x8",
+        "modified": "2026-02-03T03:16:18.791489Z"
+      },
+      {
+        "id": "GHSA-8v8x-cx79-35w7",
+        "modified": "2026-02-03T03:16:12.809493Z"
+      },
+      {
+        "id": "GHSA-9jcx-v3wj-wh4m",
+        "modified": "2026-02-03T03:14:56.431029Z"
+      },
+      {
+        "id": "GHSA-cpj6-fhp6-mr6j",
+        "modified": "2026-02-03T03:07:14.588572Z"
+      },
+      {
+        "id": "GHSA-f46r-rw29-r322",
+        "modified": "2025-04-25T14:32:54Z"
+      },
+      {
+        "id": "GHSA-h5cw-625j-3rxh",
+        "modified": "2026-02-03T03:16:13.096600Z"
+      }
+    ],
+    "ts": 1779076632578
+  },
+  "@react-router/dev@7.5.0": {
+    "result": [],
+    "ts": 1779076632578
+  },
+  "@react-router/node@7.5.0": {
+    "result": [
+      {
+        "id": "GHSA-9583-h5hc-x8cw",
+        "modified": "2026-02-03T03:16:23.683084Z"
+      }
+    ],
+    "ts": 1779076632578
+  },
+  "@tanstack/react-query@5.55.0": {
+    "result": [],
+    "ts": 1779076632578
+  }
+}

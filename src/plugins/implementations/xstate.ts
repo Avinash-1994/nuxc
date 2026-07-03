@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-xstate
+ * @nuxc/plugin-xstate
  * XState state machines
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createXstatePlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-xstate',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-xstate',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // State management: XState state machines
@@ -16,7 +16,7 @@ export function createXstatePlugin(): PluginAdapter {
         },
 
         async buildStart() {
-            console.log('[@nuce/plugin-xstate] State management initialized');
+            console.log('[@nuxc/plugin-xstate] State management initialized');
         }
     };
 }

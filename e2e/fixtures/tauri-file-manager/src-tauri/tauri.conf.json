@@ -1,7 +1,7 @@
 {
   "build": {
-    "beforeDevCommand": "nuce dev",
-    "beforeBuildCommand": "nuce build",
+    "beforeDevCommand": "nuxc dev",
+    "beforeBuildCommand": "nuxc build",
     "devPath": "http://localhost:5173",
     "distDir": "../dist"
   },

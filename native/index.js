@@ -70,13 +70,13 @@ function requireNative() {
   } else if (process.platform === 'android') {
     if (process.arch === 'arm64') {
       try {
-        return require('./nuce_native.android-arm64.node')
+        return require('./nuxc_native.android-arm64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-android-arm64')
-        const bindingPackageVersion = require('nuce-native-android-arm64/package.json').version
+        const binding = require('nuxc-native-android-arm64')
+        const bindingPackageVersion = require('nuxc-native-android-arm64/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -86,13 +86,13 @@ function requireNative() {
       }
     } else if (process.arch === 'arm') {
       try {
-        return require('./nuce_native.android-arm-eabi.node')
+        return require('./nuxc_native.android-arm-eabi.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-android-arm-eabi')
-        const bindingPackageVersion = require('nuce-native-android-arm-eabi/package.json').version
+        const binding = require('nuxc-native-android-arm-eabi')
+        const bindingPackageVersion = require('nuxc-native-android-arm-eabi/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -107,13 +107,13 @@ function requireNative() {
     if (process.arch === 'x64') {
       if (process.config?.variables?.shlib_suffix === 'dll.a' || process.config?.variables?.node_target_type === 'shared_library') {
         try {
-        return require('./nuce_native.win32-x64-gnu.node')
+        return require('./nuxc_native.win32-x64-gnu.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-win32-x64-gnu')
-        const bindingPackageVersion = require('nuce-native-win32-x64-gnu/package.json').version
+        const binding = require('nuxc-native-win32-x64-gnu')
+        const bindingPackageVersion = require('nuxc-native-win32-x64-gnu/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -123,13 +123,13 @@ function requireNative() {
       }
       } else {
         try {
-        return require('./nuce_native.win32-x64-msvc.node')
+        return require('./nuxc_native.win32-x64-msvc.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-win32-x64-msvc')
-        const bindingPackageVersion = require('nuce-native-win32-x64-msvc/package.json').version
+        const binding = require('nuxc-native-win32-x64-msvc')
+        const bindingPackageVersion = require('nuxc-native-win32-x64-msvc/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -140,13 +140,13 @@ function requireNative() {
       }
     } else if (process.arch === 'ia32') {
       try {
-        return require('./nuce_native.win32-ia32-msvc.node')
+        return require('./nuxc_native.win32-ia32-msvc.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-win32-ia32-msvc')
-        const bindingPackageVersion = require('nuce-native-win32-ia32-msvc/package.json').version
+        const binding = require('nuxc-native-win32-ia32-msvc')
+        const bindingPackageVersion = require('nuxc-native-win32-ia32-msvc/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -156,13 +156,13 @@ function requireNative() {
       }
     } else if (process.arch === 'arm64') {
       try {
-        return require('./nuce_native.win32-arm64-msvc.node')
+        return require('./nuxc_native.win32-arm64-msvc.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-win32-arm64-msvc')
-        const bindingPackageVersion = require('nuce-native-win32-arm64-msvc/package.json').version
+        const binding = require('nuxc-native-win32-arm64-msvc')
+        const bindingPackageVersion = require('nuxc-native-win32-arm64-msvc/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -175,13 +175,13 @@ function requireNative() {
     }
   } else if (process.platform === 'darwin') {
     try {
-      return require('./nuce_native.darwin-universal.node')
+      return require('./nuxc_native.darwin-universal.node')
     } catch (e) {
       loadErrors.push(e)
     }
     try {
-      const binding = require('nuce-native-darwin-universal')
-      const bindingPackageVersion = require('nuce-native-darwin-universal/package.json').version
+      const binding = require('nuxc-native-darwin-universal')
+      const bindingPackageVersion = require('nuxc-native-darwin-universal/package.json').version
       if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
         throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
       }
@@ -191,13 +191,13 @@ function requireNative() {
     }
     if (process.arch === 'x64') {
       try {
-        return require('./nuce_native.darwin-x64.node')
+        return require('./nuxc_native.darwin-x64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-darwin-x64')
-        const bindingPackageVersion = require('nuce-native-darwin-x64/package.json').version
+        const binding = require('nuxc-native-darwin-x64')
+        const bindingPackageVersion = require('nuxc-native-darwin-x64/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -207,13 +207,13 @@ function requireNative() {
       }
     } else if (process.arch === 'arm64') {
       try {
-        return require('./nuce_native.darwin-arm64.node')
+        return require('./nuxc_native.darwin-arm64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-darwin-arm64')
-        const bindingPackageVersion = require('nuce-native-darwin-arm64/package.json').version
+        const binding = require('nuxc-native-darwin-arm64')
+        const bindingPackageVersion = require('nuxc-native-darwin-arm64/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -227,13 +227,13 @@ function requireNative() {
   } else if (process.platform === 'freebsd') {
     if (process.arch === 'x64') {
       try {
-        return require('./nuce_native.freebsd-x64.node')
+        return require('./nuxc_native.freebsd-x64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-freebsd-x64')
-        const bindingPackageVersion = require('nuce-native-freebsd-x64/package.json').version
+        const binding = require('nuxc-native-freebsd-x64')
+        const bindingPackageVersion = require('nuxc-native-freebsd-x64/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -243,13 +243,13 @@ function requireNative() {
       }
     } else if (process.arch === 'arm64') {
       try {
-        return require('./nuce_native.freebsd-arm64.node')
+        return require('./nuxc_native.freebsd-arm64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-freebsd-arm64')
-        const bindingPackageVersion = require('nuce-native-freebsd-arm64/package.json').version
+        const binding = require('nuxc-native-freebsd-arm64')
+        const bindingPackageVersion = require('nuxc-native-freebsd-arm64/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -264,13 +264,13 @@ function requireNative() {
     if (process.arch === 'x64') {
       if (isMusl()) {
         try {
-          return require('./nuce_native.linux-x64-musl.node')
+          return require('./nuxc_native.linux-x64-musl.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-x64-musl')
-          const bindingPackageVersion = require('nuce-native-linux-x64-musl/package.json').version
+          const binding = require('nuxc-native-linux-x64-musl')
+          const bindingPackageVersion = require('nuxc-native-linux-x64-musl/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -280,13 +280,13 @@ function requireNative() {
         }
       } else {
         try {
-          return require('./nuce_native.linux-x64-gnu.node')
+          return require('./nuxc_native.linux-x64-gnu.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-x64-gnu')
-          const bindingPackageVersion = require('nuce-native-linux-x64-gnu/package.json').version
+          const binding = require('nuxc-native-linux-x64-gnu')
+          const bindingPackageVersion = require('nuxc-native-linux-x64-gnu/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -298,13 +298,13 @@ function requireNative() {
     } else if (process.arch === 'arm64') {
       if (isMusl()) {
         try {
-          return require('./nuce_native.linux-arm64-musl.node')
+          return require('./nuxc_native.linux-arm64-musl.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-arm64-musl')
-          const bindingPackageVersion = require('nuce-native-linux-arm64-musl/package.json').version
+          const binding = require('nuxc-native-linux-arm64-musl')
+          const bindingPackageVersion = require('nuxc-native-linux-arm64-musl/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -314,13 +314,13 @@ function requireNative() {
         }
       } else {
         try {
-          return require('./nuce_native.linux-arm64-gnu.node')
+          return require('./nuxc_native.linux-arm64-gnu.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-arm64-gnu')
-          const bindingPackageVersion = require('nuce-native-linux-arm64-gnu/package.json').version
+          const binding = require('nuxc-native-linux-arm64-gnu')
+          const bindingPackageVersion = require('nuxc-native-linux-arm64-gnu/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -332,13 +332,13 @@ function requireNative() {
     } else if (process.arch === 'arm') {
       if (isMusl()) {
         try {
-          return require('./nuce_native.linux-arm-musleabihf.node')
+          return require('./nuxc_native.linux-arm-musleabihf.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-arm-musleabihf')
-          const bindingPackageVersion = require('nuce-native-linux-arm-musleabihf/package.json').version
+          const binding = require('nuxc-native-linux-arm-musleabihf')
+          const bindingPackageVersion = require('nuxc-native-linux-arm-musleabihf/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -348,13 +348,13 @@ function requireNative() {
         }
       } else {
         try {
-          return require('./nuce_native.linux-arm-gnueabihf.node')
+          return require('./nuxc_native.linux-arm-gnueabihf.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-arm-gnueabihf')
-          const bindingPackageVersion = require('nuce-native-linux-arm-gnueabihf/package.json').version
+          const binding = require('nuxc-native-linux-arm-gnueabihf')
+          const bindingPackageVersion = require('nuxc-native-linux-arm-gnueabihf/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -366,13 +366,13 @@ function requireNative() {
     } else if (process.arch === 'loong64') {
       if (isMusl()) {
         try {
-          return require('./nuce_native.linux-loong64-musl.node')
+          return require('./nuxc_native.linux-loong64-musl.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-loong64-musl')
-          const bindingPackageVersion = require('nuce-native-linux-loong64-musl/package.json').version
+          const binding = require('nuxc-native-linux-loong64-musl')
+          const bindingPackageVersion = require('nuxc-native-linux-loong64-musl/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -382,13 +382,13 @@ function requireNative() {
         }
       } else {
         try {
-          return require('./nuce_native.linux-loong64-gnu.node')
+          return require('./nuxc_native.linux-loong64-gnu.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-loong64-gnu')
-          const bindingPackageVersion = require('nuce-native-linux-loong64-gnu/package.json').version
+          const binding = require('nuxc-native-linux-loong64-gnu')
+          const bindingPackageVersion = require('nuxc-native-linux-loong64-gnu/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -400,13 +400,13 @@ function requireNative() {
     } else if (process.arch === 'riscv64') {
       if (isMusl()) {
         try {
-          return require('./nuce_native.linux-riscv64-musl.node')
+          return require('./nuxc_native.linux-riscv64-musl.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-riscv64-musl')
-          const bindingPackageVersion = require('nuce-native-linux-riscv64-musl/package.json').version
+          const binding = require('nuxc-native-linux-riscv64-musl')
+          const bindingPackageVersion = require('nuxc-native-linux-riscv64-musl/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -416,13 +416,13 @@ function requireNative() {
         }
       } else {
         try {
-          return require('./nuce_native.linux-riscv64-gnu.node')
+          return require('./nuxc_native.linux-riscv64-gnu.node')
         } catch (e) {
           loadErrors.push(e)
         }
         try {
-          const binding = require('nuce-native-linux-riscv64-gnu')
-          const bindingPackageVersion = require('nuce-native-linux-riscv64-gnu/package.json').version
+          const binding = require('nuxc-native-linux-riscv64-gnu')
+          const bindingPackageVersion = require('nuxc-native-linux-riscv64-gnu/package.json').version
           if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }
@@ -433,13 +433,13 @@ function requireNative() {
       }
     } else if (process.arch === 'ppc64') {
       try {
-        return require('./nuce_native.linux-ppc64-gnu.node')
+        return require('./nuxc_native.linux-ppc64-gnu.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-linux-ppc64-gnu')
-        const bindingPackageVersion = require('nuce-native-linux-ppc64-gnu/package.json').version
+        const binding = require('nuxc-native-linux-ppc64-gnu')
+        const bindingPackageVersion = require('nuxc-native-linux-ppc64-gnu/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -449,13 +449,13 @@ function requireNative() {
       }
     } else if (process.arch === 's390x') {
       try {
-        return require('./nuce_native.linux-s390x-gnu.node')
+        return require('./nuxc_native.linux-s390x-gnu.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-linux-s390x-gnu')
-        const bindingPackageVersion = require('nuce-native-linux-s390x-gnu/package.json').version
+        const binding = require('nuxc-native-linux-s390x-gnu')
+        const bindingPackageVersion = require('nuxc-native-linux-s390x-gnu/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -469,13 +469,13 @@ function requireNative() {
   } else if (process.platform === 'openharmony') {
     if (process.arch === 'arm64') {
       try {
-        return require('./nuce_native.openharmony-arm64.node')
+        return require('./nuxc_native.openharmony-arm64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-openharmony-arm64')
-        const bindingPackageVersion = require('nuce-native-openharmony-arm64/package.json').version
+        const binding = require('nuxc-native-openharmony-arm64')
+        const bindingPackageVersion = require('nuxc-native-openharmony-arm64/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -485,13 +485,13 @@ function requireNative() {
       }
     } else if (process.arch === 'x64') {
       try {
-        return require('./nuce_native.openharmony-x64.node')
+        return require('./nuxc_native.openharmony-x64.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-openharmony-x64')
-        const bindingPackageVersion = require('nuce-native-openharmony-x64/package.json').version
+        const binding = require('nuxc-native-openharmony-x64')
+        const bindingPackageVersion = require('nuxc-native-openharmony-x64/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -501,13 +501,13 @@ function requireNative() {
       }
     } else if (process.arch === 'arm') {
       try {
-        return require('./nuce_native.openharmony-arm.node')
+        return require('./nuxc_native.openharmony-arm.node')
       } catch (e) {
         loadErrors.push(e)
       }
       try {
-        const binding = require('nuce-native-openharmony-arm')
-        const bindingPackageVersion = require('nuce-native-openharmony-arm/package.json').version
+        const binding = require('nuxc-native-openharmony-arm')
+        const bindingPackageVersion = require('nuxc-native-openharmony-arm/package.json').version
         if (bindingPackageVersion !== '0.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
           throw new Error(`Native binding package version mismatch, expected 0.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
         }
@@ -529,7 +529,7 @@ if (!nativeBinding || process.env.NAPI_RS_FORCE_WASI) {
   let wasiBinding = null
   let wasiBindingError = null
   try {
-    wasiBinding = require('./nuce_native.wasi.cjs')
+    wasiBinding = require('./nuxc_native.wasi.cjs')
     nativeBinding = wasiBinding
   } catch (err) {
     if (process.env.NAPI_RS_FORCE_WASI) {
@@ -538,7 +538,7 @@ if (!nativeBinding || process.env.NAPI_RS_FORCE_WASI) {
   }
   if (!nativeBinding) {
     try {
-      wasiBinding = require('nuce-native-wasm32-wasi')
+      wasiBinding = require('nuxc-native-wasm32-wasi')
       nativeBinding = wasiBinding
     } catch (err) {
       if (process.env.NAPI_RS_FORCE_WASI) {
@@ -592,7 +592,7 @@ module.exports.helloRust = nativeBinding.helloRust
 module.exports.mergeSourceMaps = nativeBinding.mergeSourceMaps
 module.exports.minifySync = nativeBinding.minifySync
 module.exports.normalizePath = nativeBinding.normalizePath
-module.exports.nuceChunk = nativeBinding.nuceChunk
+module.exports.nuxcChunk = nativeBinding.nuxcChunk
 module.exports.planBuild = nativeBinding.planBuild
 module.exports.prebundle = nativeBinding.prebundle
 module.exports.prebundlePut = nativeBinding.prebundlePut

@@ -232,7 +232,7 @@ export declare function minifySync(code: string): string
 /** Fast string operations for module resolution */
 export declare function normalizePath(path: string): string
 
-export declare function nuceChunk(graphJson: string, config: ChunkerConfig): ChunkerResult
+export declare function nuxcChunk(graphJson: string, config: ChunkerConfig): ChunkerResult
 
 /** Orchestrator statistics */
 export interface OrchestratorStats {
@@ -250,7 +250,7 @@ export interface OrchestratorStats {
  * {
  *   "swcVersion": "0.90.x",
  *   "cssVersion": "1.0.0-alpha.58",
- *   "configHash": "<xxh3 of nuce.config>",
+ *   "configHash": "<xxh3 of nuxc.config>",
  *   "modules": [
  *     {
  *       "id": "abc123",
@@ -279,7 +279,7 @@ export declare function planBuild(manifestJson: string): TaskPlan
 export declare function prebundle(modulesJson: string, config: PrebundleConfig): Array<PrebundleEntry>
 
 export interface PrebundleConfig {
-  /** Path to .nuce_cache directory */
+  /** Path to .nuxc_cache directory */
   cacheRoot: string
 }
 

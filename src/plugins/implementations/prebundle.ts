@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-prebundle
+ * @nuxc/plugin-prebundle
  * Dependency pre-bundling
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPrebundlePlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-prebundle',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-prebundle',
+        originalPlugin: 'nuxc-native',
         
         async buildStart() {
-            console.log('[@nuce/plugin-prebundle] Starting performance optimization...');
+            console.log('[@nuxc/plugin-prebundle] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createPrebundlePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-prebundle] Performance optimization complete');
+            console.log('[@nuxc/plugin-prebundle] Performance optimization complete');
         }
     };
 }

@@ -1,10 +1,10 @@
-import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
-import { detectDependencies, registry } from '@nuce/adapter-core';
+import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
+import { detectDependencies, registry } from '@nuxc/adapter-core';
 import { createHash } from 'crypto';
 
 let markoCompiler: any;
 
-export class MarkoAdapter implements NuceAdapter {
+export class MarkoAdapter implements NuxcAdapter {
   name = 'marko';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -14,7 +14,7 @@ export class MarkoAdapter implements NuceAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'nuce:marko-compiler',
+        name: 'nuxc:marko-compiler',
 
         async buildStart() {
           try {
@@ -56,7 +56,7 @@ export class MarkoAdapter implements NuceAdapter {
     ];
   }
 
-  config(config: NuceConfig): NuceConfig {
+  config(config: NuxcConfig): NuxcConfig {
     if (!config.marko) config.marko = {};
     config.marko = {
       output: 'dom',

@@ -4,12 +4,12 @@
  * Validates Day 18 Language Server Protocol Logic
  */
 
-import { NuceLSPServer } from './mocks/lsp_server.js';
+import { NuxcLSPServer } from './mocks/lsp_server.js';
 
 async function runLSPTest() {
-    console.log('🧪 Testing Nuce LSP Logic...');
+    console.log('🧪 Testing Nuxc LSP Logic...');
 
-    const server = new NuceLSPServer();
+    const server = new NuxcLSPServer();
 
     // Test 1: Completions
     console.log('  Test 1: Auto-Completions...');
@@ -22,8 +22,8 @@ export default {
     // Position inside plugins: [
     const compl = server.onCompletion(docText, { line: 3, character: 10 });
 
-    const hasReact = compl.some(c => c.label === '@nuce/plugin-react');
-    const hasVue = compl.some(c => c.label === '@nuce/plugin-vue');
+    const hasReact = compl.some(c => c.label === '@nuxc/plugin-react');
+    const hasVue = compl.some(c => c.label === '@nuxc/plugin-vue');
 
     if (!hasReact || !hasVue) {
         throw new Error('Failed to suggest plugins');

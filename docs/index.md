@@ -1,4 +1,4 @@
-# Nuce Documentation
+# Nuxc Documentation
 
 > Blazing-fast JavaScript build tool powered by SWC + LightningCSS
 
@@ -15,7 +15,7 @@
 | 📦 **[Module Federation](./guides/federation.md)** | Micro-frontend setup |
 | 🚚 **[Migration Guide](./migration.md)** | From Vite, Webpack, Rollup |
 | ❓ **[Troubleshooting](./TROUBLESHOOTING.md)** | Top 10 errors and fixes |
-| ⚖️ **[Why Nuce?](./WHY_NUCE.md)** | Honest comparison vs Vite, Rspack, Turbopack |
+| ⚖️ **[Why Nuxc?](./WHY_NUXC.md)** | Honest comparison vs Vite, Rspack, Turbopack |
 | 📊 **[Benchmarks](./benchmarks.md)** | Reproducible performance data |
 
 ---
@@ -33,8 +33,8 @@
 
 ## Online Resources
 
-- 🌐 [Documentation Website](https://avinash-1994.github.io/Nuce/)
-- 📦 [npm Package](https://www.npmjs.com/package/nuce)
-- 💻 [GitHub Repository](https://github.com/Avinash-1994/Nuce)
-- 🐛 [Report a Bug](https://github.com/Avinash-1994/Nuce/issues)
-- 💬 [Discussions](https://github.com/Avinash-1994/Nuce/discussions)
+- 🌐 [Documentation Website](https://avinash-1994.github.io/Nuxc/)
+- 📦 [npm Package](https://www.npmjs.com/package/nuxc)
+- 💻 [GitHub Repository](https://github.com/Avinash-1994/Nuxc)
+- 🐛 [Report a Bug](https://github.com/Avinash-1994/Nuxc/issues)
+- 💬 [Discussions](https://github.com/Avinash-1994/Nuxc/discussions)

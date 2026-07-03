@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-terser
+ * @nuxc/plugin-terser
  * JS minification
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTerserPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-terser',
+        name: '@nuxc/plugin-terser',
         originalPlugin: 'terser-webpack-plugin',
         
         async buildStart() {
-            console.log('[@nuce/plugin-terser] Starting performance optimization...');
+            console.log('[@nuxc/plugin-terser] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createTerserPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-terser] Performance optimization complete');
+            console.log('[@nuxc/plugin-terser] Performance optimization complete');
         }
     };
 }

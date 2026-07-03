@@ -1,0 +1,10 @@
+{
+  "id": "3cb6012a-00b1-4d16-b15d-2289bdcb1574",
+  "timestamp": 1777459108759,
+  "duration": 10,
+  "success": false,
+  "metrics": {},
+  "errors": [
+    "Dynamic require of \"fs\" is not supported"
+  ]
+}

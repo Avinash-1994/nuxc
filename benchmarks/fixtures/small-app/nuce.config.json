@@ -1,7 +1,7 @@
 {
-  "module": "nuce",
+  "module": "nuxc",
   "entry": ["./src/main.jsx"],
-  "outDir": "./dist-nuce",
+  "outDir": "./dist-nuxc",
   "build": {
     "minify": true,
     "sourcemap": false

@@ -17,11 +17,11 @@ export const preactSpaTemplate: TemplateConfig = {
     devDependencies: {
         "@preact/preset-vite": "^2.8.1",
         "typescript": "^5.2.0",
-        "@nuce/plugin-preact": "^1.0.0"
+        "@nuxc/plugin-preact": "^1.0.0"
     },
     files: {
-        'nuce.config.ts': `
-import { defineConfig } from 'nuce';
+        'nuxc.config.ts': `
+import { defineConfig } from 'nuxc';
 import preact from '@preact/preset-vite';
 
 export default defineConfig({
@@ -48,7 +48,7 @@ export function App() {
   return (
     <>
       <div class="card">
-        <h1>Nuce + Preact</h1>
+        <h1>Nuxc + Preact</h1>
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>

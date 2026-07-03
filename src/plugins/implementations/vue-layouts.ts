@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-vue-layouts
+ * @nuxc/plugin-vue-layouts
  * Vue layout system
  * Ported from: vite-plugin-vue-layouts
  */
@@ -8,7 +8,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVueLayoutsPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-vue-layouts',
+        name: '@nuxc/plugin-vue-layouts',
         originalPlugin: 'vite-plugin-vue-layouts',
         
         async transform(code: string, id: string) {

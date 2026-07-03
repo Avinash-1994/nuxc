@@ -9,21 +9,21 @@ let nativeBinding = null;
 
 // Try all known locations for the compiled .node binary
 const candidates = [
-    path.join(__dirname, 'nuce_native.win32-x64-msvc.node'),
-    path.join(__dirname, 'nuce_native.win32-x64-gnu.node'),
-    path.join(__dirname, 'nuce_native.linux-x64-gnu.node'),
-    path.join(__dirname, 'nuce_native.linux-x64-musl.node'),
-    path.join(__dirname, 'nuce_native.darwin-universal.node'),
-    path.join(__dirname, 'nuce_native.darwin-arm64.node'),
-    path.join(__dirname, 'nuce_native.darwin-x64.node'),
-    path.join(__dirname, 'nuce_native.node'),
-    path.join(__dirname, '..', 'nuce_native.node'),
-    path.join(__dirname, '..', 'dist', 'nuce_native.node'),
-    path.join(process.cwd(), 'native', 'nuce_native.win32-x64-msvc.node'),
-    path.join(process.cwd(), 'native', 'nuce_native.linux-x64-gnu.node'),
-    path.join(process.cwd(), 'native', 'nuce_native.darwin-universal.node'),
-    path.join(process.cwd(), 'nuce_native.node'),
-    path.join(process.cwd(), 'dist', 'nuce_native.node'),
+    path.join(__dirname, 'nuxc_native.win32-x64-msvc.node'),
+    path.join(__dirname, 'nuxc_native.win32-x64-gnu.node'),
+    path.join(__dirname, 'nuxc_native.linux-x64-gnu.node'),
+    path.join(__dirname, 'nuxc_native.linux-x64-musl.node'),
+    path.join(__dirname, 'nuxc_native.darwin-universal.node'),
+    path.join(__dirname, 'nuxc_native.darwin-arm64.node'),
+    path.join(__dirname, 'nuxc_native.darwin-x64.node'),
+    path.join(__dirname, 'nuxc_native.node'),
+    path.join(__dirname, '..', 'nuxc_native.node'),
+    path.join(__dirname, '..', 'dist', 'nuxc_native.node'),
+    path.join(process.cwd(), 'native', 'nuxc_native.win32-x64-msvc.node'),
+    path.join(process.cwd(), 'native', 'nuxc_native.linux-x64-gnu.node'),
+    path.join(process.cwd(), 'native', 'nuxc_native.darwin-universal.node'),
+    path.join(process.cwd(), 'nuxc_native.node'),
+    path.join(process.cwd(), 'dist', 'nuxc_native.node'),
 ];
 
 for (const candidate of candidates) {
@@ -86,9 +86,9 @@ const binding = nativeBinding || stub;
 
 if (!nativeBinding) {
     // Only warn once, not on every import
-    if (!global.__nuce_native_warned) {
-        global.__nuce_native_warned = true;
-        process.stderr.write('[nuce] Native binding not found — using JS fallback stubs. Build/run `npm run build:native` to compile.\n');
+    if (!global.__nuxc_native_warned) {
+        global.__nuxc_native_warned = true;
+        process.stderr.write('[nuxc] Native binding not found — using JS fallback stubs. Build/run `npm run build:native` to compile.\n');
     }
 }
 

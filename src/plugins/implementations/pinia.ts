@@ -1,15 +1,15 @@
 /**
- * @nuce/plugin-pinia
+ * @nuxc/plugin-pinia
  * Pinia (Vue) integration
- * Nuce-native
+ * Nuxc-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPiniaPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-pinia',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-pinia',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // pinia transformation

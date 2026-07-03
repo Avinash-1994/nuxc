@@ -1,11 +1,11 @@
 /**
- * Nuce Language Server Logic (Mock for Tests)
+ * Nuxc Language Server Logic (Mock for Tests)
  * Copied from extensions/vscode-lsp to ensure reliable loading in tests
  */
 
-export class NuceLSPServer {
+export class NuxcLSPServer {
     constructor() {
-        console.log('Nuce LSP Initialized');
+        console.log('Nuxc LSP Initialized');
     }
 
     onCompletion(documentText, position) {
@@ -14,10 +14,10 @@ export class NuceLSPServer {
 
         if (line.includes('plugins:') || (line.trim().startsWith('[') && lines[position.line - 1]?.includes('plugins:'))) {
             return [
-                { label: '@nuce/plugin-react', kind: 9, detail: 'React 19 Adapter' },
-                { label: '@nuce/plugin-vue', kind: 9, detail: 'Vue 3 Adapter' },
-                { label: '@nuce/plugin-tailwindcss', kind: 9, detail: 'Tailwind JIT' },
-                { label: '@nuce/plugin-visualizer', kind: 9, detail: 'Bundle Analysis' }
+                { label: '@nuxc/plugin-react', kind: 9, detail: 'React 19 Adapter' },
+                { label: '@nuxc/plugin-vue', kind: 9, detail: 'Vue 3 Adapter' },
+                { label: '@nuxc/plugin-tailwindcss', kind: 9, detail: 'Tailwind JIT' },
+                { label: '@nuxc/plugin-visualizer', kind: 9, detail: 'Bundle Analysis' }
             ];
         }
 
@@ -41,7 +41,7 @@ export class NuceLSPServer {
                     range: { start: { line: i, character: line.indexOf("'prod'") }, end: { line: i, character: line.indexOf("'prod'") + 6 } },
                     severity: 2,
                     message: "Did you mean 'production'?",
-                    source: 'Nuce LSP'
+                    source: 'Nuxc LSP'
                 });
             }
 
@@ -50,7 +50,7 @@ export class NuceLSPServer {
                     range: { start: { line: i, character: 0 }, end: { line: i, character: line.length } },
                     severity: 3,
                     message: "Performance: Prefer default import or lodash-es for better tree-shaking.",
-                    source: 'Nuce Perf'
+                    source: 'Nuxc Perf'
                 });
             }
         });

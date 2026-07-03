@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-storybook
+ * @nuxc/plugin-storybook
  * Storybook integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createStorybookPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-storybook',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-storybook',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Storybook integration

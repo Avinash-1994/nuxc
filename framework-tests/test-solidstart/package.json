@@ -1,20 +1,20 @@
 {
-  "name": "nuce-solidstart-template",
+  "name": "nuxc-solidstart-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview"
   },
-  "nuce": {
+  "nuxc": {
     "template": true,
     "framework": "solidstart",
-    "description": "Nuce Dashboard — streaming SSR analytics"
+    "description": "Nuxc Dashboard — streaming SSR analytics"
   },
   "devDependencies": {
-    "nuce": "file:../../",
+    "nuxc": "file:../../",
     "typescript": "5.4.5"
   }
 }

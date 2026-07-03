@@ -4,14 +4,14 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const srcPath = path.resolve(__dirname, '../../../packages/nuce-plugin-runner/dist/runner.js');
+const srcPath = path.resolve(__dirname, '../../../packages/nuxc-plugin-runner/dist/runner.js');
 let runnerModule;
 
 try {
   runnerModule = await import(srcPath);
 } catch (e) {
   // If it's not built yet, we use the ts file or mock if necessary for testing environment
-  runnerModule = await import('../../../packages/nuce-plugin-runner/dist/runner.js').catch(() => null);
+  runnerModule = await import('../../../packages/nuxc-plugin-runner/dist/runner.js').catch(() => null);
   
   if (!runnerModule) {
     // Basic mock implementation for fallback if transpilation hasn't happened

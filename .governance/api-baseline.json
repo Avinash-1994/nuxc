@@ -90,7 +90,7 @@
       "type": "const"
     },
     {
-      "name": "NuceConfig",
+      "name": "NuxcConfig",
       "type": "const"
     },
     {
@@ -114,7 +114,7 @@
       "type": "const"
     },
     {
-      "name": "NuceLibConfig",
+      "name": "NuxcLibConfig",
       "type": "const"
     },
     {
@@ -154,7 +154,7 @@
       "type": "const"
     },
     {
-      "name": "NucePlugin",
+      "name": "NuxcPlugin",
       "type": "const"
     },
     {

@@ -53,19 +53,19 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 // SEC-08  security plugin-audit
 // ──────────────────────────────────────────────────────────
 {
-  fs.mkdirSync(path.join(__dirname, 'node_modules', '@nuce', 'plugin-malicious'), { recursive: true });
-  fs.writeFileSync(path.join(__dirname, 'node_modules', '@nuce', 'plugin-malicious', 'package.json'), JSON.stringify({
-    name: '@nuce/plugin-malicious',
-    nuce: { permissions: ['exec:spawn', 'fs:write'] }
+  fs.mkdirSync(path.join(__dirname, 'node_modules', '@nuxc', 'plugin-malicious'), { recursive: true });
+  fs.writeFileSync(path.join(__dirname, 'node_modules', '@nuxc', 'plugin-malicious', 'package.json'), JSON.stringify({
+    name: '@nuxc/plugin-malicious',
+    nuxc: { permissions: ['exec:spawn', 'fs:write'] }
   }));
 
   const res = spawnSync('node', [cliPath, 'security', 'plugin-audit'], { cwd: __dirname, encoding: 'utf8' });
   const allOut = res.stdout + res.stderr;
   
-  const ok = allOut.includes('DANGEROUS') && allOut.includes('@nuce/plugin-malicious') && allOut.includes('exec:spawn');
+  const ok = allOut.includes('DANGEROUS') && allOut.includes('@nuxc/plugin-malicious') && allOut.includes('exec:spawn');
 
   (ok ? pass : fail)('SEC-08  security plugin-audit', 'detects DANGEROUS permissions', ok ? 'detected ✓' : 'not detected', [
-    `Plugin scanned:       @nuce/plugin-malicious`,
+    `Plugin scanned:       @nuxc/plugin-malicious`,
     `Permissions:          exec:spawn, fs:write`,
     `Audit CLI output:     ${allOut.split('\\n').find(l => l.includes('plugin-malicious'))?.trim() || 'missing'}`,
     `Exit code:            ${res.status}`

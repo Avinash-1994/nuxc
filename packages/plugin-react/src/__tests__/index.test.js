@@ -1,4 +1,4 @@
-// @nuce/plugin-react — Self-contained Unit Tests
+// @nuxc/plugin-react — Self-contained Unit Tests
 // Run: node --test packages/plugin-react/src/__tests__/index.test.js
 // No compilation required.
 
@@ -10,16 +10,16 @@ function reactPlugin(options = {}) {
   const { fastRefresh = true, runtime = 'automatic', overlay = true } = options;
 
   return {
-    name: '@nuce/plugin-react',
+    name: '@nuxc/plugin-react',
 
     load(id) {
-      if (id === '/__nuce_react_refresh__') {
+      if (id === '/__nuxc_react_refresh__') {
         return {
           code: `import RefreshRuntime from 'react-refresh/runtime';
 RefreshRuntime.injectIntoGlobalHook(window);
 window.$RefreshReg$ = () => {};
 window.$RefreshSig$ = () => (type) => type;
-window.__nuce_react_refresh_active__ = true;`,
+window.__nuxc_react_refresh_active__ = true;`,
         };
       }
       return null;
@@ -45,10 +45,10 @@ window.__nuce_react_refresh_active__ = true;`,
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
-describe('@nuce/plugin-react — plugin structure', () => {
+describe('@nuxc/plugin-react — plugin structure', () => {
   it('has correct name', () => {
     const p = reactPlugin();
-    assert.equal(p.name, '@nuce/plugin-react');
+    assert.equal(p.name, '@nuxc/plugin-react');
   });
 
   it('exposes load and transform hooks', () => {
@@ -62,10 +62,10 @@ describe('@nuce/plugin-react — plugin structure', () => {
   });
 });
 
-describe('@nuce/plugin-react — load hook', () => {
+describe('@nuxc/plugin-react — load hook', () => {
   it('returns React Refresh preamble for the special ID', () => {
     const p = reactPlugin();
-    const result = p.load('/__nuce_react_refresh__');
+    const result = p.load('/__nuxc_react_refresh__');
     assert.ok(result, 'Should return something');
     assert.ok(result.code.includes('RefreshRuntime'), 'Should contain RefreshRuntime');
     assert.ok(result.code.includes('injectIntoGlobalHook'), 'Should call injectIntoGlobalHook');
@@ -84,7 +84,7 @@ describe('@nuce/plugin-react — load hook', () => {
   });
 });
 
-describe('@nuce/plugin-react — transform hook', () => {
+describe('@nuxc/plugin-react — transform hook', () => {
   it('returns null for CSS files', () => {
     const p = reactPlugin();
     assert.equal(p.transform('body { color: red; }', '/src/App.css'), null);

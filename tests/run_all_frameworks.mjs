@@ -43,7 +43,7 @@ function serveDir(dir, port) {
 }
 
 (async () => {
-    console.log("🚀 Recompiling Nuce build engine...");
+    console.log("🚀 Recompiling Nuxc build engine...");
     execSync('npm run build', { cwd: ROOT, stdio: 'inherit' });
 
     console.log("\\n🚀 Building all framework test apps...");

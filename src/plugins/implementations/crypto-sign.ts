@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-crypto-sign
+ * @nuxc/plugin-crypto-sign
  * Plugin signature verification
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCryptoSignPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-crypto-sign',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-crypto-sign',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Security check: Plugin signature verification
@@ -29,7 +29,7 @@ export function createCryptoSignPlugin(): PluginAdapter {
             }
             
             if (issues.length > 0) {
-                console.warn(`[@nuce/plugin-crypto-sign] Security issues found:`, issues);
+                console.warn(`[@nuxc/plugin-crypto-sign] Security issues found:`, issues);
             }
         }
     };

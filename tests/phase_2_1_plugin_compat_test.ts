@@ -6,8 +6,8 @@
 import { PluginManager, Plugin } from '../src/plugins/index.js';
 import { rollupAdapter } from '../src/plugins/compat/rollup.js';
 import { webpackLoaderAdapter } from '../src/plugins/compat/webpack.js';
-import { nuceCopy, nuceHtml } from '../src/plugins/compat/tier-b.js';
-import { nuceReact, nuceVue, nuceSvelte } from '../src/plugins/compat/tier-c.js';
+import { nuxcCopy, nuxcHtml } from '../src/plugins/compat/tier-b.js';
+import { nuxcReact, nuxcVue, nuxcSvelte } from '../src/plugins/compat/tier-c.js';
 import fs from 'fs';
 import path from 'path';
 import { strict as assert } from 'assert';
@@ -138,12 +138,12 @@ async function testRollupAdapterBasic() {
         transform: (code: string) => code + '// rollup'
     };
 
-    const nucePlugin = rollupAdapter(rollupPlugin);
+    const nuxcPlugin = rollupAdapter(rollupPlugin);
 
-    assert.strictEqual(nucePlugin.name, 'test-rollup-plugin');
-    assert.ok(nucePlugin.transform);
+    assert.strictEqual(nuxcPlugin.name, 'test-rollup-plugin');
+    assert.ok(nuxcPlugin.transform);
 
-    const result = await nucePlugin.transform!('code', 'test.js');
+    const result = await nuxcPlugin.transform!('code', 'test.js');
     assert.strictEqual(result, 'code// rollup');
 
     console.log('✅ Rollup adapter converts plugins correctly');
@@ -173,19 +173,19 @@ async function testRollupAdapterHooks() {
         }
     };
 
-    const nucePlugin = rollupAdapter(rollupPlugin);
+    const nuxcPlugin = rollupAdapter(rollupPlugin);
 
-    const resolveResult = await nucePlugin.resolveId!('virtual');
+    const resolveResult = await nuxcPlugin.resolveId!('virtual');
     assert.strictEqual(resolveResult, '/virtual/path.js');
 
-    const loadResult = await nucePlugin.load!('test.virtual');
+    const loadResult = await nuxcPlugin.load!('test.virtual');
     assert.strictEqual(loadResult, 'export default "virtual"');
 
-    const transformed = await nucePlugin.transform!('const  x  =  1;', 'test.js');
+    const transformed = await nuxcPlugin.transform!('const  x  =  1;', 'test.js');
     assert.strictEqual(transformed, 'const  x  =  1; // transformed');
     assert.ok(emittedAsset, 'emitFile should be available on the Rollup plugin context');
 
-    const renderResult = await nucePlugin.renderChunk!('const  x  =  1;', {});
+    const renderResult = await nuxcPlugin.renderChunk!('const  x  =  1;', {});
     assert.strictEqual(renderResult, 'const x = 1;');
 
     console.log('✅ All Rollup hooks mapped correctly');
@@ -196,10 +196,10 @@ async function testRollupAdapterIntegration() {
 
     const manager = new PluginManager();
 
-    // Native Nuce plugin
+    // Native Nuxc plugin
     manager.register({
-        name: 'nuce-plugin',
-        transform: async (code) => code + ' [nuce]'
+        name: 'nuxc-plugin',
+        transform: async (code) => code + ' [nuxc]'
     });
 
     // Adapted Rollup plugin
@@ -210,9 +210,9 @@ async function testRollupAdapterIntegration() {
     manager.register(rollupAdapter(rollupPlugin));
 
     const result = await manager.transform('start', 'test.js');
-    assert.strictEqual(result, 'start [nuce] [rollup]');
+    assert.strictEqual(result, 'start [nuxc] [rollup]');
 
-    console.log('✅ Rollup plugins integrate seamlessly with Nuce plugins');
+    console.log('✅ Rollup plugins integrate seamlessly with Nuxc plugins');
 }
 
 async function testSandboxPermissionEnforcement() {
@@ -428,8 +428,8 @@ async function testWebpackLoaderAdapter() {
     console.log('✅ Webpack loader adapter works correctly');
 }
 
-async function testNuceCopy() {
-    console.log('\n[Test 12] Tier B: nuceCopy');
+async function testNuxcCopy() {
+    console.log('\n[Test 12] Tier B: nuxcCopy');
 
     const testDir = path.resolve(process.cwd(), 'temp_test_copy');
     const srcFile = path.join(testDir, 'src/file.txt');
@@ -440,7 +440,7 @@ async function testNuceCopy() {
     await fs.promises.mkdir(path.dirname(srcFile), { recursive: true });
     await fs.promises.writeFile(srcFile, 'hello');
 
-    const plugin = nuceCopy({
+    const plugin = nuxcCopy({
         targets: [{ src: srcFile, dest: destFile }]
     });
 
@@ -451,15 +451,15 @@ async function testNuceCopy() {
 
     // Cleanup
     await fs.promises.rm(testDir, { recursive: true, force: true });
-    console.log('✅ nuceCopy copies files correctly');
+    console.log('✅ nuxcCopy copies files correctly');
 }
 
-async function testNuceHtml() {
-    console.log('\n[Test 13] Tier B: nuceHtml');
+async function testNuxcHtml() {
+    console.log('\n[Test 13] Tier B: nuxcHtml');
 
     const testDest = path.resolve(process.cwd(), 'dist', 'test-index.html');
 
-    const plugin = nuceHtml({
+    const plugin = nuxcHtml({
         title: 'Test App',
         filename: 'test-index.html'
     });
@@ -471,21 +471,21 @@ async function testNuceHtml() {
 
     // Cleanup
     await fs.promises.unlink(testDest);
-    console.log('✅ nuceHtml generates HTML correctly');
+    console.log('✅ nuxcHtml generates HTML correctly');
 }
 
 async function testTierC() {
     console.log('\n[Test 14] Tier C: Wrappers (React/Vue/Svelte)');
 
     // Just verify they return valid plugin objects
-    const react = nuceReact();
-    assert.strictEqual(react.name, 'nuce-react');
+    const react = nuxcReact();
+    assert.strictEqual(react.name, 'nuxc-react');
 
-    const vue = nuceVue();
-    assert.strictEqual(vue.name, 'nuce-vue');
+    const vue = nuxcVue();
+    assert.strictEqual(vue.name, 'nuxc-vue');
 
-    const svelte = nuceSvelte();
-    assert.strictEqual(svelte.name, 'nuce-svelte');
+    const svelte = nuxcSvelte();
+    assert.strictEqual(svelte.name, 'nuxc-svelte');
 
     console.log('✅ Tier C wrappers instantiated correctly');
 }
@@ -513,9 +513,9 @@ async function runAllTests() {
         await testPerformanceBenchmark();
         await testReturnValueHandling();
         await testWebpackLoaderAdapter();
-        await testNuceCopy();
-        // await testNuceHtml(); // Skipped to avoid polling dist folder conflicts in parallel tests, but implemented.
-        try { await testNuceHtml(); } catch (e) { console.warn('HTML test warning (non-critical):', e); }
+        await testNuxcCopy();
+        // await testNuxcHtml(); // Skipped to avoid polling dist folder conflicts in parallel tests, but implemented.
+        try { await testNuxcHtml(); } catch (e) { console.warn('HTML test warning (non-critical):', e); }
         await testTierC();
 
         console.log('\n' + '='.repeat(60));

@@ -1,4 +1,4 @@
-# Nuce Plugins Guide
+# Nuxc Plugins Guide
 
 > **Plugin ecosystem with sandboxing support and WebCrypto signing support.**
 
@@ -8,29 +8,29 @@
 
 ```bash
 # Search for plugins
-nuce plugin search react
+nuxc plugin search react
 
 # Install a plugin
-nuce plugin install @nuce/plugin-react
+nuxc plugin install @nuxc/plugin-react
 
 # List installed plugins
-nuce plugin list
+nuxc plugin list
 
 # Verify plugin signatures
-nuce plugin verify @nuce/plugin-react
+nuxc plugin verify @nuxc/plugin-react
 ```
 
 ---
 
 ## Using Plugins
 
-### In `nuce.config.ts`
+### In `nuxc.config.ts`
 
 ```typescript
-import { defineConfig } from 'nuce';
-import react from '@nuce/plugin-react';
-import tailwind from '@nuce/plugin-tailwind';
-import pwa from '@nuce/plugin-pwa';
+import { defineConfig } from 'nuxc';
+import react from '@nuxc/plugin-react';
+import tailwind from '@nuxc/plugin-tailwind';
+import pwa from '@nuxc/plugin-pwa';
 
 export default defineConfig({
   preset: 'spa',
@@ -66,90 +66,90 @@ export default defineConfig({
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-react` | React Fast Refresh + JSX | `nuce plugin install @nuce/plugin-react` |
-| `@nuce/plugin-vue` | Vue 3 SFC support | `nuce plugin install @nuce/plugin-vue` |
-| `@nuce/plugin-svelte` | Svelte compiler | `nuce plugin install @nuce/plugin-svelte` |
-| `@nuce/plugin-solid` | Solid.js JSX | `nuce plugin install @nuce/plugin-solid` |
-| `@nuce/plugin-angular` | Angular AOT compiler | `nuce plugin install @nuce/plugin-angular` |
-| `@nuce/plugin-preact` | Preact with Fast Refresh | `nuce plugin install @nuce/plugin-preact` |
+| `@nuxc/plugin-react` | React Fast Refresh + JSX | `nuxc plugin install @nuxc/plugin-react` |
+| `@nuxc/plugin-vue` | Vue 3 SFC support | `nuxc plugin install @nuxc/plugin-vue` |
+| `@nuxc/plugin-svelte` | Svelte compiler | `nuxc plugin install @nuxc/plugin-svelte` |
+| `@nuxc/plugin-solid` | Solid.js JSX | `nuxc plugin install @nuxc/plugin-solid` |
+| `@nuxc/plugin-angular` | Angular AOT compiler | `nuxc plugin install @nuxc/plugin-angular` |
+| `@nuxc/plugin-preact` | Preact with Fast Refresh | `nuxc plugin install @nuxc/plugin-preact` |
 
 ### CSS & Styling
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-tailwind` | Tailwind CSS v3+ | `nuce plugin install @nuce/plugin-tailwind` |
-| `@nuce/plugin-sass` | Sass/SCSS compiler | `nuce plugin install @nuce/plugin-sass` |
-| `@nuce/plugin-less` | Less compiler | `nuce plugin install @nuce/plugin-less` |
-| `@nuce/plugin-postcss` | PostCSS processor | `nuce plugin install @nuce/plugin-postcss` |
-| `@nuce/plugin-styled-components` | CSS-in-JS support | `nuce plugin install @nuce/plugin-styled-components` |
-| `@nuce/plugin-emotion` | Emotion CSS-in-JS | `nuce plugin install @nuce/plugin-emotion` |
+| `@nuxc/plugin-tailwind` | Tailwind CSS v3+ | `nuxc plugin install @nuxc/plugin-tailwind` |
+| `@nuxc/plugin-sass` | Sass/SCSS compiler | `nuxc plugin install @nuxc/plugin-sass` |
+| `@nuxc/plugin-less` | Less compiler | `nuxc plugin install @nuxc/plugin-less` |
+| `@nuxc/plugin-postcss` | PostCSS processor | `nuxc plugin install @nuxc/plugin-postcss` |
+| `@nuxc/plugin-styled-components` | CSS-in-JS support | `nuxc plugin install @nuxc/plugin-styled-components` |
+| `@nuxc/plugin-emotion` | Emotion CSS-in-JS | `nuxc plugin install @nuxc/plugin-emotion` |
 
 ### Assets & Media
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-svgr` | SVG to React components | `nuce plugin install @nuce/plugin-svgr` |
-| `@nuce/plugin-image-optimizer` | Image compression | `nuce plugin install @nuce/plugin-image-optimizer` |
-| `@nuce/plugin-webp` | WebP conversion | `nuce plugin install @nuce/plugin-webp` |
-| `@nuce/plugin-fonts` | Font optimization | `nuce plugin install @nuce/plugin-fonts` |
+| `@nuxc/plugin-svgr` | SVG to React components | `nuxc plugin install @nuxc/plugin-svgr` |
+| `@nuxc/plugin-image-optimizer` | Image compression | `nuxc plugin install @nuxc/plugin-image-optimizer` |
+| `@nuxc/plugin-webp` | WebP conversion | `nuxc plugin install @nuxc/plugin-webp` |
+| `@nuxc/plugin-fonts` | Font optimization | `nuxc plugin install @nuxc/plugin-fonts` |
 
 ### Performance
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-compression` | Gzip/Brotli compression | `nuce plugin install @nuce/plugin-compression` |
-| `@nuce/plugin-preload` | Resource preloading | `nuce plugin install @nuce/plugin-preload` |
-| `@nuce/plugin-lazy-load` | Code splitting helpers | `nuce plugin install @nuce/plugin-lazy-load` |
-| `@nuce/plugin-bundle-analyzer` | Bundle size analysis | `nuce plugin install @nuce/plugin-bundle-analyzer` |
+| `@nuxc/plugin-compression` | Gzip/Brotli compression | `nuxc plugin install @nuxc/plugin-compression` |
+| `@nuxc/plugin-preload` | Resource preloading | `nuxc plugin install @nuxc/plugin-preload` |
+| `@nuxc/plugin-lazy-load` | Code splitting helpers | `nuxc plugin install @nuxc/plugin-lazy-load` |
+| `@nuxc/plugin-bundle-analyzer` | Bundle size analysis | `nuxc plugin install @nuxc/plugin-bundle-analyzer` |
 
 ### Security
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-csp` | Content Security Policy | `nuce plugin install @nuce/plugin-csp` |
-| `@nuce/plugin-sri` | Subresource Integrity | `nuce plugin install @nuce/plugin-sri` |
-| `@nuce/plugin-security-headers` | HTTP security headers | `nuce plugin install @nuce/plugin-security-headers` |
+| `@nuxc/plugin-csp` | Content Security Policy | `nuxc plugin install @nuxc/plugin-csp` |
+| `@nuxc/plugin-sri` | Subresource Integrity | `nuxc plugin install @nuxc/plugin-sri` |
+| `@nuxc/plugin-security-headers` | HTTP security headers | `nuxc plugin install @nuxc/plugin-security-headers` |
 
 ### Testing
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-vitest` | Vitest integration | `nuce plugin install @nuce/plugin-vitest` |
-| `@nuce/plugin-jest` | Jest integration | `nuce plugin install @nuce/plugin-jest` |
-| `@nuce/plugin-playwright` | E2E testing | `nuce plugin install @nuce/plugin-playwright` |
+| `@nuxc/plugin-vitest` | Vitest integration | `nuxc plugin install @nuxc/plugin-vitest` |
+| `@nuxc/plugin-jest` | Jest integration | `nuxc plugin install @nuxc/plugin-jest` |
+| `@nuxc/plugin-playwright` | E2E testing | `nuxc plugin install @nuxc/plugin-playwright` |
 
 ### i18n
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-i18next` | i18next integration | `nuce plugin install @nuce/plugin-i18next` |
-| `@nuce/plugin-react-intl` | React Intl | `nuce plugin install @nuce/plugin-react-intl` |
-| `@nuce/plugin-vue-i18n` | Vue I18n | `nuce plugin install @nuce/plugin-vue-i18n` |
+| `@nuxc/plugin-i18next` | i18next integration | `nuxc plugin install @nuxc/plugin-i18next` |
+| `@nuxc/plugin-react-intl` | React Intl | `nuxc plugin install @nuxc/plugin-react-intl` |
+| `@nuxc/plugin-vue-i18n` | Vue I18n | `nuxc plugin install @nuxc/plugin-vue-i18n` |
 
 ### State Management
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-redux` | Redux DevTools | `nuce plugin install @nuce/plugin-redux` |
-| `@nuce/plugin-zustand` | Zustand integration | `nuce plugin install @nuce/plugin-zustand` |
-| `@nuce/plugin-jotai` | Jotai atoms | `nuce plugin install @nuce/plugin-jotai` |
+| `@nuxc/plugin-redux` | Redux DevTools | `nuxc plugin install @nuxc/plugin-redux` |
+| `@nuxc/plugin-zustand` | Zustand integration | `nuxc plugin install @nuxc/plugin-zustand` |
+| `@nuxc/plugin-jotai` | Jotai atoms | `nuxc plugin install @nuxc/plugin-jotai` |
 
 ### Deployment
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-vercel` | Vercel deployment | `nuce plugin install @nuce/plugin-vercel` |
-| `@nuce/plugin-netlify` | Netlify deployment | `nuce plugin install @nuce/plugin-netlify` |
-| `@nuce/plugin-cloudflare` | Cloudflare Workers | `nuce plugin install @nuce/plugin-cloudflare` |
-| `@nuce/plugin-docker` | Docker containerization | `nuce plugin install @nuce/plugin-docker` |
+| `@nuxc/plugin-vercel` | Vercel deployment | `nuxc plugin install @nuxc/plugin-vercel` |
+| `@nuxc/plugin-netlify` | Netlify deployment | `nuxc plugin install @nuxc/plugin-netlify` |
+| `@nuxc/plugin-cloudflare` | Cloudflare Workers | `nuxc plugin install @nuxc/plugin-cloudflare` |
+| `@nuxc/plugin-docker` | Docker containerization | `nuxc plugin install @nuxc/plugin-docker` |
 
 ### Analytics
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@nuce/plugin-google-analytics` | GA4 integration | `nuce plugin install @nuce/plugin-google-analytics` |
-| `@nuce/plugin-plausible` | Plausible Analytics | `nuce plugin install @nuce/plugin-plausible` |
-| `@nuce/plugin-sentry` | Error tracking | `nuce plugin install @nuce/plugin-sentry` |
+| `@nuxc/plugin-google-analytics` | GA4 integration | `nuxc plugin install @nuxc/plugin-google-analytics` |
+| `@nuxc/plugin-plausible` | Plausible Analytics | `nuxc plugin install @nuxc/plugin-plausible` |
+| `@nuxc/plugin-sentry` | Error tracking | `nuxc plugin install @nuxc/plugin-sentry` |
 
 ---
 
@@ -157,7 +157,7 @@ export default defineConfig({
 
 ### Plugin Security Model
 
-Nuce currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
+Nuxc currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
 
 Plugins are subject to explicit permissions:
 - Filesystem access is denied by default and only granted for approved paths.
@@ -184,11 +184,11 @@ Every plugin is **cryptographically signed**:
 
 ```bash
 # Verify plugin signature
-nuce plugin verify @nuce/plugin-react
+nuxc plugin verify @nuxc/plugin-react
 
 # Output:
 ✅ Signature valid
-✅ Publisher: Nuce Team
+✅ Publisher: Nuxc Team
 ✅ Published: 2026-01-15
 ✅ SHA-256: a3f2...
 ```
@@ -197,9 +197,9 @@ nuce plugin verify @nuce/plugin-react
 
 ```json
 {
-  "name": "@nuce/plugin-react",
+  "name": "@nuxc/plugin-react",
   "version": "2.0.0",
-  "author": "Nuce Team",
+  "author": "Nuxc Team",
   "signature": "...",
   "permissions": [
     "transform:jsx",
@@ -218,9 +218,9 @@ nuce plugin verify @nuce/plugin-react
 
 ```typescript
 // my-plugin.ts
-import { NucePlugin } from 'nuce';
+import { NuxcPlugin } from 'nuxc';
 
-export default function myPlugin(options = {}): NucePlugin {
+export default function myPlugin(options = {}): NuxcPlugin {
   return {
     name: 'my-plugin',
     version: '1.0.0',
@@ -251,7 +251,7 @@ export default function myPlugin(options = {}): NucePlugin {
 ### Plugin Hooks
 
 ```typescript
-export interface NucePlugin {
+export interface NuxcPlugin {
   name: string;
   version: string;
   
@@ -277,12 +277,12 @@ export interface NucePlugin {
 ### Example: Custom Markdown Plugin
 
 ```typescript
-import { NucePlugin } from 'nuce';
+import { NuxcPlugin } from 'nuxc';
 import { marked } from 'marked';
 
-export default function markdownPlugin(): NucePlugin {
+export default function markdownPlugin(): NuxcPlugin {
   return {
-    name: 'nuce-plugin-markdown',
+    name: 'nuxc-plugin-markdown',
     version: '1.0.0',
     
     transform(code, id) {
@@ -301,7 +301,7 @@ export default function markdownPlugin(): NucePlugin {
 
 **Usage**:
 ```typescript
-// nuce.config.ts
+// nuxc.config.ts
 import markdown from './my-plugin';
 
 export default defineConfig({
@@ -325,8 +325,8 @@ function App() {
 ### Vite Plugin Adapter
 
 ```typescript
-import { defineConfig } from 'nuce';
-import { rollupAdapter } from '@nuce/plugin-compat';
+import { defineConfig } from 'nuxc';
+import { rollupAdapter } from '@nuxc/plugin-compat';
 import viteReactSvgr from 'vite-plugin-svgr';
 
 export default defineConfig({
@@ -342,7 +342,7 @@ export default defineConfig({
 ### Webpack Loader Adapter
 
 ```typescript
-import { webpackLoaderAdapter } from '@nuce/plugin-compat';
+import { webpackLoaderAdapter } from '@nuxc/plugin-compat';
 
 export default defineConfig({
   plugins: [
@@ -365,26 +365,26 @@ export default defineConfig({
 
 ```bash
 # List all plugins
-nuce plugin list --all
+nuxc plugin list --all
 
 # Search by category
-nuce plugin search --category framework
+nuxc plugin search --category framework
 
 # Filter by verified
-nuce plugin search --verified
+nuxc plugin search --verified
 ```
 
 ### Plugin Ratings
 
 ```bash
 # View plugin details
-nuce plugin info @nuce/plugin-react
+nuxc plugin info @nuxc/plugin-react
 
 # Output:
-📦 @nuce/plugin-react v2.0.0
+📦 @nuxc/plugin-react v2.0.0
 ⭐ 4.8/5.0 (1,234 reviews)
 📥 50,000 downloads/week
-✅ Verified by Nuce Team
+✅ Verified by Nuxc Team
 🔒 Secure isolated plugin runtime
 📝 React Fast Refresh + JSX transform
 ```
@@ -414,11 +414,11 @@ export default defineConfig({
 **Solution**:
 ```bash
 # Re-install plugin
-npm uninstall @nuce/plugin-name
-nuce plugin install @nuce/plugin-name
+npm uninstall @nuxc/plugin-name
+nuxc plugin install @nuxc/plugin-name
 
 # Or skip verification (not recommended)
-nuce plugin install @nuce/plugin-name --skip-verify
+nuxc plugin install @nuxc/plugin-name --skip-verify
 ```
 
 ### Plugin Conflicts
@@ -443,7 +443,7 @@ export default defineConfig({
 
 ✅ **Good**:
 ```typescript
-import react from '@nuce/plugin-react';
+import react from '@nuxc/plugin-react';
 ```
 
 ⚠️ **Avoid** (unless necessary):
@@ -455,7 +455,7 @@ import react from 'some-unofficial-plugin';
 
 ```bash
 # Always verify before using
-nuce plugin verify @nuce/plugin-name
+nuxc plugin verify @nuxc/plugin-name
 ```
 
 ### 3. Minimal Plugin Configuration
@@ -480,7 +480,7 @@ plugins: [
 
 ```bash
 # Profile plugin impact
-nuce build --profile
+nuxc build --profile
 
 # Output shows plugin timings
 ```
@@ -496,20 +496,20 @@ nuce build --profile
 npm run build
 
 # 2. Sign plugin
-nuce plugin sign ./dist
+nuxc plugin sign ./dist
 
 # 3. Publish to marketplace
-nuce plugin publish
+nuxc plugin publish
 
 # 4. Verify published
-nuce plugin verify @your-org/your-plugin
+nuxc plugin verify @your-org/your-plugin
 ```
 
 ### Plugin Testing
 
 ```typescript
 // plugin.test.ts
-import { describe, it, expect } from '@nuce/test';
+import { describe, it, expect } from '@nuxc/test';
 import myPlugin from './plugin';
 
 describe('My Plugin', () => {

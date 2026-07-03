@@ -1,4 +1,4 @@
-# Nuce react-router-v7 Template — Nuce Profiles — hybrid SSR+SPA directory
+# Nuxc react-router-v7 Template — Nuxc Profiles — hybrid SSR+SPA directory
 ```bash
 npm install && npm run dev
 ```

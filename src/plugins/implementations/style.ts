@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-style
+ * @nuxc/plugin-style
  * CSS injection
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createStylePlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-style',
+        name: '@nuxc/plugin-style',
         originalPlugin: 'style-loader',
         
         async transform(code: string, id: string) {

@@ -15,7 +15,7 @@ module.exports = {
     hmr: true,
   },
   federation: {
-    name: 'nuce_remote',
+    name: 'nuxc_remote',
     filename: 'remoteEntry.js',
     exposes: {
       './App': './src/main.ts'

@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-sprite
+ * @nuxc/plugin-sprite
  * SVG sprite generation
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createSpritePlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-sprite',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-sprite',
+        originalPlugin: 'nuxc-native',
         
         async load(id: string) {
             // Asset loading for sprite

@@ -1,8 +1,8 @@
-# Nuce Features Documentation - Implementation Summary
+# Nuxc Features Documentation - Implementation Summary
 
 ## Overview
 
-This document provides a complete overview of all features implemented in the Nuce Build Tool, including their implementation details and source code locations.
+This document provides a complete overview of all features implemented in the Nuxc Build Tool, including their implementation details and source code locations.
 
 ## Features Website Page
 
@@ -149,7 +149,7 @@ To make the Features page discoverable:
 To verify the implementation:
 ```bash
 cd website
-npx nuce dev
+npx nuxc dev
 # Visit http://localhost:5174/#/features
 ```
 

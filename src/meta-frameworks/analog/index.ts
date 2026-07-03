@@ -1,5 +1,5 @@
-import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
-import { detectDependencies, registry } from '@nuce/adapter-core';
+import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
+import { detectDependencies, registry } from '@nuxc/adapter-core';
 import { analogCompilerPlugin } from './analog-plugin.js';
 
 export interface AnalogConfig {
@@ -7,7 +7,7 @@ export interface AnalogConfig {
   prerender?: string[];    // default: ['/']
 }
 
-export class AnalogAdapter implements NuceAdapter {
+export class AnalogAdapter implements NuxcAdapter {
   name = 'analog';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class AnalogAdapter implements NuceAdapter {
     ];
   }
 
-  config(config: NuceConfig): NuceConfig {
+  config(config: NuxcConfig): NuxcConfig {
     if (!config.analog) config.analog = {};
     config.analog = {
       ssr: true,
@@ -62,7 +62,7 @@ export class AnalogAdapter implements NuceAdapter {
           }
         }
       } catch (e) {
-        console.error('[NUCE Analog] Dev handler error:', e);
+        console.error('[NUXC Analog] Dev handler error:', e);
       }
       next();
     };

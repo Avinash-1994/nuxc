@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-mdx
+ * @nuxc/plugin-mdx
  * MDX support
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMdxPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-mdx',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-mdx',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: MDX support

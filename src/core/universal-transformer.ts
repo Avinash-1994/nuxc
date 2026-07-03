@@ -223,8 +223,8 @@ export class UniversalTransformer {
                 const normalizedPath = filePath.replace(/\\/g, '/');
                 const hmrFooter = `
 
-// Nuce Advanced HMR (React)
-import { createHotContext } from '/@nuce/client';
+// Nuxc Advanced HMR (React)
+import { createHotContext } from '/@nuxc/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -251,7 +251,7 @@ if (import.meta.hot) {
                 line: error.loc?.line,
                 column: error.loc?.column,
                 type: 'Transformation Error',
-                plugin: 'nuce:universal-transformer'
+                plugin: 'nuxc:universal-transformer'
             });
 
             // Re-throw the error instead of falling back
@@ -270,7 +270,7 @@ if (import.meta.hot) {
         try {
             let compiler: any;
             try {
-                // Try: user project first, then nuce's own node_modules (nuce ships @vue/compiler-sfc as a dep)
+                // Try: user project first, then nuxc's own node_modules (nuxc ships @vue/compiler-sfc as a dep)
                 const searchPaths = [this.root, process.cwd(), fileURLToPath(new URL('../..', import.meta.url))];
                 const compilerPath = _require.resolve('@vue/compiler-sfc', { paths: searchPaths });
                 const compilerUrl = pathToFileURL(compilerPath).href;
@@ -285,8 +285,8 @@ if (import.meta.hot) {
 const _sfc_main = { template: \`${code.replace(/`/g, '\\`')}\` };
 export default _sfc_main;
 
-// Nuce Advanced HMR (Vue - Fallback)
-import { createHotContext } from '/@nuce/client';
+// Nuxc Advanced HMR (Vue - Fallback)
+import { createHotContext } from '/@nuxc/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -402,8 +402,8 @@ if (import.meta.hot) {
                 const normalizedPath = filePath.replace(/\\/g, '/');
                 output += `
 
-// Nuce Advanced HMR (Vue)
-import { createHotContext } from '/@nuce/client';
+// Nuxc Advanced HMR (Vue)
+import { createHotContext } from '/@nuxc/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -466,8 +466,8 @@ if (import.meta.hot) {
                 const componentId = canonicalHash(filePath).substring(0, 16);
                 finalCode += `
 
-// Nuce Advanced HMR (Svelte)
-import { createHotContext } from '/@nuce/client';
+// Nuxc Advanced HMR (Svelte)
+import { createHotContext } from '/@nuxc/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -475,7 +475,7 @@ if (import.meta.hot) {
     import.meta.hot.accept((newModule) => {
         if (!newModule) return;
         // Svelte HMR: Re-create component instances
-        const instances = window.__NUCE_SVELTE_INSTANCES__ || (window.__NUCE_SVELTE_INSTANCES__ = new Map());
+        const instances = window.__NUXC_SVELTE_INSTANCES__ || (window.__NUXC_SVELTE_INSTANCES__ = new Map());
         const componentInstances = instances.get("${componentId}") || [];
         componentInstances.forEach(instance => {
             if (instance && instance.$set) {
@@ -519,20 +519,20 @@ if (import.meta.hot) {
                 const compilerInitStart = performance.now();
                 const ts = await import('typescript');
                 const compilerInitTime = (performance.now() - compilerInitStart).toFixed(4);
-                console.log(`[NUCE-TEST] Angular compiler init time: ${compilerInitTime}ms`);
+                console.log(`[NUXC-TEST] Angular compiler init time: ${compilerInitTime}ms`);
 
                 // Check if this file is in cache by hash
                 const fsSyncModule = await import('fs');
                 const cryptoModule = await import('crypto');
                 const cacheKey = cryptoModule.createHash('sha256').update(code).update(filePath).digest('hex');
-                const cacheFile = `/tmp/nuce-ang-cache-${cacheKey.substring(0, 16)}`;
+                const cacheFile = `/tmp/nuxc-ang-cache-${cacheKey.substring(0, 16)}`;
                 const isHit = fsSyncModule.existsSync(cacheFile);
                 if (isHit) {
-                    console.log(`[NUCE-TEST] Ivy cache hit (served from cache)`);
-                    fsSyncModule.writeFileSync('/tmp/nuce-hmr-status.txt', 'hit');
+                    console.log(`[NUXC-TEST] Ivy cache hit (served from cache)`);
+                    fsSyncModule.writeFileSync('/tmp/nuxc-hmr-status.txt', 'hit');
                 } else {
-                    console.log(`[NUCE-TEST] Ivy recompile: yes`);
-                    fsSyncModule.writeFileSync('/tmp/nuce-hmr-status.txt', 'recompile');
+                    console.log(`[NUXC-TEST] Ivy recompile: yes`);
+                    fsSyncModule.writeFileSync('/tmp/nuxc-hmr-status.txt', 'recompile');
                     // Mark as cached for subsequent requests
                     fsSyncModule.writeFileSync(cacheFile, '1');
                 }
@@ -559,8 +559,8 @@ if (import.meta.hot) {
                         const componentId = canonicalHash(filePath).substring(0, 16);
                         finalCode += `
 
-// Nuce Advanced HMR (Angular)
-import { createHotContext } from '/@nuce/client';
+// Nuxc Advanced HMR (Angular)
+import { createHotContext } from '/@nuxc/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -568,7 +568,7 @@ if (import.meta.hot) {
     import.meta.hot.accept((newModule) => {
         if (!newModule) return;
         // Angular HMR: Re-bootstrap components
-        const registry = window.__NUCE_ANGULAR_REGISTRY__ || (window.__NUCE_ANGULAR_REGISTRY__ = new Map());
+        const registry = window.__NUXC_ANGULAR_REGISTRY__ || (window.__NUXC_ANGULAR_REGISTRY__ = new Map());
         const components = registry.get("${componentId}") || [];
         components.forEach(({ componentRef, viewContainerRef }) => {
             if (componentRef && viewContainerRef) {
@@ -639,8 +639,8 @@ if (import.meta.hot) {
                 const normalizedPath = filePath.replace(/\\/g, '/');
                 const hmrFooter = `
 
-// Nuce Advanced HMR (Solid)
-import { createHotContext } from '/@nuce/client';
+// Nuxc Advanced HMR (Solid)
+import { createHotContext } from '/@nuxc/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -648,7 +648,7 @@ if (import.meta.hot) {
     import.meta.hot.accept((newModule) => {
         if (!newModule) return;
         // Solid HMR: Re-render root components
-        const roots = window.__NUCE_SOLID_ROOTS__ || (window.__NUCE_SOLID_ROOTS__ = new Map());
+        const roots = window.__NUXC_SOLID_ROOTS__ || (window.__NUXC_SOLID_ROOTS__ = new Map());
         const componentRoots = roots.get("${normalizedPath}") || [];
         componentRoots.forEach(({ dispose, container, component }) => {
             if (dispose) dispose();
@@ -687,8 +687,8 @@ if (import.meta.hot) {
                     const normalizedPath = filePath.replace(/\\/g, '/');
                     const hmrFooter = `
 
-// Nuce Advanced HMR (Solid - Fallback)
-import { createHotContext } from '/@nuce/client';
+// Nuxc Advanced HMR (Solid - Fallback)
+import { createHotContext } from '/@nuxc/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -807,8 +807,8 @@ if (import.meta.hot) {
                 const componentId = canonicalHash(filePath).substring(0, 16);
                 finalCode += `
 
-// Nuce Advanced HMR (Lit)
-import { createHotContext } from '/@nuce/client';
+// Nuxc Advanced HMR (Lit)
+import { createHotContext } from '/@nuxc/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -816,7 +816,7 @@ if (import.meta.hot) {
     import.meta.hot.accept((newModule) => {
         if (!newModule) return;
         // Lit HMR: Re-register custom elements
-        const registry = window.__NUCE_LIT_REGISTRY__ || (window.__NUCE_LIT_REGISTRY__ = new Map());
+        const registry = window.__NUXC_LIT_REGISTRY__ || (window.__NUXC_LIT_REGISTRY__ = new Map());
         const elements = registry.get("${componentId}") || [];
         elements.forEach(({ tagName, constructor }) => {
             const instances = document.querySelectorAll(tagName);

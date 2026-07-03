@@ -42,7 +42,7 @@ function startDevServer() {
     const t0 = performance.now();
     const t0Ts = new Date().toISOString();
     
-    // We launch the nuce CLI built from the root workspace
+    // We launch the nuxc CLI built from the root workspace
     const cliPath = path.resolve(__dirname, '../../../dist/cli.js');
     
     const child = spawn('node', [cliPath, 'dev'], {
@@ -161,7 +161,7 @@ async function runTests() {
       `Spawn timestamp: ${t0Ts}`,
       `Ready timestamp: ${t1Ts}`,
       `Cold start: ${Math.round(startupTime)}ms`,
-      `[nuce] adapter: tanstack-start in output: yes`,
+      `[nuxc] adapter: tanstack-start in output: yes`,
       `uWS bound: yes`
     ]);
 
@@ -276,7 +276,7 @@ async function runTests() {
   ]);
 
   log(`┌─────────────────────────────────────────────┐`);
-  log(`│ NUCE — PHASE 2.10 TANSTACK START COMPLETE │`);
+  log(`│ NUXC — PHASE 2.10 TANSTACK START COMPLETE │`);
   log(`│ TS-01 Routing:    PASS  4 routes           │`);
   log(`│ TS-02 SSR render: PASS  ${Buffer.byteLength(profileResData)} bytes            │`);
   log(`│ TS-03 Server Fn:  PASS  success            │`);

@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-manifest
+ * @nuxc/plugin-manifest
  * Web manifest generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createManifestPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-manifest',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-manifest',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Web manifest generation

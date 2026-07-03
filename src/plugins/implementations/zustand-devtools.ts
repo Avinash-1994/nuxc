@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-zustand-devtools
+ * @nuxc/plugin-zustand-devtools
  * Zustand DevTools integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createZustandDevtoolsPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-zustand-devtools',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-zustand-devtools',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // State management: Zustand DevTools integration
@@ -16,7 +16,7 @@ export function createZustandDevtoolsPlugin(): PluginAdapter {
         },
 
         async buildStart() {
-            console.log('[@nuce/plugin-zustand-devtools] State management initialized');
+            console.log('[@nuxc/plugin-zustand-devtools] State management initialized');
         }
     };
 }

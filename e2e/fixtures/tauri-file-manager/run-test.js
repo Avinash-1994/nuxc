@@ -109,9 +109,9 @@ async function runTests() {
   const rustCmdFound = commands.length > 0 ? commands[0].rustSig : 'NONE';
   const tsGenerated = commands.length > 0 ? commands[0].tsDecl : 'NONE';
   
-  // Check for display / NUCE_HMR_URL env
+  // Check for display / NUXC_HMR_URL env
   const hasDisplay = !!process.env.DISPLAY || !!process.env.WAYLAND_DISPLAY;
-  const hmrUrl = process.env.NUCE_HMR_URL || `http://localhost:5173`;
+  const hmrUrl = process.env.NUXC_HMR_URL || `http://localhost:5173`;
   
   const tu01Details = [
     `tauriIpcPlugin loaded: yes`,
@@ -120,7 +120,7 @@ async function runTests() {
     `Generated TypeScript type:`,
     `  ${tsGenerated}`,
     `Wrong arg type caught by tsc: yes (emit + check pipeline)`,
-    `NUCE_HMR_URL: ${hmrUrl}`,
+    `NUXC_HMR_URL: ${hmrUrl}`,
     `cargo tauri dev hook confirmation: true`,
     hasDisplay
       ? `Tauri window spawned: yes`
@@ -165,7 +165,7 @@ async function runTests() {
       `Spawn timestamp: ${t0Ts}`,
       `Ready timestamp: ${t1Ts}`,
       `Cold start: ${Math.round(startupTime)}ms`,
-      `[nuce] adapter: tauri in output: yes`,
+      `[nuxc] adapter: tauri in output: yes`,
       `uWS bound: yes`
     ]);
 
@@ -198,7 +198,7 @@ async function runTests() {
   execFileSync('node', [cliPath, 'build'], {
     cwd: __dirname,
     stdio: 'ignore',
-        env: { ...process.env, NUCE_SKIP_SECURITY: '1' }
+        env: { ...process.env, NUXC_SKIP_SECURITY: '1' }
   });
   
   const buildMs = performance.now() - tBuildStart;
@@ -240,7 +240,7 @@ async function runTests() {
     }
   }
   
-  const hasMockComments = clientContent.includes('mock waku bundle') || clientContent.includes('mock vitepress bundle') || clientContent.includes('mock tauri bundle') || clientContent.includes('// [Nuce]');
+  const hasMockComments = clientContent.includes('mock waku bundle') || clientContent.includes('mock vitepress bundle') || clientContent.includes('mock tauri bundle') || clientContent.includes('// [Nuxc]');
   const ok5 = htmlFiles.length >= 1 && clientBundle && buildMs < 5000 && bundleSizeKB > 1 && hasTU && !hasMockComments;
   
   // Real version
@@ -297,7 +297,7 @@ async function runTests() {
     const t0r = Date.now();
     try {
       execFileSync('node', [cliPathReg, 'build'], { cwd: fix.dir, timeout: 30000, stdio: 'ignore',
-        env: { ...process.env, NUCE_SKIP_SECURITY: '1' } });
+        env: { ...process.env, NUXC_SKIP_SECURITY: '1' } });
       regLines.push(`${fix.name.padEnd(22)}: pass ${Date.now()-t0r}ms`);
     } catch(e) {
       regLines.push(`${fix.name.padEnd(22)}: FAIL`);
@@ -314,7 +314,7 @@ async function runTests() {
   pass('TU-06  Regression', 'all pass', regAllPass ? 'all pass' : 'FAIL', regLines);
 
   log(`┌─────────────────────────────────────────────┐`);
-  log(`│ NUCE — PHASE 2.13 TAURI COMPLETE           │`);
+  log(`│ NUXC — PHASE 2.13 TAURI COMPLETE           │`);
   log(`│ TU-01 IPC Bridge:       PASS  verified       │`);
   log(`│ TU-02 Static HTML:      PASS  ${Buffer.byteLength(htmlResData)} bytes        │`);
   log(`│ TU-03 Cold start:       PASS  ${Math.round(startupTime)}ms               │`);

@@ -15,10 +15,10 @@
     "jsx": "react-jsx",
     "isolatedModules": true,
     "paths": {
-      "@nuce/adapter-core": ["./packages/nuce-adapter-core/src/index.js", "./packages/nuce-adapter-core/src/index.ts"],
-      "@nuce/adapter-core/*": ["./packages/nuce-adapter-core/*"],
-      "@nuce/security": ["./packages/nuce-security/src/index.ts"],
-      "@nuce/security/*": ["./packages/nuce-security/src/*"]
+      "@nuxc/adapter-core": ["./packages/nuxc-adapter-core/src/index.js", "./packages/nuxc-adapter-core/src/index.ts"],
+      "@nuxc/adapter-core/*": ["./packages/nuxc-adapter-core/*"],
+      "@nuxc/security": ["./packages/nuxc-security/src/index.ts"],
+      "@nuxc/security/*": ["./packages/nuxc-security/src/*"]
     }
   },
   "include": [

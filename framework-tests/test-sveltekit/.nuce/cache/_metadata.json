@@ -1,0 +1,27 @@
+{
+  "hash": "88d46d4a",
+  "depsHash": "d5128537",
+  "deps": [
+    "marked",
+    "svelte",
+    "svelte/animate",
+    "svelte/easing",
+    "svelte/motion",
+    "svelte/store",
+    "svelte/transition",
+    "svelte/internal",
+    "@sveltejs/kit"
+  ],
+  "depMap": {
+    "marked": "/@nuxc-deps/marked.js",
+    "svelte": "/@nuxc-deps/svelte.js",
+    "svelte/animate": "/@nuxc-deps/svelte_animate.js",
+    "svelte/easing": "/@nuxc-deps/svelte_easing.js",
+    "svelte/motion": "/@nuxc-deps/svelte_motion.js",
+    "svelte/store": "/@nuxc-deps/svelte_store.js",
+    "svelte/transition": "/@nuxc-deps/svelte_transition.js",
+    "svelte/internal": "/@nuxc-deps/svelte_internal.js",
+    "@sveltejs/kit": "/@nuxc-deps/_sveltejs_kit.js"
+  },
+  "timestamp": 1778902269198
+}

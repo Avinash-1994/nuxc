@@ -1,7 +1,7 @@
-import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
-import { detectDependencies, registry } from '@nuce/adapter-core';
+import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
+import { detectDependencies, registry } from '@nuxc/adapter-core';
 
-export class RedwoodAdapter implements NuceAdapter {
+export class RedwoodAdapter implements NuxcAdapter {
   name = 'redwoodjs';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -11,17 +11,17 @@ export class RedwoodAdapter implements NuceAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'nuce:redwood-scaffold',
+        name: 'nuxc:redwood-scaffold',
         async buildStart() {
-          console.log('[Nuce:RedwoodJS] Detected RedwoodJS project.');
-          console.log('[Nuce:RedwoodJS] Use `yarn rw dev` for the full RedwoodJS dev experience.');
-          console.log('[Nuce:RedwoodJS] Nuce handles the web/ side bundling natively.');
+          console.log('[Nuxc:RedwoodJS] Detected RedwoodJS project.');
+          console.log('[Nuxc:RedwoodJS] Use `yarn rw dev` for the full RedwoodJS dev experience.');
+          console.log('[Nuxc:RedwoodJS] Nuxc handles the web/ side bundling natively.');
         }
       }
     ];
   }
 
-  config(config: NuceConfig): NuceConfig {
+  config(config: NuxcConfig): NuxcConfig {
     if (!config.redwood) config.redwood = {};
     config.redwood = {
       // RedwoodJS splits into web/ (frontend) and api/ (backend graphql)
@@ -39,7 +39,7 @@ export class RedwoodAdapter implements NuceAdapter {
         const url = req.url || '/';
         if (url.startsWith('/.redwood/') || url.startsWith('/api/')) {
           // Log and pass; a full implementation would proxy to localhost:8911
-          console.log(`[Nuce:RedwoodJS] API request detected: ${url} — ensure \`yarn rw dev api\` is running.`);
+          console.log(`[Nuxc:RedwoodJS] API request detected: ${url} — ensure \`yarn rw dev api\` is running.`);
         }
         next();
       }

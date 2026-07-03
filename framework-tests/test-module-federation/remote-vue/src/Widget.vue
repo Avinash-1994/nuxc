@@ -13,5 +13,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 const count = ref(0);
-const stats = [{ label:'Framework', value:'Vue 3' },{ label:'Build tool', value:'Nuce' },{ label:'MFE', value:'Module Federation' }];
+const stats = [{ label:'Framework', value:'Vue 3' },{ label:'Build tool', value:'Nuxc' },{ label:'MFE', value:'Module Federation' }];
 </script>

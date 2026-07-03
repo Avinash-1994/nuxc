@@ -23,7 +23,7 @@ const playwright = _require('playwright');
 const { chromium } = playwright;
 
 // ── SsrRunner (from built package) ───────────────────────────────────
-const { SsrRunner } = await import('@nuce/ssr');
+const { SsrRunner } = await import('@nuxc/ssr');
 
 let passed = 0;  let failed = 0;
 
@@ -113,7 +113,7 @@ log('\n── FIX 2: T9 — Zero hydration mismatches (Playwright) ──\n');
         )
     );
     const AppEl = React.createElement('div', { id: 'app' },
-        React.createElement('h1', null, 'Nuce SSR Blog'),
+        React.createElement('h1', null, 'Nuxc SSR Blog'),
         React.createElement('p', { 'data-testid': 'url' }, '/hydration-test'),
         PostList
     );
@@ -140,7 +140,7 @@ log('\n── FIX 2: T9 — Zero hydration mismatches (Playwright) ──\n');
     )
   );
   const app = e('div', { id: 'app' },
-    e('h1', null, 'Nuce SSR Blog'),
+    e('h1', null, 'Nuxc SSR Blog'),
     e('p', { 'data-testid': 'url' }, '/hydration-test'),
     postList
   );
@@ -208,9 +208,9 @@ log('\n── FIX 2: T9 — Zero hydration mismatches (Playwright) ──\n');
 log('\n── FIX 3: T10 — Error overlay in DOM (Playwright) ──\n');
 {
     // Serve a minimal page that:
-    // 1. Defines the nuce-error-overlay custom element (same as the real runtime)
+    // 1. Defines the nuxc-error-overlay custom element (same as the real runtime)
     // 2. Throws on load → the overlay appears
-    // This mirrors what the Nuce dev server does in production dev mode
+    // This mirrors what the Nuxc dev server does in production dev mode
     const overlaySource = fs.readFileSync(
         path.resolve(__dirname, '../../../src/runtime/error-overlay.ts'), 'utf-8'
     );
@@ -230,7 +230,7 @@ ${overlayJs}
 </script>
 <script>
 (function() {
-  // Simulate the kind of SSR error Nuce dev server reports
+  // Simulate the kind of SSR error Nuxc dev server reports
   const err = {
     message: 'Intentional SSR crash from entry-server.js',
     stack: 'Error: Intentional SSR crash from entry-server.js\\n    at render (entry-server.js:5:11)',
@@ -241,13 +241,13 @@ ${overlayJs}
   if (typeof ErrorOverlay !== 'undefined') {
     const overlay = new ErrorOverlay(err);
     document.body.appendChild(overlay);
-  } else if (customElements.get('nuce-error-overlay')) {
-    const el = document.createElement('nuce-error-overlay');
+  } else if (customElements.get('nuxc-error-overlay')) {
+    const el = document.createElement('nuxc-error-overlay');
     document.body.appendChild(el);
   } else {
     // fallback: produce a plain error div so tests can detect it
     const div = document.createElement('div');
-    div.setAttribute('data-nuce-overlay', 'true');
+    div.setAttribute('data-nuxc-overlay', 'true');
     div.setAttribute('data-error-file', 'entry-server.js');
     div.textContent = 'Intentional SSR crash from entry-server.js';
     document.body.appendChild(div);
@@ -276,7 +276,7 @@ ${overlayJs}
     await pw2.waitForTimeout(1000);
 
     // Look for any overlay-like element
-    const overlayEl = await pw2.$('nuce-error-overlay, [data-nuce-overlay], #nuce-error-overlay');
+    const overlayEl = await pw2.$('nuxc-error-overlay, [data-nuxc-overlay], #nuxc-error-overlay');
     const overlayText = overlayEl ? await overlayEl.textContent() : null;
     const errorInOverlay = overlayText && overlayText.includes('entry-server.js');
 
@@ -345,7 +345,7 @@ log('\n── FIX 4: T14 — ssr: false routes bypass runner ──\n');
 
     const rendered = callsAfter > callsBefore;
     const isStatic = !response.usedSSR;
-    const noHydrationScript = !response.hasHydrationState && !response.body.includes('__NUCE_STATE__');
+    const noHydrationScript = !response.hasHydrationState && !response.body.includes('__NUXC_STATE__');
 
     log(`           renderToString called: ${rendered ? 'yes ← FAIL' : 'no'} (expected: no)`);
     log(`           Static file served: ${isStatic ? 'yes' : 'no'}`);

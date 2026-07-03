@@ -1,5 +1,5 @@
 /**
- * Nuce Test API
+ * Nuxc Test API
  * Lightweight implementation of Vitest/Jest API
  */
 
@@ -182,8 +182,8 @@ export const vi = {
     },
     mock: (moduleName: string, factory: any) => {
         // This relies on the runner to intercept imports
-        (globalThis as any).__NUCE_MOCKS__ = (globalThis as any).__NUCE_MOCKS__ || {};
-        (globalThis as any).__NUCE_MOCKS__[moduleName] = factory;
+        (globalThis as any).__NUXC_MOCKS__ = (globalThis as any).__NUXC_MOCKS__ || {};
+        (globalThis as any).__NUXC_MOCKS__[moduleName] = factory;
     }
 };
 

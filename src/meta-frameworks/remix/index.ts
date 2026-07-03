@@ -1,5 +1,5 @@
-import type { NuceAdapter, Plugin, NuceConfig, PackageJson, Middleware } from '@nuce/adapter-core';
-import { detectDependencies, registry } from '@nuce/adapter-core';
+import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson, Middleware } from '@nuxc/adapter-core';
+import { detectDependencies, registry } from '@nuxc/adapter-core';
 import { remixRoutesPlugin } from './routes-plugin.js';
 
 export interface RemixConfig {
@@ -7,7 +7,7 @@ export interface RemixConfig {
   serverModuleFormat?: 'esm' | 'cjs';
 }
 
-export class RemixAdapter implements NuceAdapter {
+export class RemixAdapter implements NuxcAdapter {
   name = 'remix';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class RemixAdapter implements NuceAdapter {
     ];
   }
 
-  config(config: NuceConfig): NuceConfig {
+  config(config: NuxcConfig): NuxcConfig {
     if (!config.remix) config.remix = {};
     config.remix = {
       ignoredRouteFiles: ['**/.*'],
@@ -36,7 +36,7 @@ export class RemixAdapter implements NuceAdapter {
           // Shim Request / Response for underlying uWS API mappings
           try {
              // In Remix the entry point is heavily abstracted typically via createRequestHandler
-             const virtualID = 'virtual:nuce/remix-server-build';
+             const virtualID = 'virtual:nuxc/remix-server-build';
              let build: any;
              try {
                 build = await import(virtualID);
@@ -75,7 +75,7 @@ export class RemixAdapter implements NuceAdapter {
              res.end();
              
           } catch(e) {
-             console.error('[Nuce:Remix] Error rendering SSR', e);
+             console.error('[Nuxc:Remix] Error rendering SSR', e);
              next();
           }
        }
@@ -83,7 +83,7 @@ export class RemixAdapter implements NuceAdapter {
   }
 
   ssrEntry(): string {
-     return 'virtual:nuce/remix-server-build';
+     return 'virtual:nuxc/remix-server-build';
   }
 }
 

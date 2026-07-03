@@ -1,4 +1,4 @@
-# Getting Started with Nuce
+# Getting Started with Nuxc
 
 > Get from zero to a running app in **under 5 minutes**.
 
@@ -11,17 +11,17 @@
 
 ---
 
-## Step 1 — Install Nuce
+## Step 1 — Install Nuxc
 
 ```bash
-npm install -g nuce
+npm install -g nuxc
 ```
 
 Verify the installation:
 
 ```bash
-nuce --version
-# ⚡ nuce v1.0.9
+nuxc --version
+# ⚡ nuxc v1.0.9
 ```
 
 ---
@@ -32,16 +32,16 @@ Pick your framework:
 
 ```bash
 # React + TypeScript (recommended)
-nuce bootstrap --name my-app --template react-ts
+nuxc bootstrap --name my-app --template react-ts
 
 # Vue 3 + TypeScript
-nuce bootstrap --name my-app --template vue-ts
+nuxc bootstrap --name my-app --template vue-ts
 
 # Svelte + TypeScript
-nuce bootstrap --name my-app --template svelte-ts
+nuxc bootstrap --name my-app --template svelte-ts
 
 # Vanilla TypeScript
-nuce bootstrap --name my-app --template vanilla-ts
+nuxc bootstrap --name my-app --template vanilla-ts
 ```
 
 This creates a `my-app/` directory with a working starter project.
@@ -52,13 +52,13 @@ This creates a `my-app/` directory with a working starter project.
 
 ```bash
 cd my-app
-nuce dev
+nuxc dev
 ```
 
 You should see:
 
 ```
-⚡ Nuce v1.0.9
+⚡ Nuxc v1.0.9
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://192.168.x.x:3000/
 
@@ -72,7 +72,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. **HMR is ac
 ## Step 4 — Production Build
 
 ```bash
-nuce build
+nuxc build
 ```
 
 Output goes to `./dist/`. The build is minified, tree-shaken, and ready to deploy.
@@ -82,7 +82,7 @@ Output goes to `./dist/`. The build is minified, tree-shaken, and ready to deplo
 ## Step 5 — Preview the Production Build
 
 ```bash
-nuce preview
+nuxc preview
 ```
 
 Serves the `dist/` folder locally so you can verify before deploying.
@@ -100,7 +100,7 @@ my-app/
 │   ├── App.tsx         ← Root component
 │   └── index.css
 ├── index.html
-├── nuce.config.js    ← Nuce configuration
+├── nuxc.config.js    ← Nuxc configuration
 └── package.json
 ```
 
@@ -108,10 +108,10 @@ my-app/
 
 ## Minimal Configuration
 
-The scaffolded `nuce.config.js` works out of the box:
+The scaffolded `nuxc.config.js` works out of the box:
 
 ```js
-// nuce.config.js
+// nuxc.config.js
 module.exports = {
   entry: ['./src/main.tsx'],
   outDir: './dist',
@@ -134,14 +134,14 @@ module.exports = {
 
 ## Adding to an Existing Project
 
-If you already have a project, you can add Nuce without scaffolding:
+If you already have a project, you can add Nuxc without scaffolding:
 
 ```bash
 # Install locally
-npm install --save-dev nuce
+npm install --save-dev nuxc
 
 # Generate a config file
-npx nuce init
+npx nuxc init
 ```
 
 Then update your `package.json` scripts:
@@ -149,9 +149,9 @@ Then update your `package.json` scripts:
 ```json
 {
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview"
   }
 }
 ```
@@ -161,14 +161,14 @@ Then update your `package.json` scripts:
 ## CLI Reference
 
 ```bash
-nuce dev                            # Start dev server with HMR
-nuce build                          # Production build
-nuce preview                        # Preview production build
-nuce bootstrap --name n --template t  # Scaffold new project
-nuce init                           # Generate nuce.config.js
-nuce inspect                        # Inspect module graph
-nuce analyze                        # Analyze bundle size
-nuce doctor                         # Diagnose common issues
+nuxc dev                            # Start dev server with HMR
+nuxc build                          # Production build
+nuxc preview                        # Preview production build
+nuxc bootstrap --name n --template t  # Scaffold new project
+nuxc init                           # Generate nuxc.config.js
+nuxc inspect                        # Inspect module graph
+nuxc analyze                        # Analyze bundle size
+nuxc doctor                         # Diagnose common issues
 ```
 
 ---
@@ -176,7 +176,7 @@ nuce doctor                         # Diagnose common issues
 ## Next Steps
 
 - 📖 [Configuration Reference](./guides/configuration.md) — all config options with types and defaults
-- 🔌 [Plugin Guide](./plugins.md) — extend Nuce with plugins
+- 🔌 [Plugin Guide](./plugins.md) — extend Nuxc with plugins
 - 📦 [Module Federation](./guides/federation.md) — micro-frontend architecture
 - 🔥 [HMR Guide](./HMR_IMPLEMENTATION_STATUS.md) — how HMR works and how to debug it
 - 🚚 [Migration Guide](./migration.md) — moving from Vite or Webpack

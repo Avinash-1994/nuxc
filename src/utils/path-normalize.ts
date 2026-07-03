@@ -1,6 +1,6 @@
 
 /**
- * Nuce Path Normalization Utility
+ * Nuxc Path Normalization Utility
  * Ensures consistent behavior across Windows (win32) and Unix (posix)
  * Day 25: Legacy Polyfills & Windows Lock
  */

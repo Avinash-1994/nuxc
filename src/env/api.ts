@@ -1,6 +1,6 @@
 
 /**
- * Nuce Environment API
+ * Nuxc Environment API
  * Unified Runtime for Browser, Node, and Edge
  * Day 26: Environment API Lock
  */
@@ -11,8 +11,8 @@ export interface EnvConfig {
     base: string;
 }
 
-export class NuceEnv {
-    private static instance: NuceEnv;
+export class NuxcEnv {
+    private static instance: NuxcEnv;
     public config: EnvConfig;
     private listeners: Function[] = [];
 
@@ -20,18 +20,18 @@ export class NuceEnv {
         this.config = config;
     }
 
-    static init(config: EnvConfig): NuceEnv {
-        if (!NuceEnv.instance) {
-            NuceEnv.instance = new NuceEnv(config);
+    static init(config: EnvConfig): NuxcEnv {
+        if (!NuxcEnv.instance) {
+            NuxcEnv.instance = new NuxcEnv(config);
         }
-        return NuceEnv.instance;
+        return NuxcEnv.instance;
     }
 
-    static get(): NuceEnv {
-        if (!NuceEnv.instance) {
-            throw new Error('NuceEnv not initialized');
+    static get(): NuxcEnv {
+        if (!NuxcEnv.instance) {
+            throw new Error('NuxcEnv not initialized');
         }
-        return NuceEnv.instance;
+        return NuxcEnv.instance;
     }
 
     /**

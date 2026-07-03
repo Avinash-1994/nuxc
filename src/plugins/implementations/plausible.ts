@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-plausible
+ * @nuxc/plugin-plausible
  * Plausible Analytics integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPlausiblePlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-plausible',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-plausible',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Analytics: Plausible Analytics integration
@@ -16,7 +16,7 @@ export function createPlausiblePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-plausible] Analytics integration ready');
+            console.log('[@nuxc/plugin-plausible] Analytics integration ready');
         }
     };
 }

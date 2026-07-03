@@ -7,7 +7,7 @@ import { rewriteWasmPlugins } from '../../../dist/src/migrate/wasm-rewriter.js';
 async function run() {
     console.log('Testing Phase 1.1 Requirements...');
     const manager = new PluginManager();
-    const config = await import('./nuce.config.ts').catch(() => import('./nuce.config.js'));
+    const config = await import('./nuxc.config.ts').catch(() => import('./nuxc.config.js'));
     const plugins = config.default ? config.default.plugins : config.plugins;
 
     // Test 1: Load 5 rewriten JS hooks and verify order
@@ -47,9 +47,9 @@ async function run() {
         console.log('✅ TEST 2.1 PASS: .wasm path triggers deprecation.');
     }
 
-    // Test 3: nuce migrate rewrites wasm plugin refs
-    console.log('[TEST] Checking nuce migrate...');
-    const dummyConfigPath = path.join(process.cwd(), 'e2e/fixtures/plugin-migration-app/nuce.config.dummy.js');
+    // Test 3: nuxc migrate rewrites wasm plugin refs
+    console.log('[TEST] Checking nuxc migrate...');
+    const dummyConfigPath = path.join(process.cwd(), 'e2e/fixtures/plugin-migration-app/nuxc.config.dummy.js');
     fs.writeFileSync(dummyConfigPath, `export default { plugins: [{ path: 'dist/some-plugin.wasm', type: 'wasm' }] };`, 'utf8');
     
     // Run the rewriter manually on the specific file
@@ -59,7 +59,7 @@ async function run() {
 
     const rewrittenContent = fs.readFileSync(dummyConfigPath, 'utf8');
     if (!rewrittenContent.includes('.wasm') && rewrittenContent.includes('.js') && rewrittenContent.includes("type: 'js'")) {
-        console.log('✅ TEST 3 PASS: nuce migrate rewrites wasm plugin refs');
+        console.log('✅ TEST 3 PASS: nuxc migrate rewrites wasm plugin refs');
     } else {
         throw new Error('Migration rewriter failed to target correct tags.');
     }

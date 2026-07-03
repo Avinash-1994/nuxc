@@ -1,13 +1,13 @@
 import { Plugin } from '../index.js';
 
 /**
- * NUCE TIER C PLUGINS (Graph-Aware / HMR)
+ * NUXC TIER C PLUGINS (Graph-Aware / HMR)
  * 
- * Since Nuce v1.0 handles HMR natively via UniversalTransformer for React, Vue, and Svelte,
+ * Since Nuxc v1.0 handles HMR natively via UniversalTransformer for React, Vue, and Svelte,
  * these plugins act as compatibility wrappers or configuration providers.
  * 
  * They ensure that if a user migrates from Vite, they can map existing plugins to these
- * without breaking the build, while Nuce's core engine handles the heavy lifting.
+ * without breaking the build, while Nuxc's core engine handles the heavy lifting.
  */
 
 interface ReactOptions {
@@ -18,12 +18,12 @@ interface ReactOptions {
 }
 
 /**
- * Nuce React Plugin
+ * Nuxc React Plugin
  * Compatible with @vitejs/plugin-react
  */
-export function nuceReact(options: ReactOptions = {}): Plugin {
+export function nuxcReact(options: ReactOptions = {}): Plugin {
     return {
-        name: 'nuce-react',
+        name: 'nuxc-react',
         setup(api) {
             // In the future, we can push options to the UniversalTransformer via API
             // For now, we log that React support is active.
@@ -44,12 +44,12 @@ interface VueOptions {
 }
 
 /**
- * Nuce Vue Plugin
+ * Nuxc Vue Plugin
  * Compatible with @vitejs/plugin-vue
  */
-export function nuceVue(options: VueOptions = {}): Plugin {
+export function nuxcVue(options: VueOptions = {}): Plugin {
     return {
-        name: 'nuce-vue',
+        name: 'nuxc-vue',
         setup() {
             // Vue support is built-in
         }
@@ -63,12 +63,12 @@ interface SvelteOptions {
 }
 
 /**
- * Nuce Svelte Plugin
+ * Nuxc Svelte Plugin
  * Compatible with @sveltejs/vite-plugin-svelte
  */
-export function nuceSvelte(options: SvelteOptions = {}): Plugin {
+export function nuxcSvelte(options: SvelteOptions = {}): Plugin {
     return {
-        name: 'nuce-svelte',
+        name: 'nuxc-svelte',
         setup() {
             // Svelte support is built-in
         }
@@ -78,6 +78,6 @@ export function nuceSvelte(options: SvelteOptions = {}): Plugin {
 /**
  * Compatibility aliases
  */
-export const nuceReactRefresh = nuceReact;
-export const nuceVueHmr = nuceVue;
-export const nuceSvelteHmr = nuceSvelte;
+export const nuxcReactRefresh = nuxcReact;
+export const nuxcVueHmr = nuxcVue;
+export const nuxcSvelteHmr = nuxcSvelte;

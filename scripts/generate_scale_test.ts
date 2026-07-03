@@ -17,8 +17,8 @@ async function generateScaleProject(moduleCount: number = 10000, includeCycle: b
         type: 'module'
     }, null, 2));
 
-    // 2. Create nuce.config.js
-    await fs.writeFile(path.join(root, 'nuce.config.js'), `
+    // 2. Create nuxc.config.js
+    await fs.writeFile(path.join(root, 'nuxc.config.js'), `
 export default {
     entry: ['src/main.js'],
     preset: 'spa',

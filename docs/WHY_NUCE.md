@@ -1,4 +1,4 @@
-# Why Nuce?
+# Why Nuxc?
 
 > An honest comparison against Vite, Rspack, Turbopack, and Webpack.
 > No marketing numbers — real trade-offs included.
@@ -19,7 +19,7 @@
 
 ## Feature Matrix
 
-| Feature | Nuce | Vite | Rspack | Turbopack | Webpack 5 |
+| Feature | Nuxc | Vite | Rspack | Turbopack | Webpack 5 |
 |---------|--------|------|--------|-----------|-----------|
 | **HMR** | ✅ Fast | ✅ ~50ms | ✅ ~80ms | ✅ ~30ms* | ✅ ~200ms |
 | **Cold Start** | ✅ Fast | ✅ Fast | ✅ Fast | ✅ Fast | ❌ Slow |
@@ -46,10 +46,10 @@
 
 ## Honest Strengths
 
-### Where Nuce Wins
+### Where Nuxc Wins
 
 **1. Unified architecture**
-Nuce uses a single pipeline for both dev and production — no Rollup/ESM split like Vite. What you test in dev is exactly what gets built.
+Nuxc uses a single pipeline for both dev and production — no Rollup/ESM split like Vite. What you test in dev is exactly what gets built.
 
 **2. Built-in Module Federation**
 No plugins required. Works with React, Vue, and Vanilla. Start a micro-frontend project in minutes, not hours.
@@ -67,26 +67,26 @@ Fingerprint-based incremental builds persist across restarts. Second builds are 
 
 ## Honest Weaknesses
 
-### Where Nuce is Behind
+### Where Nuxc is Behind
 
 **1. Plugin ecosystem**
-Vite has 1500+ plugins. Nuce is newer — ecosystem is growing but not there yet. Many Vite plugins can work through the compatibility adapter, but compatibility depends on plugin APIs and adapter coverage.
+Vite has 1500+ plugins. Nuxc is newer — ecosystem is growing but not there yet. Many Vite plugins can work through the compatibility adapter, but compatibility depends on plugin APIs and adapter coverage.
 
 **2. Community size**
 Smaller community means fewer StackOverflow answers and third-party tutorials. The docs are the primary reference.
 
 **3. Battle-tested maturity**
-Vite and Webpack have been used in production by millions of projects. Nuce is newer and may have edge cases that haven't been encountered yet.
+Vite and Webpack have been used in production by millions of projects. Nuxc is newer and may have edge cases that haven't been encountered yet.
 
 **4. SSR maturity**
 SSR support is functional but less mature than Vite's. Complex SSR setups (streaming, edge rendering) may require more manual configuration.
 
 **5. No framework-specific meta-framework**
-Vite has SvelteKit, Nuxt, Remix (via adapter). Nuce doesn't yet have equivalent meta-frameworks built around it.
+Vite has SvelteKit, Nuxt, Remix (via adapter). Nuxc doesn't yet have equivalent meta-frameworks built around it.
 
 ---
 
-## Who Should Use Nuce
+## Who Should Use Nuxc
 
 ✅ **Good fit if you:**
 - Are starting a new project and want a clean, fast setup
@@ -97,7 +97,7 @@ Vite has SvelteKit, Nuxt, Remix (via adapter). Nuce doesn't yet have equivalent 
 
 ⚠️ **Consider alternatives if you:**
 - Have an existing Vite project that's working well (no reason to migrate)
-- Rely heavily on Vite-specific plugins with no Nuce equivalent
+- Rely heavily on Vite-specific plugins with no Nuxc equivalent
 - Need a large community / extensive third-party resources
 - Are building with Next.js or Nuxt (stick with their native tooling)
 
@@ -105,10 +105,10 @@ Vite has SvelteKit, Nuxt, Remix (via adapter). Nuce doesn't yet have equivalent 
 
 ## Migration Paths
 
-| From | To Nuce | Effort |
+| From | To Nuxc | Effort |
 |------|-----------|--------|
-| Vite | `npx nuce migrate` auto-migrates ~95% | Low (15 min) |
-| Webpack | `npx nuce migrate` auto-migrates ~80% | Medium (30–60 min) |
+| Vite | `npx nuxc migrate` auto-migrates ~95% | Low (15 min) |
+| Webpack | `npx nuxc migrate` auto-migrates ~80% | Medium (30–60 min) |
 | Rollup | Manual config translation | Medium (30 min) |
 | Parcel | Manual, most features map 1:1 | Low (20 min) |
 | CRA | Bootstrap new + copy src | Medium (45 min) |
@@ -117,9 +117,9 @@ Vite has SvelteKit, Nuxt, Remix (via adapter). Nuce doesn't yet have equivalent 
 
 ## The Bottom Line
 
-Nuce is the right choice when you want a **modern, Rust-accelerated build tool** that works across all major frameworks with **module federation built in** and a **consistent dev/prod pipeline**.
+Nuxc is the right choice when you want a **modern, Rust-accelerated build tool** that works across all major frameworks with **module federation built in** and a **consistent dev/prod pipeline**.
 
-It's not a Vite killer — it's a different tool with different priorities. If you're happy with Vite, stay there. If you want what Nuce offers, it's production-ready and getting better every release.
+It's not a Vite killer — it's a different tool with different priorities. If you're happy with Vite, stay there. If you want what Nuxc offers, it's production-ready and getting better every release.
 
 ---
 
@@ -129,4 +129,4 @@ It's not a Vite killer — it's a different tool with different priorities. If y
 - [Migration Guide](./migration.md)
 - [Benchmarks](./benchmarks.md)
 - [Plugin Guide](./plugins.md)
-- [GitHub](https://github.com/Avinash-1994/Nuce)
+- [GitHub](https://github.com/Avinash-1994/Nuxc)

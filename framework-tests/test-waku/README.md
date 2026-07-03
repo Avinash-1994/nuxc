@@ -1,4 +1,4 @@
-# Nuce waku Template — Nuce Shop — RSC-powered catalogue
+# Nuxc waku Template — Nuxc Shop — RSC-powered catalogue
 ```bash
 npm install && npm run dev
 ```

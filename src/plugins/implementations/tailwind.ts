@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-tailwind
+ * @nuxc/plugin-tailwind
  * Tailwind CSS integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTailwindPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-tailwind',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-tailwind',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for tailwind

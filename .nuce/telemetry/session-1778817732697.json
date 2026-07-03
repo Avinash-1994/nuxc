@@ -1,0 +1,10 @@
+{
+  "id": "0d881fb8-0a0f-4053-b097-10fc450e34c5",
+  "timestamp": 1778817732697,
+  "duration": 3016,
+  "success": false,
+  "metrics": {},
+  "errors": [
+    "HIGH CVE detected in dependencies! Aborting build."
+  ]
+}

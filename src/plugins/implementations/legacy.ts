@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-legacy
+ * @nuxc/plugin-legacy
  * Legacy browser support
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createLegacyPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-legacy',
+        name: '@nuxc/plugin-legacy',
         originalPlugin: '@vitejs/plugin-legacy',
         
         async transform(code: string, id: string) {

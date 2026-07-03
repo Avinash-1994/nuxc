@@ -1,6 +1,6 @@
 /**
  * Plugin Test Suites
- * Tests for all 10 official Nuce launch plugins
+ * Tests for all 10 official Nuxc launch plugins
  */
 
 import { describe, it, expect, beforeAll } from '@jest/globals';
@@ -11,13 +11,13 @@ import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'nuce-plugins-'));
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'nuxc-plugins-'));
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-env Tests
+//  @nuxc/plugin-env Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-env', () => {
+describe('@nuxc/plugin-env', () => {
   const envDir = path.join(TMP, 'env-project');
   beforeAll(() => {
     fs.mkdirSync(envDir, { recursive: true });
@@ -55,10 +55,10 @@ describe('@nuce/plugin-env', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-compression Tests
+//  @nuxc/plugin-compression Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-compression', () => {
+describe('@nuxc/plugin-compression', () => {
   let distDir: string;
 
   beforeAll(async () => {
@@ -98,10 +98,10 @@ describe('@nuce/plugin-compression', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-svg Tests
+//  @nuxc/plugin-svg Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-svg', () => {
+describe('@nuxc/plugin-svg', () => {
   it('?raw suffix returns string type', () => {
     const svgContent = '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0"/></svg>';
     expect(typeof svgContent).toBe('string');
@@ -129,10 +129,10 @@ describe('@nuce/plugin-svg', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-auto-import Tests
+//  @nuxc/plugin-auto-import Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-auto-import', () => {
+describe('@nuxc/plugin-auto-import', () => {
   it('resolves vue preset to Vue composables', () => {
     // The preset resolves 'vue' to a set of composables including ref, computed, etc.
     const vueComposables = ['ref', 'computed', 'watch', 'reactive', 'onMounted'];
@@ -160,14 +160,14 @@ describe('@nuce/plugin-auto-import', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-inspect Tests
+//  @nuxc/plugin-inspect Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-inspect', () => {
+describe('@nuxc/plugin-inspect', () => {
   it('returns no-op in production', () => {
     // In production, the plugin returns a minimal object with only name
-    const noopPlugin = { name: '@nuce/plugin-inspect' };
-    expect(noopPlugin.name).toBe('@nuce/plugin-inspect');
+    const noopPlugin = { name: '@nuxc/plugin-inspect' };
+    expect(noopPlugin.name).toBe('@nuxc/plugin-inspect');
     expect((noopPlugin as any).configureServer).toBeUndefined();
   });
 
@@ -178,16 +178,16 @@ describe('@nuce/plugin-inspect', () => {
   });
 
   it('zero overhead in production — plugin is no-op', () => {
-    const plugin = { name: '@nuce/plugin-inspect' }; // No-op shape
+    const plugin = { name: '@nuxc/plugin-inspect' }; // No-op shape
     expect(Object.keys(plugin)).toHaveLength(1);
   });
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-mock Tests
+//  @nuxc/plugin-mock Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-mock', () => {
+describe('@nuxc/plugin-mock', () => {
   it('creates GET handler that returns JSON response', async () => {
     const GET = () => Response.json([{ id: 1, name: 'Alice' }]);
     const response = GET();
@@ -225,10 +225,10 @@ describe('@nuce/plugin-mock', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-pwa Tests
+//  @nuxc/plugin-pwa Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-pwa', () => {
+describe('@nuxc/plugin-pwa', () => {
   it('generates manifest with correct fields', () => {
     const manifest = {
       name: 'My App',
@@ -254,10 +254,10 @@ describe('@nuce/plugin-pwa', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-icons Tests
+//  @nuxc/plugin-icons Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-icons', () => {
+describe('@nuxc/plugin-icons', () => {
   it('resolves ~icons/ prefix to virtual module', () => {
     const id = '~icons/mdi/home';
     const isIconId = id.startsWith('~icons/');
@@ -286,10 +286,10 @@ describe('@nuce/plugin-icons', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-legacy Tests
+//  @nuxc/plugin-legacy Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-legacy', () => {
+describe('@nuxc/plugin-legacy', () => {
   it('modern bundle contains type=module script', () => {
     const html = '<script type="module" src="/assets/main.js"></script>';
     expect(html).toContain('type="module"');
@@ -317,14 +317,14 @@ describe('@nuce/plugin-legacy', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @nuce/plugin-checker Tests
+//  @nuxc/plugin-checker Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@nuce/plugin-checker', () => {
+describe('@nuxc/plugin-checker', () => {
   it('plugin factory returns correct name', () => {
     // checker() returns a plugin object with correct name
-    const plugin = { name: '@nuce/plugin-checker' };
-    expect(plugin.name).toBe('@nuce/plugin-checker');
+    const plugin = { name: '@nuxc/plugin-checker' };
+    expect(plugin.name).toBe('@nuxc/plugin-checker');
   });
 
   it('failOnError default is true', () => {

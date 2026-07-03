@@ -1,0 +1,10 @@
+{
+  "id": "e1743eb4-5ea4-46d7-a0b6-b89b08edc291",
+  "timestamp": 1778845305861,
+  "duration": 65,
+  "success": false,
+  "metrics": {},
+  "errors": [
+    "Build failed with 1 error:\nnuxc.config.ts:1:29: ERROR: Could not resolve \"nuxc\""
+  ]
+}

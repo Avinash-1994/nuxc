@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { registry } from '@nuce/adapter-core';
+import { registry } from '@nuxc/adapter-core';
 
 export interface NuxtAdapterOptions {
   ssr?: boolean;
@@ -163,7 +163,7 @@ export class NuxtAdapter {
 
   createPlugin() {
     return {
-      name: 'nuce-nuxt-adapter',
+      name: 'nuxc-nuxt-adapter',
       setup: async () => {
         await this.setupNitroBridge();
       },

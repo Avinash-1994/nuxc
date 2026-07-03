@@ -1,8 +1,8 @@
 /**
  * Migration Generator (Day 44)
  * 
- * Generates Nuce project configuration from a MigrationPlan.
- * Creates nuce.config.ts, updates package.json, and generates migration report.
+ * Generates Nuxc project configuration from a MigrationPlan.
+ * Creates nuxc.config.ts, updates package.json, and generates migration report.
  */
 
 import fs from 'fs';
@@ -36,11 +36,11 @@ export class MigrationGenerator {
             this.backupExistingFiles();
         }
 
-        // Generate nuce.config.ts
-        const configContent = this.generateNuceConfig();
-        files.push('nuce.config.ts');
+        // Generate nuxc.config.ts
+        const configContent = this.generateNuxcConfig();
+        files.push('nuxc.config.ts');
         if (!this.options.dryRun) {
-            fs.writeFileSync(path.join(this.targetDir, 'nuce.config.ts'), configContent);
+            fs.writeFileSync(path.join(this.targetDir, 'nuxc.config.ts'), configContent);
         }
 
         // Update package.json
@@ -65,7 +65,7 @@ export class MigrationGenerator {
     }
 
     private backupExistingFiles(): void {
-        const backupDir = path.join(this.targetDir, '.nuce-migration-backup');
+        const backupDir = path.join(this.targetDir, '.nuxc-migration-backup');
         if (!fs.existsSync(backupDir)) {
             fs.mkdirSync(backupDir, { recursive: true });
         }
@@ -89,7 +89,7 @@ export class MigrationGenerator {
         }
     }
 
-    private generateNuceConfig(): string {
+    private generateNuxcConfig(): string {
         const { frameworks, cssSetup, projectStructure } = this.plan;
         const primaryFramework = frameworks[0] || 'react';
 
@@ -135,7 +135,7 @@ export class MigrationGenerator {
         };
 
         // Generate TypeScript config file
-        return `import { defineConfig } from 'nuce';
+        return `import { defineConfig } from 'nuxc';
 
 export default defineConfig(${JSON.stringify(config, null, 2)});
 `;
@@ -143,11 +143,11 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
 
     private generatePackageJsonUpdates(): any {
         const scripts: Record<string, string> = {
-            'dev': 'nuce dev',
-            'build': 'nuce build',
-            'preview': 'nuce preview',
-            'test': 'nuce test',
-            'audit': 'nuce audit'
+            'dev': 'nuxc dev',
+            'build': 'nuxc build',
+            'preview': 'nuxc preview',
+            'test': 'nuxc test',
+            'audit': 'nuxc audit'
         };
 
         // Mark old scripts as deprecated
@@ -163,14 +163,14 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
                 deprecatedScripts['build:webpack'] = 'webpack # DEPRECATED: Use npm run build';
                 break;
             case 'angular-cli':
-                deprecatedScripts['ng'] = 'ng # DEPRECATED: Use nuce commands';
+                deprecatedScripts['ng'] = 'ng # DEPRECATED: Use nuxc commands';
                 break;
         }
 
         return {
             scripts: { ...scripts, ...deprecatedScripts },
             devDependencies: {
-                'nuce': '^2.0.0'
+                'nuxc': '^2.0.0'
             }
         };
     }
@@ -185,7 +185,7 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
             ...updates.scripts
         };
 
-        // Add Nuce to devDependencies
+        // Add Nuxc to devDependencies
         pkg.devDependencies = {
             ...pkg.devDependencies,
             ...updates.devDependencies
@@ -197,7 +197,7 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
     private generateMigrationReport(): string {
         const { toolchainType, frameworks, riskLevel, autoMigrate, manualSteps, cssSetup } = this.plan;
 
-        let report = `# Nuce Migration Report\n\n`;
+        let report = `# Nuxc Migration Report\n\n`;
         report += `**Generated**: ${new Date().toISOString()}\n\n`;
         report += `## Source Project\n\n`;
         report += `- **Toolchain**: ${toolchainType}\n`;
@@ -225,11 +225,11 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
         report += `\n`;
 
         report += `## Next Steps\n\n`;
-        report += `1. Review the generated \`nuce.config.ts\`\n`;
+        report += `1. Review the generated \`nuxc.config.ts\`\n`;
         report += `2. Install dependencies: \`npm install\`\n`;
         report += `3. Start dev server: \`npm run dev\`\n`;
         report += `4. Test your application thoroughly\n`;
-        report += `5. Update CI/CD pipelines to use Nuce commands\n\n`;
+        report += `5. Update CI/CD pipelines to use Nuxc commands\n\n`;
 
         report += `## Known Limitations\n\n`;
         if (riskLevel === 'HIGH') {
@@ -244,12 +244,12 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
         }
 
         report += `## Support\n\n`;
-        report += `- Documentation: https://nuce.dev/docs/migration\n`;
-        report += `- Issues: https://github.com/nuce/nuce/issues\n`;
-        report += `- Discord: https://discord.gg/nuce\n\n`;
+        report += `- Documentation: https://nuxc.dev/docs/migration\n`;
+        report += `- Issues: https://github.com/nuxc/nuxc/issues\n`;
+        report += `- Discord: https://discord.gg/nuxc\n\n`;
 
         report += `---\n\n`;
-        report += `*This report was generated by Nuce Migration Tool v2.0*\n`;
+        report += `*This report was generated by Nuxc Migration Tool v2.0*\n`;
 
         return report;
     }

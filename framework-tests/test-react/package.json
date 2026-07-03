@@ -1,18 +1,18 @@
 {
-  "name": "nuce-react-template",
+  "name": "nuxc-react-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview",
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview",
     "test": "playwright test"
   },
-  "nuce": {
+  "nuxc": {
     "template": true,
     "framework": "react",
-    "description": "Nuce Tasks — task management app"
+    "description": "Nuxc Tasks — task management app"
   },
   "dependencies": {
     "react": "18.3.1",
@@ -22,7 +22,7 @@
     "zustand": "4.5.2"
   },
   "devDependencies": {
-    "nuce": "file:../../",
+    "nuxc": "file:../../",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "typescript": "5.4.5"

@@ -1,0 +1,79 @@
+{
+  "electron@28.0.0": {
+    "result": [
+      {
+        "id": "GHSA-3c8v-cfp5-9885",
+        "modified": "2026-04-06T23:20:11.001628Z"
+      },
+      {
+        "id": "GHSA-4p4r-m79c-wq3v",
+        "modified": "2026-04-06T23:21:01.480605Z"
+      },
+      {
+        "id": "GHSA-532v-xpq5-8h95",
+        "modified": "2026-04-06T23:19:58.922968Z"
+      },
+      {
+        "id": "GHSA-5rqw-r77c-jp79",
+        "modified": "2026-04-06T23:20:07.571377Z"
+      },
+      {
+        "id": "GHSA-6r2x-8pq8-9489",
+        "modified": "2025-07-01T13:13:25Z"
+      },
+      {
+        "id": "GHSA-8337-3p73-46f4",
+        "modified": "2026-04-06T23:18:52.586490Z"
+      },
+      {
+        "id": "GHSA-9899-m83m-qhpj",
+        "modified": "2026-04-06T23:18:50.163821Z"
+      },
+      {
+        "id": "GHSA-9w97-2464-8783",
+        "modified": "2026-04-06T23:19:57.917173Z"
+      },
+      {
+        "id": "GHSA-9wfr-w7mm-pc7f",
+        "modified": "2026-04-06T23:19:40.585044Z"
+      },
+      {
+        "id": "GHSA-f37v-82c4-4x64",
+        "modified": "2026-04-08T12:08:25.778807Z"
+      },
+      {
+        "id": "GHSA-f3pv-wv63-48x8",
+        "modified": "2026-04-08T12:08:27.365316Z"
+      },
+      {
+        "id": "GHSA-jfqx-fxh3-c62j",
+        "modified": "2026-04-06T23:19:48.346770Z"
+      },
+      {
+        "id": "GHSA-jjp3-mq3x-295m",
+        "modified": "2026-04-06T23:20:13.797422Z"
+      },
+      {
+        "id": "GHSA-mwmh-mq4g-g6gr",
+        "modified": "2026-04-06T23:18:42.129720Z"
+      },
+      {
+        "id": "GHSA-r5p7-gp4j-qhrx",
+        "modified": "2026-04-06T23:18:50.776701Z"
+      },
+      {
+        "id": "GHSA-vmqv-hx8q-j7mg",
+        "modified": "2025-09-05T16:10:10Z"
+      },
+      {
+        "id": "GHSA-xj5x-m3f3-5x3h",
+        "modified": "2026-04-06T23:20:03.666450Z"
+      },
+      {
+        "id": "GHSA-xwr5-m59h-vwqr",
+        "modified": "2026-04-06T23:20:06.134110Z"
+      }
+    ],
+    "ts": 1778492455793
+  }
+}

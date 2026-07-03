@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-repro
+ * @nuxc/plugin-repro
  * Reproduction case generator
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReproPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-repro',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-repro',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Reproduction case generator

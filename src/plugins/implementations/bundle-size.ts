@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-bundle-size
+ * @nuxc/plugin-bundle-size
  * Bundle size tracking
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createBundleSizePlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-bundle-size',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-bundle-size',
+        originalPlugin: 'nuxc-native',
         
         async buildStart() {
-            console.log('[@nuce/plugin-bundle-size] Starting performance optimization...');
+            console.log('[@nuxc/plugin-bundle-size] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createBundleSizePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-bundle-size] Performance optimization complete');
+            console.log('[@nuxc/plugin-bundle-size] Performance optimization complete');
         }
     };
 }

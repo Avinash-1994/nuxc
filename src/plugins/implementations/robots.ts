@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-robots
+ * @nuxc/plugin-robots
  * Robots.txt generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRobotsPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-robots',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-robots',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Robots.txt generation

@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-checker
+ * @nuxc/plugin-checker
  * TypeScript/ESLint checker
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCheckerPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-checker',
+        name: '@nuxc/plugin-checker',
         originalPlugin: 'vite-plugin-checker',
         
         async transform(code: string, id: string) {

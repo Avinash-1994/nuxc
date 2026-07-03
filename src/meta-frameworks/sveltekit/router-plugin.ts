@@ -1,12 +1,12 @@
-import type { Plugin } from '@nuce/adapter-core';
+import type { Plugin } from '@nuxc/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:nuce/sveltekit-routes';
+const VIRTUAL_MODULE_ID = 'virtual:nuxc/sveltekit-routes';
 
 export function sveltekitRouterPlugin(): Plugin {
   return {
-    name: 'nuce:sveltekit-router',
+    name: 'nuxc:sveltekit-router',
 
     // Intercept Svelte route requests to build the dynamic manifest
     resolveId(source: string) {

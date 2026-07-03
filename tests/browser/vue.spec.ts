@@ -9,7 +9,7 @@ const TEMPLATE = path.resolve(__dirname, '../../templates/vue');
 
 test.beforeAll(async () => {
   server = spawn('node', [path.resolve(__dirname, '../../dist/cli.js'), 'dev', '--port', String(PORT)], {
-    cwd: TEMPLATE, stdio: 'pipe', env: { ...process.env, NUCE_SKIP_SECURITY: '1' }
+    cwd: TEMPLATE, stdio: 'pipe', env: { ...process.env, NUXC_SKIP_SECURITY: '1' }
   });
   await new Promise<void>((res, rej) => {
     const timer = setTimeout(() => rej(new Error('Server start timeout')), 30000);
@@ -23,7 +23,7 @@ test.afterAll(() => server?.kill());
 test('homepage — featured products visible', async ({ page }) => {
   await page.goto(BASE);
   await expect(page.locator('text=Wireless Headphones')).toBeVisible();
-  await expect(page.locator('text=Nuce Shop')).toBeVisible();
+  await expect(page.locator('text=Nuxc Shop')).toBeVisible();
 });
 
 test('add to cart updates count', async ({ page }) => {
@@ -40,7 +40,7 @@ test('products page with search filter', async ({ page }) => {
 
 test('login form submits successfully', async ({ page }) => {
   await page.goto(`${BASE}/login`);
-  await page.fill('input[type=email]', 'dev@nuce.dev');
+  await page.fill('input[type=email]', 'dev@nuxc.dev');
   await page.fill('input[type=password]', 'password123');
   await page.click('button[type=submit]');
   await expect(page.locator('text=Welcome back')).toBeVisible();

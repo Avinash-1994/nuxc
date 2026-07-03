@@ -1,17 +1,17 @@
 {
-  "name": "nuce-vue-template",
+  "name": "nuxc-vue-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview"
   },
-  "nuce": {
+  "nuxc": {
     "template": true,
     "framework": "vue",
-    "description": "Nuce Shop — e-commerce storefront"
+    "description": "Nuxc Shop — e-commerce storefront"
   },
   "dependencies": {
     "vue": "3.4.27",
@@ -19,7 +19,7 @@
     "pinia": "2.1.7"
   },
   "devDependencies": {
-    "nuce": "file:../../",
+    "nuxc": "file:../../",
     "@vitejs/plugin-vue": "5.0.4",
     "typescript": "5.4.5"
   }

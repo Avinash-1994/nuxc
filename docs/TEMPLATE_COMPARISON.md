@@ -1,4 +1,4 @@
-# 🎨 Nuce Premium Templates - Design Showcase
+# 🎨 Nuxc Premium Templates - Design Showcase
 
 ## Template Comparison Guide
 
@@ -263,22 +263,22 @@ Here are **5 stunning, production-ready templates** with different design aesthe
 
 ```bash
 # Premium Dashboard
-npx create-nuce my-app --template premium-dashboard
+npx create-nuxc my-app --template premium-dashboard
 
 # Minimalist Portfolio
-npx create-nuce my-app --template minimalist-portfolio
+npx create-nuxc my-app --template minimalist-portfolio
 
 # E-Commerce
-npx create-nuce my-app --template ecommerce-modern
+npx create-nuxc my-app --template ecommerce-modern
 
 # SaaS Landing
-npx create-nuce my-app --template saas-landing
+npx create-nuxc my-app --template saas-landing
 
 # Crypto Dashboard
-npx create-nuce my-app --template crypto-dashboard
+npx create-nuxc my-app --template crypto-dashboard
 
 # Magazine Blog
-npx create-nuce my-app --template blog-magazine
+npx create-nuxc my-app --template blog-magazine
 ```
 
 ### 2. Customize
@@ -383,8 +383,8 @@ All templates include:
 ## 📞 Need Help?
 
 - 📖 [Full Documentation](../README.md)
-- 💬 [GitHub Discussions](https://github.com/Avinash-1994/nuce/discussions)
-- 🐛 [Report Issues](https://github.com/Avinash-1994/nuce/issues)
+- 💬 [GitHub Discussions](https://github.com/Avinash-1994/nuxc/discussions)
+- 🐛 [Report Issues](https://github.com/Avinash-1994/nuxc/issues)
 
 ---
 

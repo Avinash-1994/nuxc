@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-federation
+ * @nuxc/plugin-federation
  * Module federation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createFederationPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-federation',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-federation',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Module federation

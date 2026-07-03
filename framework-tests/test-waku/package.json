@@ -1,20 +1,20 @@
 {
-  "name": "nuce-waku-template",
+  "name": "nuxc-waku-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview"
   },
-  "nuce": {
+  "nuxc": {
     "template": true,
     "framework": "waku",
-    "description": "Nuce Shop — RSC-powered catalogue"
+    "description": "Nuxc Shop — RSC-powered catalogue"
   },
   "devDependencies": {
-    "nuce": "file:../../",
+    "nuxc": "file:../../",
     "typescript": "5.4.5"
   }
 }

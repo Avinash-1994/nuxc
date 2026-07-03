@@ -1,4 +1,4 @@
-# Nuce vitepress Template — Nuce API Docs — full documentation site
+# Nuxc vitepress Template — Nuxc API Docs — full documentation site
 ```bash
 npm install && npm run dev
 ```

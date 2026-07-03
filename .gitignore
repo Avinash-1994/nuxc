@@ -1,5 +1,5 @@
 # ──────────────────────────────────────────────────────
-#  Nuce — .gitignore
+#  Nuxc — .gitignore
 #  Updated: 2026-05-22
 # ──────────────────────────────────────────────────────
 
@@ -7,7 +7,7 @@
 node_modules/
 dist/
 # Exception: workspace packages that need built dist/ for CI
-!packages/nuce-security/dist/
+!packages/nuxc-security/dist/
 build_output/
 dist_ts/
 dist_plugin_test/
@@ -29,14 +29,14 @@ Thumbs.db
 *.swo
 *~
 
-# ── Nuce runtime caches (all projects) ───────────────
-.nuce/
-.nuce_cache/
-**/.nuce/
-**/.nuce_cache/
-**/.nuce/cache/
-**/.nuce/telemetry/
-**/.nuce/certs/
+# ── Nuxc runtime caches (all projects) ───────────────
+.nuxc/
+.nuxc_cache/
+**/.nuxc/
+**/.nuxc_cache/
+**/.nuxc/cache/
+**/.nuxc/telemetry/
+**/.nuxc/certs/
 
 # ── Database & lock artifacts ──────────────────────────
 *.db
@@ -49,9 +49,9 @@ native/target/
 native/Cargo.lock
 native/*.node
 native/native.d.ts
-native/nuce_native*.node
+native/nuxc_native*.node
 native/nextgen_native*.node
-nuce_native.node
+nuxc_native.node
 *.node
 *.wasm
 
@@ -87,7 +87,7 @@ validation-rerun-*.txt
 *.tgz
 
 # ── Test scaffolds ─────────────────────────────────────
-.test_create_nuce/
+.test_create_nuxc/
 test-project-*/
 my-react-app/
 test_output*/
@@ -101,21 +101,21 @@ mdi__home.svg
 e2e/fixtures/**/dist/
 e2e/fixtures/**/dist-test/
 e2e/fixtures/**/.ng-out/
-e2e/fixtures/**/.nuce/
-e2e/fixtures/**/.nuce-cache/
+e2e/fixtures/**/.nuxc/
+e2e/fixtures/**/.nuxc-cache/
 e2e/fixtures/**/node_modules/
 e2e/fixtures/**/package-lock.json
 e2e/fixtures/**/*.db
 e2e/fixtures/**/*.db-journal
 
-# Nuce build report artifacts (generated per-build)
+# Nuxc build report artifacts (generated per-build)
 e2e/fixtures/**/build-manifest.json
 e2e/fixtures/**/build-explain.json
-e2e/fixtures/**/nuce-sbom.json
-e2e/fixtures/**/nuce-headers.json
-e2e/fixtures/**/nuce-sri-manifest.json
-e2e/fixtures/**/nuce-csp.txt
-e2e/fixtures/**/nuce-csp-meta.html
+e2e/fixtures/**/nuxc-sbom.json
+e2e/fixtures/**/nuxc-headers.json
+e2e/fixtures/**/nuxc-sri-manifest.json
+e2e/fixtures/**/nuxc-csp.txt
+e2e/fixtures/**/nuxc-csp-meta.html
 e2e/fixtures/**/_headers
 
 # Specific generated files in e2e fixtures
@@ -133,35 +133,35 @@ e2e/fixtures/plugin-ecosystem-app/tmp-fix/
 # ── framework-tests — generated artifacts ─────────────
 framework-tests/**/node_modules/
 framework-tests/**/dist/
-framework-tests/**/.nuce/
-framework-tests/**/.nuce-cache/
+framework-tests/**/.nuxc/
+framework-tests/**/.nuxc-cache/
 framework-tests/**/package-lock.json
 framework-tests/**/*.db
 framework-tests/**/*.db-journal
 framework-tests/**/build-manifest.json
 framework-tests/**/build-explain.json
-framework-tests/**/nuce-sbom.json
-framework-tests/**/nuce-headers.json
-framework-tests/**/nuce-sri-manifest.json
-framework-tests/**/nuce-csp.txt
-framework-tests/**/nuce-csp-meta.html
+framework-tests/**/nuxc-sbom.json
+framework-tests/**/nuxc-headers.json
+framework-tests/**/nuxc-sri-manifest.json
+framework-tests/**/nuxc-csp.txt
+framework-tests/**/nuxc-csp-meta.html
 framework-tests/**/_headers
 
 # ── real-world-mfe / portal (dev:mfe target) ──────────
 real-world-mfe/**/node_modules/
 real-world-mfe/**/dist/
-real-world-mfe/**/.nuce/
+real-world-mfe/**/.nuxc/
 portal/**/node_modules/
 portal/**/dist/
-portal/**/.nuce/
+portal/**/.nuxc/
 tests/fixtures/**/dist/
 tests/fixtures/**/*.db
-tests/fixtures/**/.nuce/
+tests/fixtures/**/.nuxc/
 
 # ── tests/fixtures — build output artifacts ────────────
 # (cache-consistency test uses real builds; outputs are generated)
 tests/fixtures/**/dist/
-tests/fixtures/**/.nuce/
+tests/fixtures/**/.nuxc/
 tests/fixtures/**/*.db
 tests/fixtures/**/build-manifest.json
 tests/fixtures/**/build-explain.json

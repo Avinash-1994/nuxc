@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-lighthouse
+ * @nuxc/plugin-lighthouse
  * Lighthouse CI integration
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createLighthousePlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-lighthouse',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-lighthouse',
+        originalPlugin: 'nuxc-native',
         
         async buildStart() {
-            console.log('[@nuce/plugin-lighthouse] Starting performance optimization...');
+            console.log('[@nuxc/plugin-lighthouse] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createLighthousePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-lighthouse] Performance optimization complete');
+            console.log('[@nuxc/plugin-lighthouse] Performance optimization complete');
         }
     };
 }

@@ -7,8 +7,8 @@
 </script>
 
 <main>
-  <h1>Nuce + Svelte</h1>
-  <p>A minimal Svelte component served by Nuce.</p>
+  <h1>Nuxc + Svelte</h1>
+  <p>A minimal Svelte component served by Nuxc.</p>
   <button on:click={increment}>
     Count: {count}
   </button>

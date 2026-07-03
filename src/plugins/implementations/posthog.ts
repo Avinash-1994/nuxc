@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-posthog
+ * @nuxc/plugin-posthog
  * PostHog analytics integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPosthogPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-posthog',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-posthog',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Analytics: PostHog analytics integration
@@ -16,7 +16,7 @@ export function createPosthogPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-posthog] Analytics integration ready');
+            console.log('[@nuxc/plugin-posthog] Analytics integration ready');
         }
     };
 }

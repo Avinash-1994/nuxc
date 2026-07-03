@@ -1,19 +1,19 @@
 
-import { NucePlugin } from '../core/plugins/types.js';
+import { NuxcPlugin } from '../core/plugins/types.js';
 import path from 'path';
 import fs from 'fs/promises';
 
-export function createJsonPlugin(): NucePlugin {
+export function createJsonPlugin(): NuxcPlugin {
     return {
         manifest: {
-            name: 'nuce:json',
+            name: 'nuxc:json',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['load'],
             permissions: { fs: 'read' }
         },
-        id: 'nuce:json',
+        id: 'nuxc:json',
         async runHook(hook, input, context) {
             if (hook === 'load') {
                 if (input.path.endsWith('.json')) {

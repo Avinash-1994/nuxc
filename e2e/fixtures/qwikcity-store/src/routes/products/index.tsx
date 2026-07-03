@@ -2,7 +2,7 @@ import { component$ } from '@builder.io/qwik';
 import { routeLoader$, routeAction$, Form } from '@builder.io/qwik-city';
 
 export const useProducts = routeLoader$(async () => [
-  { id: '1', name: 'Nuce Pro Kit', price: 99 },
+  { id: '1', name: 'Nuxc Pro Kit', price: 99 },
   { id: '2', name: 'Qwik Builder', price: 149 },
   { id: '3', name: 'Enterprise Bundle', price: 499 },
 ]);

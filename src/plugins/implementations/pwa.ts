@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-pwa
+ * @nuxc/plugin-pwa
  * Progressive Web App support
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPwaPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-pwa',
+        name: '@nuxc/plugin-pwa',
         originalPlugin: 'vite-plugin-pwa',
         
         async transform(code: string, id: string) {

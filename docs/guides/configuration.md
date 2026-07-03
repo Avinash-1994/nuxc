@@ -1,15 +1,15 @@
 # Configuration Guide
 
-Complete reference for configuring Nuce.
+Complete reference for configuring Nuxc.
 
 ## Configuration File
 
-Nuce supports multiple configuration formats:
+Nuxc supports multiple configuration formats:
 
-- `nuce.config.js` (recommended)
-- `nuce.config.ts`
-- `nuce.config.mjs`
-- `nuce.config.cjs`
+- `nuxc.config.js` (recommended)
+- `nuxc.config.ts`
+- `nuxc.config.mjs`
+- `nuxc.config.cjs`
 
 ## Basic Configuration
 
@@ -165,7 +165,7 @@ module.exports = {
     },
     
     // Or import external plugins
-    require('@nuce/plugin-react-refresh'),
+    require('@nuxc/plugin-react-refresh'),
   ],
 };
 ```
@@ -208,7 +208,7 @@ module.exports = {
   },
   
   // Environment variable prefix
-  envPrefix: ['VITE_', 'NUCE_'],
+  envPrefix: ['VITE_', 'NUXC_'],
 };
 ```
 
@@ -354,7 +354,7 @@ module.exports = {
 ## Environment-Specific Configuration
 
 ```javascript
-// nuce.config.js
+// nuxc.config.js
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {

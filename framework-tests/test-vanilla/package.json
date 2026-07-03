@@ -1,20 +1,20 @@
 {
-  "name": "nuce-vanilla-template",
+  "name": "nuxc-vanilla-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build",
-    "preview": "nuce preview"
+    "dev": "nuxc dev",
+    "build": "nuxc build",
+    "preview": "nuxc preview"
   },
-  "nuce": {
+  "nuxc": {
     "template": true,
     "framework": "vanilla",
-    "description": "Nuce Kanban — drag-and-drop board"
+    "description": "Nuxc Kanban — drag-and-drop board"
   },
   "devDependencies": {
-    "nuce": "file:../../",
+    "nuxc": "file:../../",
     "typescript": "5.4.5"
   }
 }

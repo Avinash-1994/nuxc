@@ -47,8 +47,8 @@ async function run() {
         throw new Error(`WAL deadlock timeout: ${e}`);
     }
 
-    // Test 1: LevelDB migration (the directory .nuclie/cache should have moved to .nuce/cache)
-    const newCachePath = path.join(rootDir, '.nuce', 'cache');
+    // Test 1: LevelDB migration (the directory .nuclie/cache should have moved to .nuxc/cache)
+    const newCachePath = path.join(rootDir, '.nuxc', 'cache');
     if (fs.existsSync(newCachePath) && !fs.existsSync(legacyNuclie)) {
         console.log('✅ TEST PASS: LevelDB migration - old cache entries imported (.nuclie renamed)');
     } else {

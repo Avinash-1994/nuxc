@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-fonts
+ * @nuxc/plugin-fonts
  * Web font optimization
  */
 
@@ -9,7 +9,7 @@ import path from 'path';
 
 export function createFontsPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-fonts',
+        name: '@nuxc/plugin-fonts',
         originalPlugin: 'vite-plugin-fonts',
         
         async load(id: string) {

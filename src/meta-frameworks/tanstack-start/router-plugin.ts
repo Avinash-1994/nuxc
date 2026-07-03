@@ -1,12 +1,12 @@
-import type { Plugin } from '@nuce/adapter-core';
+import type { Plugin } from '@nuxc/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:nuce/tanstack-routes';
+const VIRTUAL_MODULE_ID = 'virtual:nuxc/tanstack-routes';
 
 export function tsRouterPlugin(): Plugin {
   return {
-    name: 'nuce:tanstack-router',
+    name: 'nuxc:tanstack-router',
 
     // Intercept Route configs mapped directly for Tanstack
     resolveId(source: string) {
@@ -56,7 +56,7 @@ export function tsRouterPlugin(): Plugin {
       scan(appDir, '');
 
       return `
-        // Auto-generated Tanstack Route proxy for Nuce native SSR engine
+        // Auto-generated Tanstack Route proxy for Nuxc native SSR engine
         export const routes = [
           ${routes.join(',\n')}
         ];

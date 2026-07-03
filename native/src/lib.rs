@@ -1,4 +1,4 @@
-// High-performance native modules for Nuce
+// High-performance native modules for Nuxc
 // Focus: Speed and minimal bundle size
 
 mod graph;
@@ -34,7 +34,7 @@ pub use cache::{
 };
 
 // Phase 3 re-exports
-pub use chunker::{ChunkerConfig, ChunkOutput, ChunkerResult, nuce_chunk};
+pub use chunker::{ChunkerConfig, ChunkOutput, ChunkerResult, nuxc_chunk};
 pub use sourcemap_merger::merge_source_maps;
 pub use watcher::{NativeWatcher, WatchEvent, start_watcher};
 pub use prebundle::{PrebundleEntry, PrebundleConfig, prebundle, prebundle_put};

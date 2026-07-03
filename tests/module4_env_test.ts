@@ -4,19 +4,19 @@
  * Validates Day 26 Unified HMR & Config
  */
 
-import { NuceEnv } from '../src/env/api.js';
+import { NuxcEnv } from '../src/env/api.js';
 
 async function runEnvTest() {
     console.log('🧪 Testing Environment API...');
 
     // 1. Initialize
-    const env = NuceEnv.init({
+    const env = NuxcEnv.init({
         mode: 'development',
         ssr: true,
         base: '/'
     });
 
-    if (NuceEnv.get().config.mode !== 'development') {
+    if (NuxcEnv.get().config.mode !== 'development') {
         throw new Error('Config mismatch');
     }
     console.log('  ✅ Env Initialization Verified');

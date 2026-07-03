@@ -12,7 +12,7 @@ async function testConfigFileDetection() {
     const classifier = new HMRClassifier();
 
     const configChange: FileChange = {
-        path: 'nuce.config.ts',
+        path: 'nuxc.config.ts',
         type: 'updated'
     };
 
@@ -175,7 +175,7 @@ async function testBatchWithFullReload() {
 
     const changes: FileChange[] = [
         { path: 'src/styles/App.css', type: 'updated' },
-        { path: 'nuce.config.ts', type: 'updated' }, // Config file!
+        { path: 'nuxc.config.ts', type: 'updated' }, // Config file!
         { path: 'src/components/Button.tsx', type: 'updated' }
     ];
 

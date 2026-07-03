@@ -1,15 +1,15 @@
-# Nuce Adapter Authoring Guide
+# Nuxc Adapter Authoring Guide
 
 **Module**: 13 (Phase H.5)  
 **Status**: ✅ Active
 
-This guide explains how to build a production-grade framework adapter for Nuce.
+This guide explains how to build a production-grade framework adapter for Nuxc.
 
 ---
 
 ## 🏗️ Mental Model
 
-An Nuce Adapter is an **isolated bridge** between Nuce's core and a framework's internal toolchain (e.g., Vite, esbuild, SWC). 
+An Nuxc Adapter is an **isolated bridge** between Nuxc's core and a framework's internal toolchain (e.g., Vite, esbuild, SWC). 
 
 **The Golden Rule**: The adapter MUST NOT know about other adapters, and the Core MUST NOT know about the adapter's framework.
 
@@ -19,7 +19,7 @@ An Nuce Adapter is an **isolated bridge** between Nuce's core and a framework's 
 
 Every adapter must implement the `FrameworkAdapter` interface:
 
-1.  **`init(options)`**: Receives the user's `nuce.config.js` and sets up the internal toolchain.
+1.  **`init(options)`**: Receives the user's `nuxc.config.js` and sets up the internal toolchain.
 2.  **`build()`**: Executes a production or dev build. Returns `AdapterOutput` containing assets and a module manifest.
 3.  **`handleHmr(event)`**: Accepts a file path and returns whether to `update` a specific module or trigger a `reload`.
 
@@ -55,7 +55,7 @@ Adapters graduation path:
 ## ✅ Validation Checklist (Before Submission)
 
 - [ ] Passes `npm run test` inside the adapter directory.
-- [ ] Passes `npx tsx scripts/verify.ts` in the Nuce root.
+- [ ] Passes `npx tsx scripts/verify.ts` in the Nuxc root.
 - [ ] No `fs.writeFile` outside the designated output directory.
 - [ ] No `eval()` or `new Function()` in the adapter logic.
 - [ ] All dependencies are pinned to exact versions (no `^` or `~`).

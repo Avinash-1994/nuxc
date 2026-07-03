@@ -1,4 +1,4 @@
-// e2e/fixtures/plugin-migration-app/nuce.config.ts
+// e2e/fixtures/plugin-migration-app/nuxc.config.ts
 
 // 5 rewritten TS hooks that previously were Wasmtime plugins
 export default {

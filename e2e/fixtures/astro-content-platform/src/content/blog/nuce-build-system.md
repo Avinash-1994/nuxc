@@ -1,15 +1,15 @@
 ---
-title: "Nuce Build System Deep Dive"
-description: "How Nuce handles multi-framework compilation with sub-second HMR."
+title: "Nuxc Build System Deep Dive"
+description: "How Nuxc handles multi-framework compilation with sub-second HMR."
 date: "2025-01-20"
 author: "Avinash"
-tags: ["nuce", "build", "performance"]
+tags: ["nuxc", "build", "performance"]
 featured: false
 ---
 
-# Nuce Build System Deep Dive
+# Nuxc Build System Deep Dive
 
-Nuce is a next-generation build system supporting Angular, Nuxt, SvelteKit, SolidStart, Qwik City, and Astro.
+Nuxc is a next-generation build system supporting Angular, Nuxt, SvelteKit, SolidStart, Qwik City, and Astro.
 
 ## Core Features
 

@@ -97,13 +97,13 @@ export class LitAdapter implements FrameworkAdapter {
     private async buildDev(): Promise<AdapterOutput> {
         // In Dev, we might just use Vite's transformMiddleware or a simple build
         // For the purpose of "Adapter acts as data producer", we might want a fast in-memory build 
-        // OR we start the server and let Nuce proxy requests?
+        // OR we start the server and let Nuxc proxy requests?
         // Module 8 says: "Orchestrate the framework's own toolchain... produce a normalized output graph"
-        // "Nuce treats outputs as inert data"
+        // "Nuxc treats outputs as inert data"
 
         // For complexity simplicity in this "Adapter" model, let's run a Vite build in 'development' mode
         // But keep the server instance for HMR if needed.
-        // Actually, if Nuce serves the files, we need the CONTENT. 
+        // Actually, if Nuxc serves the files, we need the CONTENT. 
         // Vite's `createServer` is best for this.
 
         if (!this.devServer) {
@@ -144,14 +144,14 @@ export class LitAdapter implements FrameworkAdapter {
     async handleHmr(event: HMREvent): Promise<{ type: 'reload' | 'update', modules: string[] }> {
         if (!this.devServer) return { type: 'reload', modules: [] };
 
-        // Map Nuce HMR event to Vite's internal module graph
+        // Map Nuxc HMR event to Vite's internal module graph
         const mods = this.devServer.moduleGraph.getModulesByFile(event.file);
         if (mods && mods.size > 0) {
             // Vite handles HMR internally via WS usually.
-            // If Nuce handles the WS connection, we need to generate the HMR payload.
+            // If Nuxc handles the WS connection, we need to generate the HMR payload.
             // But Module 8 says "Expose neutral HMR boundaries: invalidate(module)".
 
-            // For now, we return 'update' and assume Nuce will re-request the file or trigger client update.
+            // For now, we return 'update' and assume Nuxc will re-request the file or trigger client update.
             return { type: 'update', modules: Array.from(mods).map((m: any) => m.url) };
         }
 

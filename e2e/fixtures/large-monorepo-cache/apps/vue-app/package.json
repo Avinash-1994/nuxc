@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nuce dev",
-    "build": "nuce build"
+    "dev": "nuxc dev",
+    "build": "nuxc build"
   },
   "dependencies": {
     "vue": "^3.0.0"

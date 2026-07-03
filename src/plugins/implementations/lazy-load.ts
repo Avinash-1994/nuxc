@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-lazy-load
+ * @nuxc/plugin-lazy-load
  * Component lazy loading
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createLazyLoadPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-lazy-load',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-lazy-load',
+        originalPlugin: 'nuxc-native',
         
         async buildStart() {
-            console.log('[@nuce/plugin-lazy-load] Starting performance optimization...');
+            console.log('[@nuxc/plugin-lazy-load] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createLazyLoadPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-lazy-load] Performance optimization complete');
+            console.log('[@nuxc/plugin-lazy-load] Performance optimization complete');
         }
     };
 }

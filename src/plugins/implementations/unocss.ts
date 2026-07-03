@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-unocss
+ * @nuxc/plugin-unocss
  * UnoCSS integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createUnocssPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-unocss',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-unocss',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for unocss

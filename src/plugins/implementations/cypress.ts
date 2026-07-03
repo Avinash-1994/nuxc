@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-cypress
+ * @nuxc/plugin-cypress
  * Cypress integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCypressPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-cypress',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-cypress',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // Utility: Cypress integration

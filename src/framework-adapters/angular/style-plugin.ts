@@ -1,9 +1,9 @@
-import type { Plugin } from '@nuce/adapter-core';
+import type { Plugin } from '@nuxc/adapter-core';
 import path from 'path';
 
 export function angularStylePlugin(): Plugin {
   return {
-    name: 'nuce:angular-styles',
+    name: 'nuxc:angular-styles',
 
     async transform(code: string, id: string) {
       if (!id.endsWith('.css') && !id.endsWith('.scss') && !id.endsWith('.less')) {
@@ -14,7 +14,7 @@ export function angularStylePlugin(): Plugin {
       // in the native engine. Here, we can intercept and inject ViewEncapsulation scoping
       // if needed, or we just rely on Angular compiler's Component scope.
       
-      // Because Nuce's native CSS pipeline will catch CSS naturally, this plugin
+      // Because Nuxc's native CSS pipeline will catch CSS naturally, this plugin
       // focuses strictly on returning the CSS as an injectible string if it was imported 
       // by a Component, preventing it from becoming a separate global asset link.
       

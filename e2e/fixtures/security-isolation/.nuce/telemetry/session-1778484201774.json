@@ -1,0 +1,10 @@
+{
+  "id": "c3087fc0-43bc-4f68-baa5-737ef489d19a",
+  "timestamp": 1778484201774,
+  "duration": 17,
+  "success": false,
+  "metrics": {},
+  "errors": [
+    "[Plugin:test-plugin] buildEnd failed: [nuxc:security] Plugin \"test-plugin\" requires env:read permission."
+  ]
+}

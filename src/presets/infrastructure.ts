@@ -1,5 +1,5 @@
 
-import { NucePlugin } from '../core/plugins/types.js';
+import { NuxcPlugin } from '../core/plugins/types.js';
 import { rollupAdapter } from '../plugins/compat/rollup.js';
 import { createJsTransformPlugin } from '../plugins/js-transform.js';
 import { createPostCssPlugin } from '../plugins/css/postcss.js';
@@ -13,8 +13,8 @@ import { createHtmlPlugin } from '../plugins/html.js';
 import { createFederationPlugin } from '../plugins/federation_next.js';
 import { createStaticPlugin } from '../plugins/static.js';
 
-export function getInfrastructurePreset(rootDir: string, outDir?: string, config?: any): NucePlugin[] {
-    const plugins: NucePlugin[] = [];
+export function getInfrastructurePreset(rootDir: string, outDir?: string, config?: any): NuxcPlugin[] {
+    const plugins: NuxcPlugin[] = [];
     const effectiveOutDir = outDir || 'dist';
 
     // 0. JSON (Load early)

@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-css-framework
+ * @nuxc/plugin-css-framework
  * CSS framework detection
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCssFrameworkPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-css-framework',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-css-framework',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for css-framework

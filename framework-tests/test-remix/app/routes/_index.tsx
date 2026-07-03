@@ -3,7 +3,7 @@ import { useLoaderData, Link } from '@remix-run/react';
 
 const JOBS = [
   { id:1, title:'Senior Frontend Engineer', company:'Vercel', location:'Remote', salary:'$180k–$220k', type:'Full-time', stack:['React','Next.js','TypeScript'] },
-  { id:2, title:'Staff Engineer — Build Tools', company:'Nuce Inc.', location:'Remote / SF', salary:'$200k–$250k', type:'Full-time', stack:['Rust','TypeScript','Node'] },
+  { id:2, title:'Staff Engineer — Build Tools', company:'Nuxc Inc.', location:'Remote / SF', salary:'$200k–$250k', type:'Full-time', stack:['Rust','TypeScript','Node'] },
   { id:3, title:'DevRel Engineer', company:'Cloudflare', location:'Remote', salary:'$150k–$190k', type:'Full-time', stack:['Workers','Svelte','Vue'] },
   { id:4, title:'Platform Engineer', company:'Netlify', location:'Remote', salary:'$160k–$200k', type:'Full-time', stack:['Go','React','Terraform'] },
 ];
@@ -15,7 +15,7 @@ export default function Index() {
   return (
     <div style={{minHeight:'100vh',background:'#0f172a',color:'#f1f5f9',fontFamily:'system-ui'}}>
       <nav style={{background:'#1e293b',padding:'0 24px',display:'flex',alignItems:'center',height:56,gap:24}}>
-        <span style={{fontWeight:700,fontSize:18}}>💼 Nuce Jobs</span>
+        <span style={{fontWeight:700,fontSize:18}}>💼 Nuxc Jobs</span>
         <Link to="/" style={{color:'#94a3b8',textDecoration:'none'}}>Jobs</Link>
         <Link to="/login" style={{color:'#94a3b8',textDecoration:'none'}}>Login</Link>
       </nav>

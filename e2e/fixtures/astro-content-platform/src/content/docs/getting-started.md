@@ -1,19 +1,19 @@
 ---
-title: "Getting Started with Nuce"
-description: "Set up Nuce in under 60 seconds."
+title: "Getting Started with Nuxc"
+description: "Set up Nuxc in under 60 seconds."
 order: 1
 section: "guides"
 ---
 
-# Getting Started with Nuce
+# Getting Started with Nuxc
 
 ## Installation
 
 ```bash
-npm install -g nuce
-nuce dev
+npm install -g nuxc
+nuxc dev
 ```
 
 ## Configuration
 
-Create a `nuce.config.ts` in your project root.
+Create a `nuxc.config.ts` in your project root.

@@ -1,15 +1,15 @@
 /**
- * @nuce/plugin-react-query
+ * @nuxc/plugin-react-query
  * React Query integration
- * Nuce-native
+ * Nuxc-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReactQueryPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-react-query',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-react-query',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // react transformation

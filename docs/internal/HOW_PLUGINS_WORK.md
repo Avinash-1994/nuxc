@@ -1,4 +1,4 @@
-# How a Nuce Plugin Works — Internal Guide
+# How a Nuxc Plugin Works — Internal Guide
 
 **Audience**: Core engineers, plugin authors (advanced)  
 **Purpose**: Mental model, not marketing  
@@ -8,7 +8,7 @@
 
 ## 🎯 Purpose
 
-This guide explains **HOW** Nuce plugins work internally, not **WHY** you should use them.
+This guide explains **HOW** Nuxc plugins work internally, not **WHY** you should use them.
 
 Written as if onboarding a new core engineer.
 
@@ -31,7 +31,7 @@ Source Code → [Plugin 1] → [Plugin 2] → [Plugin N] → Bundled Code
 ### 1. **Registration** (Build Start)
 
 ```typescript
-// User's nuce.config.ts
+// User's nuxc.config.ts
 export default {
   plugins: [
     myPlugin({ option: 'value' }),
@@ -41,8 +41,8 @@ export default {
 
 **What happens**:
 1. Config loader calls `myPlugin({ option: 'value' })`
-2. Plugin returns a `NucePlugin` object
-3. Nuce validates the plugin interface
+2. Plugin returns a `NuxcPlugin` object
+3. Nuxc validates the plugin interface
 4. Plugin is added to the pipeline
 
 ---
@@ -145,7 +145,7 @@ transform(code: string, id: string): { code: string; map?: SourceMap } | null {
 
 ### Enforcement
 ```typescript
-const plugin: NucePlugin = {
+const plugin: NuxcPlugin = {
   name: 'my-plugin',
   enforce: 'pre', // Run before normal plugins
 };
@@ -224,7 +224,7 @@ export function replacePlugin(options: { from: string; to: string }) {
 
 **Usage**:
 ```typescript
-// nuce.config.ts
+// nuxc.config.ts
 export default {
   plugins: [
     replacePlugin({ from: 'process.env.NODE_ENV', to: '"production"' }),
@@ -248,7 +248,7 @@ transform(code: string, id: string) {
 // ✅ GOOD
 transform(code: string, id: string) {
   return {
-    code: code + `\n// Built with Nuce`,
+    code: code + `\n// Built with Nuxc`,
   };
 }
 ```

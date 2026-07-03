@@ -1,4 +1,4 @@
-# Nuce tauri Template — Nuce Files Desktop — Rust file manager
+# Nuxc tauri Template — Nuxc Files Desktop — Rust file manager
 ```bash
 npm install && npm run dev
 ```

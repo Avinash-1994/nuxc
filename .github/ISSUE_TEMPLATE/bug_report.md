@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a bug or unexpected behavior in Nuce
+about: Report a bug or unexpected behavior in Nuxc
 title: '[BUG] '
 labels: bug
 assignees: ''
@@ -26,7 +26,7 @@ A clear description of what actually happened.
 
 ## 📊 Environment
 
-Please run `npx nuce doctor` and paste the output here:
+Please run `npx nuxc doctor` and paste the output here:
 
 ```
 [Paste output here]
@@ -35,7 +35,7 @@ Please run `npx nuce doctor` and paste the output here:
 **Additional Environment Info:**
 - OS: [e.g., macOS 14.0, Windows 11, Ubuntu 22.04]
 - Node Version: [e.g., v20.10.0]
-- Nuce Version: [e.g., v2.0.0]
+- Nuxc Version: [e.g., v2.0.0]
 - Package Manager: [e.g., npm, pnpm, yarn]
 
 ## 📁 Minimal Reproduction
@@ -64,7 +64,7 @@ Add any other context about the problem here.
 
 ## 🩺 Self-Diagnosis
 
-Have you tried running `npx nuce doctor`?
+Have you tried running `npx nuxc doctor`?
 - [ ] Yes, and it found issues
 - [ ] Yes, but it didn't find anything
 - [ ] No, I haven't tried it yet

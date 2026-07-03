@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-webp
+ * @nuxc/plugin-webp
  * WebP image conversion
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createWebpPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-webp',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-webp',
+        originalPlugin: 'nuxc-native',
         
         async load(id: string) {
             // Asset loading for webp

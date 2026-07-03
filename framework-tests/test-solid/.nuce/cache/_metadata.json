@@ -1,0 +1,11 @@
+{
+  "hash": "eae4e5d1",
+  "depsHash": "3ead43d2",
+  "deps": [
+    "solid-js"
+  ],
+  "depMap": {
+    "solid-js": "/@nuxc-deps/solid-js.js"
+  },
+  "timestamp": 1778859637867
+}

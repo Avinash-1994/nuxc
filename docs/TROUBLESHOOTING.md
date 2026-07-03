@@ -4,25 +4,25 @@
 
 ---
 
-## Error 1 — `Cannot find module 'nuce'`
+## Error 1 — `Cannot find module 'nuxc'`
 
 **Symptom:**
 ```
-Error: Cannot find module 'nuce'
+Error: Cannot find module 'nuxc'
 ```
 
-**Cause:** Nuce is not installed in the current project.
+**Cause:** Nuxc is not installed in the current project.
 
 **Fix:**
 ```bash
 # Install locally
-npm install --save-dev nuce
+npm install --save-dev nuxc
 
 # Or install globally
-npm install -g nuce
+npm install -g nuxc
 ```
 
-If using a monorepo, ensure nuce is in the root `package.json` or the specific workspace's `package.json`.
+If using a monorepo, ensure nuxc is in the root `package.json` or the specific workspace's `package.json`.
 
 ---
 
@@ -42,7 +42,7 @@ kill -9 <PID>
 
 **Fix — Option B:** Change the port in config:
 ```js
-// nuce.config.js
+// nuxc.config.js
 module.exports = {
   dev: {
     port: 4000, // Use a different port
@@ -60,7 +60,7 @@ module.exports = {
 
 **Fix:**
 ```js
-// nuce.config.js
+// nuxc.config.js
 module.exports = {
   dev: {
     hmr: true,  // Ensure HMR is enabled
@@ -106,7 +106,7 @@ module.exports = {
 
 **Fix:**
 ```js
-// nuce.config.js
+// nuxc.config.js
 module.exports = {
   css: {
     modules: true, // Enable CSS Modules
@@ -137,10 +137,10 @@ TypeError: Failed to fetch dynamically imported module: http://localhost:3001/re
 **Cause:** The remote app is not running, or the URL is wrong.
 
 **Fix:**
-1. Start the remote app first: `cd remote-app && nuce dev`
+1. Start the remote app first: `cd remote-app && nuxc dev`
 2. Check the URL matches the remote's dev port:
 ```js
-// host nuce.config.js
+// host nuxc.config.js
 module.exports = {
   federation: {
     name: 'host',
@@ -153,7 +153,7 @@ module.exports = {
 
 3. Verify the remote exposes the correct module:
 ```js
-// remote nuce.config.js
+// remote nuxc.config.js
 module.exports = {
   federation: {
     name: 'cart',
@@ -177,14 +177,14 @@ TS2307: Cannot find module '*.svg' or its corresponding type declarations.
 ```json
 {
   "compilerOptions": {
-    "types": ["nuce/client"]
+    "types": ["nuxc/client"]
   }
 }
 ```
 
 Or create a `src/vite-env.d.ts` (compatible):
 ```ts
-/// <reference types="nuce/client" />
+/// <reference types="nuxc/client" />
 ```
 
 ---
@@ -200,12 +200,12 @@ FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memor
 
 **Fix — Option A:** Increase Node.js heap:
 ```bash
-NODE_OPTIONS=--max-old-space-size=4096 nuce build
+NODE_OPTIONS=--max-old-space-size=4096 nuxc build
 ```
 
 **Fix — Option B:** Enable code splitting:
 ```js
-// nuce.config.js
+// nuxc.config.js
 module.exports = {
   build: {
     splitting: true,     // Enable chunk splitting
@@ -224,7 +224,7 @@ module.exports = {
 
 **Fix:**
 ```js
-// nuce.config.js
+// nuxc.config.js
 module.exports = {
   css: {
     framework: 'tailwind',
@@ -248,18 +248,18 @@ npx tailwindcss init
 
 ---
 
-## Error 10 — `nuce: command not found`
+## Error 10 — `nuxc: command not found`
 
 **Symptom:**
 ```
-bash: nuce: command not found
+bash: nuxc: command not found
 ```
 
-**Cause:** Nuce is not globally installed, or the global npm bin directory is not in your PATH.
+**Cause:** Nuxc is not globally installed, or the global npm bin directory is not in your PATH.
 
 **Fix — Option A:** Use `npx` instead:
 ```bash
-npx nuce dev
+npx nuxc dev
 ```
 
 **Fix — Option B:** Fix global PATH:
@@ -276,22 +276,22 @@ source ~/.bashrc
 
 **Fix — Option C:** Reinstall globally:
 ```bash
-npm install -g nuce
+npm install -g nuxc
 ```
 
 ---
 
 ## General Diagnostic Tool
 
-Run `nuce doctor` to automatically detect common issues:
+Run `nuxc doctor` to automatically detect common issues:
 
 ```bash
-nuce doctor
+nuxc doctor
 
 # Example output:
 ✅ Node.js version: v20.11.0 (OK)
-✅ nuce version: 1.0.9 (latest)
-✅ nuce.config.js found
+✅ nuxc version: 1.0.9 (latest)
+✅ nuxc.config.js found
 ✅ Entry file exists: ./src/main.tsx
 ⚠️  No .env file found (optional)
 ✅ TypeScript config valid
@@ -304,6 +304,6 @@ All checks passed! 🎉
 
 ## Still Stuck?
 
-- 💬 [GitHub Discussions](https://github.com/Avinash-1994/Nuce/discussions)
-- 🐛 [File a Bug Report](https://github.com/Avinash-1994/Nuce/issues/new)
-- 📖 [Full Documentation](https://avinash-1994.github.io/Nuce/)
+- 💬 [GitHub Discussions](https://github.com/Avinash-1994/Nuxc/discussions)
+- 🐛 [File a Bug Report](https://github.com/Avinash-1994/Nuxc/issues/new)
+- 📖 [Full Documentation](https://avinash-1994.github.io/Nuxc/)

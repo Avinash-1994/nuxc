@@ -1,15 +1,15 @@
 /**
- * @nuce/plugin-jotai
+ * @nuxc/plugin-jotai
  * Jotai state management
- * Nuce-native
+ * Nuxc-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createJotaiPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-jotai',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-jotai',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // jotai transformation

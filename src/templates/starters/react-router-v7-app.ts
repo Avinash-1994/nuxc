@@ -3,8 +3,8 @@ export const reactRouterV7AppTemplate: TemplateConfig = {
     id: 'react-router-v7-app', name: 'react-router-v7 App', description: 'react-router-v7 application', framework: 'vanilla', type: 'spa',
     dependencies: {}, devDependencies: { '@types/node': '^20.0.0' },
     files: {
-        'nuce.config.ts': "import { defineConfig } from 'nuce';\nexport default defineConfig({ framework: 'react-router-v7' });",
-        'index.html': `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>{{PROJECT_NAME}}</title><style>body{font-family:system-ui;background:#0f172a;color:#f1f5f9;margin:0;display:flex;align-items:center;justify-content:center;height:100vh} .card{background:#1e293b;padding:40px;border-radius:12px;text-align:center;border:1px solid #334155} h1{color:#818cf8;margin:0 0 10px;font-size:32px} p{color:#94a3b8;margin:0}</style></head><body><div class="card"><h1>⚡ Nuce + react-router-v7</h1><p>Built with the Nuce engine.</p></div><script type="module" src="/src/main.ts"></script></body></html>`,
-        'src/main.ts': `console.log('Nuce + react-router-v7 running!');`
+        'nuxc.config.ts': "import { defineConfig } from 'nuxc';\nexport default defineConfig({ framework: 'react-router-v7' });",
+        'index.html': `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>{{PROJECT_NAME}}</title><style>body{font-family:system-ui;background:#0f172a;color:#f1f5f9;margin:0;display:flex;align-items:center;justify-content:center;height:100vh} .card{background:#1e293b;padding:40px;border-radius:12px;text-align:center;border:1px solid #334155} h1{color:#818cf8;margin:0 0 10px;font-size:32px} p{color:#94a3b8;margin:0}</style></head><body><div class="card"><h1>⚡ Nuxc + react-router-v7</h1><p>Built with the Nuxc engine.</p></div><script type="module" src="/src/main.ts"></script></body></html>`,
+        'src/main.ts': `console.log('Nuxc + react-router-v7 running!');`
     }
 };

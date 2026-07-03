@@ -1,19 +1,19 @@
 import path from 'path';
 import fs from 'fs/promises';
-import { NucePlugin } from '../core/plugins/types.js';
+import { NuxcPlugin } from '../core/plugins/types.js';
 import { fastHash } from '../native/index.js';
 
-export function createAssetPlugin(outDir: string = 'build_output'): NucePlugin {
+export function createAssetPlugin(outDir: string = 'build_output'): NuxcPlugin {
     return {
         manifest: {
-            name: 'nuce:asset',
+            name: 'nuxc:asset',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['resolveId', 'load'],
             permissions: { fs: 'read' }
         },
-        id: 'nuce:asset',
+        id: 'nuxc:asset',
         async runHook(hook, input, context) {
             const ASSET_REGEX = /\.(png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|otf)$/;
 

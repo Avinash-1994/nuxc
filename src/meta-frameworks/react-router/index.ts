@@ -1,5 +1,5 @@
-import type { NuceAdapter, Plugin, NuceConfig, PackageJson } from '@nuce/adapter-core';
-import { detectDependencies, registry } from '@nuce/adapter-core';
+import type { NuxcAdapter, Plugin, NuxcConfig, PackageJson } from '@nuxc/adapter-core';
+import { detectDependencies, registry } from '@nuxc/adapter-core';
 import { rr7RoutesPlugin } from './routes-plugin.js';
 
 export interface ReactRouterConfig {
@@ -7,7 +7,7 @@ export interface ReactRouterConfig {
   ssr?: boolean;         // default true
 }
 
-export class ReactRouterAdapter implements NuceAdapter {
+export class ReactRouterAdapter implements NuxcAdapter {
   name = 'react-router';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -32,7 +32,7 @@ export class ReactRouterAdapter implements NuceAdapter {
     ];
   }
 
-  config(config: NuceConfig): NuceConfig {
+  config(config: NuxcConfig): NuxcConfig {
     if (!config.reactRouter) config.reactRouter = {};
     config.reactRouter = {
       appDirectory: 'app',
@@ -83,7 +83,7 @@ export class ReactRouterAdapter implements NuceAdapter {
           }
         }
       } catch (e) {
-        console.error('[NUCE ReactRouter] Dev handler error:', e);
+        console.error('[NUXC ReactRouter] Dev handler error:', e);
       }
       next();
     };

@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-hmr-classify
+ * @nuxc/plugin-hmr-classify
  * HMR classification
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createHmrClassifyPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-hmr-classify',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-hmr-classify',
+        originalPlugin: 'nuxc-native',
         
         async buildStart() {
-            console.log('[@nuce/plugin-hmr-classify] Starting performance optimization...');
+            console.log('[@nuxc/plugin-hmr-classify] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createHmrClassifyPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-hmr-classify] Performance optimization complete');
+            console.log('[@nuxc/plugin-hmr-classify] Performance optimization complete');
         }
     };
 }

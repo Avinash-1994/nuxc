@@ -4,7 +4,7 @@ import * as path from 'path';
 import { build } from 'esbuild';
 
 /**
- * Nuce Multi-Target Build Pipeline
+ * Nuxc Multi-Target Build Pipeline
  * Handles SPA, SSR, SSG, Edge, and Lib modes
  * Day 28: Multi-Target Pipeline & Production Lock
  */
@@ -27,7 +27,7 @@ export class BuildPipeline {
      * Main Build Entry
      */
     async build() {
-        console.log(`🚀 Starting Nuce Multi-Target Build...`);
+        console.log(`🚀 Starting Nuxc Multi-Target Build...`);
         console.log(`Targets: ${this.options.target.join(', ')}`);
 
         fs.mkdirSync(this.options.outDir, { recursive: true });
@@ -113,7 +113,7 @@ export class BuildPipeline {
             write: true,
         });
 
-        const html = `<!doctype html><html><head><meta charset="utf-8"><title>Nuce SPA</title></head><body><div id="app"></div><script type="module" src="./app.js"></script></body></html>`;
+        const html = `<!doctype html><html><head><meta charset="utf-8"><title>Nuxc SPA</title></head><body><div id="app"></div><script type="module" src="./app.js"></script></body></html>`;
         fs.writeFileSync(path.join(outDir, 'index.html'), html);
         console.log(`    ✅ SPA Bundle and HTML emitted to ${outDir}`);
     }
@@ -175,7 +175,7 @@ export class BuildPipeline {
             write: true,
         });
 
-        const html = `<!doctype html><html><head><meta charset="utf-8"><title>Nuce SSG</title></head><body><div id="app"></div><script type="module" src="./app.js"></script></body></html>`;
+        const html = `<!doctype html><html><head><meta charset="utf-8"><title>Nuxc SSG</title></head><body><div id="app"></div><script type="module" src="./app.js"></script></body></html>`;
         fs.writeFileSync(path.join(outDir, 'index.html'), html);
         console.log(`    ✅ Static site emitted to ${outDir}`);
     }

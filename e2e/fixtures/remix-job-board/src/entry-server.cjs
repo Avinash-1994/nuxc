@@ -1,7 +1,7 @@
 'use strict';
 /**
  * remix-job-board/src/entry-server.cjs
- * Nuce Phase 2.7 — Remix fetch/Request/Response shim over uWS
+ * Nuxc Phase 2.7 — Remix fetch/Request/Response shim over uWS
  *
  * Implements:
  *   scanRoutes(root)              → Remix flat-file route manifest
@@ -19,7 +19,7 @@ var FIXTURE_ROOT = path.dirname(__filename);
 
 // ─── Remix fetch shim over uWS ───────────────────────────────────────────────
 // Remix expects web-standard Request/Response objects.
-// Nuce bridges uWS (μWebSockets) ↔ Remix via this shim.
+// Nuxc bridges uWS (μWebSockets) ↔ Remix via this shim.
 
 function createRequest(method, url, headers, body) {
   return { method: method || 'GET', url: url || '/', headers: headers || {}, body: body || null };
@@ -102,7 +102,7 @@ function scanRoutes(appRoot) {
 // ─── Loader execution (fetch Request/Response shim) ───────────────────────────
 
 var JOBS_DB = [
-  { id: '1', title: 'Senior Engineer', company: 'Nuce', salary: '$180k', type: 'remote', description: 'Build next-gen build tooling.' },
+  { id: '1', title: 'Senior Engineer', company: 'Nuxc', salary: '$180k', type: 'remote', description: 'Build next-gen build tooling.' },
   { id: '2', title: 'Product Designer', company: 'Qwik Labs', salary: '$140k', type: 'hybrid', description: 'Design the future of resumable UIs.' },
   { id: '3', title: 'DevRel Engineer', company: 'Astro Inc', salary: '$160k', type: 'remote', description: 'Advocate for the Astro ecosystem.' },
 ];
@@ -166,10 +166,10 @@ function renderPage(url, opts) {
   var isApply = url === '/apply';
   var isApiJobs = url === '/api/jobs';
 
-  var title = isHome ? 'Nuce Job Board'
-    : isJobDetail ? 'Job Details | Nuce Job Board'
-    : isApply ? 'Apply | Nuce Job Board'
-    : 'Nuce Job Board';
+  var title = isHome ? 'Nuxc Job Board'
+    : isJobDetail ? 'Job Details | Nuxc Job Board'
+    : isApply ? 'Apply | Nuxc Job Board'
+    : 'Nuxc Job Board';
 
   var loaderData = null;
   if (isHome) loaderData = { jobs: JOBS_DB };
@@ -192,7 +192,7 @@ function renderPage(url, opts) {
     '  <meta charset="UTF-8" />',
     '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
     '  <title>' + title + '</title>',
-    '  <meta name="description" content="Nuce Job Board — Remix Phase 2.7 SSR" />',
+    '  <meta name="description" content="Nuxc Job Board — Remix Phase 2.7 SSR" />',
     '  <link rel="stylesheet" href="/styles/app.css" />',
     '</head>',
     '<body>',
@@ -205,7 +205,7 @@ function renderPage(url, opts) {
     // Loader data serialized to avoid hydration mismatch (Remix pattern)
     '<script>window.__remixContext = { loaderData: ' + loaderDataJson + ' };</script>',
     '<script type="module" src="/build/entry.client.js"></script>',
-    '<footer><p>Powered by Nuce + Remix · Phase 2.7</p></footer>',
+    '<footer><p>Powered by Nuxc + Remix · Phase 2.7</p></footer>',
     '</body>',
     '</html>',
   ].join('\n');
@@ -216,8 +216,8 @@ function renderPage(url, opts) {
 function _buildContent(url, isHome, isJobDetail, isApply, loaderData) {
   if (isHome && loaderData) {
     return [
-      '<h1>Nuce Job Board</h1>',
-      '<p class="subtitle">Find your next role in the Nuce ecosystem.</p>',
+      '<h1>Nuxc Job Board</h1>',
+      '<p class="subtitle">Find your next role in the Nuxc ecosystem.</p>',
       '<section class="job-list">',
       ...loaderData.jobs.map(function(j) {
         return [
@@ -287,13 +287,13 @@ function emitBuildArtifacts(appRoot, outDir) {
 
   // Client entry bundle
   var clientEntry = [
-    '// Nuce Remix — Client Entry Bundle (Phase 2.7)',
+    '// Nuxc Remix — Client Entry Bundle (Phase 2.7)',
     '// Rehydrates from window.__remixContext.loaderData — zero mismatch',
     '(function() {',
     '  var ctx = window.__remixContext;',
     '  if (!ctx) return;',
     '  // Remix router picks up serialized loaderData — no refetch needed',
-    '  console.log("[Nuce Remix] Hydrating from loaderData:", Object.keys(ctx.loaderData || {}));',
+    '  console.log("[Nuxc Remix] Hydrating from loaderData:", Object.keys(ctx.loaderData || {}));',
     '  document.documentElement.setAttribute("data-remix-hydrated", "true");',
     '})();',
   ].join('\n');
@@ -301,7 +301,7 @@ function emitBuildArtifacts(appRoot, outDir) {
 
   // Server bundle (handles loader/action on the server)
   var serverBundle = [
-    '// Nuce Remix — Server Bundle (Phase 2.7)',
+    '// Nuxc Remix — Server Bundle (Phase 2.7)',
     '// fetch Request/Response shim for uWS compatibility',
     'module.exports = require("../src/entry-server.cjs");',
   ].join('\n');
@@ -314,7 +314,7 @@ function emitBuildArtifacts(appRoot, outDir) {
   // Manifest
   var manifest = {
     framework: 'remix',
-    nucePhase: '2.7',
+    nuxcPhase: '2.7',
     generated: new Date().toISOString(),
     routes: routes.map(function(r) { return { path: r.path, hasLoader: r.hasLoader, hasAction: r.hasAction, isResource: r.isResource }; }),
     pages: generatedPages,

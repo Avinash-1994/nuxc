@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const overlayDist = path.resolve(__dirname, '../../../packages/nuce-error-overlay/dist/index.js');
+const overlayDist = path.resolve(__dirname, '../../../packages/nuxc-error-overlay/dist/index.js');
 const { createOverlay, classifyError, buildVSCodeLink, AUTO_CLEAR_SCRIPT } = await import(overlayDist);
 
 function log(msg) { process.stdout.write(msg + '\n'); }
@@ -64,14 +64,14 @@ for (const c of errorCases) {
 const clearTime = Date.now();
 // The script removes the overlay in the next animation frame — in Node we can't render DOM,
 // but we verify the script contains the correct event listener and overlay selector.
-const scriptValid = AUTO_CLEAR_SCRIPT.includes('nuce-error-overlay') &&
+const scriptValid = AUTO_CLEAR_SCRIPT.includes('nuxc-error-overlay') &&
                     AUTO_CLEAR_SCRIPT.includes('update') &&
                     AUTO_CLEAR_SCRIPT.includes('requestAnimationFrame');
 const scriptCheckMs = Date.now() - clearTime;
 
 printPass('EO-02  Auto-clears on fix', '< 200ms, event-driven', `< 200ms (script validated in ${scriptCheckMs}ms)`, [
   `Script listens for HMR "update" event: yes`,
-  `Script targets #nuce-error-overlay: yes`,
+  `Script targets #nuxc-error-overlay: yes`,
   `Uses requestAnimationFrame for < 200ms clear: yes`,
   `DOM removal script size: ${AUTO_CLEAR_SCRIPT.length} chars`,
 ]);

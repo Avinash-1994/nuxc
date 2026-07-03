@@ -1,18 +1,18 @@
-# @nuce/plugin-react
+# @nuxc/plugin-react
 
-> Official Nuce plugin for React — JSX transform, React Fast Refresh HMR, and error overlay.
+> Official Nuxc plugin for React — JSX transform, React Fast Refresh HMR, and error overlay.
 
 ## Install
 
 ```bash
-npm install --save-dev @nuce/plugin-react
+npm install --save-dev @nuxc/plugin-react
 ```
 
 ## Usage
 
 ```js
-// nuce.config.js
-const react = require('@nuce/plugin-react');
+// nuxc.config.js
+const react = require('@nuxc/plugin-react');
 
 module.exports = {
   entry: ['./src/main.tsx'],
@@ -23,9 +23,9 @@ module.exports = {
 ```
 
 ```ts
-// nuce.config.ts
-import { defineConfig } from 'nuce';
-import react from '@nuce/plugin-react';
+// nuxc.config.ts
+import { defineConfig } from 'nuxc';
+import react from '@nuxc/plugin-react';
 
 export default defineConfig({
   entry: ['./src/main.tsx'],

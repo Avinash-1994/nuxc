@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-babel
+ * @nuxc/plugin-babel
  * Babel transpilation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createBabelPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-babel',
+        name: '@nuxc/plugin-babel',
         originalPlugin: 'babel-loader',
         
         async transform(code: string, id: string) {

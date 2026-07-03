@@ -1,5 +1,5 @@
 /**
- * @nuce/plugin-react-i18next
+ * @nuxc/plugin-react-i18next
  * React i18next integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReactI18nextPlugin(): PluginAdapter {
     return {
-        name: '@nuce/plugin-react-i18next',
-        originalPlugin: 'nuce-native',
+        name: '@nuxc/plugin-react-i18next',
+        originalPlugin: 'nuxc-native',
         
         async transform(code: string, id: string) {
             // i18n: React i18next integration
@@ -16,7 +16,7 @@ export function createReactI18nextPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@nuce/plugin-react-i18next] i18n setup complete');
+            console.log('[@nuxc/plugin-react-i18next] i18n setup complete');
         }
     };
 }

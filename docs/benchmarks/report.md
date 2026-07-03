@@ -7,7 +7,7 @@
 
 ## Results
 
-| Metric | Nuce | Vite | Webpack | Rspack |
+| Metric | Nuxc | Vite | Webpack | Rspack |
 |--------|-------|------|---------|--------|
 | Small - Cold Start | 119ms | ~350ms | ~1500ms | ~250ms |
 | Small - Build Time | 239ms | ~1200ms | ~2500ms | ~400ms |
@@ -17,7 +17,7 @@
 | Medium - Size | 371.5KB | ~1500KB | ~2000KB | ~1800KB |
 
 **Notes:**
-- **Nuce** values are measured live.
+- **Nuxc** values are measured live.
 - **Competitor** values are standard baselines for this class of hardware.
 - "Small App": Minimal React Hello World.
-- "Medium App": Nuce Documentation Site (~50 components).
+- "Medium App": Nuxc Documentation Site (~50 components).

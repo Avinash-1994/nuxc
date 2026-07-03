@@ -1,22 +1,22 @@
 {
-  "name": "nuce-mfe-template",
+  "name": "nuxc-mfe-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev:all": "concurrently \"npm run dev:remote-vue\" \"npm run dev:remote-react\" \"npm run dev:host\"",
-    "dev:host": "cd host && nuce dev",
-    "dev:remote-vue": "cd remote-vue && nuce dev",
-    "dev:remote-react": "cd remote-react && nuce dev",
+    "dev:host": "cd host && nuxc dev",
+    "dev:remote-vue": "cd remote-vue && nuxc dev",
+    "dev:remote-react": "cd remote-react && nuxc dev",
     "build:all": "npm run build --prefix remote-vue && npm run build --prefix remote-react && npm run build --prefix host"
   },
-  "nuce": {
+  "nuxc": {
     "template": true,
     "framework": "mfe",
-    "description": "Nuce MFE — Module Federation host + 2 remotes"
+    "description": "Nuxc MFE — Module Federation host + 2 remotes"
   },
   "devDependencies": {
     "concurrently": "8.2.2",
-    "nuce": "file:../../"
+    "nuxc": "file:../../"
   }
 }

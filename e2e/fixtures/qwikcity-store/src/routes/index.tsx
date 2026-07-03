@@ -2,14 +2,14 @@ import { component$ } from '@builder.io/qwik';
 import { routeLoader$ } from '@builder.io/qwik-city';
 
 export const useStoreData = routeLoader$(async () => {
-  return { featuredProducts: ['Nuce Pro Kit', 'Qwik Builder', 'Enterprise Bundle'] };
+  return { featuredProducts: ['Nuxc Pro Kit', 'Qwik Builder', 'Enterprise Bundle'] };
 });
 
 export default component$(() => {
   const data = useStoreData();
   return (
     <main>
-      <h1>⚡ Nuce Qwik Store</h1>
+      <h1>⚡ Nuxc Qwik Store</h1>
       <p>Zero JS initial load. Resumable state.</p>
       <ul>{data.value.featuredProducts.map(p => <li key={p}>{p}</li>)}</ul>
     </main>

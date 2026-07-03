@@ -42,7 +42,7 @@ async function runSSRBenchmarks() {
 
     console.log(`| Platform | Avg TTFB | Baseline | Winner |`);
     console.log(`|:---|:---|:---|:---|`);
-    console.log(`| Nuce (Node) | ${avgTTFB.toFixed(3)}ms | Next.js (${BASELINES.nextjs}ms) | 🏆 Nuce |`);
+    console.log(`| Nuxc (Node) | ${avgTTFB.toFixed(3)}ms | Next.js (${BASELINES.nextjs}ms) | 🏆 Nuxc |`);
 
     // 2. Memory Usage
     const memory = process.memoryUsage().heapUsed / 1024 / 1024;
@@ -70,7 +70,7 @@ async function runSSRBenchmarks() {
     const sEnd = performance.now();
     console.log(`| Streaming Total Time | ${(sEnd - sStart).toFixed(2)}ms |`);
 
-    console.log('\n✅ CERTIFIED: Nuce SSR TTFB beats Next.js by > 10x in raw engine latency.');
+    console.log('\n✅ CERTIFIED: Nuxc SSR TTFB beats Next.js by > 10x in raw engine latency.');
 }
 
 runSSRBenchmarks().catch(console.error);
