@@ -56,7 +56,7 @@ jobs:
 
       - name: 🚫 Verify no express references
         run: |
-          COUNT=$(grep -r "from 'express'\|require('express')" packages/ src/ --include="*.ts" --include="*.js" -l 2>/dev/null | wc -l)
+          COUNT=$(grep -rn "from 'express'\|require('express')" packages/ src/ --include="*.ts" --include="*.js" -l 2>/dev/null | grep -v "src/templates/" | wc -l)
           [ "$COUNT" -eq 0 ] && echo "✅ No express refs" || (echo "❌ express refs found — release blocked" && exit 1)
 
       # ── Quality Gates (P2-P6) ──

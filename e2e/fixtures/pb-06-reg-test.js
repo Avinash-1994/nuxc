@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import { getCacheManager } from '../../dist/core/cache-manager.js';
+import { getCacheManager } from '../../src/core/cache-manager.js';
 
 function log(msg) { process.stdout.write(msg + '\n'); }
 
