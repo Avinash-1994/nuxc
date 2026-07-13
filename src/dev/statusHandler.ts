@@ -20,7 +20,7 @@ export class StatusHandler {
     }
 
     async handleRequest(req: http.IncomingMessage, res: http.ServerResponse) {
-        if (req.url === '/__zeptr/status') {
+        if (req.url === '/__lunx/status') {
             const stats = {
                 uptime: Math.floor((Date.now() - this.startTime) / 1000),
                 memory: process.memoryUsage(),

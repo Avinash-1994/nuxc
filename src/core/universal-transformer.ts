@@ -223,8 +223,8 @@ export class UniversalTransformer {
                 const normalizedPath = filePath.replace(/\\/g, '/');
                 const hmrFooter = `
 
-// Zeptr Advanced HMR (React)
-import { createHotContext } from '/@zeptr/client';
+// Lunx Advanced HMR (React)
+import { createHotContext } from '/@lunx/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -251,7 +251,7 @@ if (import.meta.hot) {
                 line: error.loc?.line,
                 column: error.loc?.column,
                 type: 'Transformation Error',
-                plugin: 'zeptr:universal-transformer'
+                plugin: 'lunx:universal-transformer'
             });
 
             // Re-throw the error instead of falling back
@@ -270,7 +270,7 @@ if (import.meta.hot) {
         try {
             let compiler: any;
             try {
-                // Try: user project first, then zeptr's own node_modules (zeptr ships @vue/compiler-sfc as a dep)
+                // Try: user project first, then lunx's own node_modules (lunx ships @vue/compiler-sfc as a dep)
                 const searchPaths = [this.root, process.cwd(), fileURLToPath(new URL('../..', import.meta.url))];
                 const compilerPath = _require.resolve('@vue/compiler-sfc', { paths: searchPaths });
                 const compilerUrl = pathToFileURL(compilerPath).href;
@@ -285,8 +285,8 @@ if (import.meta.hot) {
 const _sfc_main = { template: \`${code.replace(/`/g, '\\`')}\` };
 export default _sfc_main;
 
-// Zeptr Advanced HMR (Vue - Fallback)
-import { createHotContext } from '/@zeptr/client';
+// Lunx Advanced HMR (Vue - Fallback)
+import { createHotContext } from '/@lunx/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -402,8 +402,8 @@ if (import.meta.hot) {
                 const normalizedPath = filePath.replace(/\\/g, '/');
                 output += `
 
-// Zeptr Advanced HMR (Vue)
-import { createHotContext } from '/@zeptr/client';
+// Lunx Advanced HMR (Vue)
+import { createHotContext } from '/@lunx/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -466,8 +466,8 @@ if (import.meta.hot) {
                 const componentId = canonicalHash(filePath).substring(0, 16);
                 finalCode += `
 
-// Zeptr Advanced HMR (Svelte)
-import { createHotContext } from '/@zeptr/client';
+// Lunx Advanced HMR (Svelte)
+import { createHotContext } from '/@lunx/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -475,7 +475,7 @@ if (import.meta.hot) {
     import.meta.hot.accept((newModule) => {
         if (!newModule) return;
         // Svelte HMR: Re-create component instances
-        const instances = window.__ZEPTR_SVELTE_INSTANCES__ || (window.__ZEPTR_SVELTE_INSTANCES__ = new Map());
+        const instances = window.__LUNX_SVELTE_INSTANCES__ || (window.__LUNX_SVELTE_INSTANCES__ = new Map());
         const componentInstances = instances.get("${componentId}") || [];
         componentInstances.forEach(instance => {
             if (instance && instance.$set) {
@@ -519,20 +519,20 @@ if (import.meta.hot) {
                 const compilerInitStart = performance.now();
                 const ts = await import('typescript');
                 const compilerInitTime = (performance.now() - compilerInitStart).toFixed(4);
-                console.log(`[ZEPTR-TEST] Angular compiler init time: ${compilerInitTime}ms`);
+                console.log(`[LUNX-TEST] Angular compiler init time: ${compilerInitTime}ms`);
 
                 // Check if this file is in cache by hash
                 const fsSyncModule = await import('fs');
                 const cryptoModule = await import('crypto');
                 const cacheKey = cryptoModule.createHash('sha256').update(code).update(filePath).digest('hex');
-                const cacheFile = `/tmp/zeptr-ang-cache-${cacheKey.substring(0, 16)}`;
+                const cacheFile = `/tmp/lunx-ang-cache-${cacheKey.substring(0, 16)}`;
                 const isHit = fsSyncModule.existsSync(cacheFile);
                 if (isHit) {
-                    console.log(`[ZEPTR-TEST] Ivy cache hit (served from cache)`);
-                    fsSyncModule.writeFileSync('/tmp/zeptr-hmr-status.txt', 'hit');
+                    console.log(`[LUNX-TEST] Ivy cache hit (served from cache)`);
+                    fsSyncModule.writeFileSync('/tmp/lunx-hmr-status.txt', 'hit');
                 } else {
-                    console.log(`[ZEPTR-TEST] Ivy recompile: yes`);
-                    fsSyncModule.writeFileSync('/tmp/zeptr-hmr-status.txt', 'recompile');
+                    console.log(`[LUNX-TEST] Ivy recompile: yes`);
+                    fsSyncModule.writeFileSync('/tmp/lunx-hmr-status.txt', 'recompile');
                     // Mark as cached for subsequent requests
                     fsSyncModule.writeFileSync(cacheFile, '1');
                 }
@@ -559,8 +559,8 @@ if (import.meta.hot) {
                         const componentId = canonicalHash(filePath).substring(0, 16);
                         finalCode += `
 
-// Zeptr Advanced HMR (Angular)
-import { createHotContext } from '/@zeptr/client';
+// Lunx Advanced HMR (Angular)
+import { createHotContext } from '/@lunx/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -568,7 +568,7 @@ if (import.meta.hot) {
     import.meta.hot.accept((newModule) => {
         if (!newModule) return;
         // Angular HMR: Re-bootstrap components
-        const registry = window.__ZEPTR_ANGULAR_REGISTRY__ || (window.__ZEPTR_ANGULAR_REGISTRY__ = new Map());
+        const registry = window.__LUNX_ANGULAR_REGISTRY__ || (window.__LUNX_ANGULAR_REGISTRY__ = new Map());
         const components = registry.get("${componentId}") || [];
         components.forEach(({ componentRef, viewContainerRef }) => {
             if (componentRef && viewContainerRef) {
@@ -639,8 +639,8 @@ if (import.meta.hot) {
                 const normalizedPath = filePath.replace(/\\/g, '/');
                 const hmrFooter = `
 
-// Zeptr Advanced HMR (Solid)
-import { createHotContext } from '/@zeptr/client';
+// Lunx Advanced HMR (Solid)
+import { createHotContext } from '/@lunx/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -648,7 +648,7 @@ if (import.meta.hot) {
     import.meta.hot.accept((newModule) => {
         if (!newModule) return;
         // Solid HMR: Re-render root components
-        const roots = window.__ZEPTR_SOLID_ROOTS__ || (window.__ZEPTR_SOLID_ROOTS__ = new Map());
+        const roots = window.__LUNX_SOLID_ROOTS__ || (window.__LUNX_SOLID_ROOTS__ = new Map());
         const componentRoots = roots.get("${normalizedPath}") || [];
         componentRoots.forEach(({ dispose, container, component }) => {
             if (dispose) dispose();
@@ -687,8 +687,8 @@ if (import.meta.hot) {
                     const normalizedPath = filePath.replace(/\\/g, '/');
                     const hmrFooter = `
 
-// Zeptr Advanced HMR (Solid - Fallback)
-import { createHotContext } from '/@zeptr/client';
+// Lunx Advanced HMR (Solid - Fallback)
+import { createHotContext } from '/@lunx/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -807,8 +807,8 @@ if (import.meta.hot) {
                 const componentId = canonicalHash(filePath).substring(0, 16);
                 finalCode += `
 
-// Zeptr Advanced HMR (Lit)
-import { createHotContext } from '/@zeptr/client';
+// Lunx Advanced HMR (Lit)
+import { createHotContext } from '/@lunx/client';
 if (!import.meta.hot) {
     import.meta.hot = createHotContext("${normalizedPath}");
 }
@@ -816,7 +816,7 @@ if (import.meta.hot) {
     import.meta.hot.accept((newModule) => {
         if (!newModule) return;
         // Lit HMR: Re-register custom elements
-        const registry = window.__ZEPTR_LIT_REGISTRY__ || (window.__ZEPTR_LIT_REGISTRY__ = new Map());
+        const registry = window.__LUNX_LIT_REGISTRY__ || (window.__LUNX_LIT_REGISTRY__ = new Map());
         const elements = registry.get("${componentId}") || [];
         elements.forEach(({ tagName, constructor }) => {
             const instances = document.querySelectorAll(tagName);

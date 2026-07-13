@@ -1,5 +1,5 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { tsRouterPlugin } from './router-plugin.js';
 
 export interface TanStackConfig {
@@ -7,7 +7,7 @@ export interface TanStackConfig {
   serverOnly?: boolean;    // default: false
 }
 
-export class TanStackAdapter implements ZeptrAdapter {
+export class TanStackAdapter implements LunxAdapter {
   name = 'tanstack-start';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class TanStackAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.tanstack) config.tanstack = {};
     config.tanstack = {
       ssr: true,
@@ -36,7 +36,7 @@ export class TanStackAdapter implements ZeptrAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:zeptr/tanstack-routes';
+         const virtualEntry = 'virtual:lunx/tanstack-routes';
          let manifest: any;
          try {
             manifest = await import(virtualEntry);
@@ -79,7 +79,7 @@ export class TanStackAdapter implements ZeptrAdapter {
 
          next();
       } catch(e) {
-         console.error('[Zeptr:TanStack] Dev Middleware SSR Error', e);
+         console.error('[Lunx:TanStack] Dev Middleware SSR Error', e);
          next();
       }
     };

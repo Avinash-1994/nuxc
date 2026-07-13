@@ -1,6 +1,6 @@
 
 /**
- * Zeptr Environment API
+ * Lunx Environment API
  * Unified Runtime for Browser, Node, and Edge
  * Day 26: Environment API Lock
  */
@@ -11,8 +11,8 @@ export interface EnvConfig {
     base: string;
 }
 
-export class ZeptrEnv {
-    private static instance: ZeptrEnv;
+export class LunxEnv {
+    private static instance: LunxEnv;
     public config: EnvConfig;
     private listeners: Function[] = [];
 
@@ -20,18 +20,18 @@ export class ZeptrEnv {
         this.config = config;
     }
 
-    static init(config: EnvConfig): ZeptrEnv {
-        if (!ZeptrEnv.instance) {
-            ZeptrEnv.instance = new ZeptrEnv(config);
+    static init(config: EnvConfig): LunxEnv {
+        if (!LunxEnv.instance) {
+            LunxEnv.instance = new LunxEnv(config);
         }
-        return ZeptrEnv.instance;
+        return LunxEnv.instance;
     }
 
-    static get(): ZeptrEnv {
-        if (!ZeptrEnv.instance) {
-            throw new Error('ZeptrEnv not initialized');
+    static get(): LunxEnv {
+        if (!LunxEnv.instance) {
+            throw new Error('LunxEnv not initialized');
         }
-        return ZeptrEnv.instance;
+        return LunxEnv.instance;
     }
 
     /**

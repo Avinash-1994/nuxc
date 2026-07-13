@@ -217,6 +217,8 @@ export interface GraphNode {
 /** Simple function to test native bindings */
 export declare function helloRust(): string
 
+export declare function lunxChunk(graphJson: string, config: ChunkerConfig): ChunkerResult
+
 /**
  * Merge an ordered list of serialised source maps into a single map.
  *
@@ -231,8 +233,6 @@ export declare function minifySync(code: string): string
 
 /** Fast string operations for module resolution */
 export declare function normalizePath(path: string): string
-
-export declare function zeptrChunk(graphJson: string, config: ChunkerConfig): ChunkerResult
 
 /** Orchestrator statistics */
 export interface OrchestratorStats {
@@ -250,7 +250,7 @@ export interface OrchestratorStats {
  * {
  *   "swcVersion": "0.90.x",
  *   "cssVersion": "1.0.0-alpha.58",
- *   "configHash": "<xxh3 of zeptr.config>",
+ *   "configHash": "<xxh3 of lunx.config>",
  *   "modules": [
  *     {
  *       "id": "abc123",
@@ -279,7 +279,7 @@ export declare function planBuild(manifestJson: string): TaskPlan
 export declare function prebundle(modulesJson: string, config: PrebundleConfig): Array<PrebundleEntry>
 
 export interface PrebundleConfig {
-  /** Path to .zeptr_cache directory */
+  /** Path to .lunx_cache directory */
   cacheRoot: string
 }
 

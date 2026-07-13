@@ -1,20 +1,20 @@
 /**
  * Plugin System Test Suite — Agent 5
- * Tests the Zeptr plugin system: load hooks, transform hooks, virtual modules,
+ * Tests the Lunx plugin system: load hooks, transform hooks, virtual modules,
  * ordering, error handling, and context APIs.
  */
 
 import { PluginManager } from '../../src/core/plugins/manager.js';
-import type { ZeptrPlugin } from '../../src/core/plugins/types.js';
+import type { LunxPlugin } from '../../src/core/plugins/types.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 
-const TMP = path.join(os.tmpdir(), 'zeptr-plugin-tests');
+const TMP = path.join(os.tmpdir(), 'lunx-plugin-tests');
 fs.mkdirSync(TMP, { recursive: true });
 
-// Helper: build a minimal ZeptrPlugin
-function makePlugin(name: string, runHookFn: ZeptrPlugin['runHook']): ZeptrPlugin {
+// Helper: build a minimal LunxPlugin
+function makePlugin(name: string, runHookFn: LunxPlugin['runHook']): LunxPlugin {
     return {
         id: name,
         manifest: {

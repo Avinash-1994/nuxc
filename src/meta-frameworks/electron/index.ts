@@ -1,5 +1,5 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { electronPlugin } from './electron-plugin.js';
 
 export interface ElectronConfig {
@@ -7,7 +7,7 @@ export interface ElectronConfig {
   preloadSrc?: string;    // default 'electron/preload.ts'
 }
 
-export class ElectronAdapter implements ZeptrAdapter {
+export class ElectronAdapter implements LunxAdapter {
   name = 'electron';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class ElectronAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.electron) config.electron = {};
     config.electron = {
       mainSrc: 'electron/main.ts',
@@ -32,10 +32,10 @@ export class ElectronAdapter implements ZeptrAdapter {
 
   getDevHandler(): Middleware {
     return async (req: any, res: any, next: any) => {
-      // Set ELECTRON_DEV_SERVER_URL for the main process to load renderer from Zeptr dev server
+      // Set ELECTRON_DEV_SERVER_URL for the main process to load renderer from Lunx dev server
       const devUrl = process.env.ELECTRON_DEV_SERVER_URL || `http://localhost:${req?.socket?.localPort || 5173}`;
-      res.setHeader('X-Zeptr-Electron-Dev-URL', devUrl);
-      // Renderer requests are served directly by the Zeptr HMR dev server
+      res.setHeader('X-Lunx-Electron-Dev-URL', devUrl);
+      // Renderer requests are served directly by the Lunx HMR dev server
       next();
     };
   }

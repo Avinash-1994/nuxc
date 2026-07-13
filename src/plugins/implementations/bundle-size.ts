@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-bundle-size
+ * @lunx/plugin-bundle-size
  * Bundle size tracking
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createBundleSizePlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-bundle-size',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-bundle-size',
+        originalPlugin: 'lunx-native',
         
         async buildStart() {
-            console.log('[@zeptr/plugin-bundle-size] Starting performance optimization...');
+            console.log('[@lunx/plugin-bundle-size] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createBundleSizePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@zeptr/plugin-bundle-size] Performance optimization complete');
+            console.log('[@lunx/plugin-bundle-size] Performance optimization complete');
         }
     };
 }

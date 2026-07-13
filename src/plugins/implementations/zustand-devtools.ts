@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-zustand-devtools
+ * @lunx/plugin-zustand-devtools
  * Zustand DevTools integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createZustandDevtoolsPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-zustand-devtools',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-zustand-devtools',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // State management: Zustand DevTools integration
@@ -16,7 +16,7 @@ export function createZustandDevtoolsPlugin(): PluginAdapter {
         },
 
         async buildStart() {
-            console.log('[@zeptr/plugin-zustand-devtools] State management initialized');
+            console.log('[@lunx/plugin-zustand-devtools] State management initialized');
         }
     };
 }

@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { registry } from '@zeptr/adapter-core';
+import { registry } from '@lunx/adapter-core';
 
 export interface NuxtAdapterOptions {
   ssr?: boolean;
@@ -163,7 +163,7 @@ export class NuxtAdapter {
 
   createPlugin() {
     return {
-      name: 'zeptr-nuxt-adapter',
+      name: 'lunx-nuxt-adapter',
       setup: async () => {
         await this.setupNitroBridge();
       },

@@ -1,4 +1,4 @@
-# Zeptr Governance Model — Operational Truth
+# Lunx Governance Model — Operational Truth
 
 **Status**: 🔒 Active (Phase H2.3)  
 **Version**: 1.0.0  
@@ -34,10 +34,10 @@ Every plugin has a category that determines:
 - ✅ Performance benchmarked
 
 **Examples**:
-- `zeptr:js-transform` (Universal transformer)
-- `zeptr:assets` (Hashed asset pipeline)
-- `zeptr:postcss` (CSS processing)
-- `zeptr:federation` (Module federation)
+- `lunx:js-transform` (Universal transformer)
+- `lunx:assets` (Hashed asset pipeline)
+- `lunx:postcss` (CSS processing)
+- `lunx:federation` (Module federation)
 
 **Guarantees**:
 - No breaking changes in minor versions
@@ -61,9 +61,9 @@ Every plugin has a category that determines:
 - ⚠️ Not in official docs (linked only)
 
 **Examples**:
-- `zeptr-plugin-graphql` (Community)
-- `zeptr-plugin-wasm` (Community)
-- `zeptr-plugin-mdx` (Community)
+- `lunx-plugin-graphql` (Community)
+- `lunx-plugin-wasm` (Community)
+- `lunx-plugin-mdx` (Community)
 
 **Guarantees**:
 - **NONE**
@@ -87,9 +87,9 @@ Every plugin has a category that determines:
 - 🧪 Not recommended for production
 
 **Examples**:
-- `zeptr:ai-optimizer` (Experimental)
-- `zeptr:edge-runtime` (Experimental)
-- `zeptr:ssr-streaming` (Experimental)
+- `lunx:ai-optimizer` (Experimental)
+- `lunx:edge-runtime` (Experimental)
+- `lunx:ssr-streaming` (Experimental)
 
 **Guarantees**:
 - **NONE**
@@ -105,19 +105,19 @@ Every plugin has a category that determines:
 
 | Plugin Name | Category | Owner | Risk Level | Snapshot Tested | Docs |
 |-------------|----------|-------|------------|-----------------|------|
-| `zeptr:js-transform` | Official | Core Team | Low | ✅ | ✅ |
-| `zeptr:assets` | Official | Core Team | Low | ✅ | ✅ |
-| `zeptr:postcss` | Official | Core Team | Low | ✅ | ✅ |
-| `zeptr:federation` | Official | Core Team | Medium | ✅ | ✅ |
-| `zeptr:react-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `zeptr:vue-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `zeptr:svelte-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `zeptr:solid-preset` | Official | Core Team | Low | ✅ | ✅ |
-| `zeptr:angular-preset` | Official | Core Team | Medium | ✅ | ✅ |
-| `zeptr:ai-optimizer` | Experimental | Core Team | High | ❌ | ⚠️ |
-| `zeptr:edge-runtime` | Experimental | Core Team | High | ❌ | ⚠️ |
-| `zeptr-plugin-graphql` | Community | @community | Unknown | ❌ | ❌ |
-| `zeptr-plugin-wasm` | Community | @community | Unknown | ❌ | ❌ |
+| `lunx:js-transform` | Official | Core Team | Low | ✅ | ✅ |
+| `lunx:assets` | Official | Core Team | Low | ✅ | ✅ |
+| `lunx:postcss` | Official | Core Team | Low | ✅ | ✅ |
+| `lunx:federation` | Official | Core Team | Medium | ✅ | ✅ |
+| `lunx:react-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `lunx:vue-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `lunx:svelte-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `lunx:solid-preset` | Official | Core Team | Low | ✅ | ✅ |
+| `lunx:angular-preset` | Official | Core Team | Medium | ✅ | ✅ |
+| `lunx:ai-optimizer` | Experimental | Core Team | High | ❌ | ⚠️ |
+| `lunx:edge-runtime` | Experimental | Core Team | High | ❌ | ⚠️ |
+| `lunx-plugin-graphql` | Community | @community | Unknown | ❌ | ❌ |
+| `lunx-plugin-wasm` | Community | @community | Unknown | ❌ | ❌ |
 
 ---
 
@@ -265,5 +265,5 @@ No exceptions.
 
 ---
 
-**Signed**: Zeptr Core Team  
+**Signed**: Lunx Core Team  
 **Effective**: Phase H2.3 Complete

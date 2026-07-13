@@ -243,8 +243,8 @@ function broadcast(clients: Set<any>, message: any) {
 // ===== File Watcher =====
 function watchConfigFile(root: string, onChange: (config: any) => void) {
     const configPaths = [
-        path.join(root, 'zeptr.build.json'),
-        path.join(root, 'zeptr.build.ts')
+        path.join(root, 'lunx.build.json'),
+        path.join(root, 'lunx.build.ts')
     ];
 
     configPaths.forEach(configPath => {

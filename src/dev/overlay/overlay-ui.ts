@@ -1,6 +1,6 @@
 
 /**
- * Zeptr Error Overlay UI
+ * Lunx Error Overlay UI
  * Implementation: Web Component with Shadow DOM
  * Day 15: Reliable Error Overlay Lock
  */
@@ -84,7 +84,7 @@ const STYLE = `
 }
 `;
 
-export class ZeptrErrorOverlay extends HTMLElement {
+export class LunxErrorOverlay extends HTMLElement {
     root: ShadowRoot;
 
     constructor() {
@@ -146,6 +146,6 @@ export class ZeptrErrorOverlay extends HTMLElement {
     }
 }
 
-if (!customElements.get('zeptr-error-overlay')) {
-    customElements.define('zeptr-error-overlay', ZeptrErrorOverlay);
+if (!customElements.get('lunx-error-overlay')) {
+    customElements.define('lunx-error-overlay', LunxErrorOverlay);
 }

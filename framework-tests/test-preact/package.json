@@ -1,24 +1,24 @@
 {
-  "name": "zeptr-preact-template",
+  "name": "lunx-preact-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build",
-    "preview": "zeptr preview"
+    "dev": "lunx dev",
+    "build": "lunx build",
+    "preview": "lunx preview"
   },
-  "zeptr": {
+  "lunx": {
     "template": true,
     "framework": "preact",
-    "description": "Zeptr Weather — real weather dashboard"
+    "description": "Lunx Weather — real weather dashboard"
   },
   "dependencies": {
     "@preact/signals": "^2.9.0",
     "preact": "^10.22.0"
   },
   "devDependencies": {
-    "zeptr": "file:../../",
+    "lunx": "file:../../",
     "typescript": "5.4.5"
   }
 }

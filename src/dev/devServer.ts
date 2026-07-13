@@ -19,11 +19,11 @@ let NativeWorker: any;
 
 try {
   const candidates = [
-    path.resolve(__dirname, '../../zeptr_native.node'), // From src/dev/devServer.ts
-    path.resolve(__dirname, '../zeptr_native.node'),    // From dist/dev/devServer.js
-    path.resolve(__dirname, './zeptr_native.node'),     // From dist/
-    path.resolve(process.cwd(), 'zeptr_native.node'),   // Root fallback
-    path.resolve(process.cwd(), 'dist/zeptr_native.node')
+    path.resolve(__dirname, '../../lunx_native.node'), // From src/dev/devServer.ts
+    path.resolve(__dirname, '../lunx_native.node'),    // From dist/dev/devServer.js
+    path.resolve(__dirname, './lunx_native.node'),     // From dist/
+    path.resolve(process.cwd(), 'lunx_native.node'),   // Root fallback
+    path.resolve(process.cwd(), 'dist/lunx_native.node')
   ];
 
   let pathFound = '';
@@ -107,7 +107,7 @@ async function rewriteImports(code: string, rootDir: string, preBundledDeps?: Ma
           if (singletonRedirects.has(pkgRoot)) {
             const safeName = specifier.replace(/[/@]/g, '_');
             const hostBase = singletonRedirects.get(pkgRoot)!;
-            const singletonUrl = `${hostBase}/@zeptr-deps/${safeName}.js?v=${Date.now()}`;
+            const singletonUrl = `${hostBase}/@lunx-deps/${safeName}.js?v=${Date.now()}`;
             replacements.push({ start: node.start, end: node.end, replacement: `'${singletonUrl}'` });
             return;
           }
@@ -131,7 +131,7 @@ async function rewriteImports(code: string, rootDir: string, preBundledDeps?: Ma
             if (specifier.endsWith('.js') && !preBundledDeps.has(specifier)) {
               replacement = `/node_modules/${specifier}`;
             } else {
-              replacement = `/@zeptr-deps/${safeName}.js?v=${Date.now()}`;
+              replacement = `/@lunx-deps/${safeName}.js?v=${Date.now()}`;
             }
           }
         }
@@ -205,7 +205,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   function _mark(name: string) { _phases.push({ name, ms: Date.now() - _t0 }); }
   function _printStartupDiagnostics(port: number) {
     const total = Date.now() - _t0;
-    process.stderr.write('\n┌─ Zeptr startup diagnostics ─────────────────\n');
+    process.stderr.write('\n┌─ Lunx startup diagnostics ─────────────────\n');
     let prev = 0;
     for (const p of _phases) {
       const dur = p.ms - prev;
@@ -262,7 +262,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
   // Filter public env vars — also loads .env / .env.development / .env.local files
   let publicEnv: Record<string, string | undefined> = Object.keys(process.env)
-    .filter(key => key.startsWith('ZEPTR_') || key.startsWith('PUBLIC_') || key === 'NODE_ENV')
+    .filter(key => key.startsWith('LUNX_') || key.startsWith('PUBLIC_') || key === 'NODE_ENV')
     .reduce((acc, key) => ({ ...acc, [key]: process.env[key] }), {
       NODE_ENV: process.env.NODE_ENV || 'development'
     });
@@ -299,8 +299,9 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   // ─── Initialize Adapter Registry for Meta-frameworks ───
   let activeAdapter: any = null;
   try {
-    const { registry } = await import('@zeptr/adapter-core');
+    const { registry } = await import('@lunx/adapter-core');
     // Pre-register all meta-framework adapters so registry.detect works
+    await import('../meta-frameworks/nextjs/index.js').catch(() => {});
     await import('../meta-frameworks/sveltekit/index.js').catch(() => {});
     await import('../meta-frameworks/solidstart/index.js').catch(() => {});
     await import('../meta-frameworks/nuxt/index.js').catch(() => {});
@@ -379,12 +380,12 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   if (cfg.federation?.remotes && Object.keys(cfg.federation.remotes).length > 0) {
     const remoteNames = Object.keys(cfg.federation.remotes).map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
     pluginManager.register({
-      name: 'zeptr-federation-dev',
+      name: 'lunx-federation-dev',
       transform(code, id) {
         const regex = new RegExp('\\bimport\\s*\\(\\s*["\'](' + remoteNames + ')\\/([^"\']+)["\']\\s*\\)', 'g');
         if (!regex.test(code)) return code;
         return code.replace(regex, (_, remote, modulePath) => {
-          return `globalThis.__zeptr_import__("${remote}/${modulePath}")`;
+          return `globalThis.__lunx_import__("${remote}/${modulePath}")`;
         });
       }
     });
@@ -394,10 +395,10 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   // Vue Support removed - Handled by UniversalTransformer
 
   const { DependencyPreBundler } = await import('./preBundler.js');
-  // Phase 1.10: resolve cache dir from config. Default: '<root>/.zeptr/cache'.
+  // Phase 1.10: resolve cache dir from config. Default: '<root>/.lunx/cache'.
   const resolvedCacheDir = cfg.cacheDir
     ? path.join(cfg.root, cfg.cacheDir)
-    : path.join(cfg.root, '.zeptr', 'cache');
+    : path.join(cfg.root, '.lunx', 'cache');
   const preBundler = new DependencyPreBundler(cfg.root, resolvedCacheDir);
 
   // Initialize Live Config Manager
@@ -495,7 +496,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       // ── Server-only packages that must NEVER be pre-bundled as browser ESM ──
       // These packages use Node.js built-ins (node:fs, node:url, etc.) and are
       // only used in the server/build pipeline, not in browser code.
-      // Zeptr understands the SSR boundary better than any other build tool.
+      // Lunx understands the SSR boundary better than any other build tool.
       const SERVER_ONLY_PACKAGES = new Set([
         // Meta-framework cores (all Node.js SSR engines)
         'astro', '@astrojs/compiler', '@astrojs/prism',
@@ -571,7 +572,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         line: error?.loc?.line,
         column: error?.loc?.column,
         type: 'Build Error',
-        plugin: 'zeptr:pipeline'
+        plugin: 'lunx:pipeline'
       });
       log.error('→ Dev Server: Warmup build failed - Fix the errors above');
     } else {
@@ -616,7 +617,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       httpsOptions = cfg.server.https;
     } else {
       // Generate self-signed cert
-      const certDir = path.join(cfg.root, '.zeptr', 'certs');
+      const certDir = path.join(cfg.root, '.lunx', 'certs');
       await fs.mkdir(certDir, { recursive: true });
       const keyPath = path.join(certDir, 'dev.key');
       const certPath = path.join(certDir, 'dev.crt');
@@ -818,15 +819,15 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
     // ── Bug Class B fix: Singleton dep proxy for remote apps ────────────────────
     // When this app is a REMOTE (has `exposes`) with singleton shared deps,
-    // proxy pre-bundled dep requests (/@zeptr-deps/react, etc.) to the shell
+    // proxy pre-bundled dep requests (/@lunx-deps/react, etc.) to the shell
     // so there is exactly one React instance across all federation boundaries.
-    if (cfg.federation?.exposes && cfg.federation.shared && req.url?.startsWith('/@zeptr-deps/')) {
+    if (cfg.federation?.exposes && cfg.federation.shared && req.url?.startsWith('/@lunx-deps/')) {
       const singletonPkgs = Object.entries(cfg.federation.shared)
         .filter(([, v]) => typeof v === 'object' && (v as any).singleton)
         .map(([k]) => k);
       // Strip query string then .js extension: "react.js?v=123" → "react", "react-dom_client.js" → "react-dom"
-      const rawDepPath = req.url.slice('/@zeptr-deps/'.length).split('?')[0];
-      // Convert zeptr safe-name back to pkg name: "react-dom_client.js" → check both "react-dom" and "react"
+      const rawDepPath = req.url.slice('/@lunx-deps/'.length).split('?')[0];
+      // Convert lunx safe-name back to pkg name: "react-dom_client.js" → check both "react-dom" and "react"
       const withoutExt = rawDepPath.replace(/\.js$/, '');
       // rootPkg: take portion before first underscore (for subpath like react_jsx-dev-runtime → react)
       const rootPkgRaw = withoutExt.startsWith('@')
@@ -838,7 +839,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       );
       if (matchedSingleton) {
         const singletonHost = (cfg.federation as any).singletonHost || 'http://localhost:5173';
-        const proxyUrl = `${singletonHost}/@zeptr-deps/${rawDepPath}${req.url.includes('?') ? '?' + req.url.split('?')[1] : ''}`;
+        const proxyUrl = `${singletonHost}/@lunx-deps/${rawDepPath}${req.url.includes('?') ? '?' + req.url.split('?')[1] : ''}`;
         try {
           const { getFetch } = await import('../utils/fetch.js');
           const fetch = await getFetch();
@@ -858,41 +859,54 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     }
 
 
-    // ── Meta-framework Adapter Hook ──
-    if (activeAdapter && typeof activeAdapter.getDevHandler === 'function') {
-      const handler = activeAdapter.getDevHandler();
-      // Attach root so adapters (e.g. Astro) know the project directory
-      (req as any).__zeptrRoot = cfg.root;
-      const handled = await new Promise(resolve => {
-        const originalEnd = res.end;
-        res.end = function (...args: any[]) {
-          resolve(true);
-          return originalEnd.apply(this, args as any);
-        };
-        handler(req, res, () => resolve(false));
-      });
-      if (handled) return;
-    }
-
-
     // Security Scan (Day 41)
     if (!anomalyDetector.scanRequest({ url: req.url || '', headers: req.headers, method: req.method || 'GET' })) {
       res.writeHead(403, { 'Content-Type': 'text/plain' });
-      res.end('Request Blocked by Zeptr Security Shield');
+      res.end('Request Blocked by Lunx Security Shield');
       return;
     }
 
-    if (req.url === '/__zeptr/security') {
+    if (req.url === '/__lunx/security') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(anomalyDetector.getDashboard(), null, 2));
       return;
     }
 
     // Phase 1.11 — Module Registry status endpoint
-    if (req.url === '/__zeptr/registry') {
-      const snapshot = (globalThis as any).__zeptr_registry__?.getRegistry?.() ?? { scopes: {} };
+    if (req.url === '/__lunx/registry') {
+      const snapshot = (globalThis as any).__lunx_registry__?.getRegistry?.() ?? { scopes: {} };
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(snapshot, null, 2));
+      return;
+    }
+
+    // BUG-006 — Plugin Inspect UI at /__lunx_inspect__ (double underscores, not /lunx_inspect)
+    if (req.url === '/__lunx_inspect__' || req.url?.startsWith('/__lunx_inspect__/')) {
+      try {
+        const { inspect } = await import('../../packages/lunx-plugin-inspect/src/index.js');
+        // Serve the inspect UI by constructing a minimal server shim
+        const basePath = '/__lunx_inspect__';
+        const mockServer = {
+          middlewares: {
+            use(fn: Function) {
+              fn(req, res, () => {
+                res.writeHead(404);
+                res.end('Not found');
+              });
+            }
+          }
+        };
+        const plugin = inspect({ basePath });
+        if (plugin.configureServer) {
+          plugin.configureServer(mockServer);
+        } else {
+          res.writeHead(404);
+          res.end('Inspect plugin not available');
+        }
+      } catch {
+        res.writeHead(404);
+        res.end('Inspect plugin not available');
+      }
       return;
     }
 
@@ -928,6 +942,23 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       return;
     }
 
+    // ── Meta-framework Adapter Hook ──
+    if (activeAdapter && typeof activeAdapter.getDevHandler === 'function') {
+      const handler = activeAdapter.getDevHandler();
+      // Attach root so adapters (e.g. Astro) know the project directory
+      (req as any).__lunxRoot = cfg.root;
+      const handled = await new Promise(resolve => {
+        const originalEnd = res.end;
+        res.end = function (...args: any[]) {
+          resolve(true);
+          return originalEnd.apply(this, args as any);
+        };
+        handler(req, res, () => resolve(false));
+      });
+      if (handled) return;
+    }
+
+
     const url = req.url || '/';
 
     // Headers
@@ -960,7 +991,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     if (cfg.preset === 'ssr' && (url === '/' || (!hasExtension && !isInternal && acceptsHtml))) {
       try {
         // @ts-ignore - plugin package removed to clean up orphans
-        const ssrRunner = await import('../../packages/zeptr-ssr/src/runner.js')
+        const ssrRunner = await import('../../packages/lunx-ssr/src/runner.js')
           .catch(() => null as any);
 
         if (ssrRunner?.renderToString) {
@@ -984,7 +1015,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
             try { shell = await fs.readFile(path.join(cfg.root, 'index.html'), 'utf-8'); } catch { }
             if (!shell) shell = '<!DOCTYPE html><html><head><!--head--></head><body><div id="app"><!--app--></div></body></html>';
             const finalHtml = shell
-              .replace('<!--head-->', head + `<script>window.__ZEPTR_STATE__=${state}</script>`)
+              .replace('<!--head-->', head + `<script>window.__LUNX_STATE__=${state}</script>`)
               .replace('<!--app-->', html)
               .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
               .replace('<div id="app"></div>', `<div id="app">${html}</div>`);
@@ -994,7 +1025,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
           }
         }
       } catch (e: any) {
-        log.warn(`[zeptr:ssr] renderToString failed for ${url}: ${e.message} — falling through`);
+        log.warn(`[lunx:ssr] renderToString failed for ${url}: ${e.message} — falling through`);
       }
     }
 
@@ -1056,7 +1087,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
         // Inject only client runtime
         let clientScript = `
-    <script type="module" src="/@zeptr/hmr-client"></script>
+    <script type="module" src="/@lunx/hmr-client"></script>
         `;
 
         // Federation runtime injection for host apps
@@ -1075,9 +1106,9 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
               if (isSingleton) {
                 // Map the bare specifier to the host's pre-bundled chunk
                 const hostOrigin = `http://localhost:${cfg.server?.port || cfg.port || 5173}`;
-                singletonEntries.push(`    "${pkg}": "${hostOrigin}/@zeptr-deps/${pkg}"`);
+                singletonEntries.push(`    "${pkg}": "${hostOrigin}/@lunx-deps/${pkg}"`);
                 // Also cover scoped variants (e.g. react-dom/client)
-                singletonEntries.push(`    "${pkg}/": "${hostOrigin}/@zeptr-deps/${pkg}/"`);
+                singletonEntries.push(`    "${pkg}/": "${hostOrigin}/@lunx-deps/${pkg}/"`);
               }
             }
             if (singletonEntries.length > 0) {
@@ -1100,7 +1131,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
         if (isReact) {
           if (process.env.DEBUG) {
-            log.info('[Zeptr] Injecting React Refresh Preamble', { category: 'server' });
+            log.info('[Lunx] Injecting React Refresh Preamble', { category: 'server' });
           }
           preamble += `
     <script type="module">
@@ -1119,9 +1150,9 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         // Phase 1.11 — inject registry bootstrap before federation runtime
         let registryScript = '';
         try {
-          const { generateRegistryInitTag } = await import('../../packages/zeptr-module-registry/src/browser-runtime.js')
+          const { generateRegistryInitTag } = await import('../../packages/lunx-module-registry/src/browser-runtime.js')
             // @ts-ignore
-            .catch(() => import('../../../packages/zeptr-module-registry/src/browser-runtime.js')
+            .catch(() => import('../../../packages/lunx-module-registry/src/browser-runtime.js')
             .catch(() => ({ generateRegistryInitTag: null })));
           if (generateRegistryInitTag) {
             registryScript = (generateRegistryInitTag as () => string)();
@@ -1163,10 +1194,10 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
     }
 
     // Serve pre-bundled dependencies
-    if (url.startsWith('/@zeptr-deps/')) {
+    if (url.startsWith('/@lunx-deps/')) {
       // Strip query parameters
       const cleanUrl = url.split('?')[0];
-      const depFile = cleanUrl.replace('/@zeptr-deps/', '');
+      const depFile = cleanUrl.replace('/@lunx-deps/', '');
       const depPath = path.join(resolvedCacheDir, depFile);
       try {
         const content = await fs.readFile(depPath, 'utf-8');
@@ -1178,12 +1209,12 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       } catch (error) {
         // Dep file doesn't exist (e.g. Svelte 5 internal requested on Svelte 4 project).
         // Serve empty ESM module so the page loads gracefully instead of crashing with 404.
-        log.debug(`[ZeptrDepS] Not found, serving empty module: ${depFile}`);
+        log.debug(`[LunxDepS] Not found, serving empty module: ${depFile}`);
         res.writeHead(200, {
           'Content-Type': 'application/javascript',
           'Cache-Control': 'no-cache, no-store, must-revalidate'
         });
-        res.end(`// zeptr: empty stub for missing dep: ${depFile}\nexport default {};\n`);
+        res.end(`// lunx: empty stub for missing dep: ${depFile}\nexport default {};\n`);
       }
       return;
     }
@@ -1237,7 +1268,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
 
 
 
-    if (url === '/@zeptr/client') {
+    if (url === '/@lunx/client') {
       const clientPath = path.resolve(__dirname, '../runtime/client.ts');
       try {
         const raw = await fs.readFile(clientPath, 'utf-8');
@@ -1254,13 +1285,13 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
           res.end(client);
         } catch (e2) {
           res.writeHead(404);
-          res.end('Zeptr client runtime not found');
+          res.end('Lunx client runtime not found');
         }
       }
       return;
     }
 
-    if (url === '/@zeptr/error-overlay.js') {
+    if (url === '/@lunx/error-overlay.js') {
       // Also transform error-overlay if ts
       const overlayPath = path.resolve(__dirname, '../runtime/error-overlay.ts');
       try {
@@ -1278,15 +1309,15 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
           res.end(overlay);
         } catch (e2) {
           res.writeHead(404);
-          res.end('Zeptr error overlay not found');
+          res.end('Lunx error overlay not found');
         }
       }
       return;
     }
 
     // Phase 3.4 — HMR client runtime route
-    if (url === '/@zeptr/hmr-client' || url === '/@zeptr/hmr-client.js') {
-      const srcPath = path.resolve(__dirname, '../../packages/zeptr-hmr-client/src/index.ts');
+    if (url === '/@lunx/hmr-client' || url === '/@lunx/hmr-client.js') {
+      const srcPath = path.resolve(__dirname, '../../packages/lunx-hmr-client/src/index.ts');
       try {
         const raw = await fs.readFile(srcPath, 'utf-8');
         const { transform } = await import('esbuild');
@@ -1294,28 +1325,28 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
         res.writeHead(200, { 'Content-Type': 'application/javascript' });
         res.end(result.code);
       } catch (e: any) {
-        log.warn(`[zeptr] /@zeptr/hmr-client: ${e.message}`);
-        res.writeHead(404); res.end('/* @zeptr/hmr-client not built */');
+        log.warn(`[lunx] /@lunx/hmr-client: ${e.message}`);
+        res.writeHead(404); res.end('/* @lunx/hmr-client not built */');
       }
       return;
     }
 
     // Phase 3.5 — Module registry route
-    if (url === '/@zeptr/module-registry' || url === '/@zeptr/module-registry.js') {
-      const srcPath = path.resolve(__dirname, '../../packages/zeptr-module-registry/src/index.ts');
+    if (url === '/@lunx/module-registry' || url === '/@lunx/module-registry.js') {
+      const srcPath = path.resolve(__dirname, '../../packages/lunx-module-registry/src/index.ts');
       try {
         const raw = await fs.readFile(srcPath, 'utf-8');
         const { transform } = await import('esbuild');
         const result = await transform(raw, { loader: 'ts', format: 'esm', target: 'es2020' });
         const remotes = (cfg as any).federation?.remotes ?? {};
         const initCall = Object.keys(remotes).length
-          ? `\nimport{__zeptr_registry_init__ as _ri}from '/@zeptr/module-registry';_ri(${JSON.stringify(remotes)});\n`
+          ? `\nimport{__lunx_registry_init__ as _ri}from '/@lunx/module-registry';_ri(${JSON.stringify(remotes)});\n`
           : '';
         res.writeHead(200, { 'Content-Type': 'application/javascript' });
         res.end(result.code + initCall);
       } catch (e: any) {
-        log.warn(`[zeptr] /@zeptr/module-registry: ${e.message}`);
-        res.writeHead(404); res.end('/* @zeptr/module-registry not built */');
+        log.warn(`[lunx] /@lunx/module-registry: ${e.message}`);
+        res.writeHead(404); res.end('/* @lunx/module-registry not built */');
       }
       return;
     }
@@ -1746,7 +1777,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
       if (ext === '.html') {
         mime = 'text/html';
         let html = data.toString('utf-8');
-        let clientScript = `\n<script type="module" src="/@zeptr/hmr-client"></script>\n`;
+        let clientScript = `\n<script type="module" src="/@lunx/hmr-client"></script>\n`;
         let preamble = `
     <script>
       window.$RefreshReg$ = () => {};
@@ -1814,12 +1845,12 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
           // Serve a JS fallback that throws in console and triggers overlay
           res.writeHead(200, { 'Content-Type': 'application/javascript' });
           res.end(`
-            console.error("[Zeptr Build Error]", ${JSON.stringify(e.message)});
+            console.error("[Lunx Build Error]", ${JSON.stringify(e.message)});
             const error = ${JSON.stringify(errorData)};
-            if (window.__ZEPTR_ERROR_OVERLAY__) {
-              window.__ZEPTR_ERROR_OVERLAY__.show(error);
+            if (window.__LUNX_ERROR_OVERLAY__) {
+              window.__LUNX_ERROR_OVERLAY__.show(error);
             }
-            throw new Error("[Zeptr Build Error] See overlay for details");
+            throw new Error("[Lunx Build Error] See overlay for details");
           `);
           return;
         }
@@ -1835,7 +1866,7 @@ export async function startDevServer(cliCfg: BuildConfig, existingServer?: any) 
   let server;
   if (existingServer) {
     server = existingServer;
-    (server as any).__zeptr_handler = requestHandler;
+    (server as any).__lunx_handler = requestHandler;
   } else {
     const { createUWSServer } = await import('./uWS-shim.js');
     server = createUWSServer(httpsOptions);

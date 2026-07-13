@@ -7,7 +7,7 @@ import { rewriteWasmPlugins } from '../../../dist/src/migrate/wasm-rewriter.js';
 async function run() {
     console.log('Testing Phase 1.1 Requirements...');
     const manager = new PluginManager();
-    const config = await import('./zeptr.config.ts').catch(() => import('./zeptr.config.js'));
+    const config = await import('./lunx.config.ts').catch(() => import('./lunx.config.js'));
     const plugins = config.default ? config.default.plugins : config.plugins;
 
     // Test 1: Load 5 rewriten JS hooks and verify order
@@ -47,9 +47,9 @@ async function run() {
         console.log('✅ TEST 2.1 PASS: .wasm path triggers deprecation.');
     }
 
-    // Test 3: zeptr migrate rewrites wasm plugin refs
-    console.log('[TEST] Checking zeptr migrate...');
-    const dummyConfigPath = path.join(process.cwd(), 'e2e/fixtures/plugin-migration-app/zeptr.config.dummy.js');
+    // Test 3: lunx migrate rewrites wasm plugin refs
+    console.log('[TEST] Checking lunx migrate...');
+    const dummyConfigPath = path.join(process.cwd(), 'e2e/fixtures/plugin-migration-app/lunx.config.dummy.js');
     fs.writeFileSync(dummyConfigPath, `export default { plugins: [{ path: 'dist/some-plugin.wasm', type: 'wasm' }] };`, 'utf8');
     
     // Run the rewriter manually on the specific file
@@ -59,7 +59,7 @@ async function run() {
 
     const rewrittenContent = fs.readFileSync(dummyConfigPath, 'utf8');
     if (!rewrittenContent.includes('.wasm') && rewrittenContent.includes('.js') && rewrittenContent.includes("type: 'js'")) {
-        console.log('✅ TEST 3 PASS: zeptr migrate rewrites wasm plugin refs');
+        console.log('✅ TEST 3 PASS: lunx migrate rewrites wasm plugin refs');
     } else {
         throw new Error('Migration rewriter failed to target correct tags.');
     }

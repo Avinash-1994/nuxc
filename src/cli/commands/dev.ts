@@ -42,7 +42,7 @@ export default {
     const { log } = await import('../../utils/logger.js');
     try {
       if (args.quiet) {
-        process.env.ZEPTR_QUIET = 'true';
+        process.env.LUNX_QUIET = 'true';
       }
       if (args.verbose) {
         process.env.DEBUG = '*';
@@ -52,7 +52,7 @@ export default {
         ? path.resolve(process.cwd(), args.root)
         : process.cwd();
 
-      // Load zeptr.config.ts BEFORE starting the server so that
+      // Load lunx.config.ts BEFORE starting the server so that
       // server.port from the user's config is respected when binding the port.
       let userPort = args.port || 5173;
       try {
@@ -80,7 +80,7 @@ export default {
       const port = cfg.port || 5173;
 
       console.log(
-        `\n  ⚡ zeptr v${version}  ` +
+        `\n  ⚡ lunx v${version}  ` +
         `adapter: ${adapter}  ` +
         `port: ${port}\n` +
         `     http://localhost:${port}\n` +
@@ -97,7 +97,7 @@ export default {
       }
 
       if (!args.quiet) {
-        console.log('\n💡  Tip: Run `npx zeptr audit --url http://localhost:' + port + '` to generate an audit report.');
+        console.log('\n💡  Tip: Run `npx lunx audit --url http://localhost:' + port + '` to generate an audit report.');
       }
     } catch (e: any) {
       log.error(e.message);

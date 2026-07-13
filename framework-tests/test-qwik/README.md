@@ -1,4 +1,4 @@
-# Zeptr qwik Template — Zeptr Store — zero-JS e-commerce
+# Lunx qwik Template — Lunx Store — zero-JS e-commerce
 ```bash
 npm install && npm run dev
 ```

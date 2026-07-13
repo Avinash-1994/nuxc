@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-crypto-sign
+ * @lunx/plugin-crypto-sign
  * Plugin signature verification
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCryptoSignPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-crypto-sign',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-crypto-sign',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Security check: Plugin signature verification
@@ -29,7 +29,7 @@ export function createCryptoSignPlugin(): PluginAdapter {
             }
             
             if (issues.length > 0) {
-                console.warn(`[@zeptr/plugin-crypto-sign] Security issues found:`, issues);
+                console.warn(`[@lunx/plugin-crypto-sign] Security issues found:`, issues);
             }
         }
     };

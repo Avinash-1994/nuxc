@@ -1,11 +1,11 @@
-# Migrating from Vite to Zeptr
+# Migrating from Vite to Lunx
 
-Zeptr is designed to be a fast replacement for Vite.
+Lunx is designed to be a fast replacement for Vite.
 
 ## 1. Quick Switch
 Run the auto-migration command:
 ```bash
-npx zeptr migrate
+npx lunx migrate
 ```
 
 ## 2. Manual Migration
@@ -14,18 +14,18 @@ npx zeptr migrate
 Change your content in `package.json`:
 ```json
 "scripts": {
-  "dev": "zeptr dev",
-  "build": "zeptr build"
+  "dev": "lunx dev",
+  "build": "lunx build"
 }
 ```
 
 ### Reuse Vite Plugins
-Zeptr can reuse many Vite-compatible plugins through compatibility adapters.
+Lunx can reuse many Vite-compatible plugins through compatibility adapters.
 
 ```ts
-// zeptr.config.ts
-import { defineConfig } from 'zeptr';
-import { rollupAdapter } from '@zeptr/plugin-compat';
+// lunx.config.ts
+import { defineConfig } from 'lunx';
+import { rollupAdapter } from '@lunx/plugin-compat';
 import someVitePlugin from 'vite-plugin-cool';
 
 export default defineConfig({
@@ -36,10 +36,10 @@ export default defineConfig({
 ```
 
 ## 3. Environment Variables
-Zeptr respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
+Lunx respects `.env` files exactly like Vite. Use `import.meta.env` as usual.
 
 ## 4. Key Differences
-| Feature | Vite | Zeptr |
+| Feature | Vite | Lunx |
 |---------|------|-------|
 | Startup | ~400ms | < 50ms |
 | Build | esbuild/Rollup | Native Rust |

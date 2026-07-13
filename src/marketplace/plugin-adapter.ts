@@ -1,4 +1,4 @@
-import { ZeptrPlugin, PluginHookName } from '../core/plugins/types.js';
+import { LunxPlugin, PluginHookName } from '../core/plugins/types.js';
 
 // Generic interface for Rollup/Vite-style plugins to make them compatible
 export interface CommunityPlugin {
@@ -11,16 +11,16 @@ export interface CommunityPlugin {
 }
 
 /**
- * Adapter to run Community (Vite/Rollup) plugins within Zeptr
- * Converts middleware-based plugins to Zeptr's Command Pattern
+ * Adapter to run Community (Vite/Rollup) plugins within Lunx
+ * Converts middleware-based plugins to Lunx's Command Pattern
  */
-export function adaptPlugin(plugin: CommunityPlugin): ZeptrPlugin {
+export function adaptPlugin(plugin: CommunityPlugin): LunxPlugin {
     const hooks: PluginHookName[] = [];
     if (plugin.resolveId) hooks.push('resolveId');
     if (plugin.load) hooks.push('load');
     if (plugin.transform) hooks.push('transformModule');
 
-    // Zeptr mandates strict versioning, so we mock it for community plugins
+    // Lunx mandates strict versioning, so we mock it for community plugins
     return {
         manifest: {
             name: `adapter:${plugin.name}`,
@@ -43,7 +43,7 @@ export function adaptPlugin(plugin: CommunityPlugin): ZeptrPlugin {
                     error: (msg: string) => console.error(`[${plugin.name}] ${msg}`)
                 };
                 try {
-                    // Adapt input: Zeptr passes object { source, importer }, Rollup expects (source, importer)
+                    // Adapt input: Lunx passes object { source, importer }, Rollup expects (source, importer)
                     const source = input.source || input.id;
                     const importer = input.importer;
 

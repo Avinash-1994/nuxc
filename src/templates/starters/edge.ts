@@ -14,12 +14,12 @@ export const edgeTemplate: TemplateConfig = {
     dependencies: {},
     devDependencies: {
         "typescript": "^5.0.0",
-        "@zeptr/plugin-edge": "^1.0.0"
+        "@lunx/plugin-edge": "^1.0.0"
     },
     files: {
-        'zeptr.config.ts': `
-import { defineConfig } from 'zeptr';
-import edge from '@zeptr/plugin-edge';
+        'lunx.config.ts': `
+import { defineConfig } from 'lunx';
+import edge from '@lunx/plugin-edge';
 
 export default defineConfig({
     plugins: [edge()],
@@ -36,7 +36,7 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === '/hello') {
-        return new Response('Hello from Zeptr Edge!', {
+        return new Response('Hello from Lunx Edge!', {
             headers: { 'content-type': 'text/plain' }
         });
     }
@@ -44,9 +44,9 @@ export default {
     return new Response(\`
       <!DOCTYPE html>
       <html>
-        <head><title>Zeptr Edge</title></head>
+        <head><title>Lunx Edge</title></head>
         <body>
-          <h1>⚡ Zeptr Edge Runtime</h1>
+          <h1>⚡ Lunx Edge Runtime</h1>
           <p>Request URL: \${request.url}</p>
           <p>Region: \${request.cf?.colo || 'Local'}</p>
         </body>
@@ -72,7 +72,7 @@ export default {
 }
 `,
         'README.md': `
-# Zeptr Edge Function
+# Lunx Edge Function
 
 This is a universal Edge Function starter compatible with:
 - Cloudflare Workers

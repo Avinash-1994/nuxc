@@ -1,10 +1,10 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { createHash } from 'crypto';
 
 let mdxCompiler: any;
 
-export class DocusaurusAdapter implements ZeptrAdapter {
+export class DocusaurusAdapter implements LunxAdapter {
   name = 'docusaurus';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -14,7 +14,7 @@ export class DocusaurusAdapter implements ZeptrAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'zeptr:docusaurus-mdx',
+        name: 'lunx:docusaurus-mdx',
 
         async buildStart() {
           try {
@@ -57,7 +57,7 @@ export class DocusaurusAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.docusaurus) config.docusaurus = {};
     config.docusaurus = {
       // Docusaurus outputs to build/ by default
@@ -70,7 +70,7 @@ export class DocusaurusAdapter implements ZeptrAdapter {
   serverMiddleware(): Middleware[] {
     return [
       async (req: any, res: any, next: any) => {
-        // Docusaurus runs its own dev server; Zeptr scaffolds detection + MDX transform support
+        // Docusaurus runs its own dev server; Lunx scaffolds detection + MDX transform support
         next();
       }
     ];

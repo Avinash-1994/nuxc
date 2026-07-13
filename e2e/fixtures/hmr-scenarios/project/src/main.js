@@ -1,5 +1,5 @@
 // HMR test fixture — main.js
-// Uses import.meta.hot shim (injected by zeptr-hmr-client)
+// Uses import.meta.hot shim (injected by lunx-hmr-client)
 // to opt-in to HMR without causing full reloads.
 
 // Track state for state-preservation test

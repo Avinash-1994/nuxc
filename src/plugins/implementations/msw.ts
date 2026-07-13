@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-msw
+ * @lunx/plugin-msw
  * Mock Service Worker integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMswPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-msw',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-msw',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Testing: Mock Service Worker integration

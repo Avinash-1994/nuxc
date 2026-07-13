@@ -1,7 +1,7 @@
 {
-    "name": "zeptr-real-project-matrix",
+    "name": "lunx-real-project-matrix",
     "version": "1.0.0",
-    "description": "Test Zeptr against 8 real production open-source projects",
+    "description": "Test Lunx against 8 real production open-source projects",
     "main": "dist/runner.js",
     "scripts": {
         "build": "tsc",
@@ -13,11 +13,11 @@
         "test:report": "node dist/runner.js --report"
     },
     "keywords": [
-        "zeptr",
+        "lunx",
         "benchmark",
         "testing",
         "matrix"
     ],
-    "author": "Zeptr Team",
+    "author": "Lunx Team",
     "license": "MIT"
 }

@@ -1,15 +1,15 @@
 # Configuration Guide
 
-Complete reference for configuring Zeptr.
+Complete reference for configuring Lunx.
 
 ## Configuration File
 
-Zeptr supports multiple configuration formats:
+Lunx supports multiple configuration formats:
 
-- `zeptr.config.js` (recommended)
-- `zeptr.config.ts`
-- `zeptr.config.mjs`
-- `zeptr.config.cjs`
+- `lunx.config.js` (recommended)
+- `lunx.config.ts`
+- `lunx.config.mjs`
+- `lunx.config.cjs`
 
 ## Basic Configuration
 
@@ -165,7 +165,7 @@ module.exports = {
     },
     
     // Or import external plugins
-    require('@zeptr/plugin-react-refresh'),
+    require('@lunx/plugin-react-refresh'),
   ],
 };
 ```
@@ -208,7 +208,7 @@ module.exports = {
   },
   
   // Environment variable prefix
-  envPrefix: ['VITE_', 'ZEPTR_'],
+  envPrefix: ['VITE_', 'LUNX_'],
 };
 ```
 
@@ -354,7 +354,7 @@ module.exports = {
 ## Environment-Specific Configuration
 
 ```javascript
-// zeptr.config.js
+// lunx.config.js
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {

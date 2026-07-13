@@ -6,8 +6,8 @@
 import { PluginManager, Plugin } from '../src/plugins/index.js';
 import { rollupAdapter } from '../src/plugins/compat/rollup.js';
 import { webpackLoaderAdapter } from '../src/plugins/compat/webpack.js';
-import { zeptrCopy, zeptrHtml } from '../src/plugins/compat/tier-b.js';
-import { zeptrReact, zeptrVue, zeptrSvelte } from '../src/plugins/compat/tier-c.js';
+import { lunxCopy, lunxHtml } from '../src/plugins/compat/tier-b.js';
+import { lunxReact, lunxVue, lunxSvelte } from '../src/plugins/compat/tier-c.js';
 import fs from 'fs';
 import path from 'path';
 import { strict as assert } from 'assert';
@@ -138,12 +138,12 @@ async function testRollupAdapterBasic() {
         transform: (code: string) => code + '// rollup'
     };
 
-    const zeptrPlugin = rollupAdapter(rollupPlugin);
+    const lunxPlugin = rollupAdapter(rollupPlugin);
 
-    assert.strictEqual(zeptrPlugin.name, 'test-rollup-plugin');
-    assert.ok(zeptrPlugin.transform);
+    assert.strictEqual(lunxPlugin.name, 'test-rollup-plugin');
+    assert.ok(lunxPlugin.transform);
 
-    const result = await zeptrPlugin.transform!('code', 'test.js');
+    const result = await lunxPlugin.transform!('code', 'test.js');
     assert.strictEqual(result, 'code// rollup');
 
     console.log('✅ Rollup adapter converts plugins correctly');
@@ -173,19 +173,19 @@ async function testRollupAdapterHooks() {
         }
     };
 
-    const zeptrPlugin = rollupAdapter(rollupPlugin);
+    const lunxPlugin = rollupAdapter(rollupPlugin);
 
-    const resolveResult = await zeptrPlugin.resolveId!('virtual');
+    const resolveResult = await lunxPlugin.resolveId!('virtual');
     assert.strictEqual(resolveResult, '/virtual/path.js');
 
-    const loadResult = await zeptrPlugin.load!('test.virtual');
+    const loadResult = await lunxPlugin.load!('test.virtual');
     assert.strictEqual(loadResult, 'export default "virtual"');
 
-    const transformed = await zeptrPlugin.transform!('const  x  =  1;', 'test.js');
+    const transformed = await lunxPlugin.transform!('const  x  =  1;', 'test.js');
     assert.strictEqual(transformed, 'const  x  =  1; // transformed');
     assert.ok(emittedAsset, 'emitFile should be available on the Rollup plugin context');
 
-    const renderResult = await zeptrPlugin.renderChunk!('const  x  =  1;', {});
+    const renderResult = await lunxPlugin.renderChunk!('const  x  =  1;', {});
     assert.strictEqual(renderResult, 'const x = 1;');
 
     console.log('✅ All Rollup hooks mapped correctly');
@@ -196,10 +196,10 @@ async function testRollupAdapterIntegration() {
 
     const manager = new PluginManager();
 
-    // Native Zeptr plugin
+    // Native Lunx plugin
     manager.register({
-        name: 'zeptr-plugin',
-        transform: async (code) => code + ' [zeptr]'
+        name: 'lunx-plugin',
+        transform: async (code) => code + ' [lunx]'
     });
 
     // Adapted Rollup plugin
@@ -210,9 +210,9 @@ async function testRollupAdapterIntegration() {
     manager.register(rollupAdapter(rollupPlugin));
 
     const result = await manager.transform('start', 'test.js');
-    assert.strictEqual(result, 'start [zeptr] [rollup]');
+    assert.strictEqual(result, 'start [lunx] [rollup]');
 
-    console.log('✅ Rollup plugins integrate seamlessly with Zeptr plugins');
+    console.log('✅ Rollup plugins integrate seamlessly with Lunx plugins');
 }
 
 async function testSandboxPermissionEnforcement() {
@@ -428,8 +428,8 @@ async function testWebpackLoaderAdapter() {
     console.log('✅ Webpack loader adapter works correctly');
 }
 
-async function testZeptrCopy() {
-    console.log('\n[Test 12] Tier B: zeptrCopy');
+async function testLunxCopy() {
+    console.log('\n[Test 12] Tier B: lunxCopy');
 
     const testDir = path.resolve(process.cwd(), 'temp_test_copy');
     const srcFile = path.join(testDir, 'src/file.txt');
@@ -440,7 +440,7 @@ async function testZeptrCopy() {
     await fs.promises.mkdir(path.dirname(srcFile), { recursive: true });
     await fs.promises.writeFile(srcFile, 'hello');
 
-    const plugin = zeptrCopy({
+    const plugin = lunxCopy({
         targets: [{ src: srcFile, dest: destFile }]
     });
 
@@ -451,15 +451,15 @@ async function testZeptrCopy() {
 
     // Cleanup
     await fs.promises.rm(testDir, { recursive: true, force: true });
-    console.log('✅ zeptrCopy copies files correctly');
+    console.log('✅ lunxCopy copies files correctly');
 }
 
-async function testZeptrHtml() {
-    console.log('\n[Test 13] Tier B: zeptrHtml');
+async function testLunxHtml() {
+    console.log('\n[Test 13] Tier B: lunxHtml');
 
     const testDest = path.resolve(process.cwd(), 'dist', 'test-index.html');
 
-    const plugin = zeptrHtml({
+    const plugin = lunxHtml({
         title: 'Test App',
         filename: 'test-index.html'
     });
@@ -471,21 +471,21 @@ async function testZeptrHtml() {
 
     // Cleanup
     await fs.promises.unlink(testDest);
-    console.log('✅ zeptrHtml generates HTML correctly');
+    console.log('✅ lunxHtml generates HTML correctly');
 }
 
 async function testTierC() {
     console.log('\n[Test 14] Tier C: Wrappers (React/Vue/Svelte)');
 
     // Just verify they return valid plugin objects
-    const react = zeptrReact();
-    assert.strictEqual(react.name, 'zeptr-react');
+    const react = lunxReact();
+    assert.strictEqual(react.name, 'lunx-react');
 
-    const vue = zeptrVue();
-    assert.strictEqual(vue.name, 'zeptr-vue');
+    const vue = lunxVue();
+    assert.strictEqual(vue.name, 'lunx-vue');
 
-    const svelte = zeptrSvelte();
-    assert.strictEqual(svelte.name, 'zeptr-svelte');
+    const svelte = lunxSvelte();
+    assert.strictEqual(svelte.name, 'lunx-svelte');
 
     console.log('✅ Tier C wrappers instantiated correctly');
 }
@@ -513,9 +513,9 @@ async function runAllTests() {
         await testPerformanceBenchmark();
         await testReturnValueHandling();
         await testWebpackLoaderAdapter();
-        await testZeptrCopy();
-        // await testZeptrHtml(); // Skipped to avoid polling dist folder conflicts in parallel tests, but implemented.
-        try { await testZeptrHtml(); } catch (e) { console.warn('HTML test warning (non-critical):', e); }
+        await testLunxCopy();
+        // await testLunxHtml(); // Skipped to avoid polling dist folder conflicts in parallel tests, but implemented.
+        try { await testLunxHtml(); } catch (e) { console.warn('HTML test warning (non-critical):', e); }
         await testTierC();
 
         console.log('\n' + '='.repeat(60));

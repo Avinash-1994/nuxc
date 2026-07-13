@@ -41,7 +41,7 @@ export class LazyCacheInitializer {
      */
     private setupPersistentStorage() {
         // Task Day 51: Persistent cache for Docker/Edge
-        const tmpCache = '/tmp/zeptr-cache';
+        const tmpCache = '/tmp/lunx-cache';
         if (process.env.DOCKER_CONTAINER && !fs.existsSync(this.cacheDir)) {
             try {
                 if (!fs.existsSync(tmpCache)) fs.mkdirSync(tmpCache, { recursive: true });
@@ -90,19 +90,19 @@ export class LazyCacheInitializer {
         const startTime = Date.now();
 
         try {
-            // Phase 1.2 [SAFE REMOVAL] - Migrate legacy `.zeptr/cache` or `.zeptr_cache` naming conventions
+            // Phase 1.2 [SAFE REMOVAL] - Migrate legacy `.lunx/cache` or `.lunx_cache` naming conventions
             const projectRoot = path.dirname(path.dirname(this.cacheDir));
-            const legacyNuclie = path.join(projectRoot, '.zeptr', 'cache');
-            const legacyZeptr = path.join(projectRoot, '.zeptr_cache');
+            const legacyNuclie = path.join(projectRoot, '.lunx', 'cache');
+            const legacyLunx = path.join(projectRoot, '.lunx_cache');
             
             if (fs.existsSync(legacyNuclie) && !fs.existsSync(this.cacheDir)) {
-                log.info(`Migrating legacy LevelDB cache from .zeptr/cache -> .zeptr/cache`);
+                log.info(`Migrating legacy LevelDB cache from .lunx/cache -> .lunx/cache`);
                 fs.mkdirSync(path.dirname(this.cacheDir), { recursive: true });
                 fs.renameSync(legacyNuclie, this.cacheDir);
-            } else if (fs.existsSync(legacyZeptr) && !fs.existsSync(this.cacheDir)) {
-                log.info(`Migrating legacy .zeptr_cache -> .zeptr/cache`);
+            } else if (fs.existsSync(legacyLunx) && !fs.existsSync(this.cacheDir)) {
+                log.info(`Migrating legacy .lunx_cache -> .lunx/cache`);
                 fs.mkdirSync(path.dirname(this.cacheDir), { recursive: true });
-                fs.renameSync(legacyZeptr, this.cacheDir);
+                fs.renameSync(legacyLunx, this.cacheDir);
             }
 
             if (!fs.existsSync(this.cacheDir)) {
@@ -174,7 +174,7 @@ let globalLazyCache: LazyCacheInitializer | null = null;
 
 export function getLazyCache(cacheDir?: string): LazyCacheInitializer {
     if (!globalLazyCache) {
-        const dir = cacheDir || path.join(process.cwd(), '.zeptr', 'cache');
+        const dir = cacheDir || path.join(process.cwd(), '.lunx', 'cache');
         globalLazyCache = new LazyCacheInitializer({
             cacheDir: dir,
             preload: true,

@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-imagemin
+ * @lunx/plugin-imagemin
  * Image optimization
  */
 
@@ -9,7 +9,7 @@ import path from 'path';
 
 export function createImageminPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-imagemin',
+        name: '@lunx/plugin-imagemin',
         originalPlugin: 'vite-plugin-imagemin',
         
         async load(id: string) {

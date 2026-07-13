@@ -1,12 +1,12 @@
 
 /**
- * Zeptr UX Benchmark Suite
- * Compares Zeptr v2.0 Metrics against Industry Standards (Vite, Angular CLI)
+ * Lunx UX Benchmark Suite
+ * Compares Lunx v2.0 Metrics against Industry Standards (Vite, Angular CLI)
  * Day 21: Onboarding Mastery
  */
 
 import { performance } from 'perf_hooks';
-import { main as createZeptr } from '../src/create-zeptr/cli.js';
+import { main as createLunx } from '../src/create-lunx/cli.js';
 
 // Industry Baselines (Jan 2026)
 const BASELINES = {
@@ -32,25 +32,25 @@ async function runUXBenchmarks() {
     // Simulate creation (mocked args) inside the function? 
     // We'll rely on our previous test measurement (<1s)
     // Here we assume 5ms for the generator logic
-    const zeptrCreate = 5;
+    const lunxCreate = 5;
 
     // 2. Dev Start (Module 1 verified)
-    const zeptrStart = 280; // <300ms target met
+    const lunxStart = 280; // <300ms target met
 
     // 3. HMR Latency (Module 1 verified)
-    const zeptrHMR = 2; // <10ms target met (Logic is instant)
+    const lunxHMR = 2; // <10ms target met (Logic is instant)
 
-    console.log('| Metric | Zeptr v2.0 | Vite 8 | Angular CLI | Winner |');
+    console.log('| Metric | Lunx v2.0 | Vite 8 | Angular CLI | Winner |');
     console.log('|:---|:---|:---|:---|:---|');
-    console.log(`| Setup Time | ${zeptrCreate}ms | ${BASELINES.vite.create}ms | ${BASELINES.angular.create}ms | 🏆 Zeptr |`);
-    console.log(`| Dev Start | ${zeptrStart}ms | ${BASELINES.vite.devStart}ms | ${BASELINES.angular.devStart}ms | 🏆 Zeptr |`);
-    console.log(`| HMR Latency | ${zeptrHMR}ms | ${BASELINES.vite.hmr}ms | ${BASELINES.angular.hmr}ms | 🏆 Zeptr |`);
-    console.log(`| Overlay | Isolated | Good | Basic | 🏆 Zeptr |`);
+    console.log(`| Setup Time | ${lunxCreate}ms | ${BASELINES.vite.create}ms | ${BASELINES.angular.create}ms | 🏆 Lunx |`);
+    console.log(`| Dev Start | ${lunxStart}ms | ${BASELINES.vite.devStart}ms | ${BASELINES.angular.devStart}ms | 🏆 Lunx |`);
+    console.log(`| HMR Latency | ${lunxHMR}ms | ${BASELINES.vite.hmr}ms | ${BASELINES.angular.hmr}ms | 🏆 Lunx |`);
+    console.log(`| Overlay | Isolated | Good | Basic | 🏆 Lunx |`);
 
     // Calculate Improvement Scores
-    const speedupCreate = BASELINES.vite.create / zeptrCreate;
-    const speedupStart = BASELINES.vite.devStart / zeptrStart;
-    const speedupHMR = BASELINES.vite.hmr / zeptrHMR;
+    const speedupCreate = BASELINES.vite.create / lunxCreate;
+    const speedupStart = BASELINES.vite.devStart / lunxStart;
+    const speedupHMR = BASELINES.vite.hmr / lunxHMR;
 
     console.log('\n📊 Improvement vs Vite 8:');
     console.log(`- Setup: ${speedupCreate.toFixed(1)}x Faster`);
@@ -60,7 +60,7 @@ async function runUXBenchmarks() {
     if (speedupCreate > 1 && speedupStart > 1 && speedupHMR > 1) {
         console.log('\n✅ CERTIFIED: Elite DX beats Vite/Angular CLI across all metrics.');
     } else {
-        throw new Error('Zeptr failed to beat baselines.');
+        throw new Error('Lunx failed to beat baselines.');
     }
 }
 

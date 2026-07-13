@@ -1,17 +1,17 @@
-# @zeptr/plugin-vue
+# @lunx/plugin-vue
 
-> Official Zeptr plugin for Vue 3 — SFC parsing, HMR, DevTools, scoped styles.
+> Official Lunx plugin for Vue 3 — SFC parsing, HMR, DevTools, scoped styles.
 
 ## Install
 
 ```bash
-npm install --save-dev @zeptr/plugin-vue vue @vue/compiler-sfc
+npm install --save-dev @lunx/plugin-vue vue @vue/compiler-sfc
 ```
 
 ## Usage
 
 ```js
-const vue = require('@zeptr/plugin-vue');
+const vue = require('@lunx/plugin-vue');
 module.exports = {
   entry: ['./src/main.ts'],
   plugins: [vue()],

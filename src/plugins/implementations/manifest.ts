@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-manifest
+ * @lunx/plugin-manifest
  * Web manifest generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createManifestPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-manifest',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-manifest',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Utility: Web manifest generation

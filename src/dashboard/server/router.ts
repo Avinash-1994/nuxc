@@ -1,6 +1,6 @@
 
 /**
- * Zeptr Dashboard tRPC Router
+ * Lunx Dashboard tRPC Router
  * Day 19: tRPC Dashboard Lock
  */
 

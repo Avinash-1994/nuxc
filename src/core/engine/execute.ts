@@ -82,7 +82,7 @@ export async function executeParallel(execPlan: ExecutionPlan, buildPlan: BuildP
                     ));
                     fedRt = `globalThis.__remotes=${remotesMap};globalThis.__loadRemote=async function(r,m){var u=__remotes[r];if(!window[r]){await new Promise((rs,rj)=>{var s=document.createElement('script');s.type='module';s.crossOrigin='anonymous';s.async=true;s.src=u;s.onload=rs;s.onerror=rj;document.head.appendChild(s)})}var c=window[r];await c.init({});var f=await c.get(m);return f();};\n`;
                 }
-                bundleContent += isProd ? processShim + rt + fedRt : `/* Zeptr Runtime */\n${processShim}${rt}${fedRt}`;
+                bundleContent += isProd ? processShim + rt + fedRt : `/* Lunx Runtime */\n${processShim}${rt}${fedRt}`;
             }
 
             const artifactModules: any[] = [];
@@ -117,11 +117,11 @@ export async function executeParallel(execPlan: ExecutionPlan, buildPlan: BuildP
                 }
             }
 
-            // Phase 3.1 — Native DCE via zeptrChunk (production only, additive — falls back to existing logic)
+            // Phase 3.1 — Native DCE via lunxChunk (production only, additive — falls back to existing logic)
             if (isProd && moduleResults.size > 0) {
                 try {
                     const nat = await getNative();
-                    if (nat.zeptrChunk) {
+                    if (nat.lunxChunk) {
                         const graphJson = JSON.stringify({
                             modules: [...moduleResults.keys()].map(id => {
                                 const node = ctx.graph.nodes.get(id);
@@ -139,7 +139,7 @@ export async function executeParallel(execPlan: ExecutionPlan, buildPlan: BuildP
                             resolvedEntryPoint = generateModuleId('file', normalizePath(absEntry), ctx.rootDir);
                         }
                         
-                        const result = nat.zeptrChunk(graphJson, {
+                        const result = nat.lunxChunk(graphJson, {
                             strategy: 'auto',
                             maxChunkSizeKb: 0,
                             entryPoints: resolvedEntryPoint && moduleResults.has(resolvedEntryPoint) 

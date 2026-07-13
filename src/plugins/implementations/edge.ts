@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-edge
+ * @lunx/plugin-edge
  * Edge runtime adapter
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createEdgePlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-edge',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-edge',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // edge transformation

@@ -85,14 +85,14 @@ jobs:
 
       - name: 🚫 No leveldb / rocksdb live usages
         run: |
-          # EXCLUDE: nuxc-migrate (detects old config to warn users — expected)
+          # EXCLUDE: lunx-migrate (detects old config to warn users — expected)
           # EXCLUDE: config/index.ts (emits deprecation warnings — expected per Phase 1.2)
           # EXCLUDE: native/target (auto-generated Rust build artifacts)
           COUNT=$(grep -rn "leveldb\|rocksdb" packages/ src/ \
             --include="*.ts" --include="*.js" \
             --exclude-dir="native" \
             -l 2>/dev/null \
-            | grep -v "nuxc-migrate/src/index.ts" \
+            | grep -v "lunx-migrate/src/index.ts" \
             | grep -v "src/config/index.ts" \
             | wc -l)
           echo "leveldb/rocksdb live-usage matches: $COUNT"
@@ -119,7 +119,7 @@ jobs:
           #   - Astro compiler wrapper (legitimate WASM build tool)
           #   - marketplace WASM SQLite (legitimate storage engine)
           #   - src/config/index.ts (Phase 1.1 rejection guard — throws if plugin uses .wasm)
-          #   - nuxc-migrate (migration helper — detects old config)
+          #   - lunx-migrate (migration helper — detects old config)
           #   - universal-transformer (references for rejection)
           #   - nuclie-plugin-compression (skip-list — AVOIDS compressing .wasm files)
           COUNT=$(grep -rn "\.wasm" packages/ src/ \
@@ -128,7 +128,7 @@ jobs:
             | grep -v "meta-frameworks/astro" \
             | grep -v "src/marketplace/" \
             | grep -v "src/commands/preview" \
-            | grep -v "nuxc-migrate" \
+            | grep -v "lunx-migrate" \
             | grep -v "universal-transformer" \
             | grep -v "src/config/index.ts" \
             | grep -v "nuclie-plugin-compression" \
@@ -192,9 +192,9 @@ jobs:
         # Error overlay package must export a default handler with no thrown exceptions for valid input
         run: |
           node --input-type=module --eval "
-            import('./packages/nuxc-error-overlay/src/index.ts')
-              .then(() => console.log('✅ nuxc-error-overlay: module resolves cleanly'))
-              .catch(e => { console.log('⚠️  nuxc-error-overlay (ts-node required in prod — OK): ' + e.message); })
+            import('./packages/lunx-error-overlay/src/index.ts')
+              .then(() => console.log('✅ lunx-error-overlay: module resolves cleanly'))
+              .catch(e => { console.log('⚠️  lunx-error-overlay (ts-node required in prod — OK): ' + e.message); })
           " || true
 
       - name: ✅ P6 — Strict TypeScript Build
@@ -366,7 +366,7 @@ jobs:
         run: |
           echo ""
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "  NUXC PERFORMANCE TARGETS (1000-module monorepo)"
+          echo "  LUNX PERFORMANCE TARGETS (1000-module monorepo)"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo "  Cold dev start (pre-bundle warm)  < 400ms"
           echo "  HMR round-trip (1 .vue SFC)       < 60ms"
@@ -455,31 +455,31 @@ jobs:
       - name: 📦 Install Dependencies
         run: npm ci ${{ env.NPM_FLAGS }}
 
-      - name: 🏗️ Compile nuxc-autoconfig
+      - name: 🏗️ Compile lunx-autoconfig
         run: |
-          npx tsc packages/nuxc-autoconfig/src/index.ts \
-            --outDir packages/nuxc-autoconfig/dist \
+          npx tsc packages/lunx-autoconfig/src/index.ts \
+            --outDir packages/lunx-autoconfig/dist \
             --module NodeNext --moduleResolution NodeNext \
             --target ES2022 --declaration --skipLibCheck
 
-      - name: 🏗️ Compile nuxc-workspace
+      - name: 🏗️ Compile lunx-workspace
         run: |
-          npx tsc packages/nuxc-workspace/src/index.ts \
-            --outDir packages/nuxc-workspace/dist \
+          npx tsc packages/lunx-workspace/src/index.ts \
+            --outDir packages/lunx-workspace/dist \
             --module NodeNext --moduleResolution NodeNext \
             --target ES2022 --declaration --skipLibCheck
 
-      - name: 🏗️ Compile nuxc-error-overlay
+      - name: 🏗️ Compile lunx-error-overlay
         run: |
-          npx tsc packages/nuxc-error-overlay/src/index.ts \
-            --outDir packages/nuxc-error-overlay/dist \
+          npx tsc packages/lunx-error-overlay/src/index.ts \
+            --outDir packages/lunx-error-overlay/dist \
             --module NodeNext --moduleResolution NodeNext \
             --target ES2022 --declaration --skipLibCheck
 
-      - name: 🏗️ Compile nuxc-analyze
+      - name: 🏗️ Compile lunx-analyze
         run: |
-          npx tsc packages/nuxc-analyze/src/index.ts \
-            --outDir packages/nuxc-analyze/dist \
+          npx tsc packages/lunx-analyze/src/index.ts \
+            --outDir packages/lunx-analyze/dist \
             --module NodeNext --moduleResolution NodeNext \
             --target ES2022 --declaration --skipLibCheck
 
@@ -524,10 +524,10 @@ jobs:
           name: dist
           path: dist/
 
-      - name: 🏗️ Compile nuxc-adapter-core
+      - name: 🏗️ Compile lunx-adapter-core
         run: |
-          npx tsc packages/nuxc-adapter-core/src/index.ts \
-            --outDir packages/nuxc-adapter-core/dist \
+          npx tsc packages/lunx-adapter-core/src/index.ts \
+            --outDir packages/lunx-adapter-core/dist \
             --module NodeNext --moduleResolution NodeNext \
             --target ES2022 --declaration --skipLibCheck
 
@@ -584,7 +584,7 @@ jobs:
         run: |
           echo ""
           echo "╔══════════════════════════════════════════════════════════╗"
-          echo "║         NUXC — PRODUCTION GATE REPORT                  ║"
+          echo "║         LUNX — PRODUCTION GATE REPORT                  ║"
           echo "╠══════════════════════════════════════════════════════════╣"
           echo "║  Build & Type Check   : ${{ needs.build.result }}"
           echo "║  Clean-Up Checks      : ${{ needs.cleanup-checks.result }}"

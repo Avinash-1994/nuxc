@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-trpc
+ * @lunx/plugin-trpc
  * tRPC integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTrpcPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-trpc',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-trpc',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Utility: tRPC integration

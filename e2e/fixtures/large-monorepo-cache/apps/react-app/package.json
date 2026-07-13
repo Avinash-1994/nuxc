@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build"
+    "dev": "lunx dev",
+    "build": "lunx build"
   },
   "dependencies": {
     "react": "^18.0.0"

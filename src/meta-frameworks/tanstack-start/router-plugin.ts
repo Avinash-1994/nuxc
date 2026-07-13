@@ -1,12 +1,12 @@
-import type { Plugin } from '@zeptr/adapter-core';
+import type { Plugin } from '@lunx/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:zeptr/tanstack-routes';
+const VIRTUAL_MODULE_ID = 'virtual:lunx/tanstack-routes';
 
 export function tsRouterPlugin(): Plugin {
   return {
-    name: 'zeptr:tanstack-router',
+    name: 'lunx:tanstack-router',
 
     // Intercept Route configs mapped directly for Tanstack
     resolveId(source: string) {
@@ -56,7 +56,7 @@ export function tsRouterPlugin(): Plugin {
       scan(appDir, '');
 
       return `
-        // Auto-generated Tanstack Route proxy for Zeptr native SSR engine
+        // Auto-generated Tanstack Route proxy for Lunx native SSR engine
         export const routes = [
           ${routes.join(',\n')}
         ];

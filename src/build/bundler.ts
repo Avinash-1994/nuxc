@@ -9,7 +9,7 @@ export async function build(rawConfig: BuildConfig) {
   // Step 2: detect active framework adapter
   let adapter: any = null;
   try {
-    const { registry } = await import('@zeptr/adapter-core');
+    const { registry } = await import('@lunx/adapter-core');
     const pkgPath = path.join(config.root, 'package.json');
     if (fs.existsSync(pkgPath)) {
       const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
@@ -47,7 +47,7 @@ export async function build(rawConfig: BuildConfig) {
     if (adapter.config) {
       config = await adapter.config(config) as BuildConfig;
     }
-    console.log(`[zeptr] adapter: ${adapter.name}`);
+    console.log(`[lunx] adapter: ${adapter.name}`);
   }
 
   // Step 4: merge adapter plugins into plugin list
@@ -59,7 +59,7 @@ export async function build(rawConfig: BuildConfig) {
   // 3.2: Plugin Permission Sandbox
   if (config.plugins) {
     try {
-      const { createPluginPermissionProxy } = await import('@zeptr/security');
+      const { createPluginPermissionProxy } = await import('@lunx/security');
       config.plugins = config.plugins.map((p: any) => {
         const perms = { declared: p.permissions || [], name: p.name || 'anonymous' };
         return createPluginPermissionProxy(p, perms, { 
@@ -67,7 +67,7 @@ export async function build(rawConfig: BuildConfig) {
         });
       });
     } catch (e) {
-      console.warn('[zeptr:security] Failed to load plugin permission sandbox:', e);
+      console.warn('[lunx:security] Failed to load plugin permission sandbox:', e);
     }
   }
 
@@ -80,14 +80,14 @@ export async function build(rawConfig: BuildConfig) {
   if (config.mode === 'production') {
     // Allow opting out via env var (CI/regression) or per-project config key
     const skipSecurity =
-      process.env.ZEPTR_SKIP_SECURITY === '1' ||
+      process.env.LUNX_SKIP_SECURITY === '1' ||
       (config as any).security?.vulnSeverity === 'off';
 
     if (skipSecurity) {
-      console.log('[zeptr:security] Security gate skipped (vulnSeverity: off).');
+      console.log('[lunx:security] Security gate skipped (vulnSeverity: off).');
     } else {
     try {
-      const security = await import('@zeptr/security');
+      const security = await import('@lunx/security');
       
       // 1. Lockfile audit
       const lockfileResult = await security.auditLockfile(config.root);
@@ -105,7 +105,7 @@ export async function build(rawConfig: BuildConfig) {
           version: String(version).replace(/^[^0-9]/, '')
         }));
         
-        const cacheDir = path.join(config.root, '.zeptr', 'security');
+        const cacheDir = path.join(config.root, '.lunx', 'security');
         const cveResult = await security.scanCVE(packagesToScan, { cacheDir, distDir: config.outDir });
         if (!cveResult.clean) {
           throw new Error('HIGH CVE detected in dependencies! Aborting build.');
@@ -115,7 +115,7 @@ export async function build(rawConfig: BuildConfig) {
       if (err.message.includes('Lockfile tampering') || err.message.includes('HIGH CVE')) {
         throw err;
       }
-      console.warn('[zeptr] Security modules not fully available or failed:', err.message);
+      console.warn('[lunx] Security modules not fully available or failed:', err.message);
     }
     }
   }
@@ -132,7 +132,7 @@ export async function build(rawConfig: BuildConfig) {
 
     // Phase 3.1 & 3.2 — Output Analysis & Generation
     if (config.mode === 'production') {
-      const security = await import('@zeptr/security');
+      const security = await import('@lunx/security');
       const buildOutDir = config.outDir || 'build_output';
       
       // 3.2 Secret Scanning
@@ -188,11 +188,11 @@ export async function build(rawConfig: BuildConfig) {
         }
         
         const sbom = await security.generateSBOM(config.root, deps);
-        const outPath = path.join(buildOutDir, 'zeptr-sbom.json');
+        const outPath = path.join(buildOutDir, 'lunx-sbom.json');
         fs.mkdirSync(path.dirname(outPath), { recursive: true });
         fs.writeFileSync(outPath, JSON.stringify(sbom, null, 2), 'utf8');
       } catch (e: any) {
-        console.warn('[zeptr:security] Failed to generate SBOM:', e.message);
+        console.warn('[lunx:security] Failed to generate SBOM:', e.message);
       }
 
       // 3.3 Output Hardening (SRI, CSP, Headers)
@@ -222,7 +222,7 @@ export async function build(rawConfig: BuildConfig) {
         };
         injectHtml(buildOutDir);
       } catch (e: any) {
-        console.warn('[zeptr:security] Failed to apply output hardening:', e.message);
+        console.warn('[lunx:security] Failed to apply output hardening:', e.message);
       }
     }
 

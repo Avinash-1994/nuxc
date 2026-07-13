@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-mobx
+ * @lunx/plugin-mobx
  * MobX integration
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createMobxPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-mobx',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-mobx',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // mobx transformation

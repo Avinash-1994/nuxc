@@ -1,20 +1,20 @@
 {
-  "name": "zeptr-tanstack-start-template",
+  "name": "lunx-tanstack-start-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build",
-    "preview": "zeptr preview"
+    "dev": "lunx dev",
+    "build": "lunx build",
+    "preview": "lunx preview"
   },
-  "zeptr": {
+  "lunx": {
     "template": true,
     "framework": "tanstack-start",
-    "description": "Zeptr Invoices — freelancer billing app"
+    "description": "Lunx Invoices — freelancer billing app"
   },
   "devDependencies": {
-    "zeptr": "file:../../",
+    "lunx": "file:../../",
     "typescript": "5.4.5"
   }
 }

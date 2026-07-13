@@ -1,4 +1,4 @@
-# Zeptr Tasks — React Template
+# Lunx Tasks — React Template
 ```bash
 npm install && npm run dev
 ```

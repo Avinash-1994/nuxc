@@ -1,11 +1,11 @@
 /**
- * Zeptr — Discriminated Union Config Types (PART 4)
+ * Lunx — Discriminated Union Config Types (PART 4)
  * Provides framework-specific IntelliSense via defineConfig overloads.
  */
 
 // ─── Base (shared by all) ──────────────────────────────────────────────────
 
-export interface ZeptrBaseConfig {
+export interface LunxBaseConfig {
   entry?:     string | string[];
   outDir?:    string;
   mode?:      'development' | 'production' | 'test';
@@ -57,7 +57,7 @@ export interface ZeptrBaseConfig {
 
 // ─── SSR Meta-Frameworks ───────────────────────────────────────────────────
 
-export interface ZeptrSSRConfig extends ZeptrBaseConfig {
+export interface LunxSSRConfig extends LunxBaseConfig {
   framework: 'nuxt' | 'sveltekit' | 'svelte-kit' | 'remix' | 'solidstart'
            | 'solid-start' | 'astro' | 'analog' | 'tanstack-start' | 'waku'
            | 'next' | 'nextjs';
@@ -68,7 +68,7 @@ export interface ZeptrSSRConfig extends ZeptrBaseConfig {
 
 // ─── Electron — dual bundle ────────────────────────────────────────────────
 
-export interface ZeptrElectronConfig extends ZeptrBaseConfig {
+export interface LunxElectronConfig extends LunxBaseConfig {
   framework:      'electron';
   preset?:        'spa';
   platform?:      'browser';
@@ -80,7 +80,7 @@ export interface ZeptrElectronConfig extends ZeptrBaseConfig {
 
 // ─── Tauri — WebView frontend ──────────────────────────────────────────────
 
-export interface ZeptrTauriConfig extends ZeptrBaseConfig {
+export interface LunxTauriConfig extends LunxBaseConfig {
   framework: 'tauri';
   preset?:   'spa';
   platform?: 'browser';
@@ -90,7 +90,7 @@ export interface ZeptrTauriConfig extends ZeptrBaseConfig {
 
 // ─── SPA frameworks ───────────────────────────────────────────────────────
 
-export interface ZeptrSPAConfig extends ZeptrBaseConfig {
+export interface LunxSPAConfig extends LunxBaseConfig {
   framework?: 'react' | 'vue' | 'svelte' | 'angular' | 'solid'
             | 'preact' | 'lit' | 'qwik' | 'vanilla';
   preset?:    'spa';
@@ -99,10 +99,10 @@ export interface ZeptrSPAConfig extends ZeptrBaseConfig {
 
 // ─── defineConfig overloads ────────────────────────────────────────────────
 /* eslint-disable no-redeclare */
-export function defineConfig(c: ZeptrElectronConfig): ZeptrElectronConfig;
-export function defineConfig(c: ZeptrTauriConfig):    ZeptrTauriConfig;
-export function defineConfig(c: ZeptrSSRConfig):      ZeptrSSRConfig;
-export function defineConfig(c: ZeptrSPAConfig):      ZeptrSPAConfig;
-export function defineConfig(c: ZeptrBaseConfig):     ZeptrBaseConfig;
+export function defineConfig(c: LunxElectronConfig): LunxElectronConfig;
+export function defineConfig(c: LunxTauriConfig):    LunxTauriConfig;
+export function defineConfig(c: LunxSSRConfig):      LunxSSRConfig;
+export function defineConfig(c: LunxSPAConfig):      LunxSPAConfig;
+export function defineConfig(c: LunxBaseConfig):     LunxBaseConfig;
 export function defineConfig(c: any): any { return c; }
 /* eslint-enable no-redeclare */

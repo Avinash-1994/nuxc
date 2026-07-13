@@ -10,7 +10,7 @@ async function printBuildSummary(outDir: string, elapsed: number) {
   if (!fs.existsSync(outDir)) return;
 
   const APP_EXTENSIONS = ['.js', '.mjs', '.cjs', '.css', '.html', '.wasm', '.map'];
-  const EXCLUDE_NAMES = ['zeptr-sbom', 'zeptr-csp', 'zeptr-sri', 'zeptr-headers', '_headers', '.htaccess'];
+  const EXCLUDE_NAMES = ['lunx-sbom', 'lunx-csp', 'lunx-sri', 'lunx-headers', '_headers', '.htaccess'];
 
   const files = (fs.readdirSync(outDir, { recursive: true }) as string[])
     .filter(f => typeof f === 'string' && !f.includes('node_modules'))
@@ -92,7 +92,7 @@ export default {
     const { Telemetry } = await import('../../ai/telemetry.js');
 
     if (!args.profile && !args.verbose) {
-      process.env.ZEPTR_FAST_PATH = '1';
+      process.env.LUNX_FAST_PATH = '1';
     }
 
     const telemetry = new Telemetry(process.cwd());
@@ -137,8 +137,8 @@ export default {
         printProfileReport(result);
       }
 
-      console.log('\n💡  Tip: Run `npx zeptr preview` to serve the build locally.');
-      console.log('💡  Tip: Run `npx zeptr audit` to generate a full audit report.');
+      console.log('\n💡  Tip: Run `npx lunx preview` to serve the build locally.');
+      console.log('💡  Tip: Run `npx lunx audit` to generate a full audit report.');
 
       await telemetry.stop(true);
 
@@ -151,7 +151,7 @@ export default {
         const watcher = chokidar.watch(srcDir, { ignoreInitial: true, persistent: true });
 
         const rebuild = async (filePath: string) => {
-          console.log(`  [zeptr] Changed: ${path.relative(root, filePath)}`);
+          console.log(`  [lunx] Changed: ${path.relative(root, filePath)}`);
           const t1 = performance.now();
           try {
             await runBuild(config);

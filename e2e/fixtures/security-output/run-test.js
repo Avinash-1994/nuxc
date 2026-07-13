@@ -31,7 +31,7 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 // ──────────────────────────────────────────────────────────
 {
   fs.writeFileSync(path.join(__dirname, 'package.json'), JSON.stringify({ type: 'module' }));
-  fs.writeFileSync(path.join(__dirname, 'zeptr.config.ts'), `export default { entry: ['src/index.js'] };`);
+  fs.writeFileSync(path.join(__dirname, 'lunx.config.ts'), `export default { entry: ['src/index.js'] };`);
   fs.mkdirSync(path.join(__dirname, 'src'), { recursive: true });
   fs.writeFileSync(path.join(__dirname, 'src', 'index.js'), `
     // Simple module output for output hardening test
@@ -61,8 +61,8 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
     const htmlPath = path.join(outDir, 'index.html');
     const headersPath = path.join(outDir, '_headers');
     const htaccessPath = path.join(outDir, '.htaccess');
-    const sriManifestPath = path.join(outDir, 'zeptr-sri-manifest.json');
-    const cspPath = path.join(outDir, 'zeptr-csp.txt');
+    const sriManifestPath = path.join(outDir, 'lunx-sri-manifest.json');
+    const cspPath = path.join(outDir, 'lunx-csp.txt');
 
     const htmlExists = fs.existsSync(htmlPath);
     const headersExists = fs.existsSync(headersPath);

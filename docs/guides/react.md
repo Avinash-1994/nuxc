@@ -1,6 +1,6 @@
 # React Guide
 
-> Build React apps (18 & 19) with Zeptr — Fast Refresh HMR, JSX, TypeScript, CSS Modules.
+> Build React apps (18 & 19) with Lunx — Fast Refresh HMR, JSX, TypeScript, CSS Modules.
 
 ---
 
@@ -8,10 +8,10 @@
 
 ```bash
 # Scaffold a React + TypeScript project
-zeptr bootstrap --name my-react-app --template react-ts
+lunx bootstrap --name my-react-app --template react-ts
 
 cd my-react-app
-zeptr dev
+lunx dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -23,16 +23,16 @@ Open [http://localhost:3000](http://localhost:3000).
 ### 1. Install
 
 ```bash
-npm install --save-dev zeptr
+npm install --save-dev lunx
 npm install react react-dom
 npm install --save-dev @types/react @types/react-dom typescript
 ```
 
-### 2. Create `zeptr.config.js`
+### 2. Create `lunx.config.js`
 
 **JavaScript:**
 ```js
-// zeptr.config.js
+// lunx.config.js
 module.exports = {
   entry: ['./src/main.jsx'],
   outDir: './dist',
@@ -52,8 +52,8 @@ module.exports = {
 
 **TypeScript:**
 ```ts
-// zeptr.config.ts
-import { defineConfig } from 'zeptr';
+// lunx.config.ts
+import { defineConfig } from 'lunx';
 
 export default defineConfig({
   entry: ['./src/main.tsx'],
@@ -113,7 +113,7 @@ function App() {
 
   return (
     <div>
-      <h1>Hello from Zeptr + React</h1>
+      <h1>Hello from Lunx + React</h1>
       <button onClick={() => setCount(c => c + 1)}>
         Count: {count}
       </button>
@@ -128,14 +128,14 @@ export default App;
 
 ## Hot Module Replacement (Fast Refresh)
 
-Zeptr integrates **React Fast Refresh** automatically for `.jsx`/`.tsx` files.
+Lunx integrates **React Fast Refresh** automatically for `.jsx`/`.tsx` files.
 
 - Component state is **preserved** across saves
 - Only the changed component re-renders — not the whole page
 - Error overlay appears on runtime errors
 
 **How it works:**
-- Zeptr detects React files by extension and framework config
+- Lunx detects React files by extension and framework config
 - Injects React Refresh runtime in dev mode
 - Communicates via WebSocket to the browser client
 
@@ -148,7 +148,7 @@ Zeptr integrates **React Fast Refresh** automatically for `.jsx`/`.tsx` files.
 If HMR stops working, try:
 ```bash
 # Restart dev server
-zeptr dev --force
+lunx dev --force
 ```
 
 ---
@@ -198,7 +198,7 @@ npx tailwindcss init
 ```
 
 ```js
-// zeptr.config.js
+// lunx.config.js
 module.exports = {
   css: {
     framework: 'tailwind',
@@ -239,7 +239,7 @@ module.exports = {
 ## Path Aliases
 
 ```js
-// zeptr.config.js
+// lunx.config.js
 module.exports = {
   resolve: {
     alias: {
@@ -262,7 +262,7 @@ import { useAuth } from '@hooks/useAuth';
 ## Production Build
 
 ```bash
-zeptr build
+lunx build
 ```
 
 Output in `./dist/`:
@@ -277,7 +277,7 @@ dist/
 
 **Serve the production build:**
 ```bash
-zeptr preview
+lunx preview
 # Serves dist/ at http://localhost:4173
 ```
 
@@ -285,7 +285,7 @@ zeptr preview
 
 ## React 19 Compatibility
 
-Zeptr fully supports React 19:
+Lunx fully supports React 19:
 
 ```bash
 npm install react@19 react-dom@19
@@ -335,5 +335,5 @@ Put side-effect-only imports (like `import './styles.css'`) at the top of `main.
 ## Next Steps
 
 - [Module Federation with React](./federation.md) — share components across micro-frontends
-- [Plugin Guide](../plugins.md) — extend Zeptr
+- [Plugin Guide](../plugins.md) — extend Lunx
 - [Migration from Vite](../migration.md) — step-by-step migration

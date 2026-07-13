@@ -1,4 +1,4 @@
-# Zeptr angular Template — Zeptr HR — employee management dashboard
+# Lunx angular Template — Lunx HR — employee management dashboard
 ```bash
 npm install && npm run dev
 ```

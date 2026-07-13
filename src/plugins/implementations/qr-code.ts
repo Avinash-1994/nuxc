@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-qr-code
+ * @lunx/plugin-qr-code
  * QR code generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createQrCodePlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-qr-code',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-qr-code',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Fintech integration: QR code generation
@@ -16,7 +16,7 @@ export function createQrCodePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@zeptr/plugin-qr-code] Fintech integration ready');
+            console.log('[@lunx/plugin-qr-code] Fintech integration ready');
             // Initialize payment gateway, generate QR codes, etc.
         }
     };

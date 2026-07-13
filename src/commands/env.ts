@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-// NEW-03: zeptr env — validate environment variables
+// NEW-03: lunx env — validate environment variables
 
 function scanForEnvUsage(srcDir: string): Set<string> {
   const used = new Set<string>();
@@ -14,7 +14,7 @@ function scanForEnvUsage(srcDir: string): Set<string> {
         walk(full);
       } else if (entry.isFile() && /\.(ts|tsx|js|jsx|svelte|vue)$/.test(entry.name)) {
         const content = fs.readFileSync(full, 'utf8');
-        const matches = content.matchAll(/import\.meta\.env\.(ZEPTR_[A-Z0-9_]+)/g);
+        const matches = content.matchAll(/import\.meta\.env\.(LUNX_[A-Z0-9_]+)/g);
         for (const m of matches) used.add(m[1]);
       }
     }
@@ -54,8 +54,8 @@ export async function runEnv() {
   if (envFiles.length > 0) console.log(`  Source: ${envFiles[0]}`);
   console.log();
 
-  const zeptrVars = Object.entries(envVars).filter(([k]) => k.startsWith('ZEPTR_'));
-  for (const [key] of zeptrVars) {
+  const lunxVars = Object.entries(envVars).filter(([k]) => k.startsWith('LUNX_'));
+  for (const [key] of lunxVars) {
     const used = usedVars.has(key);
     console.log(`  ✓ ${key.padEnd(30)} = [set]${used ? '' : ' (unused in code)'}`);
   }
@@ -66,14 +66,14 @@ export async function runEnv() {
     }
   }
 
-  const nonZeptr = Object.keys(envVars).filter(k => !k.startsWith('ZEPTR_') && !k.startsWith('#'));
-  for (const key of nonZeptr) {
-    console.log(`  ⚠  ${key.padEnd(30)} — missing ZEPTR_ prefix, not exposed to browser`);
+  const nonLunx = Object.keys(envVars).filter(k => !k.startsWith('LUNX_') && !k.startsWith('#'));
+  for (const key of nonLunx) {
+    console.log(`  ⚠  ${key.padEnd(30)} — missing LUNX_ prefix, not exposed to browser`);
   }
 
-  if (zeptrVars.length === 0 && usedVars.size === 0) {
-    console.log('  No ZEPTR_ environment variables found.');
-    console.log('  Docs: https://zeptr.dev/guide/env-vars');
+  if (lunxVars.length === 0 && usedVars.size === 0) {
+    console.log('  No LUNX_ environment variables found.');
+    console.log('  Docs: https://lunx.dev/guide/env-vars');
   }
   console.log();
 }

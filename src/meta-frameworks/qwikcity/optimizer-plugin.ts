@@ -1,11 +1,11 @@
-import type { Plugin } from '@zeptr/adapter-core';
+import type { Plugin } from '@lunx/adapter-core';
 import { createHash } from 'crypto';
 
 let qwikOptimizer: any;
 
 export function qwikOptimizerPlugin(): Plugin {
   return {
-    name: 'zeptr:qwik-optimizer',
+    name: 'lunx:qwik-optimizer',
     
     async buildStart() {
       try {
@@ -20,7 +20,7 @@ export function qwikOptimizerPlugin(): Plugin {
       if (!id.endsWith('.tsx') && !id.endsWith('.ts')) return null;
       if (!qwikOptimizer) return null;
 
-      // Access Zeptr's SQLite/RocksDB cache wrapper
+      // Access Lunx's SQLite/RocksDB cache wrapper
       const { getLazyCacheDatabase } = await import('../../core/cache/lazy-init.js');
       const db = await getLazyCacheDatabase();
 
@@ -51,7 +51,7 @@ export function qwikOptimizerPlugin(): Plugin {
          if (mainOut) transformedCode = mainOut.code;
 
          // For other segmented files, we would dynamically register them to the `chunker` 
-         // manifest using Rollup's emitFile pattern or Zeptr equivalent natively
+         // manifest using Rollup's emitFile pattern or Lunx equivalent natively
          // Example: 
          // result.modules.forEach(m => { if(m.isEntry) emitChunk(m) })
 

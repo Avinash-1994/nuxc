@@ -1,5 +1,5 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { rr7RoutesPlugin } from './routes-plugin.js';
 
 export interface ReactRouterConfig {
@@ -7,7 +7,7 @@ export interface ReactRouterConfig {
   ssr?: boolean;         // default true
 }
 
-export class ReactRouterAdapter implements ZeptrAdapter {
+export class ReactRouterAdapter implements LunxAdapter {
   name = 'react-router';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -32,7 +32,7 @@ export class ReactRouterAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.reactRouter) config.reactRouter = {};
     config.reactRouter = {
       appDirectory: 'app',
@@ -83,7 +83,7 @@ export class ReactRouterAdapter implements ZeptrAdapter {
           }
         }
       } catch (e) {
-        console.error('[ZEPTR ReactRouter] Dev handler error:', e);
+        console.error('[LUNX ReactRouter] Dev handler error:', e);
       }
       next();
     };

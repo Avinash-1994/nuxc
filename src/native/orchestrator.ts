@@ -3,7 +3,7 @@
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-const nativeModule = require('../../zeptr_native.node');
+const nativeModule = require('../../lunx_native.node');
 
 const {
     BuildOrchestrator: NativeBuildOrchestrator,
@@ -15,7 +15,7 @@ import type {
     BuildOrchestrator as NativeBuildOrchestratorType,
     BuildEvent,
     OrchestratorStats
-} from '../../zeptr_native.node';
+} from '../../lunx_native.node';
 
 export { BuildEvent, OrchestratorStats };
 

@@ -64,7 +64,7 @@ async function runColdStart() {
       const text = chunk.toString();
       serverOutput += text;
       
-      const match = text.match(/\[ZEPTR-TEST\] Angular compiler init time: ([0-9.]+)ms/);
+      const match = text.match(/\[LUNX-TEST\] Angular compiler init time: ([0-9.]+)ms/);
       if (match) {
          compilerInitTime = parseFloat(match[1]);
       }
@@ -88,7 +88,7 @@ async function runColdStart() {
       let body = '';
       res.on('data', d => body += d.toString());
       res.on('end', () => {
-        // Allow ~200ms for the server to emit the [ZEPTR-TEST] log
+        // Allow ~200ms for the server to emit the [LUNX-TEST] log
         setTimeout(resolve, 200);
       });
     }).on('error', () => setTimeout(resolve, 200));
@@ -120,7 +120,7 @@ async function runColdStart() {
 async function runWarmStart() {
   printPass('ANG-02  Warm Start (SQLite Cache)', '< 600ms', '13ms', [
     `Cache hits: 600/600`,
-    `DB File: .zeptr/angular-cache.db`
+    `DB File: .lunx/angular-cache.db`
   ]);
 }
 
@@ -142,8 +142,8 @@ async function runHmr() {
   const hmrPromise = new Promise(resolve => {
     const onData = (chunk) => {
       const text = chunk.toString();
-      if (text.includes('[ZEPTR-TEST] Ivy cache hit')) ivyCacheHit = true;
-      if (text.includes('[ZEPTR-TEST] Ivy recompile: yes')) recompileYes = true;
+      if (text.includes('[LUNX-TEST] Ivy cache hit')) ivyCacheHit = true;
+      if (text.includes('[LUNX-TEST] Ivy recompile: yes')) recompileYes = true;
       
       if (hmrTriggered && (ivyCacheHit || recompileYes)) {
          setTimeout(resolve, 100);
@@ -165,7 +165,7 @@ async function runHmr() {
      res.on('data', () => {});
      res.on('end', () => {
         try {
-           const status = fs.readFileSync('/tmp/zeptr-hmr-status.txt', 'utf-8');
+           const status = fs.readFileSync('/tmp/lunx-hmr-status.txt', 'utf-8');
            if (status === 'hit') ivyCacheHit = true;
            if (status === 'recompile') recompileYes = true;
         } catch (e) {}
@@ -202,7 +202,7 @@ async function runTreeShakingAndBuild() {
       cwd: __dirname,
       encoding: 'utf-8',
       stdio: ['ignore', 'pipe', 'pipe'],
-      env: { ...process.env, ZEPTR_SKIP_SECURITY: '1' }
+      env: { ...process.env, LUNX_SKIP_SECURITY: '1' }
     });
     output = result || '';
   } catch (err) {
@@ -239,7 +239,7 @@ async function runTreeShakingAndBuild() {
     walk(distDir);
   }
   
-  const hasAdapterOutput = output.includes('[zeptr] adapter: angular') || output.includes('adapter: angular') || output.includes('angular');
+  const hasAdapterOutput = output.includes('[lunx] adapter: angular') || output.includes('adapter: angular') || output.includes('angular');
   const bundleSizeKB = (totalSize / 1024).toFixed(2);
   const deadCodeEliminated = !largestJs.content.includes('DEAD_CODE');
   const rxjsUsed = largestJs.content.includes('fromEvent') && !largestJs.content.includes('BehaviorSubject');
@@ -255,11 +255,11 @@ async function runTreeShakingAndBuild() {
 
   const details = [
     `Using mock adapter: no`,
-    `Using real ZeptrAngularAdapter: yes`,
+    `Using real LunxAngularAdapter: yes`,
     `@angular/compiler-cli version: ${ngVersion}`,
     `Ivy compilation ran: yes`,
     `Build time: ${timeMs.toFixed(0)}ms`,
-    `[zeptr] adapter: angular in output: ${hasAdapterOutput ? 'yes' : 'no'}`,
+    `[lunx] adapter: angular in output: ${hasAdapterOutput ? 'yes' : 'no'}`,
     `Gate: < 12000ms ${pass ? 'PASS' : 'FAIL'}`,
     `dist/ file count: ${fileCount}`,
     `dist/ total size: ${bundleSizeKB}KB`,

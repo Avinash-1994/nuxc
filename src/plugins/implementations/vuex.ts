@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-vuex
+ * @lunx/plugin-vuex
  * Vuex integration
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVuexPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-vuex',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-vuex',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // vuex transformation

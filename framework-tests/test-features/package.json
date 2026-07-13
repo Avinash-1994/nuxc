@@ -4,16 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build",
-    "preview": "zeptr preview"
+    "dev": "lunx dev",
+    "build": "lunx build",
+    "preview": "lunx preview"
   },
   "dependencies": {
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "zeptr": "file:../../",
+    "lunx": "file:../../",
     "typescript": "latest"
   }
 }

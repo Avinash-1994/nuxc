@@ -1,9 +1,0 @@
-{
-  "module": "zeptr",
-  "entry": ["./src/main.jsx"],
-  "outDir": "./dist-zeptr",
-  "build": {
-    "minify": true,
-    "sourcemap": false
-  }
-}

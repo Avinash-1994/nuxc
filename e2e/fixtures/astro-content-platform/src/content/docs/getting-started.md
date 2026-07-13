@@ -1,19 +1,19 @@
 ---
-title: "Getting Started with Zeptr"
-description: "Set up Zeptr in under 60 seconds."
+title: "Getting Started with Lunx"
+description: "Set up Lunx in under 60 seconds."
 order: 1
 section: "guides"
 ---
 
-# Getting Started with Zeptr
+# Getting Started with Lunx
 
 ## Installation
 
 ```bash
-npm install -g zeptr
-zeptr dev
+npm install -g lunx
+lunx dev
 ```
 
 ## Configuration
 
-Create a `zeptr.config.ts` in your project root.
+Create a `lunx.config.ts` in your project root.

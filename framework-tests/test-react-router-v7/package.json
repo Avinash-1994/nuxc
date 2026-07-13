@@ -1,20 +1,20 @@
 {
-  "name": "zeptr-react-router-v7-template",
+  "name": "lunx-react-router-v7-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build",
-    "preview": "zeptr preview"
+    "dev": "lunx dev",
+    "build": "lunx build",
+    "preview": "lunx preview"
   },
-  "zeptr": {
+  "lunx": {
     "template": true,
     "framework": "react-router",
-    "description": "Zeptr Profiles — hybrid SSR+SPA directory"
+    "description": "Lunx Profiles — hybrid SSR+SPA directory"
   },
   "devDependencies": {
-    "zeptr": "file:../../",
+    "lunx": "file:../../",
     "typescript": "5.4.5"
   }
 }

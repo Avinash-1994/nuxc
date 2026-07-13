@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-critical-css
+ * @lunx/plugin-critical-css
  * Critical CSS extraction
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCriticalCssPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-critical-css',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-critical-css',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for critical-css

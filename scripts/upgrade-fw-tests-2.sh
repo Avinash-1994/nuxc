@@ -3,35 +3,35 @@
 set -e
 FT="/home/avinash/Desktop/framework_practis/build/framework-tests"
 
-# ── SVELTEKIT — nuxc-blog ────────────────────────────────────────
-mkdir -p "$FT/nuxc-blog/src/routes/blog"
-cat > "$FT/nuxc-blog/package.json" <<'EOF'
-{"name":"nuxc-blog","version":"0.0.1","private":true,"type":"module",
+# ── SVELTEKIT — lunx-blog ────────────────────────────────────────
+mkdir -p "$FT/lunx-blog/src/routes/blog"
+cat > "$FT/lunx-blog/package.json" <<'EOF'
+{"name":"lunx-blog","version":"0.0.1","private":true,"type":"module",
 "scripts":{"dev":"node ../../dist/cli.js dev","build":"node ../../dist/cli.js build"},
 "dependencies":{"@sveltejs/kit":"2.5.18","svelte":"4.2.18"},
 "devDependencies":{"typescript":"5.4.5"}}
 EOF
-cat > "$FT/nuxc-blog/nuxc.config.ts" <<'EOF'
+cat > "$FT/lunx-blog/lunx.config.ts" <<'EOF'
 const defineConfig = (c: any) => c;
 export default defineConfig({ framework: 'sveltekit' });
 EOF
-cat > "$FT/nuxc-blog/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Nuxc Blog</title></head><body><div id="app"></div><script type="module" src="/src/routes/+page.svelte"></script></body></html>
+cat > "$FT/lunx-blog/index.html" <<'EOF'
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Lunx Blog</title></head><body><div id="app"></div><script type="module" src="/src/routes/+page.svelte"></script></body></html>
 EOF
-cat > "$FT/nuxc-blog/src/routes/+page.svelte" <<'EOF'
+cat > "$FT/lunx-blog/src/routes/+page.svelte" <<'EOF'
 <script lang="ts">
   const posts = [
-    {slug:'nuxc-1-0',title:'Nuxc 1.0: Production-Ready Build Tool',date:'2026-05-14',category:'Engineering',excerpt:'303 tests, 19 framework adapters, security gate — Nuxc 1.0 is ready.'},
-    {slug:'sveltekit-ssr',title:'SvelteKit SSR with Nuxc: Zero Config',date:'2026-05-10',category:'Tutorial',excerpt:'How Nuxc auto-detects SvelteKit and configures SSR with no config.'},
+    {slug:'lunx-1-0',title:'Lunx 1.0: Production-Ready Build Tool',date:'2026-05-14',category:'Engineering',excerpt:'303 tests, 19 framework adapters, security gate — Lunx 1.0 is ready.'},
+    {slug:'sveltekit-ssr',title:'SvelteKit SSR with Lunx: Zero Config',date:'2026-05-10',category:'Tutorial',excerpt:'How Lunx auto-detects SvelteKit and configures SSR with no config.'},
     {slug:'security-gate',title:'Designing a CVE Security Gate',date:'2026-05-06',category:'Security',excerpt:'Build-time CVE scanner with OSV, blocks HIGH severity by default.'},
     {slug:'mfe-2026',title:'Module Federation in 2026',date:'2026-05-01',category:'Architecture',excerpt:'Native MFE across React, Vue, Angular with zero configuration.'},
-    {slug:'hmr-performance',title:'How Nuxc HMR Hits 12ms p50',date:'2026-04-28',category:'Performance',excerpt:'The uWS + WebSocket pipeline that makes 12ms HMR possible.'},
+    {slug:'hmr-performance',title:'How Lunx HMR Hits 12ms p50',date:'2026-04-28',category:'Performance',excerpt:'The uWS + WebSocket pipeline that makes 12ms HMR possible.'},
   ];
 </script>
 <div style="min-height:100vh;background:#0f172a;color:#f1f5f9;font-family:system-ui">
   <header style="background:#1e293b;padding:24px;border-bottom:1px solid #334155">
-    <h1 style="margin:0;font-size:28px">⚡ Nuxc Blog</h1>
-    <p style="color:#94a3b8;margin:8px 0 0">Engineering insights from the Nuxc team</p>
+    <h1 style="margin:0;font-size:28px">⚡ Lunx Blog</h1>
+    <p style="color:#94a3b8;margin:8px 0 0">Engineering insights from the Lunx team</p>
   </header>
   <main style="padding:32px;max-width:800px;margin:0 auto">
     {#each posts as post}
@@ -46,28 +46,28 @@ cat > "$FT/nuxc-blog/src/routes/+page.svelte" <<'EOF'
 </div>
 EOF
 
-# ── REMIX — nuxc-jobs ────────────────────────────────────────────
-mkdir -p "$FT/nuxc-jobs/app/routes"
-cat > "$FT/nuxc-jobs/package.json" <<'EOF'
-{"name":"nuxc-jobs","version":"0.0.1","private":true,"type":"module",
+# ── REMIX — lunx-jobs ────────────────────────────────────────────
+mkdir -p "$FT/lunx-jobs/app/routes"
+cat > "$FT/lunx-jobs/package.json" <<'EOF'
+{"name":"lunx-jobs","version":"0.0.1","private":true,"type":"module",
 "scripts":{"dev":"node ../../dist/cli.js dev","build":"node ../../dist/cli.js build"},
 "dependencies":{"react":"18.3.1","react-dom":"18.3.1"},
 "devDependencies":{"typescript":"5.4.5"}}
 EOF
-cat > "$FT/nuxc-jobs/nuxc.config.ts" <<'EOF'
+cat > "$FT/lunx-jobs/lunx.config.ts" <<'EOF'
 const defineConfig = (c: any) => c;
 export default defineConfig({ framework: 'remix' });
 EOF
-cat > "$FT/nuxc-jobs/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Nuxc Jobs</title></head><body><div id="root"></div><script type="module" src="/app/routes/index.tsx"></script></body></html>
+cat > "$FT/lunx-jobs/index.html" <<'EOF'
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Lunx Jobs</title></head><body><div id="root"></div><script type="module" src="/app/routes/index.tsx"></script></body></html>
 EOF
-cat > "$FT/nuxc-jobs/app/routes/index.tsx" <<'EOF'
+cat > "$FT/lunx-jobs/app/routes/index.tsx" <<'EOF'
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
 const JOBS = [
   {id:1,title:'Senior Frontend Engineer',company:'Vercel',location:'Remote',salary:'$180k–$220k',stack:['React','Next.js','TypeScript']},
-  {id:2,title:'Staff Engineer — Build Tools',company:'Nuxc Inc.',location:'Remote / SF',salary:'$200k–$250k',stack:['Rust','TypeScript','Node']},
+  {id:2,title:'Staff Engineer — Build Tools',company:'Lunx Inc.',location:'Remote / SF',salary:'$200k–$250k',stack:['Rust','TypeScript','Node']},
   {id:3,title:'DevRel Engineer',company:'Cloudflare',location:'Remote',salary:'$150k–$190k',stack:['Workers','Svelte','Vue']},
   {id:4,title:'Platform Engineer',company:'Netlify',location:'Remote',salary:'$160k–$200k',stack:['Go','React','Terraform']},
   {id:5,title:'Full-Stack Engineer',company:'Linear',location:'Remote',salary:'$170k–$210k',stack:['React','Node','GraphQL']},
@@ -101,7 +101,7 @@ function App() {
   return (
     <div style={{minHeight:'100vh',background:'#0f172a',color:'#f1f5f9',fontFamily:'system-ui'}}>
       <nav style={{background:'#1e293b',padding:'0 24px',display:'flex',alignItems:'center',height:56,borderBottom:'1px solid #334155'}}>
-        <span style={{fontWeight:700,fontSize:18}}>💼 Nuxc Jobs</span>
+        <span style={{fontWeight:700,fontSize:18}}>💼 Lunx Jobs</span>
         <span style={{marginLeft:'auto',color:'#94a3b8',fontSize:14}}>{JOBS.length} open positions</span>
       </nav>
       <div style={{padding:32,maxWidth:860px,margin:'0 auto'}}>
@@ -127,21 +127,21 @@ function App() {
 createRoot(document.getElementById('root')!).render(<App/>);
 EOF
 
-# ── VANILLA KANBAN — nuxc-kanban ────────────────────────────────
-mkdir -p "$FT/nuxc-kanban/src"
-cat > "$FT/nuxc-kanban/package.json" <<'EOF'
-{"name":"nuxc-kanban","version":"0.0.1","private":true,"type":"module",
+# ── VANILLA KANBAN — lunx-kanban ────────────────────────────────
+mkdir -p "$FT/lunx-kanban/src"
+cat > "$FT/lunx-kanban/package.json" <<'EOF'
+{"name":"lunx-kanban","version":"0.0.1","private":true,"type":"module",
 "scripts":{"dev":"node ../../dist/cli.js dev","build":"node ../../dist/cli.js build"},
 "devDependencies":{"typescript":"5.4.5"}}
 EOF
-cat > "$FT/nuxc-kanban/nuxc.config.ts" <<'EOF'
+cat > "$FT/lunx-kanban/lunx.config.ts" <<'EOF'
 const defineConfig = (c: any) => c;
 export default defineConfig({ framework: 'vanilla', entry: 'src/main.ts' });
 EOF
-cat > "$FT/nuxc-kanban/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Nuxc Kanban</title><style>*{box-sizing:border-box;margin:0}body{background:#0f172a;color:#f1f5f9;font-family:system-ui}</style></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
+cat > "$FT/lunx-kanban/index.html" <<'EOF'
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Lunx Kanban</title><style>*{box-sizing:border-box;margin:0}body{background:#0f172a;color:#f1f5f9;font-family:system-ui}</style></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
 EOF
-cat > "$FT/nuxc-kanban/src/main.ts" <<'EOF'
+cat > "$FT/lunx-kanban/src/main.ts" <<'EOF'
 interface Card { id:string; title:string; priority:'low'|'medium'|'high'; }
 interface Col { id:string; title:string; cards:Card[]; }
 const SEED:Col[] = [
@@ -164,15 +164,15 @@ const SEED:Col[] = [
     {id:'10',title:'SRI hash injection',priority:'low'},
   ]},
 ];
-let state:Col[] = JSON.parse(localStorage.getItem('nuxc-kanban')||'null')??SEED;
+let state:Col[] = JSON.parse(localStorage.getItem('lunx-kanban')||'null')??SEED;
 let drag:{cardId:string;fromCol:string}|null=null;
 function pc(p:string){return p==='high'?'#ef4444':p==='medium'?'#f59e0b':'#22c55e';}
-function save(){localStorage.setItem('nuxc-kanban',JSON.stringify(state));}
+function save(){localStorage.setItem('lunx-kanban',JSON.stringify(state));}
 function render(){
   const app=document.getElementById('app')!;
   app.innerHTML=`<div style="padding:24px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-      <h1 style="font-size:24px">🗂️ Nuxc Kanban</h1>
+      <h1 style="font-size:24px">🗂️ Lunx Kanban</h1>
       <span style="color:#94a3b8;font-size:14px">${state.reduce((s,c)=>s+c.cards.length,0)} cards</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
@@ -219,12 +219,12 @@ EOF
 # ── MFE host/remote upgrade ───────────────────────────────────────
 mkdir -p "$FT/mfe-demo/host/src" "$FT/mfe-demo/remote/src"
 cat > "$FT/mfe-demo/host/package.json" <<'EOF'
-{"name":"nuxc-mfe-host","version":"0.0.1","private":true,"type":"module",
+{"name":"lunx-mfe-host","version":"0.0.1","private":true,"type":"module",
 "scripts":{"dev":"node ../../../dist/cli.js dev","build":"node ../../../dist/cli.js build"},
 "dependencies":{"react":"18.3.1","react-dom":"18.3.1"},
 "devDependencies":{"typescript":"5.4.5"}}
 EOF
-cat > "$FT/mfe-demo/host/nuxc.config.ts" <<'EOF'
+cat > "$FT/mfe-demo/host/lunx.config.ts" <<'EOF'
 const defineConfig=(c:any)=>c;
 export default defineConfig({
   framework:'react',
@@ -232,7 +232,7 @@ export default defineConfig({
 });
 EOF
 cat > "$FT/mfe-demo/host/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Nuxc MFE Host</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><title>Lunx MFE Host</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
 EOF
 cat > "$FT/mfe-demo/host/src/main.tsx" <<'EOF'
 import React, { Suspense, useState } from 'react';
@@ -242,7 +242,7 @@ function App() {
   const [show, setShow] = useState(false);
   return (
     <div style={{minHeight:'100vh',background:'#0f172a',color:'#f1f5f9',fontFamily:'system-ui',padding:32}}>
-      <h1 style={{marginBottom:24}}>⚡ Nuxc MFE Host (React)</h1>
+      <h1 style={{marginBottom:24}}>⚡ Lunx MFE Host (React)</h1>
       <div style={{background:'#1e293b',borderRadius:12,padding:24,maxWidth:600}}>
         <h2 style={{color:'#61dafb',marginBottom:16}}>React Remote Dashboard</h2>
         {show
@@ -257,12 +257,12 @@ createRoot(document.getElementById('root')!).render(<App/>);
 EOF
 
 cat > "$FT/mfe-demo/remote/package.json" <<'EOF'
-{"name":"nuxc-mfe-remote","version":"0.0.1","private":true,"type":"module",
+{"name":"lunx-mfe-remote","version":"0.0.1","private":true,"type":"module",
 "scripts":{"dev":"node ../../../dist/cli.js dev","build":"node ../../../dist/cli.js build"},
 "dependencies":{"react":"18.3.1","react-dom":"18.3.1"},
 "devDependencies":{"typescript":"5.4.5"}}
 EOF
-cat > "$FT/mfe-demo/remote/nuxc.config.ts" <<'EOF'
+cat > "$FT/mfe-demo/remote/lunx.config.ts" <<'EOF'
 const defineConfig=(c:any)=>c;
 export default defineConfig({
   framework:'react',
@@ -290,4 +290,4 @@ export default function Dashboard() {
 }
 EOF
 
-echo "✅ nuxc-blog, nuxc-jobs, nuxc-kanban, mfe-demo created"
+echo "✅ lunx-blog, lunx-jobs, lunx-kanban, mfe-demo created"

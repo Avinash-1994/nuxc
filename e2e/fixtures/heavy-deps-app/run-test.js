@@ -11,9 +11,9 @@ function log(msg) { process.stdout.write(msg + '\n'); }
 
 async function getNative() {
     const candidates = [
-        path.resolve(__dirname, '../../../zeptr_native.node'),
-        path.resolve(process.cwd(), 'zeptr_native.node'),
-        path.resolve(process.cwd(), 'dist/zeptr_native.node'),
+        path.resolve(__dirname, '../../../lunx_native.node'),
+        path.resolve(process.cwd(), 'lunx_native.node'),
+        path.resolve(process.cwd(), 'dist/lunx_native.node'),
     ];
     for (const p of candidates) {
         try { return _require(p); } catch {}
@@ -33,7 +33,7 @@ async function run() {
         process.exit(1);
     }
 
-    const cacheRoot = path.join(__dirname, '.zeptr/cache');
+    const cacheRoot = path.join(__dirname, '.lunx/cache');
     const config = { cacheRoot };
 
     // PB-01 Cold Start

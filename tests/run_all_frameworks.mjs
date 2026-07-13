@@ -43,7 +43,7 @@ function serveDir(dir, port) {
 }
 
 (async () => {
-    console.log("🚀 Recompiling Zeptr build engine...");
+    console.log("🚀 Recompiling Lunx build engine...");
     execSync('npm run build', { cwd: ROOT, stdio: 'inherit' });
 
     console.log("\\n🚀 Building all framework test apps...");

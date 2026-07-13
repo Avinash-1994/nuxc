@@ -1,13 +1,13 @@
 import { Plugin } from '../index.js';
 
 /**
- * ZEPTR TIER C PLUGINS (Graph-Aware / HMR)
+ * LUNX TIER C PLUGINS (Graph-Aware / HMR)
  * 
- * Since Zeptr v1.0 handles HMR natively via UniversalTransformer for React, Vue, and Svelte,
+ * Since Lunx v1.0 handles HMR natively via UniversalTransformer for React, Vue, and Svelte,
  * these plugins act as compatibility wrappers or configuration providers.
  * 
  * They ensure that if a user migrates from Vite, they can map existing plugins to these
- * without breaking the build, while Zeptr's core engine handles the heavy lifting.
+ * without breaking the build, while Lunx's core engine handles the heavy lifting.
  */
 
 interface ReactOptions {
@@ -18,12 +18,12 @@ interface ReactOptions {
 }
 
 /**
- * Zeptr React Plugin
+ * Lunx React Plugin
  * Compatible with @vitejs/plugin-react
  */
-export function zeptrReact(options: ReactOptions = {}): Plugin {
+export function lunxReact(options: ReactOptions = {}): Plugin {
     return {
-        name: 'zeptr-react',
+        name: 'lunx-react',
         setup(api) {
             // In the future, we can push options to the UniversalTransformer via API
             // For now, we log that React support is active.
@@ -44,12 +44,12 @@ interface VueOptions {
 }
 
 /**
- * Zeptr Vue Plugin
+ * Lunx Vue Plugin
  * Compatible with @vitejs/plugin-vue
  */
-export function zeptrVue(options: VueOptions = {}): Plugin {
+export function lunxVue(options: VueOptions = {}): Plugin {
     return {
-        name: 'zeptr-vue',
+        name: 'lunx-vue',
         setup() {
             // Vue support is built-in
         }
@@ -63,12 +63,12 @@ interface SvelteOptions {
 }
 
 /**
- * Zeptr Svelte Plugin
+ * Lunx Svelte Plugin
  * Compatible with @sveltejs/vite-plugin-svelte
  */
-export function zeptrSvelte(options: SvelteOptions = {}): Plugin {
+export function lunxSvelte(options: SvelteOptions = {}): Plugin {
     return {
-        name: 'zeptr-svelte',
+        name: 'lunx-svelte',
         setup() {
             // Svelte support is built-in
         }
@@ -78,6 +78,6 @@ export function zeptrSvelte(options: SvelteOptions = {}): Plugin {
 /**
  * Compatibility aliases
  */
-export const zeptrReactRefresh = zeptrReact;
-export const zeptrVueHmr = zeptrVue;
-export const zeptrSvelteHmr = zeptrSvelte;
+export const lunxReactRefresh = lunxReact;
+export const lunxVueHmr = lunxVue;
+export const lunxSvelteHmr = lunxSvelte;

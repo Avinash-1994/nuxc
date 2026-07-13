@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-recoil
+ * @lunx/plugin-recoil
  * Recoil state management
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRecoilPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-recoil',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-recoil',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // recoil transformation

@@ -17,12 +17,12 @@ export const vueSpaTemplate: TemplateConfig = {
     devDependencies: {
         "@vitejs/plugin-vue": "^4.2.3",
         "vue-tsc": "^1.8.8",
-        "@zeptr/plugin-vue": "^1.0.0"
+        "@lunx/plugin-vue": "^1.0.0"
     },
     files: {
-        'zeptr.config.ts': `
-import { defineConfig } from 'zeptr';
-import vue from '@zeptr/plugin-vue';
+        'lunx.config.ts': `
+import { defineConfig } from 'lunx';
+import vue from '@lunx/plugin-vue';
 
 export default defineConfig({
     plugins: [vue()],
@@ -46,9 +46,9 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <div>
-    <h1>Zeptr + Vue</h1>
+    <h1>Lunx + Vue</h1>
   </div>
-  <HelloWorld msg="Zeptr + Vue" />
+  <HelloWorld msg="Lunx + Vue" />
 </template>
 
 <style scoped>

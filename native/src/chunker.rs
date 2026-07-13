@@ -170,8 +170,8 @@ fn split_into_chunks(
 
 // ─── N-API Export ─────────────────────────────────────────────────────────────
 
-#[napi(js_name = "zeptrChunk")]
-pub fn zeptr_chunk(graph_json: String, config: ChunkerConfig) -> Result<ChunkerResult> {
+#[napi(js_name = "lunxChunk")]
+pub fn lunx_chunk(graph_json: String, config: ChunkerConfig) -> Result<ChunkerResult> {
     let graph = DepGraph::from_json(&graph_json)
         .map_err(|e| Error::new(Status::GenericFailure, e))?;
 

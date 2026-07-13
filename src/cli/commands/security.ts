@@ -58,7 +58,7 @@ export default {
       )
       .command(
         'plugin-audit',
-        'Audit installed Zeptr plugin permissions',
+        'Audit installed Lunx plugin permissions',
         () => {},
         async () => {
           const { runPluginAuditCommand } = await import('../../commands/security.js');

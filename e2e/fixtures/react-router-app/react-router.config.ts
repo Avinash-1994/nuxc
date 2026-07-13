@@ -1,4 +1,4 @@
-// react-router.config.ts — Zeptr Phase 2.9
+// react-router.config.ts — Lunx Phase 2.9
 import type { Config } from '@react-router/dev/config';
 
 export default {

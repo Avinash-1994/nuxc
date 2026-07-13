@@ -4,12 +4,12 @@
  * Validates Day 18 Language Server Protocol Logic
  */
 
-import { ZeptrLSPServer } from './mocks/lsp_server.js';
+import { LunxLSPServer } from './mocks/lsp_server.js';
 
 async function runLSPTest() {
-    console.log('🧪 Testing Zeptr LSP Logic...');
+    console.log('🧪 Testing Lunx LSP Logic...');
 
-    const server = new ZeptrLSPServer();
+    const server = new LunxLSPServer();
 
     // Test 1: Completions
     console.log('  Test 1: Auto-Completions...');
@@ -22,8 +22,8 @@ export default {
     // Position inside plugins: [
     const compl = server.onCompletion(docText, { line: 3, character: 10 });
 
-    const hasReact = compl.some(c => c.label === '@zeptr/plugin-react');
-    const hasVue = compl.some(c => c.label === '@zeptr/plugin-vue');
+    const hasReact = compl.some(c => c.label === '@lunx/plugin-react');
+    const hasVue = compl.some(c => c.label === '@lunx/plugin-vue');
 
     if (!hasReact || !hasVue) {
         throw new Error('Failed to suggest plugins');

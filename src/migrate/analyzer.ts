@@ -2,7 +2,7 @@
  * Migration Analyzer (Day 43)
  * 
  * Analyzes existing projects (Vite/Webpack/Rollup/Angular CLI) and generates
- * a migration plan for converting to Zeptr.
+ * a migration plan for converting to Lunx.
  */
 
 import fs from 'fs';
@@ -264,7 +264,7 @@ export class MigrationAnalyzer {
             autoMigrate.push('Development server settings');
         }
 
-        // Common plugins that have Zeptr equivalents
+        // Common plugins that have Lunx equivalents
         const autoMigratablePlugins = [
             '@vitejs/plugin-react',
             '@vitejs/plugin-vue',
@@ -278,7 +278,7 @@ export class MigrationAnalyzer {
 
         for (const plugin of plugins) {
             if (autoMigratablePlugins.includes(plugin)) {
-                autoMigrate.push(`Plugin: ${plugin} → Zeptr preset`);
+                autoMigrate.push(`Plugin: ${plugin} → Lunx preset`);
             }
         }
 
@@ -319,7 +319,7 @@ export class MigrationAnalyzer {
         manualSteps.push('Review environment variable usage (process.env → import.meta.env)');
 
         // Build scripts
-        manualSteps.push('Update package.json scripts to use Zeptr commands');
+        manualSteps.push('Update package.json scripts to use Lunx commands');
 
         return manualSteps;
     }

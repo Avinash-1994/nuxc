@@ -1,4 +1,4 @@
-# Zeptr waku Template — Zeptr Shop — RSC-powered catalogue
+# Lunx waku Template — Lunx Shop — RSC-powered catalogue
 ```bash
 npm install && npm run dev
 ```

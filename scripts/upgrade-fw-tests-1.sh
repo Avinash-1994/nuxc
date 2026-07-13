@@ -1,27 +1,27 @@
 #!/bin/bash
 # Upgrade existing + create missing framework-tests projects with real content
-# All use local nuxc: "file:../.."
+# All use local lunx: "file:../.."
 ROOT="/home/avinash/Desktop/framework_practis/build"
 FT="$ROOT/framework-tests"
 
-# ── 1. UPGRADE test-react-ts → Nuxc Tasks ───────────────────────
+# ── 1. UPGRADE test-react-ts → Lunx Tasks ───────────────────────
 cat > "$FT/test-react-ts/src/App.tsx" <<'EOF'
 import React, { useState } from 'react';
 
 const PROJECTS = [
-  { id:1, name:'Nuxc Core', tasks:12, done:8 },
+  { id:1, name:'Lunx Core', tasks:12, done:8 },
   { id:2, name:'Plugin Ecosystem', tasks:34, done:29 },
   { id:3, name:'Meta-Frameworks', tasks:21, done:19 },
   { id:4, name:'Security Gate', tasks:15, done:15 },
   { id:5, name:'Browser Tests', tasks:9, done:3 },
 ];
 const TASKS = [
-  { id:1, title:'Fix SvelteKit SSR adapter', project:'Nuxc Core', priority:'high', status:'done' },
+  { id:1, title:'Fix SvelteKit SSR adapter', project:'Lunx Core', priority:'high', status:'done' },
   { id:2, title:'Add tRPC support to Analog', project:'Meta-Frameworks', priority:'high', status:'in-progress' },
   { id:3, title:'Implement SBOM generation', project:'Security Gate', priority:'medium', status:'done' },
   { id:4, title:'Plugin sandbox permissions', project:'Security Gate', priority:'high', status:'done' },
   { id:5, title:'Playwright E2E suite', project:'Browser Tests', priority:'high', status:'todo' },
-  { id:6, title:'React Query integration', project:'Nuxc Core', priority:'medium', status:'done' },
+  { id:6, title:'React Query integration', project:'Lunx Core', priority:'medium', status:'done' },
   { id:7, title:'Waku RSC support', project:'Meta-Frameworks', priority:'high', status:'done' },
   { id:8, title:'SRI hash injection', project:'Security Gate', priority:'medium', status:'done' },
 ];
@@ -41,7 +41,7 @@ export default function App() {
     <div style={{minHeight:'100vh', background:C.bg, color:C.text, fontFamily:'system-ui'}}>
       {/* NAV */}
       <nav style={{background:C.card, padding:'0 24px', display:'flex', gap:24, alignItems:'center', height:56, borderBottom:`1px solid ${C.border}`}}>
-        <span style={{fontWeight:700, fontSize:18, marginRight:8}}>⚡ Nuxc Tasks</span>
+        <span style={{fontWeight:700, fontSize:18, marginRight:8}}>⚡ Lunx Tasks</span>
         {(['dashboard','projects','new-task','login'] as Tab[]).map(t => (
           <button key={t} onClick={() => nav(t)}
             style={{background:'none', border:'none', color: tab===t ? C.purple : C.muted, cursor:'pointer', fontSize:15, fontWeight: tab===t ? 600 : 400, padding:'4px 0'}}>
@@ -121,7 +121,7 @@ export default function App() {
           {loggedIn
             ? <div style={{color:C.green, fontSize:22, padding:32, background:C.card, borderRadius:12, textAlign:'center'}}>✅ Welcome back! <button onClick={() => nav('dashboard')} style={{background:'none', border:'none', color:C.purple, cursor:'pointer', fontSize:18}}>Go to Dashboard →</button></div>
             : <form onSubmit={e => { e.preventDefault(); setLoggedIn(true); }} style={{display:'flex', flexDirection:'column', gap:16, maxWidth:400}}>
-                <input type="email" defaultValue="dev@nuxc.dev" placeholder="Email" required
+                <input type="email" defaultValue="dev@lunx.dev" placeholder="Email" required
                   style={{padding:12, borderRadius:8, border:`1px solid ${C.border}`, background:C.card, color:C.text}}/>
                 <input type="password" defaultValue="password" placeholder="Password" required
                   style={{padding:12, borderRadius:8, border:`1px solid ${C.border}`, background:C.card, color:C.text}}/>
@@ -137,12 +137,12 @@ export default function App() {
 }
 EOF
 
-# ── 2. UPGRADE test-vue-ts → Nuxc Shop ──────────────────────────
+# ── 2. UPGRADE test-vue-ts → Lunx Shop ──────────────────────────
 cat > "$FT/test-vue-ts/src/App.vue" <<'EOF'
 <template>
   <div style="min-height:100vh;background:#0f172a;color:#f1f5f9;font-family:system-ui">
     <nav style="background:#1e293b;padding:0 24px;display:flex;gap:20px;align-items:center;height:56px;border-bottom:1px solid #334155">
-      <span style="font-weight:700;font-size:18px;margin-right:8px">🛒 Nuxc Shop</span>
+      <span style="font-weight:700;font-size:18px;margin-right:8px">🛒 Lunx Shop</span>
       <button v-for="t in tabs" :key="t" @click="tab=t"
         :style="`background:none;border:none;color:${tab===t?'#6366f1':'#94a3b8'};cursor:pointer;font-size:15px;font-weight:${tab===t?600:400};padding:4px 0`">
         {{ t === 'cart' ? `Cart (${cartCount})` : t.charAt(0).toUpperCase()+t.slice(1) }}
@@ -218,7 +218,7 @@ cat > "$FT/test-vue-ts/src/App.vue" <<'EOF'
           ✅ Welcome back! <button @click="tab='home'" style="background:none;border:none;color:#6366f1;cursor:pointer;font-size:20px">Shop now →</button>
         </div>
         <form v-else @submit.prevent="loggedIn=true" style="display:flex;flex-direction:column;gap:16px;max-width:400px">
-          <input type="email" placeholder="Email" defaultValue="dev@nuxc.dev" required
+          <input type="email" placeholder="Email" defaultValue="dev@lunx.dev" required
             style="padding:12px;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#f1f5f9"/>
           <input type="password" placeholder="Password" required
             style="padding:12px;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#f1f5f9"/>
@@ -257,13 +257,13 @@ function removeItem(id: number) { cartItems.value = cartItems.value.filter(i => 
 </script>
 EOF
 
-# ── 3. UPGRADE test-svelte-ts → Nuxc Notes ──────────────────────
+# ── 3. UPGRADE test-svelte-ts → Lunx Notes ──────────────────────
 cat > "$FT/test-svelte-ts/src/App.svelte" <<'EOF'
 <script lang="ts">
   import { writable } from 'svelte/store';
   const notes = writable([
-    {id:1,title:'Getting Started with Nuxc',folder:'work',updated:'2026-05-14',
-     content:'# Getting Started\n\nNuxc is a **fast** build tool powered by SWC.\n\n- Zero config for 19 meta-frameworks\n- Sub-100ms HMR (p50: 12ms)\n- Built-in security pipeline'},
+    {id:1,title:'Getting Started with Lunx',folder:'work',updated:'2026-05-14',
+     content:'# Getting Started\n\nLunx is a **fast** build tool powered by SWC.\n\n- Zero config for 19 meta-frameworks\n- Sub-100ms HMR (p50: 12ms)\n- Built-in security pipeline'},
     {id:2,title:'Q2 Review Notes',folder:'work',updated:'2026-05-13',
      content:'## Q2 Review\n\n- 303 tests passing\n- 19 framework adapters\n- Security gate live'},
     {id:3,title:'Book List 2026',folder:'personal',updated:'2026-05-10',
@@ -277,7 +277,7 @@ cat > "$FT/test-svelte-ts/src/App.svelte" <<'EOF'
 </script>
 <div style="display:flex;height:100vh;background:#0f172a;color:#f1f5f9;font-family:system-ui">
   <aside style="width:260px;background:#1e293b;border-right:1px solid #334155;display:flex;flex-direction:column">
-    <div style="padding:16px 20px;font-weight:700;font-size:18px;border-bottom:1px solid #334155">📝 Nuxc Notes</div>
+    <div style="padding:16px 20px;font-weight:700;font-size:18px;border-bottom:1px solid #334155">📝 Lunx Notes</div>
     <div style="padding:8px;overflow-y:auto">
       {#each $notes as n}
         <button on:click={() => { selected=n.id; editing=false; }}
@@ -312,16 +312,16 @@ EOF
 
 # ── 4. UPGRADE test-vue-ts index.html ─────────────────────────────
 cat > "$FT/test-vue-ts/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Nuxc Shop</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Lunx Shop</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
 EOF
 
 # ── 5. Fix index.html for react-ts ───────────────────────────────
 cat > "$FT/test-react-ts/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Nuxc Tasks</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Lunx Tasks</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
 EOF
 
 cat > "$FT/test-svelte-ts/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Nuxc Notes</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Lunx Notes</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
 EOF
 
 echo "✅ React, Vue, Svelte upgraded"

@@ -16,7 +16,7 @@ console.log('🔍 Running pre-pack checks...\n');
 
 const requiredFiles = [
     'dist/cli.js',
-    'dist/zeptr_native.node',
+    'dist/lunx_native.node',
     'README.md',
     'LICENSE',
     'package.json'

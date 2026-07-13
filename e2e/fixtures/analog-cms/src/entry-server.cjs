@@ -1,7 +1,7 @@
 'use strict';
 /**
  * analog-cms/src/entry-server.cjs
- * Zeptr Phase 2.8 — Analog Angular Meta-framework
+ * Lunx Phase 2.8 — Analog Angular Meta-framework
  *
  * Implements:
  *   scanRoutes(root)              → Analog file routing manifest (app/pages, server/routes)
@@ -96,7 +96,7 @@ function executeApi(routePath, reqOpts) {
       hello: 'world from tRPC',
       posts: [
         { id: 1, title: 'Hello Analog' },
-        { id: 2, title: 'Zeptr Build Integration' }
+        { id: 2, title: 'Lunx Build Integration' }
       ]
     };
     return Promise.resolve({
@@ -122,10 +122,10 @@ function renderApplication(url, opts) {
 
   var mainContent = '';
   if (isHome) {
-    mainContent = '<app-home-page _nghost-ng-c1234><h2 _ngcontent-ng-c1234>Latest Posts</h2><ul _ngcontent-ng-c1234><li><a _ngcontent-ng-c1234 href="/blog/hello-analog">Hello Analog</a></li><li><a _ngcontent-ng-c1234 href="/blog/zeptr-build">Zeptr Build Integration</a></li></ul></app-home-page>';
+    mainContent = '<app-home-page _nghost-ng-c1234><h2 _ngcontent-ng-c1234>Latest Posts</h2><ul _ngcontent-ng-c1234><li><a _ngcontent-ng-c1234 href="/blog/hello-analog">Hello Analog</a></li><li><a _ngcontent-ng-c1234 href="/blog/lunx-build">Lunx Build Integration</a></li></ul></app-home-page>';
   } else if (isBlog) {
     var slug = params.slug || url.split('/blog/')[1] || 'unknown';
-    var postTitle = slug === 'hello-analog' ? 'Hello Analog' : slug === 'zeptr-build' ? 'Zeptr Build Integration' : 'Unknown';
+    var postTitle = slug === 'hello-analog' ? 'Hello Analog' : slug === 'lunx-build' ? 'Lunx Build Integration' : 'Unknown';
     mainContent = '<app-blog-post _nghost-ng-c5678><article _ngcontent-ng-c5678><h1 _ngcontent-ng-c5678>' + postTitle + '</h1><p _ngcontent-ng-c5678 class="content">This is the content for ' + slug + '</p></article></app-blog-post>';
   } else {
     mainContent = '<h1>Page not found</h1>';
@@ -168,7 +168,7 @@ function emitBuildArtifacts(appRoot, outDir) {
   var generatedPages = [];
 
   // Prerender pages
-  var staticUrls = ['/', '/blog/hello-analog', '/blog/zeptr-build'];
+  var staticUrls = ['/', '/blog/hello-analog', '/blog/lunx-build'];
 
   for (var i = 0; i < staticUrls.length; i++) {
     var url = staticUrls[i];
@@ -186,7 +186,7 @@ function emitBuildArtifacts(appRoot, outDir) {
   var clientEntry = [
     '"use strict";',
     '(()=>{',
-    '// [Zeptr] Angular Runtime bundled',
+    '// [Lunx] Angular Runtime bundled',
     'var defineComponent = function(opts) { return opts; };',
     'var elementStart = function(opts) { return opts; };',
     '// ... 150KB of compiled framework code ...'
@@ -202,7 +202,7 @@ function emitBuildArtifacts(appRoot, outDir) {
 
   // Server bundle (Nitro)
   var serverBundle = [
-    '// Zeptr Analog — Server Bundle (Phase 2.8)',
+    '// Lunx Analog — Server Bundle (Phase 2.8)',
     '// Nitro server shim for SSR',
     'module.exports = require("../../src/entry-server.cjs");',
   ].join('\n');
@@ -211,7 +211,7 @@ function emitBuildArtifacts(appRoot, outDir) {
   // Manifest
   var manifest = {
     framework: 'analog',
-    zeptrPhase: '2.8',
+    lunxPhase: '2.8',
     generated: new Date().toISOString(),
     routes: routes,
     pages: generatedPages,

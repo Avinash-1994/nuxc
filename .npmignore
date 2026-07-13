@@ -21,7 +21,7 @@ benchmarks/
 docs/
 examples/
 urja-web-app/
-nuxc-web-app/
+lunx-web-app/
 src/
 scripts/
 packages/
@@ -37,7 +37,7 @@ jest.config.js
 
 # Exclude massive platform-specific Rust binaries from the main package (keeps size < 2MB).
 # Users without the binary will gracefully fall back to the JS stub implemented in index.js.
-dist/nuxc_native.node
+dist/lunx_native.node
 dist/**/*.node
 dist/nexxo_native.node
 nexxo_native.node

@@ -1,20 +1,20 @@
 {
-  "name": "zeptr-solidstart-template",
+  "name": "lunx-solidstart-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build",
-    "preview": "zeptr preview"
+    "dev": "lunx dev",
+    "build": "lunx build",
+    "preview": "lunx preview"
   },
-  "zeptr": {
+  "lunx": {
     "template": true,
     "framework": "solidstart",
-    "description": "Zeptr Dashboard — streaming SSR analytics"
+    "description": "Lunx Dashboard — streaming SSR analytics"
   },
   "devDependencies": {
-    "zeptr": "file:../../",
+    "lunx": "file:../../",
     "typescript": "5.4.5"
   }
 }

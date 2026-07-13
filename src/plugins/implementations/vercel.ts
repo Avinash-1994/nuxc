@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-vercel
+ * @lunx/plugin-vercel
  * Vercel deployment adapter
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createVercelPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-vercel',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-vercel',
+        originalPlugin: 'lunx-native',
         
         async buildEnd() {
-            console.log('[@zeptr/plugin-vercel] Deployment adapter ready');
+            console.log('[@lunx/plugin-vercel] Deployment adapter ready');
             // Generate deployment config
         }
     };

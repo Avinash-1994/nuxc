@@ -28,8 +28,8 @@ export interface WebpackAdapterOptions {
 }
 
 /**
- * Adapter to use Webpack Loaders within Zeptr
- * Maps Webpack's loader API to Zeptr's transform hook.
+ * Adapter to use Webpack Loaders within Lunx
+ * Maps Webpack's loader API to Lunx's transform hook.
  */
 export function webpackLoaderAdapter(opts: WebpackAdapterOptions): Plugin {
     const name = opts.name || 'webpack-loader-compat';
@@ -52,17 +52,17 @@ export function webpackLoaderAdapter(opts: WebpackAdapterOptions): Plugin {
                     query: opts.options || {},
                     fs: fs,
 
-                    // Cacheable is a no-op in Zeptr (we handle caching at graph level)
+                    // Cacheable is a no-op in Lunx (we handle caching at graph level)
                     cacheable: () => { },
 
                     // Dependency tracking
                     addDependency: (file: string) => {
-                        // TODO: Hook into Zeptr's graph dependency tracking
+                        // TODO: Hook into Lunx's graph dependency tracking
                         // context.meta.watchFiles.add(file);
                     },
 
                     emitFile: (name: string, content: string | Buffer) => {
-                        // TODO: Hook into Zeptr's asset emission
+                        // TODO: Hook into Lunx's asset emission
                     },
 
                     async: () => {

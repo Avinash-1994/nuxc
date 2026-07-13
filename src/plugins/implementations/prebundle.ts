@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-prebundle
+ * @lunx/plugin-prebundle
  * Dependency pre-bundling
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPrebundlePlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-prebundle',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-prebundle',
+        originalPlugin: 'lunx-native',
         
         async buildStart() {
-            console.log('[@zeptr/plugin-prebundle] Starting performance optimization...');
+            console.log('[@lunx/plugin-prebundle] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createPrebundlePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@zeptr/plugin-prebundle] Performance optimization complete');
+            console.log('[@lunx/plugin-prebundle] Performance optimization complete');
         }
     };
 }

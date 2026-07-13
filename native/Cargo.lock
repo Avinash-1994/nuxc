@@ -1075,6 +1075,34 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5e5032e24019045c762d3c0f28f5b6b8bbf38563a65908389bf7978758920897"
 
 [[package]]
+name = "lunx_native"
+version = "0.1.0"
+dependencies = [
+ "base64 0.22.1",
+ "chrono",
+ "hex",
+ "lazy_static",
+ "lightningcss",
+ "napi",
+ "napi-build",
+ "napi-derive",
+ "notify",
+ "petgraph",
+ "rayon",
+ "regex",
+ "rusqlite",
+ "serde",
+ "serde_json",
+ "sha2",
+ "sourcemap 8.0.1",
+ "swc_common",
+ "swc_core",
+ "swc_ecma_transforms_base",
+ "tokio",
+ "xxhash-rust",
+]
+
+[[package]]
 name = "matches"
 version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3072,34 +3100,6 @@ dependencies = [
  "quote",
  "syn 2.0.114",
  "synstructure",
-]
-
-[[package]]
-name = "zeptr_native"
-version = "0.1.0"
-dependencies = [
- "base64 0.22.1",
- "chrono",
- "hex",
- "lazy_static",
- "lightningcss",
- "napi",
- "napi-build",
- "napi-derive",
- "notify",
- "petgraph",
- "rayon",
- "regex",
- "rusqlite",
- "serde",
- "serde_json",
- "sha2",
- "sourcemap 8.0.1",
- "swc_common",
- "swc_core",
- "swc_ecma_transforms_base",
- "tokio",
- "xxhash-rust",
 ]
 
 [[package]]

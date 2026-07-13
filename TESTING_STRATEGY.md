@@ -1,4 +1,4 @@
-# 🧪 Zeptr Testing Strategy - Current & Recommended
+# 🧪 Lunx Testing Strategy - Current & Recommended
 
 ## 📊 Current Testing Coverage (41 Tests)
 

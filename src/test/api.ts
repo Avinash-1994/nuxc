@@ -1,5 +1,5 @@
 /**
- * Zeptr Test API
+ * Lunx Test API
  * Lightweight implementation of Vitest/Jest API
  */
 
@@ -182,8 +182,8 @@ export const vi = {
     },
     mock: (moduleName: string, factory: any) => {
         // This relies on the runner to intercept imports
-        (globalThis as any).__ZEPTR_MOCKS__ = (globalThis as any).__ZEPTR_MOCKS__ || {};
-        (globalThis as any).__ZEPTR_MOCKS__[moduleName] = factory;
+        (globalThis as any).__LUNX_MOCKS__ = (globalThis as any).__LUNX_MOCKS__ || {};
+        (globalThis as any).__LUNX_MOCKS__[moduleName] = factory;
     }
 };
 

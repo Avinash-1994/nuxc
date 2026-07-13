@@ -84,7 +84,7 @@ export const BuildConfigSchema = z.object({
   // Phase 4.2 — Remote cache (new optional key)
   cache: z.object({
     remote: z.object({
-      provider: z.union([z.enum(['s3', 'zeptr-cloud']), z.literal(false)]).default(false),
+      provider: z.union([z.enum(['s3', 'lunx-cloud']), z.literal(false)]).default(false),
       bucket: z.string().optional(),
       token: z.string().optional(),
       region: z.string().optional(),
@@ -141,7 +141,7 @@ export type BuildConfig = {
     https?: boolean | { key: string; cert: string };
     headers?: Record<string, string>;
   };
-  /** Phase 1.10 — cache root dir (relative to project root). Default: .zeptr/cache */
+  /** Phase 1.10 — cache root dir (relative to project root). Default: .lunx/cache */
   cacheDir?: string;
   prebundle?: {
     enabled?: boolean;
@@ -152,7 +152,7 @@ export type BuildConfig = {
   // Supports: false (disable), true (legacy boolean), or object with remote config
   cache?: boolean | {
     remote?: {
-      provider: 's3' | 'zeptr-cloud' | false;
+      provider: 's3' | 'lunx-cloud' | false;
       bucket?: string;
       token?: string;
       region?: string;
@@ -195,20 +195,20 @@ function validateConfigKeys(raw: Record<string, unknown>) {
         .sort((a, b) => a.d - b.d)[0];
       if (closest.d <= 3) {
         errors.push(
-          `[zeptr] Config error: unknown key "${key}"\n` +
+          `[lunx] Config error: unknown key "${key}"\n` +
           `        Did you mean: ${closest.k} ?`
         );
       } else {
         errors.push(
-          `[zeptr] Config error: unknown key "${key}"\n` +
-          `        See https://zeptr.dev/config for valid keys.`
+          `[lunx] Config error: unknown key "${key}"\n` +
+          `        See https://lunx.dev/config for valid keys.`
         );
       }
     }
   }
   if (errors.length > 0) {
     errors.forEach(e => console.error(e));
-    console.error('\nFix zeptr.config.ts then re-run.\n');
+    console.error('\nFix lunx.config.ts then re-run.\n');
     process.exit(1);
   }
 }
@@ -257,58 +257,58 @@ const FRAMEWORK_IMPLICATIONS: Record<string, { preset?: string; platform?: strin
 };
 
 export async function loadConfig(cwd: string): Promise<BuildConfig> {
-  const zeptrTsPath = path.join(cwd, 'zeptr.config.ts');
-  const zeptrJsPath = path.join(cwd, 'zeptr.config.js');
-  const zeptrCjsPath = path.join(cwd, 'zeptr.config.cjs');
-  const zeptrJsonPath = path.join(cwd, 'zeptr.config.json');
-  const zeptrYamlPath = path.join(cwd, 'zeptr.config.yaml');
-  const zeptrYmlPath = path.join(cwd, 'zeptr.config.yml');
-  const legacyJsonPath = path.join(cwd, 'zeptr.build.json');
-  const legacyTsPath = path.join(cwd, 'zeptr.build.ts');
-  const legacyYamlPath = path.join(cwd, 'zeptr.build.yaml');
-  const legacyYmlPath = path.join(cwd, 'zeptr.build.yml');
+  const lunxTsPath = path.join(cwd, 'lunx.config.ts');
+  const lunxJsPath = path.join(cwd, 'lunx.config.js');
+  const lunxCjsPath = path.join(cwd, 'lunx.config.cjs');
+  const lunxJsonPath = path.join(cwd, 'lunx.config.json');
+  const lunxYamlPath = path.join(cwd, 'lunx.config.yaml');
+  const lunxYmlPath = path.join(cwd, 'lunx.config.yml');
+  const legacyJsonPath = path.join(cwd, 'lunx.build.json');
+  const legacyTsPath = path.join(cwd, 'lunx.build.ts');
+  const legacyYamlPath = path.join(cwd, 'lunx.build.yaml');
+  const legacyYmlPath = path.join(cwd, 'lunx.build.yml');
 
   let rawConfig: any;
   let loadedConfigPath = 'default';
 
   try {
-    if (await fs.access(zeptrTsPath).then(() => true).catch(() => false)) {
-      rawConfig = await loadModuleConfig(zeptrTsPath, cwd);
-      loadedConfigPath = 'zeptr.config.ts';
-    } else if (await fs.access(zeptrCjsPath).then(() => true).catch(() => false)) {
-      rawConfig = require(zeptrCjsPath);
-      loadedConfigPath = 'zeptr.config.cjs';
-    } else if (await fs.access(zeptrJsPath).then(() => true).catch(() => false)) {
-      const mod = await import('file://' + zeptrJsPath);
+    if (await fs.access(lunxTsPath).then(() => true).catch(() => false)) {
+      rawConfig = await loadModuleConfig(lunxTsPath, cwd);
+      loadedConfigPath = 'lunx.config.ts';
+    } else if (await fs.access(lunxCjsPath).then(() => true).catch(() => false)) {
+      rawConfig = require(lunxCjsPath);
+      loadedConfigPath = 'lunx.config.cjs';
+    } else if (await fs.access(lunxJsPath).then(() => true).catch(() => false)) {
+      const mod = await import('file://' + lunxJsPath);
       rawConfig = mod.default || mod;
-      loadedConfigPath = 'zeptr.config.js';
-    } else if (await fs.access(zeptrJsonPath).then(() => true).catch(() => false)) {
-      const raw = await fs.readFile(zeptrJsonPath, 'utf-8');
+      loadedConfigPath = 'lunx.config.js';
+    } else if (await fs.access(lunxJsonPath).then(() => true).catch(() => false)) {
+      const raw = await fs.readFile(lunxJsonPath, 'utf-8');
       rawConfig = JSON.parse(raw);
-      loadedConfigPath = 'zeptr.config.json';
-    } else if (await fs.access(zeptrYamlPath).then(() => true).catch(() => false)) {
-      const raw = await fs.readFile(zeptrYamlPath, 'utf-8');
+      loadedConfigPath = 'lunx.config.json';
+    } else if (await fs.access(lunxYamlPath).then(() => true).catch(() => false)) {
+      const raw = await fs.readFile(lunxYamlPath, 'utf-8');
       rawConfig = yaml.load(raw);
-      loadedConfigPath = 'zeptr.config.yaml';
-    } else if (await fs.access(zeptrYmlPath).then(() => true).catch(() => false)) {
-      const raw = await fs.readFile(zeptrYmlPath, 'utf-8');
+      loadedConfigPath = 'lunx.config.yaml';
+    } else if (await fs.access(lunxYmlPath).then(() => true).catch(() => false)) {
+      const raw = await fs.readFile(lunxYmlPath, 'utf-8');
       rawConfig = yaml.load(raw);
-      loadedConfigPath = 'zeptr.config.yml';
+      loadedConfigPath = 'lunx.config.yml';
     } else if (await fs.access(legacyTsPath).then(() => true).catch(() => false)) {
       rawConfig = await loadModuleConfig(legacyTsPath, cwd);
-      loadedConfigPath = 'zeptr.build.ts';
+      loadedConfigPath = 'lunx.build.ts';
     } else if (await fs.access(legacyJsonPath).then(() => true).catch(() => false)) {
       const raw = await fs.readFile(legacyJsonPath, 'utf-8');
       rawConfig = JSON.parse(raw);
-      loadedConfigPath = 'zeptr.build.json';
+      loadedConfigPath = 'lunx.build.json';
     } else if (await fs.access(legacyYamlPath).then(() => true).catch(() => false)) {
       const raw = await fs.readFile(legacyYamlPath, 'utf-8');
       rawConfig = yaml.load(raw);
-      loadedConfigPath = 'zeptr.build.yaml';
+      loadedConfigPath = 'lunx.build.yaml';
     } else if (await fs.access(legacyYmlPath).then(() => true).catch(() => false)) {
       const raw = await fs.readFile(legacyYmlPath, 'utf-8');
       rawConfig = yaml.load(raw);
-      loadedConfigPath = 'zeptr.build.yml';
+      loadedConfigPath = 'lunx.build.yml';
     } else {
       // Return default config if file not found, with auto-detection
       log.info('No config file found, using defaults...');
@@ -381,7 +381,7 @@ export async function loadConfig(cwd: string): Promise<BuildConfig> {
     if (finalConfig.plugins) {
       for (const p of finalConfig.plugins) {
         if (p && (p.main?.endsWith('.wasm') || p.entry?.endsWith('.wasm') || typeof p === 'string' && p.endsWith('.wasm'))) {
-          throw new Error("Zeptr no longer supports WASM plugins. Please use a JS/TS plugin entry point. See https://zeptr.dev/migrate#wasm-plugins");
+          throw new Error("Lunx no longer supports WASM plugins. Please use a JS/TS plugin entry point. See https://lunx.dev/migrate#wasm-plugins");
         }
       }
     }
@@ -393,18 +393,18 @@ export async function loadConfig(cwd: string): Promise<BuildConfig> {
       const val = (finalConfig as any)[key];
       if (typeof val === 'string' && /leveldb|rocksdb/i.test(val)) {
         console.warn(
-          `[zeptr] Deprecated config key "${key}": "${val}" is no longer supported. ` +
-          `Zeptr uses SQLite for all caching. See https://zeptr.dev/migrate#cache-backend`
+          `[lunx] Deprecated config key "${key}": "${val}" is no longer supported. ` +
+          `Lunx uses SQLite for all caching. See https://lunx.dev/migrate#cache-backend`
         );
       }
     }
     // Also check environment variables
-    for (const envKey of ['ZEPTR_CACHE_BACKEND', 'ZEPTR_CACHE_DRIVER', 'NUCLIE_CACHE_BACKEND']) {
+    for (const envKey of ['LUNX_CACHE_BACKEND', 'LUNX_CACHE_DRIVER', 'NUCLIE_CACHE_BACKEND']) {
       const envVal = process.env[envKey];
       if (envVal && /leveldb|rocksdb/i.test(envVal)) {
         console.warn(
-          `[zeptr] Deprecated environment variable "${envKey}": "${envVal}" is ignored. ` +
-          `Zeptr uses SQLite for all caching. See https://zeptr.dev/migrate#cache-backend`
+          `[lunx] Deprecated environment variable "${envKey}": "${envVal}" is ignored. ` +
+          `Lunx uses SQLite for all caching. See https://lunx.dev/migrate#cache-backend`
         );
       }
     }
@@ -420,7 +420,7 @@ export async function loadConfig(cwd: string): Promise<BuildConfig> {
 async function loadModuleConfig(tsPath: string, cwd: string): Promise<any> {
   log.info(`Loading config from ${path.basename(tsPath)}...`);
   const { build } = await import('esbuild');
-  const outfile = path.join(cwd, `zeptr.config.temp.${Date.now()}.mjs`);
+  const outfile = path.join(cwd, `lunx.config.temp.${Date.now()}.mjs`);
 
   try {
     await build({
@@ -446,7 +446,7 @@ async function loadModuleConfig(tsPath: string, cwd: string): Promise<any> {
 }
 
 export async function saveConfig(cwd: string, config: any): Promise<void> {
-  const jsonPath = path.join(cwd, 'zeptr.build.json');
+  const jsonPath = path.join(cwd, 'lunx.build.json');
   await fs.writeFile(jsonPath, JSON.stringify(config, null, 2), 'utf-8');
   log.info(`Configuration saved to ${jsonPath}`);
 }

@@ -50,7 +50,7 @@ export interface PluginExecutionRecord {
 }
 
 /** @public */
-export interface ZeptrPlugin {
+export interface LunxPlugin {
     manifest: PluginManifest;
     id: string; // sha256(name + version)
 

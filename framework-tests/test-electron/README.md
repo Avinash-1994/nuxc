@@ -1,4 +1,4 @@
-# Zeptr electron Template — Zeptr Notes Desktop — native note app
+# Lunx electron Template — Lunx Notes Desktop — native note app
 ```bash
 npm install && npm run dev
 ```

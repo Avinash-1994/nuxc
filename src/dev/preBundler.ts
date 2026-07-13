@@ -14,9 +14,9 @@ function getNative() {
     if (_native !== null) return _native;
     try {
         const candidates = [
-            path.resolve(process.cwd(), 'zeptr_native.node'),
-            path.resolve(process.cwd(), 'dist/zeptr_native.node'),
-            new URL('../../zeptr_native.node', import.meta.url).pathname,
+            path.resolve(process.cwd(), 'lunx_native.node'),
+            path.resolve(process.cwd(), 'dist/lunx_native.node'),
+            new URL('../../lunx_native.node', import.meta.url).pathname,
         ];
         for (const p of candidates) {
             try { _native = require(p); return _native; } catch {}
@@ -31,17 +31,17 @@ function getNative() {
  * Uses full dependency graph bundling with splitting.
  * Handles transitive dependencies automatically.
  *
- * Phase 1.10: Cache root is driven by `cacheDir` from zeptr.config
- * (default: `.zeptr/cache`). SHA-256 fingerprints are stored in a native
+ * Phase 1.10: Cache root is driven by `cacheDir` from lunx.config
+ * (default: `.lunx/cache`). SHA-256 fingerprints are stored in a native
  * SQLite DB via the prebundle N-API; the esbuild pass runs only on misses.
  */
 export class DependencyPreBundler {
     /** Resolved absolute path to the pre-bundle output directory */
     public readonly cacheRoot: string;
 
-    constructor(private root: string, cacheDirOrLegacy: string = 'node_modules/.zeptr') {
-        // Accept both old-style 'node_modules/.zeptr' and new config-driven paths.
-        // New config key (`cacheDir`) maps to '<root>/.zeptr/cache' by default.
+    constructor(private root: string, cacheDirOrLegacy: string = 'node_modules/.lunx') {
+        // Accept both old-style 'node_modules/.lunx' and new config-driven paths.
+        // New config key (`cacheDir`) maps to '<root>/.lunx/cache' by default.
         // If the legacy default is still passed we keep backwards compat.
         this.cacheRoot = path.isAbsolute(cacheDirOrLegacy)
             ? cacheDirOrLegacy
@@ -86,15 +86,15 @@ export class DependencyPreBundler {
                 // All hits → serve from native SQLite cache, skip esbuild entirely
                 const allHit = results.every(r => r.hit);
                 if (allHit && results.length === deps.length) {
-                    log.info('[zeptr:prebundle] Warm start — serving all deps from native cache');
+                    log.info('[lunx:prebundle] Warm start — serving all deps from native cache');
                     for (const r of results) {
                         const safeName = r.moduleId.replace(/[/@]/g, '_');
-                        bundledDeps.set(r.moduleId, `/@zeptr-deps/${safeName}.js`);
+                        bundledDeps.set(r.moduleId, `/@lunx-deps/${safeName}.js`);
                     }
                     return bundledDeps;
                 }
             } catch (e: any) {
-                log.debug(`[zeptr:prebundle] Native fingerprint check skipped: ${e.message}`);
+                log.debug(`[lunx:prebundle] Native fingerprint check skipped: ${e.message}`);
             }
         }
 
@@ -114,7 +114,7 @@ export class DependencyPreBundler {
                 (cachedMeta.depsHash === depsHash || // New-style: exact dep hash
                     (cachedMeta.deps && xxh3.xxh64([...cachedMeta.deps].sort().join(',')).toString(16).slice(0, 8) === depsHash)); // Legacy-style fallback
             if (cacheHit) {
-                log.info('[zeptr:prebundle] Using cached pre-bundled dependencies');
+                log.info('[lunx:prebundle] Using cached pre-bundled dependencies');
                 // Load from cache
                 for (const dep of deps) {
                     const cachedPath = cachedMeta.depMap?.[dep];
@@ -419,7 +419,7 @@ export class DependencyPreBundler {
                             // Exact match - prevent "react" matching "react-router-dom"
                             if (outputBasename === normalizedName) {
                                 const relativePath = path.relative(cacheDir, outputPath);
-                                const urlPath = `/@zeptr-deps/${relativePath}`;
+                                const urlPath = `/@lunx-deps/${relativePath}`;
                                 bundledDeps.set(dep, urlPath);
                                 depMap[dep] = urlPath;
                                 log.debug(`✓ Pre-bundled: ${dep} → ${urlPath}`);
@@ -462,7 +462,7 @@ export class DependencyPreBundler {
                         }
                     }
                 } catch (e: any) {
-                    log.debug(`[zeptr:prebundle] Native persist skipped: ${e.message}`);
+                    log.debug(`[lunx:prebundle] Native persist skipped: ${e.message}`);
                 }
             }
 

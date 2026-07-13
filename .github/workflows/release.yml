@@ -111,8 +111,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            nuxc-*.tgz
-            dist/nuxc_native.node
+            lunx-*.tgz
+            dist/lunx_native.node
           generate_release_notes: true
           draft: false
           prerelease: false

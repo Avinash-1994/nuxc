@@ -1,4 +1,4 @@
-# ZEPTR Security Policy
+# LUNX Security Policy
 
 ## Reporting Vulnerabilities
 

@@ -1,17 +1,17 @@
 /**
- * Plugin Authoring Guide for Zeptr v1
+ * Plugin Authoring Guide for Lunx v1
  * 
  * follow strict strict rules to ensure stability and compatibility.
  */
 
 /*
-# Zeptr Plugin API Reference
+# Lunx Plugin API Reference
 
-Zeptr plugins are compatible with Rollup plugins, with additional governance for stability.
+Lunx plugins are compatible with Rollup plugins, with additional governance for stability.
 
 ## Required Properties
 
-- `name` (string): Unique ID (e.g. `zeptr-plugin-my-feature`)
+- `name` (string): Unique ID (e.g. `lunx-plugin-my-feature`)
 - `stability` (string): 'experimental' | 'stable' | 'deprecated'
 
 ## Hooks
@@ -26,11 +26,11 @@ All standard Rollup hooks are supported:
 ## Example
 
 ```typescript
-import { Plugin } from 'zeptr';
+import { Plugin } from 'lunx';
 
 export function myPlugin(): Plugin {
   return {
-    name: 'zeptr-plugin-example',
+    name: 'lunx-plugin-example',
     stability: 'stable',
     async transform(code, id) {
       if (id.endsWith('.foo')) {

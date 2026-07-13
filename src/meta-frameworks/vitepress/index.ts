@@ -1,5 +1,5 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { vitepressMarkdownPlugin } from './press-plugin.js';
 
 export interface VitePressConfig {
@@ -8,7 +8,7 @@ export interface VitePressConfig {
   cleanUrls?: boolean;   // default false
 }
 
-export class VitePressAdapter implements ZeptrAdapter {
+export class VitePressAdapter implements LunxAdapter {
   name = 'vitepress';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -21,7 +21,7 @@ export class VitePressAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.vitepress) config.vitepress = {};
     config.vitepress = {
       srcDir: '.',
@@ -39,7 +39,7 @@ export class VitePressAdapter implements ZeptrAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:zeptr/vitepress-router';
+         const virtualEntry = 'virtual:lunx/vitepress-router';
          let router: any;
          try {
             router = await import(virtualEntry);
@@ -70,7 +70,7 @@ export class VitePressAdapter implements ZeptrAdapter {
 
          next();
       } catch(e) {
-         console.error('[Zeptr:VitePress] Error rendering SSR', e);
+         console.error('[Lunx:VitePress] Error rendering SSR', e);
          next();
       }
     };

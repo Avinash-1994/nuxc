@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-jotai
+ * @lunx/plugin-jotai
  * Jotai state management
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createJotaiPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-jotai',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-jotai',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // jotai transformation

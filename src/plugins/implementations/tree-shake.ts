@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-tree-shake
+ * @lunx/plugin-tree-shake
  * Advanced tree-shaking
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTreeShakePlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-tree-shake',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-tree-shake',
+        originalPlugin: 'lunx-native',
         
         async buildStart() {
-            console.log('[@zeptr/plugin-tree-shake] Starting performance optimization...');
+            console.log('[@lunx/plugin-tree-shake] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createTreeShakePlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@zeptr/plugin-tree-shake] Performance optimization complete');
+            console.log('[@lunx/plugin-tree-shake] Performance optimization complete');
         }
     };
 }

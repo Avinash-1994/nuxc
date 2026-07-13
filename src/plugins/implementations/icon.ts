@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-icon
+ * @lunx/plugin-icon
  * Icon component generation
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createIconPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-icon',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-icon',
+        originalPlugin: 'lunx-native',
         
         async load(id: string) {
             // Asset loading for icon

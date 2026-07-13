@@ -1,12 +1,12 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { wakuRscPlugin } from './rsc-plugin.js';
 
 export interface WakuConfig {
   rscPath?: string; // default '/RSC'
 }
 
-export class WakuAdapter implements ZeptrAdapter {
+export class WakuAdapter implements LunxAdapter {
   name = 'waku';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -19,7 +19,7 @@ export class WakuAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.waku) config.waku = {};
     config.waku = {
       rscPath: '/RSC',
@@ -35,7 +35,7 @@ export class WakuAdapter implements ZeptrAdapter {
       if (!req || !res) return next?.();
 
       try {
-         const virtualEntry = 'virtual:zeptr/waku-rsc-router';
+         const virtualEntry = 'virtual:lunx/waku-rsc-router';
          let router: any;
          try {
             router = await import(virtualEntry);
@@ -88,7 +88,7 @@ export class WakuAdapter implements ZeptrAdapter {
 
          next();
       } catch(e) {
-         console.error('[Zeptr:Waku] Error rendering RSC', e);
+         console.error('[Lunx:Waku] Error rendering RSC', e);
          next();
       }
     };

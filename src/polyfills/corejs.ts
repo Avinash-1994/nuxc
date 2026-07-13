@@ -1,6 +1,6 @@
 
 /**
- * Zeptr Legacy Polyfill Injector
+ * Lunx Legacy Polyfill Injector
  * Day 25: Legacy Polyfills & Windows Lock
  */
 

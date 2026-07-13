@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-postcss
+ * @lunx/plugin-postcss
  * PostCSS processing
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPostcssPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-postcss',
+        name: '@lunx/plugin-postcss',
         originalPlugin: 'postcss-loader',
         
         async transform(code: string, id: string) {

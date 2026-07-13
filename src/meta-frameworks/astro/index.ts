@@ -1,6 +1,6 @@
 import path from 'path';
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 
 export interface AstroConfig {
   srcDir?: string;
@@ -11,16 +11,16 @@ export interface AstroConfig {
 }
 
 /**
- * Zeptr Astro Adapter
+ * Lunx Astro Adapter
  *
- * Zeptr provides deeper Astro integration than any other build tool:
+ * Lunx provides deeper Astro integration than any other build tool:
  * - Uses Astro's programmatic API to start the dev server
- * - Proxies all requests through Zeptr's security & HMR layer
+ * - Proxies all requests through Lunx's security & HMR layer
  * - Supports Astro Islands with React, Vue, Svelte components
  * - Content Collections with SQLite-backed caching
  * - Zero config — auto-detected from package.json
  */
-export class AstroAdapter implements ZeptrAdapter {
+export class AstroAdapter implements LunxAdapter {
   name = 'astro';
 
   // Internal: holds the running Astro dev server instance + proxy port
@@ -35,7 +35,7 @@ export class AstroAdapter implements ZeptrAdapter {
     return [];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.astro) config.astro = {};
     config.astro = {
       srcDir: 'src',
@@ -49,7 +49,7 @@ export class AstroAdapter implements ZeptrAdapter {
 
   /**
    * Start Astro's dev server programmatically and return a proxy handler.
-   * Zeptr wraps it with: HMR overlay, security headers, request timing, CSP.
+   * Lunx wraps it with: HMR overlay, security headers, request timing, CSP.
    */
   getDevHandler(): any {
     // Start Astro dev server on a random high port and proxy to it
@@ -61,7 +61,7 @@ export class AstroAdapter implements ZeptrAdapter {
       proxyInitialized = true;
 
       try {
-        // Resolve 'astro' from the PROJECT root, not Zeptr's own node_modules
+        // Resolve 'astro' from the PROJECT root, not Lunx's own node_modules
         const { createRequire } = await import('module');
         const { pathToFileURL } = await import('url');
         const projectRequire = createRequire(path.join(root, 'package.json'));
@@ -69,14 +69,14 @@ export class AstroAdapter implements ZeptrAdapter {
         try {
           astroEntry = projectRequire.resolve('astro');
         } catch {
-          console.warn('[Zeptr:Astro] astro package not found in project node_modules. Run: npm install astro');
+          console.warn('[Lunx:Astro] astro package not found in project node_modules. Run: npm install astro');
           return;
         }
 
         const _importAstro = new Function('specifier', 'return import(specifier)');
         const astro = await _importAstro(pathToFileURL(astroEntry).href).catch(() => null) as any;
         if (!astro || typeof astro.dev !== 'function') {
-          console.warn('[Zeptr:Astro] astro.dev() not available — try updating astro to v4+');
+          console.warn('[Lunx:Astro] astro.dev() not available — try updating astro to v4+');
           return;
         }
 
@@ -86,16 +86,16 @@ export class AstroAdapter implements ZeptrAdapter {
         const server = await astro.dev({
           root,
           server: { port: internalPort, host: '127.0.0.1' },
-          // Integrate Zeptr's plugin pipeline
+          // Integrate Lunx's plugin pipeline
           vite: {
             plugins: [],
-            define: { '__ZEPTR_BUILD__': 'true' }
+            define: { '__LUNX_BUILD__': 'true' }
           }
         });
 
         this._astroPort = internalPort;
         this._astroServer = server;
-        console.log(`[Zeptr:Astro] ⚡ Astro dev server running internally on :${internalPort}`);
+        console.log(`[Lunx:Astro] ⚡ Astro dev server running internally on :${internalPort}`);
 
         // Create http-proxy agent to forward requests
         const httpProxy = await import('http-proxy');
@@ -106,7 +106,7 @@ export class AstroAdapter implements ZeptrAdapter {
         });
 
         proxyAgent.on('error', (err: Error, _req: any, res: any) => {
-          console.error('[Zeptr:Astro] Proxy error:', err.message);
+          console.error('[Lunx:Astro] Proxy error:', err.message);
           if (res && !res.headersSent) {
             res.writeHead(502, { 'Content-Type': 'text/plain' });
             res.end('Astro dev server error: ' + err.message);
@@ -114,12 +114,12 @@ export class AstroAdapter implements ZeptrAdapter {
         });
 
       } catch (e: any) {
-        console.error('[Zeptr:Astro] Failed to start Astro dev server:', e.message);
+        console.error('[Lunx:Astro] Failed to start Astro dev server:', e.message);
       }
     };
 
     return async (req: any, res: any, next: any) => {
-      const root = req.__zeptrRoot || process.cwd();
+      const root = req.__lunxRoot || process.cwd();
 
       // Lazy-init Astro on first request
       if (!proxyInitialized) {

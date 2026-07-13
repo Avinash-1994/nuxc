@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-relay
+ * @lunx/plugin-relay
  * Relay integration
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRelayPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-relay',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-relay',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Utility: Relay integration

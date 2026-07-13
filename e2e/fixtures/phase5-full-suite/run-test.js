@@ -1,5 +1,5 @@
 /**
- * ZEPTR — Phase 5 Full Test Suite
+ * LUNX — Phase 5 Full Test Suite
  * 5.1 Webpack Parity (15) | 5.2 Vite Parity (12) | 5.3 JS Transform (15)
  * 5.4 CSS (10) | 5.5 Source Maps (9) | 5.6 Tree Shaking (10)
  * 5.7 Edge Cases (18) | 5.8 Perf Benchmarks (7) | 5.9 Security (15)
@@ -90,7 +90,7 @@ console.log('  ── 5.2  Vite Migration Parity ──────────�
 }
 
 const vmTests = [
-  ['VM-002  pre-bundle dep cache', 'react pre-bundled in .zeptr/cache/deps'],
+  ['VM-002  pre-bundle dep cache', 'react pre-bundled in .lunx/cache/deps'],
   ['VM-003  enforce:pre plugin order', 'pre plugin runs before transform'],
   ['VM-004  enforce:post plugin order', 'post plugin runs after transform'],
   ['VM-005  lib mode dual format', 'ESM + CJS outputs generated'],
@@ -214,7 +214,7 @@ const ecTests = [
   ['EC-011', 'import.meta.url in CJS', 'fileURLToPath shim applied'],
   ['EC-012', 'Unicode filename (日本語.ts)', 'encoded path handles correctly'],
   ['EC-013', 'Zero-byte file', 'empty module: export {}'],
-  ['EC-014', 'Self-referencing package', 'name: "zeptr" → local src resolved'],
+  ['EC-014', 'Self-referencing package', 'name: "lunx" → local src resolved'],
   ['EC-015', 'tsconfig path wildcard', '"@ui/*" → src/ui/* resolved'],
   ['EC-016', 'Multi-root tsconfig', 'composite project references handled'],
   ['EC-017', 'node: protocol import', 'node:fs resolves correctly'],
@@ -227,10 +227,10 @@ console.log('  ── 5.8  Performance Benchmarks ──────────
 
 // PB-001: Build 100 modules
 {
-  const cacheDir = `${ROOT}/e2e/fixtures/vue-basic/.zeptr`;
+  const cacheDir = `${ROOT}/e2e/fixtures/vue-basic/.lunx`;
   try { fs.rmSync(cacheDir, { recursive: true, force: true }); } catch {}
   const t0 = performance.now();
-  const r = spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/vue-basic`, encoding: 'utf-8', env: {...process.env, ZEPTR_SKIP_SECURITY:'1'} });
+  const r = spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/vue-basic`, encoding: 'utf-8', env: {...process.env, LUNX_SKIP_SECURITY:'1'} });
   const ms = Math.round(performance.now() - t0);
   const ok = ms < 500;
   if(ok) pass('PB-001  Cold build 100 modules (<500ms)', [`modules: 100`, `time: ${ms}ms`, `gate: <500ms`, `status: PASS ✓`]);
@@ -239,10 +239,10 @@ console.log('  ── 5.8  Performance Benchmarks ──────────
 
 // PB-002: 1000 modules
 {
-  const cacheDir = `${ROOT}/e2e/fixtures/react-basic/.zeptr`;
+  const cacheDir = `${ROOT}/e2e/fixtures/react-basic/.lunx`;
   try { fs.rmSync(cacheDir, { recursive: true, force: true }); } catch {}
   const t0 = performance.now();
-  const r = spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/react-basic`, encoding: 'utf-8', env: {...process.env, ZEPTR_SKIP_SECURITY:'1'} });
+  const r = spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/react-basic`, encoding: 'utf-8', env: {...process.env, LUNX_SKIP_SECURITY:'1'} });
   const ms = Math.round(performance.now() - t0);
   const ok = ms < 800;
   if(ok) pass('PB-002  Cold build 1000 modules (<800ms)', [`modules: 1000`, `time: ${ms}ms`, `gate: <800ms`, `status: PASS ✓`]);
@@ -252,7 +252,7 @@ console.log('  ── 5.8  Performance Benchmarks ──────────
 // PB-003: Real build from CLI
 {
   const t0 = Date.now();
-  const r = spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/react-basic`, encoding: 'utf-8', env: {...process.env, ZEPTR_SKIP_SECURITY:'1'} });
+  const r = spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/react-basic`, encoding: 'utf-8', env: {...process.env, LUNX_SKIP_SECURITY:'1'} });
   const ms = Date.now() - t0;
   pass('PB-003  Cold 5000-module sim (<800ms)', [`fixture: react-basic`, `time: ${ms}ms`, `exit: ${r.status ?? 0}`]);
 }
@@ -260,7 +260,7 @@ console.log('  ── 5.8  Performance Benchmarks ──────────
 // PB-004: Warm start (second run, cache hit)
 {
   const t0 = Date.now();
-  const r = spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/react-basic`, encoding: 'utf-8', env: {...process.env, ZEPTR_SKIP_SECURITY:'1'} });
+  const r = spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/react-basic`, encoding: 'utf-8', env: {...process.env, LUNX_SKIP_SECURITY:'1'} });
   const ms = Date.now() - t0;
   if (ms < 350) {
     pass('PB-004  Warm start (<350ms)', [`time: ${ms}ms (Node + Build)`, `cache: SQLite WAL`, `status: PASS ✓`]);
@@ -274,7 +274,7 @@ warn('PB-005  Playwright HMR p50 (<50ms)', 'Playwright not installed');
 // PB-006: Prod build 1000-module
 {
   const t0 = Date.now();
-  spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/react-router-app`, encoding: 'utf-8', env: {...process.env, ZEPTR_SKIP_SECURITY:'1'} });
+  spawnSync('node', [CLI, 'build'], { cwd: `${ROOT}/e2e/fixtures/react-router-app`, encoding: 'utf-8', env: {...process.env, LUNX_SKIP_SECURITY:'1'} });
   const ms = Date.now() - t0;
   pass('PB-006  Prod build 1000-module (<8s)', [`time: ${ms}ms`, `bundle: client.js ${(clientBytes/1024).toFixed(1)}KB`]);
 }
@@ -314,7 +314,7 @@ const secTests = [
   ['SEC-010', 'SRI hash on script tag', 'integrity="sha384-..." injected'],
   ['SEC-011', 'CSP meta tag injected', 'Content-Security-Policy in <head>'],
   ['SEC-012', 'CSP blocks unsafe-inline eval', 'script-src omits unsafe-eval'],
-  ['SEC-013', 'SBOM generated', 'dist/zeptr-sbom.json created'],
+  ['SEC-013', 'SBOM generated', 'dist/lunx-sbom.json created'],
   ['SEC-014', 'lockfile tamper detection', 'checksum mismatch → abort'],
   ['SEC-015', 'plugin sandbox fs violation', 'fs:write blocked for read-only plugin'],
 ];
@@ -330,7 +330,7 @@ const frameworks = [
 for (const f of frameworks) {
   const t0 = Date.now();
   const r = spawnSync('node', [CLI, 'build'], {
-    cwd: `${ROOT}/e2e/fixtures/${f}`, encoding: 'utf-8', timeout: 30000, env: {...process.env, ZEPTR_SKIP_SECURITY:'1'}
+    cwd: `${ROOT}/e2e/fixtures/${f}`, encoding: 'utf-8', timeout: 30000, env: {...process.env, LUNX_SKIP_SECURITY:'1'}
   });
   const ms = Date.now() - t0;
   const ok = r.status === 0 || (r.stdout + r.stderr).includes('built in');
@@ -360,7 +360,7 @@ console.log('  ── Regression Gate ──────────────
 // ─── SUMMARY ─────────────────────────────────────────────────────────────────
 const total = passed + failed + warned;
 console.log('┌────────────────────────────────────────────────────────────┐');
-console.log('│ ZEPTR — PHASE 5 FULL TEST SUITE COMPLETE                  │');
+console.log('│ LUNX — PHASE 5 FULL TEST SUITE COMPLETE                  │');
 console.log('│                                                            │');
 console.log('│ 5.1  Webpack Parity:      15 tests  PASS                  │');
 console.log('│ 5.2  Vite Parity:         12 tests  PASS                  │');

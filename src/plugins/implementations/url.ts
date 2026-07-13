@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-url
+ * @lunx/plugin-url
  * URL/data URI assets
  */
 
@@ -9,7 +9,7 @@ import path from 'path';
 
 export function createUrlPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-url',
+        name: '@lunx/plugin-url',
         originalPlugin: 'url-loader',
         
         async load(id: string) {

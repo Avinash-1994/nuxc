@@ -1,8 +1,8 @@
 /**
  * Migration Generator (Day 44)
  * 
- * Generates Zeptr project configuration from a MigrationPlan.
- * Creates zeptr.config.ts, updates package.json, and generates migration report.
+ * Generates Lunx project configuration from a MigrationPlan.
+ * Creates lunx.config.ts, updates package.json, and generates migration report.
  */
 
 import fs from 'fs';
@@ -36,11 +36,11 @@ export class MigrationGenerator {
             this.backupExistingFiles();
         }
 
-        // Generate zeptr.config.ts
-        const configContent = this.generateZeptrConfig();
-        files.push('zeptr.config.ts');
+        // Generate lunx.config.ts
+        const configContent = this.generateLunxConfig();
+        files.push('lunx.config.ts');
         if (!this.options.dryRun) {
-            fs.writeFileSync(path.join(this.targetDir, 'zeptr.config.ts'), configContent);
+            fs.writeFileSync(path.join(this.targetDir, 'lunx.config.ts'), configContent);
         }
 
         // Update package.json
@@ -65,7 +65,7 @@ export class MigrationGenerator {
     }
 
     private backupExistingFiles(): void {
-        const backupDir = path.join(this.targetDir, '.zeptr-migration-backup');
+        const backupDir = path.join(this.targetDir, '.lunx-migration-backup');
         if (!fs.existsSync(backupDir)) {
             fs.mkdirSync(backupDir, { recursive: true });
         }
@@ -89,7 +89,7 @@ export class MigrationGenerator {
         }
     }
 
-    private generateZeptrConfig(): string {
+    private generateLunxConfig(): string {
         const { frameworks, cssSetup, projectStructure } = this.plan;
         const primaryFramework = frameworks[0] || 'react';
 
@@ -135,7 +135,7 @@ export class MigrationGenerator {
         };
 
         // Generate TypeScript config file
-        return `import { defineConfig } from 'zeptr';
+        return `import { defineConfig } from 'lunx';
 
 export default defineConfig(${JSON.stringify(config, null, 2)});
 `;
@@ -143,11 +143,11 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
 
     private generatePackageJsonUpdates(): any {
         const scripts: Record<string, string> = {
-            'dev': 'zeptr dev',
-            'build': 'zeptr build',
-            'preview': 'zeptr preview',
-            'test': 'zeptr test',
-            'audit': 'zeptr audit'
+            'dev': 'lunx dev',
+            'build': 'lunx build',
+            'preview': 'lunx preview',
+            'test': 'lunx test',
+            'audit': 'lunx audit'
         };
 
         // Mark old scripts as deprecated
@@ -163,14 +163,14 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
                 deprecatedScripts['build:webpack'] = 'webpack # DEPRECATED: Use npm run build';
                 break;
             case 'angular-cli':
-                deprecatedScripts['ng'] = 'ng # DEPRECATED: Use zeptr commands';
+                deprecatedScripts['ng'] = 'ng # DEPRECATED: Use lunx commands';
                 break;
         }
 
         return {
             scripts: { ...scripts, ...deprecatedScripts },
             devDependencies: {
-                'zeptr': '^2.0.0'
+                'lunx': '^2.0.0'
             }
         };
     }
@@ -185,7 +185,7 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
             ...updates.scripts
         };
 
-        // Add Zeptr to devDependencies
+        // Add Lunx to devDependencies
         pkg.devDependencies = {
             ...pkg.devDependencies,
             ...updates.devDependencies
@@ -197,7 +197,7 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
     private generateMigrationReport(): string {
         const { toolchainType, frameworks, riskLevel, autoMigrate, manualSteps, cssSetup } = this.plan;
 
-        let report = `# Zeptr Migration Report\n\n`;
+        let report = `# Lunx Migration Report\n\n`;
         report += `**Generated**: ${new Date().toISOString()}\n\n`;
         report += `## Source Project\n\n`;
         report += `- **Toolchain**: ${toolchainType}\n`;
@@ -225,11 +225,11 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
         report += `\n`;
 
         report += `## Next Steps\n\n`;
-        report += `1. Review the generated \`zeptr.config.ts\`\n`;
+        report += `1. Review the generated \`lunx.config.ts\`\n`;
         report += `2. Install dependencies: \`npm install\`\n`;
         report += `3. Start dev server: \`npm run dev\`\n`;
         report += `4. Test your application thoroughly\n`;
-        report += `5. Update CI/CD pipelines to use Zeptr commands\n\n`;
+        report += `5. Update CI/CD pipelines to use Lunx commands\n\n`;
 
         report += `## Known Limitations\n\n`;
         if (riskLevel === 'HIGH') {
@@ -244,12 +244,12 @@ export default defineConfig(${JSON.stringify(config, null, 2)});
         }
 
         report += `## Support\n\n`;
-        report += `- Documentation: https://zeptr.dev/docs/migration\n`;
-        report += `- Issues: https://github.com/zeptr/zeptr/issues\n`;
-        report += `- Discord: https://discord.gg/zeptr\n\n`;
+        report += `- Documentation: https://lunx.dev/docs/migration\n`;
+        report += `- Issues: https://github.com/lunx/lunx/issues\n`;
+        report += `- Discord: https://discord.gg/lunx\n\n`;
 
         report += `---\n\n`;
-        report += `*This report was generated by Zeptr Migration Tool v2.0*\n`;
+        report += `*This report was generated by Lunx Migration Tool v2.0*\n`;
 
         return report;
     }

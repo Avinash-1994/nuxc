@@ -1,5 +1,5 @@
 # ──────────────────────────────────────────────────────
-#  Nuxc — .gitignore
+#  Lunx — .gitignore
 #  Updated: 2026-05-22
 # ──────────────────────────────────────────────────────
 
@@ -7,7 +7,7 @@
 node_modules/
 dist/
 # Exception: workspace packages that need built dist/ for CI
-!packages/nuxc-security/dist/
+!packages/lunx-security/dist/
 build_output/
 dist_ts/
 dist_plugin_test/
@@ -29,14 +29,14 @@ Thumbs.db
 *.swo
 *~
 
-# ── Nuxc runtime caches (all projects) ───────────────
-.nuxc/
-.nuxc_cache/
-**/.nuxc/
-**/.nuxc_cache/
-**/.nuxc/cache/
-**/.nuxc/telemetry/
-**/.nuxc/certs/
+# ── Lunx runtime caches (all projects) ───────────────
+.lunx/
+.lunx_cache/
+**/.lunx/
+**/.lunx_cache/
+**/.lunx/cache/
+**/.lunx/telemetry/
+**/.lunx/certs/
 
 # ── Database & lock artifacts ──────────────────────────
 *.db
@@ -49,9 +49,9 @@ native/target/
 native/Cargo.lock
 native/*.node
 native/native.d.ts
-native/nuxc_native*.node
+native/lunx_native*.node
 native/nextgen_native*.node
-nuxc_native.node
+lunx_native.node
 *.node
 *.wasm
 
@@ -87,7 +87,7 @@ validation-rerun-*.txt
 *.tgz
 
 # ── Test scaffolds ─────────────────────────────────────
-.test_create_nuxc/
+.test_create_lunx/
 test-project-*/
 my-react-app/
 test_output*/
@@ -101,21 +101,21 @@ mdi__home.svg
 e2e/fixtures/**/dist/
 e2e/fixtures/**/dist-test/
 e2e/fixtures/**/.ng-out/
-e2e/fixtures/**/.nuxc/
-e2e/fixtures/**/.nuxc-cache/
+e2e/fixtures/**/.lunx/
+e2e/fixtures/**/.lunx-cache/
 e2e/fixtures/**/node_modules/
 e2e/fixtures/**/package-lock.json
 e2e/fixtures/**/*.db
 e2e/fixtures/**/*.db-journal
 
-# Nuxc build report artifacts (generated per-build)
+# Lunx build report artifacts (generated per-build)
 e2e/fixtures/**/build-manifest.json
 e2e/fixtures/**/build-explain.json
-e2e/fixtures/**/nuxc-sbom.json
-e2e/fixtures/**/nuxc-headers.json
-e2e/fixtures/**/nuxc-sri-manifest.json
-e2e/fixtures/**/nuxc-csp.txt
-e2e/fixtures/**/nuxc-csp-meta.html
+e2e/fixtures/**/lunx-sbom.json
+e2e/fixtures/**/lunx-headers.json
+e2e/fixtures/**/lunx-sri-manifest.json
+e2e/fixtures/**/lunx-csp.txt
+e2e/fixtures/**/lunx-csp-meta.html
 e2e/fixtures/**/_headers
 
 # Specific generated files in e2e fixtures
@@ -133,35 +133,35 @@ e2e/fixtures/plugin-ecosystem-app/tmp-fix/
 # ── framework-tests — generated artifacts ─────────────
 framework-tests/**/node_modules/
 framework-tests/**/dist/
-framework-tests/**/.nuxc/
-framework-tests/**/.nuxc-cache/
+framework-tests/**/.lunx/
+framework-tests/**/.lunx-cache/
 framework-tests/**/package-lock.json
 framework-tests/**/*.db
 framework-tests/**/*.db-journal
 framework-tests/**/build-manifest.json
 framework-tests/**/build-explain.json
-framework-tests/**/nuxc-sbom.json
-framework-tests/**/nuxc-headers.json
-framework-tests/**/nuxc-sri-manifest.json
-framework-tests/**/nuxc-csp.txt
-framework-tests/**/nuxc-csp-meta.html
+framework-tests/**/lunx-sbom.json
+framework-tests/**/lunx-headers.json
+framework-tests/**/lunx-sri-manifest.json
+framework-tests/**/lunx-csp.txt
+framework-tests/**/lunx-csp-meta.html
 framework-tests/**/_headers
 
 # ── real-world-mfe / portal (dev:mfe target) ──────────
 real-world-mfe/**/node_modules/
 real-world-mfe/**/dist/
-real-world-mfe/**/.nuxc/
+real-world-mfe/**/.lunx/
 portal/**/node_modules/
 portal/**/dist/
-portal/**/.nuxc/
+portal/**/.lunx/
 tests/fixtures/**/dist/
 tests/fixtures/**/*.db
-tests/fixtures/**/.nuxc/
+tests/fixtures/**/.lunx/
 
 # ── tests/fixtures — build output artifacts ────────────
 # (cache-consistency test uses real builds; outputs are generated)
 tests/fixtures/**/dist/
-tests/fixtures/**/.nuxc/
+tests/fixtures/**/.lunx/
 tests/fixtures/**/*.db
 tests/fixtures/**/build-manifest.json
 tests/fixtures/**/build-explain.json

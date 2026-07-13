@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const CLI = path.resolve(ROOT, 'dist/cli.js');  // absolute — works regardless of cwd
 const TMPL_DIR = `${ROOT}/templates`;
-const env = { ...process.env, ZEPTR_SKIP_SECURITY: '1' };
+const env = { ...process.env, LUNX_SKIP_SECURITY: '1' };
 
 function pad(s, n) { return String(s).padEnd(n); }
 function getDistStats(dir) {
@@ -27,7 +27,7 @@ const nuclieFiles = (nuclieGrep.stdout || '').trim().split('\n').filter(Boolean)
 const templates = readdirSync(TMPL_DIR).filter(d => statSync(`${TMPL_DIR}/${d}`).isDirectory()).sort();
 
 console.log('┌─────────────────────────────────────────────────────────────────────────┐');
-console.log('│ ZEPTR — REAL-WORLD TEMPLATES VERIFICATION                              │');
+console.log('│ LUNX — REAL-WORLD TEMPLATES VERIFICATION                              │');
 console.log('├──────────────────┬──────────────┬──────────────────┬───────────────────┤');
 console.log('│ Framework        │ Build        │ Dist             │ nuclie            │');
 console.log('├──────────────────┼──────────────┼──────────────────┼───────────────────┤');

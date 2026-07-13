@@ -14,7 +14,7 @@ const features = [
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Astro + Nuxc</title>
+  <title>Astro + Lunx</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
@@ -38,9 +38,9 @@ const features = [
     .sidebar-footer span{color:#6366f1;font-weight:600}
     /* Main */
     main{flex:1;padding:60px 64px;max-width:900px;position:relative;z-index:1}
-    .nuxc-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);border-radius:999px;padding:5px 14px;font-size:12px;font-weight:600;color:#818cf8;margin-bottom:24px}
+    .lunx-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);border-radius:999px;padding:5px 14px;font-size:12px;font-weight:600;color:#818cf8;margin-bottom:24px}
     h1{font-size:clamp(40px,5vw,64px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:16px}
-    h1 .nuxc{background:linear-gradient(135deg,#e0e7ff,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    h1 .lunx{background:linear-gradient(135deg,#e0e7ff,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     h1 .astro{background:linear-gradient(135deg,#ff5d01,#ffad00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .subtitle{color:#94a3b8;font-size:17px;line-height:1.7;max-width:600px;margin-bottom:36px}
     .meta-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:56px}
@@ -75,7 +75,7 @@ const features = [
     <a href="/" class="logo">
       <div class="logo-icon">🚀</div>
       <div>
-        <div class="logo-text">Nuxc Docs <span class="logo-badge">Astro</span></div>
+        <div class="logo-text">Lunx Docs <span class="logo-badge">Astro</span></div>
       </div>
     </a>
     <div class="nav-section">Guide</div>
@@ -86,23 +86,23 @@ const features = [
     <a href="#">GitHub</a>
     <a href="#">Changelog</a>
     <div class="sidebar-footer">
-      <div>⚡ <span>Nuxc</span> v1.0.10</div>
+      <div>⚡ <span>Lunx</span> v1.0.10</div>
       <div>🚀 Astro v4.10.2</div>
     </div>
   </aside>
 
   <main>
-    <div class="nuxc-pill">⚡ Nuxc Build Tool &nbsp;·&nbsp; 🚀 Astro Adapter</div>
+    <div class="lunx-pill">⚡ Lunx Build Tool &nbsp;·&nbsp; 🚀 Astro Adapter</div>
     <h1>
-      <span class="astro">Astro</span> + <span class="nuxc">Nuxc</span>
+      <span class="astro">Astro</span> + <span class="lunx">Lunx</span>
     </h1>
     <p class="subtitle">
       Islands architecture for content-driven websites — zero JS by default,
-      powered by Nuxc's Rust-native build engine and intelligent dependency caching.
+      powered by Lunx's Rust-native build engine and intelligent dependency caching.
     </p>
     <div class="meta-row">
       <div class="chip"><strong>🚀 Astro v4.10.2</strong>Framework</div>
-      <div class="chip"><strong>⚡ Nuxc Engine</strong>Build Tool</div>
+      <div class="chip"><strong>⚡ Lunx Engine</strong>Build Tool</div>
       <div class="chip"><strong>🏝️ Islands</strong>Architecture</div>
       <div class="chip"><strong>🦀 Rust Native</strong>Core Engine</div>
     </div>
@@ -125,17 +125,17 @@ const features = [
         <div class="dot" style="background:#f59e0b"></div>
         <div class="dot" style="background:#22c55e"></div>
       </div>
-      <div class="ln"><span class="cmt"># Create an Astro project with Nuxc</span></div>
-      <div class="ln"><span class="p">$ </span><span class="cmd">nuxc create my-docs --framework astro</span></div>
+      <div class="ln"><span class="cmt"># Create an Astro project with Lunx</span></div>
+      <div class="ln"><span class="p">$ </span><span class="cmd">lunx create my-docs --framework astro</span></div>
       <div class="ln"><span class="ok">  ✓ Scaffolded Astro project in 0.3s</span></div>
-      <div class="ln"><span class="p">$ </span><span class="cmd">nuxc dev</span></div>
+      <div class="ln"><span class="p">$ </span><span class="cmd">lunx dev</span></div>
       <div class="ln"><span class="ok">  ✓ Compiled!</span> <span class="dim">→ http://localhost:5173</span></div>
-      <div class="ln"><span class="p">$ </span><span class="cmd">nuxc build --optimize</span></div>
+      <div class="ln"><span class="p">$ </span><span class="cmd">lunx build --optimize</span></div>
       <div class="ln"><span class="ok">  ✓ Build complete — 42 static pages generated in 1.2s</span></div>
     </div>
 
     <footer>
-      <span>Built with ⚡ <a href="#">Nuxc</a> + 🚀 <a href="#">Astro</a></span>
+      <span>Built with ⚡ <a href="#">Lunx</a> + 🚀 <a href="#">Astro</a></span>
       <a href="#">Documentation</a>
       <a href="#">GitHub</a>
       <a href="#">Changelog</a>

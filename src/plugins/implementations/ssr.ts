@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-ssr
+ * @lunx/plugin-ssr
  * Universal SSR support
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSsrPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-ssr',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-ssr',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // ssr transformation

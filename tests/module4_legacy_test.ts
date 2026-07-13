@@ -29,10 +29,10 @@ async function runLegacyTest() {
 
     // 2. Test Path Normalization (Windows Simulation)
     console.log('  Scenario 2: Windows Path Normalization...');
-    const winPath = 'C:\\Users\\Zeptr\\Project';
+    const winPath = 'C:\\Users\\Lunx\\Project';
     const normalized = PathOps.normalize(winPath);
 
-    if (normalized !== 'C:/Users/Zeptr/Project') {
+    if (normalized !== 'C:/Users/Lunx/Project') {
         throw new Error(`Normalization failed. Got: ${normalized}`);
     }
 

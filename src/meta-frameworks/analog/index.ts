@@ -1,5 +1,5 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { analogCompilerPlugin } from './analog-plugin.js';
 
 export interface AnalogConfig {
@@ -7,7 +7,7 @@ export interface AnalogConfig {
   prerender?: string[];    // default: ['/']
 }
 
-export class AnalogAdapter implements ZeptrAdapter {
+export class AnalogAdapter implements LunxAdapter {
   name = 'analog';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class AnalogAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.analog) config.analog = {};
     config.analog = {
       ssr: true,
@@ -62,7 +62,7 @@ export class AnalogAdapter implements ZeptrAdapter {
           }
         }
       } catch (e) {
-        console.error('[ZEPTR Analog] Dev handler error:', e);
+        console.error('[LUNX Analog] Dev handler error:', e);
       }
       next();
     };

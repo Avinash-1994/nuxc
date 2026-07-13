@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-sprite
+ * @lunx/plugin-sprite
  * SVG sprite generation
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createSpritePlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-sprite',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-sprite',
+        originalPlugin: 'lunx-native',
         
         async load(id: string) {
             // Asset loading for sprite

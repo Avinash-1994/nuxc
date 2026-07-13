@@ -5,7 +5,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-// IPC handlers — parsed by Zeptr electron adapter for TypeScript type generation
+// IPC handlers — parsed by Lunx electron adapter for TypeScript type generation
 // Channel: 'note:save'
 ipcMain.handle('note:save', async (event, { id, content }) => {
   const notesDir = path.join(app.getPath('userData'), 'notes');
@@ -39,7 +39,7 @@ function createWindow() {
     }
   });
 
-  // In dev: load from Zeptr dev server via ELECTRON_DEV_SERVER_URL
+  // In dev: load from Lunx dev server via ELECTRON_DEV_SERVER_URL
   // In prod: load from built dist/renderer/index.html
   const devUrl = process.env.ELECTRON_DEV_SERVER_URL;
   if (devUrl) {

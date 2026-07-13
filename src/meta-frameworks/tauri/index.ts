@@ -1,5 +1,5 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { tauriIpcPlugin } from './tauri-plugin.js';
 
 export interface TauriConfig {
@@ -7,7 +7,7 @@ export interface TauriConfig {
   autoBuildRust?: boolean;   // default false
 }
 
-export class TauriAdapter implements ZeptrAdapter {
+export class TauriAdapter implements LunxAdapter {
   name = 'tauri';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class TauriAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.tauri) config.tauri = {};
     config.tauri = {
       backendSrc: 'src-tauri',

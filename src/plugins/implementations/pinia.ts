@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-pinia
+ * @lunx/plugin-pinia
  * Pinia (Vue) integration
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createPiniaPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-pinia',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-pinia',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // pinia transformation

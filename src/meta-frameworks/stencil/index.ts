@@ -1,8 +1,8 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { createHash } from 'crypto';
 
-export class StencilAdapter implements ZeptrAdapter {
+export class StencilAdapter implements LunxAdapter {
   name = 'stencil';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -12,11 +12,11 @@ export class StencilAdapter implements ZeptrAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'zeptr:stencil-compiler',
+        name: 'lunx:stencil-compiler',
 
         async transform(code: string, id: string) {
           // Stencil uses TSX with custom decorators (@Component, @Prop, @State, @Event, @Watch)
-          // These are compiled down by Stencil CLI; here Zeptr intercepts .tsx files from Stencil
+          // These are compiled down by Stencil CLI; here Lunx intercepts .tsx files from Stencil
           // and passes them through our SWC + decorator pipeline safely
           if (!id.endsWith('.tsx')) return null;
           if (!code.includes('@stencil/core')) return null;
@@ -31,7 +31,7 @@ export class StencilAdapter implements ZeptrAdapter {
           if (cached) return { code: cached, map: null };
 
           // Stencil's compiler is deeply integrated into their own CLI build
-          // In dev mode Zeptr serves Stencil's www/ output directory natively
+          // In dev mode Lunx serves Stencil's www/ output directory natively
           db.set(cacheKey, code);
           return null; // Stencil components pass through; decorators are handled by tsc
         }
@@ -39,7 +39,7 @@ export class StencilAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.stencil) config.stencil = {};
     config.stencil = {
       // Stencil outputs to www/ by default

@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-zustand
+ * @lunx/plugin-zustand
  * Zustand state management
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createZustandPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-zustand',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-zustand',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // zustand transformation

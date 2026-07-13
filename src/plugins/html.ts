@@ -1,19 +1,19 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { ZeptrPlugin } from '../core/plugins/types.js';
+import { LunxPlugin } from '../core/plugins/types.js';
 
-export function createHtmlPlugin(rootDir: string, outDir: string): ZeptrPlugin {
+export function createHtmlPlugin(rootDir: string, outDir: string): LunxPlugin {
     return {
         manifest: {
-            name: 'zeptr:html',
+            name: 'lunx:html',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['buildEnd'],
             permissions: { fs: 'read' }
         },
-        id: 'zeptr:html',
+        id: 'lunx:html',
         async runHook(hook, data) {
             if (hook !== 'buildEnd') return data;
 
@@ -29,7 +29,7 @@ export function createHtmlPlugin(rootDir: string, outDir: string): ZeptrPlugin {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeptr Build</title>
+    <title>Lunx Build</title>
     ${links}
 </head>
 <body>

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 export function rewriteWasmPlugins(projectPath: string): string[] {
-    const filesToExamine = ['zeptr.config.ts', 'zeptr.config.js', 'zeptr.config.cjs', 'zeptr.config.json', 'zeptr.build.json', 'zeptr.build.ts'];
+    const filesToExamine = ['lunx.config.ts', 'lunx.config.js', 'lunx.config.cjs', 'lunx.config.json', 'lunx.build.json', 'lunx.build.ts'];
     const rewrittenFiles: string[] = [];
 
     for (const file of filesToExamine) {

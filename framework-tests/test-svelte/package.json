@@ -1,24 +1,24 @@
 {
-  "name": "zeptr-svelte-template",
+  "name": "lunx-svelte-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build",
-    "preview": "zeptr preview"
+    "dev": "lunx dev",
+    "build": "lunx build",
+    "preview": "lunx preview"
   },
-  "zeptr": {
+  "lunx": {
     "template": true,
     "framework": "svelte",
-    "description": "Zeptr Notes — markdown note-taking app"
+    "description": "Lunx Notes — markdown note-taking app"
   },
   "dependencies": {
     "svelte": "4.2.18",
     "marked": "12.0.0"
   },
   "devDependencies": {
-    "zeptr": "file:../../",
+    "lunx": "file:../../",
     "typescript": "5.4.5"
   }
 }

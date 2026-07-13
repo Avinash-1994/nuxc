@@ -1,18 +1,18 @@
 {
-  "name": "zeptr-react-js",
+  "name": "lunx-react-js",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build",
-    "preview": "zeptr preview"
+    "dev": "lunx dev",
+    "build": "lunx build",
+    "preview": "lunx preview"
   },
   "dependencies": {
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "zeptr": "file:../../"
+    "lunx": "file:../../"
   }
 }

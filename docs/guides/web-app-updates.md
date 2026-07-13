@@ -1,7 +1,7 @@
-# 🎯 Zeptr Web App Update Requirements
+# 🎯 Lunx Web App Update Requirements
 
 ## Current Status
-The zeptr-web-app exists at `/home/avinash/Desktop/framework_practis/build/zeptr-web-app` but needs updating with **accurate production data** from our v1.0 release.
+The lunx-web-app exists at `/home/avinash/Desktop/framework_practis/build/lunx-web-app` but needs updating with **accurate production data** from our v1.0 release.
 
 ---
 
@@ -61,20 +61,20 @@ The zeptr-web-app exists at `/home/avinash/Desktop/framework_practis/build/zeptr
 
 ### CLI Commands (ACTUAL)
 ```bash
-zeptr dev        # Start development server
-zeptr build      # Build for production
-zeptr analyze    # Analyze bundle
-zeptr ssr        # Start SSR server
-zeptr init       # Initialize config
-zeptr bootstrap  # Create from template
-zeptr css        # CSS utilities
-zeptr optimize   # Optimize config
-zeptr inspect    # Inspect dependency graph
-zeptr report     # Generate build report
-zeptr audit      # Run audits (A11y, Perf, SEO)
-zeptr verify     # Verify project health
-zeptr test       # Run tests
-zeptr doctor     # Health diagnostics
+lunx dev        # Start development server
+lunx build      # Build for production
+lunx analyze    # Analyze bundle
+lunx ssr        # Start SSR server
+lunx init       # Initialize config
+lunx bootstrap  # Create from template
+lunx css        # CSS utilities
+lunx optimize   # Optimize config
+lunx inspect    # Inspect dependency graph
+lunx report     # Generate build report
+lunx audit      # Run audits (A11y, Perf, SEO)
+lunx verify     # Verify project health
+lunx test       # Run tests
+lunx doctor     # Health diagnostics
 ```
 
 ---
@@ -116,17 +116,17 @@ zeptr doctor     # Health diagnostics
 **Update CLI Example (line 125):**
 ```tsx
 // OLD
-<CodeBlock code="$ npx zeptr build --preset react" />
+<CodeBlock code="$ npx lunx build --preset react" />
 
 // NEW
 <CodeBlock code={`# Create new project
-npx create-zeptr my-app --template premium-dashboard
+npx create-lunx my-app --template premium-dashboard
 
 # Start development
-cd my-app && zeptr dev
+cd my-app && lunx dev
 
 # Build for production
-zeptr build`} />
+lunx build`} />
 ```
 
 **Update Framework Status (line 147-169):**
@@ -164,17 +164,17 @@ zeptr build`} />
 ```tsx
 {
   coldStart: {
-    zeptr: 69,
+    lunx: 69,
     vite: 100,
     webpack: 2000
   },
   hmr: {
-    zeptr: '10-60',
+    lunx: '10-60',
     vite: '<100',
     webpack: '~500'
   },
   bundleSize: {
-    zeptr: 6.9,
+    lunx: 6.9,
     vite: 7.2,
     webpack: 8.5
   }
@@ -186,10 +186,10 @@ zeptr build`} />
 **Update Getting Started:**
 ```bash
 # Install
-npm install -g zeptr
+npm install -g lunx
 
 # Create project
-npx create-zeptr my-app
+npx create-lunx my-app
 
 # Choose template
 - premium-dashboard (Feature showcase)
@@ -199,10 +199,10 @@ npx create-zeptr my-app
 - And 9 more...
 
 # Start dev server
-zeptr dev
+lunx dev
 
 # Build
-zeptr build
+lunx build
 ```
 
 ### 5. Templates Page (`src/pages/TemplateStarters.tsx`)

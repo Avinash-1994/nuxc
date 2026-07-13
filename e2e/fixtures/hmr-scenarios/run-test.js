@@ -2,7 +2,7 @@
  * Phase 1.6 HMR Client Runtime Fixture Tests
  *
  * Two layers:
- *  A) Client-side message handling — driven with window.__zeptrHmr.simulate()
+ *  A) Client-side message handling — driven with window.__lunxHmr.simulate()
  *     Tests: update stamp, css-update stamp, state preservation, error logging
  *
  *  B) Server broadcast path — file change → watcher → WS broadcast → stamp
@@ -56,7 +56,7 @@ async function run() {
         await page.goto('http://localhost:5174', { waitUntil: 'load' });
 
         // ── Wait for WS handshake ─────────────────────────────────────────────
-        await page.waitForFunction(() => !!window.__zeptrHmr?.connected, { timeout: 10_000 });
+        await page.waitForFunction(() => !!window.__lunxHmr?.connected, { timeout: 10_000 });
         pass('WS handshake — connected flag set');
 
         // Snapshot initial reload count
@@ -70,9 +70,9 @@ async function run() {
         {
             const before = Date.now();
             await page.evaluate(() =>
-                window.__zeptrHmr.simulate({ type: 'update', modules: ['/src/component.js'] })
+                window.__lunxHmr.simulate({ type: 'update', modules: ['/src/component.js'] })
             );
-            await page.waitForFunction(since => (window.__zeptrHmr?.lastUpdate ?? 0) > since, before, { timeout: 5000 });
+            await page.waitForFunction(since => (window.__lunxHmr?.lastUpdate ?? 0) > since, before, { timeout: 5000 });
             const delta = Date.now() - before;
             if (reloads > baseReloads) fail('A1', 'simulate(update) triggered a full reload');
             pass('A1 — update message → lastUpdate stamped, no reload', delta);
@@ -82,9 +82,9 @@ async function run() {
         {
             const before = Date.now();
             await page.evaluate(() =>
-                window.__zeptrHmr.simulate({ type: 'css-update', href: '/src/styles.css' })
+                window.__lunxHmr.simulate({ type: 'css-update', href: '/src/styles.css' })
             );
-            await page.waitForFunction(since => (window.__zeptrHmr?.lastCssUpdate ?? 0) > since, before, { timeout: 5000 });
+            await page.waitForFunction(since => (window.__lunxHmr?.lastCssUpdate ?? 0) > since, before, { timeout: 5000 });
             const delta = Date.now() - before;
             if (reloads > baseReloads) fail('A2', 'simulate(css-update) triggered a full reload');
             pass('A2 — css-update message → lastCssUpdate stamped, no reload', delta);
@@ -95,9 +95,9 @@ async function run() {
             await page.evaluate(() => { window.__testState = 'preserved'; });
             const before = Date.now();
             await page.evaluate(() =>
-                window.__zeptrHmr.simulate({ type: 'update', modules: ['/src/component.js'] })
+                window.__lunxHmr.simulate({ type: 'update', modules: ['/src/component.js'] })
             );
-            await page.waitForFunction(since => (window.__zeptrHmr?.lastUpdate ?? 0) > since, before, { timeout: 5000 });
+            await page.waitForFunction(since => (window.__lunxHmr?.lastUpdate ?? 0) > since, before, { timeout: 5000 });
             const state = await page.evaluate(() => window.__testState);
             if (state !== 'preserved') fail('A3', `State lost — got: ${state}`);
             pass('A3 — HMR update preserves window state');
@@ -108,7 +108,7 @@ async function run() {
             const consoleMsgs = [];
             page.on('console', m => consoleMsgs.push(m.text()));
             await page.evaluate(() =>
-                window.__zeptrHmr.simulate({ type: 'error', message: 'test-err', stack: 'at test' })
+                window.__lunxHmr.simulate({ type: 'error', message: 'test-err', stack: 'at test' })
             );
             await wait(300);
             const hasErr = consoleMsgs.some(m => m.includes('test-err'));
@@ -123,7 +123,7 @@ async function run() {
         {
             const before = Date.now();
             fs.writeFileSync(FILES.component, 'export const message = "<h1>Version 2</h1>";');
-            await page.waitForFunction(since => (window.__zeptrHmr?.lastUpdate ?? 0) > since, before, { timeout: 8000 });
+            await page.waitForFunction(since => (window.__lunxHmr?.lastUpdate ?? 0) > since, before, { timeout: 8000 });
             const delta = Date.now() - before;
             if (reloads > baseReloads) fail('B1', 'JS change triggered a full reload');
             pass('B1 — JS file change → server broadcast → lastUpdate stamped', delta);
@@ -133,7 +133,7 @@ async function run() {
         {
             const before = Date.now();
             fs.writeFileSync(FILES.styles, 'body { background: blue; } #app { font-size: 16px; }');
-            await page.waitForFunction(since => (window.__zeptrHmr?.lastCssUpdate ?? 0) > since, before, { timeout: 8000 });
+            await page.waitForFunction(since => (window.__lunxHmr?.lastCssUpdate ?? 0) > since, before, { timeout: 8000 });
             const delta = Date.now() - before;
             if (reloads > baseReloads) fail('B2', 'CSS change triggered a full reload');
             pass('B2 — CSS file change → server broadcast → lastCssUpdate stamped', delta);

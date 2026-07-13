@@ -35,7 +35,7 @@ export class DevWatcher extends EventEmitter {
 
     private start() {
         const ignoredPatterns = [
-            '**/node_modules/**', '**/.git/**', '**/dist/**', '**/.zeptr/**', '**/.zeptr_cache/**'
+            '**/node_modules/**', '**/.git/**', '**/dist/**', '**/.lunx/**', '**/.lunx_cache/**'
         ];
 
         if (NativeWatcher) {
@@ -56,21 +56,21 @@ export class DevWatcher extends EventEmitter {
                 });
                 this.engine = 'rust-notify';
                 // Resolve real version from package.json; never use a hardcoded placeholder
-                let zeptrNativeVer = '0.1.0';
+                let lunxNativeVer = '0.1.0';
                 try {
                     const pkg = require('../../package.json');
-                    zeptrNativeVer = pkg.version ?? '0.1.0';
+                    lunxNativeVer = pkg.version ?? '0.1.0';
                 } catch { /* package.json not readable — use safe default */ }
                 const ver = typeof this.nativeWatcher.getVersion === 'function'
                     ? this.nativeWatcher.getVersion()
-                    : `rust-notify (zeptr-native v${zeptrNativeVer})`;
-                console.log(`[zeptr] watcher: ${ver}`);
+                    : `rust-notify (lunx-native v${lunxNativeVer})`;
+                console.log(`[lunx] watcher: ${ver}`);
                 return;
             } catch (err: any) {
-                console.warn(`[zeptr] WARN: native watcher failed to load, falling back to chokidar (`, err?.message ?? err, `)`);
+                console.warn(`[lunx] WARN: native watcher failed to load, falling back to chokidar (`, err?.message ?? err, `)`);
             }
         } else {
-            console.warn(`[zeptr] WARN: native watcher failed to load, falling back to chokidar`);
+            console.warn(`[lunx] WARN: native watcher failed to load, falling back to chokidar`);
         }
 
         // Chokidar fallback
@@ -91,7 +91,7 @@ export class DevWatcher extends EventEmitter {
             });
             this.engine = 'chokidar';
         } catch (err: any) {
-            console.error(`[zeptr] Both native watcher and chokidar failed: ${err.message}`);
+            console.error(`[lunx] Both native watcher and chokidar failed: ${err.message}`);
         }
     }
 

@@ -1,17 +1,17 @@
 {
-  "name": "zeptr-remix-template",
+  "name": "lunx-remix-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build",
-    "preview": "zeptr preview"
+    "dev": "lunx dev",
+    "build": "lunx build",
+    "preview": "lunx preview"
   },
-  "zeptr": {
+  "lunx": {
     "template": true,
     "framework": "remix",
-    "description": "Zeptr Jobs — job board with applications"
+    "description": "Lunx Jobs — job board with applications"
   },
   "dependencies": {
     "@remix-run/react": "2.9.2",
@@ -20,7 +20,7 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "zeptr": "file:../../",
+    "lunx": "file:../../",
     "typescript": "5.4.5"
   }
 }

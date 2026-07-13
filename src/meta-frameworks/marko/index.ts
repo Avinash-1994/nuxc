@@ -1,10 +1,10 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { createHash } from 'crypto';
 
 let markoCompiler: any;
 
-export class MarkoAdapter implements ZeptrAdapter {
+export class MarkoAdapter implements LunxAdapter {
   name = 'marko';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -14,7 +14,7 @@ export class MarkoAdapter implements ZeptrAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'zeptr:marko-compiler',
+        name: 'lunx:marko-compiler',
 
         async buildStart() {
           try {
@@ -56,7 +56,7 @@ export class MarkoAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.marko) config.marko = {};
     config.marko = {
       output: 'dom',

@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-determinism
+ * @lunx/plugin-determinism
  * Build determinism checker
  */
 
@@ -7,11 +7,11 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createDeterminismPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-determinism',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-determinism',
+        originalPlugin: 'lunx-native',
         
         async buildStart() {
-            console.log('[@zeptr/plugin-determinism] Starting performance optimization...');
+            console.log('[@lunx/plugin-determinism] Starting performance optimization...');
         },
 
         async transform(code: string, id: string) {
@@ -20,7 +20,7 @@ export function createDeterminismPlugin(): PluginAdapter {
         },
 
         async buildEnd() {
-            console.log('[@zeptr/plugin-determinism] Performance optimization complete');
+            console.log('[@lunx/plugin-determinism] Performance optimization complete');
         }
     };
 }

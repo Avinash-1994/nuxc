@@ -12,7 +12,7 @@ interface DoctorCheck {
     fix?: string;
 }
 
-export class ZeptrDoctor {
+export class LunxDoctor {
     private cwd: string;
     private checks: DoctorCheck[] = [];
 
@@ -21,11 +21,11 @@ export class ZeptrDoctor {
     }
 
     async diagnose(): Promise<void> {
-        console.log('\n🩺 Zeptr Doctor - Running Diagnostics...\n');
+        console.log('\n🩺 Lunx Doctor - Running Diagnostics...\n');
 
         await this.checkNodeVersion();
         await this.checkPackageJson();
-        await this.checkZeptrConfig();
+        await this.checkLunxConfig();
         await this.checkDependencies();
         await this.checkGitIgnore();
         await this.checkEnvironment();
@@ -61,30 +61,30 @@ export class ZeptrDoctor {
         try {
             const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
 
-            // Check for zeptr in dependencies
-            const hasZeptr = pkg.dependencies?.zeptr || pkg.devDependencies?.zeptr;
-            if (hasZeptr) {
-                this.addCheck('package.json', 'pass', `Zeptr ${hasZeptr} configured`);
+            // Check for lunx in dependencies
+            const hasLunx = pkg.dependencies?.lunx || pkg.devDependencies?.lunx;
+            if (hasLunx) {
+                this.addCheck('package.json', 'pass', `Lunx ${hasLunx} configured`);
             } else {
-                this.addCheck('package.json', 'warn', 'Zeptr not in dependencies', 'Run `npm install zeptr`');
+                this.addCheck('package.json', 'warn', 'Lunx not in dependencies', 'Run `npm install lunx`');
             }
 
             // Check for scripts
             if (pkg.scripts?.dev || pkg.scripts?.build) {
                 this.addCheck('npm scripts', 'pass', 'Build scripts configured');
             } else {
-                this.addCheck('npm scripts', 'warn', 'No dev/build scripts', 'Add "dev": "zeptr dev" and "build": "zeptr build"');
+                this.addCheck('npm scripts', 'warn', 'No dev/build scripts', 'Add "dev": "lunx dev" and "build": "lunx build"');
             }
         } catch (e) {
             this.addCheck('package.json', 'fail', 'Invalid JSON', 'Fix JSON syntax errors');
         }
     }
 
-    private async checkZeptrConfig(): Promise<void> {
+    private async checkLunxConfig(): Promise<void> {
         const configPaths = [
-            'zeptr.config.ts',
-            'zeptr.config.js',
-            'zeptr.config.mjs'
+            'lunx.config.ts',
+            'lunx.config.js',
+            'lunx.config.mjs'
         ];
 
         const configFile = configPaths.find(p => fs.existsSync(path.join(this.cwd, p)));
@@ -92,7 +92,7 @@ export class ZeptrDoctor {
         if (configFile) {
             try {
                 const config = await loadConfig(this.cwd);
-                this.addCheck('Zeptr Config', 'pass', `Found ${configFile}`);
+                this.addCheck('Lunx Config', 'pass', `Found ${configFile}`);
 
                 // Validate config
                 if (!config.entry || config.entry.length === 0) {
@@ -101,10 +101,10 @@ export class ZeptrDoctor {
                     this.addCheck('Config Validation', 'pass', `${config.entry.length} entry point(s)`);
                 }
             } catch (e: any) {
-                this.addCheck('Zeptr Config', 'fail', `Error loading config: ${e.message}`, 'Check config syntax');
+                this.addCheck('Lunx Config', 'fail', `Error loading config: ${e.message}`, 'Check config syntax');
             }
         } else {
-            this.addCheck('Zeptr Config', 'warn', 'No config file found', 'Run `zeptr init` to create one');
+            this.addCheck('Lunx Config', 'warn', 'No config file found', 'Run `lunx init` to create one');
         }
     }
 
@@ -227,7 +227,7 @@ export class ZeptrDoctor {
     }
 
     private async checkCacheHealth(): Promise<void> {
-        const cacheDir = path.join(this.cwd, 'node_modules', '.zeptr');
+        const cacheDir = path.join(this.cwd, 'node_modules', '.lunx');
 
         if (!fs.existsSync(cacheDir)) {
             this.addCheck('Build Cache', 'pass', 'No cache yet (will be created on first build)');
@@ -240,7 +240,7 @@ export class ZeptrDoctor {
             const sizeMB = sizeBytes / (1024 ** 2);
 
             if (sizeMB > 1000) {
-                this.addCheck('Build Cache', 'warn', `${sizeMB.toFixed(0)} MB (large)`, 'Consider clearing cache with `rm -rf node_modules/.zeptr`');
+                this.addCheck('Build Cache', 'warn', `${sizeMB.toFixed(0)} MB (large)`, 'Consider clearing cache with `rm -rf node_modules/.lunx`');
             } else {
                 this.addCheck('Build Cache', 'pass', `${sizeMB.toFixed(0)} MB`);
             }
@@ -275,7 +275,7 @@ export class ZeptrDoctor {
         const outputDir = fs.existsSync(buildDir) ? buildDir : fs.existsSync(distDir) ? distDir : null;
 
         if (!outputDir) {
-            this.addCheck('Performance', 'pass', 'No build output yet (run `zeptr build` first)');
+            this.addCheck('Performance', 'pass', 'No build output yet (run `lunx build` first)');
             return;
         }
 
@@ -367,12 +367,12 @@ export class ZeptrDoctor {
         console.log(`   CPU: ${os.cpus()[0].model} (${os.cpus().length} cores)`);
         console.log(`   Memory: ${(os.totalmem() / (1024 ** 3)).toFixed(1)} GB total, ${(os.freemem() / (1024 ** 3)).toFixed(1)} GB free`);
 
-        // Try to get Zeptr version
+        // Try to get Lunx version
         try {
-            const pkgPath = path.join(this.cwd, 'node_modules', 'zeptr', 'package.json');
+            const pkgPath = path.join(this.cwd, 'node_modules', 'lunx', 'package.json');
             if (fs.existsSync(pkgPath)) {
                 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
-                console.log(`   Zeptr: v${pkg.version}`);
+                console.log(`   Lunx: v${pkg.version}`);
             }
         } catch (e) {
             // Ignore
@@ -386,12 +386,12 @@ export class ZeptrDoctor {
         } else if (warnings > 0) {
             console.log('⚠️  Some warnings detected. Consider addressing them for optimal performance.\n');
         } else {
-            console.log('✅ All checks passed! Your Zeptr project is healthy.\n');
+            console.log('✅ All checks passed! Your Lunx project is healthy.\n');
         }
     }
 }
 
 export async function runDoctor(cwd: string = process.cwd()): Promise<void> {
-    const doctor = new ZeptrDoctor(cwd);
+    const doctor = new LunxDoctor(cwd);
     await doctor.diagnose();
 }

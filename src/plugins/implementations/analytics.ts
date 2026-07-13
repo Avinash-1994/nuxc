@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-analytics
+ * @lunx/plugin-analytics
  * Build analytics
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createAnalyticsPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-analytics',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-analytics',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Utility: Build analytics

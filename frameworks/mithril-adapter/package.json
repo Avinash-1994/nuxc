@@ -1,12 +1,12 @@
 {
-    "name": "@zeptr/mithril-adapter",
+    "name": "@lunx/mithril-adapter",
     "version": "0.1.0",
-    "description": "Zeptr Framework Adapter for Mithril.js (Tier-1 Supported)",
+    "description": "Lunx Framework Adapter for Mithril.js (Tier-1 Supported)",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
         "build": "tsc",
-        "test": "echo 'Run integration tests via Zeptr runner'"
+        "test": "echo 'Run integration tests via Lunx runner'"
     },
     "dependencies": {
         "vite": "^5.0.0"
@@ -17,10 +17,10 @@
         "@types/mithril": "^2.0.0",
         "@types/node": "^20.0.0"
     },
-    "zeptr": {
+    "lunx": {
         "name": "Mithril Adapter",
         "state": "candidate",
-        "maintainer": "Zeptr Core Team",
+        "maintainer": "Lunx Core Team",
         "supported_capabilities": [
             "build",
             "hmr",

@@ -6,7 +6,7 @@ exports.render = async function render({ url, cookies }) {
     var isAuthed = cookies && cookies['session'];
     state = { userData: { name: 'SvelteKit Admin', email: 'admin@acme.com' }, authed: !!isAuthed };
     html = [
-      '<main id="zeptr-ssr-root">',
+      '<main id="lunx-ssr-root">',
       '  <header class="dashboard-header">',
       '    <h1>Dashboard - SvelteKit SSR</h1>',
       '    <nav class="dashboard-nav">',
@@ -43,14 +43,14 @@ exports.render = async function render({ url, cookies }) {
       '    </ul>',
       '  </section>',
       '  <footer class="dashboard-footer">',
-      '    <p>Powered by Zeptr SSR - SvelteKit Adapter v1.0.0</p>',
+      '    <p>Powered by Lunx SSR - SvelteKit Adapter v1.0.0</p>',
       '  </footer>',
       '</main>'
     ].join('\n');
   }
   return {
     html: html,
-    head: '<title>Dashboard | Zeptr SSR</title><meta name="description" content="SvelteKit SSR Dashboard"><meta name="robots" content="noindex">',
+    head: '<title>Dashboard | Lunx SSR</title><meta name="description" content="SvelteKit SSR Dashboard"><meta name="robots" content="noindex">',
     state: JSON.stringify(state)
   };
 };

@@ -14,7 +14,7 @@ module.exports = {
     hmr: true,
   },
   federation: {
-    name: 'zeptr_remote',
+    name: 'lunx_remote',
     filename: 'remoteEntry.js',
     exposes: {
       './App': './src/main.ts'

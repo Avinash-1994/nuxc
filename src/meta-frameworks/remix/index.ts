@@ -1,5 +1,5 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 import { remixRoutesPlugin } from './routes-plugin.js';
 
 export interface RemixConfig {
@@ -7,7 +7,7 @@ export interface RemixConfig {
   serverModuleFormat?: 'esm' | 'cjs';
 }
 
-export class RemixAdapter implements ZeptrAdapter {
+export class RemixAdapter implements LunxAdapter {
   name = 'remix';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -20,7 +20,7 @@ export class RemixAdapter implements ZeptrAdapter {
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.remix) config.remix = {};
     config.remix = {
       ignoredRouteFiles: ['**/.*'],
@@ -36,7 +36,7 @@ export class RemixAdapter implements ZeptrAdapter {
           // Shim Request / Response for underlying uWS API mappings
           try {
              // In Remix the entry point is heavily abstracted typically via createRequestHandler
-             const virtualID = 'virtual:zeptr/remix-server-build';
+             const virtualID = 'virtual:lunx/remix-server-build';
              let build: any;
              try {
                 build = await import(virtualID);
@@ -75,7 +75,7 @@ export class RemixAdapter implements ZeptrAdapter {
              res.end();
              
           } catch(e) {
-             console.error('[Zeptr:Remix] Error rendering SSR', e);
+             console.error('[Lunx:Remix] Error rendering SSR', e);
              next();
           }
        }
@@ -83,7 +83,7 @@ export class RemixAdapter implements ZeptrAdapter {
   }
 
   ssrEntry(): string {
-     return 'virtual:zeptr/remix-server-build';
+     return 'virtual:lunx/remix-server-build';
   }
 }
 

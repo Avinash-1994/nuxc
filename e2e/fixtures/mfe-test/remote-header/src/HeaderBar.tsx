@@ -22,7 +22,7 @@ export default function HeaderBar({ cartCount = 0 }: HeaderBarProps) {
       {/* Logo */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: '-0.5px' }}>
-          ⚡ Zeptr Shop
+          ⚡ Lunx Shop
         </span>
       </div>
 

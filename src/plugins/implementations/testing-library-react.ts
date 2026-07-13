@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-testing-library-react
+ * @lunx/plugin-testing-library-react
  * React Testing Library
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTestingLibraryReactPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-testing-library-react',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-testing-library-react',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Testing: React Testing Library

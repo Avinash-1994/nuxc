@@ -1,22 +1,22 @@
-import type { Plugin } from '@zeptr/adapter-core';
+import type { Plugin } from '@lunx/adapter-core';
 import path from 'path';
 
 let wakuCompiler: any;
 
 export function wakuRscPlugin(): Plugin {
   return {
-    name: 'zeptr:waku-rsc',
+    name: 'lunx:waku-rsc',
 
     async resolveId(source: string) {
        // Virtual bridge linking Core RSC Server actions
-       if (source === 'virtual:zeptr/waku-rsc-router') {
+       if (source === 'virtual:lunx/waku-rsc-router') {
           return source;
        }
        return null;
     },
 
     async load(id: string) {
-       if (id === 'virtual:zeptr/waku-rsc-router') {
+       if (id === 'virtual:lunx/waku-rsc-router') {
           // Shim standard RSC pipeline mappings for React Server Components natively
           // Mapping directly over 'react-server-dom-webpack/server' (Vite shim alternative)
           return `
@@ -49,13 +49,13 @@ export function wakuRscPlugin(): Plugin {
        // We mark those chunks here in the TS hook prior to native extraction.
        if (code.includes('use client')) {
            return {
-              code: `/* @@zeptr_rsc_client_boundary@@ */\n` + code,
+              code: `/* @@lunx_rsc_client_boundary@@ */\n` + code,
               map: null
            };
        }
        if (code.includes('use server')) {
            return {
-              code: `/* @@zeptr_rsc_server_boundary@@ */\n` + code,
+              code: `/* @@lunx_rsc_server_boundary@@ */\n` + code,
               map: null
            };
        }

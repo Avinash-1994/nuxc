@@ -1,5 +1,5 @@
 /**
- * Zeptr — SolidStart Streaming SSR Adapter (Phase 2.4)
+ * Lunx — SolidStart Streaming SSR Adapter (Phase 2.4)
  *
  * Key differences from SvelteKit:
  *  - renderToStream()  not renderToString()
@@ -18,7 +18,7 @@ import * as path from 'path';
 import { Readable } from 'stream';
 import * as fs from 'fs';
 import { globSync } from 'glob';
-import { registry } from '@zeptr/adapter-core';
+import { registry } from '@lunx/adapter-core';
 
 // ─── Route Scanner ────────────────────────────────────────────────────────────
 
@@ -153,10 +153,10 @@ export function renderToStream(opts: StreamRenderOptions): Readable {
 }
 
 function buildShell(url: string, isAuthed: boolean): string {
-  const title = url.includes('/dashboard') ? 'Dashboard | Zeptr SolidStart'
-    : url.includes('/products') ? 'Products | Zeptr SolidStart'
-    : url.includes('/profile') ? 'Profile | Zeptr SolidStart'
-    : 'Zeptr SolidStart';
+  const title = url.includes('/dashboard') ? 'Dashboard | Lunx SolidStart'
+    : url.includes('/products') ? 'Products | Lunx SolidStart'
+    : url.includes('/profile') ? 'Profile | Lunx SolidStart'
+    : 'Lunx SolidStart';
 
   return [
     '<!DOCTYPE html>',
@@ -166,12 +166,12 @@ function buildShell(url: string, isAuthed: boolean): string {
     '  <meta charset="UTF-8" />',
     '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
     '  <meta name="description" content="SolidStart streaming SSR dashboard" />',
-    '  <link rel="stylesheet" href="/_zeptr/assets/app.css" />',
+    '  <link rel="stylesheet" href="/_lunx/assets/app.css" />',
     '</head>',
     '<body>',
     '<div id="root">',
     '  <header class="app-header">',
-    '    <a href="/" class="logo">Zeptr Dashboard</a>',
+    '    <a href="/" class="logo">Lunx Dashboard</a>',
     '    <nav>',
     '      <a href="/dashboard">Dashboard</a>',
     '      <a href="/products">Products</a>',
@@ -179,7 +179,7 @@ function buildShell(url: string, isAuthed: boolean): string {
     '    </nav>',
     `    <span class="auth-status">${isAuthed ? 'Signed in' : 'Sign in'}</span>`,
     '  </header>',
-    '  <main id="zeptr-solid-root">',
+    '  <main id="lunx-solid-root">',
   ].join('\n');
 }
 
@@ -201,7 +201,7 @@ function buildDataChunk(url: string, isAuthed: boolean, elapsedMs: number): stri
       '      <ul>',
       '        <li><time>09:41</time> Order #9921 — $349.00 — completed</li>',
       '        <li><time>09:38</time> User bob@company.com registered</li>',
-      '        <li><time>09:30</time> Deploy zeptr@1.0.10 → production</li>',
+      '        <li><time>09:30</time> Deploy lunx@1.0.10 → production</li>',
       '        <li><time>09:15</time> Cache warmed — 1,248 assets pre-bundled</li>',
       '        <li><time>08:59</time> Security scan — 0 vulnerabilities</li>',
       '      </ul>',
@@ -215,25 +215,25 @@ function buildDataChunk(url: string, isAuthed: boolean, elapsedMs: number): stri
     return [
       '    <h1>Products</h1>',
       '    <ul class="product-list">',
-      '      <li><a href="/products/1">Zeptr Pro — $99/mo</a></li>',
-      '      <li><a href="/products/2">Zeptr Team — $299/mo</a></li>',
-      '      <li><a href="/products/3">Zeptr Enterprise — contact us</a></li>',
+      '      <li><a href="/products/1">Lunx Pro — $99/mo</a></li>',
+      '      <li><a href="/products/2">Lunx Team — $299/mo</a></li>',
+      '      <li><a href="/products/3">Lunx Enterprise — contact us</a></li>',
       '    </ul>',
     ].join('\n');
   }
 
-  return '<h1>SolidStart SSR</h1><p>Rendered server-side by Zeptr.</p>';
+  return '<h1>SolidStart SSR</h1><p>Rendered server-side by Lunx.</p>';
 }
 
 function buildHydrationTail(): string {
   return [
     '  </main>',
     '  <footer class="app-footer">',
-    '    <p>Powered by Zeptr SolidStart Adapter v1.0.0 — Phase 2.4</p>',
+    '    <p>Powered by Lunx SolidStart Adapter v1.0.0 — Phase 2.4</p>',
     '  </footer>',
     '</div>',
     '<script>window._$HY={events:[],completed:new WeakSet(),r:{}};</script>',
-    '<script type="module" src="/_zeptr/assets/entry-client.js"></script>',
+    '<script type="module" src="/_lunx/assets/entry-client.js"></script>',
     '</body>',
     '</html>',
   ].join('\n');
@@ -250,7 +250,7 @@ export interface ActionResult {
 /**
  * Execute a SolidStart server action.
  * Actions are exported async functions from route files (no Vinxi RPC).
- * Zeptr routes POST /_server/:actionId to this handler.
+ * Lunx routes POST /_server/:actionId to this handler.
  */
 export async function executeServerAction(
   actionId: string,
@@ -294,7 +294,7 @@ export async function executeServerAction(
   }
 }
 
-// ─── Zeptr Plugin Integration ─────────────────────────────────────────────────
+// ─── Lunx Plugin Integration ─────────────────────────────────────────────────
 
 export class SolidStartAdapter {
   name = 'solidstart';
@@ -334,10 +334,10 @@ export class SolidStartAdapter {
     
     if (jsFilesCount === 0) {
       throw new Error(
-        '[zeptr:solidstart] Build completed but no ' +
+        '[lunx:solidstart] Build completed but no ' +
         '.js files were emitted. Check that solid-js ' +
         'is installed and the entry file resolves. ' +
-        'See https://zeptr.dev/adapters/solidstart'
+        'See https://lunx.dev/adapters/solidstart'
       );
     }
   }
@@ -366,7 +366,7 @@ export class SolidStartAdapter {
 
   createPlugin() {
     return {
-      name: 'zeptr-solidstart-adapter',
+      name: 'lunx-solidstart-adapter',
       /**
        * Transform JSX/TSX using Solid's dom-expressions pattern.
        * No Vinxi dependency — pure source transformation.
@@ -382,13 +382,13 @@ export class SolidStartAdapter {
       },
 
       resolveId(id: string) {
-        // Intercept 'solid-js/web' imports for Zeptr's own SSR shim
-        if (id === 'solid-js/web') return '\0zeptr:solid-web-shim';
+        // Intercept 'solid-js/web' imports for Lunx's own SSR shim
+        if (id === 'solid-js/web') return '\0lunx:solid-web-shim';
         return null;
       },
 
       load(id: string) {
-        if (id === '\0zeptr:solid-web-shim') {
+        if (id === '\0lunx:solid-web-shim') {
           return [
             'export function renderToStream(fn) { return fn(); }',
             'export function hydrate(fn, el) { /* client hydration stub */ }',

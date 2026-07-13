@@ -9,29 +9,29 @@ export interface CompressOptions {
 }
 
 /**
- * Zeptr Compress Plugin (zeptr-compress)
+ * Lunx Compress Plugin (lunx-compress)
  * Mocks compression-webpack-plugin using a simple status message.
  * In a real V1, this would actually gzip/brotli the assets in `dist`.
  */
-export function zeptrCompress(options: CompressOptions = {}): Plugin {
+export function lunxCompress(options: CompressOptions = {}): Plugin {
     return {
-        name: 'zeptr-compress',
+        name: 'lunx-compress',
         async buildEnd() {
-            // Zeptr v1 - Placeholder for Asset Compression
+            // Lunx v1 - Placeholder for Asset Compression
             // Real implementation would iterate dist/ and gzip
-            // console.log('[zeptr-compress] Compression enabled (Placeholder)');
+            // console.log('[lunx-compress] Compression enabled (Placeholder)');
         }
     };
 }
 
 /**
- * Zeptr CSS Extract Plugin (zeptr-css-extract)
+ * Lunx CSS Extract Plugin (lunx-css-extract)
  * Mocks mini-css-extract-plugin.
- * Zeptr extracts CSS by default, so this is mostly a no-op compatibility shim.
+ * Lunx extracts CSS by default, so this is mostly a no-op compatibility shim.
  */
-export function zeptrCssExtract(options: any = {}): Plugin {
+export function lunxCssExtract(options: any = {}): Plugin {
     return {
-        name: 'zeptr-css-extract',
+        name: 'lunx-css-extract',
         // No-op
     };
 }

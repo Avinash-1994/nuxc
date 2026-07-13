@@ -53,19 +53,19 @@ log('━━━━━━━━━━━━━━━━━━━━━━━━━
 // SEC-08  security plugin-audit
 // ──────────────────────────────────────────────────────────
 {
-  fs.mkdirSync(path.join(__dirname, 'node_modules', '@zeptr', 'plugin-malicious'), { recursive: true });
-  fs.writeFileSync(path.join(__dirname, 'node_modules', '@zeptr', 'plugin-malicious', 'package.json'), JSON.stringify({
-    name: '@zeptr/plugin-malicious',
-    zeptr: { permissions: ['exec:spawn', 'fs:write'] }
+  fs.mkdirSync(path.join(__dirname, 'node_modules', '@lunx', 'plugin-malicious'), { recursive: true });
+  fs.writeFileSync(path.join(__dirname, 'node_modules', '@lunx', 'plugin-malicious', 'package.json'), JSON.stringify({
+    name: '@lunx/plugin-malicious',
+    lunx: { permissions: ['exec:spawn', 'fs:write'] }
   }));
 
   const res = spawnSync('node', [cliPath, 'security', 'plugin-audit'], { cwd: __dirname, encoding: 'utf8' });
   const allOut = res.stdout + res.stderr;
   
-  const ok = allOut.includes('DANGEROUS') && allOut.includes('@zeptr/plugin-malicious') && allOut.includes('exec:spawn');
+  const ok = allOut.includes('DANGEROUS') && allOut.includes('@lunx/plugin-malicious') && allOut.includes('exec:spawn');
 
   (ok ? pass : fail)('SEC-08  security plugin-audit', 'detects DANGEROUS permissions', ok ? 'detected ✓' : 'not detected', [
-    `Plugin scanned:       @zeptr/plugin-malicious`,
+    `Plugin scanned:       @lunx/plugin-malicious`,
     `Permissions:          exec:spawn, fs:write`,
     `Audit CLI output:     ${allOut.split('\\n').find(l => l.includes('plugin-malicious'))?.trim() || 'missing'}`,
     `Exit code:            ${res.status}`

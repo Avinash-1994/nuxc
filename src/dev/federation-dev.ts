@@ -53,18 +53,18 @@ export function createFederationDevRemoteEntry(federation: NonNullable<BuildConf
   const singletonPkgsJson = JSON.stringify(singletonPkgs);
 
   const sharedInitCode = federation.shared ? `
-      if (sharedScope && typeof globalThis.__zeptr_shared__ !== 'undefined') {
+      if (sharedScope && typeof globalThis.__lunx_shared__ !== 'undefined') {
         Object.keys(sharedScope).forEach(function(name) {
-          if (!globalThis.__zeptr_shared__.has(name)) {
+          if (!globalThis.__lunx_shared__.has(name)) {
             Object.keys(sharedScope[name] || {}).forEach(function(version) {
-              globalThis.__zeptr_shared__.register(name, version, sharedScope[name][version].get, false);
+              globalThis.__lunx_shared__.register(name, version, sharedScope[name][version].get, false);
             });
           }
         });
       }
     ` : '';
 
-  return `// Zeptr Module Federation Remote Entry (dev)
+  return `// Lunx Module Federation Remote Entry (dev)
 (function() {
   var remoteName = ${JSON.stringify(federation.name)};
   var exposedModules = {
@@ -77,7 +77,7 @@ ${exposeEntries}
   function resolvePath(moduleName) {
     var modulePath = exposedModules[moduleName];
     if (!modulePath) {
-      throw new Error('[Zeptr MF] Module not found: ' + moduleName);
+      throw new Error('[Lunx MF] Module not found: ' + moduleName);
     }
     var base = typeof import.meta !== 'undefined' ? import.meta.url : window.location.href;
     return new URL(modulePath, base).toString();
@@ -92,14 +92,14 @@ ${exposeEntries}
     // If the shared scope is available, pre-seed the window module cache
     // by registering a global interception map that the remote's bundled
     // importmap-style imports will consult.
-    if (typeof globalThis.__zeptr_shared__ !== 'undefined' && SINGLETONS.length > 0) {
-      if (!globalThis.__zeptr_singleton_map__) {
-        globalThis.__zeptr_singleton_map__ = {};
+    if (typeof globalThis.__lunx_shared__ !== 'undefined' && SINGLETONS.length > 0) {
+      if (!globalThis.__lunx_singleton_map__) {
+        globalThis.__lunx_singleton_map__ = {};
       }
       SINGLETONS.forEach(function(pkg) {
-        var instance = globalThis.__zeptr_shared__.get(pkg, '*');
+        var instance = globalThis.__lunx_shared__.get(pkg, '*');
         if (instance) {
-          globalThis.__zeptr_singleton_map__[pkg] = instance;
+          globalThis.__lunx_singleton_map__[pkg] = instance;
         }
       });
     }
@@ -119,9 +119,9 @@ ${exposeEntries}
     }
   };
 
-  globalThis['zeptr_remote_' + remoteName] = container;
+  globalThis['lunx_remote_' + remoteName] = container;
   globalThis[remoteName] = container;
-  var event = new CustomEvent('zeptr:remote:ready', { detail: { name: remoteName } });
+  var event = new CustomEvent('lunx:remote:ready', { detail: { name: remoteName } });
   if (typeof document !== 'undefined') {
     document.dispatchEvent(event);
   }

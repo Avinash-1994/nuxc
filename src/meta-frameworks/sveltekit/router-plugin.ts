@@ -1,12 +1,12 @@
-import type { Plugin } from '@zeptr/adapter-core';
+import type { Plugin } from '@lunx/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:zeptr/sveltekit-routes';
+const VIRTUAL_MODULE_ID = 'virtual:lunx/sveltekit-routes';
 
 export function sveltekitRouterPlugin(): Plugin {
   return {
-    name: 'zeptr:sveltekit-router',
+    name: 'lunx:sveltekit-router',
 
     // Intercept Svelte route requests to build the dynamic manifest
     resolveId(source: string) {

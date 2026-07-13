@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-sass
+ * @lunx/plugin-sass
  * Sass/SCSS compilation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSassPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-sass',
+        name: '@lunx/plugin-sass',
         originalPlugin: 'sass-loader',
         
         async transform(code: string, id: string) {

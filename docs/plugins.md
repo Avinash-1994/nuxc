@@ -1,4 +1,4 @@
-# Zeptr Plugins Guide
+# Lunx Plugins Guide
 
 > **Plugin ecosystem with sandboxing support and WebCrypto signing support.**
 
@@ -8,29 +8,29 @@
 
 ```bash
 # Search for plugins
-zeptr plugin search react
+lunx plugin search react
 
 # Install a plugin
-zeptr plugin install @zeptr/plugin-react
+lunx plugin install @lunx/plugin-react
 
 # List installed plugins
-zeptr plugin list
+lunx plugin list
 
 # Verify plugin signatures
-zeptr plugin verify @zeptr/plugin-react
+lunx plugin verify @lunx/plugin-react
 ```
 
 ---
 
 ## Using Plugins
 
-### In `zeptr.config.ts`
+### In `lunx.config.ts`
 
 ```typescript
-import { defineConfig } from 'zeptr';
-import react from '@zeptr/plugin-react';
-import tailwind from '@zeptr/plugin-tailwind';
-import pwa from '@zeptr/plugin-pwa';
+import { defineConfig } from 'lunx';
+import react from '@lunx/plugin-react';
+import tailwind from '@lunx/plugin-tailwind';
+import pwa from '@lunx/plugin-pwa';
 
 export default defineConfig({
   preset: 'spa',
@@ -66,90 +66,90 @@ export default defineConfig({
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-react` | React Fast Refresh + JSX | `zeptr plugin install @zeptr/plugin-react` |
-| `@zeptr/plugin-vue` | Vue 3 SFC support | `zeptr plugin install @zeptr/plugin-vue` |
-| `@zeptr/plugin-svelte` | Svelte compiler | `zeptr plugin install @zeptr/plugin-svelte` |
-| `@zeptr/plugin-solid` | Solid.js JSX | `zeptr plugin install @zeptr/plugin-solid` |
-| `@zeptr/plugin-angular` | Angular AOT compiler | `zeptr plugin install @zeptr/plugin-angular` |
-| `@zeptr/plugin-preact` | Preact with Fast Refresh | `zeptr plugin install @zeptr/plugin-preact` |
+| `@lunx/plugin-react` | React Fast Refresh + JSX | `lunx plugin install @lunx/plugin-react` |
+| `@lunx/plugin-vue` | Vue 3 SFC support | `lunx plugin install @lunx/plugin-vue` |
+| `@lunx/plugin-svelte` | Svelte compiler | `lunx plugin install @lunx/plugin-svelte` |
+| `@lunx/plugin-solid` | Solid.js JSX | `lunx plugin install @lunx/plugin-solid` |
+| `@lunx/plugin-angular` | Angular AOT compiler | `lunx plugin install @lunx/plugin-angular` |
+| `@lunx/plugin-preact` | Preact with Fast Refresh | `lunx plugin install @lunx/plugin-preact` |
 
 ### CSS & Styling
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-tailwind` | Tailwind CSS v3+ | `zeptr plugin install @zeptr/plugin-tailwind` |
-| `@zeptr/plugin-sass` | Sass/SCSS compiler | `zeptr plugin install @zeptr/plugin-sass` |
-| `@zeptr/plugin-less` | Less compiler | `zeptr plugin install @zeptr/plugin-less` |
-| `@zeptr/plugin-postcss` | PostCSS processor | `zeptr plugin install @zeptr/plugin-postcss` |
-| `@zeptr/plugin-styled-components` | CSS-in-JS support | `zeptr plugin install @zeptr/plugin-styled-components` |
-| `@zeptr/plugin-emotion` | Emotion CSS-in-JS | `zeptr plugin install @zeptr/plugin-emotion` |
+| `@lunx/plugin-tailwind` | Tailwind CSS v3+ | `lunx plugin install @lunx/plugin-tailwind` |
+| `@lunx/plugin-sass` | Sass/SCSS compiler | `lunx plugin install @lunx/plugin-sass` |
+| `@lunx/plugin-less` | Less compiler | `lunx plugin install @lunx/plugin-less` |
+| `@lunx/plugin-postcss` | PostCSS processor | `lunx plugin install @lunx/plugin-postcss` |
+| `@lunx/plugin-styled-components` | CSS-in-JS support | `lunx plugin install @lunx/plugin-styled-components` |
+| `@lunx/plugin-emotion` | Emotion CSS-in-JS | `lunx plugin install @lunx/plugin-emotion` |
 
 ### Assets & Media
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-svgr` | SVG to React components | `zeptr plugin install @zeptr/plugin-svgr` |
-| `@zeptr/plugin-image-optimizer` | Image compression | `zeptr plugin install @zeptr/plugin-image-optimizer` |
-| `@zeptr/plugin-webp` | WebP conversion | `zeptr plugin install @zeptr/plugin-webp` |
-| `@zeptr/plugin-fonts` | Font optimization | `zeptr plugin install @zeptr/plugin-fonts` |
+| `@lunx/plugin-svgr` | SVG to React components | `lunx plugin install @lunx/plugin-svgr` |
+| `@lunx/plugin-image-optimizer` | Image compression | `lunx plugin install @lunx/plugin-image-optimizer` |
+| `@lunx/plugin-webp` | WebP conversion | `lunx plugin install @lunx/plugin-webp` |
+| `@lunx/plugin-fonts` | Font optimization | `lunx plugin install @lunx/plugin-fonts` |
 
 ### Performance
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-compression` | Gzip/Brotli compression | `zeptr plugin install @zeptr/plugin-compression` |
-| `@zeptr/plugin-preload` | Resource preloading | `zeptr plugin install @zeptr/plugin-preload` |
-| `@zeptr/plugin-lazy-load` | Code splitting helpers | `zeptr plugin install @zeptr/plugin-lazy-load` |
-| `@zeptr/plugin-bundle-analyzer` | Bundle size analysis | `zeptr plugin install @zeptr/plugin-bundle-analyzer` |
+| `@lunx/plugin-compression` | Gzip/Brotli compression | `lunx plugin install @lunx/plugin-compression` |
+| `@lunx/plugin-preload` | Resource preloading | `lunx plugin install @lunx/plugin-preload` |
+| `@lunx/plugin-lazy-load` | Code splitting helpers | `lunx plugin install @lunx/plugin-lazy-load` |
+| `@lunx/plugin-bundle-analyzer` | Bundle size analysis | `lunx plugin install @lunx/plugin-bundle-analyzer` |
 
 ### Security
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-csp` | Content Security Policy | `zeptr plugin install @zeptr/plugin-csp` |
-| `@zeptr/plugin-sri` | Subresource Integrity | `zeptr plugin install @zeptr/plugin-sri` |
-| `@zeptr/plugin-security-headers` | HTTP security headers | `zeptr plugin install @zeptr/plugin-security-headers` |
+| `@lunx/plugin-csp` | Content Security Policy | `lunx plugin install @lunx/plugin-csp` |
+| `@lunx/plugin-sri` | Subresource Integrity | `lunx plugin install @lunx/plugin-sri` |
+| `@lunx/plugin-security-headers` | HTTP security headers | `lunx plugin install @lunx/plugin-security-headers` |
 
 ### Testing
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-vitest` | Vitest integration | `zeptr plugin install @zeptr/plugin-vitest` |
-| `@zeptr/plugin-jest` | Jest integration | `zeptr plugin install @zeptr/plugin-jest` |
-| `@zeptr/plugin-playwright` | E2E testing | `zeptr plugin install @zeptr/plugin-playwright` |
+| `@lunx/plugin-vitest` | Vitest integration | `lunx plugin install @lunx/plugin-vitest` |
+| `@lunx/plugin-jest` | Jest integration | `lunx plugin install @lunx/plugin-jest` |
+| `@lunx/plugin-playwright` | E2E testing | `lunx plugin install @lunx/plugin-playwright` |
 
 ### i18n
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-i18next` | i18next integration | `zeptr plugin install @zeptr/plugin-i18next` |
-| `@zeptr/plugin-react-intl` | React Intl | `zeptr plugin install @zeptr/plugin-react-intl` |
-| `@zeptr/plugin-vue-i18n` | Vue I18n | `zeptr plugin install @zeptr/plugin-vue-i18n` |
+| `@lunx/plugin-i18next` | i18next integration | `lunx plugin install @lunx/plugin-i18next` |
+| `@lunx/plugin-react-intl` | React Intl | `lunx plugin install @lunx/plugin-react-intl` |
+| `@lunx/plugin-vue-i18n` | Vue I18n | `lunx plugin install @lunx/plugin-vue-i18n` |
 
 ### State Management
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-redux` | Redux DevTools | `zeptr plugin install @zeptr/plugin-redux` |
-| `@zeptr/plugin-zustand` | Zustand integration | `zeptr plugin install @zeptr/plugin-zustand` |
-| `@zeptr/plugin-jotai` | Jotai atoms | `zeptr plugin install @zeptr/plugin-jotai` |
+| `@lunx/plugin-redux` | Redux DevTools | `lunx plugin install @lunx/plugin-redux` |
+| `@lunx/plugin-zustand` | Zustand integration | `lunx plugin install @lunx/plugin-zustand` |
+| `@lunx/plugin-jotai` | Jotai atoms | `lunx plugin install @lunx/plugin-jotai` |
 
 ### Deployment
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-vercel` | Vercel deployment | `zeptr plugin install @zeptr/plugin-vercel` |
-| `@zeptr/plugin-netlify` | Netlify deployment | `zeptr plugin install @zeptr/plugin-netlify` |
-| `@zeptr/plugin-cloudflare` | Cloudflare Workers | `zeptr plugin install @zeptr/plugin-cloudflare` |
-| `@zeptr/plugin-docker` | Docker containerization | `zeptr plugin install @zeptr/plugin-docker` |
+| `@lunx/plugin-vercel` | Vercel deployment | `lunx plugin install @lunx/plugin-vercel` |
+| `@lunx/plugin-netlify` | Netlify deployment | `lunx plugin install @lunx/plugin-netlify` |
+| `@lunx/plugin-cloudflare` | Cloudflare Workers | `lunx plugin install @lunx/plugin-cloudflare` |
+| `@lunx/plugin-docker` | Docker containerization | `lunx plugin install @lunx/plugin-docker` |
 
 ### Analytics
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| `@zeptr/plugin-google-analytics` | GA4 integration | `zeptr plugin install @zeptr/plugin-google-analytics` |
-| `@zeptr/plugin-plausible` | Plausible Analytics | `zeptr plugin install @zeptr/plugin-plausible` |
-| `@zeptr/plugin-sentry` | Error tracking | `zeptr plugin install @zeptr/plugin-sentry` |
+| `@lunx/plugin-google-analytics` | GA4 integration | `lunx plugin install @lunx/plugin-google-analytics` |
+| `@lunx/plugin-plausible` | Plausible Analytics | `lunx plugin install @lunx/plugin-plausible` |
+| `@lunx/plugin-sentry` | Error tracking | `lunx plugin install @lunx/plugin-sentry` |
 
 ---
 
@@ -157,7 +157,7 @@ export default defineConfig({
 
 ### Plugin Security Model
 
-Zeptr currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
+Lunx currently executes plugins in an isolated VM-based runtime with strict permission controls. A secure WASM runtime for plugin execution is planned, but the current model is based on runtime isolation and API safety checks.
 
 Plugins are subject to explicit permissions:
 - Filesystem access is denied by default and only granted for approved paths.
@@ -184,11 +184,11 @@ Every plugin is **cryptographically signed**:
 
 ```bash
 # Verify plugin signature
-zeptr plugin verify @zeptr/plugin-react
+lunx plugin verify @lunx/plugin-react
 
 # Output:
 ✅ Signature valid
-✅ Publisher: Zeptr Team
+✅ Publisher: Lunx Team
 ✅ Published: 2026-01-15
 ✅ SHA-256: a3f2...
 ```
@@ -197,9 +197,9 @@ zeptr plugin verify @zeptr/plugin-react
 
 ```json
 {
-  "name": "@zeptr/plugin-react",
+  "name": "@lunx/plugin-react",
   "version": "2.0.0",
-  "author": "Zeptr Team",
+  "author": "Lunx Team",
   "signature": "...",
   "permissions": [
     "transform:jsx",
@@ -218,9 +218,9 @@ zeptr plugin verify @zeptr/plugin-react
 
 ```typescript
 // my-plugin.ts
-import { ZeptrPlugin } from 'zeptr';
+import { LunxPlugin } from 'lunx';
 
-export default function myPlugin(options = {}): ZeptrPlugin {
+export default function myPlugin(options = {}): LunxPlugin {
   return {
     name: 'my-plugin',
     version: '1.0.0',
@@ -251,7 +251,7 @@ export default function myPlugin(options = {}): ZeptrPlugin {
 ### Plugin Hooks
 
 ```typescript
-export interface ZeptrPlugin {
+export interface LunxPlugin {
   name: string;
   version: string;
   
@@ -277,12 +277,12 @@ export interface ZeptrPlugin {
 ### Example: Custom Markdown Plugin
 
 ```typescript
-import { ZeptrPlugin } from 'zeptr';
+import { LunxPlugin } from 'lunx';
 import { marked } from 'marked';
 
-export default function markdownPlugin(): ZeptrPlugin {
+export default function markdownPlugin(): LunxPlugin {
   return {
-    name: 'zeptr-plugin-markdown',
+    name: 'lunx-plugin-markdown',
     version: '1.0.0',
     
     transform(code, id) {
@@ -301,7 +301,7 @@ export default function markdownPlugin(): ZeptrPlugin {
 
 **Usage**:
 ```typescript
-// zeptr.config.ts
+// lunx.config.ts
 import markdown from './my-plugin';
 
 export default defineConfig({
@@ -325,8 +325,8 @@ function App() {
 ### Vite Plugin Adapter
 
 ```typescript
-import { defineConfig } from 'zeptr';
-import { rollupAdapter } from '@zeptr/plugin-compat';
+import { defineConfig } from 'lunx';
+import { rollupAdapter } from '@lunx/plugin-compat';
 import viteReactSvgr from 'vite-plugin-svgr';
 
 export default defineConfig({
@@ -342,7 +342,7 @@ export default defineConfig({
 ### Webpack Loader Adapter
 
 ```typescript
-import { webpackLoaderAdapter } from '@zeptr/plugin-compat';
+import { webpackLoaderAdapter } from '@lunx/plugin-compat';
 
 export default defineConfig({
   plugins: [
@@ -365,26 +365,26 @@ export default defineConfig({
 
 ```bash
 # List all plugins
-zeptr plugin list --all
+lunx plugin list --all
 
 # Search by category
-zeptr plugin search --category framework
+lunx plugin search --category framework
 
 # Filter by verified
-zeptr plugin search --verified
+lunx plugin search --verified
 ```
 
 ### Plugin Ratings
 
 ```bash
 # View plugin details
-zeptr plugin info @zeptr/plugin-react
+lunx plugin info @lunx/plugin-react
 
 # Output:
-📦 @zeptr/plugin-react v2.0.0
+📦 @lunx/plugin-react v2.0.0
 ⭐ 4.8/5.0 (1,234 reviews)
 📥 50,000 downloads/week
-✅ Verified by Zeptr Team
+✅ Verified by Lunx Team
 🔒 Secure isolated plugin runtime
 📝 React Fast Refresh + JSX transform
 ```
@@ -414,11 +414,11 @@ export default defineConfig({
 **Solution**:
 ```bash
 # Re-install plugin
-npm uninstall @zeptr/plugin-name
-zeptr plugin install @zeptr/plugin-name
+npm uninstall @lunx/plugin-name
+lunx plugin install @lunx/plugin-name
 
 # Or skip verification (not recommended)
-zeptr plugin install @zeptr/plugin-name --skip-verify
+lunx plugin install @lunx/plugin-name --skip-verify
 ```
 
 ### Plugin Conflicts
@@ -443,7 +443,7 @@ export default defineConfig({
 
 ✅ **Good**:
 ```typescript
-import react from '@zeptr/plugin-react';
+import react from '@lunx/plugin-react';
 ```
 
 ⚠️ **Avoid** (unless necessary):
@@ -455,7 +455,7 @@ import react from 'some-unofficial-plugin';
 
 ```bash
 # Always verify before using
-zeptr plugin verify @zeptr/plugin-name
+lunx plugin verify @lunx/plugin-name
 ```
 
 ### 3. Minimal Plugin Configuration
@@ -480,7 +480,7 @@ plugins: [
 
 ```bash
 # Profile plugin impact
-zeptr build --profile
+lunx build --profile
 
 # Output shows plugin timings
 ```
@@ -496,20 +496,20 @@ zeptr build --profile
 npm run build
 
 # 2. Sign plugin
-zeptr plugin sign ./dist
+lunx plugin sign ./dist
 
 # 3. Publish to marketplace
-zeptr plugin publish
+lunx plugin publish
 
 # 4. Verify published
-zeptr plugin verify @your-org/your-plugin
+lunx plugin verify @your-org/your-plugin
 ```
 
 ### Plugin Testing
 
 ```typescript
 // plugin.test.ts
-import { describe, it, expect } from '@zeptr/test';
+import { describe, it, expect } from '@lunx/test';
 import myPlugin from './plugin';
 
 describe('My Plugin', () => {

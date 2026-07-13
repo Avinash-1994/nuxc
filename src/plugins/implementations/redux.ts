@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-redux
+ * @lunx/plugin-redux
  * Redux integration
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReduxPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-redux',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-redux',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // redux transformation

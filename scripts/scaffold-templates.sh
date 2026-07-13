@@ -9,10 +9,10 @@ mk() { mkdir -p "$T/$1/src"; }
 # ── REACT ─────────────────────────────────────────────────────────
 mk react
 cat > "$T/react/package.json" <<'EOF'
-{"name":"nuxc-react-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuxc dev","build":"nuxc build","preview":"nuxc preview","test":"playwright test"},"nuxc":{"template":true,"framework":"react","description":"Nuxc Tasks — task management app"},"dependencies":{"react":"18.3.1","react-dom":"18.3.1","react-router-dom":"6.23.1","@tanstack/react-query":"5.40.0","zustand":"4.5.2"},"devDependencies":{"nuxc":"file:../..","@types/react":"18.3.3","@types/react-dom":"18.3.0","typescript":"5.4.5"}}
+{"name":"lunx-react-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"lunx dev","build":"lunx build","preview":"lunx preview","test":"playwright test"},"lunx":{"template":true,"framework":"react","description":"Lunx Tasks — task management app"},"dependencies":{"react":"18.3.1","react-dom":"18.3.1","react-router-dom":"6.23.1","@tanstack/react-query":"5.40.0","zustand":"4.5.2"},"devDependencies":{"lunx":"file:../..","@types/react":"18.3.3","@types/react-dom":"18.3.0","typescript":"5.4.5"}}
 EOF
-cat > "$T/react/nuxc.config.ts" <<'EOF'
-import { defineConfig } from 'nuxc';
+cat > "$T/react/lunx.config.ts" <<'EOF'
+import { defineConfig } from 'lunx';
 export default defineConfig({ framework: 'react' });
 EOF
 cat > "$T/react/src/main.tsx" <<'EOF'
@@ -22,7 +22,7 @@ import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const PROJECTS = [
-  { id: 1, name: 'Nuxc Core', tasks: 12, done: 8 },
+  { id: 1, name: 'Lunx Core', tasks: 12, done: 8 },
   { id: 2, name: 'Plugin Ecosystem', tasks: 34, done: 29 },
   { id: 3, name: 'Meta-Frameworks', tasks: 21, done: 19 },
   { id: 4, name: 'Security Gate', tasks: 15, done: 15 },
@@ -45,7 +45,7 @@ function Nav() {
   const links = [['/', 'Dashboard'], ['/projects', 'Projects'], ['/tasks/new', '+ New Task'], ['/settings', 'Settings']];
   return (
     <nav style={{background:'#0f172a',color:'#fff',padding:'0 24px',display:'flex',gap:24,alignItems:'center',height:56}}>
-      <span style={{fontWeight:700,fontSize:18,marginRight:16}}>⚡ Nuxc Tasks</span>
+      <span style={{fontWeight:700,fontSize:18,marginRight:16}}>⚡ Lunx Tasks</span>
       {links.map(([to, label]) => (
         <NavLink key={to} to={to} style={({isActive})=>({color: isActive ? '#818cf8' : '#94a3b8', textDecoration:'none', fontWeight: isActive ? 600 : 400})}>{label}</NavLink>
       ))}
@@ -125,7 +125,7 @@ function Login() {
     <div style={{padding:32,maxWidth:400}}>
       <h1>Sign In</h1>
       <form onSubmit={e=>{e.preventDefault();setOk(true)}} style={{display:'flex',flexDirection:'column',gap:16}}>
-        <input type="email" placeholder="Email" defaultValue="dev@nuxc.dev" required style={{padding:12,borderRadius:8,border:'1px solid #334155',background:'#1e293b',color:'#fff'}}/>
+        <input type="email" placeholder="Email" defaultValue="dev@lunx.dev" required style={{padding:12,borderRadius:8,border:'1px solid #334155',background:'#1e293b',color:'#fff'}}/>
         <input type="password" placeholder="Password" defaultValue="password" required style={{padding:12,borderRadius:8,border:'1px solid #334155',background:'#1e293b',color:'#fff'}}/>
         <button type="submit" style={{padding:12,background:'#6366f1',color:'#fff',border:'none',borderRadius:8,cursor:'pointer',fontWeight:600}}>Sign In</button>
       </form>
@@ -155,10 +155,10 @@ function App() {
 createRoot(document.getElementById('root')!).render(<App/>);
 EOF
 cat > "$T/react/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Nuxc Tasks</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Lunx Tasks</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
 EOF
 cat > "$T/react/README.md" <<'EOF'
-# Nuxc Tasks — React Template
+# Lunx Tasks — React Template
 ```bash
 npm install && npm run dev
 ```
@@ -168,14 +168,14 @@ EOF
 # ── VUE ─────────────────────────────────────────────────────────
 mk vue
 cat > "$T/vue/package.json" <<'EOF'
-{"name":"nuxc-vue-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"nuxc dev","build":"nuxc build","preview":"nuxc preview"},"nuxc":{"template":true,"framework":"vue","description":"Nuxc Shop — e-commerce storefront"},"dependencies":{"vue":"3.4.27","vue-router":"4.3.3","pinia":"2.1.7"},"devDependencies":{"nuxc":"file:../..","@vitejs/plugin-vue":"5.0.4","typescript":"5.4.5"}}
+{"name":"lunx-vue-template","version":"0.0.1","private":true,"type":"module","scripts":{"dev":"lunx dev","build":"lunx build","preview":"lunx preview"},"lunx":{"template":true,"framework":"vue","description":"Lunx Shop — e-commerce storefront"},"dependencies":{"vue":"3.4.27","vue-router":"4.3.3","pinia":"2.1.7"},"devDependencies":{"lunx":"file:../..","@vitejs/plugin-vue":"5.0.4","typescript":"5.4.5"}}
 EOF
-cat > "$T/vue/nuxc.config.ts" <<'EOF'
-import { defineConfig } from 'nuxc';
+cat > "$T/vue/lunx.config.ts" <<'EOF'
+import { defineConfig } from 'lunx';
 export default defineConfig({ framework: 'vue' });
 EOF
 cat > "$T/vue/index.html" <<'EOF'
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Nuxc Shop</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Lunx Shop</title></head><body><div id="app"></div><script type="module" src="/src/main.ts"></script></body></html>
 EOF
 cat > "$T/vue/src/main.ts" <<'EOF'
 import { createApp } from 'vue';
@@ -198,7 +198,7 @@ cat > "$T/vue/src/App.vue" <<'EOF'
 <template>
   <div class="app">
     <nav>
-      <span class="brand">🛒 Nuxc Shop</span>
+      <span class="brand">🛒 Lunx Shop</span>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/products">Products</RouterLink>
       <RouterLink to="/cart">Cart ({{ cartCount }})</RouterLink>

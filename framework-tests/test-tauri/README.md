@@ -1,4 +1,4 @@
-# Zeptr tauri Template — Zeptr Files Desktop — Rust file manager
+# Lunx tauri Template — Lunx Files Desktop — Rust file manager
 ```bash
 npm install && npm run dev
 ```

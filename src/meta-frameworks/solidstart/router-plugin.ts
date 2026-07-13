@@ -1,12 +1,12 @@
-import type { Plugin } from '@zeptr/adapter-core';
+import type { Plugin } from '@lunx/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:zeptr/solidstart-routes';
+const VIRTUAL_MODULE_ID = 'virtual:lunx/solidstart-routes';
 
 export function solidStartRouterPlugin(): Plugin {
   return {
-    name: 'zeptr:solidstart-router',
+    name: 'lunx:solidstart-router',
 
     // Intercept SolidStart component routes
     resolveId(source: string) {

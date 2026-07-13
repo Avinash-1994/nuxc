@@ -4,7 +4,7 @@ export const astroSpaTemplate: TemplateConfig = {
     dependencies: { 'astro': '^4.8.0' },
     devDependencies: { '@types/node': '^20.0.0' },
     files: {
-        'zeptr.config.ts': "import { defineConfig } from 'zeptr';\nexport default defineConfig({ framework: 'astro' });",
+        'lunx.config.ts': "import { defineConfig } from 'lunx';\nexport default defineConfig({ framework: 'astro' });",
         'src/pages/index.astro': `---
 ---
 <html lang="en">
@@ -16,8 +16,8 @@ export const astroSpaTemplate: TemplateConfig = {
 </head>
 <body>
   <div class="card">
-    <h1>⚡ Zeptr + Astro</h1>
-    <p>Blazing fast MPA built with the Zeptr engine.</p>
+    <h1>⚡ Lunx + Astro</h1>
+    <p>Blazing fast MPA built with the Lunx engine.</p>
   </div>
 </body>
 </html>`

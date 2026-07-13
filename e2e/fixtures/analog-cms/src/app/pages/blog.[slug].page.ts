@@ -14,7 +14,7 @@ export default class BlogPostComponent {
   @Input() slug!: string;
   
   get title() {
-    return this.slug === 'hello-analog' ? 'Hello Analog' : 'Zeptr Build Integration';
+    return this.slug === 'hello-analog' ? 'Hello Analog' : 'Lunx Build Integration';
   }
   
   get content() {

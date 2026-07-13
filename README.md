@@ -1,12 +1,12 @@
-# ⚡ Zeptr — Modern Build Tool
+# ⚡ Lunx — Modern Build Tool
 
-[![npm version](https://img.shields.io/npm/v/zeptr.svg)](https://www.npmjs.com/package/zeptr)
-[![CI](https://github.com/Avinash-1994/Zeptr/actions/workflows/ci.yml/badge.svg)](https://github.com/Avinash-1994/Zeptr/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/lunx.svg)](https://www.npmjs.com/package/lunx)
+[![CI](https://github.com/Avinash-1994/Lunx/actions/workflows/ci.yml/badge.svg)](https://github.com/Avinash-1994/Lunx/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://img.shields.io/badge/tests-303%2F303-brightgreen)](#test-status)
 [![Node >=20](https://img.shields.io/badge/node-%3E%3D20-blue)](https://nodejs.org)
 
-**Zeptr** is a production-grade JavaScript/TypeScript build tool powered by **SWC (Rust)** and **LightningCSS**. It delivers sub-100ms HMR, native Module Federation for micro-frontends, full ES2022+ support, automatic tree shaking, a security gate pipeline, and zero-config support for **19 meta-frameworks** — a modern alternative to Webpack/Vite with a Rust-native core.
+**Lunx** is a production-grade JavaScript/TypeScript build tool powered by **SWC (Rust)** and **LightningCSS**. It delivers sub-100ms HMR, native Module Federation for micro-frontends, full ES2022+ support, automatic tree shaking, a security gate pipeline, and zero-config support for **19 meta-frameworks** — a modern alternative to Webpack/Vite with a Rust-native core.
 
 ---
 
@@ -23,7 +23,7 @@
 | 🗺️ **Workspace orchestrator** | Monorepo topological build ordering and parallel execution |
 | 💾 **Smart caching** | SQLite WAL incremental cache (warm start <100ms) |
 | 🎨 **CSS processing** | LightningCSS cascade layers, nesting, CSS Modules, Tailwind |
-| 🔍 **Inspect UI** | Live plugin timing visualization at `/__zeptr_inspect__` |
+| 🔍 **Inspect UI** | Live plugin timing visualization at `/__lunx_inspect__` |
 
 ---
 
@@ -31,20 +31,20 @@
 
 ```bash
 # Install globally
-npm install -g zeptr
+npm install -g lunx
 
 # Create a new project (interactive)
-zeptr create my-app --framework react --ts
+lunx create my-app --framework react --ts
 
 # Or scaffold with a template
-zeptr bootstrap --name my-app --template react-ts
+lunx bootstrap --name my-app --template react-ts
 
 # Start dev server
 cd my-app
-zeptr dev
+lunx dev
 
 # Production build
-zeptr build
+lunx build
 ```
 
 ---
@@ -52,26 +52,26 @@ zeptr build
 ## 📦 Installation
 
 ```bash
-npm install -g zeptr
+npm install -g lunx
 # or per-project
-npm install -D zeptr
+npm install -D lunx
 ```
 
 **Requirements:** Node.js ≥ 20
 
 ---
 
-## ⚙️ Configuration — `zeptr.config.ts`
+## ⚙️ Configuration — `lunx.config.ts`
 
 ```ts
-// zeptr.config.ts
-import { defineConfig } from 'zeptr';
+// lunx.config.ts
+import { defineConfig } from 'lunx';
 
 export default defineConfig({
   // ── Entry ────────────────────────────────────────
   entry: ['./src/main.tsx'],        // string | string[]
   outDir: './dist',                  // output directory
-  cacheDir: '.zeptr/cache',         // SQLite WAL cache location
+  cacheDir: '.lunx/cache',         // SQLite WAL cache location
 
   // ── Build ────────────────────────────────────────
   build: {
@@ -106,7 +106,7 @@ export default defineConfig({
     secretPatterns: true,            // scan for AWS/Stripe/JWT/GitHub keys
     csp: true,                       // inject Content-Security-Policy
     sri: true,                       // inject Subresource Integrity hashes
-    sbom: true,                      // emit dist/zeptr-sbom.json
+    sbom: true,                      // emit dist/lunx-sbom.json
     lockfileAudit: true,             // verify lockfile integrity
     pluginSandbox: true,             // restrict plugin fs/net permissions
   },
@@ -132,66 +132,66 @@ export default defineConfig({
 ## 🖥️ CLI Reference
 
 ```
-zeptr <command> [options]
+lunx <command> [options]
 ```
 
 | Command | Description |
 |---|---|
-| `zeptr dev` | Start development server with HMR |
-| `zeptr build` | Production build with tree shaking + minification |
-| `zeptr preview` | Serve production build locally |
-| `zeptr create [name]` | Create a new project interactively |
-| `zeptr bootstrap` | Scaffold from a template |
-| `zeptr init` | Initialize config in an existing project |
-| `zeptr check` | Pre-build validation (type-check + circular imports) |
-| `zeptr analyze` | Bundle composition report (HTML or JSON) |
-| `zeptr why <module>` | Trace full import chain to a module |
-| `zeptr inspect` | Inspect the dependency graph |
-| `zeptr ssr` | Start SSR server for meta-frameworks |
-| `zeptr security` | Security sub-commands (see below) |
-| `zeptr migrate` | Migrate config from older Zeptr/Webpack/Vite |
-| `zeptr audit` | Accessibility, performance, and SEO audit |
-| `zeptr verify` | Project health and configuration check |
-| `zeptr report` | AI-narrated build report from latest session |
-| `zeptr doctor` | Diagnostics for project health |
-| `zeptr test` | Run tests using Zeptr custom runner |
-| `zeptr css purge` | Remove unused CSS |
-| `zeptr env` | List and validate environment variables |
-| `zeptr info` | Print environment info for bug reports |
-| `zeptr workspaces` | Monorepo workspace commands |
+| `lunx dev` | Start development server with HMR |
+| `lunx build` | Production build with tree shaking + minification |
+| `lunx preview` | Serve production build locally |
+| `lunx create [name]` | Create a new project interactively |
+| `lunx bootstrap` | Scaffold from a template |
+| `lunx init` | Initialize config in an existing project |
+| `lunx check` | Pre-build validation (type-check + circular imports) |
+| `lunx analyze` | Bundle composition report (HTML or JSON) |
+| `lunx why <module>` | Trace full import chain to a module |
+| `lunx inspect` | Inspect the dependency graph |
+| `lunx ssr` | Start SSR server for meta-frameworks |
+| `lunx security` | Security sub-commands (see below) |
+| `lunx migrate` | Migrate config from older Lunx/Webpack/Vite |
+| `lunx audit` | Accessibility, performance, and SEO audit |
+| `lunx verify` | Project health and configuration check |
+| `lunx report` | AI-narrated build report from latest session |
+| `lunx doctor` | Diagnostics for project health |
+| `lunx test` | Run tests using Lunx custom runner |
+| `lunx css purge` | Remove unused CSS |
+| `lunx env` | List and validate environment variables |
+| `lunx info` | Print environment info for bug reports |
+| `lunx workspaces` | Monorepo workspace commands |
 
 ### Security sub-commands
 
 ```bash
-zeptr security audit          # full CVE + secret scan
-zeptr security cve            # CVE-only scan against OSV API
-zeptr security sbom           # generate SBOM (dist/zeptr-sbom.json)
-zeptr security scan           # scan source for secret patterns
-zeptr security plugin-audit   # audit plugin sandbox permissions
-zeptr security headers        # generate security headers manifest
-zeptr security report         # print full security report
-zeptr security fix            # auto-upgrade vulnerable lockfile deps
+lunx security audit          # full CVE + secret scan
+lunx security cve            # CVE-only scan against OSV API
+lunx security sbom           # generate SBOM (dist/lunx-sbom.json)
+lunx security scan           # scan source for secret patterns
+lunx security plugin-audit   # audit plugin sandbox permissions
+lunx security headers        # generate security headers manifest
+lunx security report         # print full security report
+lunx security fix            # auto-upgrade vulnerable lockfile deps
 ```
 
 ### Key options
 
 ```bash
-zeptr dev --port 3000 --host 0.0.0.0
-zeptr build --outDir ./out --sourcemap inline
-zeptr check --no-types           # skip tsc, only circular check
-zeptr analyze --json             # JSON output instead of HTML
-zeptr why react-dom              # trace import chain
-zeptr inspect --filter src/      # filter dependency graph
-zeptr ssr --framework remix --port 4000 --prod
-zeptr verify --ci --strict       # CI mode: exit 1 on any issue
-zeptr create my-app --framework vue --ts --tailwind
+lunx dev --port 3000 --host 0.0.0.0
+lunx build --outDir ./out --sourcemap inline
+lunx check --no-types           # skip tsc, only circular check
+lunx analyze --json             # JSON output instead of HTML
+lunx why react-dom              # trace import chain
+lunx inspect --filter src/      # filter dependency graph
+lunx ssr --framework remix --port 4000 --prod
+lunx verify --ci --strict       # CI mode: exit 1 on any issue
+lunx create my-app --framework vue --ts --tailwind
 ```
 
 ---
 
 ## 🏗️ Meta-Framework Support
 
-Zeptr detects your framework automatically from config files and applies the correct adapter. Use `zeptr dev` and `zeptr build` — no extra setup required.
+Lunx detects your framework automatically from config files and applies the correct adapter. Use `lunx dev` and `lunx build` — no extra setup required.
 
 | Framework | Adapter | SSR | HMR | Streaming |
 |---|---|---|---|---|
@@ -220,7 +220,7 @@ Zeptr detects your framework automatically from config files and applies the cor
 ### Example: SvelteKit
 
 ```ts
-// zeptr.config.ts
+// lunx.config.ts
 export default defineConfig({
   preset: 'ssr',
   adapter: 'sveltekit',
@@ -257,26 +257,26 @@ export default defineConfig({
 Install any plugin via npm, then add to your config:
 
 ```bash
-npm install -D @zeptr/plugin-env @zeptr/plugin-pwa
+npm install -D @lunx/plugin-env @lunx/plugin-pwa
 ```
 
 ```ts
-import { envPlugin } from '@zeptr/plugin-env';
-import { pwaPlugin } from '@zeptr/plugin-pwa';
-import { iconsPlugin } from '@zeptr/plugin-icons';
-import { svgPlugin } from '@zeptr/plugin-svg';
-import { legacyPlugin } from '@zeptr/plugin-legacy';
-import { compressionPlugin } from '@zeptr/plugin-compression';
-import { autoImportPlugin } from '@zeptr/plugin-auto-import';
-import { inspectPlugin } from '@zeptr/plugin-inspect';
-import { checkerPlugin } from '@zeptr/plugin-checker';
-import { mockPlugin } from '@zeptr/plugin-mock';
-import { imagePlugin } from '@zeptr/plugin-image';
+import { envPlugin } from '@lunx/plugin-env';
+import { pwaPlugin } from '@lunx/plugin-pwa';
+import { iconsPlugin } from '@lunx/plugin-icons';
+import { svgPlugin } from '@lunx/plugin-svg';
+import { legacyPlugin } from '@lunx/plugin-legacy';
+import { compressionPlugin } from '@lunx/plugin-compression';
+import { autoImportPlugin } from '@lunx/plugin-auto-import';
+import { inspectPlugin } from '@lunx/plugin-inspect';
+import { checkerPlugin } from '@lunx/plugin-checker';
+import { mockPlugin } from '@lunx/plugin-mock';
+import { imagePlugin } from '@lunx/plugin-image';
 
 export default defineConfig({
   plugins: [
     envPlugin({
-      prefix: 'ZEPTR_',             // only expose ZEPTR_* vars to bundle
+      prefix: 'LUNX_',             // only expose LUNX_* vars to bundle
       dts: 'src/env.d.ts',          // auto-generate type declarations
     }),
     pwaPlugin({
@@ -297,7 +297,7 @@ export default defineConfig({
       imports: ['vue', 'react'],     // auto-inject imports
       dts: 'src/auto-imports.d.ts',
     }),
-    inspectPlugin(),                 // UI at /__zeptr_inspect__
+    inspectPlugin(),                 // UI at /__lunx_inspect__
     checkerPlugin({
       typescript: true,
       eslint: true,
@@ -320,23 +320,23 @@ export default defineConfig({
 
 | Plugin | What it does |
 |---|---|
-| `@zeptr/plugin-env` | Loads `.env`, filters to prefix, generates `env.d.ts`, blocks secret patterns |
-| `@zeptr/plugin-pwa` | Generates `manifest.json` + Service Worker with precache |
-| `@zeptr/plugin-icons` | On-demand icon loading via `~icons/mdi/home` (no unused icons in bundle) |
-| `@zeptr/plugin-svg` | SVG as URL, raw string, or React/Vue component |
-| `@zeptr/plugin-legacy` | `<script nomodule>` fallback bundle via SWC + core-js |
-| `@zeptr/plugin-compression` | Parallel Brotli + Gzip via Rust threads |
-| `@zeptr/plugin-auto-import` | Auto-inject framework imports, sync `.eslintrc-auto-import` |
-| `@zeptr/plugin-inspect` | Dev GUI at `/__zeptr_inspect__` showing per-plugin timings |
-| `@zeptr/plugin-checker` | Worker-thread tsc, eslint, stylelint with overlay error display |
-| `@zeptr/plugin-mock` | REST + GraphQL local mock server with fast intercept |
-| `@zeptr/plugin-image` | sharp AVIF/WebP optimization, responsive `srcset` |
+| `@lunx/plugin-env` | Loads `.env`, filters to prefix, generates `env.d.ts`, blocks secret patterns |
+| `@lunx/plugin-pwa` | Generates `manifest.json` + Service Worker with precache |
+| `@lunx/plugin-icons` | On-demand icon loading via `~icons/mdi/home` (no unused icons in bundle) |
+| `@lunx/plugin-svg` | SVG as URL, raw string, or React/Vue component |
+| `@lunx/plugin-legacy` | `<script nomodule>` fallback bundle via SWC + core-js |
+| `@lunx/plugin-compression` | Parallel Brotli + Gzip via Rust threads |
+| `@lunx/plugin-auto-import` | Auto-inject framework imports, sync `.eslintrc-auto-import` |
+| `@lunx/plugin-inspect` | Dev GUI at `/__lunx_inspect__` showing per-plugin timings |
+| `@lunx/plugin-checker` | Worker-thread tsc, eslint, stylelint with overlay error display |
+| `@lunx/plugin-mock` | REST + GraphQL local mock server with fast intercept |
+| `@lunx/plugin-image` | sharp AVIF/WebP optimization, responsive `srcset` |
 
 ---
 
 ## 🔒 Security Pipeline
 
-Zeptr has a built-in security gate that runs on every production build.
+Lunx has a built-in security gate that runs on every production build.
 
 ### What it checks
 
@@ -346,7 +346,7 @@ Zeptr has a built-in security gate that runs on every production build.
 | **CVE gating** | OSV API scan — blocks at configured severity (`high` by default) |
 | **CSP injection** | Injects `<meta http-equiv="Content-Security-Policy">` into all HTML pages |
 | **SRI hashes** | Injects `integrity="sha384-..."` on all `<script>` and `<link>` tags |
-| **SBOM** | Generates `dist/zeptr-sbom.json` with full dependency inventory |
+| **SBOM** | Generates `dist/lunx-sbom.json` with full dependency inventory |
 | **Lockfile audit** | Detects tampered `package-lock.json` checksums → abort |
 | **Plugin sandbox** | Blocks plugins from writing to the filesystem without explicit permission |
 
@@ -365,7 +365,7 @@ security: {
 ### Skip in CI (dev fixtures only)
 
 ```bash
-ZEPTR_SKIP_SECURITY=1 zeptr build   # bypasses all security gates
+LUNX_SKIP_SECURITY=1 lunx build   # bypasses all security gates
 ```
 
 > **Never** set this in production. It is only for dev fixture builds where `node_modules` contain dev-only packages with known CVEs.
@@ -409,7 +409,7 @@ const Widget = React.lazy(() => import('dashboard/Widget'));
 ## 🗺️ Monorepo / Workspace
 
 ```ts
-// zeptr.workspace.ts
+// lunx.workspace.ts
 export default {
   packages: ['packages/*', 'apps/*'],
   build: {
@@ -420,8 +420,8 @@ export default {
 ```
 
 ```bash
-zeptr workspaces build        # build all packages in dependency order
-zeptr workspaces dev          # run dev servers for all packages
+lunx workspaces build        # build all packages in dependency order
+lunx workspaces dev          # run dev servers for all packages
 ```
 
 ---
@@ -541,11 +541,11 @@ export default defineConfig({
 
 | Issue | Fix |
 |---|---|
-| `ERR_MODULE_NOT_FOUND @zeptr/security` | Run `cd packages/zeptr-security && npx tsc` to build the package |
-| CVE scanner aborts dev build | Use `ZEPTR_SKIP_SECURITY=1` for dev fixtures only |
+| `ERR_MODULE_NOT_FOUND @lunx/security` | Run `cd packages/lunx-security && npx tsc` to build the package |
+| CVE scanner aborts dev build | Use `LUNX_SKIP_SECURITY=1` for dev fixtures only |
 | HMR not working | Check `dev.hmr: true` in config; ensure port is not in use |
-| `build_output/` is empty | Zeptr writes to `dist/` by default; check your `outDir` config |
-| TypeScript errors on `@zeptr/*` | Verify `tsconfig.json` has the `paths` mapping to `packages/zeptr-*/src` |
+| `build_output/` is empty | Lunx writes to `dist/` by default; check your `outDir` config |
+| TypeScript errors on `@lunx/*` | Verify `tsconfig.json` has the `paths` mapping to `packages/lunx-*/src` |
 | `--root` flag unknown | Use `cwd` option instead: `execFileSync('node', ['build'], { cwd: dir })` |
 
 ---
@@ -553,22 +553,22 @@ export default defineConfig({
 ## 📁 Package Structure
 
 ```
-zeptr/
+lunx/
 ├── src/
 │   ├── cli.ts                    # CLI entry — 20+ commands
 │   ├── commands/                 # analyze, security, ssr, migrate, …
 │   ├── build/bundler.ts          # core bundler + security gate
-│   ├── config/types.ts           # ZeptrConfig type definitions
+│   ├── config/types.ts           # LunxConfig type definitions
 │   ├── dev/devServer.ts          # uWS dev server + HMR
 │   ├── meta-frameworks/          # 19 framework adapters
-│   └── plugins/inspect/          # inspect UI (/__zeptr_inspect__)
+│   └── plugins/inspect/          # inspect UI (/__lunx_inspect__)
 ├── packages/
-│   ├── zeptr-security/           # CVE, CSP, SRI, SBOM, secret scan
-│   ├── zeptr-plugin-{name}/      # 11 official plugins
-│   ├── zeptr-ssr/                # SSR adapter core
-│   ├── zeptr-workspace/          # monorepo orchestration
-│   ├── zeptr-hmr-client/         # browser HMR client
-│   └── zeptr-module-registry/    # MFE module registry
+│   ├── lunx-security/           # CVE, CSP, SRI, SBOM, secret scan
+│   ├── lunx-plugin-{name}/      # 11 official plugins
+│   ├── lunx-ssr/                # SSR adapter core
+│   ├── lunx-workspace/          # monorepo orchestration
+│   ├── lunx-hmr-client/         # browser HMR client
+│   └── lunx-module-registry/    # MFE module registry
 └── e2e/fixtures/                 # 50+ real framework test fixtures
 ```
 
@@ -577,8 +577,8 @@ zeptr/
 ## 🤝 Contributing
 
 ```bash
-git clone https://github.com/Avinash-1994/zeptr
-cd zeptr
+git clone https://github.com/Avinash-1994/lunx
+cd lunx
 npm install
 npm run build
 npm run typecheck      # tsc --noEmit (0 errors expected)

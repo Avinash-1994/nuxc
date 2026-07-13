@@ -104,8 +104,8 @@ let engineUsed: 'native' | 'js' = 'js';
 
 function getJSFallback() {
     const crypto = _require('crypto');
-    console.warn("⚠️  [ZEPTR EXECUTOR] Native binary and WASM failed to load. Falling back to JavaScript engine.");
-    console.warn("⚠️  [ZEPTR EXECUTOR] Performance will be degraded. Execution is guaranteed iteratively safely.");
+    console.warn("⚠️  [LUNX EXECUTOR] Native binary and WASM failed to load. Falling back to JavaScript engine.");
+    console.warn("⚠️  [LUNX EXECUTOR] Performance will be degraded. Execution is guaranteed iteratively safely.");
     return {
         // Wire in the actual JS implementation
         GraphAnalyzer: JSGraphAnalyzer,
@@ -127,11 +127,11 @@ function getJSFallback() {
 
 try {
     const nativeCandidates = [
-        path.resolve(__dirname, '../../../zeptr_native.node'),
-        path.resolve(__dirname, '../../zeptr_native.node'),
-        path.resolve(__dirname, '../zeptr_native.node'),
-        path.resolve(__dirname, './zeptr_native.node'),
-        path.resolve(process.cwd(), 'zeptr_native.node')
+        path.resolve(__dirname, '../../../lunx_native.node'),
+        path.resolve(__dirname, '../../lunx_native.node'),
+        path.resolve(__dirname, '../lunx_native.node'),
+        path.resolve(__dirname, './lunx_native.node'),
+        path.resolve(process.cwd(), 'lunx_native.node')
     ];
 
     let foundNative = '';
@@ -147,13 +147,13 @@ try {
         engineUsed = 'native';
     } else {
         // Phase 2.3: WASM plugin sandbox removed. Native → JS fallback directly.
-        // See https://zeptr.dev/migrate#wasm-plugins
+        // See https://lunx.dev/migrate#wasm-plugins
         native = getJSFallback();
         engineUsed = 'js';
     }
 } catch (e) {
     // If native or WASM crashes during load, catch and fallback to JS
-    console.warn(`⚠️  [ZEPTR EXECUTOR] Engine failure: ${e instanceof Error ? e.message : String(e)}`);
+    console.warn(`⚠️  [LUNX EXECUTOR] Engine failure: ${e instanceof Error ? e.message : String(e)}`);
     native = getJSFallback();
     engineUsed = 'js';
 }
@@ -164,7 +164,7 @@ native.GraphAnalyzer = class DebugWrappedGraphAnalyzer extends OriginalGraphAnal
     private __spy_edges: string[][] = [];
 
     addBatch(ids: string[], edges: string[][]) {
-        if (process.env.ZEPTR_DEBUG_GRAPH) {
+        if (process.env.LUNX_DEBUG_GRAPH) {
             this.__spy_ids.push(...ids);
             this.__spy_edges.push(...edges);
         }
@@ -172,7 +172,7 @@ native.GraphAnalyzer = class DebugWrappedGraphAnalyzer extends OriginalGraphAnal
     }
 
     analyze(entryPoints: string[]) {
-        if (process.env.ZEPTR_DEBUG_GRAPH) {
+        if (process.env.LUNX_DEBUG_GRAPH) {
             this._dumpSnapshot(entryPoints);
         }
         if (typeof super.analyze === 'function') {
@@ -182,7 +182,7 @@ native.GraphAnalyzer = class DebugWrappedGraphAnalyzer extends OriginalGraphAnal
     }
 
     detectCycles() {
-        if (process.env.ZEPTR_DEBUG_GRAPH && typeof super.analyze !== 'function') {
+        if (process.env.LUNX_DEBUG_GRAPH && typeof super.analyze !== 'function') {
             this._dumpSnapshot([]); // some consumers just call detectCycles
         }
         return super.detectCycles();
@@ -197,7 +197,7 @@ native.GraphAnalyzer = class DebugWrappedGraphAnalyzer extends OriginalGraphAnal
                 edges: this.__spy_edges
             };
             fs.writeFileSync('snapshot.json', JSON.stringify(data, null, 2), 'utf8');
-            console.warn('⚠️  [ZEPTR DEBUG] Graph snapshot written to snapshot.json');
+            console.warn('⚠️  [LUNX DEBUG] Graph snapshot written to snapshot.json');
         } catch(e) {}
     }
 };
@@ -217,7 +217,7 @@ export const {
     // Phase 3 — additive exports
     NativeWatcher,
     startWatcher,
-    zeptrChunk,
+    lunxChunk,
     mergeSourceMaps,
     prebundle,
     prebundlePut,

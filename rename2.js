@@ -5,7 +5,7 @@ function walk(dir) {
     let results = [];
     const list = fs.readdirSync(dir);
     list.forEach(function(file) {
-        if (file === 'node_modules' || file === '.git' || file === 'dist' || file === 'coverage' || file === '.nuce' || file === '.zeptr' || file === 'package-lock.json' || file === '.zeptr') return;
+        if (file === 'node_modules' || file === '.git' || file === 'dist' || file === 'coverage' || file === '.lunx' || file === '.lunx' || file === 'package-lock.json' || file === '.lunx') return;
         file = path.join(dir, file);
         const stat = fs.statSync(file);
         if (stat && stat.isDirectory()) { 
@@ -23,9 +23,9 @@ for (const file of files) {
     if (!file.match(/\.(js|ts|json|md|html|cjs|mjs|tsx|jsx|rs|toml)$/)) continue;
     let content = fs.readFileSync(file, 'utf8');
     let newContent = content
-        .replace(/zeptr/g, 'zeptr')
-        .replace(/Zeptr/g, 'Zeptr')
-        .replace(/ZEPTR/g, 'ZEPTR');
+        .replace(/lunx/g, 'lunx')
+        .replace(/Lunx/g, 'Lunx')
+        .replace(/LUNX/g, 'LUNX');
     if (content !== newContent) {
         fs.writeFileSync(file, newContent, 'utf8');
         console.log(`Updated content: ${file}`);
@@ -41,8 +41,8 @@ function renamePaths(dir) {
         if (fs.statSync(fullPath).isDirectory()) {
             renamePaths(fullPath);
         }
-        if (file.includes('zeptr')) {
-            const newPath = path.join(dir, file.replace(/zeptr/g, 'zeptr'));
+        if (file.includes('lunx')) {
+            const newPath = path.join(dir, file.replace(/lunx/g, 'lunx'));
             fs.renameSync(fullPath, newPath);
             console.log(`Renamed: ${fullPath} -> ${newPath}`);
         }

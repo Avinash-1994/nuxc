@@ -1,7 +1,7 @@
 /**
  * src/config-loader.ts
  *
- * Loads and merges zeptr.config.js / zeptr.config.ts,
+ * Loads and merges lunx.config.js / lunx.config.ts,
  * with support for `extends` (base config inheritance).
  *
  * Replace / augment your existing config loader with this.
@@ -12,8 +12,8 @@ import fs from 'fs'
 import { pathToFileURL } from 'url'
 import type { BuildConfig } from './config/index.js'
 
-// Use the existing BuildConfig type from config/index.ts as ZeptrConfig alias
-export type ZeptrConfig = BuildConfig
+// Use the existing BuildConfig type from config/index.ts as LunxConfig alias
+export type LunxConfig = BuildConfig
 
 // ─── Deep merge ───────────────────────────────────────────────────────────────
 
@@ -49,10 +49,10 @@ export function mergeConfig(
 // ─── Config file resolution ───────────────────────────────────────────────────
 
 const CONFIG_FILE_NAMES = [
-  'zeptr.config.ts',
-  'zeptr.config.js',
-  'zeptr.config.mjs',
-  'zeptr.config.cjs',
+  'lunx.config.ts',
+  'lunx.config.js',
+  'lunx.config.mjs',
+  'lunx.config.cjs',
 ]
 
 export async function findConfigFile(root: string): Promise<string | null> {
@@ -63,7 +63,7 @@ export async function findConfigFile(root: string): Promise<string | null> {
   return null
 }
 
-async function loadRawConfig(filePath: string): Promise<ZeptrConfig & { extends?: string }> {
+async function loadRawConfig(filePath: string): Promise<LunxConfig & { extends?: string }> {
   const ext = path.extname(filePath)
   const fileUrl = pathToFileURL(filePath).href
 
@@ -91,7 +91,7 @@ async function loadRawConfig(filePath: string): Promise<ZeptrConfig & { extends?
     return config
   } catch (err) {
     throw new Error(
-      `[zeptr] Failed to load config from "${filePath}":\n  ${(err as Error).message}\n` +
+      `[lunx] Failed to load config from "${filePath}":\n  ${(err as Error).message}\n` +
       `  Make sure the file is valid JS/TS and exports a default config object.`
     )
   }
@@ -100,21 +100,21 @@ async function loadRawConfig(filePath: string): Promise<ZeptrConfig & { extends?
 // ─── Main loader ──────────────────────────────────────────────────────────────
 
 export interface LoadConfigResult {
-  config: ZeptrConfig
+  config: LunxConfig
   configFile: string | null
 }
 
 /**
- * Load zeptr config from the given root directory.
+ * Load lunx config from the given root directory.
  * Supports:
- * - zeptr.config.ts / .js / .mjs / .cjs
+ * - lunx.config.ts / .js / .mjs / .cjs
  * - `extends` field for base config inheritance
  * - Deep merge of extended + local config
  *
  * @example
- * // zeptr.config.js in a monorepo package
+ * // lunx.config.js in a monorepo package
  * module.exports = {
- *   extends: '../../zeptr.base.config.js',
+ *   extends: '../../lunx.base.config.js',
  *   dev: { port: 3001 }  // override only what changes
  * }
  */
@@ -135,7 +135,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
 
     if (!fs.existsSync(baseConfigPath)) {
       throw new Error(
-        `[zeptr] Config "extends" path not found: "${baseConfigPath}"\n` +
+        `[lunx] Config "extends" path not found: "${baseConfigPath}"\n` +
         `  Resolved from: "${configFile}"`
       )
     }
@@ -143,7 +143,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
     const baseRaw = await loadRawConfig(baseConfigPath)
 
     // Recursively handle extends chain (base can also extend something)
-    let baseConfig: ZeptrConfig = baseRaw
+    let baseConfig: LunxConfig = baseRaw
     if (baseRaw.extends) {
       const { config: resolvedBase } = await loadConfigExtended(path.dirname(baseConfigPath))
       baseConfig = resolvedBase
@@ -157,7 +157,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
     )
 
     return {
-      config: applyDefaults(merged as ZeptrConfig),
+      config: applyDefaults(merged as LunxConfig),
       configFile,
     }
   }
@@ -170,7 +170,7 @@ export async function loadConfigExtended(root = process.cwd()): Promise<LoadConf
 
 // ─── Defaults ─────────────────────────────────────────────────────────────────
 
-function getDefaults(): ZeptrConfig {
+function getDefaults(): LunxConfig {
   return {
     root: process.cwd(),
     entry: ['./src/main.ts'],
@@ -182,12 +182,12 @@ function getDefaults(): ZeptrConfig {
   }
 }
 
-function applyDefaults(config: ZeptrConfig): ZeptrConfig {
+function applyDefaults(config: LunxConfig): LunxConfig {
   const defaults = getDefaults()
   return mergeConfig(
     defaults as unknown as Record<string, unknown>,
     config as unknown as Record<string, unknown>
-  ) as unknown as ZeptrConfig
+  ) as unknown as LunxConfig
 }
 
 // ─── Config validator ─────────────────────────────────────────────────────────
@@ -198,7 +198,7 @@ export interface ConfigValidationResult {
   warnings: string[]
 }
 
-export function validateConfig(config: ZeptrConfig): ConfigValidationResult {
+export function validateConfig(config: LunxConfig): ConfigValidationResult {
   const errors: string[] = []
   const warnings: string[] = []
 

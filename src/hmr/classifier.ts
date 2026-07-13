@@ -38,8 +38,8 @@ export interface FileChange {
 
 export class HMRClassifier {
     private configFiles = new Set([
-        'zeptr.config.js',
-        'zeptr.config.ts',
+        'lunx.config.js',
+        'lunx.config.ts',
         'package.json',
         'tsconfig.json',
         'vite.config.js',

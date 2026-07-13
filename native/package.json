@@ -1,7 +1,7 @@
 {
-    "name": "zeptr-native",
+    "name": "lunx-native",
     "version": "0.1.0",
     "napi": {
-        "binaryName": "zeptr_native"
+        "binaryName": "lunx_native"
     }
 }

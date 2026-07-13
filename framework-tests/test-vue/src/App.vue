@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <nav>
-      <span class="brand">🛒 Nuxc Shop</span>
+      <span class="brand">🛒 Lunx Shop</span>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/products">Products</RouterLink>
       <RouterLink to="/cart">Cart ({{ cartCount }})</RouterLink>

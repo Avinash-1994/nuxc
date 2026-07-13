@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-html
+ * @lunx/plugin-html
  * HTML generation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createHtmlPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-html',
+        name: '@lunx/plugin-html',
         originalPlugin: 'html-webpack-plugin',
         
         async transform(code: string, id: string) {

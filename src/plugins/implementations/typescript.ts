@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-typescript
+ * @lunx/plugin-typescript
  * TypeScript compilation
  */
 
@@ -7,7 +7,7 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createTypescriptPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-typescript',
+        name: '@lunx/plugin-typescript',
         originalPlugin: 'ts-loader',
         
         async transform(code: string, id: string) {

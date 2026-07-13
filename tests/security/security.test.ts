@@ -10,18 +10,18 @@ import os from 'node:os';
 import fs from 'node:fs';
 
 // Static imports from security package (ESM-safe)
-import { scanSecrets } from '../../packages/zeptr-security/src/secret-scanner.js';
-import { computeSRI } from '../../packages/zeptr-security/src/sri.js';
-import { generateCSP } from '../../packages/zeptr-security/src/csp.js';
-import { auditLockfile } from '../../packages/zeptr-security/src/lockfile-audit.js';
-import { validatePath, validateSymlink, guardEnvAccess } from '../../packages/zeptr-security/src/build-isolation.js';
-import { generateSBOM } from '../../packages/zeptr-security/src/sbom.js';
-import { scanCVE } from '../../packages/zeptr-security/src/cve-scan.js';
+import { scanSecrets } from '../../packages/lunx-security/src/secret-scanner.js';
+import { computeSRI } from '../../packages/lunx-security/src/sri.js';
+import { generateCSP } from '../../packages/lunx-security/src/csp.js';
+import { auditLockfile } from '../../packages/lunx-security/src/lockfile-audit.js';
+import { validatePath, validateSymlink, guardEnvAccess } from '../../packages/lunx-security/src/build-isolation.js';
+import { generateSBOM } from '../../packages/lunx-security/src/sbom.js';
+import { scanCVE } from '../../packages/lunx-security/src/cve-scan.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '../../');
-const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zeptr-sec-'));
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'lunx-sec-'));
 
 describe('SEC-TEST-001: AWS Key in source aborts build', () => {
   it('detects AKIA AWS key pattern', () => {
@@ -164,6 +164,6 @@ describe('SEC-TEST-015: SBOM contains all direct deps', () => {
     expect(sbom.bomFormat).toBe('CycloneDX');
     expect(sbom.specVersion).toBe('1.5');
     expect(Array.isArray(sbom.components)).toBe(true);
-    expect(sbom.metadata.tools[0].name).toBe('zeptr');
+    expect(sbom.metadata.tools[0].name).toBe('lunx');
   });
 });

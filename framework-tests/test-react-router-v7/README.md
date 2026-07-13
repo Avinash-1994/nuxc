@@ -1,4 +1,4 @@
-# Zeptr react-router-v7 Template — Zeptr Profiles — hybrid SSR+SPA directory
+# Lunx react-router-v7 Template — Lunx Profiles — hybrid SSR+SPA directory
 ```bash
 npm install && npm run dev
 ```

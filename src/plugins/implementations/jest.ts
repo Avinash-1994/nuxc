@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-jest
+ * @lunx/plugin-jest
  * Jest testing framework
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createJestPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-jest',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-jest',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Testing: Jest testing framework

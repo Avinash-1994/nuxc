@@ -17,11 +17,11 @@ export const preactSpaTemplate: TemplateConfig = {
     devDependencies: {
         "@preact/preset-vite": "^2.8.1",
         "typescript": "^5.2.0",
-        "@zeptr/plugin-preact": "^1.0.0"
+        "@lunx/plugin-preact": "^1.0.0"
     },
     files: {
-        'zeptr.config.ts': `
-import { defineConfig } from 'zeptr';
+        'lunx.config.ts': `
+import { defineConfig } from 'lunx';
 import preact from '@preact/preset-vite';
 
 export default defineConfig({
@@ -48,7 +48,7 @@ export function App() {
   return (
     <>
       <div class="card">
-        <h1>Zeptr + Preact</h1>
+        <h1>Lunx + Preact</h1>
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>

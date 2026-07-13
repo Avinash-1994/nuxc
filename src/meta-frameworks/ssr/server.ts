@@ -369,11 +369,11 @@ export class SSRServer {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="zeptr-version" content="PROD-READY-V1">
+  <meta name="lunx-version" content="PROD-READY-V1">
   <title><!--app-title--></title>
 </head>
 <body>
-  <div id="zeptr-root"><!--app-html--></div>
+  <div id="lunx-root"><!--app-html--></div>
   <!--app-data-->
   <script type="module" src="/assets/entry0.js"></script>
 </body>

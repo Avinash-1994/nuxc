@@ -1,6 +1,6 @@
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
-import zeptrGovernance from 'eslint-plugin-zeptr-governance';
+import lunxGovernance from 'eslint-plugin-lunx-governance';
 import js from '@eslint/js';
 
 export default [
@@ -12,7 +12,7 @@ export default [
             'dist/**',
             '*.min.js',
             'coverage/**',
-            '.zeptr-cache/**'
+            '.lunx-cache/**'
         ]
     },
     js.configs.recommended,
@@ -91,7 +91,7 @@ export default [
         },
         plugins: {
             '@typescript-eslint': tsPlugin,
-            'zeptr-governance': zeptrGovernance,
+            'lunx-governance': lunxGovernance,
         },
         rules: {
             ...tsPlugin.configs.recommended.rules,
@@ -103,10 +103,10 @@ export default [
             'no-empty': 'off',
             'no-useless-escape': 'off',
             'no-case-declarations': 'off',
-            'zeptr-governance/no-internal-imports': 'error',
-            'zeptr-governance/require-experimental-flag': 'warn',
-            'zeptr-governance/no-graph-mutation': 'error',
-            'zeptr-governance/no-cache-access': 'error',
+            'lunx-governance/no-internal-imports': 'error',
+            'lunx-governance/require-experimental-flag': 'warn',
+            'lunx-governance/no-graph-mutation': 'error',
+            'lunx-governance/no-cache-access': 'error',
         },
     },
     {
@@ -130,16 +130,16 @@ export default [
             'src/marketplace/**/*.ts'
         ],
         rules: {
-            'zeptr-governance/no-internal-imports': 'off',
-            'zeptr-governance/no-graph-mutation': 'off',
-            'zeptr-governance/no-cache-access': 'off',
+            'lunx-governance/no-internal-imports': 'off',
+            'lunx-governance/no-graph-mutation': 'off',
+            'lunx-governance/no-cache-access': 'off',
         }
     },
     {
         // Allow tests to be more permissive during stabilization
         files: ['tests/**/*.ts', 'examples/**/*.ts', 'benchmarks/**/*.ts', 'src/test/**/*.ts'],
         rules: {
-            'zeptr-governance/no-internal-imports': 'off',
+            'lunx-governance/no-internal-imports': 'off',
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-unused-vars': 'off'
         }

@@ -95,7 +95,7 @@ async function runTest() {
         },
         rootDir: '/test',
         target: 'browser',
-        engine: { name: 'zeptr', version: '1.0.0' },
+        engine: { name: 'lunx', version: '1.0.0' },
         graph: mockGraph
     };
 

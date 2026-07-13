@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-avif
+ * @lunx/plugin-avif
  * AVIF image support
  */
 
@@ -9,8 +9,8 @@ import path from 'path';
 
 export function createAvifPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-avif',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-avif',
+        originalPlugin: 'lunx-native',
         
         async load(id: string) {
             // Asset loading for avif

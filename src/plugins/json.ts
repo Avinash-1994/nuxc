@@ -1,19 +1,19 @@
 
-import { ZeptrPlugin } from '../core/plugins/types.js';
+import { LunxPlugin } from '../core/plugins/types.js';
 import path from 'path';
 import fs from 'fs/promises';
 
-export function createJsonPlugin(): ZeptrPlugin {
+export function createJsonPlugin(): LunxPlugin {
     return {
         manifest: {
-            name: 'zeptr:json',
+            name: 'lunx:json',
             version: '1.0.0',
             engineVersion: '1.0.0',
             type: 'js',
             hooks: ['load'],
             permissions: { fs: 'read' }
         },
-        id: 'zeptr:json',
+        id: 'lunx:json',
         async runHook(hook, input, context) {
             if (hook === 'load') {
                 if (input.path.endsWith('.json')) {

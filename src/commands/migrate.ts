@@ -1,5 +1,5 @@
 /**
- * zeptr migrate — config and plugin migration from older Zeptr versions
+ * lunx migrate — config and plugin migration from older Lunx versions
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,7 +11,7 @@ interface MigrateOptions {
 const MIGRATIONS = [
   {
     id: 'M01',
-    title: 'Rename nuclie.config.* → zeptr.config.*',
+    title: 'Rename nuclie.config.* → lunx.config.*',
     detect: (root: string) =>
       ['nuclie.config.js', 'nuclie.config.ts', 'nuclie.config.json'].find(f =>
         fs.existsSync(path.join(root, f))
@@ -22,14 +22,14 @@ const MIGRATIONS = [
       );
       if (!old) return;
       const ext = path.extname(old);
-      const newName = `zeptr.config${ext}`;
+      const newName = `lunx.config${ext}`;
       fs.renameSync(path.join(root, old), path.join(root, newName));
       console.log(`  ✅ Renamed ${old} → ${newName}`);
     }
   },
   {
     id: 'M02',
-    title: 'Rewrite @nuclie/* imports → @zeptr/* in package.json',
+    title: 'Rewrite @nuclie/* imports → @lunx/* in package.json',
     detect: (root: string) => {
       const pkgPath = path.join(root, 'package.json');
       if (!fs.existsSync(pkgPath)) return undefined;
@@ -40,9 +40,9 @@ const MIGRATIONS = [
       const pkgPath = path.join(root, 'package.json');
       if (!fs.existsSync(pkgPath)) return;
       const content = fs.readFileSync(pkgPath, 'utf8');
-      const updated = content.replace(/@nuclie\//g, '@zeptr/');
+      const updated = content.replace(/@nuclie\//g, '@lunx/');
       fs.writeFileSync(pkgPath, updated, 'utf8');
-      console.log('  ✅ Rewrote @nuclie/* → @zeptr/* in package.json');
+      console.log('  ✅ Rewrote @nuclie/* → @lunx/* in package.json');
     }
   },
   {
@@ -62,11 +62,11 @@ const MIGRATIONS = [
       for (const file of files) {
         const content = fs.readFileSync(file, 'utf8');
         if (content.includes('@nuclie/')) {
-          fs.writeFileSync(file, content.replace(/@nuclie\//g, '@zeptr/'), 'utf8');
+          fs.writeFileSync(file, content.replace(/@nuclie\//g, '@lunx/'), 'utf8');
           count++;
         }
       }
-      console.log(`  ✅ Rewrote @nuclie/* → @zeptr/* in ${count} source file(s)`);
+      console.log(`  ✅ Rewrote @nuclie/* → @lunx/* in ${count} source file(s)`);
     }
   }
 ];
@@ -76,7 +76,7 @@ function findSourceFiles(dir: string): string[] {
   if (!fs.existsSync(dir)) return results;
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory() && !['node_modules', '.zeptr', 'dist', 'build_output'].includes(entry.name)) {
+    if (entry.isDirectory() && !['node_modules', '.lunx', 'dist', 'build_output'].includes(entry.name)) {
       results.push(...findSourceFiles(full));
     } else if (entry.isFile() && /\.(ts|tsx|js|mjs|cjs)$/.test(entry.name)) {
       results.push(full);
@@ -86,7 +86,7 @@ function findSourceFiles(dir: string): string[] {
 }
 
 export async function runMigrate(root: string, options: MigrateOptions = {}): Promise<void> {
-  console.log('\n🔄 Zeptr Migration Tool\n' + '─'.repeat(40));
+  console.log('\n🔄 Lunx Migration Tool\n' + '─'.repeat(40));
 
   const applicable = MIGRATIONS.filter(m => m.detect(root));
 

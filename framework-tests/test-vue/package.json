@@ -1,17 +1,17 @@
 {
-  "name": "zeptr-vue-template",
+  "name": "lunx-vue-template",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "zeptr dev",
-    "build": "zeptr build",
-    "preview": "zeptr preview"
+    "dev": "lunx dev",
+    "build": "lunx build",
+    "preview": "lunx preview"
   },
-  "zeptr": {
+  "lunx": {
     "template": true,
     "framework": "vue",
-    "description": "Zeptr Shop — e-commerce storefront"
+    "description": "Lunx Shop — e-commerce storefront"
   },
   "dependencies": {
     "vue": "3.4.27",
@@ -19,7 +19,7 @@
     "pinia": "2.1.7"
   },
   "devDependencies": {
-    "zeptr": "file:../../",
+    "lunx": "file:../../",
     "@vitejs/plugin-vue": "5.0.4",
     "typescript": "5.4.5"
   }

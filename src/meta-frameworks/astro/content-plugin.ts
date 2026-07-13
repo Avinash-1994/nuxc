@@ -1,12 +1,12 @@
-import type { Plugin } from '@zeptr/adapter-core';
+import type { Plugin } from '@lunx/adapter-core';
 import fs from 'fs';
 import path from 'path';
 
-const VIRTUAL_MODULE_ID = 'virtual:zeptr/astro-content';
+const VIRTUAL_MODULE_ID = 'virtual:lunx/astro-content';
 
 export function astroContentPlugin(): Plugin {
   return {
-    name: 'zeptr:astro-content',
+    name: 'lunx:astro-content',
 
     resolveId(source: string) {
       if (source === VIRTUAL_MODULE_ID) return source;

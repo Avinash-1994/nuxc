@@ -1,4 +1,4 @@
-# Contributing to Zeptr
+# Contributing to Lunx
 
 We welcome contributions! Please follow these guidelines to ensure a smooth process.
 

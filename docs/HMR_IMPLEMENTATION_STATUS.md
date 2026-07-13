@@ -1,4 +1,4 @@
-# Zeptr Framework HMR Implementation Status
+# Lunx Framework HMR Implementation Status
 
 **Date**: 2026-01-06  
 **Status**: ✅ All frameworks have HMR support
@@ -19,7 +19,7 @@ All framework plugins include Hot Module Replacement (HMR) support that is:
 
 ### 🟢 Tier 1: Production-Ready
 
-#### React (`zeptrReact`)
+#### React (`lunxReact`)
 **HMR Status**: ✅ **Fast Refresh Enabled**
 
 **Features**:
@@ -39,7 +39,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-zeptrReact({
+lunxReact({
   fastRefresh: true,  // Enable Fast Refresh
   development: true,  // Enable HMR
   sourceMaps: true
@@ -48,7 +48,7 @@ zeptrReact({
 
 ---
 
-#### Vue (`zeptrVue`)
+#### Vue (`lunxVue`)
 **HMR Status**: ✅ **Vue HMR Runtime Enabled**
 
 **Features**:
@@ -67,7 +67,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-zeptrVue({
+lunxVue({
   hmr: true,         // Enable HMR
   development: true,
   sourceMaps: true
@@ -78,7 +78,7 @@ zeptrVue({
 
 ### 🟡 Tier 2: Stable
 
-#### Svelte (`zeptrSvelte`)
+#### Svelte (`lunxSvelte`)
 **HMR Status**: ✅ **Svelte HMR Enabled**
 
 **Features**:
@@ -101,7 +101,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-zeptrSvelte({
+lunxSvelte({
   hmr: true,         // Enable HMR
   development: true,
   compilerOptions: { dev: true }
@@ -110,7 +110,7 @@ zeptrSvelte({
 
 ---
 
-#### Solid (`zeptrSolid`)
+#### Solid (`lunxSolid`)
 **HMR Status**: ✅ **Solid HMR Enabled**
 
 **Features**:
@@ -133,7 +133,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-zeptrSolid({
+lunxSolid({
   hmr: true,         // Enable HMR
   development: true,
   sourceMaps: true
@@ -142,7 +142,7 @@ zeptrSolid({
 
 ---
 
-#### Lit (`zeptrLit`)
+#### Lit (`lunxLit`)
 **HMR Status**: ✅ **Lit HMR Enabled**
 
 **Features**:
@@ -168,7 +168,7 @@ if (import.meta.hot) {
 
 **Configuration**:
 ```typescript
-zeptrLit({
+lunxLit({
   hmr: true,         // Enable HMR
   development: true,
   typescript: { experimentalDecorators: true }
@@ -186,7 +186,7 @@ All plugins **automatically disable HMR** in production:
 const development = process.env.NODE_ENV !== 'production';
 
 // Or explicit configuration
-zeptrReact({ development: false, fastRefresh: false })
+lunxReact({ development: false, fastRefresh: false })
 ```
 
 **Production builds**:
@@ -204,11 +204,11 @@ zeptrReact({ development: false, fastRefresh: false })
 All plugins follow this pattern:
 
 ```typescript
-export function zeptrFramework(options = {}) {
+export function lunxFramework(options = {}) {
   const { hmr = true, development = true } = options;
   
   return {
-    name: 'zeptr-framework',
+    name: 'lunx-framework',
     
     async transform(code, id) {
       // 1. Transform framework code
@@ -331,4 +331,4 @@ No plugin wrapper needed ✅
 ✅ **Zero global state**  
 ✅ **Automatic production optimization**  
 
-Zeptr's HMR implementation is **complete and verified**.
+Lunx's HMR implementation is **complete and verified**.

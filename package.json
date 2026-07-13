@@ -1,7 +1,7 @@
 {
-  "name": "zeptr",
+  "name": "lunx",
   "version": "1.0.0",
-  "description": "⚡ Zeptr — a modern JavaScript build tool powered by SWC and LightningCSS. Fast HMR, module federation, tree shaking, and multi-framework support (React, Vue, Svelte, Solid). A fast, Rust-native build pipeline.",
+  "description": "⚡ Lunx — a modern JavaScript build tool powered by SWC and LightningCSS. Fast HMR, module federation, tree shaking, and multi-framework support (React, Vue, Svelte, Solid). A fast, Rust-native build pipeline.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -16,8 +16,8 @@
   },
   "sideEffects": false,
   "bin": {
-    "zeptr": "./dist/cli.js",
-    "create-zeptr": "./dist/create-zeptr.js"
+    "lunx": "./dist/cli.js",
+    "create-lunx": "./dist/create-lunx.js"
   },
   "files": [
     "dist",
@@ -103,12 +103,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Avinash-1994/zeptr.git"
+    "url": "git+https://github.com/Avinash-1994/lunx.git"
   },
   "bugs": {
-    "url": "https://github.com/Avinash-1994/zeptr/issues"
+    "url": "https://github.com/Avinash-1994/lunx/issues"
   },
-  "homepage": "https://github.com/Avinash-1994/zeptr#readme",
+  "homepage": "https://github.com/Avinash-1994/lunx#readme",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -118,8 +118,8 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@node-rs/xxhash": "^1.7.6",
-    "@zeptr/adapter-core": "file:packages/zeptr-adapter-core",
-    "@zeptr/security": "file:packages/zeptr-security",
+    "@lunx/adapter-core": "file:packages/lunx-adapter-core",
+    "@lunx/security": "file:packages/lunx-security",
     "@swc/core": "^1.15.24",
     "@tauri-apps/api": "^2.11.0",
     "@trpc/client": "^11.8.1",
@@ -179,7 +179,7 @@
     "autocannon": "^8.0.0",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.2",
-    "eslint-plugin-zeptr-governance": "file:eslint-plugin-zeptr-governance",
+    "eslint-plugin-lunx-governance": "file:eslint-plugin-lunx-governance",
     "fast-check": "^4.5.3",
     "jest": "^30.2.0",
     "jsdom": "^27.2.0",

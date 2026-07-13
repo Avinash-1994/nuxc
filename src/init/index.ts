@@ -67,14 +67,14 @@ export async function initProject(cwd: string) {
         // Add css config if needed
     };
 
-    const cfgPath = path.join(cwd, 'zeptr.config.json');
+    const cfgPath = path.join(cwd, 'lunx.config.json');
     if (await fs.access(cfgPath).then(() => true).catch(() => false)) {
         log.warn('Config file already exists, skipping creation');
         return;
     }
 
     await fs.writeFile(cfgPath, JSON.stringify(config, null, 2));
-    log.success('Created zeptr.config.json');
+    log.success('Created lunx.config.json');
 
     if (useTailwind) {
         log.success('Initialized project with Tailwind CSS');

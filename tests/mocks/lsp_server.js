@@ -1,11 +1,11 @@
 /**
- * Zeptr Language Server Logic (Mock for Tests)
+ * Lunx Language Server Logic (Mock for Tests)
  * Copied from extensions/vscode-lsp to ensure reliable loading in tests
  */
 
-export class ZeptrLSPServer {
+export class LunxLSPServer {
     constructor() {
-        console.log('Zeptr LSP Initialized');
+        console.log('Lunx LSP Initialized');
     }
 
     onCompletion(documentText, position) {
@@ -14,10 +14,10 @@ export class ZeptrLSPServer {
 
         if (line.includes('plugins:') || (line.trim().startsWith('[') && lines[position.line - 1]?.includes('plugins:'))) {
             return [
-                { label: '@zeptr/plugin-react', kind: 9, detail: 'React 19 Adapter' },
-                { label: '@zeptr/plugin-vue', kind: 9, detail: 'Vue 3 Adapter' },
-                { label: '@zeptr/plugin-tailwindcss', kind: 9, detail: 'Tailwind JIT' },
-                { label: '@zeptr/plugin-visualizer', kind: 9, detail: 'Bundle Analysis' }
+                { label: '@lunx/plugin-react', kind: 9, detail: 'React 19 Adapter' },
+                { label: '@lunx/plugin-vue', kind: 9, detail: 'Vue 3 Adapter' },
+                { label: '@lunx/plugin-tailwindcss', kind: 9, detail: 'Tailwind JIT' },
+                { label: '@lunx/plugin-visualizer', kind: 9, detail: 'Bundle Analysis' }
             ];
         }
 
@@ -41,7 +41,7 @@ export class ZeptrLSPServer {
                     range: { start: { line: i, character: line.indexOf("'prod'") }, end: { line: i, character: line.indexOf("'prod'") + 6 } },
                     severity: 2,
                     message: "Did you mean 'production'?",
-                    source: 'Zeptr LSP'
+                    source: 'Lunx LSP'
                 });
             }
 
@@ -50,7 +50,7 @@ export class ZeptrLSPServer {
                     range: { start: { line: i, character: 0 }, end: { line: i, character: line.length } },
                     severity: 3,
                     message: "Performance: Prefer default import or lodash-es for better tree-shaking.",
-                    source: 'Zeptr Perf'
+                    source: 'Lunx Perf'
                 });
             }
         });

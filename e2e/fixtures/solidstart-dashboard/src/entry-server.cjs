@@ -3,7 +3,7 @@
 /**
  * SolidStart entry-server.cjs
  *
- * Used by Zeptr dev-server's CJS fast-path (createRequire) and
+ * Used by Lunx dev-server's CJS fast-path (createRequire) and
  * directly by run-test.js for SS-02 (streaming) and SS-07 (SSR content).
  *
  * renderToStream() — returns a Node Readable that:
@@ -15,10 +15,10 @@
 var Readable = require('stream').Readable;
 
 function buildShell(url, isAuthed) {
-  var title = url.includes('/dashboard') ? 'Dashboard | Zeptr SolidStart'
-    : url.includes('/products') ? 'Products | Zeptr SolidStart'
-    : url.includes('/profile') ? 'Profile | Zeptr SolidStart'
-    : 'Zeptr SolidStart';
+  var title = url.includes('/dashboard') ? 'Dashboard | Lunx SolidStart'
+    : url.includes('/products') ? 'Products | Lunx SolidStart'
+    : url.includes('/profile') ? 'Profile | Lunx SolidStart'
+    : 'Lunx SolidStart';
 
   return [
     '<!DOCTYPE html>',
@@ -27,12 +27,12 @@ function buildShell(url, isAuthed) {
     '  <meta charset="UTF-8" />',
     '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
     '  <title>' + title + '</title>',
-    '  <meta name="description" content="SolidStart streaming SSR — Zeptr Phase 2.4" />',
+    '  <meta name="description" content="SolidStart streaming SSR — Lunx Phase 2.4" />',
     '</head>',
     '<body>',
     '<div id="root">',
     '  <header class="app-header">',
-    '    <a href="/" class="logo">Zeptr SolidStart</a>',
+    '    <a href="/" class="logo">Lunx SolidStart</a>',
     '    <nav>',
     '      <a href="/dashboard">Dashboard</a>',
     '      <a href="/products">Products</a>',
@@ -41,7 +41,7 @@ function buildShell(url, isAuthed) {
     '    </nav>',
     '    <span class="auth-badge">' + (isAuthed ? 'admin@acme.com' : 'Sign in') + '</span>',
     '  </header>',
-    '  <main id="zeptr-solid-root">',
+    '  <main id="lunx-solid-root">',
   ].join('\n');
 }
 
@@ -62,7 +62,7 @@ function buildDashboardChunk(isAuthed, elapsedMs) {
     '      <ul>',
     '        <li><time>09:41</time> Order #9921 — $349.00 — completed</li>',
     '        <li><time>09:38</time> User bob@company.com registered</li>',
-    '        <li><time>09:30</time> Deploy zeptr@1.0.10 to production</li>',
+    '        <li><time>09:30</time> Deploy lunx@1.0.10 to production</li>',
     '        <li><time>09:15</time> Cache warmed — 1,248 assets pre-bundled</li>',
     '        <li><time>08:59</time> Security scan completed — 0 vulnerabilities</li>',
     '      </ul>',
@@ -78,12 +78,12 @@ function buildHydrationTail() {
   return [
     '  </main>',
     '  <footer class="app-footer">',
-    '    <p>Powered by Zeptr SolidStart Adapter v1.0.0 — Phase 2.4</p>',
+    '    <p>Powered by Lunx SolidStart Adapter v1.0.0 — Phase 2.4</p>',
     '  </footer>',
     '</div>',
     '<!-- window._$HY: solid-js resumability marker -->',
     '<script>window._$HY={events:[],completed:new WeakSet(),r:{}};</script>',
-    '<script type="module" src="/_zeptr/assets/entry-client.js"></script>',
+    '<script type="module" src="/_lunx/assets/entry-client.js"></script>',
     '</body>',
     '</html>',
   ].join('\n');
@@ -131,7 +131,7 @@ exports.renderToStream = function renderToStream(opts) {
 
 /**
  * renderToString({ url, cookies }) — convenience wrapper for tools that
- * need a single string (e.g. Zeptr SSR runner).
+ * need a single string (e.g. Lunx SSR runner).
  * Collects all stream chunks.
  */
 exports.renderToString = function renderToString(opts) {

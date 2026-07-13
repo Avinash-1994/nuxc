@@ -1,15 +1,15 @@
 /**
- * @zeptr/plugin-react-query
+ * @lunx/plugin-react-query
  * React Query integration
- * Zeptr-native
+ * Lunx-native
  */
 
 import { PluginAdapter } from '../ported/adapter.js';
 
 export function createReactQueryPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-react-query',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-react-query',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // react transformation

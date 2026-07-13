@@ -18,7 +18,7 @@ export interface BenchmarkConfig {
     timeout?: number;
 }
 
-export type BuildTool = 'zeptr' | 'vite' | 'webpack' | 'rspack' | 'esbuild' | 'turbopack' | 'parcel';
+export type BuildTool = 'lunx' | 'vite' | 'webpack' | 'rspack' | 'esbuild' | 'turbopack' | 'parcel';
 
 export interface BenchmarkResult {
     tool: BuildTool;
@@ -336,7 +336,7 @@ export class BenchmarkRunner {
      */
     private isServerReady(tool: BuildTool, output: string): boolean {
         const patterns: Record<BuildTool, RegExp[]> = {
-            zeptr: [/ready in/i, /server running/i, /http:\/\/localhost/i],
+            lunx: [/ready in/i, /server running/i, /http:\/\/localhost/i],
             vite: [/ready in/i, /local:.*http/i],
             webpack: [/compiled successfully/i, /webpack.*compiled/i],
             rspack: [/compiled successfully/i, /rspack.*compiled/i],
@@ -369,7 +369,7 @@ export class BenchmarkRunner {
         const cacheDirs = [
             'node_modules/.vite',
             'node_modules/.cache',
-            '.zeptr_cache',
+            '.lunx_cache',
             'dist',
             'build',
             '.next',
@@ -396,7 +396,7 @@ export class BenchmarkRunner {
      */
     private getDistPath(appPath: string, tool: BuildTool): string {
         const distPaths: Record<BuildTool, string> = {
-            zeptr: 'dist',
+            lunx: 'dist',
             vite: 'dist',
             webpack: 'dist',
             rspack: 'dist',

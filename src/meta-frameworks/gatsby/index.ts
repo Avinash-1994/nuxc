@@ -1,7 +1,7 @@
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson, Middleware } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson, Middleware } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 
-export class GatsbyAdapter implements ZeptrAdapter {
+export class GatsbyAdapter implements LunxAdapter {
   name = 'gatsby';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
@@ -11,27 +11,27 @@ export class GatsbyAdapter implements ZeptrAdapter {
   plugins(): Plugin[] {
     return [
       {
-        name: 'zeptr:gatsby-scaffold',
+        name: 'lunx:gatsby-scaffold',
         // Gatsby's build process is entirely custom (gatsby build / gatsby develop)
-        // Zeptr scaffolds config detection + serves the built public/ directory.
+        // Lunx scaffolds config detection + serves the built public/ directory.
         // For SSG pre-render outputs, we serve the static public/ folder natively.
         async buildStart() {
           // We warn users that Gatsby requires its own CLI for full builds.
-          console.log('[Zeptr:Gatsby] Detected Gatsby project. Use `gatsby build` for production.');
-          console.log('[Zeptr:Gatsby] Dev mode serves from public/ directory.');
+          console.log('[Lunx:Gatsby] Detected Gatsby project. Use `gatsby build` for production.');
+          console.log('[Lunx:Gatsby] Dev mode serves from public/ directory.');
         }
       }
     ];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     if (!config.gatsby) config.gatsby = {};
     config.gatsby = {
       // Gatsby outputs to public/ by default
       outDir: 'public',
       ...(config.gatsby || {})
     };
-    // Ensure Zeptr serves from Gatsby's output directory in dev pass-through mode
+    // Ensure Lunx serves from Gatsby's output directory in dev pass-through mode
     if (!config.outDir) config.outDir = 'public';
     return config;
   }
@@ -39,7 +39,7 @@ export class GatsbyAdapter implements ZeptrAdapter {
   serverMiddleware(): Middleware[] {
     return [
       async (req: any, res: any, next: any) => {
-        // Gatsby runs its own webpack dev server; Zeptr proxies requests to it when detected
+        // Gatsby runs its own webpack dev server; Lunx proxies requests to it when detected
         next();
       }
     ];

@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-federation
+ * @lunx/plugin-federation
  * Module federation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createFederationPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-federation',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-federation',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Utility: Module federation

@@ -1,6 +1,6 @@
 /**
  * Plugin Test Suites
- * Tests for all 10 official Zeptr launch plugins
+ * Tests for all 10 official Lunx launch plugins
  */
 
 import { describe, it, expect, beforeAll } from '@jest/globals';
@@ -11,13 +11,13 @@ import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zeptr-plugins-'));
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'lunx-plugins-'));
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-env Tests
+//  @lunx/plugin-env Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-env', () => {
+describe('@lunx/plugin-env', () => {
   const envDir = path.join(TMP, 'env-project');
   beforeAll(() => {
     fs.mkdirSync(envDir, { recursive: true });
@@ -55,10 +55,10 @@ describe('@zeptr/plugin-env', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-compression Tests
+//  @lunx/plugin-compression Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-compression', () => {
+describe('@lunx/plugin-compression', () => {
   let distDir: string;
 
   beforeAll(async () => {
@@ -98,10 +98,10 @@ describe('@zeptr/plugin-compression', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-svg Tests
+//  @lunx/plugin-svg Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-svg', () => {
+describe('@lunx/plugin-svg', () => {
   it('?raw suffix returns string type', () => {
     const svgContent = '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0"/></svg>';
     expect(typeof svgContent).toBe('string');
@@ -129,10 +129,10 @@ describe('@zeptr/plugin-svg', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-auto-import Tests
+//  @lunx/plugin-auto-import Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-auto-import', () => {
+describe('@lunx/plugin-auto-import', () => {
   it('resolves vue preset to Vue composables', () => {
     // The preset resolves 'vue' to a set of composables including ref, computed, etc.
     const vueComposables = ['ref', 'computed', 'watch', 'reactive', 'onMounted'];
@@ -160,34 +160,35 @@ describe('@zeptr/plugin-auto-import', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-inspect Tests
+//  @lunx/plugin-inspect Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-inspect', () => {
+describe('@lunx/plugin-inspect', () => {
   it('returns no-op in production', () => {
     // In production, the plugin returns a minimal object with only name
-    const noopPlugin = { name: '@zeptr/plugin-inspect' };
-    expect(noopPlugin.name).toBe('@zeptr/plugin-inspect');
+    const noopPlugin = { name: '@lunx/plugin-inspect' };
+    expect(noopPlugin.name).toBe('@lunx/plugin-inspect');
     expect((noopPlugin as any).configureServer).toBeUndefined();
   });
 
-  it('registers /__nuclie_inspect endpoint in dev mode', () => {
-    // The plugin registers a middleware that responds to this path
-    const basePath = '/__nuclie_inspect';
-    expect(basePath).toMatch(/^\/__nuclie_inspect/);
+  it('registers /__lunx_inspect__ endpoint in dev mode (BUG-006)', () => {
+    // BUG-006: must be double underscores /__lunx_inspect__ not /__lunx_inspect
+    const basePath = '/__lunx_inspect__';
+    expect(basePath).toBe('/__lunx_inspect__');
+    expect(basePath).toMatch(/^\/__(lunx_inspect)__$/);
   });
 
   it('zero overhead in production — plugin is no-op', () => {
-    const plugin = { name: '@zeptr/plugin-inspect' }; // No-op shape
+    const plugin = { name: '@lunx/plugin-inspect' }; // No-op shape
     expect(Object.keys(plugin)).toHaveLength(1);
   });
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-mock Tests
+//  @lunx/plugin-mock Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-mock', () => {
+describe('@lunx/plugin-mock', () => {
   it('creates GET handler that returns JSON response', async () => {
     const GET = () => Response.json([{ id: 1, name: 'Alice' }]);
     const response = GET();
@@ -225,10 +226,10 @@ describe('@zeptr/plugin-mock', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-pwa Tests
+//  @lunx/plugin-pwa Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-pwa', () => {
+describe('@lunx/plugin-pwa', () => {
   it('generates manifest with correct fields', () => {
     const manifest = {
       name: 'My App',
@@ -254,10 +255,10 @@ describe('@zeptr/plugin-pwa', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-icons Tests
+//  @lunx/plugin-icons Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-icons', () => {
+describe('@lunx/plugin-icons', () => {
   it('resolves ~icons/ prefix to virtual module', () => {
     const id = '~icons/mdi/home';
     const isIconId = id.startsWith('~icons/');
@@ -286,10 +287,10 @@ describe('@zeptr/plugin-icons', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-legacy Tests
+//  @lunx/plugin-legacy Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-legacy', () => {
+describe('@lunx/plugin-legacy', () => {
   it('modern bundle contains type=module script', () => {
     const html = '<script type="module" src="/assets/main.js"></script>';
     expect(html).toContain('type="module"');
@@ -317,14 +318,14 @@ describe('@zeptr/plugin-legacy', () => {
 });
 
 // ══════════════════════════════════════════════════════════════
-//  @zeptr/plugin-checker Tests
+//  @lunx/plugin-checker Tests
 // ══════════════════════════════════════════════════════════════
 
-describe('@zeptr/plugin-checker', () => {
+describe('@lunx/plugin-checker', () => {
   it('plugin factory returns correct name', () => {
     // checker() returns a plugin object with correct name
-    const plugin = { name: '@zeptr/plugin-checker' };
-    expect(plugin.name).toBe('@zeptr/plugin-checker');
+    const plugin = { name: '@lunx/plugin-checker' };
+    expect(plugin.name).toBe('@lunx/plugin-checker');
   });
 
   it('failOnError default is true', () => {

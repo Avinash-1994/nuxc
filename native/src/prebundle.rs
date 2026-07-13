@@ -1,7 +1,7 @@
 /// Phase 3.7 — Pre-bundle Cache
 ///
 /// Caches pre-bundled node_modules imports, equivalent to Vite's
-/// node_modules/.vite/deps. Location: .zeptr_cache/deps/
+/// node_modules/.vite/deps. Location: .lunx_cache/deps/
 ///
 /// Key: SHA-256(package name + version + all transitive dep versions).
 /// On dev server start: check fingerprint, serve pre-bundled deps if hit,
@@ -119,7 +119,7 @@ pub struct PrebundleEntry {
 
 #[napi(object)]
 pub struct PrebundleConfig {
-    /// Path to .zeptr_cache directory
+    /// Path to .lunx_cache directory
     pub cache_root: String,
 }
 

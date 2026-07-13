@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-rss
+ * @lunx/plugin-rss
  * RSS feed generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createRssPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-rss',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-rss',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Utility: RSS feed generation

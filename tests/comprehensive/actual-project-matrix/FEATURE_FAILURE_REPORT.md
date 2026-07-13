@@ -1,6 +1,6 @@
-# 🔍 Zeptr Feature Failure Report
+# 🔍 Lunx Feature Failure Report
 
-This report provides a deep dive into specifically which Zeptr features are failing and why, based on real-project edge cases.
+This report provides a deep dive into specifically which Lunx features are failing and why, based on real-project edge cases.
 
 | Project | Feature | Error Type | Root Cause | Status |
 |---------|---------|------------|------------|--------|
@@ -13,13 +13,13 @@ This report provides a deep dive into specifically which Zeptr features are fail
 ## 🛠️ Technical Deep Dive
 
 ### 1. Configuration Validation Rigidity
-*   **Symptom**: Zeptr fails immediately if `zeptr.config.js` slightly deviates from the latest internal Zod schema.
-*   **Issue**: Most build tools (like Vite) auto-convert strings to arrays for convenience. Zeptr is currently too strict.
+*   **Symptom**: Lunx fails immediately if `lunx.config.js` slightly deviates from the latest internal Zod schema.
+*   **Issue**: Most build tools (like Vite) auto-convert strings to arrays for convenience. Lunx is currently too strict.
 *   **Impact**: Blocks initial project setup unless configurations are "perfect".
 
 ### 2. Alpine.js ESM Resolution
 *   **Symptom**: Tree shaking test failed.
-*   **Hypothesis**: Zeptr might not be correctly identifying the "sideEffects" flag in Alpine's vanilla structure, leading to over-aggressive or under-aggressive shaking.
+*   **Hypothesis**: Lunx might not be correctly identifying the "sideEffects" flag in Alpine's vanilla structure, leading to over-aggressive or under-aggressive shaking.
 
 ---
 

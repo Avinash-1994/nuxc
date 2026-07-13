@@ -5,7 +5,7 @@
 
 ## Results
 
-| Metric | Zeptr | Vite | Webpack | Rspack | esbuild | Zeptr Rank |
+| Metric | Lunx | Vite | Webpack | Rspack | esbuild | Lunx Rank |
 |--------|-------|------|---------|--------|---------|------------|
 | Small - Cold Start (ms) | 118 🥇 | 257 🥈 | N/A | N/A | N/A | #1 |
 | Small - Build (ms) | 655 🥉 | 719 | 1793 | 385 🥈 | 141 🥇 | #3 |

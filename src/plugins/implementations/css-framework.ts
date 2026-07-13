@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-css-framework
+ * @lunx/plugin-css-framework
  * CSS framework detection
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createCssFrameworkPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-css-framework',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-css-framework',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // CSS transformation for css-framework

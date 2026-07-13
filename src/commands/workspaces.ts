@@ -4,7 +4,7 @@ import { loadConfig } from '../config/index.js';
 import { startDevServer } from '../dev/devServer.minimal.js';
 
 export async function startWorkspaceOrchestrator(rootDir: string) {
-    console.log('\n🚀 Starting Zeptr Monorepo Workspace Orchestrator...');
+    console.log('\n🚀 Starting Lunx Monorepo Workspace Orchestrator...');
     
     // 1. Auto-discover MFE projects in subdirectories
     async function findProjects(dir: string, depth = 0): Promise<string[]> {
@@ -16,7 +16,7 @@ export async function startWorkspaceOrchestrator(rootDir: string) {
                 if (entry.isDirectory() && entry.name !== 'node_modules' && !entry.name.startsWith('.')) {
                     const fullPath = path.join(dir, entry.name);
                     try {
-                        await fs.access(path.join(fullPath, 'zeptr.config.js'));
+                        await fs.access(path.join(fullPath, 'lunx.config.js'));
                         results.push(fullPath);
                     } catch {
                         // Recursively search
@@ -31,7 +31,7 @@ export async function startWorkspaceOrchestrator(rootDir: string) {
     const projectPaths = await findProjects(rootDir);
 
     if (projectPaths.length === 0) {
-        console.error('❌ No Zeptr projects (with zeptr.config.js) found in subdirectories!');
+        console.error('❌ No Lunx projects (with lunx.config.js) found in subdirectories!');
         process.exit(1);
     }
 

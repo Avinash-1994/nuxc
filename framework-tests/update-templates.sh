@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script to update all 24 framework test projects with premium Nuxc branded starter templates
+# Script to update all 24 framework test projects with premium Lunx branded starter templates
 
 TESTS="framework-tests"
 

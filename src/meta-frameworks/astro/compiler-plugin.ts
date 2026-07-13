@@ -1,11 +1,11 @@
-import type { Plugin } from '@zeptr/adapter-core';
+import type { Plugin } from '@lunx/adapter-core';
 import { createHash } from 'crypto';
 
 let astroCompiler: any;
 
 export function astroCompilerPlugin(): Plugin {
   return {
-    name: 'zeptr:astro-compiler',
+    name: 'lunx:astro-compiler',
 
     async buildStart() {
       try {

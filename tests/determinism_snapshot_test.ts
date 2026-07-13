@@ -29,7 +29,7 @@ async function createStaticProject() {
 }
 
 async function runSnapshotTest() {
-    console.log('--- Zeptr Determinism Snapshot Test ---');
+    console.log('--- Lunx Determinism Snapshot Test ---');
     await setup();
     await createStaticProject();
 

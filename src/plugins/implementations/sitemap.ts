@@ -1,5 +1,5 @@
 /**
- * @zeptr/plugin-sitemap
+ * @lunx/plugin-sitemap
  * Sitemap generation
  */
 
@@ -7,8 +7,8 @@ import { PluginAdapter } from '../ported/adapter.js';
 
 export function createSitemapPlugin(): PluginAdapter {
     return {
-        name: '@zeptr/plugin-sitemap',
-        originalPlugin: 'zeptr-native',
+        name: '@lunx/plugin-sitemap',
+        originalPlugin: 'lunx-native',
         
         async transform(code: string, id: string) {
             // Utility: Sitemap generation

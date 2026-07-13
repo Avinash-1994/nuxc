@@ -38,7 +38,7 @@ export const TerminalWarnings: React.FC<TerminalWarningsProps> = ({
             {/* Header */}
             <Box marginBottom={1}>
                 <Text bold color="cyan">
-                    ⚡ Zeptr Build Diagnostics
+                    ⚡ Lunx Build Diagnostics
                 </Text>
             </Box>
 

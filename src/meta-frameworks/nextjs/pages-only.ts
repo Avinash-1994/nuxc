@@ -1,21 +1,21 @@
 /**
- * ZEPTR — Next.js Pages Router Adapter (pages-only)
+ * LUNX — Next.js Pages Router Adapter (pages-only)
  *
  * Scope:
  *   - Pages Router ONLY (pages/ dir, no src/app/)
  *   - If src/app/ exists → print INFO, do NOTHING (App Router untouched)
  *   - Overrides webpack() in next.config.js to replace babel-loader/swc-loader
- *     with Zeptr SWC transform (same output, faster, SQLite-cached)
+ *     with Lunx SWC transform (same output, faster, SQLite-cached)
  *   - Does NOT replace `next dev` or `next build` commands
  */
 
 import fs from 'fs';
 import path from 'path';
-import type { ZeptrAdapter, Plugin, ZeptrConfig, PackageJson } from '@zeptr/adapter-core';
-import { detectDependencies, registry } from '@zeptr/adapter-core';
+import type { LunxAdapter, Plugin, LunxConfig, PackageJson } from '@lunx/adapter-core';
+import { detectDependencies, registry } from '@lunx/adapter-core';
 
-export const ZEPTR_NEXTJS_INFO_MESSAGE =
-  '[zeptr] INFO: App Router project detected. Zeptr does not modify App Router projects. next.config.js unchanged.';
+export const LUNX_NEXTJS_INFO_MESSAGE =
+  '[lunx] INFO: App Router project detected. Lunx does not modify App Router projects. next.config.js unchanged.';
 
 /**
  * Detect whether a project is Pages Router only.
@@ -32,19 +32,19 @@ export function detectRouterType(projectRoot: string): 'pages' | 'app' | 'none' 
 }
 
 /**
- * Build the webpack override config snippet that injects the Zeptr SWC loader
+ * Build the webpack override config snippet that injects the Lunx SWC loader
  * in place of babel-loader or next/dist/compiled/babel/bundle.js.
  */
-export function buildWebpackOverride(zeptrSwcLoaderPath: string): string {
+export function buildWebpackOverride(lunxSwcLoaderPath: string): string {
   return `
-// [zeptr] Pages Router webpack override — replaces babel-loader with Zeptr SWC transform
-// Do NOT edit this block manually — managed by Zeptr adapter
-const zeptrSwcLoader = {
-  loader: ${JSON.stringify(zeptrSwcLoaderPath)},
-  options: { cacheDir: '.zeptr-cache' }
+// [lunx] Pages Router webpack override — replaces babel-loader with Lunx SWC transform
+// Do NOT edit this block manually — managed by Lunx adapter
+const lunxSwcLoader = {
+  loader: ${JSON.stringify(lunxSwcLoaderPath)},
+  options: { cacheDir: '.lunx-cache' }
 };
 
-function zeptrWebpackOverride(config, { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) {
+function lunxWebpackOverride(config, { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) {
   config.module.rules = config.module.rules.map(rule => {
     if (!rule || typeof rule !== 'object') return rule;
     // Replace babel-loader / next swc-loader in oneOf chains
@@ -53,7 +53,7 @@ function zeptrWebpackOverride(config, { buildId, dev, isServer, defaultLoaders, 
         if (!r || typeof r !== 'object') return r;
         const loaderStr = JSON.stringify(r.loader || r.use || '');
         if (loaderStr.includes('babel') || loaderStr.includes('swc-loader')) {
-          return { ...r, loader: zeptrSwcLoader.loader, options: zeptrSwcLoader.options };
+          return { ...r, loader: lunxSwcLoader.loader, options: lunxSwcLoader.options };
         }
         return r;
       });
@@ -68,29 +68,29 @@ function zeptrWebpackOverride(config, { buildId, dev, isServer, defaultLoaders, 
 /**
  * Inject or update the webpack override in next.config.js.
  * If the config already has a webpack() function, wraps it.
- * If no webpack() exists, adds zeptrWebpackOverride.
+ * If no webpack() exists, adds lunxWebpackOverride.
  * Returns the modified config content.
  */
-export function injectWebpackOverride(configContent: string, zeptrSwcLoaderPath: string): string {
-  const override = buildWebpackOverride(zeptrSwcLoaderPath);
+export function injectWebpackOverride(configContent: string, lunxSwcLoaderPath: string): string {
+  const override = buildWebpackOverride(lunxSwcLoaderPath);
 
   // Already injected
-  if (configContent.includes('[zeptr] Pages Router webpack override')) {
+  if (configContent.includes('[lunx] Pages Router webpack override')) {
     return configContent;
   }
 
   // Prepend override definition, then append webpack key to module.exports
   const preamble = override;
 
-  // Add webpack: zeptrWebpackOverride to the exported config object
+  // Add webpack: lunxWebpackOverride to the exported config object
   const patched = configContent.replace(
     /module\.exports\s*=\s*(\{)/,
-    `${preamble}\nmodule.exports = {\n  webpack: zeptrWebpackOverride,`
+    `${preamble}\nmodule.exports = {\n  webpack: lunxWebpackOverride,`
   );
 
   if (patched === configContent) {
     // Fallback: wrap entire export
-    return `${preamble}\nconst _nextConfig = ${configContent};\n_nextConfig.webpack = zeptrWebpackOverride;\nmodule.exports = _nextConfig;\n`;
+    return `${preamble}\nconst _nextConfig = ${configContent};\n_nextConfig.webpack = lunxWebpackOverride;\nmodule.exports = _nextConfig;\n`;
   }
   return patched;
 }
@@ -107,7 +107,7 @@ function getDb(cacheDir: string): any {
   try {
     const Database = _require('better-sqlite3');
     fs.mkdirSync(cacheDir, { recursive: true });
-    _db = new Database(path.join(cacheDir, 'zeptr-transform.db'));
+    _db = new Database(path.join(cacheDir, 'lunx-transform.db'));
     _db.exec(`CREATE TABLE IF NOT EXISTS transforms (
       fingerprint TEXT PRIMARY KEY,
       output      TEXT NOT NULL,
@@ -133,11 +133,11 @@ export function setCachedTransform(fingerprint: string, output: string, cacheDir
     .run(fingerprint, output, Date.now());
 }
 
-// ─── ZeptrSwcTransformer (used by the webpack loader) ─────────────────────
+// ─── LunxSwcTransformer (used by the webpack loader) ─────────────────────
 
 import { createHash } from 'crypto';
 
-export function transformWithZeptrSwc(source: string, filePath: string, cacheDir = '.zeptr-cache'): {
+export function transformWithLunxSwc(source: string, filePath: string, cacheDir = '.lunx-cache'): {
   code: string;
   cached: boolean;
 } {
@@ -147,7 +147,7 @@ export function transformWithZeptrSwc(source: string, filePath: string, cacheDir
     return { code: cached, cached: true };
   }
 
-  // Zeptr SWC transform: strip TypeScript types + JSX (same output as Next's internal SWC)
+  // Lunx SWC transform: strip TypeScript types + JSX (same output as Next's internal SWC)
   // In production this calls the native Rust SWC binding.
   // For the adapter layer we use esbuild as a compatible JS-side transform with identical semantics.
   let code = source;
@@ -165,18 +165,28 @@ export function transformWithZeptrSwc(source: string, filePath: string, cacheDir
 
 // ─── Adapter ──────────────────────────────────────────────────────────────
 
-export class NextJsPagesAdapter implements ZeptrAdapter {
+import { NextAppRouterProxy } from './app-router.js';
+
+export class NextJsPagesAdapter implements LunxAdapter {
   name = 'nextjs-pages';
+
+  // State for App Router proxy
+  private proxy: NextAppRouterProxy | null = null;
+  private isAppRouterProject = false;
+  private rootPath = '';
 
   detect(projectRoot: string, pkg: PackageJson): boolean {
     const hasNext = detectDependencies(pkg, ['next']);
     if (!hasNext) return false;
     const routerType = detectRouterType(projectRoot);
+    this.rootPath = projectRoot;
+    
     if (routerType === 'app') {
-      // Print info message but return false — we do not activate
-      console.log(ZEPTR_NEXTJS_INFO_MESSAGE);
-      return false;
+      // Activating for App Router now to start the proxy
+      this.isAppRouterProject = true;
+      return true;
     }
+    
     return routerType === 'pages';
   }
 
@@ -184,17 +194,45 @@ export class NextJsPagesAdapter implements ZeptrAdapter {
     return [];
   }
 
-  config(config: ZeptrConfig): ZeptrConfig {
+  config(config: LunxConfig): LunxConfig {
     return config;
   }
 
-  /**
-   * Called during the build pipeline — injects webpack override into next.config.js.
-   */
+  getDevHandler() {
+    if (this.isAppRouterProject) {
+      if (!this.proxy) {
+        const port = 5173; // We assume 5173 or we can grab from env
+        this.proxy = new NextAppRouterProxy(this.rootPath, port);
+        
+        this.proxy.start().catch(console.error);
+
+        // Register cleanup on process exit
+        const stopProxy = async () => {
+          if (this.proxy) {
+            await this.proxy.stop();
+          }
+          process.exit(0);
+        };
+        
+        process.on('SIGINT', stopProxy);
+        process.on('SIGTERM', stopProxy);
+      }
+
+      return (req: any, res: any, next: any) => {
+        if (this.proxy) {
+          this.proxy.handleRequest(req, res);
+        } else {
+          next();
+        }
+      };
+    }
+    return undefined; // No dev handler needed for Pages Router (uses SWC loader)
+  }
+
   async onBuild(projectRoot: string): Promise<void> {
     const routerType = detectRouterType(projectRoot);
     if (routerType === 'app') {
-      console.log(ZEPTR_NEXTJS_INFO_MESSAGE);
+      console.log(LUNX_NEXTJS_INFO_MESSAGE);
       return;
     }
 
@@ -202,8 +240,8 @@ export class NextJsPagesAdapter implements ZeptrAdapter {
     if (!fs.existsSync(configPath)) return;
 
     const original = fs.readFileSync(configPath, 'utf-8');
-    const zeptrLoaderPath = path.resolve(projectRoot, 'node_modules/@zeptr/swc-loader/index.js');
-    const patched = injectWebpackOverride(original, zeptrLoaderPath);
+    const lunxLoaderPath = path.resolve(projectRoot, 'node_modules/@lunx/swc-loader/index.js');
+    const patched = injectWebpackOverride(original, lunxLoaderPath);
 
     if (patched !== original) {
       fs.writeFileSync(configPath, patched, 'utf-8');
